@@ -1,6 +1,6 @@
 import { createRouter, createWebHistory } from "vue-router";
 import store from "@/store/index";
-//import auth from "@/middleware/auth";
+import auth from "@/middleware/auth";
 //import admin from "@/middleware/admin";
 import guest from "@/middleware/guest";
 import middlewarePipeline from "@/router/middlewarePipeline";
@@ -9,6 +9,7 @@ import Signin from "@/views/Signin.view.vue";
 import ForgotPassword from "@/views/Forgot_Password.view.vue";
 import ResetPassword from "@/views/Reset_Password.view.vue";
 import Home from "@/views/Home.view.vue";
+import NotFound from "@/views/404NotFound.view.vue";
 const routes = [
   {
     path: "/",
@@ -58,6 +59,13 @@ const routes = [
     name: "ResetPassword",
     meta: { middleware: [guest] },
     component: ResetPassword,
+  },
+  {
+    path: "/:catchAll(.*)",
+    name: "NotFound",
+    meta: { middleware: [auth, guest] },
+
+    component: NotFound
   },
 ];
 

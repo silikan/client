@@ -43,8 +43,17 @@
             </div>
             <transition enter-active-class="transition ease-out duration-100" enter-from-class="transform opacity-0 scale-95" enter-to-class="transform opacity-100 scale-100" leave-active-class="transition ease-in duration-75" leave-from-class="transform opacity-100 scale-100" leave-to-class="transform opacity-0 scale-95">
               <MenuItems class="origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 py-1 focus:outline-none">
-                <MenuItem v-for="item in userNavigation" :key="item.name" v-slot="{ active }">
-                  <a :href="item.href" :class="[active ? 'bg-gray-100' : '', 'block py-2 px-4 text-sm text-gray-700']">{{ item.name }}</a>
+                <MenuItem  v-slot="{ active } ">
+                  <a    :class="[active ? 'bg-gray-100' : '', 'block py-2 px-4 text-sm text-gray-700']   " >Your Profile</a>
+
+                </MenuItem>
+                 <MenuItem  v-slot="{ active } ">
+                  <a    :class="[active ? 'bg-gray-100' : '', 'block py-2 px-4 text-sm text-gray-700']   " >Settings</a>
+
+                </MenuItem>
+                 <MenuItem  v-slot="{ active } ">
+                  <a    :class="[active ? 'bg-gray-100' : '', 'block py-2 px-4 text-sm text-gray-700']   " @click="logout" >Sign out</a>
+
                 </MenuItem>
               </MenuItems>
             </transition>
@@ -77,7 +86,7 @@
           </button>
         </div>
         <div class="mt-3 px-2 space-y-1">
-          <DisclosureButton v-for="item in userNavigation" :key="item.name" as="a" :href="item.href" class="block rounded-md py-2 px-3 text-base font-medium text-gray-500 hover:bg-gray-50 hover:text-gray-900">{{ item.name }}</DisclosureButton>
+          <DisclosureButton v-for="item in userNavigation" :key="item.name" as="a" :href="item.href" class="block rounded-md py-2 px-3 text-base font-medium text-gray-500 hover:bg-gray-50 hover:text-gray-900"  >{{ item.name }}</DisclosureButton>
         </div>
       </div>
     </DisclosurePanel>
@@ -88,6 +97,7 @@
 import { Disclosure, DisclosureButton, DisclosurePanel, Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/vue'
 import { SearchIcon } from '@heroicons/vue/solid'
 import { BellIcon, MenuIcon, XIcon } from '@heroicons/vue/outline'
+import { useStore } from 'vuex'
 
 const user = {
   name: 'Tom Cook',
@@ -98,13 +108,13 @@ const user = {
 const navigation = [
   { name: 'Dashboard', href: '#', current: true },
   { name: 'Team', href: '#', current: false },
-  { name: 'Projects', href: '#', current: false },
-  { name: 'Calendar', href: '#', current: false },
+  { name: 'Projects', href: '#', current: false, },
+  { name: 'Calendar', href: '#', current: false , },
 ]
 const userNavigation = [
   { name: 'Your Profile', href: '#' },
   { name: 'Settings', href: '#' },
-  { name: 'Sign out', href: '#' },
+  { name: 'Sign out', href: '#' , mthd : "logout()"  },
 ]
 
 export default {
@@ -122,10 +132,20 @@ export default {
     XIcon,
   },
   setup() {
+
+    const store = useStore()
+
+   const logout = () => {
+      store.dispatch("auth/logout");
+      console.log("logout");
+    }
+
     return {
       user,
       navigation,
       userNavigation,
+      logout
+
     }
   },
 }
