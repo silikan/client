@@ -1,12 +1,8 @@
 <template>
-  <div id="app">
-    <Header />
-    <main class="container mx-auto">
-      <router-view />
-    </main>
+  <div class=" h-screen min-h-full flex flex-col justify-between	 ">
+    <router-view />
   </div>
 </template>
-
 <script>
 export default {
   name: "app",

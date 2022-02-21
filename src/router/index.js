@@ -4,13 +4,18 @@ import store from "@/store/index";
 import admin from "@/middleware/admin"; */
 import guest from "@/middleware/guest";
 import middlewarePipeline from "@/router/middlewarePipeline";
+import Signup from "@/views/Signup.view.vue";
+import Signin from "@/views/Signin.view.vue";
+import ForgotPassword from "@/views/Forgot_Password.view.vue";
+import ResetPassword from "@/views/Reset_Password.view.vue";
+import Home from "@/views/Home.view.vue";
 const routes = [
-  /*   {
-      path: "/",
-      name: "home",
-      meta: { middleware: [guest] },
-      component: () => import( "../views/Home"),
-    }, */
+  {
+    path: "/",
+    name: "Home",
+    meta: { middleware: [guest] },
+    component: Home
+  },
   /*  {
      path: "/dashboard",
      name: "dashboard",
@@ -31,34 +36,28 @@ const routes = [
       component: () => import( "../views/Users"),
     }, */
   {
-    path: "/login",
-    name: "login",
+    path: "/signin",
+    name: "Signin",
     meta: { middleware: [guest] },
-    component: () =>
-      import(/* webpackChunkName: "login" */ "../views/Signin.view.vue"),
+    component: Signin,
   },
   {
-    path: "/register",
-    name: "register",
+    path: "/signup",
+    name: "Signup",
     meta: { middleware: [guest] },
-    component: () =>
-      import(/* webpackChunkName: "register" */ "../views/Signup.view.vue"),
+    component: Signup,
   },
   {
     path: "/forgot-password",
     name: "forgotPassword",
     meta: { middleware: [guest] },
-    component: () =>
-      import(
-        /* webpackChunkName: "forgot-password" */ "../views/Forgot_Password.view.vue"
-      ),
+    component: ForgotPassword,
   },
   {
     path: "/reset-password",
-    name: "resetPassword",
+    name: "ResetPassword",
     meta: { middleware: [guest] },
-    component: () =>
-      import(/* webpackChunkName: "reset-password" */ "../views/Reset_Password.view.vue"),
+    component: ResetPassword,
   },
 ];
 

@@ -171,11 +171,10 @@
                     </label>
                   </div>
 
-                  <router-link class="text-sm"  :to="'/forgot-password'">
+                  <router-link class="text-sm" :to="'/forgot-password'">
                     <a
                       href="#"
                       class="font-medium text-indigo-600 hover:text-indigo-500"
-
                     >
                       Forgot your password?
                     </a>
@@ -198,7 +197,7 @@
       <div class="hidden lg:flex w-full flex-1 justify-center items-center">
         <img
           class="self-center mr-10"
-          src="src\assets\undraw_safe_re_kiil.svg "
+          src="@\assets\undraw_safe_re_kiil.svg "
           alt=""
         />
       </div>
@@ -215,16 +214,15 @@ import { ref } from "vue";
 
 export default {
   setup() {
-    let email, password , error;
+    let email, password, error;
 
-
-         email = ref("");
-     password = ref("");
+    email = ref("");
+    password = ref("");
 
     const store = useStore();
     const router = useRouter();
 
-     let  login = async ()=> {
+    let login = async () => {
       const payload = {
         email: email.value,
         password: password.value,
@@ -244,8 +242,9 @@ export default {
           throw error;
         }
       } catch (error) {
-console.log(email,password)      }
-    }
+        console.log(email, password);
+      }
+    };
 
     return {
       email,

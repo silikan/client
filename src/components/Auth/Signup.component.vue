@@ -3,7 +3,7 @@
     <div class="hidden lg:flex w-full flex-1 justify-center items-center">
       <img
         class="self-center ml-10"
-        src="src\assets\undraw_fingerprint_re_uf3f.svg"
+        src="@\assets\undraw_fingerprint_re_uf3f.svg"
         alt=""
       />
     </div>
@@ -49,17 +49,7 @@
                   </div>
                   <a
                     href="#"
-                    class="
-                      relative
-                      w-8
-                      h-8
-                      flex
-                      items-center
-                      justify-center
-                      bg-indigo-600
-                      rounded-full
-                      hover:bg-indigo-900
-                    "
+                    class="relative w-8 h-8 flex items-center justify-center bg-indigo-600 rounded-full hover:bg-indigo-900"
                   >
                     <CheckIcon class="w-5 h-5 text-white" aria-hidden="true" />
                     <span class="sr-only">{{ step.name }}</span>
@@ -77,17 +67,7 @@
                   </div>
                   <a
                     href="#"
-                    class="
-                      relative
-                      w-8
-                      h-8
-                      flex
-                      items-center
-                      justify-center
-                      bg-white
-                      border-2 border-indigo-600
-                      rounded-full
-                    "
+                    class="relative w-8 h-8 flex items-center justify-center bg-white border-2 border-indigo-600 rounded-full"
                     aria-current="step"
                   >
                     <span
@@ -106,28 +86,10 @@
                   </div>
                   <a
                     href="#"
-                    class="
-                      group
-                      relative
-                      w-8
-                      h-8
-                      flex
-                      items-center
-                      justify-center
-                      bg-white
-                      border-2 border-gray-300
-                      rounded-full
-                      hover:border-gray-400
-                    "
+                    class="group relative w-8 h-8 flex items-center justify-center bg-white border-2 border-gray-300 rounded-full hover:border-gray-400"
                   >
                     <span
-                      class="
-                        h-2.5
-                        w-2.5
-                        bg-transparent
-                        rounded-full
-                        group-hover:bg-gray-300
-                      "
+                      class="h-2.5 w-2.5 bg-transparent rounded-full group-hover:bg-gray-300"
                       aria-hidden="true"
                     />
                     <span class="sr-only">{{ step.name }}</span>
@@ -205,21 +167,7 @@
                   <div>
                     <a
                       href="#"
-                      class="
-                        w-full
-                        inline-flex
-                        justify-center
-                        py-2
-                        px-4
-                        border border-gray-300
-                        rounded-md
-                        shadow-sm
-                        bg-white
-                        text-sm
-                        font-medium
-                        text-gray-500
-                        hover:bg-gray-50
-                      "
+                      class="w-full inline-flex justify-center py-2 px-4 border border-gray-300 rounded-md shadow-sm bg-white text-sm font-medium text-gray-500 hover:bg-gray-50"
                     >
                       <span class="sr-only">Sign in with Facebook</span>
                       <svg
@@ -240,21 +188,7 @@
                   <div>
                     <a
                       href="#"
-                      class="
-                        w-full
-                        inline-flex
-                        justify-center
-                        py-2
-                        px-4
-                        border border-gray-300
-                        rounded-md
-                        shadow-sm
-                        bg-white
-                        text-sm
-                        font-medium
-                        text-gray-500
-                        hover:bg-gray-50
-                      "
+                      class="w-full inline-flex justify-center py-2 px-4 border border-gray-300 rounded-md shadow-sm bg-white text-sm font-medium text-gray-500 hover:bg-gray-50"
                     >
                       <span class="sr-only">Sign in with Twitter</span>
                       <svg
@@ -273,21 +207,7 @@
                   <div>
                     <a
                       href="#"
-                      class="
-                        w-full
-                        inline-flex
-                        justify-center
-                        py-2
-                        px-4
-                        border border-gray-300
-                        rounded-md
-                        shadow-sm
-                        bg-white
-                        text-sm
-                        font-medium
-                        text-gray-500
-                        hover:bg-gray-50
-                      "
+                      class="w-full inline-flex justify-center py-2 px-4 border border-gray-300 rounded-md shadow-sm bg-white text-sm font-medium text-gray-500 hover:bg-gray-50"
                     >
                       <span class="sr-only">Sign in with GitHub</span>
                       <svg
@@ -323,7 +243,12 @@
             </div>
 
             <div class="mt-6">
-              <form action="#" method="POST" class="space-y-6" @submit.prevent="registerUser">
+              <form
+                action="#"
+                method="POST"
+                class="space-y-6"
+                @submit.prevent="registerUser"
+              >
                 <div>
                   <label
                     for="n ame"
@@ -339,21 +264,7 @@
                       autocomplete="name"
                       v-model="name"
                       required=""
-                      class="
-                        appearance-none
-                        block
-                        w-full
-                        px-3
-                        py-2
-                        border border-gray-300
-                        rounded-md
-                        shadow-sm
-                        placeholder-gray-400
-                        focus:outline-none
-                        focus:ring-indigo-500
-                        focus:border-indigo-500
-                        sm:text-sm
-                      "
+                      class="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                     />
                   </div>
                 </div>
@@ -372,21 +283,7 @@
                       v-model="email"
                       autocomplete="email"
                       required=""
-                      class="
-                        appearance-none
-                        block
-                        w-full
-                        px-3
-                        py-2
-                        border border-gray-300
-                        rounded-md
-                        shadow-sm
-                        placeholder-gray-400
-                        focus:outline-none
-                        focus:ring-indigo-500
-                        focus:border-indigo-500
-                        sm:text-sm
-                      "
+                      class="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                     />
                   </div>
                 </div>
@@ -406,21 +303,7 @@
                       v-model="password"
                       autocomplete="current-password"
                       required=""
-                      class="
-                        appearance-none
-                        block
-                        w-full
-                        px-3
-                        py-2
-                        border border-gray-300
-                        rounded-md
-                        shadow-sm
-                        placeholder-gray-400
-                        focus:outline-none
-                        focus:ring-indigo-500
-                        focus:border-indigo-500
-                        sm:text-sm
-                      "
+                      class="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                     />
                   </div>
                 </div>
@@ -439,21 +322,7 @@
                       v-model="passwordConfirm"
                       autocomplete="confirm password"
                       required=""
-                      class="
-                        appearance-none
-                        block
-                        w-full
-                        px-3
-                        py-2
-                        border border-gray-300
-                        rounded-md
-                        shadow-sm
-                        placeholder-gray-400
-                        focus:outline-none
-                        focus:ring-indigo-500
-                        focus:border-indigo-500
-                        sm:text-sm
-                      "
+                      class="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                     />
                   </div>
                 </div>
@@ -463,14 +332,7 @@
                       id="remember-me"
                       name="remember-me"
                       type="checkbox"
-                      class="
-                        h-4
-                        w-4
-                        text-indigo-600
-                        focus:ring-indigo-500
-                        border-gray-300
-                        rounded
-                      "
+                      class="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded"
                     />
                     <label
                       for="remember-me"
@@ -493,25 +355,7 @@
                 <div>
                   <button
                     type="submit"
-                    class="
-                      w-full
-                      flex
-                      justify-center
-                      py-2
-                      px-4
-                      border border-transparent
-                      rounded-md
-                      shadow-sm
-                      text-sm
-                      font-medium
-                      text-white
-                      bg-indigo-600
-                      hover:bg-indigo-700
-                      focus:outline-none
-                      focus:ring-2
-                      focus:ring-offset-2
-                      focus:ring-indigo-500
-                    "
+                    class="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
                   >
                     Sign in
                   </button>
