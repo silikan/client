@@ -44,6 +44,22 @@ const routes = [
     component: () =>
       import(/* webpackChunkName: "register" */ "../views/Signup.view.vue"),
   },
+  {
+    path: "/forgot-password",
+    name: "forgotPassword",
+    meta: { middleware: [guest] },
+    component: () =>
+      import(
+        /* webpackChunkName: "forgot-password" */ "../views/Forgot_Password.view.vue"
+      ),
+  },
+  {
+    path: "/reset-password",
+    name: "resetPassword",
+    meta: { middleware: [guest] },
+    component: () =>
+      import(/* webpackChunkName: "reset-password" */ "../views/Reset_Password.view.vue"),
+  },
 ];
 
 const router = createRouter({
