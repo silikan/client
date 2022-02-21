@@ -28,8 +28,8 @@ export const actions = {
       .then(() => {
         commit("SET_USER", null);
         dispatch("setGuest", { value: "isGuest" });
-        if (router.currentRoute.name !== "login")
-          router.push({ path: "/login" });
+        if (router.currentRoute.name !== "signin")
+          router.push({ path: "/signin" });
       })
       .catch((error) => {
         commit("SET_ERROR", getError(error));
@@ -59,6 +59,15 @@ export const getters = {
   },
   isAdmin: (state) => {
     return state.user ? state.user.isAdmin : false;
+  },
+  isHandyman: (state) => {
+    return state.user ? state.user.isHandyman : false;
+  },
+  isClient: (state) => {
+    return state.user ? state.user.isClient : false;
+  },
+  isModerator: (state) => {
+    return state.user ? state.user.isModerator : false;
   },
   error: (state) => {
     return state.error;

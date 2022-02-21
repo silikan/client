@@ -10,12 +10,36 @@ import ForgotPassword from "@/views/Forgot_Password.view.vue";
 import ResetPassword from "@/views/Reset_Password.view.vue";
 import Home from "@/views/Home.view.vue";
 import NotFound from "@/views/404NotFound.view.vue";
+import Handymen from '@/views/Handymen.view.vue'
+import Requests from '@/views/Requests.view.vue'
+import Services from '@/views/Services.view.vue'
 const routes = [
   {
     path: "/",
     name: "Home",
     meta: { middleware: [guest] },
     component: Home
+  },
+  {
+    path: '/handymen',
+    name: 'Handymen',
+    meta: { middleware: [auth, guest] },
+
+    component: Handymen,
+  },
+  {
+    path: '/requests',
+    name: 'Requests',
+    meta: { middleware: [auth, guest] },
+
+    component: Requests,
+  },
+  {
+    path: '/services',
+    name: 'Services',
+    meta: { middleware: [auth, guest] },
+
+    component: Services,
   },
   /*  {
      path: "/dashboard",
