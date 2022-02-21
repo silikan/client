@@ -26,7 +26,7 @@
             uppercase
           "
         >
-          Deploy faster
+          Deploy faster yaaay
         </h2>
         <p
           class="
