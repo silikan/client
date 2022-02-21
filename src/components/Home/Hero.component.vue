@@ -288,7 +288,6 @@
                             py-1
                             flex
                             items-center
-                            pointer-events-none
                           "
                         >
                           <button
@@ -311,7 +310,8 @@
                               focus:ring-2
                               focus:ring-offset-2
                               focus:ring-indigo-500
-                            "
+cursor-pointer
+	 "
                           >
                             Search
                           </button>

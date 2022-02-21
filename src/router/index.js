@@ -1,7 +1,7 @@
 import { createRouter, createWebHistory } from "vue-router";
 import store from "@/store/index";
-/* import auth from "@/middleware/auth";
-import admin from "@/middleware/admin"; */
+//import auth from "@/middleware/auth";
+//import admin from "@/middleware/admin";
 import guest from "@/middleware/guest";
 import middlewarePipeline from "@/router/middlewarePipeline";
 import Signup from "@/views/Signup.view.vue";
