@@ -13,19 +13,33 @@ import NotFound from "@/views/404NotFound.view.vue";
 import Handymen from '@/views/Handymen.view.vue'
 import Requests from '@/views/Requests.view.vue'
 import Services from '@/views/Services.view.vue'
+import EditProfile from '@/views/Edit_Profile.view.vue'
 const routes = [
+
   {
     path: "/",
     name: "Home",
     meta: { middleware: [guest] },
     component: Home
   },
-  {
-    path: '/handymen',
-    name: 'Handymen',
-    meta: { middleware: [auth, guest] },
 
-    component: Handymen,
+  {
+    path: '/profile',
+    name: "profile",
+    meta: { middleware: [auth] },
+    component: EditProfile,
+
+    children: [
+
+      {
+        // UserPosts will be rendered inside User's <router-view>
+        // when /user/:id/posts is matched
+        path: 'edit',
+        name: "EditProfile",
+        meta: { middleware: [auth] },
+        component: EditProfile,
+      },
+    ],
   },
   {
     path: '/requests',
@@ -40,6 +54,13 @@ const routes = [
     meta: { middleware: [auth, guest] },
 
     component: Services,
+  },
+  {
+    path: '/handymen',
+    name: 'Handymen',
+    meta: { middleware: [auth, guest] },
+
+    component: Handymen,
   },
   /*  {
      path: "/dashboard",
