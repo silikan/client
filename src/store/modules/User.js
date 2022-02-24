@@ -59,6 +59,8 @@ export const actions = {
         commit('SET_ERROR', getError(error));
       });
   },
+
+
 };
 
 export const getters = {

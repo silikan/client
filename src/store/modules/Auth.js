@@ -72,10 +72,10 @@ export const actions = {
 */
 export const getters = {
   authUser: (state) => state.user,
-  isAdmin: (state) => (state.user ? state.user.isAdmin : false),
-  isHandyman: (state) => (state.user ? state.user.isHandyman : false),
-  isClient: (state) => (state.user ? state.user.isClient : false),
-  isModerator: (state) => (state.user ? state.user.isModerator : false),
+  isAdmin: (state) => (state.user.isAdmin),
+  isHandyman: (state) => (state.user.isHandyman),
+  isClient: (state) => (state.user.isClient),
+  isModerator: (state) => (state.user.isModerator),
   error: (state) => state.error,
   loading: (state) => state.loading,
   emailVerified: (state) => state.user.emailVerified,

@@ -7,6 +7,9 @@ export default {
   getUsers(page) {
     return API.apiClient.get(`/users/?page=${page}`);
   },
+  deleteUser(userId) {
+    return API.apiClient.delete(`users/${userId}}`);
+  },
   paginateUsers(link) {
     return API.apiClient.get(link);
   },
