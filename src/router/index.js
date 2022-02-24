@@ -33,6 +33,7 @@ const routes = [
   {
     path: '/edit/',
     name: 'EditProfile',
+    meta: { middleware: [auth] },
     component: EditProfile,
     children: [
       // UserHome will be rendered inside User's <router-view>

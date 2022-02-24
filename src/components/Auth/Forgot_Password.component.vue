@@ -1,8 +1,14 @@
 <template>
   <form
     @submit.prevent="forgotPassword"
-    class="p-5 bg-white border rounded shadow"
+    class="p-10 bg-white border rounded shadow"
   >
+  <div class=" divide-y divide-gray-200">
+ <h2 class="text-lg leading-6 font-medium text-gray-900  mb-5 ">
+            Verify Email
+          </h2>
+  </div>
+
     <div>
       <label for="email" class="block text-sm font-medium text-gray-700"
         >Email</label
@@ -13,33 +19,62 @@
           v-model="email"
           name="email"
           id="email"
-          class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md"
+          class="
+            appearance-none
+            block
+            w-full
+            pl-5
+                      pr-20
+            py-2
+            border border-gray-300
+            rounded-md
+            shadow-sm
+            placeholder-gray-400
+            focus:outline-none focus:ring-indigo-500 focus:border-indigo-500
+            sm:text-sm
+          "
           placeholder="you@example.com"
           aria-describedby="email-description"
         />
       </div>
-      <p class="mt-2 text-sm text-gray-500" id="email-description">
-        We'll only use this for spam.
-      </p>
     </div>
-    <button
-      type="submit"
-      class="inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-base font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-    >
-      Button text
-      <MailIcon class="ml-3 -mr-1 h-5 w-5" aria-hidden="true" />
-    </button>
+    <div class="mt-2 flex justify-end">
+      <button
+        type="submit"
+        class="
+
+          inline-flex
+          justify-center
+          items-center
+          w-full
+
+          py-1
+          border border-transparent
+          shadow-sm
+          text-base
+          font-medium
+          rounded-md
+          text-white
+          bg-indigo-600
+          hover:bg-indigo-700
+          focus:outline-none
+          focus:ring-2
+          focus:ring-offset-2
+          focus:ring-indigo-500
+        "
+      >
+        Send
+      </button>
+    </div>
   </form>
 </template>
 <script>
-import { MailIcon } from "@heroicons/vue/solid";
 import AuthService from "@/services/AuthService";
 import { ref } from "vue";
 
 export default {
   components: {
-    MailIcon,
-  },
+ },
   setup() {
     let email = ref("");
 

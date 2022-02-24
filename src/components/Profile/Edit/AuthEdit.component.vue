@@ -1,6 +1,10 @@
 
 <template>
-  <form class="divide-y divide-gray-200 lg:col-span-9" action="#" method="POST">
+<div class="divide-y divide-gray-200 lg:col-span-9">
+
+
+   <form @submit.prevent="sendVerification" class="divide-y divide-gray-200 lg:col-span-9" v-if="isEmailVerified == null" action="#" method="POST">
+
     <!-- Privacy section -->
     <div class="pt-6 divide-gray-200">
       <div class="px-4 sm:px-6">
@@ -40,6 +44,9 @@
         </button>
       </div>
     </div>
+       </form>
+
+  <form @submit.prevent="updatePassword" class="divide-y divide-gray-200 lg:col-span-9" action="#" method="POST">
 
     <!-- Privacy section -->
     <div class="pt-6 divide-y divide-gray-200">
@@ -68,6 +75,7 @@
                     id="current-password"
                     name="current-password"
                     type="password"
+                    v-model="currentPassword"
                     autocomplete="current-password"
                     required
                     class="
@@ -102,6 +110,7 @@
                     name="password"
                     type="password"
                     autocomplete="password"
+                    v-model="password"
                     required
                     class="
                       appearance-none
@@ -133,6 +142,7 @@
                   <input
                     id="confirm-password"
                     name="confirm-password"
+                    v-model="passwordConfirm"
                     type="password"
                     autocomplete="current-password"
                     required
@@ -186,10 +196,13 @@
       </div>
     </div>
   </form>
+  </div>
 </template>
 
 <script>
-import { ref } from "vue";
+import {  computed, ref } from "vue";
+import AuthService from "@/services/AuthService";
+import {  mapGetters, useStore } from 'vuex';
 
 const user = {
   name: "Debbie Lewis",
@@ -207,6 +220,45 @@ export default {
     const allowCommenting = ref(true);
     const allowMentions = ref(true);
 
+    let currentPassword, password, passwordConfirm;
+    currentPassword = ref("");
+    password = ref("");
+    passwordConfirm = ref("");
+
+    const   updatePassword = () => {
+
+      const payload = {
+        current_password: currentPassword.value,
+        password: password.value,
+        password_confirmation: passwordConfirm.value,
+      };
+      AuthService.updatePassword(payload)
+        .then(() => (console.log("Password updated.")))
+        .catch((error) => (console.log(error)));
+    }
+
+    const store  = useStore();
+
+    const authUser = ref("");
+ authUser.value = computed(() => {
+  return mapGetters(["authUser"]);
+});
+        const sendVerification= () => {
+
+      const payload = {
+        user: authUser.value.id,
+      };
+      AuthService.sendVerification(payload)
+        .then(() => (console.log("Verification email sent.")))
+        .catch((error) => (console.log(error)));
+    }
+
+
+
+
+ let isEmailVerified = computed(() =>  store.getters["auth/emailVerified"]);
+
+
     return {
       user,
 
@@ -214,7 +266,16 @@ export default {
       privateAccount,
       allowCommenting,
       allowMentions,
+      currentPassword,
+      password,
+      passwordConfirm,
+      updatePassword,
+      sendVerification,
+authUser,
+isEmailVerified
+
     };
   },
+
 };
 </script>

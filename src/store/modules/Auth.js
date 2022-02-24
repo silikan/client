@@ -75,6 +75,9 @@ export const getters = {
   loading: (state) => {
     return state.loading;
   },
+  emailVerified: (state) => {
+    return state.user.emailVerified;
+  },
   loggedIn: (state) => {
     return !!state.user;
   },

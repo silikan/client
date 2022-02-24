@@ -247,7 +247,9 @@
                 name="country"
                 autocomplete="country"
                 class="
-                  focus:outline-none focus:ring-indigo-500 focus:border-indigo-500
+                  focus:outline-none
+                  focus:ring-indigo-500
+                  focus:border-indigo-500
                   h-full
                   py-0
                   pl-3
@@ -489,7 +491,7 @@
                   rounded-none rounded-l-md
                   pl-10
                   sm:text-sm
-                 border  border-gray-300
+                  border border-gray-300
                 "
                 placeholder="John Doe"
               />
@@ -525,7 +527,7 @@
             </button>
           </div>
         </div>
-          <div class="col-span-12 sm:col-span-6">
+        <div class="col-span-12 sm:col-span-6">
           <label for="email" class="block text-sm font-medium text-gray-700"
             >Certifications</label
           >
@@ -557,7 +559,7 @@
                   rounded-none rounded-l-md
                   pl-10
                   sm:text-sm
-                 border  border-gray-300
+                  border border-gray-300
                 "
                 placeholder="John Doe"
               />
@@ -593,7 +595,7 @@
             </button>
           </div>
         </div>
-          <div class="col-span-12 sm:col-span-6">
+        <div class="col-span-12 sm:col-span-6">
           <label for="email" class="block text-sm font-medium text-gray-700"
             >Education</label
           >
@@ -625,7 +627,7 @@
                   rounded-none rounded-l-md
                   pl-10
                   sm:text-sm
-                 border  border-gray-300
+                  border border-gray-300
                 "
                 placeholder="John Doe"
               />
@@ -661,7 +663,7 @@
             </button>
           </div>
         </div>
-           <div class="col-span-12 sm:col-span-6">
+        <div class="col-span-12 sm:col-span-6">
           <label for="email" class="block text-sm font-medium text-gray-700"
             >Skills</label
           >
@@ -693,7 +695,7 @@
                   rounded-none rounded-l-md
                   pl-10
                   sm:text-sm
-                 border  border-gray-300
+                  border border-gray-300
                 "
                 placeholder="John Doe"
               />
@@ -771,7 +773,7 @@
             />
           </div>
         </div>
- <div class="col-span-12 sm:col-span-8">
+        <div class="col-span-12 sm:col-span-8">
           <label
             for="company-website"
             class="block text-sm font-medium text-gray-700"
@@ -813,7 +815,7 @@
             />
           </div>
         </div>
-<div class="col-span-12 sm:col-span-8">
+        <div class="col-span-12 sm:col-span-8">
           <label
             for="company-website"
             class="block text-sm font-medium text-gray-700"
@@ -855,76 +857,117 @@
             />
           </div>
         </div>
-<div class="col-span-12 sm:col-span-8">
-
-<div class="relative">
-  <div class="flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none">
-    <svg class="w-5 h-5 text-gray-500 dark:text-gray-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clip-rule="evenodd"></path></svg>
-  </div>
-  <input datepicker datepicker-orientation="bottom right" type="text" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Select date">
-</div>
-</div>
-
-
+        <div class="col-span-12 sm:col-span-8">
+          <div class="relative">
+            <div
+              class="
+                flex
+                absolute
+                inset-y-0
+                left-0
+                items-center
+                pl-3
+                pointer-events-none
+              "
+            >
+              <svg
+                class="w-5 h-5 text-gray-500 dark:text-gray-400"
+                fill="currentColor"
+                viewBox="0 0 20 20"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  fill-rule="evenodd"
+                  d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z"
+                  clip-rule="evenodd"
+                ></path>
+              </svg>
+            </div>
+            <input
+              datepicker
+              datepicker-orientation="bottom right"
+              type="text"
+              class="
+                bg-gray-50
+                border border-gray-300
+                text-gray-900
+                sm:text-sm
+                rounded-lg
+                focus:ring-blue-500 focus:border-blue-500
+                block
+                w-full
+                pl-10
+                p-2.5
+                dark:bg-gray-700
+                dark:border-gray-600
+                dark:placeholder-gray-400
+                dark:text-white
+                dark:focus:ring-blue-500
+                dark:focus:border-blue-500
+              "
+              placeholder="Select date"
+            />
+          </div>
+        </div>
       </div>
     </div>
 
- <div class="mt-4 py-4 px-4 flex justify-end sm:px-6">
-        <button
-          type="button"
-          class="
-            bg-white
-            border border-gray-300
-            rounded-md
-            shadow-sm
-            py-2
-            px-4
-            inline-flex
-            justify-center
-            text-sm
-            font-medium
-            text-gray-700
-            hover:bg-gray-50
-            focus:outline-none
-            focus:ring-2
-            focus:ring-offset-2
-            focus:ring-indigo-500
-          "
-        >
-          Cancel
-        </button>
-        <button
-          type="submit"
-          class="
-            ml-5
-            bg-indigo-700
-            border border-transparent
-            rounded-md
-            shadow-sm
-            py-2
-            px-4
-            inline-flex
-            justify-center
-            text-sm
-            font-medium
-            text-white
-            hover:bg-indigo-800
-            focus:outline-none
-            focus:ring-2
-            focus:ring-offset-2
-            focus:ring-indigo-500
-          "
-        >
-          Save
-        </button>
-      </div>
+    <div class="mt-4 py-4 px-4 flex justify-end sm:px-6">
+      <button
+        type="button"
+        class="
+          bg-white
+          border border-gray-300
+          rounded-md
+          shadow-sm
+          py-2
+          px-4
+          inline-flex
+          justify-center
+          text-sm
+          font-medium
+          text-gray-700
+          hover:bg-gray-50
+          focus:outline-none
+          focus:ring-2
+          focus:ring-offset-2
+          focus:ring-indigo-500
+        "
+      >
+        Cancel
+      </button>
+      <button
+        type="submit"
+        class="
+          ml-5
+          bg-indigo-700
+          border border-transparent
+          rounded-md
+          shadow-sm
+          py-2
+          px-4
+          inline-flex
+          justify-center
+          text-sm
+          font-medium
+          text-white
+          hover:bg-indigo-800
+          focus:outline-none
+          focus:ring-2
+          focus:ring-offset-2
+          focus:ring-indigo-500
+        "
+      >
+        Save
+      </button>
+    </div>
   </form>
 </template>
 
 <script>
 import { ref } from "vue";
 
-import { SortAscendingIcon, UsersIcon } from '@heroicons/vue/solid'
+import { SortAscendingIcon, UsersIcon } from "@heroicons/vue/solid";
 
 const user = {
   name: "Ismail Bentabet",
@@ -936,8 +979,7 @@ const user = {
 
 export default {
   components: {
-
-        SortAscendingIcon,
+    SortAscendingIcon,
     UsersIcon,
   },
   setup() {
@@ -953,7 +995,6 @@ export default {
       privateAccount,
       allowCommenting,
       allowMentions,
-
     };
   },
 };
