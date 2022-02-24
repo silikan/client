@@ -14,6 +14,11 @@ import Handymen from '@/views/Handymen.view.vue'
 import Requests from '@/views/Requests.view.vue'
 import Services from '@/views/Services.view.vue'
 import EditProfile from '@/views/Edit_Profile.view.vue'
+
+import AuthEdit from "../components/Profile/Edit/AuthEdit.component.vue"
+import AccountEdit from "../components/Profile/Edit/AccountEdit.component.vue"
+import ProfileEdit from "../components/Profile/Edit/ProfileEdit.component.vue"
+
 const routes = [
 
   {
@@ -23,24 +28,42 @@ const routes = [
     component: Home
   },
 
+
+
   {
-    path: '/profile',
-    name: "profile",
-    meta: { middleware: [auth] },
+    path: '/edit/',
+    name: 'EditProfile',
     component: EditProfile,
-
     children: [
-
+      // UserHome will be rendered inside User's <router-view>
+      // when /user/:id is matched
       {
-        // UserPosts will be rendered inside User's <router-view>
-        // when /user/:id/posts is matched
-        path: 'edit',
-        name: "EditProfile",
-        meta: { middleware: [auth] },
-        component: EditProfile,
+        path: 'auth',
+        name: 'AuthEdit',
+
+        component: AuthEdit
       },
-    ],
+      {
+        path: 'account',
+        name: 'AccountEdit',
+
+        component: AccountEdit
+      },
+      {
+        path: 'profile',
+        name: 'ProfileEdit',
+
+        component: ProfileEdit
+      },
+      // ...other sub routes
+    ]
   },
+
+
+
+
+
+
   {
     path: '/requests',
     name: 'Requests',

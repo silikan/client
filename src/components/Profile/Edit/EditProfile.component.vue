@@ -1,0 +1,172 @@
+
+<template>
+  <div>
+    <main class="">
+      <div class="max-w-screen-xl mx-auto pb-6 px-4 sm:px-6 lg:pb-16 lg:px-8">
+        <div class="bg-white rounded-lg shadow overflow-hidden">
+          <div
+            class="
+              divide-y divide-gray-200
+              lg:grid lg:grid-cols-12 lg:divide-y-0 lg:divide-x
+            "
+          >
+            <aside class="py-6 lg:col-span-3">
+              <nav class="space-y-1">
+                <router-link
+                  v-for="item in subNavigation"
+                  :key="item.name"
+                  :to="item.route"
+                  :href="item.href"
+                  :class="[
+                    item.current
+                      ? 'bg-indigo-50 border-indigo-500 text-indigo-700 hover:bg-indigo-50 hover:text-indigo-700'
+                      : 'border-transparent text-gray-900 hover:bg-gray-50 hover:text-gray-900',
+                    'group border-l-4 px-3 py-2 flex items-center text-sm font-medium',
+                  ]"
+                  :aria-current="item.current ? 'page' : undefined"
+                >
+                  <component
+                    :is="item.icon"
+                    :class="[
+                      item.current
+                        ? 'text-indigo-500 group-hover:text-indigo-500'
+                        : 'text-gray-400 group-hover:text-gray-500',
+                      'flex-shrink-0 -ml-1 mr-3 h-6 w-6',
+                    ]"
+                    aria-hidden="true"
+                  />
+                  <span class="truncate">
+                    {{ item.name }}
+                  </span>
+                </router-link>
+              </nav>
+            </aside>
+            <router-view />
+            <!--          //form
+ --<!-
+    <ProfileEdit v-if="subNavigation[0].current == true"/>
+    <AccountEdit v-if="subNavigation[1].current == true"/>
+  <AuthEdit v-if="subNavigation[2].current == true "/> -->
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+</template>
+
+<script>
+/* import AuthEdit from "./AuthEdit.component.vue";
+import AccountEdit from "./AccountEdit.component.vue";
+import ProfileEdit from "./ProfileEdit.component.vue"; */
+import {
+  Disclosure,
+  DisclosureButton,
+  DisclosurePanel,
+  Menu,
+  MenuButton,
+  MenuItem,
+  MenuItems,
+  Switch,
+  SwitchDescription,
+  SwitchGroup,
+  SwitchLabel,
+} from "@headlessui/vue";
+import { SearchIcon } from "@heroicons/vue/solid";
+import {
+  BellIcon,
+  CogIcon,
+  KeyIcon,
+  MenuIcon,
+  UserCircleIcon,
+  XIcon,
+} from "@heroicons/vue/outline";
+import { ref } from '@vue/reactivity';
+
+const user = {
+  name: "Debbie Lewis",
+  handle: "deblewis",
+  email: "debbielewis@example.com",
+  imageUrl:
+    "https://images.unsplash.com/photo-1517365830460-955ce3ccd263?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=4&w=320&h=320&q=80",
+};
+const navigation = [
+  { name: "Dashboard", href: "#", current: true },
+  { name: "Jobs", href: "#", current: false },
+  { name: "Applicants", href: "#", current: false },
+  { name: "Company", href: "#", current: false },
+];
+const subNavigation = [
+  {
+    name: "Profile",
+    href: "#",
+    icon: UserCircleIcon,
+    current: true,
+    route: "/edit/profile",
+  },
+  {
+    name: "Account",
+    href: "#",
+    icon: CogIcon,
+    current: false,
+    route: "/edit/account",
+  },
+  {
+    name: "Auth",
+    href: "#",
+    icon: KeyIcon,
+    current: false,
+    route: "/edit/auth",
+  },
+  /*   { name: "Notifications", href: "#", icon: BellIcon, current: false },
+  { name: "Billing", href: "#", icon: CreditCardIcon, current: false },
+  { name: "Integrations", href: "#", icon: ViewGridAddIcon, current: false }, */
+];
+const userNavigation = [
+  { name: "Your Profile", href: "#" },
+  { name: "Settings", href: "#" },
+  { name: "Sign out", href: "#" },
+];
+
+export default {
+  components: {
+    Disclosure,
+    DisclosureButton,
+    DisclosurePanel,
+    Menu,
+    MenuButton,
+    MenuItem,
+    MenuItems,
+    Switch,
+    SwitchDescription,
+    SwitchGroup,
+    SwitchLabel,
+    BellIcon,
+    MenuIcon,
+    SearchIcon,
+    XIcon,
+    /*   AuthEdit,
+    AccountEdit,
+    ProfileEdit */
+  },
+  setup() {
+
+    const availableToHire = ref(true);
+    const privateAccount = ref(false);
+    const allowCommenting = ref(true);
+    const allowMentions = ref(true);
+
+
+
+    return {
+      user,
+      navigation,
+      subNavigation,
+      userNavigation,
+      availableToHire,
+      privateAccount,
+      allowCommenting,
+      allowMentions,
+    };
+  },
+};
+</script>

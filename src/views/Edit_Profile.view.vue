@@ -3,7 +3,7 @@
 </template>
 
 <script>
-import EditProfile from "../components/Profile/Edit_Profile.component.vue"
+import EditProfile from "../components/Profile/Edit/EditProfile.component.vue"
 export default {
 components: {EditProfile}
 }
