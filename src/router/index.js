@@ -1,34 +1,32 @@
-import { createRouter, createWebHistory } from "vue-router";
-import store from "@/store/index";
-import auth from "@/middleware/auth";
-//import admin from "@/middleware/admin";
-import guest from "@/middleware/guest";
-import middlewarePipeline from "@/router/middlewarePipeline";
-import Signup from "@/views/Signup.view.vue";
-import Signin from "@/views/Signin.view.vue";
-import ForgotPassword from "@/views/Forgot_Password.view.vue";
-import ResetPassword from "@/views/Reset_Password.view.vue";
-import Home from "@/views/Home.view.vue";
-import NotFound from "@/views/404NotFound.view.vue";
-import Handymen from '@/views/Handymen.view.vue'
-import Requests from '@/views/Requests.view.vue'
-import Services from '@/views/Services.view.vue'
-import EditProfile from '@/views/Edit_Profile.view.vue'
+import { createRouter, createWebHistory } from 'vue-router';
+import store from '@/store/index';
+import auth from '@/middleware/auth';
+// import admin from "@/middleware/admin";
+import guest from '@/middleware/guest';
+import middlewarePipeline from '@/router/middlewarePipeline';
+import Signup from '@/views/Signup.view.vue';
+import Signin from '@/views/Signin.view.vue';
+import ForgotPassword from '@/views/Forgot_Password.view.vue';
+import ResetPassword from '@/views/Reset_Password.view.vue';
+import Home from '@/views/Home.view.vue';
+import NotFound from '@/views/404NotFound.view.vue';
+import Handymen from '@/views/Handymen.view.vue';
+import Requests from '@/views/Requests.view.vue';
+import Services from '@/views/Services.view.vue';
+import EditProfile from '@/views/Edit_Profile.view.vue';
 
-import AuthEdit from "../components/Profile/Edit/AuthEdit.component.vue"
-import AccountEdit from "../components/Profile/Edit/AccountEdit.component.vue"
-import ProfileEdit from "../components/Profile/Edit/ProfileEdit.component.vue"
+import AuthEdit from '../components/Profile/Edit/AuthEdit.component.vue';
+import AccountEdit from '../components/Profile/Edit/AccountEdit.component.vue';
+import ProfileEdit from '../components/Profile/Edit/ProfileEdit.component.vue';
 
 const routes = [
 
   {
-    path: "/",
-    name: "Home",
+    path: '/',
+    name: 'Home',
     meta: { middleware: [guest] },
-    component: Home
+    component: Home,
   },
-
-
 
   {
     path: '/edit/',
@@ -42,28 +40,23 @@ const routes = [
         path: 'auth',
         name: 'AuthEdit',
 
-        component: AuthEdit
+        component: AuthEdit,
       },
       {
         path: 'account',
         name: 'AccountEdit',
 
-        component: AccountEdit
+        component: AccountEdit,
       },
       {
         path: 'profile',
         name: 'ProfileEdit',
 
-        component: ProfileEdit
+        component: ProfileEdit,
       },
       // ...other sub routes
-    ]
+    ],
   },
-
-
-
-
-
 
   {
     path: '/requests',
@@ -106,35 +99,35 @@ const routes = [
       component: () => import( "../views/Users"),
     }, */
   {
-    path: "/signin",
-    name: "Signin",
+    path: '/signin',
+    name: 'Signin',
     meta: { middleware: [guest] },
     component: Signin,
   },
   {
-    path: "/signup",
-    name: "Signup",
+    path: '/signup',
+    name: 'Signup',
     meta: { middleware: [guest] },
     component: Signup,
   },
   {
-    path: "/forgot-password",
-    name: "forgotPassword",
+    path: '/forgot-password',
+    name: 'forgotPassword',
     meta: { middleware: [guest] },
     component: ForgotPassword,
   },
   {
-    path: "/reset-password",
-    name: "ResetPassword",
+    path: '/reset-password',
+    name: 'ResetPassword',
     meta: { middleware: [guest] },
     component: ResetPassword,
   },
   {
-    path: "/:catchAll(.*)",
-    name: "NotFound",
+    path: '/:catchAll(.*)',
+    name: 'NotFound',
     meta: { middleware: [auth, guest] },
 
-    component: NotFound
+    component: NotFound,
   },
 ];
 
@@ -144,15 +137,16 @@ const router = createRouter({
   scrollBehavior(to, from, savedPosition) {
     if (savedPosition) {
       return savedPosition;
-    } else {
-      return { x: 0, y: 0 };
     }
+    return { x: 0, y: 0 };
   },
 });
 
 router.beforeEach((to, from, next) => {
-  const middleware = to.meta.middleware;
-  const context = { to, from, next, store };
+  const { middleware } = to.meta;
+  const context = {
+    to, from, next, store,
+  };
 
   if (!middleware) {
     return next();

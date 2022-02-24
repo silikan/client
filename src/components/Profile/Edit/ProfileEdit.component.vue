@@ -1,6 +1,10 @@
-
 <template>
-  <form class="divide-y divide-gray-200 lg:col-span-9" action="#" method="POST">
+  <form
+    @submit.prevent="updateUser"
+    class="divide-y divide-gray-200 lg:col-span-9"
+    action="#"
+    method="POST"
+  >
     <!-- Profile section -->
     <div class="py-6 px-4 sm:p-6 lg:pb-8">
       <div>
@@ -36,9 +40,9 @@
                 Silikan.com/user/
               </span>
               <input
+                id="username"
                 type="text"
                 name="username"
-                id="username"
                 autocomplete="username"
                 class="
                   focus:ring-indigo-500 focus:border-indigo-500
@@ -48,9 +52,40 @@
                   min-w-0
                   rounded-none rounded-r-md
                   sm:text-sm
-                  border-gray-300
+                  border border-gray-300
                 "
-                :value="user.handle"
+                v-model="username"
+              />
+            </div>
+          </div>
+          <div>
+            <label for="email" class="block text-sm font-medium text-gray-700"
+              >Email</label
+            >
+            <div class="mt-1">
+              <input
+                id="email"
+                v-model="email"
+                type="email"
+                name="email"
+                class="
+                  appearance-none
+                  block
+                  w-full
+                  pl-5
+                  pr-20
+                  py-2
+                  border border-gray-300
+                  rounded-md
+                  shadow-sm
+                  placeholder-gray-400
+                  focus:outline-none
+                  focus:ring-indigo-500
+                  focus:border-indigo-500
+                  sm:text-sm
+                "
+                placeholder="you@example.com"
+                aria-describedby="email-description"
               />
             </div>
           </div>
@@ -61,8 +96,8 @@
             </label>
             <div class="mt-1">
               <textarea
-                id="about"
-                name="about"
+                id="bio"
+                name="bio"
                 rows="3"
                 class="
                   shadow-sm
@@ -74,6 +109,7 @@
                   border border-gray-300
                   rounded-md
                 "
+                v-model="bio"
               />
             </div>
             <p class="mt-2 text-sm text-gray-500">
@@ -103,7 +139,7 @@
               >
                 <img
                   class="rounded-full h-full w-full"
-                  :src="user.imageUrl"
+                  :src="imageUrl"
                   alt=""
                 />
               </div>
@@ -161,7 +197,7 @@
           <div class="hidden relative rounded-full overflow-hidden lg:block">
             <img
               class="relative rounded-full w-40 h-40"
-              :src="user.imageUrl"
+              :src="imageUrl"
               alt=""
             />
             <label
@@ -186,8 +222,8 @@
               <span>Change</span>
               <span class="sr-only"> user photo</span>
               <input
-                type="file"
                 id="desktop-user-photo"
+                type="file"
                 name="user-photo"
                 class="
                   absolute
@@ -207,17 +243,15 @@
 
       <div class="mt-6 grid grid-cols-12 gap-6">
         <div class="col-span-12 sm:col-span-6">
-          <label
-            for="first-name"
-            class="block text-sm font-medium text-gray-700"
-          >
+          <label for="name" class="block text-sm font-medium text-gray-700">
             name</label
           >
           <input
+              id="name"
             type="text"
-            name="first-name"
-            id="first-name"
-            autocomplete="given-name"
+            name="name"
+            autocomplete="name"
+            v-model="name"
             class="
               mt-1
               block
@@ -243,9 +277,9 @@
             <div class="absolute inset-y-0 left-0 flex items-center">
               <label for="country" class="sr-only">Country</label>
               <select
-                id="country"
-                name="country"
-                autocomplete="country"
+                id="district"
+                name="district"
+                autocomplete="district"
                 class="
                   focus:outline-none
                   focus:ring-indigo-500
@@ -267,9 +301,10 @@
               </select>
             </div>
             <input
+              id="phone_number"
               type="text"
-              name="phone-number"
-              id="phone-number"
+              name="phone_number"
+              v-model="phone_number"
               class="
                 mt-1
                 block
@@ -295,6 +330,7 @@
           <select
             id="country"
             name="country"
+            v-model="country"
             autocomplete="country-name"
             class="
               mt-1
@@ -323,10 +359,11 @@
             >Street address</label
           >
           <input
+            id="address"
             type="text"
-            name="street-address"
-            id="street-address"
-            autocomplete="street-address"
+            name="address"
+            autocomplete="address"
+            v-model="address"
             class="
               mt-1
               block
@@ -347,9 +384,10 @@
             >City</label
           >
           <input
+            id="city"
             type="text"
             name="city"
-            id="city"
+            v-model="city"
             autocomplete="address-level2"
             class="
               mt-1
@@ -371,9 +409,10 @@
             >State / Province</label
           >
           <input
+            id="state"
             type="text"
-            name="region"
-            id="region"
+            name="state"
+            v-model="state"
             autocomplete="address-level1"
             class="
               mt-1
@@ -391,15 +430,14 @@
         </div>
 
         <div class="col-span-12 sm:col-span-6">
-          <label
-            for="postal-code"
-            class="block text-sm font-medium text-gray-700"
+          <label for="zip_code" class="block text-sm font-medium text-gray-700"
             >ZIP / Postal code</label
           >
           <input
+            id="zip_code"
             type="text"
-            name="postal-code"
-            id="postal-code"
+            name="zip_code"
+            v-model="zip_code"
             autocomplete="postal-code"
             class="
               mt-1
@@ -439,9 +477,10 @@
               http://
             </span>
             <input
+              id="website"
               type="text"
-              name="company-website"
-              id="company-website"
+              name="website"
+              v-model="website"
               class="
                 mt-1
                 block
@@ -481,9 +520,9 @@
                 <UsersIcon class="h-5 w-5 text-gray-400" aria-hidden="true" />
               </div>
               <input
+                id="email"
                 type="email"
                 name="email"
-                id="email"
                 class="
                   focus:ring-indigo-500 focus:border-indigo-500
                   block
@@ -549,9 +588,9 @@
                 <UsersIcon class="h-5 w-5 text-gray-400" aria-hidden="true" />
               </div>
               <input
+                id="email"
                 type="email"
                 name="email"
-                id="email"
                 class="
                   focus:ring-indigo-500 focus:border-indigo-500
                   block
@@ -617,9 +656,9 @@
                 <UsersIcon class="h-5 w-5 text-gray-400" aria-hidden="true" />
               </div>
               <input
+                id="email"
                 type="email"
                 name="email"
-                id="email"
                 class="
                   focus:ring-indigo-500 focus:border-indigo-500
                   block
@@ -685,9 +724,9 @@
                 <UsersIcon class="h-5 w-5 text-gray-400" aria-hidden="true" />
               </div>
               <input
+                id="email"
                 type="email"
                 name="email"
-                id="email"
                 class="
                   focus:ring-indigo-500 focus:border-indigo-500
                   block
@@ -754,9 +793,9 @@
               fb.com/
             </span>
             <input
+              id="company-website"
               type="text"
               name="company-website"
-              id="company-website"
               class="
                 mt-1
                 block
@@ -796,9 +835,9 @@
               twt.com/
             </span>
             <input
+              id="company-website"
               type="text"
               name="company-website"
-              id="company-website"
               class="
                 mt-1
                 block
@@ -838,9 +877,9 @@
               in.com/
             </span>
             <input
+              id="company-website"
               type="text"
               name="company-website"
-              id="company-website"
               class="
                 mt-1
                 block
@@ -880,7 +919,7 @@
                   fill-rule="evenodd"
                   d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z"
                   clip-rule="evenodd"
-                ></path>
+                />
               </svg>
             </div>
             <input
@@ -913,29 +952,7 @@
     </div>
 
     <div class="mt-4 py-4 px-4 flex justify-end sm:px-6">
-      <button
-        type="button"
-        class="
-          bg-white
-          border border-gray-300
-          rounded-md
-          shadow-sm
-          py-2
-          px-4
-          inline-flex
-          justify-center
-          text-sm
-          font-medium
-          text-gray-700
-          hover:bg-gray-50
-          focus:outline-none
-          focus:ring-2
-          focus:ring-offset-2
-          focus:ring-indigo-500
-        "
-      >
-        Cancel
-      </button>
+
       <button
         type="submit"
         class="
@@ -945,7 +962,7 @@
           rounded-md
           shadow-sm
           py-2
-          px-4
+          px-20
           inline-flex
           justify-center
           text-sm
@@ -965,17 +982,11 @@
 </template>
 
 <script>
-import { ref } from "vue";
+import { onMounted, computed, ref } from "vue";
+import AuthService from "@/services/AuthService";
 
 import { SortAscendingIcon, UsersIcon } from "@heroicons/vue/solid";
-
-const user = {
-  name: "Ismail Bentabet",
-  handle: "ismailbentabett",
-  email: "ismailbentabett@gmail.com",
-  imageUrl:
-    "https://images.unsplash.com/photo-1517365830460-955ce3ccd263?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=4&w=320&h=320&q=80",
-};
+import {  useStore } from "vuex";
 
 export default {
   components: {
@@ -983,18 +994,132 @@ export default {
     UsersIcon,
   },
   setup() {
-    const availableToHire = ref(true);
-    const privateAccount = ref(false);
-    const allowCommenting = ref(true);
-    const allowMentions = ref(true);
+    /*
+
+'name' => $input['name'],
+                'email' => $input['email'],
+                'is_handyman' => $input['is_handyman'],
+                'is_online' => $input['is_online'],
+                'is_admin' => $input['is_admin'],
+                'is_moderator' => $input['is_moderator'],
+                'username' => $input['username'],
+                'bio' => $input['bio'],
+                'date_of_birth' => $input['date_of_birth'],
+                'phone_number' => $input['phone_number'],
+                'address' => $input['address'],
+                'country' => $input['country'],
+                'city' => $input['city'],
+                'state' => $input['state'],
+                'zip_code' => $input['zip_code'],
+                'website' => $input['website'],
+                'education' => $input['education'],
+                'certifications' => $input['certifications'],
+                'experience' => $input['experience'],
+                'social_links' => $input['social_links'],
+                'skills' => $input['skills'],
+
+*/
+    const store = useStore();
+
+    const authUser = computed(() => store.getters["auth/authUser"]);
+
+    let email = ref("");
+    let username = ref("");
+    let bio = ref("");
+    let date_of_birth = ref("");
+    let phone_number = ref("");
+    let address = ref("");
+    let country = ref("");
+    let city = ref("");
+    let state = ref("");
+    let zip_code = ref("");
+    let website = ref("");
+    let education = ref("");
+    let certifications = ref("");
+    let experience = ref("");
+    let social_links = ref("");
+    let skills = ref("");
+    let name = ref("");
+
+    onMounted(() => {
+      email.value = authUser.value.email;
+      username.value = authUser.value.username;
+      bio.value = authUser.value.bio;
+      date_of_birth.value = authUser.value.date_of_birth;
+      phone_number.value = authUser.value.phone_number;
+      address.value = authUser.value.address;
+      country.value = authUser.value.country;
+      city.value = authUser.value.city;
+      state.value = authUser.value.state;
+      zip_code.value = authUser.value.zip_code;
+      website.value = authUser.value.website;
+      education.value = authUser.value.education;
+      certifications.value = authUser.value.certifications;
+      experience.value = authUser.value.experience;
+      social_links.value = authUser.value.social_links;
+      skills.value = authUser.value.skills;
+       name.value = authUser.value.name;
+    });
+
+    const updateUser = () => {
+      const payload = {
+        name: name.value,
+        email: email.value,
+        username: username.value,
+        bio: bio.value,
+        date_of_birth: date_of_birth.value,
+        phone_number: phone_number.value,
+        address: address.value,
+        country: country.value,
+        city: city.value,
+        state: state.value,
+        zip_code: zip_code.value,
+        website: website.value,
+        education: education.value,
+        certifications: certifications.value,
+        experience: experience.value,
+        social_links: social_links.value,
+        skills: skills.value,
+            is_available_to_hire: authUser.value,
+        is_handyman: authUser.value.isHandyman,
+        is_online: authUser.value .is_online,
+
+        is_admin: authUser.value.isAdmin,
+        is_moderator: authUser.value.isModerator,
+
+
+      };
+
+
+      AuthService.updateUser(payload)
+        .then(() => store.dispatch("auth/getAuthUser"))
+        .then(() => console.log("User updated."))
+        .catch(() => console.log(payload));
+    };
+    console.log(username);
 
     return {
-      user,
+      email,
+      username,
+      bio,
+      date_of_birth,
+      phone_number,
+      address,
+      country,
+      city,
+      state,
 
-      availableToHire,
-      privateAccount,
-      allowCommenting,
-      allowMentions,
+name,
+      zip_code,
+      website,
+      education,
+      certifications,
+      experience,
+      social_links,
+      skills,
+      updateUser,
+      authUser,
+
     };
   },
 };

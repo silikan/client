@@ -1,4 +1,3 @@
-
 <template>
   <div class="relative bg-gray-800 overflow-hidden">
     <div class="hidden sm:block sm:absolute sm:inset-0" aria-hidden="true">
@@ -38,7 +37,7 @@
         />
       </svg>
     </div>
-    <div class="relative pt-6 ">
+    <div class="relative pt-6">
       <Popover>
         <nav
           class="
@@ -217,15 +216,17 @@
         </transition>
       </Popover>
 
-      <main class="mt-16 sm:mt-24 ">
-        <div class="mx-auto max-w-7xl ">
-          <div class="lg:grid lg:grid-cols-12 lg:gap-8   	">
+      <main class="mt-16 sm:mt-24">
+        <div class="mx-auto max-w-7xl">
+          <div class="lg:grid lg:grid-cols-12 lg:gap-8">
             <div
               class="
                 px-4
                 sm:px-6
-                col-span-6 text-left lg:flex items-center
-
+                col-span-6
+                text-left
+                lg:flex
+                items-center
                 flex
               "
             >
@@ -240,8 +241,7 @@
                     lg:mt-6
                   "
                 >
-                  <span class="text-indigo-400 text-left  text-5xl
-                    xl:text-6xl"
+                  <span class="text-indigo-400 text-left text-5xl xl:text-6xl"
                     >Silikan</span
                   >
                 </h1>
@@ -310,8 +310,8 @@
                               focus:ring-2
                               focus:ring-offset-2
                               focus:ring-indigo-500
-cursor-pointer
-	 "
+                              cursor-pointer
+                            "
                           >
                             Search
                           </button>
@@ -349,24 +349,25 @@ cursor-pointer
             <div
               class="
                 lg:mt-0 lg:col-span-6
-
-md:row-span-6
-flex
-items-end
-   mt-16
-
-
+                md:row-span-6
+                flex
+                items-end
+                mt-16
                 sm:mt-24
-
               "
             >
-              <img src="@\assets\undraw_house_searching_re_stk8.svg" class="" alt="" />
+              <img
+                src="@\assets\undraw_house_searching_re_stk8.svg"
+                class=""
+                alt=""
+              />
             </div>
           </div>
         </div>
       </main>
     </div>
   </div>
+  <!--  -->
 </template>
 
 <script>

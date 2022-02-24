@@ -1,12 +1,14 @@
 <template>
-  <EditProfile/>
+  <EditProfile />
 </template>
 
 <script>
-import EditProfile from "../components/Profile/Edit/EditProfile.component.vue"
+import EditProfile from '../components/Profile/Edit/EditProfile.component.vue';
+
 export default {
-components: {EditProfile}
-}
+  components: { EditProfile },
+
+};
 </script>
 
 <style>

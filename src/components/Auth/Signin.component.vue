@@ -8,7 +8,7 @@
               class="h-12 w-auto"
               src="https://tailwindui.com/img/logos/workflow-mark-indigo-600.svg"
               alt="Workflow"
-            />
+            >
             <h2 class="mt-6 text-3xl font-extrabold text-gray-900">
               Sign in to your account
             </h2>
@@ -27,13 +27,29 @@
           <div class="mt-8">
             <div>
               <div>
-                <p class="text-sm font-medium text-gray-700">Sign in with</p>
+                <p class="text-sm font-medium text-gray-700">
+                  Sign in with
+                </p>
 
                 <div class="mt-1 grid grid-cols-3 gap-3">
                   <div>
                     <a
                       href="#"
-                      class="w-full inline-flex justify-center py-2 px-4 border border-gray-300 rounded-md shadow-sm bg-white text-sm font-medium text-gray-500 hover:bg-gray-50"
+                      class="
+                        w-full
+                        inline-flex
+                        justify-center
+                        py-2
+                        px-4
+                        border border-gray-300
+                        rounded-md
+                        shadow-sm
+                        bg-white
+                        text-sm
+                        font-medium
+                        text-gray-500
+                        hover:bg-gray-50
+                      "
                     >
                       <span class="sr-only">Sign in with Facebook</span>
                       <svg
@@ -54,7 +70,21 @@
                   <div>
                     <a
                       href="#"
-                      class="w-full inline-flex justify-center py-2 px-4 border border-gray-300 rounded-md shadow-sm bg-white text-sm font-medium text-gray-500 hover:bg-gray-50"
+                      class="
+                        w-full
+                        inline-flex
+                        justify-center
+                        py-2
+                        px-4
+                        border border-gray-300
+                        rounded-md
+                        shadow-sm
+                        bg-white
+                        text-sm
+                        font-medium
+                        text-gray-500
+                        hover:bg-gray-50
+                      "
                     >
                       <span class="sr-only">Sign in with Twitter</span>
                       <svg
@@ -73,7 +103,21 @@
                   <div>
                     <a
                       href="#"
-                      class="w-full inline-flex justify-center py-2 px-4 border border-gray-300 rounded-md shadow-sm bg-white text-sm font-medium text-gray-500 hover:bg-gray-50"
+                      class="
+                        w-full
+                        inline-flex
+                        justify-center
+                        py-2
+                        px-4
+                        border border-gray-300
+                        rounded-md
+                        shadow-sm
+                        bg-white
+                        text-sm
+                        font-medium
+                        text-gray-500
+                        hover:bg-gray-50
+                      "
                     >
                       <span class="sr-only">Sign in with GitHub</span>
                       <svg
@@ -112,8 +156,8 @@
               <form
                 action="#"
                 method="POST"
-                @submit.prevent="login()"
                 class="space-y-6"
+                @submit.prevent="login()"
               >
                 <div>
                   <label
@@ -125,13 +169,27 @@
                   <div class="mt-1">
                     <input
                       id="email"
+                      v-model="email"
                       name="email"
                       type="email"
                       autocomplete="email"
                       required=""
-                      v-model="email"
-                      class="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-                    />
+                      class="
+                        appearance-none
+                        block
+                        w-full
+                        px-3
+                        py-2
+                        border border-gray-300
+                        rounded-md
+                        shadow-sm
+                        placeholder-gray-400
+                        focus:outline-none
+                        focus:ring-indigo-500
+                        focus:border-indigo-500
+                        sm:text-sm
+                      "
+                    >
                   </div>
                 </div>
 
@@ -145,13 +203,27 @@
                   <div class="mt-1">
                     <input
                       id="password"
+                      v-model="password"
                       name="password"
                       type="password"
-                      v-model="password"
                       autocomplete="current-password"
                       required=""
-                      class="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-                    />
+                      class="
+                        appearance-none
+                        block
+                        w-full
+                        px-3
+                        py-2
+                        border border-gray-300
+                        rounded-md
+                        shadow-sm
+                        placeholder-gray-400
+                        focus:outline-none
+                        focus:ring-indigo-500
+                        focus:border-indigo-500
+                        sm:text-sm
+                      "
+                    >
                   </div>
                 </div>
 
@@ -161,8 +233,15 @@
                       id="remember-me"
                       name="remember-me"
                       type="checkbox"
-                      class="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded"
-                    />
+                      class="
+                        h-4
+                        w-4
+                        text-indigo-600
+                        focus:ring-indigo-500
+                        border-gray-300
+                        rounded
+                      "
+                    >
                     <label
                       for="remember-me"
                       class="ml-2 block text-sm text-gray-900"
@@ -171,7 +250,10 @@
                     </label>
                   </div>
 
-                  <router-link class="text-sm" :to="'/forgot-password'">
+                  <router-link
+                    class="text-sm"
+                    :to="'/forgot-password'"
+                  >
                     <a
                       href="#"
                       class="font-medium text-indigo-600 hover:text-indigo-500"
@@ -184,7 +266,25 @@
                 <div>
                   <button
                     type="submit"
-                    class="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                    class="
+                      w-full
+                      flex
+                      justify-center
+                      py-2
+                      px-4
+                      border border-transparent
+                      rounded-md
+                      shadow-sm
+                      text-sm
+                      font-medium
+                      text-white
+                      bg-indigo-600
+                      hover:bg-indigo-700
+                      focus:outline-none
+                      focus:ring-2
+                      focus:ring-offset-2
+                      focus:ring-indigo-500
+                    "
                   >
                     Sign in
                   </button>
@@ -199,30 +299,32 @@
           class="self-center mr-10"
           src="@\assets\undraw_safe_re_kiil.svg "
           alt=""
-        />
+        >
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import AuthService from "@/services/AuthService";
+import AuthService from '@/services/AuthService';
 
-import { useStore } from "vuex";
-import { useRouter } from "vue-router";
-import { ref } from "vue";
+import { useStore } from 'vuex';
+import { useRouter } from 'vue-router';
+import { ref } from 'vue';
 
 export default {
   setup() {
-    let email, password, error;
+    let email;
+    let password;
+    let error;
 
-    email = ref("");
-    password = ref("");
+    email = ref('');
+    password = ref('');
 
     const store = useStore();
     const router = useRouter();
 
-    let login = async () => {
+    const login = async () => {
       const payload = {
         email: email.value,
         password: password.value,
@@ -230,15 +332,15 @@ export default {
       error = null;
       try {
         await AuthService.login(payload);
-        const authUser = await store.dispatch("auth/getAuthUser");
+        const authUser = await store.dispatch('auth/getAuthUser');
         if (authUser) {
-          store.dispatch("auth/setGuest", { value: "isNotGuest" });
-          router.push("/dashboard");
+          store.dispatch('auth/setGuest', { value: 'isNotGuest' });
+          router.push('/dashboard');
         } else {
           const error = Error(
-            "Unable to fetch user after login, check your API settings."
+            'Unable to fetch user after login, check your API settings.',
           );
-          error.name = "Fetch User";
+          error.name = 'Fetch User';
           throw error;
         }
       } catch (error) {

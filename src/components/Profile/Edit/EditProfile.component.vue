@@ -1,4 +1,3 @@
-
 <template>
   <div>
     <main class="">
@@ -70,8 +69,8 @@ import {
   SwitchDescription,
   SwitchGroup,
   SwitchLabel,
-} from "@headlessui/vue";
-import { SearchIcon } from "@heroicons/vue/solid";
+} from '@headlessui/vue';
+import { SearchIcon } from '@heroicons/vue/solid';
 import {
   BellIcon,
   CogIcon,
@@ -79,52 +78,52 @@ import {
   MenuIcon,
   UserCircleIcon,
   XIcon,
-} from "@heroicons/vue/outline";
+} from '@heroicons/vue/outline';
 import { ref } from '@vue/reactivity';
 
 const user = {
-  name: "Debbie Lewis",
-  handle: "deblewis",
-  email: "debbielewis@example.com",
+  name: 'Debbie Lewis',
+  handle: 'deblewis',
+  email: 'debbielewis@example.com',
   imageUrl:
-    "https://images.unsplash.com/photo-1517365830460-955ce3ccd263?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=4&w=320&h=320&q=80",
+    'https://images.unsplash.com/photo-1517365830460-955ce3ccd263?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=4&w=320&h=320&q=80',
 };
 const navigation = [
-  { name: "Dashboard", href: "#", current: true },
-  { name: "Jobs", href: "#", current: false },
-  { name: "Applicants", href: "#", current: false },
-  { name: "Company", href: "#", current: false },
+  { name: 'Dashboard', href: '#', current: true },
+  { name: 'Jobs', href: '#', current: false },
+  { name: 'Applicants', href: '#', current: false },
+  { name: 'Company', href: '#', current: false },
 ];
 const subNavigation = [
   {
-    name: "Profile",
-    href: "#",
+    name: 'Profile',
+    href: '#',
     icon: UserCircleIcon,
     current: true,
-    route: "/edit/profile",
+    route: '/edit/profile',
   },
   {
-    name: "Account",
-    href: "#",
+    name: 'Account',
+    href: '#',
     icon: CogIcon,
     current: false,
-    route: "/edit/account",
+    route: '/edit/account',
   },
   {
-    name: "Auth",
-    href: "#",
+    name: 'Auth',
+    href: '#',
     icon: KeyIcon,
     current: false,
-    route: "/edit/auth",
+    route: '/edit/auth',
   },
   /*   { name: "Notifications", href: "#", icon: BellIcon, current: false },
   { name: "Billing", href: "#", icon: CreditCardIcon, current: false },
   { name: "Integrations", href: "#", icon: ViewGridAddIcon, current: false }, */
 ];
 const userNavigation = [
-  { name: "Your Profile", href: "#" },
-  { name: "Settings", href: "#" },
-  { name: "Sign out", href: "#" },
+  { name: 'Your Profile', href: '#' },
+  { name: 'Settings', href: '#' },
+  { name: 'Sign out', href: '#' },
 ];
 
 export default {
@@ -149,13 +148,10 @@ export default {
     ProfileEdit */
   },
   setup() {
-
     const availableToHire = ref(true);
     const privateAccount = ref(false);
     const allowCommenting = ref(true);
     const allowMentions = ref(true);
-
-
 
     return {
       user,

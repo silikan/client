@@ -5,7 +5,7 @@
         class="self-center ml-10"
         src="@\assets\undraw_fingerprint_re_uf3f.svg"
         alt=""
-      />
+      >
     </div>
     <div class="flex flex-col justify-center py-12 px-4 flex-1">
       <div class="mx-auto w-full max-w-sm lg:w-96">
@@ -14,9 +14,9 @@
             class="h-12 w-auto"
             src="https://tailwindui.com/img/logos/workflow-mark-indigo-600.svg"
             alt="Workflow"
-          />
+          >
           <h2 class="mt-6 text-3xl font-extrabold text-gray-900">
-            Sign in to your account
+            Create a New Account
           </h2>
           <p class="mt-2 text-sm text-gray-600">
             Or
@@ -31,7 +31,10 @@
         </div>
         <div class="flex justify-center m-10">
           <nav aria-label="Progress">
-            <ol role="list" class="flex items-center">
+            <ol
+              role="list"
+              class="flex items-center"
+            >
               <li
                 v-for="(step, stepIdx) in steps"
                 :key="step.name"
@@ -51,7 +54,10 @@
                     href="#"
                     class="relative w-8 h-8 flex items-center justify-center bg-indigo-600 rounded-full hover:bg-indigo-900"
                   >
-                    <CheckIcon class="w-5 h-5 text-white" aria-hidden="true" />
+                    <CheckIcon
+                      class="w-5 h-5 text-white"
+                      aria-hidden="true"
+                    />
                     <span class="sr-only">{{ step.name }}</span>
                   </a>
                 </template>
@@ -100,15 +106,20 @@
           </nav>
         </div>
         <div class="mt-8">
-          <RadioGroup v-model="selected" v-if="steps[0].status == 'current'">
-            <RadioGroupLabel class="sr-only"> Privacy setting </RadioGroupLabel>
+          <RadioGroup
+            v-if="steps[0].status == 'current'"
+            v-model="selected"
+          >
+            <RadioGroupLabel class="sr-only">
+              Privacy setting
+            </RadioGroupLabel>
             <div class="bg-white rounded-md -space-y-px">
               <RadioGroupOption
-                as="template"
                 v-for="(setting, settingIdx) in settings"
                 :key="setting.name"
-                :value="setting"
                 v-slot="{ checked, active }"
+                as="template"
+                :value="setting"
               >
                 <div
                   :class="[
@@ -158,10 +169,15 @@
               </RadioGroupOption>
             </div>
           </RadioGroup>
-          <div class="signup" v-if="steps[1].status == 'current'">
+          <div
+            v-if="steps[1].status == 'current'"
+            class="signup"
+          >
             <div>
               <div>
-                <p class="text-sm font-medium text-gray-700">Sign in with</p>
+                <p class="text-sm font-medium text-gray-700">
+                  sign up with
+                </p>
 
                 <div class="mt-1 grid grid-cols-3 gap-3">
                   <div>
@@ -169,7 +185,7 @@
                       href="#"
                       class="w-full inline-flex justify-center py-2 px-4 border border-gray-300 rounded-md shadow-sm bg-white text-sm font-medium text-gray-500 hover:bg-gray-50"
                     >
-                      <span class="sr-only">Sign in with Facebook</span>
+                      <span class="sr-only">sign up with Facebook</span>
                       <svg
                         class="w-5 h-5"
                         aria-hidden="true"
@@ -190,7 +206,7 @@
                       href="#"
                       class="w-full inline-flex justify-center py-2 px-4 border border-gray-300 rounded-md shadow-sm bg-white text-sm font-medium text-gray-500 hover:bg-gray-50"
                     >
-                      <span class="sr-only">Sign in with Twitter</span>
+                      <span class="sr-only">sign up with Twitter</span>
                       <svg
                         class="w-5 h-5"
                         aria-hidden="true"
@@ -209,7 +225,7 @@
                       href="#"
                       class="w-full inline-flex justify-center py-2 px-4 border border-gray-300 rounded-md shadow-sm bg-white text-sm font-medium text-gray-500 hover:bg-gray-50"
                     >
-                      <span class="sr-only">Sign in with GitHub</span>
+                      <span class="sr-only">sign up with GitHub</span>
                       <svg
                         class="w-5 h-5"
                         aria-hidden="true"
@@ -259,13 +275,13 @@
                   <div class="mt-1">
                     <input
                       id="name"
+                      v-model="name"
                       name="name"
                       type="name"
                       autocomplete="name"
-                      v-model="name"
                       required=""
                       class="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-                    />
+                    >
                   </div>
                 </div>
                 <div>
@@ -278,13 +294,13 @@
                   <div class="mt-1">
                     <input
                       id="email"
+                      v-model="email"
                       name="email"
                       type="email"
-                      v-model="email"
                       autocomplete="email"
                       required=""
                       class="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-                    />
+                    >
                   </div>
                 </div>
 
@@ -298,13 +314,13 @@
                   <div class="mt-1">
                     <input
                       id="password"
+                      v-model="password"
                       name="password"
                       type="password"
-                      v-model="password"
                       autocomplete="current-password"
                       required=""
                       class="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-                    />
+                    >
                   </div>
                 </div>
                 <div class="space-y-1">
@@ -317,13 +333,13 @@
                   <div class="mt-1">
                     <input
                       id="confirm password"
-                      name="confirm password"
-                      type="confirm password"
                       v-model="passwordConfirm"
+                      name="confirm password"
+                      type="password"
                       autocomplete="confirm password"
                       required=""
                       class="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-                    />
+                    >
                   </div>
                 </div>
                 <div class="flex items-center justify-between">
@@ -333,7 +349,7 @@
                       name="remember-me"
                       type="checkbox"
                       class="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded"
-                    />
+                    >
                     <label
                       for="remember-me"
                       class="ml-2 block text-sm text-gray-900"
@@ -357,7 +373,7 @@
                     type="submit"
                     class="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
                   >
-                    Sign in
+                    sign up
                   </button>
                 </div>
               </form>
@@ -370,40 +386,40 @@
 </template>
 
 <script>
-import { CheckIcon } from "@heroicons/vue/solid";
+import { CheckIcon } from '@heroicons/vue/solid';
 import {
   RadioGroup,
   RadioGroupDescription,
   RadioGroupLabel,
   RadioGroupOption,
-} from "@headlessui/vue";
+} from '@headlessui/vue';
+
+import { getError } from '@/utils/helpers';
+import AuthService from '@/services/AuthService';
+import { useRouter } from 'vue-router';
+import { ref } from 'vue';
 
 const steps = [
-  { name: "Step 1", href: "#", status: "complete" },
+  { name: 'Step 1', href: '#', status: 'complete' },
 
-  { name: "Step 3", href: "#", status: "current" },
+  { name: 'Step 3', href: '#', status: 'current' },
 
-  { name: "Step 5", href: "#", status: "upcoming" },
+  { name: 'Step 5', href: '#', status: 'upcoming' },
 ];
 const settings = [
   {
-    name: "Public access",
-    description: "This project would be available to anyone who has the link",
+    name: 'Public access',
+    description: 'This project would be available to anyone who has the link',
   },
   {
-    name: "Private to Project Members",
-    description: "Only members of this project would be able to access",
+    name: 'Private to Project Members',
+    description: 'Only members of this project would be able to access',
   },
   {
-    name: "Private to you",
-    description: "You are the only one able to access this project",
+    name: 'Private to you',
+    description: 'You are the only one able to access this project',
   },
 ];
-
-import { getError } from "@/utils/helpers";
-import AuthService from "@/services/AuthService";
-import { useRouter } from "vue-router";
-import { ref } from "vue";
 
 export default {
   components: {
@@ -415,12 +431,13 @@ export default {
   },
   setup() {
     const selected = ref(settings[0]);
-    let name, email, password, passwordConfirm, error;
+    let name; let email; let password; let passwordConfirm; let
+      error;
 
-    name = ref("");
-    email = ref("");
-    password = ref("");
-    passwordConfirm = ref("");
+    name = ref('');
+    email = ref('');
+    password = ref('');
+    passwordConfirm = ref('');
     const router = useRouter();
 
     const registerUser = () => {
@@ -432,7 +449,7 @@ export default {
         password_confirmation: passwordConfirm.value,
       };
       AuthService.registerUser(payload)
-        .then(() => router.push("/dashboard"))
+        .then(() => router.push('/dashboard'))
         .catch((error) => (error = getError(error)));
     };
 

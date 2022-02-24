@@ -1,6 +1,6 @@
-import router from "@/router";
-import { getError } from "@/utils/helpers";
-import AuthService from "@/services/AuthService";
+import router from '@/router';
+import { getError } from '@/utils/helpers';
+import AuthService from '@/services/AuthService';
 
 export const namespaced = true;
 
@@ -26,65 +26,82 @@ export const actions = {
   logout({ commit, dispatch }) {
     return AuthService.logout()
       .then(() => {
-        commit("SET_USER", null);
-        dispatch("setGuest", { value: "isGuest" });
-        if (router.currentRoute.name !== "signin")
-          router.push({ path: "/signin" });
+        commit('SET_USER', null);
+        dispatch('setGuest', { value: 'isGuest' });
+        if (router.currentRoute.name !== 'signin') { router.push({ path: '/signin' }); }
       })
       .catch((error) => {
-        commit("SET_ERROR", getError(error));
+        commit('SET_ERROR', getError(error));
       });
   },
   async getAuthUser({ commit }) {
-    commit("SET_LOADING", true);
+    commit('SET_LOADING', true);
     try {
       const response = await AuthService.getAuthUser();
-      commit("SET_USER", response.data.data);
-      commit("SET_LOADING", false);
+      commit('SET_USER', response.data.data);
+      commit('SET_LOADING', false);
       return response.data.data;
     } catch (error) {
-      commit("SET_LOADING", false);
-      commit("SET_USER", null);
-      commit("SET_ERROR", getError(error));
+      commit('SET_LOADING', false);
+      commit('SET_USER', null);
+      commit('SET_ERROR', getError(error));
     }
   },
   setGuest(context, { value }) {
-    window.localStorage.setItem("guest", value);
+    window.localStorage.setItem('guest', value);
   },
 };
 
+/*
+ email,
+      username,
+      bio,
+      date_of_birth,
+      phone_number,
+      address,
+      country,
+      city,
+      state,
+      zip_code,
+      website,
+      education,
+      certifications,
+      experience,
+      social_links,
+      skills,
+*/
 export const getters = {
-  authUser: (state) => {
-    return state.user;
-  },
-  isAdmin: (state) => {
-    return state.user ? state.user.isAdmin : false;
-  },
-  isHandyman: (state) => {
-    return state.user ? state.user.isHandyman : false;
-  },
-  isClient: (state) => {
-    return state.user ? state.user.isClient : false;
-  },
-  isModerator: (state) => {
-    return state.user ? state.user.isModerator : false;
-  },
-  error: (state) => {
-    return state.error;
-  },
-  loading: (state) => {
-    return state.loading;
-  },
-  emailVerified: (state) => {
-    return state.user.emailVerified;
-  },
-  loggedIn: (state) => {
-    return !!state.user;
-  },
+  authUser: (state) => state.user,
+  isAdmin: (state) => (state.user ? state.user.isAdmin : false),
+  isHandyman: (state) => (state.user ? state.user.isHandyman : false),
+  isClient: (state) => (state.user ? state.user.isClient : false),
+  isModerator: (state) => (state.user ? state.user.isModerator : false),
+  error: (state) => state.error,
+  loading: (state) => state.loading,
+  emailVerified: (state) => state.user.emailVerified,
+  /*
+   email,
+        username,
+        bio,
+        date_of_birth,
+        phone_number,
+        address,
+        country,
+        city,
+        state,
+        zip_code,
+        website,
+        education,
+        certifications,
+        experience,
+        social_links,
+        skills,
+  */
+  loggedIn: (state) => !!state.user,
   guest: () => {
-    const storageItem = window.localStorage.getItem("guest");
+    const storageItem = window.localStorage.getItem('guest');
     if (!storageItem) return false;
-    if (storageItem === "isGuest") return true;
-    if (storageItem === "isNotGuest") return false;
+    if (storageItem === 'isGuest') return true;
+    if (storageItem === 'isNotGuest') return false;
   },
 };

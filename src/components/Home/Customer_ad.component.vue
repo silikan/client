@@ -1,4 +1,3 @@
-
 <template>
   <div class="grid grid-cols-1 md:grid-cols-2 bg-gray-800 p-10 md:w-2/3 self-center mb-10  ">
     <div
@@ -65,7 +64,11 @@
       </div>
     </div>
     <div class="flex justify-center">
-      <img src="@\assets\undraw_contract_re_ves9.svg" class="w-60 lg:w-96 h-96" alt="" />
+      <img
+        src="@\assets\undraw_contract_re_ves9.svg"
+        class="w-60 lg:w-96 h-96"
+        alt=""
+      >
     </div>
   </div>
 </template>

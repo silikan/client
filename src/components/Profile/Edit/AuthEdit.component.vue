@@ -1,26 +1,28 @@
-
 <template>
-<div class="divide-y divide-gray-200 lg:col-span-9">
-
-
-   <form @submit.prevent="sendVerification" class="divide-y divide-gray-200 lg:col-span-9" v-if="isEmailVerified == null" action="#" method="POST">
-
-    <!-- Privacy section -->
-    <div class="pt-6 divide-gray-200">
-      <div class="px-4 sm:px-6">
-        <div>
-          <h2 class="text-lg leading-6 font-medium text-gray-900">
-            Verify Email
-          </h2>
-          <p class="mt-1 text-sm text-gray-500">
-            Ornare eu a volutpat eget vulputate. Fringilla commodo amet.
-          </p>
+  <div class="divide-y divide-gray-200 lg:col-span-9">
+    <form
+      v-if="isEmailVerified == null"
+      class="divide-y divide-gray-200 lg:col-span-9"
+      action="#"
+      method="POST"
+      @submit.prevent="sendVerification"
+    >
+      <!-- Privacy section -->
+      <div class="pt-6 divide-gray-200">
+        <div class="px-4 sm:px-6">
+          <div>
+            <h2 class="text-lg leading-6 font-medium text-gray-900">
+              Verify Email
+            </h2>
+            <p class="mt-1 text-sm text-gray-500">
+              Ornare eu a volutpat eget vulputate. Fringilla commodo amet.
+            </p>
+          </div>
         </div>
-      </div>
-      <div class="mt-4 py-4 px-4 flex justify-end sm:px-6">
-        <button
-          type="submit"
-          class="
+        <div class="mt-4 py-4 px-4 flex justify-end sm:px-6">
+          <button
+            type="submit"
+            class="
             ml-5
             bg-indigo-700
             border border-transparent
@@ -39,46 +41,54 @@
             focus:ring-offset-2
             focus:ring-indigo-500
           "
-        >
-          Verify Email
-        </button>
-      </div>
-    </div>
-       </form>
-
-  <form @submit.prevent="updatePassword" class="divide-y divide-gray-200 lg:col-span-9" action="#" method="POST">
-
-    <!-- Privacy section -->
-    <div class="pt-6 divide-y divide-gray-200">
-      <div class="px-4 sm:px-6">
-        <div>
-          <h2 class="text-lg leading-6 font-medium text-gray-900">
-            Change Password
-          </h2>
-          <p class="mt-1 text-sm text-gray-500">
-            Ornare eu a volutpat eget vulputate. Fringilla commodo amet.
-          </p>
+          >
+            Verify Email
+          </button>
         </div>
+      </div>
+    </form>
 
-        <div class="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
-          <div class="bg-white py-8 px-4 sm:px-10">
-            <form class="space-y-6" action="#" method="POST">
-              <div>
-                <label
-                  for="current-password"
-                  class="block text-sm font-medium text-gray-700"
-                >
-                  Current Password
-                </label>
-                <div class="mt-1">
-                  <input
-                    id="current-password"
-                    name="current-password"
-                    type="password"
-                    v-model="currentPassword"
-                    autocomplete="current-password"
-                    required
-                    class="
+    <form
+      class="divide-y divide-gray-200 lg:col-span-9"
+      action="#"
+      method="POST"
+      @submit.prevent="updatePassword"
+    >
+      <!-- Privacy section -->
+      <div class="pt-6 divide-y divide-gray-200">
+        <div class="px-4 sm:px-6">
+          <div>
+            <h2 class="text-lg leading-6 font-medium text-gray-900">
+              Change Password
+            </h2>
+            <p class="mt-1 text-sm text-gray-500">
+              Ornare eu a volutpat eget vulputate. Fringilla commodo amet.
+            </p>
+          </div>
+
+          <div class="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
+            <div class="bg-white py-8 px-4 sm:px-10">
+              <form
+                class="space-y-6"
+                action="#"
+                method="POST"
+              >
+                <div>
+                  <label
+                    for="current-password"
+                    class="block text-sm font-medium text-gray-700"
+                  >
+                    Current Password
+                  </label>
+                  <div class="mt-1">
+                    <input
+                      id="current-password"
+                      v-model="currentPassword"
+                      name="current-password"
+                      type="password"
+                      autocomplete="current-password"
+                      required
+                      class="
                       appearance-none
                       block
                       w-full
@@ -93,26 +103,26 @@
                       focus:border-indigo-500
                       sm:text-sm
                     "
-                  />
+                    >
+                  </div>
                 </div>
-              </div>
 
-              <div>
-                <label
-                  for="password"
-                  class="block text-sm font-medium text-gray-700"
-                >
-                  New Password
-                </label>
-                <div class="mt-1">
-                  <input
-                    id="password"
-                    name="password"
-                    type="password"
-                    autocomplete="password"
-                    v-model="password"
-                    required
-                    class="
+                <div>
+                  <label
+                    for="password"
+                    class="block text-sm font-medium text-gray-700"
+                  >
+                    New Password
+                  </label>
+                  <div class="mt-1">
+                    <input
+                      id="password"
+                      v-model="password"
+                      name="password"
+                      type="password"
+                      autocomplete="password"
+                      required
+                      class="
                       appearance-none
                       block
                       w-full
@@ -127,26 +137,26 @@
                       focus:border-indigo-500
                       sm:text-sm
                     "
-                  />
+                    >
+                  </div>
                 </div>
-              </div>
 
-              <div>
-                <label
-                  for="confirm-password"
-                  class="block text-sm font-medium text-gray-700"
-                >
-                  Confirm Password
-                </label>
-                <div class="mt-1">
-                  <input
-                    id="confirm-password"
-                    name="confirm-password"
-                    v-model="passwordConfirm"
-                    type="password"
-                    autocomplete="current-password"
-                    required
-                    class="
+                <div>
+                  <label
+                    for="confirm-password"
+                    class="block text-sm font-medium text-gray-700"
+                  >
+                    Confirm Password
+                  </label>
+                  <div class="mt-1">
+                    <input
+                      id="confirm-password"
+                      v-model="passwordConfirm"
+                      name="confirm-password"
+                      type="password"
+                      autocomplete="current-password"
+                      required
+                      class="
                       appearance-none
                       block
                       w-full
@@ -161,17 +171,17 @@
                       focus:border-indigo-500
                       sm:text-sm
                     "
-                  />
+                    >
+                  </div>
                 </div>
-              </div>
-            </form>
+              </form>
+            </div>
           </div>
         </div>
-      </div>
-      <div class="mt-4 py-4 px-4 flex justify-end sm:px-6">
-        <button
-          type="submit"
-          class="
+        <div class="mt-4 py-4 px-4 flex justify-end sm:px-6">
+          <button
+            type="submit"
+            class="
             ml-5
             bg-indigo-700
             border border-transparent
@@ -190,26 +200,26 @@
             focus:ring-offset-2
             focus:ring-indigo-500
           "
-        >
-          Change Password
-        </button>
+          >
+            Change Password
+          </button>
+        </div>
       </div>
-    </div>
-  </form>
+    </form>
   </div>
 </template>
 
 <script>
-import {  computed, ref } from "vue";
-import AuthService from "@/services/AuthService";
-import {  mapGetters, useStore } from 'vuex';
+import { computed, ref } from 'vue';
+import AuthService from '@/services/AuthService';
+import { mapGetters, useStore } from 'vuex';
 
 const user = {
-  name: "Debbie Lewis",
-  handle: "deblewis",
-  email: "debbielewis@example.com",
+  name: 'Debbie Lewis',
+  handle: 'deblewis',
+  email: 'debbielewis@example.com',
   imageUrl:
-    "https://images.unsplash.com/photo-1517365830460-955ce3ccd263?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=4&w=320&h=320&q=80",
+    'https://images.unsplash.com/photo-1517365830460-955ce3ccd263?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=4&w=320&h=320&q=80',
 };
 
 export default {
@@ -220,44 +230,37 @@ export default {
     const allowCommenting = ref(true);
     const allowMentions = ref(true);
 
-    let currentPassword, password, passwordConfirm;
-    currentPassword = ref("");
-    password = ref("");
-    passwordConfirm = ref("");
+    let currentPassword; let password; let
+      passwordConfirm;
+    currentPassword = ref('');
+    password = ref('');
+    passwordConfirm = ref('');
 
-    const   updatePassword = () => {
-
+    const updatePassword = () => {
       const payload = {
         current_password: currentPassword.value,
         password: password.value,
         password_confirmation: passwordConfirm.value,
       };
       AuthService.updatePassword(payload)
-        .then(() => (console.log("Password updated.")))
+        .then(() => (console.log('Password updated.')))
         .catch((error) => (console.log(error)));
-    }
+    };
 
-    const store  = useStore();
+    const store = useStore();
 
-    const authUser = ref("");
- authUser.value = computed(() => {
-  return mapGetters(["authUser"]);
-});
-        const sendVerification= () => {
-
+    const authUser = ref('');
+    authUser.value = computed(() => mapGetters(['authUser']));
+    const sendVerification = () => {
       const payload = {
         user: authUser.value.id,
       };
       AuthService.sendVerification(payload)
-        .then(() => (console.log("Verification email sent.")))
+        .then(() => (console.log('Verification email sent.')))
         .catch((error) => (console.log(error)));
-    }
+    };
 
-
-
-
- let isEmailVerified = computed(() =>  store.getters["auth/emailVerified"]);
-
+    const isEmailVerified = computed(() => store.getters['auth/emailVerified']);
 
     return {
       user,
@@ -271,8 +274,8 @@ export default {
       passwordConfirm,
       updatePassword,
       sendVerification,
-authUser,
-isEmailVerified
+      authUser,
+      isEmailVerified,
 
     };
   },

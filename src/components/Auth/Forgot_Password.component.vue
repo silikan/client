@@ -1,24 +1,25 @@
 <template>
   <form
-    @submit.prevent="forgotPassword"
     class="p-10 bg-white border rounded shadow"
+    @submit.prevent="forgotPassword"
   >
-  <div class=" divide-y divide-gray-200">
- <h2 class="text-lg leading-6 font-medium text-gray-900  mb-5 ">
-            Verify Email
-          </h2>
-  </div>
+    <div class=" divide-y divide-gray-200">
+      <h2 class="text-lg leading-6 font-medium text-gray-900  mb-5 ">
+        Verify Email
+      </h2>
+    </div>
 
     <div>
-      <label for="email" class="block text-sm font-medium text-gray-700"
-        >Email</label
-      >
+      <label
+        for="email"
+        class="block text-sm font-medium text-gray-700"
+      >Email</label>
       <div class="mt-1">
         <input
-          type="email"
-          v-model="email"
-          name="email"
           id="email"
+          v-model="email"
+          type="email"
+          name="email"
           class="
             appearance-none
             block
@@ -35,7 +36,7 @@
           "
           placeholder="you@example.com"
           aria-describedby="email-description"
-        />
+        >
       </div>
     </div>
     <div class="mt-2 flex justify-end">
@@ -69,14 +70,14 @@
   </form>
 </template>
 <script>
-import AuthService from "@/services/AuthService";
-import { ref } from "vue";
+import AuthService from '@/services/AuthService';
+import { ref } from 'vue';
 
 export default {
   components: {
- },
+  },
   setup() {
-    let email = ref("");
+    const email = ref('');
 
     const forgotPassword = () => {
       const payload = {
@@ -84,7 +85,7 @@ export default {
       };
 
       AuthService.forgotPassword(payload).then(
-        () => (this.message = "Reset password email sent.")
+        () => (console.log('Reset password email sent.')),
       );
     };
 

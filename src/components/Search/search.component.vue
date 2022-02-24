@@ -1,7 +1,10 @@
 <template>
   <div class="flex-1 flex justify-center px-2 lg:ml-6 lg:justify-end">
     <div class="max-w-lg w-full lg:max-w-xs">
-      <label for="search" class="sr-only">Search</label>
+      <label
+        for="search"
+        class="sr-only"
+      >Search</label>
       <div class="relative">
         <div
           class="
@@ -14,7 +17,10 @@
             pointer-events-none
           "
         >
-          <SearchIcon class="h-5 w-5 text-gray-400" aria-hidden="true" />
+          <SearchIcon
+            class="h-5 w-5 text-gray-400"
+            aria-hidden="true"
+          />
         </div>
         <input
           id="search"
@@ -40,14 +46,14 @@
           "
           placeholder="Search"
           type="search"
-        />
+        >
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import { SearchIcon } from "@heroicons/vue/solid";
+import { SearchIcon } from '@heroicons/vue/solid';
 
 export default {
   components: { SearchIcon },
