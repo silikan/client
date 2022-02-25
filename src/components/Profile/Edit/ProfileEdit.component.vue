@@ -247,7 +247,7 @@
             name</label
           >
           <input
-              id="name"
+            id="name"
             type="text"
             name="name"
             autocomplete="name"
@@ -952,7 +952,6 @@
     </div>
 
     <div class="mt-4 py-4 px-4 flex justify-end sm:px-6">
-
       <button
         type="submit"
         class="
@@ -986,7 +985,7 @@ import { onMounted, computed, ref } from "vue";
 import AuthService from "@/services/AuthService";
 
 import { SortAscendingIcon, UsersIcon } from "@heroicons/vue/solid";
-import {  useStore } from "vuex";
+import { useStore } from "vuex";
 
 export default {
   components: {
@@ -994,31 +993,7 @@ export default {
     UsersIcon,
   },
   setup() {
-    /*
 
-'name' => $input['name'],
-                'email' => $input['email'],
-                'is_handyman' => $input['is_handyman'],
-                'is_online' => $input['is_online'],
-                'is_admin' => $input['is_admin'],
-                'is_moderator' => $input['is_moderator'],
-                'username' => $input['username'],
-                'bio' => $input['bio'],
-                'date_of_birth' => $input['date_of_birth'],
-                'phone_number' => $input['phone_number'],
-                'address' => $input['address'],
-                'country' => $input['country'],
-                'city' => $input['city'],
-                'state' => $input['state'],
-                'zip_code' => $input['zip_code'],
-                'website' => $input['website'],
-                'education' => $input['education'],
-                'certifications' => $input['certifications'],
-                'experience' => $input['experience'],
-                'social_links' => $input['social_links'],
-                'skills' => $input['skills'],
-
-*/
     const store = useStore();
 
     const authUser = computed(() => store.getters["auth/authUser"]);
@@ -1026,7 +1001,7 @@ export default {
     let email = ref("");
     let username = ref("");
     let bio = ref("");
-    let date_of_birth = ref("");
+    let date_of_birth = ref(null);
     let phone_number = ref("");
     let address = ref("");
     let country = ref("");
@@ -1058,11 +1033,12 @@ export default {
       experience.value = authUser.value.experience;
       social_links.value = authUser.value.social_links;
       skills.value = authUser.value.skills;
-       name.value = authUser.value.name;
+      name.value = authUser.value.name;
     });
 
     const updateUser = () => {
       const payload = {
+
         name: name.value,
         email: email.value,
         username: username.value,
@@ -1080,16 +1056,13 @@ export default {
         experience: experience.value,
         social_links: social_links.value,
         skills: skills.value,
-            is_available_to_hire: authUser.value,
+        is_available_to_hire: authUser.value.is_available_to_hire,
+        is_online: authUser.value.is_online,
         is_handyman: authUser.value.isHandyman,
-        is_online: authUser.value .is_online,
 
         is_admin: authUser.value.isAdmin,
         is_moderator: authUser.value.isModerator,
-
-
       };
-
 
       AuthService.updateUser(payload)
         .then(() => store.dispatch("auth/getAuthUser"))
@@ -1109,7 +1082,7 @@ export default {
       city,
       state,
 
-name,
+      name,
       zip_code,
       website,
       education,
@@ -1119,7 +1092,6 @@ name,
       skills,
       updateUser,
       authUser,
-
     };
   },
 };

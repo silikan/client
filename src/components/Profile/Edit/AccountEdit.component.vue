@@ -420,9 +420,9 @@ export default {
     ExclamationIcon,
   },
   setup() {
-    const availableToHire = ref();
-    const Handyman = ref();
-    const Online = ref();
+    const availableToHire = ref(false);
+    const Handyman = ref(false);
+    const Online = ref(false);
     const store = useStore();
     const authUser = computed(() => store.getters["auth/authUser"]);
     const open = ref(false)
