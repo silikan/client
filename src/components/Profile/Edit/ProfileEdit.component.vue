@@ -1,6 +1,6 @@
 <template>
   <form
-    @submit.prevent="uploadFile"
+    @submit.prevent="updateAndUploadFile"
     class="divide-y divide-gray-200 lg:col-span-9"
     action="#"
     method="POST"
@@ -128,25 +128,28 @@
             <div class="flex items-center">
               <div
                 class="
-                  flex-shrink-0
-                  inline-block
+                 flex
+
+                 justify-center
+
+                 items-center
                   rounded-full
-                  overflow-hidden
-                  h-12
-                  w-12
+
+                  h-15
+                  w-15
                 "
                 aria-hidden="true"
               >
                <img
-              class="relative rounded-full w-40 h-40"
+              class=" rounded-full w-10 h-10 "
               :src="avatar_svg"
-              v-if="avatar == null"
+              v-if="avatarWithoutLocalhost === null"
               alt=""
             />
              <img
-              class="relative rounded-full w-40 h-40"
+              class=" rounded-full w-10 h-10 "
               :src="avatar"
-              v-if="avatar!= null"
+              v-if="avatarWithoutLocalhost !== null"
               alt=""
             />
               </div>
@@ -208,15 +211,15 @@
 
           <div class="hidden relative rounded-full overflow-hidden lg:block">
             <img
-              class="relative rounded-full w-40 h-40"
+              class="relative rounded-full w-40 h-40 "
               :src="avatar_svg"
-              v-if="avatar == null"
+              v-if="avatarWithoutLocalhost === null"
               alt=""
             />
              <img
-              class="relative rounded-full w-40 h-40"
+              class="relative rounded-full w-40 h-40 "
               :src="avatar"
-              v-if="avatar!= null"
+              v-if="avatarWithoutLocalhost !== null"
               alt=""
             />
             <label
@@ -262,7 +265,7 @@
             </label>
 
           </div>
-                                    <button @click="uploadFile">upload</button>
+
 
         </div>
       </div>
@@ -1101,6 +1104,9 @@ export default {
         .then(() => store.dispatch("auth/getAuthUser"))
         .then(() => console.log("User updated."))
         .catch(() => console.log(payload));
+
+
+
     };
 
 
@@ -1136,8 +1142,15 @@ const uploadFile = () => {
   .catch(() => (console.log("error")));
 }
 
-let avatar = `${process.env.VUE_APP_API_URL}${authUser.value.avatar}`;
+const updateAndUploadFile = () => {
+  updateUser();
+  uploadFile();
+}
 
+let avatar = `${process.env.VUE_APP_API_URL}/${authUser.value.avatar}`;
+console.log(avatar)
+
+let avatarWithoutLocalhost = authUser.value.avatar
 
     return {
       email,
@@ -1163,7 +1176,9 @@ avatar,
       avatar_svg,
       uploadFile,
       fileChange,
-      file
+      file,
+      updateAndUploadFile,
+      avatarWithoutLocalhost
     };
   },
 };
