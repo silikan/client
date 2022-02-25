@@ -1,6 +1,6 @@
 <template>
   <form
-    @submit.prevent="updateUser"
+    @submit.prevent="uploadFile"
     class="divide-y divide-gray-200 lg:col-span-9"
     action="#"
     method="POST"
@@ -137,11 +137,18 @@
                 "
                 aria-hidden="true"
               >
-                <img
-                  class="rounded-full h-full w-full"
-                  :src="imageUrl"
-                  alt=""
-                />
+               <img
+              class="relative rounded-full w-40 h-40"
+              :src="avatar_svg"
+              v-if="avatar == null"
+              alt=""
+            />
+             <img
+              class="relative rounded-full w-40 h-40"
+              :src="avatar"
+              v-if="avatar!= null"
+              alt=""
+            />
               </div>
               <div class="ml-5 rounded-md shadow-sm">
                 <div
@@ -172,13 +179,18 @@
                       pointer-events-none
                     "
                   >
-                    <span>Change</span>
+                    <span>Change me</span>
                     <span class="sr-only"> user photo</span>
                   </label>
                   <input
                     id="mobile-user-photo"
                     name="user-photo"
                     type="file"
+                     :fileTypes="['image/*']"
+    endpoint="/users/auth/avatar"
+
+   @change="fileChange"
+   :accept="fileTypes"
                     class="
                       absolute
                       w-full
@@ -197,7 +209,14 @@
           <div class="hidden relative rounded-full overflow-hidden lg:block">
             <img
               class="relative rounded-full w-40 h-40"
-              :src="imageUrl"
+              :src="avatar_svg"
+              v-if="avatar == null"
+              alt=""
+            />
+             <img
+              class="relative rounded-full w-40 h-40"
+              :src="avatar"
+              v-if="avatar!= null"
               alt=""
             />
             <label
@@ -222,6 +241,10 @@
               <span>Change</span>
               <span class="sr-only"> user photo</span>
               <input
+                  endpoint="/users/auth/avatar"
+   @change="fileChange"
+   :accept="fileTypes"
+
                 id="desktop-user-photo"
                 type="file"
                 name="user-photo"
@@ -237,7 +260,10 @@
                 "
               />
             </label>
+
           </div>
+                                    <button @click="uploadFile">upload</button>
+
         </div>
       </div>
 
@@ -838,6 +864,7 @@
               id="company-website"
               type="text"
               name="company-website"
+
               class="
                 mt-1
                 block
@@ -983,9 +1010,14 @@
 <script>
 import { onMounted, computed, ref } from "vue";
 import AuthService from "@/services/AuthService";
-
+import FileService from "@/services/FileService";
 import { SortAscendingIcon, UsersIcon } from "@heroicons/vue/solid";
 import { useStore } from "vuex";
+
+
+import { createAvatar } from '@dicebear/avatars';
+import * as style from '@dicebear/avatars-initials-sprites';
+
 
 export default {
   components: {
@@ -1036,6 +1068,7 @@ export default {
       name.value = authUser.value.name;
     });
 
+
     const updateUser = () => {
       const payload = {
 
@@ -1069,7 +1102,42 @@ export default {
         .then(() => console.log("User updated."))
         .catch(() => console.log(payload));
     };
-    console.log(username);
+
+
+let avatar_svg = createAvatar(style, {
+  seed: authUser.value.name,
+  dataUri: true,
+  // ... and other options
+});
+
+
+
+let file ;
+
+const fileChange = (event) => {
+  file = event.target.files[0];
+}
+
+let     endpoint="/users/auth/avatar"
+
+
+const uploadFile = () => {
+  const payload = {};
+  const formData = new FormData();
+  formData.append("avatar", file);
+  payload.file = formData;
+  payload.endpoint = endpoint;
+
+  FileService.uploadFile(payload)
+  .then(() => {
+
+    console.log("fileUploaded")
+  })
+  .catch(() => (console.log("error")));
+}
+
+let avatar = `${process.env.VUE_APP_API_URL}${authUser.value.avatar}`;
+
 
     return {
       email,
@@ -1081,7 +1149,7 @@ export default {
       country,
       city,
       state,
-
+avatar,
       name,
       zip_code,
       website,
@@ -1092,6 +1160,10 @@ export default {
       skills,
       updateUser,
       authUser,
+      avatar_svg,
+      uploadFile,
+      fileChange,
+      file
     };
   },
 };
