@@ -82,6 +82,8 @@ import {
   XIcon,
 } from '@heroicons/vue/outline';
 import { ref } from '@vue/reactivity';
+import { onMounted } from '@vue/runtime-core';
+import { useRoute, useRouter } from 'vue-router';
 
 const user = {
   name: 'Debbie Lewis',
@@ -96,12 +98,15 @@ const navigation = [
   { name: 'Applicants', href: '#', current: false },
   { name: 'Company', href: '#', current: false },
 ];
+
+let route = useRoute();
+
 const subNavigation = [
   {
     name: 'Profile',
     href: '#',
     icon: UserCircleIcon,
-    current: true,
+    current: true ,
     route: '/edit/profile',
   },
   {
@@ -154,7 +159,17 @@ export default {
     const privateAccount = ref(false);
     const allowCommenting = ref(true);
     const allowMentions = ref(true);
+const router = useRouter();
+    onMounted(() => {
+      router.push('/edit/profile');
+    });
 
+
+onMounted(() => {
+
+  //   console.log(this.$route.path);
+
+});
     return {
       user,
       navigation,
