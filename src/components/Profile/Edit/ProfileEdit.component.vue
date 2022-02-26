@@ -127,31 +127,21 @@
           <div class="mt-1 lg:hidden">
             <div class="flex items-center">
               <div
-                class="
-                 flex
-
-                 justify-center
-
-                 items-center
-                  rounded-full
-
-                  h-15
-                  w-15
-                "
+                class="flex justify-center items-center rounded-full h-15 w-15"
                 aria-hidden="true"
               >
-               <img
-              class=" rounded-full w-10 h-10 "
-              :src="avatar_svg"
-              v-if="avatarWithoutLocalhost === null"
-              alt=""
-            />
-             <img
-              class=" rounded-full w-10 h-10 "
-              :src="avatar"
-              v-if="avatarWithoutLocalhost !== null"
-              alt=""
-            />
+                <img
+                  class="rounded-full w-10 h-10"
+                  :src="avatar_svg"
+                  v-if="avatarWithoutLocalhost === null"
+                  alt=""
+                />
+                <img
+                  class="rounded-full w-10 h-10"
+                  :src="avatar"
+                  v-if="avatarWithoutLocalhost !== null"
+                  alt=""
+                />
               </div>
               <div class="ml-5 rounded-md shadow-sm">
                 <div
@@ -189,11 +179,10 @@
                     id="mobile-user-photo"
                     name="user-photo"
                     type="file"
-                     :fileTypes="['image/*']"
-    endpoint="/users/auth/avatar"
-
-   @change="fileChange"
-   :accept="fileTypes"
+                    :fileTypes="['image/*']"
+                    endpoint="/users/auth/avatar"
+                    @change="fileChange"
+                    :accept="fileTypes"
                     class="
                       absolute
                       w-full
@@ -211,13 +200,13 @@
 
           <div class="hidden relative rounded-full overflow-hidden lg:block">
             <img
-              class="relative rounded-full w-40 h-40 "
+              class="relative rounded-full w-40 h-40"
               :src="avatar_svg"
               v-if="avatarWithoutLocalhost === null"
               alt=""
             />
-             <img
-              class="relative rounded-full w-40 h-40 "
+            <img
+              class="relative rounded-full w-40 h-40"
               :src="avatar"
               v-if="avatarWithoutLocalhost !== null"
               alt=""
@@ -244,10 +233,9 @@
               <span>Change</span>
               <span class="sr-only"> user photo</span>
               <input
-                  endpoint="/users/auth/avatar"
-   @change="fileChange"
-   :accept="fileTypes"
-
+                endpoint="/users/auth/avatar"
+                @change="fileChange"
+                :accept="fileTypes"
                 id="desktop-user-photo"
                 type="file"
                 name="user-photo"
@@ -263,10 +251,7 @@
                 "
               />
             </label>
-
           </div>
-
-
         </div>
       </div>
 
@@ -527,278 +512,37 @@
           </div>
         </div>
 
-        <div class="col-span-12 sm:col-span-6">
-          <label for="email" class="block text-sm font-medium text-gray-700"
-            >Experiences</label
-          >
-          <div class="mt-1 flex rounded-md shadow-sm">
-            <div
-              class="relative flex items-stretch flex-grow focus-within:z-10"
-            >
-              <div
-                class="
-                  absolute
-                  inset-y-0
-                  left-0
-                  pl-3
-                  flex
-                  items-center
-                  pointer-events-none
-                "
-              >
-                <UsersIcon class="h-5 w-5 text-gray-400" aria-hidden="true" />
-              </div>
-              <input
-                id="email"
-                type="email"
-                name="email"
-                class="
-                  focus:ring-indigo-500 focus:border-indigo-500
-                  block
-                  w-full
-                  rounded-none rounded-l-md
-                  pl-10
-                  sm:text-sm
-                  border border-gray-300
-                "
-                placeholder="John Doe"
-              />
-            </div>
-            <button
-              type="button"
-              class="
-                -ml-px
-                relative
-                inline-flex
-                items-center
-                space-x-2
-                px-4
-                py-2
-                border border-gray-300
-                text-sm
-                font-medium
-                rounded-r-md
-                text-gray-700
-                bg-gray-50
-                hover:bg-gray-100
-                focus:outline-none
-                focus:ring-1
-                focus:ring-indigo-500
-                focus:border-indigo-500
-              "
-            >
-              <SortAscendingIcon
-                class="h-5 w-5 text-gray-400"
-                aria-hidden="true"
-              />
-              <span>Sort</span>
-            </button>
+        <div class="mt-5 col-span-12">
+          <div class="col-span-12">
+            <ArrayForm
+              DataType="education"
+              :Data="arrayProps"
+              @sendEducation="sendEducation"
+            />
+          </div>
+          <div class="col-span-12">
+            <ArrayForm
+              DataType="skills"
+              :Data="arrayProps"
+              @sendSkills="sendSkills"
+            />
+          </div>
+          <div class="col-span-12">
+            <ArrayForm
+              DataType="experience"
+              :Data="arrayProps"
+              @sendExperience="sendExperience"
+            />
+          </div>
+          <div class="col-span-12">
+            <ArrayForm
+              DataType="certifications"
+             :Data="arrayProps"
+              @sendCertifications="sendCertifications"
+            />
           </div>
         </div>
-        <div class="col-span-12 sm:col-span-6">
-          <label for="email" class="block text-sm font-medium text-gray-700"
-            >Certifications</label
-          >
-          <div class="mt-1 flex rounded-md shadow-sm">
-            <div
-              class="relative flex items-stretch flex-grow focus-within:z-10"
-            >
-              <div
-                class="
-                  absolute
-                  inset-y-0
-                  left-0
-                  pl-3
-                  flex
-                  items-center
-                  pointer-events-none
-                "
-              >
-                <UsersIcon class="h-5 w-5 text-gray-400" aria-hidden="true" />
-              </div>
-              <input
-                id="email"
-                type="email"
-                name="email"
-                class="
-                  focus:ring-indigo-500 focus:border-indigo-500
-                  block
-                  w-full
-                  rounded-none rounded-l-md
-                  pl-10
-                  sm:text-sm
-                  border border-gray-300
-                "
-                placeholder="John Doe"
-              />
-            </div>
-            <button
-              type="button"
-              class="
-                -ml-px
-                relative
-                inline-flex
-                items-center
-                space-x-2
-                px-4
-                py-2
-                border border-gray-300
-                text-sm
-                font-medium
-                rounded-r-md
-                text-gray-700
-                bg-gray-50
-                hover:bg-gray-100
-                focus:outline-none
-                focus:ring-1
-                focus:ring-indigo-500
-                focus:border-indigo-500
-              "
-            >
-              <SortAscendingIcon
-                class="h-5 w-5 text-gray-400"
-                aria-hidden="true"
-              />
-              <span>Sort</span>
-            </button>
-          </div>
-        </div>
-        <div class="col-span-12 sm:col-span-6">
-          <label for="email" class="block text-sm font-medium text-gray-700"
-            >Education</label
-          >
-          <div class="mt-1 flex rounded-md shadow-sm">
-            <div
-              class="relative flex items-stretch flex-grow focus-within:z-10"
-            >
-              <div
-                class="
-                  absolute
-                  inset-y-0
-                  left-0
-                  pl-3
-                  flex
-                  items-center
-                  pointer-events-none
-                "
-              >
-                <UsersIcon class="h-5 w-5 text-gray-400" aria-hidden="true" />
-              </div>
-              <input
-                id="email"
-                type="email"
-                name="email"
-                class="
-                  focus:ring-indigo-500 focus:border-indigo-500
-                  block
-                  w-full
-                  rounded-none rounded-l-md
-                  pl-10
-                  sm:text-sm
-                  border border-gray-300
-                "
-                placeholder="John Doe"
-              />
-            </div>
-            <button
-              type="button"
-              class="
-                -ml-px
-                relative
-                inline-flex
-                items-center
-                space-x-2
-                px-4
-                py-2
-                border border-gray-300
-                text-sm
-                font-medium
-                rounded-r-md
-                text-gray-700
-                bg-gray-50
-                hover:bg-gray-100
-                focus:outline-none
-                focus:ring-1
-                focus:ring-indigo-500
-                focus:border-indigo-500
-              "
-            >
-              <SortAscendingIcon
-                class="h-5 w-5 text-gray-400"
-                aria-hidden="true"
-              />
-              <span>Sort</span>
-            </button>
-          </div>
-        </div>
-        <div class="col-span-12 sm:col-span-6">
-          <label for="email" class="block text-sm font-medium text-gray-700"
-            >Skills</label
-          >
-          <div class="mt-1 flex rounded-md shadow-sm">
-            <div
-              class="relative flex items-stretch flex-grow focus-within:z-10"
-            >
-              <div
-                class="
-                  absolute
-                  inset-y-0
-                  left-0
-                  pl-3
-                  flex
-                  items-center
-                  pointer-events-none
-                "
-              >
-                <UsersIcon class="h-5 w-5 text-gray-400" aria-hidden="true" />
-              </div>
-              <input
-                id="email"
-                type="email"
-                name="email"
-                class="
-                  focus:ring-indigo-500 focus:border-indigo-500
-                  block
-                  w-full
-                  rounded-none rounded-l-md
-                  pl-10
-                  sm:text-sm
-                  border border-gray-300
-                "
-                placeholder="John Doe"
-              />
-            </div>
-            <button
-              type="button"
-              class="
-                -ml-px
-                relative
-                inline-flex
-                items-center
-                space-x-2
-                px-4
-                py-2
-                border border-gray-300
-                text-sm
-                font-medium
-                rounded-r-md
-                text-gray-700
-                bg-gray-50
-                hover:bg-gray-100
-                focus:outline-none
-                focus:ring-1
-                focus:ring-indigo-500
-                focus:border-indigo-500
-              "
-            >
-              <SortAscendingIcon
-                class="h-5 w-5 text-gray-400"
-                aria-hidden="true"
-              />
-              <span>Sort</span>
-            </button>
-          </div>
-        </div>
+
         <div class="col-span-12 sm:col-span-8">
           <label
             for="company-website"
@@ -867,7 +611,6 @@
               id="company-website"
               type="text"
               name="company-website"
-
               class="
                 mt-1
                 block
@@ -1014,21 +757,17 @@
 import { onMounted, computed, ref } from "vue";
 import AuthService from "@/services/AuthService";
 import FileService from "@/services/FileService";
-import { SortAscendingIcon, UsersIcon } from "@heroicons/vue/solid";
 import { useStore } from "vuex";
+import ArrayForm from "./ArrayForm.component.vue";
 
-
-import { createAvatar } from '@dicebear/avatars';
-import * as style from '@dicebear/avatars-initials-sprites';
-
+import { createAvatar } from "@dicebear/avatars";
+import * as style from "@dicebear/avatars-initials-sprites";
 
 export default {
   components: {
-    SortAscendingIcon,
-    UsersIcon,
+    ArrayForm,
   },
   setup() {
-
     const store = useStore();
 
     const authUser = computed(() => store.getters["auth/authUser"]);
@@ -1050,6 +789,23 @@ export default {
     let social_links = ref("");
     let skills = ref("");
     let name = ref("");
+    let Educationdata, ExperienceData, Certificationsdata, SkillsData;
+
+    let sendEducation = (data) => {
+      Educationdata = JSON.stringify(data.people);
+    };
+
+    let sendExperience = (data) => {
+      ExperienceData = JSON.stringify(data.people);
+    };
+
+    let sendCertifications = (data) => {
+      Certificationsdata = JSON.stringify(data.people);
+    };
+
+    let sendSkills = (data) => {
+      SkillsData = JSON.stringify(data.people);
+    };
 
     onMounted(() => {
       email.value = authUser.value.email;
@@ -1063,18 +819,17 @@ export default {
       state.value = authUser.value.state;
       zip_code.value = authUser.value.zip_code;
       website.value = authUser.value.website;
-      education.value = authUser.value.education;
-      certifications.value = authUser.value.certifications;
-      experience.value = authUser.value.experience;
+      education.value = JSON.parse(authUser.value.education);
+      certifications.value = JSON.parse(authUser.value.certifications);
+      experience.value = JSON.parse(authUser.value.experience);
       social_links.value = authUser.value.social_links;
-      skills.value = authUser.value.skills;
+      skills.value = JSON.parse(authUser.value.skills);
       name.value = authUser.value.name;
     });
 
-
     const updateUser = () => {
+      console.log(Educationdata)
       const payload = {
-
         name: name.value,
         email: email.value,
         username: username.value,
@@ -1087,70 +842,71 @@ export default {
         state: state.value,
         zip_code: zip_code.value,
         website: website.value,
-        education: education.value,
-        certifications: certifications.value,
-        experience: experience.value,
         social_links: social_links.value,
-        skills: skills.value,
         is_available_to_hire: authUser.value.is_available_to_hire,
         is_online: authUser.value.is_online,
         is_handyman: authUser.value.isHandyman,
 
         is_admin: authUser.value.isAdmin,
         is_moderator: authUser.value.isModerator,
+        education: Educationdata,
+        certifications: Certificationsdata,
+        experience: ExperienceData,
+        skills: SkillsData,
       };
 
       AuthService.updateUser(payload)
         .then(() => store.dispatch("auth/getAuthUser"))
         .then(() => console.log("User updated."))
         .catch(() => console.log(payload));
-
-
-
     };
 
+    let avatar_svg = createAvatar(style, {
+      seed: authUser.value.name,
+      dataUri: true,
+      // ... and other options
+    });
 
-let avatar_svg = createAvatar(style, {
-  seed: authUser.value.name,
-  dataUri: true,
-  // ... and other options
-});
+    let file;
 
+    const fileChange = (event) => {
+      file = event.target.files[0];
+    };
 
+    let endpoint = "/users/auth/avatar";
 
-let file ;
+    const uploadFile = () => {
+      const payload = {};
+      const formData = new FormData();
+      formData.append("avatar", file);
+      payload.file = formData;
+      payload.endpoint = endpoint;
 
-const fileChange = (event) => {
-  file = event.target.files[0];
-}
+      FileService.uploadFile(payload)
+        .then(() => {
+          console.log("fileUploaded");
+        })
+        .catch(() => console.log("error"));
+    };
 
-let     endpoint="/users/auth/avatar"
+    const updateAndUploadFile = () => {
+      updateUser();
+      uploadFile();
+    };
 
+    let avatar = `${process.env.VUE_APP_API_URL}/${authUser.value.avatar}`;
 
-const uploadFile = () => {
-  const payload = {};
-  const formData = new FormData();
-  formData.append("avatar", file);
-  payload.file = formData;
-  payload.endpoint = endpoint;
+    let avatarWithoutLocalhost = authUser.value.avatar;
 
-  FileService.uploadFile(payload)
-  .then(() => {
+    let arrayProps = {
+     education,
 
-    console.log("fileUploaded")
-  })
-  .catch(() => (console.log("error")));
-}
+     experience,
 
-const updateAndUploadFile = () => {
-  updateUser();
-  uploadFile();
-}
+       certifications,
 
-let avatar = `${process.env.VUE_APP_API_URL}/${authUser.value.avatar}`;
-console.log(avatar)
-
-let avatarWithoutLocalhost = authUser.value.avatar
+       skills,
+    };
 
     return {
       email,
@@ -1162,7 +918,7 @@ let avatarWithoutLocalhost = authUser.value.avatar
       country,
       city,
       state,
-avatar,
+      avatar,
       name,
       zip_code,
       website,
@@ -1178,7 +934,16 @@ avatar,
       fileChange,
       file,
       updateAndUploadFile,
-      avatarWithoutLocalhost
+      avatarWithoutLocalhost,
+      sendEducation,
+      sendSkills,
+      sendCertifications,
+      sendExperience,
+      Educationdata,
+      ExperienceData,
+      Certificationsdata,
+      SkillsData,
+      arrayProps,
     };
   },
 };

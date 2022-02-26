@@ -1,5 +1,8 @@
 <template>
-  <EditProfile />
+<div class="mt-5">
+<EditProfile />
+</div>
+
 </template>
 
 <script>

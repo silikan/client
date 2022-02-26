@@ -333,29 +333,6 @@
       </div>
       <div class="mt-4 py-4 px-4 flex justify-end sm:px-6">
         <button
-          type="button"
-          class="
-            bg-white
-            border border-gray-300
-            rounded-md
-            shadow-sm
-            py-2
-            px-4
-            inline-flex
-            justify-center
-            text-sm
-            font-medium
-            text-gray-700
-            hover:bg-gray-50
-            focus:outline-none
-            focus:ring-2
-            focus:ring-offset-2
-            focus:ring-indigo-500
-          "
-        >
-          Cancel
-        </button>
-        <button
           type="submit"
           class="
             ml-5
@@ -364,7 +341,7 @@
             rounded-md
             shadow-sm
             py-2
-            px-4
+            px-20
             inline-flex
             justify-center
             text-sm
@@ -387,8 +364,14 @@
 <script>
 import { onMounted, computed, ref } from "vue";
 import AuthService from "@/services/AuthService";
-import { Dialog, DialogOverlay, DialogTitle, TransitionChild, TransitionRoot } from '@headlessui/vue'
-import { ExclamationIcon } from '@heroicons/vue/outline'
+import {
+  Dialog,
+  DialogOverlay,
+  DialogTitle,
+  TransitionChild,
+  TransitionRoot,
+} from "@headlessui/vue";
+import { ExclamationIcon } from "@heroicons/vue/outline";
 import UserService from "@/services/UserService";
 import {
   Switch,
@@ -412,7 +395,7 @@ export default {
     SwitchDescription,
     SwitchGroup,
     SwitchLabel,
-     Dialog,
+    Dialog,
     DialogOverlay,
     DialogTitle,
     TransitionChild,
@@ -425,11 +408,11 @@ export default {
     const Online = ref(false);
     const store = useStore();
     const authUser = computed(() => store.getters["auth/authUser"]);
-    const open = ref(false)
+    const open = ref(false);
 
-const openDeleteAcoountModal = () => {
-  open.value = true
-}
+    const openDeleteAcoountModal = () => {
+      open.value = true;
+    };
 
     onMounted(() => {
       availableToHire.value = authUser.value.is_available_to_hire;
@@ -470,14 +453,13 @@ const openDeleteAcoountModal = () => {
         .catch(() => console.log(payload));
     };
 
-
-const deleteUserAccount = () => {
-let userId = authUser.value.id
-  UserService.deleteUser(userId)
-  .then(() => store.dispatch("auth/logout"))
-  .then(() => console.log("User deleted."))
-  .catch(() => console.log(userId));
-}
+    const deleteUserAccount = () => {
+      let userId = authUser.value.id;
+      UserService.deleteUser(userId)
+        .then(() => store.dispatch("auth/logout"))
+        .then(() => console.log("User deleted."))
+        .catch(() => console.log(userId));
+    };
     return {
       user,
 
@@ -486,8 +468,8 @@ let userId = authUser.value.id
       Online,
       updateUser,
       openDeleteAcoountModal,
-open,
-deleteUserAccount
+      open,
+      deleteUserAccount,
     };
   },
 };
