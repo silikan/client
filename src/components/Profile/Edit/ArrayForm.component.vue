@@ -3,7 +3,14 @@
   <div class="max-w-md mx-auto sm:max-w-3xl">
     <div>
       <div class="flex flex-col justify-center items-center">
-        <AcademicCapIcon class="w-10 h-10" />
+        <AcademicCapIcon v-if="dataTypeComp == 'education'" class="w-10 h-10" />
+        <PuzzleIcon v-if="dataTypeComp == 'skills'" class="w-10 h-10" />
+        <BriefcaseIcon v-if="dataTypeComp == 'experience'" class="w-10 h-10" />
+
+        <BadgeCheckIcon
+          v-if="dataTypeComp == 'certifications'"
+          class="w-10 h-10"
+        />
         <h2 class="mt-2 text-lg font-medium text-gray-900">
           Add {{ dataTypeComp }}
         </h2>
@@ -88,8 +95,14 @@
           >
             <span class="min-w-0 flex-1 flex items-center space-x-3">
               <span class="block flex-shrink-0">
-                <AcademicCapIcon class="block h-7 w-7" />
-              </span>
+   <AcademicCapIcon v-if="dataTypeComp == 'education'" class="w-7 h-7" />
+        <PuzzleIcon v-if="dataTypeComp == 'skills'" class="w-7 h-7" />
+        <BriefcaseIcon v-if="dataTypeComp == 'experience'" class="w-7 h-7" />
+
+        <BadgeCheckIcon
+          v-if="dataTypeComp == 'certifications'"
+          class="w-7 h-7"
+        />              </span>
 
               <span class="block min-w-0 flex-1">
                 <span
@@ -121,13 +134,18 @@
 </template>
 
 <script>
-import { AcademicCapIcon } from "@heroicons/vue/solid";
+import {
+  AcademicCapIcon,
+  PuzzleIcon,
+  BriefcaseIcon,
+  BadgeCheckIcon,
+} from "@heroicons/vue/solid";
 import { reactive, ref } from "@vue/reactivity";
 import { computed, watchEffect } from "@vue/runtime-core";
-  import { uuid } from 'vue-uuid';
+import { uuid } from "vue-uuid";
 
 export default {
-  components: { AcademicCapIcon },
+  components: { AcademicCapIcon, PuzzleIcon, BriefcaseIcon ,BadgeCheckIcon},
   props: ["DataType", "Data"],
 
   setup(props, { emit }) {
@@ -135,42 +153,55 @@ export default {
 
     const dataTypeComp = computed(() => props.DataType);
     watchEffect(() => {
+      console.log(props.Data.education);
       if (dataTypeComp.value === "education") {
         let educationdb = computed(() => props.Data.education.value);
 
         let educationdbdata = ref(educationdb.value);
 
+
+
+ if (educationdbdata.value.length !== null) {
         for (let i = 0; i < educationdbdata.value.length; i++) {
           people.push(educationdbdata.value[i]);
+        }
         }
       }
       if (dataTypeComp.value === "experience") {
         let experiencedb = computed(() => props.Data.experience.value);
 
         let experiencedbdata = ref(experiencedb.value);
-
-        for (let i = 0; i < experiencedbdata.value.length; i++) {
+        if (experiencedbdata.value.length !== null) {
+           for (let i = 0; i < experiencedbdata.value.length; i++) {
           people.push(experiencedbdata.value[i]);
         }
+        }
+
+
       }
 
       if (dataTypeComp.value === "skills") {
         let skillsdb = computed(() => props.Data.skills.value);
 
- let skillsdbdata = ref(skillsdb.value);
-
-        for (let i = 0; i < skillsdbdata.value.length; i++) {
+        let skillsdbdata = ref(skillsdb.value);
+        if (skillsdbdata.value.length !== null) {
+            for (let i = 0; i < skillsdbdata.value.length; i++) {
           people.push(skillsdbdata.value[i]);
-        }      }
+        }
+        }
+
+      }
 
       if (dataTypeComp.value === "certifications") {
         let certificationsdb = computed(() => props.Data.certifications.value);
 
         let certificationsdbdata = ref(certificationsdb.value);
-
-        for (let i = 0; i < certificationsdbdata.value.length; i++) {
+        if (certificationsdbdata.value.length !== null) {
+           for (let i = 0; i < certificationsdbdata.value.length; i++) {
           people.push(certificationsdbdata.value[i]);
         }
+        }
+
       }
     });
 
@@ -191,7 +222,7 @@ export default {
 
       if (dataTypeComp.value === "skills" && data.value.length > 0) {
         people.push({
-           id: uuid.v1(),
+          id: uuid.v1(),
           name: data.value,
           role: "2000-2022",
         });
@@ -203,7 +234,7 @@ export default {
 
       if (dataTypeComp.value === "experience" && data.value.length > 0) {
         people.push({
-           id: uuid.v1(),
+          id: uuid.v1(),
           name: data.value,
           role: "2000-2022",
         });
@@ -214,7 +245,7 @@ export default {
 
       if (dataTypeComp.value === "certifications" && data.value.length > 0) {
         people.push({
-           id: uuid.v1(),
+          id: uuid.v1(),
           name: data.value,
           role: "2000-2022",
         });
@@ -223,22 +254,21 @@ export default {
           people,
         });
       }
-
     };
-      watchEffect(() => {
-             emit("sendSkills", {
-          people,
-        });
-          emit("sendEducation", {
-          people,
-        });
-           emit("sendExperience", {
-          people,
-        });
-        emit("sendCertifications", {
-          people,
-        });
+    watchEffect(() => {
+      emit("sendSkills", {
+        people,
       });
+      emit("sendEducation", {
+        people,
+      });
+      emit("sendExperience", {
+        people,
+      });
+      emit("sendCertifications", {
+        people,
+      });
+    });
 
     return {
       people,

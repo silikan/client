@@ -79,23 +79,17 @@ export const getters = {
   error: (state) => state.error,
   loading: (state) => state.loading,
   emailVerified: (state) => state.user.emailVerified,
+  education: (state) => (state.user.education !== null ? state.user.education : JSON.stringify([])),
+  certifications: (state) => (state.user.certifications !== null ? state.user.certifications : JSON.stringify([])),
+  experience: (state) => (state.user.experience !== null ? state.user.experience : JSON.stringify([])),
+  skills: (state) => (state.user.skills !== null ? state.user.skills : JSON.stringify([])),
+
   /*
-   email,
-        username,
-        bio,
-        date_of_birth,
-        phone_number,
-        address,
-        country,
-        city,
-        state,
-        zip_code,
-        website,
-        education,
-        certifications,
-        experience,
-        social_links,
-        skills,
+  education.value = JSON.parse(authUser.value.education);
+      certifications.value = JSON.parse(authUser.value.certifications);
+      experience.value = JSON.parse(authUser.value.experience);
+      skills.value = JSON.parse(authUser.value.skills);
+
   */
   loggedIn: (state) => !!state.user,
   guest: () => {

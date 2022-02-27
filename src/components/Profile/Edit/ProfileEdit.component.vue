@@ -537,7 +537,7 @@
           <div class="col-span-12">
             <ArrayForm
               DataType="certifications"
-             :Data="arrayProps"
+              :Data="arrayProps"
               @sendCertifications="sendCertifications"
             />
           </div>
@@ -566,9 +566,10 @@
               fb.com/
             </span>
             <input
-              id="company-website"
+              id="facebook_social_link"
               type="text"
-              name="company-website"
+              v-model="facebook_social_link"
+              name="facebook_social_link"
               class="
                 mt-1
                 block
@@ -581,7 +582,7 @@
                 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500
                 sm:text-sm
               "
-              placeholder="www.example.com"
+              placeholder="@username"
             />
           </div>
         </div>
@@ -608,9 +609,10 @@
               twt.com/
             </span>
             <input
-              id="company-website"
+              id="twitter_social_link"
               type="text"
-              name="company-website"
+              v-model="twitter_social_link"
+              name="twitter_social_link"
               class="
                 mt-1
                 block
@@ -623,7 +625,7 @@
                 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500
                 sm:text-sm
               "
-              placeholder="www.example.com"
+              placeholder="@username"
             />
           </div>
         </div>
@@ -650,9 +652,10 @@
               in.com/
             </span>
             <input
-              id="company-website"
+              id="linkedin_social_link"
+              v-model="linkedin_social_link"
               type="text"
-              name="company-website"
+              name="linkedin_social_link"
               class="
                 mt-1
                 block
@@ -665,7 +668,7 @@
                 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500
                 sm:text-sm
               "
-              placeholder="www.example.com"
+              placeholder="@username"
             />
           </div>
         </div>
@@ -771,7 +774,12 @@ export default {
     const store = useStore();
 
     const authUser = computed(() => store.getters["auth/authUser"]);
-
+    const educationState = computed(() => store.getters["auth/education"]);
+    const experienceState = computed(() => store.getters["auth/experience"]);
+    const skillsState = computed(() => store.getters["auth/skills"]);
+    const certificationsState = computed(
+      () => store.getters["auth/certifications"]
+    );
     let email = ref("");
     let username = ref("");
     let bio = ref("");
@@ -786,9 +794,11 @@ export default {
     let education = ref("");
     let certifications = ref("");
     let experience = ref("");
-    let social_links = ref("");
     let skills = ref("");
     let name = ref("");
+      let facebook_social_link = ref("");
+    let linkedin_social_link = ref("");
+    let twitter_social_link = ref("");
     let Educationdata, ExperienceData, Certificationsdata, SkillsData;
 
     let sendEducation = (data) => {
@@ -819,16 +829,21 @@ export default {
       state.value = authUser.value.state;
       zip_code.value = authUser.value.zip_code;
       website.value = authUser.value.website;
-      education.value = JSON.parse(authUser.value.education);
-      certifications.value = JSON.parse(authUser.value.certifications);
-      experience.value = JSON.parse(authUser.value.experience);
-      social_links.value = authUser.value.social_links;
-      skills.value = JSON.parse(authUser.value.skills);
+      education.value = JSON.parse(educationState.value);
+      certifications.value = JSON.parse(certificationsState.value);
+      experience.value = JSON.parse(experienceState.value);
+      skills.value = JSON.parse(skillsState.value);
+
       name.value = authUser.value.name;
+
+      facebook_social_link.value = authUser.value.facebook_social_link;
+      linkedin_social_link.value = authUser.value.linkedin_social_link;
+      twitter_social_link.value = authUser.value.twitter_social_link;
+
     });
 
     const updateUser = () => {
-      console.log(Educationdata)
+      console.log(Educationdata);
       const payload = {
         name: name.value,
         email: email.value,
@@ -842,11 +857,12 @@ export default {
         state: state.value,
         zip_code: zip_code.value,
         website: website.value,
-        social_links: social_links.value,
         is_available_to_hire: authUser.value.is_available_to_hire,
         is_online: authUser.value.is_online,
         is_handyman: authUser.value.isHandyman,
-
+        facebook_social_link: facebook_social_link.value,
+        linkedin_social_link: linkedin_social_link.value,
+        twitter_social_link: twitter_social_link.value,
         is_admin: authUser.value.isAdmin,
         is_moderator: authUser.value.isModerator,
         education: Educationdata,
@@ -899,13 +915,13 @@ export default {
     let avatarWithoutLocalhost = authUser.value.avatar;
 
     let arrayProps = {
-     education,
+      education,
 
-     experience,
+      experience,
 
-       certifications,
+      certifications,
 
-       skills,
+      skills,
     };
 
     return {
@@ -925,7 +941,9 @@ export default {
       education,
       certifications,
       experience,
-      social_links,
+      facebook_social_link,
+      linkedin_social_link,
+      twitter_social_link,
       skills,
       updateUser,
       authUser,
