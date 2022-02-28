@@ -14,11 +14,11 @@ import Handymen from '@/views/Handymen.view.vue';
 import Requests from '@/views/Requests.view.vue';
 import Services from '@/views/Services.view.vue';
 import EditProfile from '@/views/Edit_Profile.view.vue';
+import Profile from '@/views/Profile.view.vue';
 
 import AuthEdit from '../components/Profile/Edit/AuthEdit.component.vue';
 import AccountEdit from '../components/Profile/Edit/AccountEdit.component.vue';
 import ProfileEdit from '../components/Profile/Edit/ProfileEdit.component.vue';
-
 const routes = [
 
   {
@@ -27,7 +27,12 @@ const routes = [
     meta: { middleware: [guest] },
     component: Home,
   },
-
+  {
+    path: '/profile',
+    name: 'Profile',
+    meta: { middleware: [auth] },
+    component: Profile,
+  },
   {
     path: '/edit/',
     name: 'EditProfile',
