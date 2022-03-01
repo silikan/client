@@ -353,8 +353,17 @@ export default {
       // ... and other options
     });
     let avatar = `${process.env.VUE_APP_API_URL}/${authUserData.value.avatar}`;
+let OathAvatar = authUserData.value.avatar;
 
     let avatarWithoutLocalhost = authUserData.value.avatar;
+
+    if(authUserData.value.avatar !== null){
+if(authUserData.value.avatar.includes("googleusercontent.com") || authUserData.value.avatar.includes("graph.facebook.com")){
+  avatar = OathAvatar;
+}
+
+}
+
     return {
       profile,
       tabs,

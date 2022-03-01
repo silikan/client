@@ -139,9 +139,10 @@
                 <img
                   class="rounded-full w-10 h-10"
                   :src="avatar"
-                  v-if="avatarWithoutLocalhost !== null"
+                  v-if="avatarWithoutLocalhost !== null "
                   alt=""
                 />
+
               </div>
               <div class="ml-5 rounded-md shadow-sm">
                 <div
@@ -208,9 +209,10 @@
             <img
               class="relative rounded-full w-40 h-40"
               :src="avatar"
-              v-if="avatarWithoutLocalhost !== null"
+                  v-if="avatarWithoutLocalhost !== null && hostname != 'lh3.googleusercontent.com'"
               alt=""
             />
+
             <label
               for="desktop-user-photo"
               class="
@@ -706,7 +708,7 @@
 </template>
 
 <script>
-import { onMounted, computed, ref } from "vue";
+import { onMounted, computed, ref, } from "vue";
 import AuthService from "@/services/AuthService";
 import FileService from "@/services/FileService";
 import { useStore } from "vuex";
@@ -862,7 +864,7 @@ export default {
     let avatar = `${process.env.VUE_APP_API_URL}/${authUser.value.avatar}`;
 
     let avatarWithoutLocalhost = authUser.value.avatar;
-
+let OathAvatar = authUser.value.avatar;
     let arrayProps = {
       education,
 
@@ -872,6 +874,21 @@ export default {
 
       skills,
     };
+
+if(authUser.value.avatar !== null){
+if(authUser.value.avatar.includes("googleusercontent.com") || authUser.value.avatar.includes("graph.facebook.com")){
+  avatar = OathAvatar;
+}
+
+}
+
+
+
+
+
+
+//lh3.googleusercontent.com
+
 
     return {
       email,
@@ -911,6 +928,7 @@ export default {
       Certificationsdata,
       SkillsData,
       arrayProps,
+
     };
   },
 };

@@ -83,6 +83,7 @@ export const getters = {
   certifications: (state) => (state.user.certifications !== null ? state.user.certifications : JSON.stringify([])),
   experience: (state) => (state.user.experience !== null ? state.user.experience : JSON.stringify([])),
   skills: (state) => (state.user.skills !== null ? state.user.skills : JSON.stringify([])),
+  password_is_null: (state) => (state.user.password_is_null),
 
   /*
   education.value = JSON.parse(authUser.value.education);

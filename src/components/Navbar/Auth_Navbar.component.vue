@@ -132,8 +132,20 @@
                 "
               >
                 <span class="sr-only">Open user menu</span>
-                <img class="h-8 w-8 rounded-full" :src="user.imageUrl" alt="" />
-              </MenuButton>
+    <img
+                    class="h-8 w-8 rounded-full"
+                    :src="avatar_svg"
+                                  v-if="avatarWithoutLocalhost === null"
+
+                    alt=""
+                  >
+                     <img
+                    class="h-8 w-8 rounded-full"
+              :src="avatar"
+              v-if="avatarWithoutLocalhost !== null"
+
+                    alt=""
+                  >              </MenuButton>
             </div>
             <transition
               enter-active-class="transition ease-out duration-100"
@@ -236,8 +248,18 @@
       <div class="border-t border-gray-200 pt-4 pb-3">
         <div class="px-4 flex items-center">
           <div class="flex-shrink-0">
-            <img class="h-10 w-10 rounded-full" :src="user.imageUrl" alt="" />
-          </div>
+      <img
+                class="h-10 w-10 rounded-full"
+              :src="avatar_svg"
+              v-if="avatarWithoutLocalhost === null"
+              alt=""
+            />
+            <img
+                class="h-10 w-10 rounded-full"
+              :src="avatar"
+              v-if="avatarWithoutLocalhost !== null"
+              alt=""
+            />          </div>
           <div class="ml-3">
             <div class="text-base font-medium text-gray-800">
               {{ user.name }}
@@ -324,6 +346,9 @@
 </template>
 
 <script>
+import { computed } from "@vue/runtime-core";
+import { createAvatar } from "@dicebear/avatars";
+import * as style from "@dicebear/avatars-initials-sprites";
 import {
   Disclosure,
   DisclosureButton,
@@ -369,19 +394,43 @@ export default {
     SearchIcon,
     XIcon,
   },
-  setup() {
-    const store = useStore();
+      props: ["authUser"],
 
+  setup(props) {
+    const store = useStore();
+let authUserData = computed(() => {
+      return props.authUser;
+    });
     const logout = () => {
       store.dispatch("auth/logout");
       console.log("logout");
     };
 
+       let avatar_svg = createAvatar(style, {
+      seed: authUserData.value.name,
+      dataUri: true,
+      // ... and other options
+    });
+    let avatar = `${process.env.VUE_APP_API_URL}/${authUserData.value.avatar}`;
+let OathAvatar = authUserData.value.avatar;
+
+    let avatarWithoutLocalhost = authUserData.value.avatar;
+
+    if(authUserData.value.avatar !== null){
+if(authUserData.value.avatar.includes("googleusercontent.com") || authUserData.value.avatar.includes("graph.facebook.com")){
+  avatar = OathAvatar;
+}
+
+}
     return {
       user,
       navigation,
       userNavigation,
       logout,
+        avatar,
+      avatar_svg,
+      avatarWithoutLocalhost,
+      authUserData,
     };
   },
 };

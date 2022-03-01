@@ -181,7 +181,11 @@ export default {
         subNavigation[2].current = true;
       }
       console.log(route.path);
+
+
     });
+
+
 
     return {
       user,
