@@ -32,8 +32,8 @@
                 <div class="mt-1 grid grid-cols-3 gap-3">
                   <div>
                     <a
-                                            :href="facebook" target="_blank"
-
+                      :href="facebook"
+                      target="_blank"
                       class="
                         w-full
                         inline-flex
@@ -68,7 +68,8 @@
 
                   <div>
                     <a
-                      :href="twitter" target="_blank"
+                      :href="twitter"
+                      target="_blank"
                       class="
                         w-full
                         inline-flex
@@ -101,8 +102,8 @@
 
                   <div>
                     <a
-                    :href="google" target="_blank"
-
+                      :href="google"
+                      target="_blank"
                       class="
                         w-full
                         inline-flex
@@ -121,7 +122,7 @@
                     >
                       <span class="sr-only">Sign in with Google</span>
                       <svg
-                         class="w-5 h-5"
+                        class="w-5 h-5"
                         aria-hidden="true"
                         fill="currentColor"
                         xmlns="http://www.w3.org/2000/svg"
@@ -139,22 +140,22 @@
                         </clipPath>
                         <path
                           clip-path="url(#b)"
-                        fill="currentColor"
+                          fill="currentColor"
                           d="M0 37V11l17 13z"
                         />
                         <path
                           clip-path="url(#b)"
-                        fill="currentColor"
+                          fill="currentColor"
                           d="M0 11l17 13 7-6.1L48 14V0H0z"
                         />
                         <path
                           clip-path="url(#b)"
-                        fill="currentColor"
+                          fill="currentColor"
                           d="M0 37l30-23 7.9 1L48 0v48H0z"
                         />
                         <path
                           clip-path="url(#b)"
-                        fill="currentColor"
+                          fill="currentColor"
                           d="M48 48L17 24l-4-3 35-10z"
                         />
                       </svg>
@@ -340,9 +341,9 @@ export default {
     let email;
     let password;
     let error;
-let       google = `${process.env.VUE_APP_API_URL}/social/google`
-let       facebook = `${process.env.VUE_APP_API_URL}/social/facebook`
-let       twitter = `${process.env.VUE_APP_API_URL}/social/twitter`
+    let google = `${process.env.VUE_APP_API_URL}/social/google`;
+    let facebook = `${process.env.VUE_APP_API_URL}/social/facebook`;
+    let twitter = `${process.env.VUE_APP_API_URL}/social/twitter`;
 
     email = ref("");
     password = ref("");
@@ -381,7 +382,7 @@ let       twitter = `${process.env.VUE_APP_API_URL}/social/twitter`
       login,
       google,
       facebook,
-      twitter
+      twitter,
     };
   },
 };
