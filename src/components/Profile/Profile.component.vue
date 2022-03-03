@@ -358,7 +358,7 @@ let OathAvatar = authUserData.value.avatar;
     let avatarWithoutLocalhost = authUserData.value.avatar;
 
     if(authUserData.value.avatar !== null){
-if(authUserData.value.avatar.includes("googleusercontent.com") || authUserData.value.avatar.includes("graph.facebook.com")){
+if(authUserData.value.avatar.includes("googleusercontent.com") || authUserData.value.avatar.includes("graph.facebook.com") || authUserData.value.avatar.includes("licdn.com")){
   avatar = OathAvatar;
 }
 

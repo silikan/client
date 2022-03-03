@@ -876,7 +876,7 @@ let OathAvatar = authUser.value.avatar;
     };
 
 if(authUser.value.avatar !== null){
-if(authUser.value.avatar.includes("googleusercontent.com") || authUser.value.avatar.includes("graph.facebook.com")){
+if(authUser.value.avatar.includes("googleusercontent.com") || authUser.value.avatar.includes("graph.facebook.com") || authUser.value.avatar.includes("licdn.com")){
   avatar = OathAvatar;
 }
 
