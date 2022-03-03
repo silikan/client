@@ -238,12 +238,15 @@
               {{ tab.name }}
             </a>
           </nav>
-        </div>
-      </div>
-    </div>
-    <About :Data="authUserData" v-if="tabs[0].current === true" />
+           <About :Data="authUserData" v-if="tabs[0].current === true" />
     <Info :Data="authUserData" v-if="tabs[1].current === true"/>
     <Resume :Data="authUserData" v-if="tabs[2].current === true"/>
+        </div>
+
+      </div>
+
+    </div>
+
   </div>
   <div class="mt-6 sm:mt-2 2xl:mt-5">
     <div class="border-b border-gray-200">

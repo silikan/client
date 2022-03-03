@@ -1,7 +1,7 @@
 <template>
-  <div class="px-4 py-5 sm:px-0 sm:py-0 mt-10 lg:flex justify-center">
+  <div class="px-4 py-5 sm:px-0 sm:py-0 mt-10 lg:flex lg:flex">
     <dl>
-      <div class="sm:flex sm:px-6 sm:py-5 px-4 py-5 sm:px-6">
+      <div class="sm:flex sm:px-6 sm:py-5 px-4 py-5 sm:px-6 flex items-center">
         <dt
           class="
             text-sm
@@ -9,6 +9,7 @@
             text-gray-500
             sm:w-40 sm:flex-shrink-0
             lg:w-48
+
           "
         >
           Bio
@@ -17,9 +18,21 @@
           <p>
             {{ authUserData.bio }}
           </p>
+          <div v-if="authUserData.bio === null">
+            <router-link
+              class="flex font-bold items-center text-indigo-800 "
+              to="/edit/profile"
+            >
+              <PlusCircleIcon
+                class="w-6 h-6 stroke-1 mr-3"
+                aria-hidden="true"
+              />
+              <span class="">Add Bio</span>
+            </router-link>
+          </div>
         </dd>
       </div>
-      <div class="sm:flex sm:px-6 sm:py-5 px-4 py-5 sm:px-6">
+      <div class="sm:flex sm:px-6 sm:py-5 px-4 py-5 sm:px-6 flex items-center">
         <dt
           class="
             text-sm
@@ -27,16 +40,34 @@
             text-gray-500
             sm:w-40 sm:flex-shrink-0
             lg:w-48
+
           "
         >
           Location
         </dt>
         <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:ml-6 sm:col-span-2">
-          {{ authUserData.country }}, {{ authUserData.city }},
-          {{ authUserData.state }} , {{ authUserData.address }}
+          {{ authUserData.country }} {{ authUserData.city }}
+          {{ authUserData.state }} {{ authUserData.address }}
         </dd>
+        <div
+          class="flex"
+          v-if="
+            authUserData.country === null &&
+            authUserData.state === null &&
+            authUserData.city === null &&
+            authUserData.address === null
+          "
+        >
+          <router-link
+            class="flex font-bold items-center text-indigo-800"
+            to="/edit/profile"
+          >
+            <PlusCircleIcon class="w-6 h-6 stroke-1 mr-3" aria-hidden="true" />
+            <span class="">Add Location</span>
+          </router-link>
+        </div>
       </div>
-      <div class="sm:flex sm:px-6 sm:py-5 px-4 py-5 sm:px-6">
+      <div class="sm:flex sm:px-6 sm:py-5 px-4 py-5 sm:px-6 flex items-center">
         <dt
           class="
             text-sm
@@ -44,6 +75,7 @@
             text-gray-500
             sm:w-40 sm:flex-shrink-0
             lg:w-48
+
           "
         >
           Website
@@ -51,6 +83,15 @@
         <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:ml-6 sm:col-span-2">
           {{ authUserData.website }}
         </dd>
+        <div class="flex" v-if="authUserData.website === null">
+          <router-link
+            class="flex font-bold items-center text-indigo-800"
+            to="/edit/profile"
+          >
+            <PlusCircleIcon class="w-6 h-6 stroke-1 mr-3" aria-hidden="true" />
+            <span class="">Add website</span>
+          </router-link>
+        </div>
       </div>
       <div
         class="
@@ -59,6 +100,7 @@
           px-4
           py-5
           sm:px-6
+          flex items-center
         "
       >
         <dt
@@ -68,13 +110,24 @@
             text-gray-500
             sm:w-40 sm:flex-shrink-0
             lg:w-48
+
           "
         >
           Birthday
         </dt>
         <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:ml-6 sm:col-span-2">
-          <time datetime="1982-06-23"> June 23, 1982 </time>
+          <time datetime="1982-06-23"> </time>
         </dd>
+
+        <div class="flex" v-if="authUserData.date_of_birth === null">
+          <router-link
+            class="flex font-bold items-center text-indigo-800"
+            to="/edit/profile"
+          >
+            <PlusCircleIcon class="w-6 h-6 stroke-1 mr-3" aria-hidden="true" />
+            <span class="">Add Birthday</span>
+          </router-link>
+        </div>
       </div>
 
       <div class="sm:flex sm:px-6 sm:py-5 mt-10 sm:mt-0">
@@ -120,7 +173,8 @@ import {
   CurrencyDollarIcon,
   LocationMarkerIcon,
 } from "@heroicons/vue/solid";
-import { computed } from '@vue/runtime-core';
+import { PlusCircleIcon } from "@heroicons/vue/outline";
+import { computed } from "@vue/runtime-core";
 export default {
   components: {
     BriefcaseIcon,
@@ -129,14 +183,14 @@ export default {
     CurrencyDollarIcon,
 
     LocationMarkerIcon,
+    PlusCircleIcon,
   },
-props: ["Data"],
+  props: ["Data"],
   setup(props) {
-
     let authUserData = computed(() => {
       return props.Data;
     });
-console.log(authUserData);
+    console.log(authUserData);
 
     return {
       authUserData,

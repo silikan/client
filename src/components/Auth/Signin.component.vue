@@ -33,7 +33,7 @@
                   <div>
                     <a
                       :href="facebook"
-                      target="_blank"
+
                       class="
                         w-full
                         inline-flex
@@ -67,7 +67,7 @@
                   <div>
                     <a
                       :href="linkedin"
-                      target="_blank"
+
                       class="
                         w-full
                         inline-flex
@@ -101,7 +101,7 @@
                   <div>
                     <a
                       :href="google"
-                      target="_blank"
+
                       class="
                         w-full
                         inline-flex

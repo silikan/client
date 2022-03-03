@@ -8,7 +8,7 @@
 </template>
 <script>
 import { computed, onMounted } from 'vue';
-import { useRoute, useRouter } from 'vue-router';
+import { useRoute } from 'vue-router';
 import { useStore } from 'vuex';
 import Footer from './components/Footer.component.vue';
 import Navbar from './components/Navbar/Navbar.component.vue';
@@ -18,17 +18,15 @@ export default {
   name: 'App',
   components: { Footer, Navbar, AuthNavbar },
   setup() {
-    const router = useRouter();
     const route = useRoute();
     const path = computed(() => route.path !== '/');
     const store = useStore();
 
     onMounted( async () => {
 
-        const authUser = await store.dispatch("auth/getAuthUser");
+        const authUser = await store.getters("auth/authUser");
         if (authUser) {
           store.dispatch("auth/setGuest", { value: "isNotGuest" });
-          router.push("/dashboard");
         } else {
           const error = Error(
             "Unable to fetch user after login, check your API settings."

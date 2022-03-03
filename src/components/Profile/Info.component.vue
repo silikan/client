@@ -1,5 +1,5 @@
 <template>
-  <div class="px-4 py-5 sm:px-0 sm:py-0 mt-10 lg:flex justify-center">
+  <div class="px-4 py-5 sm:px-0 sm:py-0 mt-10 ">
     <dl>
       <div class="sm:flex sm:px-6 sm:py-5 px-4 py-5 sm:px-6">
         <dt
