@@ -1,6 +1,6 @@
 <template>
   <div class="h-screen min-h-full flex flex-col justify-between">
-    <Navbar :authUser="authUser" />
+    <Navbar :authUser="authUser" v-if="path" />
     <router-view />
     <Footer />
   </div>

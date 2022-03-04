@@ -98,7 +98,53 @@
           </DisclosureButton>
         </div>
         <div class="hidden lg:relative lg:z-10 lg:ml-4 lg:flex lg:items-center">
+          <div class="flex justify-between" v-if="isLoggedin === false">
+            <div class="hidden md:flex mx-4" v-if="signin === false">
+              <router-link
+                to="/signin"
+                class="
+                  inline-flex
+                  items-center
+                  px-5
+                  py-2
+                  border
+                  text-sm
+                  font-medium
+                  rounded-full
+                  shadow-sm
+                  text-black
+                  bg-white
+                  hover:bg-transparent hover:border-white
+                "
+              >
+                Signin
+              </router-link>
+            </div>
+            <div class="hidden md:flex">
+              <router-link
+                v-if="signup === false"
+                to="/signup"
+                class="
+                  inline-flex
+                  items-center
+                  px-5
+                  py-2
+                  border border-transparent
+                  text-sm
+                  font-medium
+                  rounded-full
+                  shadow-sm
+                  text-white
+                  bg-indigo-600
+                  hover:bg-indigo-700
+                "
+              >
+                Signup
+              </router-link>
+            </div>
+          </div>
           <button
+            v-if="isLoggedin === true"
             type="button"
             class="
               flex-shrink-0
@@ -121,6 +167,7 @@
           <Menu as="div" class="flex-shrink-0 relative ml-4">
             <div>
               <MenuButton
+                v-if="isLoggedin === true"
                 class="
                   bg-white
                   rounded-full
@@ -209,10 +256,10 @@
         </div>
       </div>
       <nav class="hidden lg:py-2 lg:flex lg:space-x-8" aria-label="Global">
-        <a
+        <router-link
           v-for="item in navigation"
           :key="item.name"
-          :href="item.href"
+          :to="item.link"
           :class="[
             item.current
               ? 'bg-gray-100 text-gray-900'
@@ -222,29 +269,31 @@
           :aria-current="item.current ? 'page' : undefined"
         >
           {{ item.name }}
-        </a>
+        </router-link>
       </nav>
     </div>
 
     <DisclosurePanel as="nav" class="lg:hidden" aria-label="Global">
-      <div class="pt-2 pb-3 px-2 space-y-1">
-        <DisclosureButton
-          v-for="item in navigation"
-          :key="item.name"
-          as="a"
-          :href="item.href"
-          :class="[
-            item.current
-              ? 'bg-gray-100 text-gray-900'
-              : 'text-gray-900 hover:bg-gray-50 hover:text-gray-900',
-            'block rounded-md py-2 px-3 text-base font-medium',
-          ]"
-          :aria-current="item.current ? 'page' : undefined"
-        >
-          {{ item.name }}
-        </DisclosureButton>
-      </div>
-      <div class="border-t border-gray-200 pt-4 pb-3">
+      <router-link v-for="item in navigation" :key="item.name" :to="item.link"
+        ><div class="pt-2 pb-3 px-2 space-y-1">
+          <DisclosureButton
+            as="a"
+            :class="[
+              item.current
+                ? 'bg-gray-100 text-gray-900'
+                : 'text-gray-900 hover:bg-gray-50 hover:text-gray-900',
+              'block rounded-md py-2 px-3 text-base font-medium',
+            ]"
+            :aria-current="item.current ? 'page' : undefined"
+          >
+            {{ item.name }}
+          </DisclosureButton>
+        </div>
+      </router-link>
+      <div
+        v-if="isLoggedin === true"
+        class="border-t border-gray-200 pt-4 pb-3"
+      >
         <div class="px-4 flex items-center">
           <div class="flex-shrink-0">
             <img
@@ -361,6 +410,7 @@ import {
 import { SearchIcon } from "@heroicons/vue/solid";
 import { BellIcon, MenuIcon, XIcon } from "@heroicons/vue/outline";
 import { useStore } from "vuex";
+import { useRoute } from "vue-router";
 
 const user = {
   name: "Tom Cook",
@@ -369,10 +419,11 @@ const user = {
     "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
 };
 const navigation = [
-  { name: "Dashboard", href: "#", current: true },
-  { name: "Team", href: "#", current: false },
-  { name: "Projects", href: "#", current: false },
-  { name: "Calendar", href: "#", current: false },
+  { name: "Services", link: "/services" },
+  { name: "Requests", link: "/requests" },
+  { name: "Handymen", link: "/handymen" },
+  { name: "About", link: "/about" },
+  { name: "Contact Us", link: "/contact" },
 ];
 const userNavigation = [
   { name: "Your Profile", href: "#", route: "/profile" },
@@ -397,34 +448,34 @@ export default {
   props: ["authUser"],
 
   setup(props) {
+    const route = useRoute();
     const store = useStore();
     const isLoggedin = computed(() => store.getters["auth/loggedIn"]);
-    if (isLoggedin.value === false) {
-       return {
-        user,
-        navigation,
+    const signin = computed(() => route.path === "/signin");
+    const signup = computed(() => route.path === "/signup");
+    let authUserData = computed(() => {
+      return props.authUser;
+    });
+    const logout = () => {
+      store.dispatch("auth/logout");
+      console.log("logout");
+    };
+    let avatar_svg;
+    let avatar;
+    let avatarWithoutLocalhost;
+    let OathAvatar;
+    console.log(authUserData.value);
 
-      };
-    }
     if (isLoggedin.value === true) {
-      const store = useStore();
-      let authUserData = computed(() => {
-        return props.authUser;
-      });
-      const logout = () => {
-        store.dispatch("auth/logout");
-        console.log("logout");
-      };
-      console.log(authUserData.value);
-      let avatar_svg = createAvatar(style, {
+      avatar_svg = createAvatar(style, {
         seed: authUserData.value.name,
         dataUri: true,
         // ... and other options
       });
-      let avatar = `${process.env.VUE_APP_API_URL}/${authUserData.value.avatar}`;
-      let OathAvatar = authUserData.value.avatar;
+      avatar = `${process.env.VUE_APP_API_URL}/${authUserData.value.avatar}`;
+      OathAvatar = authUserData.value.avatar;
 
-      let avatarWithoutLocalhost = authUserData.value.avatar;
+      avatarWithoutLocalhost = authUserData.value.avatar;
 
       if (authUserData.value.avatar !== null) {
         if (
@@ -435,17 +486,21 @@ export default {
           avatar = OathAvatar;
         }
       }
-      return {
-        user,
-        navigation,
-        userNavigation,
-        logout,
-        avatar,
-        avatar_svg,
-        avatarWithoutLocalhost,
-        authUserData,
-      };
     }
+
+    return {
+      user,
+      navigation,
+      userNavigation,
+      logout,
+      avatar,
+      avatar_svg,
+      avatarWithoutLocalhost,
+      authUserData,
+      isLoggedin,
+      signin,
+      signup,
+    };
   },
 };
 </script>
