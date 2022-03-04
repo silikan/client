@@ -1,7 +1,6 @@
 <template>
   <div class="h-screen min-h-full flex flex-col justify-between">
-    <Navbar v-if="path && isLoggedin == false" :authUser="authUser" />
-    <AuthNavbar v-if="path && isLoggedin == true" :authUser="authUser" />
+    <Navbar :authUser="authUser" />
     <router-view />
     <Footer />
   </div>
@@ -12,11 +11,10 @@ import { useRoute } from 'vue-router';
 import { useStore } from 'vuex';
 import Footer from './components/Footer.component.vue';
 import Navbar from './components/Navbar/Navbar.component.vue';
-import AuthNavbar from './components/Navbar/Auth_Navbar.component.vue';
 
 export default {
   name: 'App',
-  components: { Footer, Navbar, AuthNavbar },
+  components: { Footer, Navbar },
   setup() {
     const route = useRoute();
     const path = computed(() => route.path !== '/');
@@ -24,7 +22,7 @@ export default {
 
     onMounted( async () => {
 
-        const authUser = await store.getters("auth/authUser");
+        const authUser = await store.getters["auth/authUser"];
         if (authUser) {
           store.dispatch("auth/setGuest", { value: "isNotGuest" });
         } else {

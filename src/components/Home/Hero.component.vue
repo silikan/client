@@ -85,19 +85,24 @@
               </div>
             </div>
             <div class="hidden space-x-10 md:flex md:ml-10">
-              <a
+              <router-link
                 v-for="item in navigation"
                 :key="item.name"
-                :href="item.href"
-                class="font-medium text-white hover:text-gray-300"
-                >{{ item.name }}</a
+                :to="item.link"
+                class="
+                  font-medium
+                  text-white
+                  hover:text-gray-300
+                  cursor-pointer
+                "
+                >{{ item.name }}</router-link
               >
             </div>
           </div>
           <div class="flex justify-between">
             <div class="hidden md:flex mx-4">
-              <a
-                href="#"
+                 <router-link
+                to="/signin"
                 class="
                   inline-flex
                   items-center
@@ -110,23 +115,20 @@
                   shadow-sm
                   text-black
                   bg-white
-                  hover:bg-transparent
-                  hover:text-white
-                  hover:border-white
-
+                  hover:bg-transparent hover:text-white hover:border-white
                 "
               >
                 Signin
-              </a>
+              </router-link>
             </div>
             <div class="hidden md:flex">
-              <a
-                href="#"
+            <router-link
+                to="/signup"
                 class="
-              inline-flex
+                  inline-flex
                   items-center
                   px-5
-                   py-2
+                  py-2
                   border border-transparent
                   text-sm
                   font-medium
@@ -135,11 +137,10 @@
                   text-white
                   bg-indigo-600
                   hover:bg-indigo-700
-
                 "
               >
                 Signup
-              </a>
+              </router-link>
             </div>
           </div>
         </nav>
@@ -206,10 +207,10 @@
                 </div>
               </div>
               <div class="px-2 pt-2 pb-3 space-y-1">
-                <a
+                <router-link
                   v-for="item in navigation"
                   :key="item.name"
-                  :href="item.href"
+                  :to="item.link"
                   class="
                     block
                     px-3
@@ -219,8 +220,9 @@
                     font-medium
                     text-gray-700
                     hover:text-gray-900 hover:bg-gray-50
+                    cursor-pointer
                   "
-                  >{{ item.name }}</a
+                  >{{ item.name }}</router-link
                 >
               </div>
               <a
@@ -404,10 +406,11 @@ import { MenuIcon, XIcon } from "@heroicons/vue/outline";
 import { SearchIcon } from "@heroicons/vue/solid";
 
 const navigation = [
-  { name: "Product", href: "#" },
-  { name: "Features", href: "#" },
-  { name: "Marketplace", href: "#" },
-  { name: "Company", href: "#" },
+  { name: "About", link: "/about" },
+  { name: "Contact Us", link: "/contact" },
+  { name: "Services", link: "/handymen" },
+  { name: "Requests", link: "/services" },
+  { name: "Handymen", link: "/requests" },
 ];
 
 export default {

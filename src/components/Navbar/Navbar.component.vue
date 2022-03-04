@@ -1,307 +1,296 @@
-<!--
-  This example requires Tailwind CSS v2.0+
-
-  This example requires some changes to your config:
-
-  ```
-  // tailwind.config.js
-  module.exports = {
-    // ...
-    plugins: [
-      // ...
-      require('@tailwindcss/forms'),
-    ],
-  }
-  ```
--->
 <template>
-  <!-- When the mobile menu is open, add `overflow-hidden` to the `body` element to prevent double scrollbars -->
-  <Popover v-slot="{ open }" as="template">
-    <header
-      :class="[
-        open ? 'fixed inset-0 z-40 overflow-y-auto' : '',
-        'bg-white shadow-sm lg:static lg:overflow-y-visible',
-      ]"
+  <Disclosure v-slot="{ open }" as="header" class="bg-white shadow">
+    <div
+      class="
+        max-w-7xl
+        mx-auto
+        px-2
+        sm:px-4
+        lg:divide-y lg:divide-gray-200 lg:px-8
+      "
     >
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="relative h-16 flex justify-between">
+        <div class="relative z-10 px-2 flex lg:px-0">
+          <div class="flex-shrink-0 flex items-center">
+            <img
+              class="block h-8 w-auto"
+              src="https://tailwindui.com/img/logos/workflow-mark-indigo-600.svg"
+              alt="Workflow"
+            />
+          </div>
+        </div>
         <div
-          class="relative flex justify-between xl:grid xl:grid-cols-12 lg:gap-8"
+          class="
+            relative
+            z-0
+            flex-1
+            px-2
+            flex
+            items-center
+            justify-center
+            sm:absolute sm:inset-0
+          "
         >
-          <div
-            class="
-              flex
-              md:absolute md:left-0 md:inset-y-0
-              lg:static
-              xl:col-span-2
-            "
-          >
-            <div class="flex-shrink-0 flex items-center">
-              <a href="#">
-                <img
-                  class="block h-8 w-auto"
-                  src="https://tailwindui.com/img/logos/workflow-mark.svg?color=indigo&shade=600"
-                  alt="Workflow"
-                />
-              </a>
-            </div>
-          </div>
-          <div class="min-w-0 flex-1 md:px-8 lg:px-0 xl:col-span-6">
-            <div
-              class="
-                flex
-                items-center
-                px-6
-                py-4
-                md:max-w-3xl md:mx-auto
-                lg:max-w-none lg:mx-0
-                xl:px-0
-              "
-            >
-              <div class="w-full">
-                <label for="search" class="sr-only">Search</label>
-                <div class="relative">
-                  <div
-                    class="
-                      pointer-events-none
-                      absolute
-                      inset-y-0
-                      left-0
-                      pl-3
-                      flex
-                      items-center
-                    "
-                  >
-                    <SearchIcon
-                      class="h-5 w-5 text-gray-400"
-                      aria-hidden="true"
-                    />
-                  </div>
-                  <input
-                    id="search"
-                    name="search"
-                    class="
-                      block
-                      w-full
-                      bg-white
-                      border border-gray-300
-                      rounded-md
-                      py-2
-                      pl-10
-                      pr-3
-                      text-sm
-                      placeholder-gray-500
-                      focus:outline-none
-                      focus:text-gray-900
-                      focus:placeholder-gray-400
-                      focus:ring-1
-                      focus:ring-indigo-500
-                      focus:border-indigo-500
-                      sm:text-sm
-                    "
-                    placeholder="Search"
-                    type="search"
-                  />
-                </div>
-              </div>
-            </div>
-          </div>
-          <div
-            class="
-              flex
-              items-center
-              md:absolute md:right-0 md:inset-y-0
-              lg:hidden
-            "
-          >
-            <!-- Mobile menu button -->
-            <PopoverButton
-              class="
-                -mx-2
-                rounded-md
-                p-2
-                inline-flex
-                items-center
-                justify-center
-                text-gray-400
-                hover:bg-gray-100 hover:text-gray-500
-                focus:outline-none
-                focus:ring-2
-                focus:ring-inset
-                focus:ring-indigo-500
-              "
-            >
-              <span class="sr-only">Open menu</span>
-              <MenuIcon v-if="!open" class="block h-6 w-6" aria-hidden="true" />
-              <XIcon v-else class="block h-6 w-6" aria-hidden="true" />
-            </PopoverButton>
-          </div>
-          <div
-            class="hidden lg:flex lg:items-center lg:justify-end xl:col-span-4"
-          >
-            <a
-              href="#"
-              class="
-                ml-5
-                flex-shrink-0
-                bg-white
-                rounded-full
-                p-1
-                text-gray-400
-                hover:text-gray-500
-                focus:outline-none
-                focus:ring-2
-                focus:ring-offset-2
-                focus:ring-indigo-500
-              "
-            >
-              <span class="sr-only">View notifications</span>
-              <BellIcon class="h-6 w-6" aria-hidden="true" />
-            </a>
-
-            <!-- Profile dropdown -->
-            <Menu as="div" class="flex-shrink-0 relative ml-5">
-              <div>
-                <MenuButton
-                  class="
-                    bg-white
-                    rounded-full
-                    flex
-                    focus:outline-none
-                    focus:ring-2
-                    focus:ring-offset-2
-                    focus:ring-indigo-500
-                  "
-                >
-                  <span class="sr-only">Open user menu</span>
-                  <img
-                    class="h-8 w-8 rounded-full"
-                    :src="user.imageUrl"
-                    alt=""
-                  />
-                </MenuButton>
-              </div>
-              <transition
-                enter-active-class="transition ease-out duration-100"
-                enter-from-class="transform opacity-0 scale-95"
-                enter-to-class="transform opacity-100 scale-100"
-                leave-active-class="transition ease-in duration-75"
-                leave-from-class="transform opacity-100 scale-100"
-                leave-to-class="transform opacity-0 scale-95"
+          <div class="w-full sm:max-w-xs">
+            <label for="search" class="sr-only">Search</label>
+            <div class="relative">
+              <div
+                class="
+                  pointer-events-none
+                  absolute
+                  inset-y-0
+                  left-0
+                  pl-3
+                  flex
+                  items-center
+                "
               >
-                <MenuItems
-                  class="
-                    origin-top-right
-                    absolute
-                    z-10
-                    right-0
-                    mt-2
-                    w-48
-                    rounded-md
-                    shadow-lg
-                    bg-white
-                    ring-1 ring-black ring-opacity-5
-                    py-1
-                    focus:outline-none
-                  "
-                >
-                  <MenuItem
-                    v-for="item in userNavigation"
-                    :key="item.name"
-                    v-slot="{ active }"
-                  >
+                <SearchIcon class="h-5 w-5 text-gray-400" aria-hidden="true" />
+              </div>
+              <input
+                id="search"
+                name="search"
+                class="
+                  block
+                  w-full
+                  bg-white
+                  border border-gray-300
+                  rounded-md
+                  py-2
+                  pl-10
+                  pr-3
+                  text-sm
+                  placeholder-gray-500
+                  focus:outline-none
+                  focus:text-gray-900
+                  focus:placeholder-gray-400
+                  focus:ring-1
+                  focus:ring-indigo-500
+                  focus:border-indigo-500
+                  sm:text-sm
+                "
+                placeholder="Search"
+                type="search"
+              />
+            </div>
+          </div>
+        </div>
+        <div class="relative z-10 flex items-center lg:hidden">
+          <!-- Mobile menu button -->
+          <DisclosureButton
+            class="
+              rounded-md
+              p-2
+              inline-flex
+              items-center
+              justify-center
+              text-gray-400
+              hover:bg-gray-100 hover:text-gray-500
+              focus:outline-none
+              focus:ring-2
+              focus:ring-inset
+              focus:ring-indigo-500
+            "
+          >
+            <span class="sr-only">Open menu</span>
+            <MenuIcon v-if="!open" class="block h-6 w-6" aria-hidden="true" />
+            <XIcon v-else class="block h-6 w-6" aria-hidden="true" />
+          </DisclosureButton>
+        </div>
+        <div class="hidden lg:relative lg:z-10 lg:ml-4 lg:flex lg:items-center">
+          <button
+            type="button"
+            class="
+              flex-shrink-0
+              bg-white
+              rounded-full
+              p-1
+              text-gray-400
+              hover:text-gray-500
+              focus:outline-none
+              focus:ring-2
+              focus:ring-offset-2
+              focus:ring-indigo-500
+            "
+          >
+            <span class="sr-only">View notifications</span>
+            <BellIcon class="h-6 w-6" aria-hidden="true" />
+          </button>
+
+          <!-- Profile dropdown -->
+          <Menu as="div" class="flex-shrink-0 relative ml-4">
+            <div>
+              <MenuButton
+                class="
+                  bg-white
+                  rounded-full
+                  flex
+                  focus:outline-none
+                  focus:ring-2
+                  focus:ring-offset-2
+                  focus:ring-indigo-500
+                "
+              >
+                <span class="sr-only">Open user menu</span>
+                <img
+                  class="h-8 w-8 rounded-full"
+                  :src="avatar_svg"
+                  v-if="avatarWithoutLocalhost === null"
+                  alt=""
+                />
+                <img
+                  class="h-8 w-8 rounded-full"
+                  :src="avatar"
+                  v-if="avatarWithoutLocalhost !== null"
+                  alt=""
+                />
+              </MenuButton>
+            </div>
+            <transition
+              enter-active-class="transition ease-out duration-100"
+              enter-from-class="transform opacity-0 scale-95"
+              enter-to-class="transform opacity-100 scale-100"
+              leave-active-class="transition ease-in duration-75"
+              leave-from-class="transform opacity-100 scale-100"
+              leave-to-class="transform opacity-0 scale-95"
+            >
+              <MenuItems
+                class="
+                  origin-top-right
+                  absolute
+                  right-0
+                  mt-2
+                  w-48
+                  rounded-md
+                  shadow-lg
+                  bg-white
+                  ring-1 ring-black ring-opacity-5
+                  py-1
+                  focus:outline-none
+                "
+              >
+                <router-link to="/profile">
+                  <MenuItem v-slot="{ active }">
                     <a
-                      :href="item.href"
                       :class="[
                         active ? 'bg-gray-100' : '',
                         'block py-2 px-4 text-sm text-gray-700',
                       ]"
-                      >{{ item.name }}</a
                     >
+                      Your Profile
+                    </a>
                   </MenuItem>
-                </MenuItems>
-              </transition>
-            </Menu>
-
-            <a
-              href="#"
-              class="
-                ml-6
-                inline-flex
-                items-center
-                px-4
-                py-2
-                border border-transparent
-                text-sm
-                font-medium
-                rounded-md
-                shadow-sm
-                text-white
-                bg-indigo-600
-                hover:bg-indigo-700
-                focus:outline-none
-                focus:ring-2
-                focus:ring-offset-2
-                focus:ring-indigo-500
-              "
-            >
-              New Project
-            </a>
-          </div>
+                </router-link>
+                <router-link to="/edit/profile">
+                  <MenuItem v-slot="{ active }">
+                    <a
+                      :class="[
+                        active ? 'bg-gray-100' : '',
+                        'block py-2 px-4 text-sm text-gray-700',
+                      ]"
+                    >
+                      Settings
+                    </a>
+                  </MenuItem>
+                </router-link>
+                <MenuItem v-slot="{ active }" class="cursor-pointer">
+                  <a
+                    :class="[
+                      active ? 'bg-gray-100' : '',
+                      'block py-2 px-4 text-sm text-gray-700',
+                    ]"
+                    @click="logout"
+                    >Sign out</a
+                  >
+                </MenuItem>
+              </MenuItems>
+            </transition>
+          </Menu>
         </div>
       </div>
+      <nav class="hidden lg:py-2 lg:flex lg:space-x-8" aria-label="Global">
+        <a
+          v-for="item in navigation"
+          :key="item.name"
+          :href="item.href"
+          :class="[
+            item.current
+              ? 'bg-gray-100 text-gray-900'
+              : 'text-gray-900 hover:bg-gray-50 hover:text-gray-900',
+            'rounded-md py-2 px-3 inline-flex items-center text-sm font-medium',
+          ]"
+          :aria-current="item.current ? 'page' : undefined"
+        >
+          {{ item.name }}
+        </a>
+      </nav>
+    </div>
 
-      <PopoverPanel as="nav" class="lg:hidden" aria-label="Global">
-        <div class="max-w-3xl mx-auto px-2 pt-2 pb-3 space-y-1 sm:px-4">
-          <a
-            v-for="item in navigation"
-            :key="item.name"
-            :href="item.href"
-            :aria-current="item.current ? 'page' : undefined"
-            :class="[
-              item.current ? 'bg-gray-100 text-gray-900' : 'hover:bg-gray-50',
-              'block rounded-md py-2 px-3 text-base font-medium',
-            ]"
-            >{{ item.name }}</a
-          >
-        </div>
-        <div class="border-t border-gray-200 pt-4 pb-3">
-          <div class="max-w-3xl mx-auto px-4 flex items-center sm:px-6">
-            <div class="flex-shrink-0">
-              <img class="h-10 w-10 rounded-full" :src="user.imageUrl" alt="" />
-            </div>
-            <div class="ml-3">
-              <div class="text-base font-medium text-gray-800">
-                {{ user.name }}
-              </div>
-              <div class="text-sm font-medium text-gray-500">
-                {{ user.email }}
-              </div>
-            </div>
-            <button
-              type="button"
-              class="
-                ml-auto
-                flex-shrink-0
-                bg-white
-                rounded-full
-                p-1
-                text-gray-400
-                hover:text-gray-500
-                focus:outline-none
-                focus:ring-2
-                focus:ring-offset-2
-                focus:ring-indigo-500
-              "
-            >
-              <span class="sr-only">View notifications</span>
-              <BellIcon class="h-6 w-6" aria-hidden="true" />
-            </button>
+    <DisclosurePanel as="nav" class="lg:hidden" aria-label="Global">
+      <div class="pt-2 pb-3 px-2 space-y-1">
+        <DisclosureButton
+          v-for="item in navigation"
+          :key="item.name"
+          as="a"
+          :href="item.href"
+          :class="[
+            item.current
+              ? 'bg-gray-100 text-gray-900'
+              : 'text-gray-900 hover:bg-gray-50 hover:text-gray-900',
+            'block rounded-md py-2 px-3 text-base font-medium',
+          ]"
+          :aria-current="item.current ? 'page' : undefined"
+        >
+          {{ item.name }}
+        </DisclosureButton>
+      </div>
+      <div class="border-t border-gray-200 pt-4 pb-3">
+        <div class="px-4 flex items-center">
+          <div class="flex-shrink-0">
+            <img
+              class="h-10 w-10 rounded-full"
+              :src="avatar_svg"
+              v-if="avatarWithoutLocalhost === null"
+              alt=""
+            />
+            <img
+              class="h-10 w-10 rounded-full"
+              :src="avatar"
+              v-if="avatarWithoutLocalhost !== null"
+              alt=""
+            />
           </div>
-          <div class="mt-3 max-w-3xl mx-auto px-2 space-y-1 sm:px-4">
-            <a
-              v-for="item in userNavigation"
-              :key="item.name"
-              :href="item.href"
+          <div class="ml-3">
+            <div class="text-base font-medium text-gray-800">
+              {{ user.name }}
+            </div>
+            <div class="text-sm font-medium text-gray-500">
+              {{ user.email }}
+            </div>
+          </div>
+          <button
+            type="button"
+            class="
+              ml-auto
+              flex-shrink-0
+              bg-white
+              rounded-full
+              p-1
+              text-gray-400
+              hover:text-gray-500
+              focus:outline-none
+              focus:ring-2
+              focus:ring-offset-2
+              focus:ring-indigo-500
+            "
+          >
+            <span class="sr-only">View notifications</span>
+            <BellIcon class="h-6 w-6" aria-hidden="true" />
+          </button>
+        </div>
+        <div class="mt-3 px-2 space-y-1">
+          <router-link to="/profile">
+            <DisclosureButton
               class="
                 block
                 rounded-md
@@ -311,67 +300,152 @@
                 font-medium
                 text-gray-500
                 hover:bg-gray-50 hover:text-gray-900
+                cursor-pointer
               "
-              >{{ item.name }}</a
             >
-          </div>
+              Your Profile
+            </DisclosureButton>
+          </router-link>
+          <router-link to="/edit/profile">
+            <DisclosureButton
+              class="
+                block
+                rounded-md
+                py-2
+                px-3
+                text-base
+                font-medium
+                text-gray-500
+                hover:bg-gray-50 hover:text-gray-900
+                cursor-pointer
+              "
+            >
+              Settings
+            </DisclosureButton>
+          </router-link>
+          <DisclosureButton
+            class="
+              block
+              rounded-md
+              py-2
+              px-3
+              text-base
+              font-medium
+              text-gray-500
+              hover:bg-gray-50 hover:text-gray-900
+              cursor-pointer
+            "
+            @click="logout"
+          >
+            Logout
+          </DisclosureButton>
         </div>
-      </PopoverPanel>
-    </header>
-  </Popover>
+      </div>
+    </DisclosurePanel>
+  </Disclosure>
 </template>
 
 <script>
+import { computed } from "@vue/runtime-core";
+import { createAvatar } from "@dicebear/avatars";
+import * as style from "@dicebear/avatars-initials-sprites";
 import {
+  Disclosure,
+  DisclosureButton,
+  DisclosurePanel,
   Menu,
   MenuButton,
   MenuItem,
   MenuItems,
-  Popover,
-  PopoverButton,
-  PopoverPanel,
 } from "@headlessui/vue";
 import { SearchIcon } from "@heroicons/vue/solid";
 import { BellIcon, MenuIcon, XIcon } from "@heroicons/vue/outline";
+import { useStore } from "vuex";
 
 const user = {
-  name: "Chelsea Hagon",
-  email: "chelseahagon@example.com",
+  name: "Tom Cook",
+  email: "tom@example.com",
   imageUrl:
-    "https://images.unsplash.com/photo-1550525811-e5869dd03032?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
+    "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
 };
 const navigation = [
   { name: "Dashboard", href: "#", current: true },
+  { name: "Team", href: "#", current: false },
+  { name: "Projects", href: "#", current: false },
   { name: "Calendar", href: "#", current: false },
-  { name: "Teams", href: "#", current: false },
-  { name: "Directory", href: "#", current: false },
 ];
 const userNavigation = [
-  { name: "Your Profile", href: "#" },
-  { name: "Settings", href: "#" },
-  { name: "Sign out", href: "#" },
+  { name: "Your Profile", href: "#", route: "/profile" },
+  { name: "Settings", href: "#", route: "/edit/profile" },
+  { name: "Sign out", href: "#", mthd: "logout()" },
 ];
 
 export default {
   components: {
+    Disclosure,
+    DisclosureButton,
+    DisclosurePanel,
     Menu,
     MenuButton,
     MenuItem,
     MenuItems,
-    Popover,
-    PopoverButton,
-    PopoverPanel,
     BellIcon,
     MenuIcon,
     SearchIcon,
     XIcon,
   },
-  setup() {
-    return {
-      user,
-      navigation,
-      userNavigation,
-    };
+  props: ["authUser"],
+
+  setup(props) {
+    const store = useStore();
+    const isLoggedin = computed(() => store.getters["auth/loggedIn"]);
+    if (isLoggedin.value === false) {
+       return {
+        user,
+        navigation,
+
+      };
+    }
+    if (isLoggedin.value === true) {
+      const store = useStore();
+      let authUserData = computed(() => {
+        return props.authUser;
+      });
+      const logout = () => {
+        store.dispatch("auth/logout");
+        console.log("logout");
+      };
+      console.log(authUserData.value);
+      let avatar_svg = createAvatar(style, {
+        seed: authUserData.value.name,
+        dataUri: true,
+        // ... and other options
+      });
+      let avatar = `${process.env.VUE_APP_API_URL}/${authUserData.value.avatar}`;
+      let OathAvatar = authUserData.value.avatar;
+
+      let avatarWithoutLocalhost = authUserData.value.avatar;
+
+      if (authUserData.value.avatar !== null) {
+        if (
+          authUserData.value.avatar.includes("googleusercontent.com") ||
+          authUserData.value.avatar.includes("graph.facebook.com") ||
+          authUserData.value.avatar.includes("licdn.com")
+        ) {
+          avatar = OathAvatar;
+        }
+      }
+      return {
+        user,
+        navigation,
+        userNavigation,
+        logout,
+        avatar,
+        avatar_svg,
+        avatarWithoutLocalhost,
+        authUserData,
+      };
+    }
   },
 };
 </script>

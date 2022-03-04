@@ -442,8 +442,11 @@ export default {
         website: authUser.value.website,
         education: authUser.value.education,
         certifications: authUser.value.certifications,
+
+        facebook_social_link: authUser.value.facebook_social_link,
+        linkedin_social_link: authUser.value.linkedin_social_link,
+        twitter_social_link: authUser.value.twitter_social_link,
         experience: authUser.value.experience,
-        social_links: authUser.value.social_links,
         skills: authUser.value.skills,
       };
 
