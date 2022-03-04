@@ -94,25 +94,53 @@
               >
             </div>
           </div>
-          <div class="hidden md:flex">
-            <a
-              href="#"
-              class="
-                inline-flex
-                items-center
-                px-4
-                py-2
-                border border-transparent
-                text-sm
-                font-medium
-                rounded-md
-                text-white
-                bg-gray-600
-                hover:bg-gray-700
-              "
-            >
-              Log in
-            </a>
+          <div class="flex justify-between">
+            <div class="hidden md:flex mx-4">
+              <a
+                href="#"
+                class="
+                  inline-flex
+                  items-center
+                  px-5
+                  py-2
+                  border border-transparent
+                  text-sm
+                  font-medium
+                  rounded-full
+                  shadow-sm
+                  text-black
+                  bg-white
+                  hover:bg-transparent
+                  hover:text-white
+                  hover:border-white
+
+                "
+              >
+                Signin
+              </a>
+            </div>
+            <div class="hidden md:flex">
+              <a
+                href="#"
+                class="
+              inline-flex
+                  items-center
+                  px-5
+                   py-2
+                  border border-transparent
+                  text-sm
+                  font-medium
+                  rounded-full
+                  shadow-sm
+                  text-white
+                  bg-indigo-600
+                  hover:bg-indigo-700
+
+                "
+              >
+                Signup
+              </a>
+            </div>
           </div>
         </nav>
 

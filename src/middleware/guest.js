@@ -5,7 +5,7 @@ export default function guest({ next, store }) {
 
     store.dispatch('auth/getAuthUser').then(() => {
       if (store.getters['auth/authUser']) {
-        next('/dashboard');
+        next('/profile');
       } else {
         store.dispatch('auth/setGuest', { value: 'isGuest' });
         next();

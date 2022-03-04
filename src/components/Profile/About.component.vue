@@ -1,7 +1,7 @@
 <template>
   <div class="px-4 py-5 sm:px-0 sm:py-0 mt-10 lg:flex lg:flex">
     <dl>
-      <div class="sm:flex sm:px-6 sm:py-5 px-4 py-5 sm:px-6 flex items-center">
+      <div class="sm:flex sm:px-6 sm:py-5 px-4 py-5 sm:px-6">
         <dt
           class="
             text-sm
@@ -9,18 +9,17 @@
             text-gray-500
             sm:w-40 sm:flex-shrink-0
             lg:w-48
-
           "
         >
           Bio
         </dt>
-        <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:ml-6 sm:col-span-2">
+        <dd class="mt-1 text-md text-gray-900 sm:mt-0 sm:ml-6 sm:col-span-2">
           <p>
             {{ authUserData.bio }}
           </p>
           <div v-if="authUserData.bio === null">
             <router-link
-              class="flex font-bold items-center text-indigo-800 "
+              class="flex font-bold items-center text-indigo-800"
               to="/edit/profile"
             >
               <PlusCircleIcon
@@ -32,7 +31,7 @@
           </div>
         </dd>
       </div>
-      <div class="sm:flex sm:px-6 sm:py-5 px-4 py-5 sm:px-6 flex items-center">
+      <div class="sm:flex sm:px-6 sm:py-5 px-4 py-5 sm:px-6">
         <dt
           class="
             text-sm
@@ -40,12 +39,11 @@
             text-gray-500
             sm:w-40 sm:flex-shrink-0
             lg:w-48
-
           "
         >
           Location
         </dt>
-        <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:ml-6 sm:col-span-2">
+        <dd class="mt-1 text-md text-gray-900 sm:mt-0 sm:ml-6 sm:col-span-2">
           {{ authUserData.country }} {{ authUserData.city }}
           {{ authUserData.state }} {{ authUserData.address }}
         </dd>
@@ -67,7 +65,7 @@
           </router-link>
         </div>
       </div>
-      <div class="sm:flex sm:px-6 sm:py-5 px-4 py-5 sm:px-6 flex items-center">
+      <div class="sm:flex sm:px-6 sm:py-5 px-4 py-5 sm:px-6">
         <dt
           class="
             text-sm
@@ -75,12 +73,11 @@
             text-gray-500
             sm:w-40 sm:flex-shrink-0
             lg:w-48
-
           "
         >
           Website
         </dt>
-        <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:ml-6 sm:col-span-2">
+        <dd class="mt-1 text-md text-gray-900 sm:mt-0 sm:ml-6 sm:col-span-2">
           {{ authUserData.website }}
         </dd>
         <div class="flex" v-if="authUserData.website === null">
@@ -93,16 +90,7 @@
           </router-link>
         </div>
       </div>
-      <div
-        class="
-          sm:flex sm:px-6 sm:py-5
-          border-b border-gray-200
-          px-4
-          py-5
-          sm:px-6
-          flex items-center
-        "
-      >
+      <div class="sm:flex sm:px-6 sm:py-5 px-4 py-5 sm:px-6">
         <dt
           class="
             text-sm
@@ -110,12 +98,11 @@
             text-gray-500
             sm:w-40 sm:flex-shrink-0
             lg:w-48
-
           "
         >
           Birthday
         </dt>
-        <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:ml-6 sm:col-span-2">
+        <dd class="mt-1 text-md text-gray-900 sm:mt-0 sm:ml-6 sm:col-span-2">
           <time datetime="1982-06-23"> </time>
         </dd>
 

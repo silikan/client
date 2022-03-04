@@ -238,15 +238,12 @@
               {{ tab.name }}
             </a>
           </nav>
-           <About :Data="authUserData" v-if="tabs[0].current === true" />
-    <Info :Data="authUserData" v-if="tabs[1].current === true"/>
-    <Resume :Data="authUserData" v-if="tabs[2].current === true"/>
+          <About :Data="authUserData" v-if="tabs[0].current === true" />
+          <Info :Data="authUserData" v-if="tabs[1].current === true" />
+          <Resume :Data="authUserData" v-if="tabs[2].current === true" />
         </div>
-
       </div>
-
     </div>
-
   </div>
   <div class="mt-6 sm:mt-2 2xl:mt-5">
     <div class="border-b border-gray-200">
@@ -356,16 +353,19 @@ export default {
       // ... and other options
     });
     let avatar = `${process.env.VUE_APP_API_URL}/${authUserData.value.avatar}`;
-let OathAvatar = authUserData.value.avatar;
+    let OathAvatar = authUserData.value.avatar;
 
     let avatarWithoutLocalhost = authUserData.value.avatar;
 
-    if(authUserData.value.avatar !== null){
-if(authUserData.value.avatar.includes("googleusercontent.com") || authUserData.value.avatar.includes("graph.facebook.com") || authUserData.value.avatar.includes("licdn.com")){
-  avatar = OathAvatar;
-}
-
-}
+    if (authUserData.value.avatar !== null) {
+      if (
+        authUserData.value.avatar.includes("googleusercontent.com") ||
+        authUserData.value.avatar.includes("graph.facebook.com") ||
+        authUserData.value.avatar.includes("licdn.com")
+      ) {
+        avatar = OathAvatar;
+      }
+    }
 
     return {
       profile,
