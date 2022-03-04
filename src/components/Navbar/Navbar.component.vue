@@ -10,15 +10,18 @@
       "
     >
       <div class="relative h-16 flex justify-between">
-        <div class="relative z-10 px-2 flex lg:px-0">
-          <div class="flex-shrink-0 flex items-center">
-            <img
-              class="block h-8 w-auto"
-              src="https://tailwindui.com/img/logos/workflow-mark-indigo-600.svg"
-              alt="Workflow"
-            />
+        <div class="">
+          <div class="flex-shrink-0 flex items-center h-full">
+            <router-link to="/" class="cursor-pointer">
+              <img
+                class="block h-8 w-auto"
+                src="https://tailwindui.com/img/logos/workflow-mark-indigo-600.svg"
+                alt="Workflow"
+              />
+            </router-link>
           </div>
         </div>
+
         <div
           class="
             relative
@@ -295,28 +298,31 @@
         class="border-t border-gray-200 pt-4 pb-3"
       >
         <div class="px-4 flex items-center">
-          <div class="flex-shrink-0">
-            <img
-              class="h-10 w-10 rounded-full"
-              :src="avatar_svg"
-              v-if="avatarWithoutLocalhost === null"
-              alt=""
-            />
-            <img
-              class="h-10 w-10 rounded-full"
-              :src="avatar"
-              v-if="avatarWithoutLocalhost !== null"
-              alt=""
-            />
-          </div>
-          <div class="ml-3">
-            <div class="text-base font-medium text-gray-800">
-              {{ user.name }}
+          <router-link to="/profile" class="cursor-pointer flex items-center">
+            <div class="flex-shrink-0">
+              <img
+                class="h-10 w-10 rounded-full"
+                :src="avatar_svg"
+                v-if="avatarWithoutLocalhost === null"
+                alt=""
+              />
+              <img
+                class="h-10 w-10 rounded-full"
+                :src="avatar"
+                v-if="avatarWithoutLocalhost !== null"
+                alt=""
+              />
             </div>
-            <div class="text-sm font-medium text-gray-500">
-              {{ user.email }}
+            <div class="ml-3">
+              <div class="text-base font-medium text-gray-800">
+                {{ authUserData.name }}
+              </div>
+              <div class="text-sm font-medium text-gray-500">
+                {{ authUserData.username }}
+              </div>
             </div>
-          </div>
+          </router-link>
+
           <button
             type="button"
             class="
