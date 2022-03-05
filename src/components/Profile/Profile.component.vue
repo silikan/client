@@ -290,9 +290,9 @@ import { DotsVerticalIcon } from "@heroicons/vue/solid";
 import { Menu, MenuButton, MenuItem, MenuItems } from "@headlessui/vue";
 import { computed, onMounted, ref } from "@vue/runtime-core";
 const tabs = [
-  { name: "About", href: "#", current: true },
+  { name: "About", href: "#", current: false },
   { name: "Info", href: "#", current: false },
-  { name: "Resume", href: "#", current: false },
+  { name: "Resume", href: "#", current: true },
 ];
 const Gigs_Requests_tabs = [
   { name: "Requests", href: "#", current: true },
