@@ -15,12 +15,12 @@
             <p class="mt-2 text-sm text-gray-600">
               Or
               {{ " " }}
-              <a
-                href="#"
+              <router-link
+                to="/signup"
                 class="font-medium text-indigo-600 hover:text-indigo-500"
               >
-                start your 14-day free trial
-              </a>
+                Create a New Account
+              </router-link>
             </p>
           </div>
 

@@ -21,12 +21,12 @@
           <p class="mt-2 text-sm text-gray-600">
             Or
             {{ " " }}
-            <a
-              href="#"
+            <router-link
+              to="/signin"
               class="font-medium text-indigo-600 hover:text-indigo-500"
             >
-              start your 14-day free trial
-            </a>
+              Signin To Your Account
+            </router-link>
           </p>
         </div>
         <div class="flex justify-center m-10">
@@ -606,7 +606,7 @@ import { getError } from "@/utils/helpers";
 import AuthService from "@/services/AuthService";
 import { useRouter } from "vue-router";
 import { reactive, ref } from "vue";
-import { useStore } from 'vuex';
+import { useStore } from "vuex";
 
 const Roles = [
   {
@@ -634,35 +634,51 @@ export default {
       { name: "Signup", href: "#", status: "upnext" },
     ]);
     const selected = ref(Roles[0]);
+    console.log(selected.value);
     let name;
     let email;
     let password;
     let passwordConfirm;
     let error;
+    let is_handyman, is_client;
+    is_client = ref(true);
+    is_handyman = ref(false);
 
     name = ref("");
     email = ref("");
     password = ref("");
     passwordConfirm = ref("");
     const router = useRouter();
- const store = useStore()
-    const registerUser =  () => {
+    const store = useStore();
+    const registerUser = () => {
+      if (selected.value.name == "Client") {
+        is_client.value = true;
+        is_handyman.value = false;
+      } else {
+        is_client.value = true;
+        is_handyman.value = true;
+      }
+
+      console.log(is_handyman.value);
+
       error = null;
       const payload = {
         name: name.value,
         email: email.value,
+        is_client: is_client.value,
+        is_handyman: is_handyman.value,
         password: password.value,
         password_confirmation: passwordConfirm.value,
       };
       AuthService.registerUser(payload)
-        .then(async () =>{
-
-            const authUser = await store.dispatch("auth/getAuthUser");
-        if (authUser) {
-          store.dispatch("auth/setGuest", { value: "isNotGuest" });
-          router.push("/profile");
-        }
-        }) .catch((error) => (error = getError(error)));
+        .then(async () => {
+          const authUser = await store.dispatch("auth/getAuthUser");
+          if (authUser) {
+            store.dispatch("auth/setGuest", { value: "isNotGuest" });
+            router.push("/profile");
+          }
+        })
+        .catch((error) => (error = getError(error)));
     };
 
     const StepsNext = () => {
