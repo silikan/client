@@ -76,7 +76,21 @@
                   <span class="sr-only">Offline</span>
                 </span>
               </div>
-              <p class="text-sm text-gray-500">@{{ authUserData.username }}</p>
+              <p class="text-sm text-gray-500" v-if="authUserData.username !== null">
+                @{{ authUserData.username }}
+              </p>
+              <div class="flex" v-if="authUserData.username === null">
+                <router-link
+                  class="flex font-bold items-center text-indigo-800"
+                  to="/edit/profile"
+                >
+                  <PlusCircleIcon
+                    class="w-6 h-6 stroke-1 mr-3"
+                    aria-hidden="true"
+                  />
+                  <span class="">Add Username</span>
+                </router-link>
+              </div>
             </div>
             <div
               class="mt-5 flex flex-wrap space-y-3 sm:space-y-0 sm:space-x-3"
@@ -280,6 +294,7 @@ import Resume from "./Resume.component.vue";
 import Info from "./Info.component.vue";
 import { createAvatar } from "@dicebear/avatars";
 import * as style from "@dicebear/avatars-initials-sprites";
+import { PlusCircleIcon } from "@heroicons/vue/outline";
 
 import ClientRequests from "./Client_Requests.component.vue";
 import HandymanGigs from "./Handyman_Gigs.component.vue";
@@ -291,8 +306,8 @@ import { Menu, MenuButton, MenuItem, MenuItems } from "@headlessui/vue";
 import { computed, onMounted, ref } from "@vue/runtime-core";
 const tabs = [
   { name: "About", href: "#", current: false },
-  { name: "Info", href: "#", current: false },
-  { name: "Resume", href: "#", current: true },
+  { name: "Info", href: "#", current: true },
+  { name: "Resume", href: "#", current: false },
 ];
 const Gigs_Requests_tabs = [
   { name: "Requests", href: "#", current: true },
@@ -331,6 +346,7 @@ export default {
     About,
     Resume,
     Info,
+    PlusCircleIcon,
   },
   props: ["authUser"],
 
