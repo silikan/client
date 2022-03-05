@@ -84,14 +84,6 @@ export const getters = {
   experience: (state) => (state.user.experience !== null ? state.user.experience : JSON.stringify([])),
   skills: (state) => (state.user.skills !== null ? state.user.skills : JSON.stringify([])),
   password_is_null: (state) => (state.user.password_is_null),
-
-  /*
-  education.value = JSON.parse(authUser.value.education);
-      certifications.value = JSON.parse(authUser.value.certifications);
-      experience.value = JSON.parse(authUser.value.experience);
-      skills.value = JSON.parse(authUser.value.skills);
-
-  */
   loggedIn: (state) => !!state.user,
   guest: () => {
     const storageItem = window.localStorage.getItem('guest');

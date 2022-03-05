@@ -456,7 +456,10 @@ export default {
   setup(props) {
     const route = useRoute();
     const store = useStore();
-    const isLoggedin = computed(() => store.getters["auth/loggedIn"]);
+
+    let isLoggedin = computed(() => store.getters["auth/loggedIn"]);
+
+
     const signin = computed(() => route.path === "/signin");
     const signup = computed(() => route.path === "/signup");
     let authUserData = computed(() => {
