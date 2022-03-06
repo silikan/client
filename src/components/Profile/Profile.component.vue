@@ -76,7 +76,10 @@
                   <span class="sr-only">Offline</span>
                 </span>
               </div>
-              <p class="text-sm text-gray-500" v-if="authUserData.username !== null">
+              <p
+                class="text-sm text-gray-500"
+                v-if="authUserData.username !== null"
+              >
                 @{{ authUserData.username }}
               </p>
               <div class="flex" v-if="authUserData.username === null">
@@ -95,39 +98,10 @@
             <div
               class="mt-5 flex flex-wrap space-y-3 sm:space-y-0 sm:space-x-3"
             >
-              <button
-                type="button"
+              <router-link
                 class="
                   flex-shrink-0
                   w-full
-                  inline-flex
-                  items-center
-                  justify-center
-                  px-4
-                  py-2
-                  border border-transparent
-                  rounded-md
-                  shadow-sm
-                  text-sm
-                  font-medium
-                  text-white
-                  bg-indigo-600
-                  hover:bg-indigo-700
-                  focus:outline-none
-                  focus:ring-2
-                  focus:ring-offset-2
-                  focus:ring-indigo-500
-                  sm:flex-1
-                "
-              >
-                Hire
-              </button>
-              <button
-                type="button"
-                class="
-                  flex-1
-                  w-full
-                  sm:flex-none sm:w-auto
                   inline-flex
                   items-center
                   justify-center
@@ -138,20 +112,40 @@
                   shadow-sm
                   text-sm
                   font-medium
-                  text-gray-700
+                  text-black
                   bg-white
-                  hover:bg-gray-50
-                  focus:outline-none
-                  focus:ring-2
-                  focus:ring-offset-2
-                  focus:ring-indigo-500
+                  hover:border-transparent
+                  sm:flex-1
                 "
+                tag="button"
+                to="/edit/profile"
               >
-                <PaperAirplaneIcon
-                  class="h-5 w-5 rotate-90"
-                  aria-hidden="true"
-                />
-              </button>
+                <!--        <button
+                  type="button"
+                  class="
+                    flex-shrink-0
+                    w-full
+                    inline-flex
+                    items-center
+                    justify-center
+                    px-4
+                    py-2
+                    border border-gray-300
+                    rounded-md
+                    shadow-sm
+                    text-sm
+                    font-medium
+                    text-black
+                    bg-white
+                    hover:border-transparent
+                    sm:flex-1
+                  "
+                > -->
+                <PencilIcon class="h-5 w-5 rotate-90" aria-hidden="true" />
+                <!--                 </button>
+ -->
+              </router-link>
+
               <span class="ml-3 inline-flex sm:ml-0">
                 <Menu as="div" class="relative inline-block text-left">
                   <MenuButton
@@ -239,13 +233,14 @@
           <nav class="-mb-px flex space-x-8" aria-label="Tabs">
             <a
               v-for="tab in tabs"
-              :key="tab.name"
+              :key="tab.number"
+              @click="navigateTabs(tab)"
               :href="tab.href"
               :class="[
                 tab.current
                   ? 'border-pink-500 text-gray-900'
                   : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300',
-                'whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm',
+                'whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm cursor-pointer',
               ]"
               :aria-current="tab.current ? 'page' : undefined"
             >
@@ -299,16 +294,12 @@ import { PlusCircleIcon } from "@heroicons/vue/outline";
 import ClientRequests from "./Client_Requests.component.vue";
 import HandymanGigs from "./Handyman_Gigs.component.vue";
 
-import { PaperAirplaneIcon } from "@heroicons/vue/solid";
+import { PencilIcon } from "@heroicons/vue/solid";
 
 import { DotsVerticalIcon } from "@heroicons/vue/solid";
 import { Menu, MenuButton, MenuItem, MenuItems } from "@headlessui/vue";
-import { computed, onMounted, ref } from "@vue/runtime-core";
-const tabs = [
-  { name: "About", href: "#", current: false },
-  { name: "Info", href: "#", current: true },
-  { name: "Resume", href: "#", current: false },
-];
+import { computed, onMounted, reactive, ref } from "@vue/runtime-core";
+
 const Gigs_Requests_tabs = [
   { name: "Requests", href: "#", current: true },
   { name: "Gigs", href: "#", current: false, isHandyman: true },
@@ -340,7 +331,7 @@ export default {
     MenuItems,
 
     DotsVerticalIcon,
-    PaperAirplaneIcon,
+    PencilIcon,
     ClientRequests,
     HandymanGigs,
     About,
@@ -382,6 +373,34 @@ export default {
         avatar = OathAvatar;
       }
     }
+    const tabs = reactive([
+      { name: "About", number: 1, current: true },
+      { name: "Info", number: 2, current: false },
+      { name: "Resume", number: 3, current: false },
+    ]);
+
+    /*    const tabs = [
+  { name: "About", number: 1, current: false },
+  { name: "Info", number: 2, current: true },
+  { name: "Resume", number: 3, current: false },
+];
+ */
+
+    const navigateTabs = (tab) => {
+      if (tab.name === "About" && tab.number === 1) {
+        tab.current = true;
+        tabs[1].current = false;
+        tabs[2].current = false;
+      } else if (tab.name === "Info" && tab.number === 2) {
+        tab.current = true;
+        tabs[2].current = false;
+        tabs[0].current = false;
+      } else if (tab.name === "Resume" && tab.number === 3) {
+        tab.current = true;
+        tabs[0].current = false;
+        tabs[1].current = false;
+      }
+    };
 
     return {
       profile,
@@ -393,6 +412,7 @@ export default {
       isHandyman,
       isClient,
       Gigs_Requests_tabs,
+      navigateTabs,
     };
   },
 };

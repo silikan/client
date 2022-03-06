@@ -14,8 +14,7 @@
           Education
         </dt>
         <dd class="mt-1 text-md text-gray-900 sm:mt-0 sm:ml-6 sm:col-span-2">
-          <div class="m-10" v-if="education !== null">
-
+          <div class="m-10" v-if="education !== null && education.length > 0">
             <ul role="list" class="mt-4 grid grid-cols-1 gap-4 sm:grid-cols-2">
               <li v-for="person in education" :key="person.id">
                 <button
@@ -41,7 +40,7 @@
                 >
                   <span class="min-w-0 flex-1 flex items-center space-x-3">
                     <span class="block flex-shrink-0">
-                      <BriefcaseIcon class="w-7 h-7" />
+                      <AcademicCapIcon class="w-7 h-7" />
                     </span>
 
                     <span class="block min-w-0 flex-1">
@@ -70,7 +69,7 @@
               </li>
             </ul>
           </div>
-          <div v-if="education === null">
+          <div v-if="education === null || education.length === 0">
             <router-link
               class="flex font-bold items-center text-indigo-800"
               to="/edit/profile"
@@ -96,9 +95,8 @@
         >
           Skills
         </dt>
-        <dd class="mt-1 text-md text-gray-900 sm:mt-0 sm:ml-6 sm:col-span-2" >
-                  <div class="m-10" v-if="skills !== null">
-
+        <dd class="mt-1 text-md text-gray-900 sm:mt-0 sm:ml-6 sm:col-span-2">
+          <div class="m-10" v-if="skills !== null && skills.length > 0">
             <ul role="list" class="mt-4 grid grid-cols-1 gap-4 sm:grid-cols-2">
               <li v-for="person in skills" :key="person.id">
                 <button
@@ -124,7 +122,7 @@
                 >
                   <span class="min-w-0 flex-1 flex items-center space-x-3">
                     <span class="block flex-shrink-0">
-                      <BriefcaseIcon class="w-7 h-7" />
+                      <PuzzleIcon class="w-7 h-7" />
                     </span>
 
                     <span class="block min-w-0 flex-1">
@@ -154,7 +152,7 @@
             </ul>
           </div>
         </dd>
-        <div class="flex" v-if="skills === null">
+        <div class="flex" v-if="skills === null || skills.length === 0">
           <router-link
             class="flex font-bold items-center text-indigo-800"
             to="/edit/profile"
@@ -177,8 +175,7 @@
           Experience
         </dt>
         <dd class="mt-1 text-md text-gray-900 sm:mt-0 sm:ml-6 sm:col-span-2">
-               <div class="m-10" v-if="experience !== null">
-
+          <div class="m-10" v-if="experience !== null && experience.length > 0">
             <ul role="list" class="mt-4 grid grid-cols-1 gap-4 sm:grid-cols-2">
               <li v-for="person in experience" :key="person.id">
                 <button
@@ -234,7 +231,7 @@
             </ul>
           </div>
         </dd>
-        <div class="flex"  v-if="experience === null">
+        <div class="flex" v-if="experience === null || experience.length === 0">
           <router-link
             class="flex font-bold items-center text-indigo-800"
             to="/edit/profile"
@@ -257,8 +254,10 @@
           Certifications
         </dt>
         <dd class="mt-1 text-md text-gray-900 sm:mt-0 sm:ml-6 sm:col-span-2">
-                  <div class="m-10" v-if="certifications !== null">
-
+          <div
+            class="m-10"
+            v-if="certifications !== null && certifications.length > 0"
+          >
             <ul role="list" class="mt-4 grid grid-cols-1 gap-4 sm:grid-cols-2">
               <li v-for="person in certifications" :key="person.id">
                 <button
@@ -284,7 +283,7 @@
                 >
                   <span class="min-w-0 flex-1 flex items-center space-x-3">
                     <span class="block flex-shrink-0">
-                      <BriefcaseIcon class="w-7 h-7" />
+                      <BadgeCheckIcon class="w-7 h-7" />
                     </span>
 
                     <span class="block min-w-0 flex-1">
@@ -315,7 +314,10 @@
           </div>
         </dd>
 
-        <div class="flex" v-if="certifications === null">
+        <div
+          class="flex"
+          v-if="certifications === null || certifications.length === 0"
+        >
           <router-link
             class="flex font-bold items-center text-indigo-800"
             to="/edit/profile"
@@ -364,7 +366,10 @@
 
 <script>
 import {
+  AcademicCapIcon,
+  PuzzleIcon,
   BriefcaseIcon,
+  BadgeCheckIcon,
   CalendarIcon,
   CurrencyDollarIcon,
   LocationMarkerIcon,
@@ -373,7 +378,10 @@ import { PlusCircleIcon } from "@heroicons/vue/outline";
 import { computed } from "@vue/runtime-core";
 export default {
   components: {
+    AcademicCapIcon,
+    PuzzleIcon,
     BriefcaseIcon,
+    BadgeCheckIcon,
     CalendarIcon,
 
     CurrencyDollarIcon,
@@ -399,7 +407,7 @@ export default {
       return JSON.parse(authUserData.value.skills);
     });
 
-    console.log(education.value);
+    console.log(typeof education.value);
 
     return {
       authUserData,
