@@ -368,6 +368,34 @@
           </select>
         </div>
 
+           <div class="col-span-12 sm:col-span-8">
+          <label for="gender" class="block text-sm font-medium text-gray-700"
+            >gender</label
+          >
+          <select
+            id="gender"
+            name="gender"
+            v-model="gender"
+            autocomplete="gender"
+            class="
+              mt-1
+              block
+              w-full
+              bg-white
+              border border-gray-300
+              rounded-md
+              shadow-sm
+              py-2
+              px-3
+              focus:outline-none focus:ring-indigo-500 focus:border-indigo-500
+              sm:text-sm
+            "
+          >
+            <option>Male</option>
+            <option>Female</option>
+          </select>
+        </div>
+
         <div class="col-span-12 sm:col-span-12">
           <label
             for="street-address"
@@ -750,6 +778,7 @@ export default {
       let facebook_social_link = ref("");
     let linkedin_social_link = ref("");
     let twitter_social_link = ref("");
+    let gender = ref("");
     let Educationdata, ExperienceData, Certificationsdata, SkillsData;
 
     let sendEducation = (data) => {
@@ -786,7 +815,7 @@ export default {
       skills.value = JSON.parse(skillsState.value);
 
       name.value = authUser.value.name;
-
+      gender.value = authUser.value.gender;
       facebook_social_link.value = authUser.value.facebook_social_link;
       linkedin_social_link.value = authUser.value.linkedin_social_link;
       twitter_social_link.value = authUser.value.twitter_social_link;
@@ -796,6 +825,7 @@ export default {
     const updateUser = () => {
       console.log(Educationdata);
       const payload = {
+        gender : gender.value,
         name: name.value,
         email: email.value,
         username: username.value,
@@ -928,6 +958,7 @@ if(authUser.value.avatar.includes("googleusercontent.com") || authUser.value.ava
       Certificationsdata,
       SkillsData,
       arrayProps,
+      gender
 
     };
   },

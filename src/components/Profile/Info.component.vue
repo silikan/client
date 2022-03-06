@@ -31,6 +31,36 @@
           </div>
         </dd>
       </div>
+            <div class="sm:flex sm:px-6 sm:py-5 px-4 py-5 sm:px-6">
+        <dt
+          class="
+            text-sm
+            font-medium
+            text-gray-500
+            sm:w-40 sm:flex-shrink-0
+            lg:w-48
+          "
+        >
+          gender
+        </dt>
+        <dd class="mt-1 text-md text-gray-900 sm:mt-0 sm:ml-6 sm:col-span-2">
+          <p>
+            {{ authUserData.gender }}
+          </p>
+          <div v-if="authUserData.gender === null">
+            <router-link
+              class="flex font-bold items-center text-indigo-800"
+              to="/edit/profile"
+            >
+              <PlusCircleIcon
+                class="w-6 h-6 stroke-1 mr-3"
+                aria-hidden="true"
+              />
+              <span class="">Add gender</span>
+            </router-link>
+          </div>
+        </dd>
+      </div>
       <div class="sm:flex sm:px-6 sm:py-5 px-4 py-5 sm:px-6">
         <dt
           class="
