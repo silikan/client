@@ -20,6 +20,8 @@
     "axios": "^0.26.0",
     "core-js": "^3.6.5",
     "flowbite": "^1.3.4",
+    "litepie-datepicker": "^1.0.14",
+    "moment": "^2.29.1",
     "postcss": "^7.0.39",
     "register-service-worker": "^1.7.1",
     "tailwindcss": "npm:@tailwindcss/postcss7-compat@^2.2.17",
@@ -29,6 +31,8 @@
     "vue-heroicons": "^0.9.4",
     "vue-router": "^4.0.0-0",
     "vue-uuid": "^3.0.0",
+    "vue3-date-time-picker": "^2.7.0",
+    "vue3-tailwind-datepicker": "^1.0.16",
     "vuex": "^4.0.0-0"
   },
   "devDependencies": {

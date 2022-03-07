@@ -103,7 +103,7 @@
           Birthday
         </dt>
         <dd class="mt-1 text-md text-gray-900 sm:mt-0 sm:ml-6 sm:col-span-2">
-          <time datetime="1982-06-23"> </time>
+          {{ authUserData.date_of_birth }}
         </dd>
 
         <div class="flex" v-if="authUserData.date_of_birth === null">

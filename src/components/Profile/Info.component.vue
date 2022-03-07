@@ -174,7 +174,7 @@
             lg:w-48
           "
         >
-          Birthday
+          Zip Code
         </dt>
         <dd class="mt-1 text-md text-gray-900 sm:mt-0 sm:ml-6 sm:col-span-2">
          {{authUserData.zip_code}}

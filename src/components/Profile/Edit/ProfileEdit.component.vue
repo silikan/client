@@ -342,6 +342,23 @@
         </div>
 
         <div class="col-span-12 sm:col-span-8">
+  <label for="work_hours" class="block text-sm font-medium text-gray-700">
+            Work Hours</label
+          >
+     <Datepicker v-model="work_hours" timePicker  range  noMinutesOverlay  />
+
+        </div>
+
+
+        <div class="col-span-12 sm:col-span-8">
+  <label for="work_hours" class="block text-sm font-medium text-gray-700">
+            Birthday</label
+          >
+     <Datepicker v-model="date_of_birth"  :enableTimePicker="false"     />
+
+        </div>
+
+        <div class="col-span-12 sm:col-span-8">
           <div>
             <label for="salary" class="block text-sm font-medium text-gray-700"
               >salary</label
@@ -366,7 +383,7 @@
                 id="salary"
                 v-model="salary"
                 class="
-                  focus:ring-indigo-500 focus:border-indigo-500
+               focus:ring-indigo-500 focus:border-indigo-500
                   block
                   w-full
                   pl-7
@@ -878,16 +895,14 @@
               v-model="facebook_social_link"
               name="facebook_social_link"
               class="
-                mt-1
-                block
-                w-full
-                border border-gray-300
-                rounded-md
-                shadow-sm
-                py-2
-                px-3
-                focus:outline-none focus:ring-indigo-500 focus:border-indigo-500
-                sm:text-sm
+            focus:ring-indigo-500 focus:border-indigo-500
+                  block
+                  w-full
+                  pl-7
+                  pr-12
+                  sm:text-sm
+                  border-gray-300
+                  rounded-md
               "
               placeholder="@username"
             />
@@ -1012,6 +1027,11 @@
 </template>
 
 <script >
+import moment from 'moment'
+
+  import Datepicker from 'vue3-date-time-picker';
+
+    import 'vue3-date-time-picker/dist/main.css'
 import { onMounted, computed, ref } from "vue";
 import AuthService from "@/services/AuthService";
 import FileService from "@/services/FileService";
@@ -1038,8 +1058,11 @@ export default {
     ListboxOptions,
     CheckIcon,
     SelectorIcon,
+Datepicker
   },
-
+  created: function () {
+    this.moment = moment;
+  },
   setup() {
     const store = useStore();
     const WorkDays = [
@@ -1061,7 +1084,7 @@ export default {
     let email = ref("");
     let username = ref("");
     let bio = ref("");
-    let date_of_birth = ref(null);
+    let date_of_birth = ref(new Date());
     let phone_number = ref("");
     let address = ref("");
     let country = ref("");
@@ -1080,7 +1103,10 @@ export default {
     let gender = ref("");
     let work_days = ref(null);
 
-    let work_hours = ref(null);
+    let work_hours = ref({
+            hours: new Date().getHours(),
+            minutes: new Date().getMinutes()
+        });
     let salary = ref(null);
     const workLength = ["Part Time", "Full Time"];
     const workPlace = ["remote", "Office"];
@@ -1151,7 +1177,8 @@ export default {
         email: email.value,
         username: username.value,
         bio: bio.value,
-        date_of_birth: date_of_birth.value,
+        date_of_birth:moment(date_of_birth.value).format("YYYY-MM-DD") ,
+
         phone_number: phone_number.value,
         address: address.value,
         country: country.value,
