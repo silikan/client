@@ -101,7 +101,8 @@
               <router-link
                 class="
                   flex-shrink-0
-                  w-full
+                  sm:w-full
+                  flex-1
                   inline-flex
                   items-center
                   justify-center
@@ -115,7 +116,7 @@
                   text-black
                   bg-white
                   hover:border-transparent
-                  sm:flex-1
+
                 "
                 tag="button"
                 to="/edit/profile"
@@ -147,12 +148,13 @@
               </router-link>
 
               <span class="ml-3 inline-flex sm:ml-0">
-                <Menu as="div" class="relative inline-block text-left">
+                <Menu as="div" class="relative inline-block text-left w-full">
                   <MenuButton
                     class="
                       inline-flex
                       items-center
-                      p-2
+                           px-4
+                  py-2
                       border border-gray-300
                       rounded-md
                       shadow-sm
@@ -250,102 +252,128 @@
           <About :Data="authUserData" v-if="tabs[0].current === true" />
           <Info :Data="authUserData" v-if="tabs[1].current === true" />
           <Resume :Data="authUserData" v-if="tabs[2].current === true" />
+          <div class="sm:flex sm:px-6 sm:py-5 mt-10 sm:mt-0">
+            <div class="flex flex-col">
+              <div class="mb-5 mt-2 flex items-center text-sm text-gray-500">
+                <BriefcaseIcon
+                  class="flex-shrink-0 mr-1.5 h-5 w-5 text-gray-400"
+                  aria-hidden="true"
+                />
+                <dd
+                  class="
+                    mt-1
+                    text-md text-gray-900
+                    sm:mt-0 sm:ml-6 sm:col-span-2
+                  "
+                >
+                  <p v-if="authUserData.work_time_length !== null">
+                    {{ authUserData.work_time_length }}
+                  </p>
+                  <div v-if="authUserData.work_time_length === null">
+                    <router-link
+                      class="flex font-bold items-center text-indigo-800"
+                      to="/edit/profile"
+                    >
+                      <PlusCircleIcon
+                        class="w-6 h-6 stroke-1 mr-3"
+                        aria-hidden="true"
+                      />
+                      <span class="">Add Work Time Length</span>
+                    </router-link>
+                  </div>
+                </dd>
+              </div>
+              <div class="mb-5 flex items-center text-sm text-gray-500">
+                <LocationMarkerIcon
+                  class="flex-shrink-0 mr-1.5 h-5 w-5 text-gray-400"
+                  aria-hidden="true"
+                />
+                <dd
+                  class="
+                    mt-1
+                    text-md text-gray-900
+                    sm:mt-0 sm:ml-6 sm:col-span-2
+                  "
+                >
+                  <p v-if="authUserData.work_place !== null">
+                    {{ authUserData.work_place }}
+                  </p>
+                  <div v-if="authUserData.work_place === null">
+                    <router-link
+                      class="flex font-bold items-center text-indigo-800"
+                      to="/edit/profile"
+                    >
+                      <PlusCircleIcon
+                        class="w-6 h-6 stroke-1 mr-3"
+                        aria-hidden="true"
+                      />
+                      <span class="">Add Work Place</span>
+                    </router-link>
+                  </div>
+                </dd>
+              </div>
+              <div class="mb-5 flex items-center text-sm text-gray-500">
+                <CurrencyDollarIcon
+                  class="flex-shrink-0 mr-1.5 h-5 w-5 text-gray-400"
+                  aria-hidden="true"
+                />
+                <dd
+                  class="
+                    mt-1
+                    text-md text-gray-900
+                    sm:mt-0 sm:ml-6 sm:col-span-2
+                  "
+                >
+                  <p v-if="authUserData.salary !== null">
+                    {{ authUserData.salary }}$
+                  </p>
+                  <div v-if="authUserData.salary === null">
+                    <router-link
+                      class="flex font-bold items-center text-indigo-800"
+                      to="/edit/profile"
+                    >
+                      <PlusCircleIcon
+                        class="w-6 h-6 stroke-1 mr-3"
+                        aria-hidden="true"
+                      />
+                      <span class="">Add Salary</span>
+                    </router-link>
+                  </div>
+                </dd>
+              </div>
+              <div class="flex items-center text-sm text-gray-500">
+                <CalendarIcon
+                  class="flex-shrink-0 mr-1.5 h-5 w-5 text-gray-400"
+                  aria-hidden="true"
+                />
+                <dd
+                  class="
+                    mt-1
+                    text-md text-gray-900
+                    sm:mt-0 sm:ml-6 sm:col-span-2
+                  "
+                >
+                  <p v-if="authUserData.work_hours !== null">
+                    FROM {{ timerange.start }}:00 am TO {{ timerange.end }}:00
+                    pm
+                  </p>
+                  <div v-if="authUserData.work_hours === null">
+                    <router-link
+                      class="flex font-bold items-center text-indigo-800"
+                      to="/edit/profile"
+                    >
+                      <PlusCircleIcon
+                        class="w-6 h-6 stroke-1 mr-3"
+                        aria-hidden="true"
+                      />
+                      <span class="">Add Work Hours</span>
+                    </router-link>
+                  </div>
+                </dd>
+              </div>
+            </div>
+          </div>
         </div>
-      </div>
-    </div>
-
-    <div class="sm:flex sm:px-6 sm:py-5 mt-10 sm:mt-0">
-      <div class="flex flex-col">
-        <div class="mb-5 mt-2 flex items-center text-sm text-gray-500">
-          <BriefcaseIcon
-            class="flex-shrink-0 mr-1.5 h-5 w-5 text-gray-400"
-            aria-hidden="true"
-          />
-          <dd class="mt-1 text-md text-gray-900 sm:mt-0 sm:ml-6 sm:col-span-2">
-            <p>
-              {{ authUserData.work_time_length }}
-            </p>
-            <div v-if="authUserData.work_time_length === null">
-              <router-link
-                class="flex font-bold items-center text-indigo-800"
-                to="/edit/profile"
-              >
-                <PlusCircleIcon
-                  class="w-6 h-6 stroke-1 mr-3"
-                  aria-hidden="true"
-                />
-                <span class="">Add Work Time Length</span>
-              </router-link>
-            </div>
-          </dd>
-        </div>
-        <div class="mb-5 flex items-center text-sm text-gray-500">
-          <LocationMarkerIcon
-            class="flex-shrink-0 mr-1.5 h-5 w-5 text-gray-400"
-            aria-hidden="true"
-          />
-          <dd class="mt-1 text-md text-gray-900 sm:mt-0 sm:ml-6 sm:col-span-2">
-            <p>
-              {{ authUserData.work_place }}
-            </p>
-            <div v-if="authUserData.work_place === null">
-              <router-link
-                class="flex font-bold items-center text-indigo-800"
-                to="/edit/profile"
-              >
-                <PlusCircleIcon
-                  class="w-6 h-6 stroke-1 mr-3"
-                  aria-hidden="true"
-                />
-                <span class="">Add Work Place</span>
-              </router-link>
-            </div>
-          </dd>
-        </div>
-        <div class="mb-5 flex items-center text-sm text-gray-500">
-          <CurrencyDollarIcon
-            class="flex-shrink-0 mr-1.5 h-5 w-5 text-gray-400"
-            aria-hidden="true"
-          />
- <dd class="mt-1 text-md text-gray-900 sm:mt-0 sm:ml-6 sm:col-span-2">
-            <p>
-              {{ authUserData.salary }}$
-            </p>
-            <div v-if="authUserData.salary === null">
-              <router-link
-                class="flex font-bold items-center text-indigo-800"
-                to="/edit/profile"
-              >
-                <PlusCircleIcon
-                  class="w-6 h-6 stroke-1 mr-3"
-                  aria-hidden="true"
-                />
-                <span class="">Add Salary</span>
-              </router-link>
-            </div>
-          </dd>        </div>
-        <div class="flex items-center text-sm text-gray-500">
-          <CalendarIcon
-            class="flex-shrink-0 mr-1.5 h-5 w-5 text-gray-400"
-            aria-hidden="true"
-          />
-<dd class="mt-1 text-md text-gray-900 sm:mt-0 sm:ml-6 sm:col-span-2">
-            <p>
-            FROM  {{ timerange.start }}:00 am TO {{ timerange.end }}:00 pm
-            </p>
-            <div v-if="authUserData.work_hours === null">
-              <router-link
-                class="flex font-bold items-center text-indigo-800"
-                to="/edit/profile"
-              >
-                <PlusCircleIcon
-                  class="w-6 h-6 stroke-1 mr-3"
-                  aria-hidden="true"
-                />
-                <span class="">Add Work Hours</span>
-              </router-link>
-            </div>
-          </dd>         </div>
       </div>
     </div>
   </div>
@@ -509,13 +537,16 @@ export default {
       }
     };
 
-
-let ParsedTime = JSON.parse(authUserData.value.work_hours);
-    let timerange = reactive({
-      start:ParsedTime[0].hours,
-      end:ParsedTime[1].hours,
-
-    });
+    let timerange = reactive(null);
+    let ParsedTime = JSON.parse(authUserData.value.work_hours);
+    if (ParsedTime !== null) {
+      timerange = reactive({
+        start: ParsedTime[0].hours,
+        end: ParsedTime[1].hours,
+      });
+    } else {
+      timerange = reactive(null);
+    }
 
     return {
       profile,
@@ -528,7 +559,7 @@ let ParsedTime = JSON.parse(authUserData.value.work_hours);
       isClient,
       Gigs_Requests_tabs,
       navigateTabs,
-      timerange
+      timerange,
     };
   },
 };
