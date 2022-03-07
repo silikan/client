@@ -459,7 +459,6 @@ export default {
 
     let isLoggedin = computed(() => store.getters["auth/loggedIn"]);
 
-
     const signin = computed(() => route.path === "/signin");
     const signup = computed(() => route.path === "/signup");
     let authUserData = computed(() => {
