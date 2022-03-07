@@ -449,7 +449,6 @@ export default {
         experience: authUser.value.experience,
         skills: authUser.value.skills,
         work_time_length: authUser.value.work_time_length,
-        work_days: authUser.value.work_days,
         work_hours: authUser.value.work_hours,
         work_place: authUser.value.work_place,
         salary: authUser.value.salary,

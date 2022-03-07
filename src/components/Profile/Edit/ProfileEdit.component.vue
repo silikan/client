@@ -1101,7 +1101,6 @@ Datepicker
     let linkedin_social_link = ref("");
     let twitter_social_link = ref("");
     let gender = ref("");
-    let work_days = ref(null);
 
     let work_hours = ref({
             hours: new Date().getHours(),
@@ -1157,7 +1156,6 @@ Datepicker
       linkedin_social_link.value = authUser.value.linkedin_social_link;
       twitter_social_link.value = authUser.value.twitter_social_link;
       work_time_length.value = authUser.value.work_time_length;
-      work_days.value = authUser.value.work_days;
       work_hours.value = authUser.value.work_hours;
       work_place.value = authUser.value.work_place;
       salary.value = authUser.value.salary;
@@ -1170,7 +1168,6 @@ Datepicker
         name: name.value,
 
         work_time_length: work_time_length.value,
-        work_days: work_days.value,
         work_hours: work_hours.value,
         work_place: work_place.value,
 
@@ -1307,7 +1304,6 @@ Datepicker
       arrayProps,
       gender,
       work_time_length,
-      work_days,
       work_hours,
       work_place,
       workLength,
