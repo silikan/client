@@ -153,7 +153,6 @@ export default {
 
     const dataTypeComp = computed(() => props.DataType);
     watchEffect(() => {
-      console.log(props.Data.education);
       if (dataTypeComp.value === "education") {
         let educationdb = computed(() => props.Data.education.value);
 

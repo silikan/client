@@ -139,10 +139,9 @@
                 <img
                   class="rounded-full w-10 h-10"
                   :src="avatar"
-                  v-if="avatarWithoutLocalhost !== null "
+                  v-if="avatarWithoutLocalhost !== null"
                   alt=""
                 />
-
               </div>
               <div class="ml-5 rounded-md shadow-sm">
                 <div
@@ -209,7 +208,10 @@
             <img
               class="relative rounded-full w-40 h-40"
               :src="avatar"
-                  v-if="avatarWithoutLocalhost !== null && hostname != 'lh3.googleusercontent.com'"
+              v-if="
+                avatarWithoutLocalhost !== null &&
+                hostname != 'lh3.googleusercontent.com'
+              "
               alt=""
             />
 
@@ -340,6 +342,281 @@
         </div>
 
         <div class="col-span-12 sm:col-span-8">
+          <div>
+            <label for="salary" class="block text-sm font-medium text-gray-700"
+              >salary</label
+            >
+            <div class="mt-1 relative rounded-md shadow-sm">
+              <div
+                class="
+                  absolute
+                  inset-y-0
+                  left-0
+                  pl-3
+                  flex
+                  items-center
+                  pointer-events-none
+                "
+              >
+                <span class="text-gray-500 sm:text-sm"> $ </span>
+              </div>
+              <input
+                type="text"
+                name="salary"
+                id="salary"
+                v-model="salary"
+                class="
+                  focus:ring-indigo-500 focus:border-indigo-500
+                  block
+                  w-full
+                  pl-7
+                  pr-12
+                  sm:text-sm
+                  border-gray-300
+                  rounded-md
+                "
+                placeholder="0.00"
+              />
+              <div class="absolute inset-y-0 right-0 flex items-center">
+                <label for="currency" class="sr-only">Currency</label>
+                <select
+                  id="currency"
+                  name="currency"
+                  class="
+                    focus:ring-indigo-500 focus:border-indigo-500
+                    h-full
+                    py-0
+                    pl-2
+                    pr-7
+                    border-transparent
+                    bg-transparent
+                    text-gray-500
+                    sm:text-sm
+                    rounded-md
+                  "
+                >
+                  <option>USD</option>
+                  <option>CAD</option>
+                  <option>EUR</option>
+                </select>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-span-12 sm:col-span-8">
+          <Listbox as="div" v-model="work_place">
+            <ListboxLabel class="block text-sm font-medium text-gray-700">
+              Work Place
+            </ListboxLabel>
+            <div class="mt-1 relative">
+              <ListboxButton
+                class="
+                  relative
+                  w-full
+                  bg-white
+                  border border-gray-300
+                  rounded-md
+                  shadow-sm
+                  pl-3
+                  pr-10
+                  py-2
+                  text-left
+                  cursor-default
+                  focus:outline-none
+                  focus:ring-1
+                  focus:ring-indigo-500
+                  focus:border-indigo-500
+                  sm:text-sm
+                "
+              >
+                <span class="block truncate">{{ work_place }}</span>
+                <span
+                  class="
+                    absolute
+                    inset-y-0
+                    right-0
+                    flex
+                    items-center
+                    pr-2
+                    pointer-events-none
+                  "
+                >
+                  <SelectorIcon
+                    class="h-5 w-5 text-gray-400"
+                    aria-hidden="true"
+                  />
+                </span>
+              </ListboxButton>
+
+              <transition
+                leave-active-class="transition ease-in duration-100"
+                leave-from-class="opacity-100"
+                leave-to-class="opacity-0"
+              >
+                <ListboxOptions
+                  class="
+                    absolute
+                    z-10
+                    mt-1
+                    w-full
+                    bg-white
+                    shadow-lg
+                    max-h-60
+                    rounded-md
+                    py-1
+                    text-base
+                    ring-1 ring-black ring-opacity-5
+                    overflow-auto
+                    focus:outline-none
+                    sm:text-sm
+                  "
+                >
+                  <ListboxOption
+                    as="template"
+                    v-for="work in workPlace"
+                    :key="work.id"
+                    :value="work"
+                    v-slot="{ active, work_place }"
+                  >
+                    <li
+                      :class="[
+                        active ? 'text-white bg-indigo-600' : 'text-gray-900',
+                        'cursor-default select-none relative py-2 pl-8 pr-4',
+                      ]"
+                    >
+                      <span
+                        :class="[
+                          work_place ? 'font-semibold' : 'font-normal',
+                          'block truncate',
+                        ]"
+                      >
+                        {{ work }}
+                      </span>
+
+                      <span
+                        v-if="work_place"
+                        :class="[
+                          active ? 'text-white' : 'text-indigo-600',
+                          'absolute inset-y-0 left-0 flex items-center pl-1.5',
+                        ]"
+                      >
+                        <CheckIcon class="h-5 w-5" aria-hidden="true" />
+                      </span>
+                    </li>
+                  </ListboxOption>
+                </ListboxOptions>
+              </transition>
+            </div>
+          </Listbox>
+        </div>
+
+        <div class="col-span-12 sm:col-span-8">
+          <Listbox as="div" v-model="work_time_length">
+            <ListboxLabel class="block text-sm font-medium text-gray-700">
+              Work Time Length
+            </ListboxLabel>
+            <div class="mt-1 relative">
+              <ListboxButton
+                class="
+                  relative
+                  w-full
+                  bg-white
+                  border border-gray-300
+                  rounded-md
+                  shadow-sm
+                  pl-3
+                  pr-10
+                  py-2
+                  text-left
+                  cursor-default
+                  focus:outline-none
+                  focus:ring-1
+                  focus:ring-indigo-500
+                  focus:border-indigo-500
+                  sm:text-sm
+                "
+              >
+                <span class="block truncate">{{ work_time_length }}</span>
+                <span
+                  class="
+                    absolute
+                    inset-y-0
+                    right-0
+                    flex
+                    items-center
+                    pr-2
+                    pointer-events-none
+                  "
+                >
+                  <SelectorIcon
+                    class="h-5 w-5 text-gray-400"
+                    aria-hidden="true"
+                  />
+                </span>
+              </ListboxButton>
+
+              <transition
+                leave-active-class="transition ease-in duration-100"
+                leave-from-class="opacity-100"
+                leave-to-class="opacity-0"
+              >
+                <ListboxOptions
+                  class="
+                    absolute
+                    z-10
+                    mt-1
+                    w-full
+                    bg-white
+                    shadow-lg
+                    max-h-60
+                    rounded-md
+                    py-1
+                    text-base
+                    ring-1 ring-black ring-opacity-5
+                    overflow-auto
+                    focus:outline-none
+                    sm:text-sm
+                  "
+                >
+                  <ListboxOption
+                    as="template"
+                    v-for="work in workLength"
+                    :key="work.id"
+                    :value="work"
+                    v-slot="{ active, work_time_length }"
+                  >
+                    <li
+                      :class="[
+                        active ? 'text-white bg-indigo-600' : 'text-gray-900',
+                        'cursor-default select-none relative py-2 pl-8 pr-4',
+                      ]"
+                    >
+                      <span
+                        :class="[
+                          work_time_length ? 'font-semibold' : 'font-normal',
+                          'block truncate',
+                        ]"
+                      >
+                        {{ work }}
+                      </span>
+
+                      <span
+                        v-if="work_time_length"
+                        :class="[
+                          active ? 'text-white' : 'text-indigo-600',
+                          'absolute inset-y-0 left-0 flex items-center pl-1.5',
+                        ]"
+                      >
+                        <CheckIcon class="h-5 w-5" aria-hidden="true" />
+                      </span>
+                    </li>
+                  </ListboxOption>
+                </ListboxOptions>
+              </transition>
+            </div>
+          </Listbox>
+        </div>
+        <div class="col-span-12 sm:col-span-8">
           <label for="country" class="block text-sm font-medium text-gray-700"
             >Country</label
           >
@@ -368,7 +645,7 @@
           </select>
         </div>
 
-           <div class="col-span-12 sm:col-span-8">
+        <div class="col-span-12 sm:col-span-8">
           <label for="gender" class="block text-sm font-medium text-gray-700"
             >gender</label
           >
@@ -702,7 +979,6 @@
             />
           </div>
         </div>
-
       </div>
     </div>
 
@@ -735,23 +1011,46 @@
   </form>
 </template>
 
-<script>
-import { onMounted, computed, ref, } from "vue";
+<script >
+import { onMounted, computed, ref } from "vue";
 import AuthService from "@/services/AuthService";
 import FileService from "@/services/FileService";
 import { useStore } from "vuex";
 import ArrayForm from "./ArrayForm.component.vue";
-
+import {
+  Listbox,
+  ListboxButton,
+  ListboxLabel,
+  ListboxOption,
+  ListboxOptions,
+} from "@headlessui/vue";
+import { CheckIcon, SelectorIcon } from "@heroicons/vue/solid";
 import { createAvatar } from "@dicebear/avatars";
 import * as style from "@dicebear/avatars-initials-sprites";
 
 export default {
   components: {
     ArrayForm,
+    Listbox,
+    ListboxButton,
+    ListboxLabel,
+    ListboxOption,
+    ListboxOptions,
+    CheckIcon,
+    SelectorIcon,
   },
+
   setup() {
     const store = useStore();
-
+    const WorkDays = [
+      "Sunday",
+      "Monday",
+      "Tuesday",
+      "Wednesday",
+      "Thursday",
+      "Friday",
+      "Saterday",
+    ];
     const authUser = computed(() => store.getters["auth/authUser"]);
     const educationState = computed(() => store.getters["auth/education"]);
     const experienceState = computed(() => store.getters["auth/experience"]);
@@ -775,10 +1074,22 @@ export default {
     let experience = ref("");
     let skills = ref("");
     let name = ref("");
-      let facebook_social_link = ref("");
+    let facebook_social_link = ref("");
     let linkedin_social_link = ref("");
     let twitter_social_link = ref("");
     let gender = ref("");
+    let work_days = ref(null);
+
+    let work_hours = ref(null);
+    let salary = ref(null);
+    const workLength = ["Part Time", "Full Time"];
+    const workPlace = ["remote", "Office"];
+
+    let work_time_length = ref(workLength[0]);
+    let work_place = ref(workPlace[0]);
+
+    console.log(work_time_length.value);
+
     let Educationdata, ExperienceData, Certificationsdata, SkillsData;
 
     let sendEducation = (data) => {
@@ -819,14 +1130,24 @@ export default {
       facebook_social_link.value = authUser.value.facebook_social_link;
       linkedin_social_link.value = authUser.value.linkedin_social_link;
       twitter_social_link.value = authUser.value.twitter_social_link;
-
+      work_time_length.value = authUser.value.work_time_length;
+      work_days.value = authUser.value.work_days;
+      work_hours.value = authUser.value.work_hours;
+      work_place.value = authUser.value.work_place;
+      salary.value = authUser.value.salary;
     });
 
     const updateUser = () => {
       console.log(Educationdata);
       const payload = {
-        gender : gender.value,
+        gender: gender.value,
         name: name.value,
+
+        work_time_length: work_time_length.value,
+        work_days: work_days.value,
+        work_hours: work_hours.value,
+        work_place: work_place.value,
+
         email: email.value,
         username: username.value,
         bio: bio.value,
@@ -850,6 +1171,8 @@ export default {
         certifications: Certificationsdata,
         experience: ExperienceData,
         skills: SkillsData,
+
+        salary: salary.value,
       };
 
       AuthService.updateUser(payload)
@@ -894,7 +1217,7 @@ export default {
     let avatar = `${process.env.VUE_APP_API_URL}/${authUser.value.avatar}`;
 
     let avatarWithoutLocalhost = authUser.value.avatar;
-let OathAvatar = authUser.value.avatar;
+    let OathAvatar = authUser.value.avatar;
     let arrayProps = {
       education,
 
@@ -905,20 +1228,17 @@ let OathAvatar = authUser.value.avatar;
       skills,
     };
 
-if(authUser.value.avatar !== null){
-if(authUser.value.avatar.includes("googleusercontent.com") || authUser.value.avatar.includes("graph.facebook.com") || authUser.value.avatar.includes("licdn.com")){
-  avatar = OathAvatar;
-}
+    if (authUser.value.avatar !== null) {
+      if (
+        authUser.value.avatar.includes("googleusercontent.com") ||
+        authUser.value.avatar.includes("graph.facebook.com") ||
+        authUser.value.avatar.includes("licdn.com")
+      ) {
+        avatar = OathAvatar;
+      }
+    }
 
-}
-
-
-
-
-
-
-//lh3.googleusercontent.com
-
+    //lh3.googleusercontent.com
 
     return {
       email,
@@ -958,8 +1278,15 @@ if(authUser.value.avatar.includes("googleusercontent.com") || authUser.value.ava
       Certificationsdata,
       SkillsData,
       arrayProps,
-      gender
-
+      gender,
+      work_time_length,
+      work_days,
+      work_hours,
+      work_place,
+      workLength,
+      WorkDays,
+      salary,
+      workPlace,
     };
   },
 };

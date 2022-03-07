@@ -442,12 +442,17 @@ export default {
         website: authUser.value.website,
         education: authUser.value.education,
         certifications: authUser.value.certifications,
-gender: authUser.value.gender,
+        gender: authUser.value.gender,
         facebook_social_link: authUser.value.facebook_social_link,
         linkedin_social_link: authUser.value.linkedin_social_link,
         twitter_social_link: authUser.value.twitter_social_link,
         experience: authUser.value.experience,
         skills: authUser.value.skills,
+        work_time_length: authUser.value.work_time_length,
+        work_days: authUser.value.work_days,
+        work_hours: authUser.value.work_hours,
+        work_place: authUser.value.work_place,
+        salary: authUser.value.salary,
       };
 
       AuthService.updateUser(payload)
