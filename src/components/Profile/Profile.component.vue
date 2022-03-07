@@ -253,6 +253,101 @@
         </div>
       </div>
     </div>
+
+    <div class="sm:flex sm:px-6 sm:py-5 mt-10 sm:mt-0">
+      <div class="flex flex-col">
+        <div class="mb-5 mt-2 flex items-center text-sm text-gray-500">
+          <BriefcaseIcon
+            class="flex-shrink-0 mr-1.5 h-5 w-5 text-gray-400"
+            aria-hidden="true"
+          />
+          <dd class="mt-1 text-md text-gray-900 sm:mt-0 sm:ml-6 sm:col-span-2">
+            <p>
+              {{ authUserData.work_time_length }}
+            </p>
+            <div v-if="authUserData.work_time_length === null">
+              <router-link
+                class="flex font-bold items-center text-indigo-800"
+                to="/edit/profile"
+              >
+                <PlusCircleIcon
+                  class="w-6 h-6 stroke-1 mr-3"
+                  aria-hidden="true"
+                />
+                <span class="">Add Work Time Length</span>
+              </router-link>
+            </div>
+          </dd>
+        </div>
+        <div class="mb-5 flex items-center text-sm text-gray-500">
+          <LocationMarkerIcon
+            class="flex-shrink-0 mr-1.5 h-5 w-5 text-gray-400"
+            aria-hidden="true"
+          />
+          <dd class="mt-1 text-md text-gray-900 sm:mt-0 sm:ml-6 sm:col-span-2">
+            <p>
+              {{ authUserData.work_place }}
+            </p>
+            <div v-if="authUserData.work_place === null">
+              <router-link
+                class="flex font-bold items-center text-indigo-800"
+                to="/edit/profile"
+              >
+                <PlusCircleIcon
+                  class="w-6 h-6 stroke-1 mr-3"
+                  aria-hidden="true"
+                />
+                <span class="">Add Work Place</span>
+              </router-link>
+            </div>
+          </dd>
+        </div>
+        <div class="mb-5 flex items-center text-sm text-gray-500">
+          <CurrencyDollarIcon
+            class="flex-shrink-0 mr-1.5 h-5 w-5 text-gray-400"
+            aria-hidden="true"
+          />
+ <dd class="mt-1 text-md text-gray-900 sm:mt-0 sm:ml-6 sm:col-span-2">
+            <p>
+              {{ authUserData.salary }}$
+            </p>
+            <div v-if="authUserData.salary === null">
+              <router-link
+                class="flex font-bold items-center text-indigo-800"
+                to="/edit/profile"
+              >
+                <PlusCircleIcon
+                  class="w-6 h-6 stroke-1 mr-3"
+                  aria-hidden="true"
+                />
+                <span class="">Add Salary</span>
+              </router-link>
+            </div>
+          </dd>        </div>
+        <div class="flex items-center text-sm text-gray-500">
+          <CalendarIcon
+            class="flex-shrink-0 mr-1.5 h-5 w-5 text-gray-400"
+            aria-hidden="true"
+          />
+<dd class="mt-1 text-md text-gray-900 sm:mt-0 sm:ml-6 sm:col-span-2">
+            <p>
+            FROM  {{ timerange.start }}:00 am TO {{ timerange.end }}:00 pm
+            </p>
+            <div v-if="authUserData.work_hours === null">
+              <router-link
+                class="flex font-bold items-center text-indigo-800"
+                to="/edit/profile"
+              >
+                <PlusCircleIcon
+                  class="w-6 h-6 stroke-1 mr-3"
+                  aria-hidden="true"
+                />
+                <span class="">Add Work Hours</span>
+              </router-link>
+            </div>
+          </dd>         </div>
+      </div>
+    </div>
   </div>
   <div class="mt-6 sm:mt-2 2xl:mt-5">
     <div class="border-b border-gray-200">
@@ -284,6 +379,12 @@
 </template>
 
 <script>
+import {
+  BriefcaseIcon,
+  CalendarIcon,
+  CurrencyDollarIcon,
+  LocationMarkerIcon,
+} from "@heroicons/vue/solid";
 import About from "./About.component.vue";
 import Resume from "./Resume.component.vue";
 import Info from "./Info.component.vue";
@@ -338,6 +439,12 @@ export default {
     Resume,
     Info,
     PlusCircleIcon,
+    BriefcaseIcon,
+    CalendarIcon,
+
+    CurrencyDollarIcon,
+
+    LocationMarkerIcon,
   },
   props: ["authUser"],
 
@@ -402,6 +509,14 @@ export default {
       }
     };
 
+
+let ParsedTime = JSON.parse(authUserData.value.work_hours);
+    let timerange = reactive({
+      start:ParsedTime[0].hours,
+      end:ParsedTime[1].hours,
+
+    });
+
     return {
       profile,
       tabs,
@@ -413,6 +528,7 @@ export default {
       isClient,
       Gigs_Requests_tabs,
       navigateTabs,
+      timerange
     };
   },
 };

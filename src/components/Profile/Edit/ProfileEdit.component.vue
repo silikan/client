@@ -45,14 +45,20 @@
                 name="username"
                 autocomplete="username"
                 class="
-                  focus:ring-indigo-500 focus:border-indigo-500
-                  flex-grow
+                  appearance-none
                   block
                   w-full
-                  min-w-0
-                  rounded-none rounded-r-md
-                  sm:text-sm
+                  pl-5
+                  pr-20
+                  py-3
                   border border-gray-300
+                  rounded-md
+                  shadow-sm
+                  placeholder-gray-400
+                  focus:outline-none
+                  focus:ring-indigo-500
+                  focus:border-indigo-500
+                  sm:text-sm
                 "
                 v-model="username"
               />
@@ -74,7 +80,7 @@
                   w-full
                   pl-5
                   pr-20
-                  py-2
+                  py-3
                   border border-gray-300
                   rounded-md
                   shadow-sm
@@ -98,7 +104,7 @@
               <textarea
                 id="bio"
                 name="bio"
-                rows="3"
+                rows="7"
                 class="
                   shadow-sm
                   focus:ring-indigo-500 focus:border-indigo-500
@@ -277,7 +283,7 @@
               border border-gray-300
               rounded-md
               shadow-sm
-              py-2
+              py-3
               px-3
               focus:outline-none focus:ring-indigo-500 focus:border-indigo-500
               sm:text-sm
@@ -330,7 +336,7 @@
                 border border-gray-300
                 rounded-md
                 shadow-sm
-                py-2
+                py-3
                 px-3
                 pl-24
                 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500
@@ -342,20 +348,23 @@
         </div>
 
         <div class="col-span-12 sm:col-span-8">
-  <label for="work_hours" class="block text-sm font-medium text-gray-700">
+          <label
+            for="work_hours"
+            class="block text-sm font-medium text-gray-700"
+          >
             Work Hours</label
           >
-     <Datepicker v-model="work_hours" timePicker  range  noMinutesOverlay  />
-
+          <Datepicker v-model="work_hours" timePicker range noMinutesOverlay />
         </div>
 
-
         <div class="col-span-12 sm:col-span-8">
-  <label for="work_hours" class="block text-sm font-medium text-gray-700">
+          <label
+            for="work_hours"
+            class="block text-sm font-medium text-gray-700"
+          >
             Birthday</label
           >
-     <Datepicker v-model="date_of_birth"  :enableTimePicker="false"     />
-
+          <Datepicker v-model="date_of_birth" :enableTimePicker="false" />
         </div>
 
         <div class="col-span-12 sm:col-span-8">
@@ -383,14 +392,20 @@
                 id="salary"
                 v-model="salary"
                 class="
-               focus:ring-indigo-500 focus:border-indigo-500
+                  appearance-none
                   block
                   w-full
-                  pl-7
-                  pr-12
-                  sm:text-sm
-                  border-gray-300
+                  pl-5
+                  pr-20
+                  py-3
+                  border border-gray-300
                   rounded-md
+                  shadow-sm
+                  placeholder-gray-400
+                  focus:outline-none
+                  focus:ring-indigo-500
+                  focus:border-indigo-500
+                  sm:text-sm
                 "
                 placeholder="0.00"
               />
@@ -400,16 +415,17 @@
                   id="currency"
                   name="currency"
                   class="
-                    focus:ring-indigo-500 focus:border-indigo-500
-                    h-full
-                    py-0
-                    pl-2
-                    pr-7
-                    border-transparent
-                    bg-transparent
-                    text-gray-500
-                    sm:text-sm
+                    block
+                    w-full
+                    border border-gray-300
                     rounded-md
+                    shadow-sm
+                    py-3
+                    px-3
+                    focus:outline-none
+                    focus:ring-indigo-500
+                    focus:border-indigo-500
+                    sm:text-sm
                   "
                 >
                   <option>USD</option>
@@ -436,7 +452,7 @@
                   shadow-sm
                   pl-3
                   pr-10
-                  py-2
+                  py-5
                   text-left
                   cursor-default
                   focus:outline-none
@@ -543,7 +559,7 @@
                   shadow-sm
                   pl-3
                   pr-10
-                  py-2
+                  py-5
                   text-left
                   cursor-default
                   focus:outline-none
@@ -650,7 +666,7 @@
               border border-gray-300
               rounded-md
               shadow-sm
-              py-2
+              py-3
               px-3
               focus:outline-none focus:ring-indigo-500 focus:border-indigo-500
               sm:text-sm
@@ -679,7 +695,7 @@
               border border-gray-300
               rounded-md
               shadow-sm
-              py-2
+              py-3
               px-3
               focus:outline-none focus:ring-indigo-500 focus:border-indigo-500
               sm:text-sm
@@ -709,7 +725,7 @@
               border border-gray-300
               rounded-md
               shadow-sm
-              py-2
+              py-3
               px-3
               focus:outline-none focus:ring-indigo-500 focus:border-indigo-500
               sm:text-sm
@@ -734,7 +750,7 @@
               border border-gray-300
               rounded-md
               shadow-sm
-              py-2
+              py-3
               px-3
               focus:outline-none focus:ring-indigo-500 focus:border-indigo-500
               sm:text-sm
@@ -759,7 +775,7 @@
               border border-gray-300
               rounded-md
               shadow-sm
-              py-2
+              py-3
               px-3
               focus:outline-none focus:ring-indigo-500 focus:border-indigo-500
               sm:text-sm
@@ -784,7 +800,7 @@
               border border-gray-300
               rounded-md
               shadow-sm
-              py-2
+              py-3
               px-3
               focus:outline-none focus:ring-indigo-500 focus:border-indigo-500
               sm:text-sm
@@ -815,23 +831,23 @@
               http://
             </span>
             <input
-              id="website"
-              type="text"
-              name="website"
+              id="linkedin_social_link"
               v-model="website"
+              type="text"
+              name="linkedin_social_link"
               class="
-                mt-1
+                focus:ring-indigo-500 focus:border-indigo-500
                 block
                 w-full
                 border border-gray-300
-                rounded-md
-                shadow-sm
-                py-2
-                px-3
-                focus:outline-none focus:ring-indigo-500 focus:border-indigo-500
+                pl-7
+                pr-12
+                py-3
                 sm:text-sm
+                border-gray-300
+                rounded-md
               "
-              placeholder="www.example.com"
+              placeholder="www.website.com"
             />
           </div>
         </div>
@@ -895,14 +911,16 @@
               v-model="facebook_social_link"
               name="facebook_social_link"
               class="
-            focus:ring-indigo-500 focus:border-indigo-500
-                  block
-                  w-full
-                  pl-7
-                  pr-12
-                  sm:text-sm
-                  border-gray-300
-                  rounded-md
+                focus:ring-indigo-500 focus:border-indigo-500
+                block
+                w-full
+                border border-gray-300
+                pl-7
+                pr-12
+                py-3
+                sm:text-sm
+                border-gray-300
+                rounded-md
               "
               placeholder="@username"
             />
@@ -936,16 +954,16 @@
               v-model="twitter_social_link"
               name="twitter_social_link"
               class="
-                mt-1
+                focus:ring-indigo-500 focus:border-indigo-500
                 block
                 w-full
                 border border-gray-300
-                rounded-md
-                shadow-sm
-                py-2
-                px-3
-                focus:outline-none focus:ring-indigo-500 focus:border-indigo-500
+                pl-7
+                pr-12
+                py-3
                 sm:text-sm
+                border-gray-300
+                rounded-md
               "
               placeholder="@username"
             />
@@ -979,16 +997,16 @@
               type="text"
               name="linkedin_social_link"
               class="
-                mt-1
+                focus:ring-indigo-500 focus:border-indigo-500
                 block
                 w-full
                 border border-gray-300
-                rounded-md
-                shadow-sm
-                py-2
-                px-3
-                focus:outline-none focus:ring-indigo-500 focus:border-indigo-500
+                pl-7
+                pr-12
+                py-3
                 sm:text-sm
+                border-gray-300
+                rounded-md
               "
               placeholder="@username"
             />
@@ -1027,11 +1045,11 @@
 </template>
 
 <script >
-import moment from 'moment'
+import moment from "moment";
 
-  import Datepicker from 'vue3-date-time-picker';
+import Datepicker from "vue3-date-time-picker";
 
-    import 'vue3-date-time-picker/dist/main.css'
+import "vue3-date-time-picker/dist/main.css";
 import { onMounted, computed, ref } from "vue";
 import AuthService from "@/services/AuthService";
 import FileService from "@/services/FileService";
@@ -1058,7 +1076,7 @@ export default {
     ListboxOptions,
     CheckIcon,
     SelectorIcon,
-Datepicker
+    Datepicker,
   },
   created: function () {
     this.moment = moment;
@@ -1103,9 +1121,9 @@ Datepicker
     let gender = ref("");
 
     let work_hours = ref({
-            hours: new Date().getHours(),
-            minutes: new Date().getMinutes()
-        });
+      hours: new Date().getHours(),
+      minutes: new Date().getMinutes(),
+    });
     let salary = ref(null);
     const workLength = ["Part Time", "Full Time"];
     const workPlace = ["remote", "Office"];
@@ -1174,7 +1192,7 @@ Datepicker
         email: email.value,
         username: username.value,
         bio: bio.value,
-        date_of_birth:moment(date_of_birth.value).format("YYYY-MM-DD") ,
+        date_of_birth: moment(date_of_birth.value).format("YYYY-MM-DD"),
 
         phone_number: phone_number.value,
         address: address.value,

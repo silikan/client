@@ -28,7 +28,7 @@
               w-full
               pl-5
               pr-20
-              py-2
+              py-3
               border border-gray-300
               rounded-md
               shadow-sm
@@ -45,7 +45,7 @@
               w-full
               text-center
               px-4
-              py-2
+              py-3
               border border-transparent
               text-sm
               font-medium

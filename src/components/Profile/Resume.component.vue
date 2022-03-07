@@ -328,38 +328,7 @@
         </div>
       </div>
 
-      <div class="sm:flex sm:px-6 sm:py-5 mt-10 sm:mt-0">
-        <div class="flex flex-col">
-          <div class="mb-5 mt-2 flex items-center text-sm text-gray-500">
-            <BriefcaseIcon
-              class="flex-shrink-0 mr-1.5 h-5 w-5 text-gray-400"
-              aria-hidden="true"
-            />
-            Full-time
-          </div>
-          <div class="mb-5 flex items-center text-sm text-gray-500">
-            <LocationMarkerIcon
-              class="flex-shrink-0 mr-1.5 h-5 w-5 text-gray-400"
-              aria-hidden="true"
-            />
-            Remote
-          </div>
-          <div class="mb-5 flex items-center text-sm text-gray-500">
-            <CurrencyDollarIcon
-              class="flex-shrink-0 mr-1.5 h-5 w-5 text-gray-400"
-              aria-hidden="true"
-            />
-            $120k &ndash; $140k
-          </div>
-          <div class="flex items-center text-sm text-gray-500">
-            <CalendarIcon
-              class="flex-shrink-0 mr-1.5 h-5 w-5 text-gray-400"
-              aria-hidden="true"
-            />
-            Closing on January 9, 2020
-          </div>
-        </div>
-      </div>
+
     </dl>
   </div>
 </template>
@@ -370,9 +339,7 @@ import {
   PuzzleIcon,
   BriefcaseIcon,
   BadgeCheckIcon,
-  CalendarIcon,
-  CurrencyDollarIcon,
-  LocationMarkerIcon,
+
 } from "@heroicons/vue/solid";
 import { PlusCircleIcon } from "@heroicons/vue/outline";
 import { computed } from "@vue/runtime-core";
@@ -382,11 +349,8 @@ export default {
     PuzzleIcon,
     BriefcaseIcon,
     BadgeCheckIcon,
-    CalendarIcon,
 
-    CurrencyDollarIcon,
 
-    LocationMarkerIcon,
     PlusCircleIcon,
   },
   props: ["Data"],
