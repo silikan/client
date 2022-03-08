@@ -184,14 +184,14 @@
                 <span class="sr-only">Open user menu</span>
                 <img
                   class="h-8 w-8 rounded-full"
-                  :src="avatar_svg"
-                  v-if="avatarWithoutLocalhost === null"
+                  :src="navBarImg.avatar_svg"
+                  v-if="navBarImg.avatarWithoutLocalhost === null"
                   alt=""
                 />
                 <img
                   class="h-8 w-8 rounded-full"
-                  :src="avatar"
-                  v-if="avatarWithoutLocalhost !== null"
+                  :src="navBarImg.avatar"
+                  v-if="navBarImg.avatarWithoutLocalhost !== null"
                   alt=""
                 />
               </MenuButton>
@@ -302,14 +302,14 @@
             <div class="flex-shrink-0">
               <img
                 class="h-10 w-10 rounded-full"
-                :src="avatar_svg"
-                v-if="avatarWithoutLocalhost === null"
+                :src="navBarImg.avatar_svg"
+                v-if="navBarImg.avatarWithoutLocalhost === null"
                 alt=""
               />
               <img
                 class="h-10 w-10 rounded-full"
-                :src="avatar"
-                v-if="avatarWithoutLocalhost !== null"
+                :src="navBarImg.avatar"
+                v-if="navBarImg.avatarWithoutLocalhost !== null"
                 alt=""
               />
             </div>
@@ -473,8 +473,7 @@ export default {
     let avatarWithoutLocalhost;
     let OathAvatar;
     console.log(authUserData.value);
-
-    if (isLoggedin.value === true) {
+const navBarImg = computed(() => {
       avatar_svg = createAvatar(style, {
         seed: authUserData.value.name,
         dataUri: true,
@@ -494,7 +493,15 @@ export default {
           avatar = OathAvatar;
         }
       }
-    }
+
+      return {
+        avatar_svg,
+        avatar,
+        avatarWithoutLocalhost,
+      };
+
+    });
+
 
     return {
       user,
@@ -508,6 +515,7 @@ export default {
       isLoggedin,
       signin,
       signup,
+      navBarImg
     };
   },
 };

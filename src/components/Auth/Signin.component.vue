@@ -361,6 +361,7 @@ export default {
         if (authUser) {
           store.dispatch("auth/setGuest", { value: "isNotGuest" });
           router.push("/profile");
+
         } else {
           const error = Error(
             "Unable to fetch user after login, check your API settings."
