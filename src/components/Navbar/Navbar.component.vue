@@ -156,15 +156,67 @@
               p-1
               text-gray-400
               hover:text-gray-500
-              focus:outline-none
-              focus:ring-2
-              focus:ring-offset-2
-              focus:ring-indigo-500
+
+            "
+          >
+            <span class="sr-only">View notifications</span>
+                        <ChatAlt2Icon class="h-6 w-6" aria-hidden="true" />
+
+          </button
+          >
+           <button
+            v-if="isLoggedin === true"
+            type="button"
+            class="
+              flex-shrink-0
+              bg-white
+              rounded-full
+              p-1
+              text-gray-400
+              hover:text-gray-500
+
+            "
+          >
+            <span class="sr-only">View notifications</span>
+                        <ClipboardCheckIcon class="h-6 w-6" aria-hidden="true" />
+
+          </button
+          >
+             <button
+            v-if="isLoggedin === true"
+            type="button"
+            class="
+              flex-shrink-0
+              bg-white
+              rounded-full
+              p-1
+              text-gray-400
+              hover:text-gray-500
+
+            "
+          >
+            <span class="sr-only">View notifications</span>
+                        <ShoppingBagIcon class="h-6 w-6" aria-hidden="true" />
+
+          </button
+          >
+             <button
+            v-if="isLoggedin === true"
+            type="button"
+            class="
+              flex-shrink-0
+              bg-white
+              rounded-full
+              p-1
+              text-gray-400
+              hover:text-gray-500
+
             "
           >
             <span class="sr-only">View notifications</span>
             <BellIcon class="h-6 w-6" aria-hidden="true" />
-          </button>
+          </button
+          >
 
           <!-- Profile dropdown -->
           <Menu as="div" class="flex-shrink-0 relative ml-4">
@@ -323,25 +375,76 @@
             </div>
           </router-link>
 
-          <button
+      <button
+            v-if="isLoggedin === true"
             type="button"
             class="
-              ml-auto
               flex-shrink-0
               bg-white
               rounded-full
               p-1
               text-gray-400
               hover:text-gray-500
-              focus:outline-none
-              focus:ring-2
-              focus:ring-offset-2
-              focus:ring-indigo-500
+
             "
           >
             <span class="sr-only">View notifications</span>
-            <BellIcon class="h-6 w-6" aria-hidden="true" />
-          </button>
+            <ChatAlt2Icon class="h-6 w-6" aria-hidden="true" />
+          </button
+          >
+           <button
+            v-if="isLoggedin === true"
+            type="button"
+            class="
+              flex-shrink-0
+              bg-white
+              rounded-full
+              p-1
+              text-gray-400
+              hover:text-gray-500
+
+            "
+          >
+            <span class="sr-only">View notifications</span>
+            <ShoppingBagIcon class="h-6 w-6" aria-hidden="true" />
+
+          </button
+          >
+             <button
+            v-if="isLoggedin === true"
+            type="button"
+            class="
+              flex-shrink-0
+              bg-white
+              rounded-full
+              p-1
+              text-gray-400
+              hover:text-gray-500
+
+            "
+          >
+            <span class="sr-only">View notifications</span>
+            <ClipboardCheckIcon class="h-6 w-6" aria-hidden="true" />
+          </button
+          >
+             <button
+            v-if="isLoggedin === true"
+            type="button"
+            class="
+              flex-shrink-0
+              bg-white
+              rounded-full
+              p-1
+              text-gray-400
+              hover:text-gray-500
+
+            "
+          >
+            <span class="sr-only">View notifications</span>
+                        <BellIcon class="h-6 w-6" aria-hidden="true" />
+
+          </button
+          >
         </div>
         <div class="mt-3 px-2 space-y-1">
           <router-link to="/profile">
@@ -414,7 +517,14 @@ import {
   MenuItems,
 } from "@headlessui/vue";
 import { SearchIcon } from "@heroicons/vue/solid";
-import { BellIcon, MenuIcon, XIcon } from "@heroicons/vue/outline";
+import {
+  BellIcon,
+  MenuIcon,
+  XIcon,
+   ShoppingBagIcon,
+  ClipboardCheckIcon,
+  ChatAlt2Icon,
+} from "@heroicons/vue/outline";
 import { useStore } from "vuex";
 import { useRoute } from "vue-router";
 
@@ -450,6 +560,9 @@ export default {
     MenuIcon,
     SearchIcon,
     XIcon,
+   ShoppingBagIcon,
+    ClipboardCheckIcon,
+    ChatAlt2Icon,
   },
   props: ["authUser"],
 
@@ -473,7 +586,7 @@ export default {
     let avatarWithoutLocalhost;
     let OathAvatar;
     console.log(authUserData.value);
-const navBarImg = computed(() => {
+    const navBarImg = computed(() => {
       avatar_svg = createAvatar(style, {
         seed: authUserData.value.name,
         dataUri: true,
@@ -499,9 +612,7 @@ const navBarImg = computed(() => {
         avatar,
         avatarWithoutLocalhost,
       };
-
     });
-
 
     return {
       user,
@@ -515,7 +626,7 @@ const navBarImg = computed(() => {
       isLoggedin,
       signin,
       signup,
-      navBarImg
+      navBarImg,
     };
   },
 };
