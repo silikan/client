@@ -116,6 +116,11 @@
               bg-white
               hover:bg-gray-50
             "
+              rel="prev"
+        type="button"
+               @click="prevPage"
+        v-if="links.prev"
+
           >
             Previous
           </a>
@@ -136,6 +141,12 @@
               bg-white
               hover:bg-gray-50
             "
+
+                rel="next"
+        type="button"
+        @click="nextPage"
+        v-if="links.next"
+
           >
             Next
           </a>
@@ -145,19 +156,8 @@
         >
           <div>
             <p class="text-sm text-indigo-700">
-              Showing
-              {{ " " }}
-              <span class="font-medium">1</span>
-              {{ " " }}
-              to
-              {{ " " }}
-              <span class="font-medium">10</span>
-              {{ " " }}
-              of
-              {{ " " }}
-              <span class="font-medium">97</span>
-              {{ " " }}
-              results
+            Page {{ meta.current_page }} of {{ meta.last_page }}
+
             </p>
           </div>
         </div>
@@ -169,7 +169,8 @@
 <script>
 import { AdjustmentsIcon } from "@heroicons/vue/outline";
 import Search from "./Search/search.component.vue";
-import { useStore } from "vuex";
+import store from "@/store/index";
+
 import { useRouter } from "vue-router";
 import { computed, } from '@vue/runtime-core';
 
@@ -184,71 +185,95 @@ export default {
     Search,
     AdjustmentsIcon,
   },
+  props: {
+    action: {
+      type: String,
+      required: true,
+    },
+    path: {
+      type: String,
+      default: null,
+    },
+    meta: {
+      type: Object,
+      required: true,
+    },
+    links: {
+      type: Object,
+      required: true,
+    },
+  },
+  setup(props) {
 
-  setup() {
-    const store = useStore();
-    const router = useRouter();
-
-    const users = computed(()=>store.getters["user/users"])
-    const meta = computed(()=>store.getters["user/meta"])
-    const links =computed(()=> store.getters["user/links"])
+const router = useRouter();
 
 
-    let action = "user/paginateUsers";
 
-    let path = "handymen";
+
+let action = computed(() => props.action) ;
+let path = computed(() => props.path) ;
+let meta = computed(() => props.meta) ;
+let links = computed(() => props.links) ;
+
+console.log(links.value.next);
+
 
     const firstPage = () => {
-      store.dispatch(action, links.first).then(() => {
+
+
+
+
+      store.dispatch(action.value.value, links.value.first).then(() => {
         if (path) {
           router.push({
-            path: path,
+            path: path.value,
             query: { page: 1 },
           });
         }
       });
     };
     const prevPage = () => {
-      store.dispatch(action, links.prev).then(() => {
+
+
+      store.dispatch(action.value, links.value.prev).then(() => {
         if (path) {
           router.push({
-            path: path,
-            query: { page: meta.current_page - 1 },
+            path: path.value,
+            query: { page: meta.value.current_page - 1 },
           });
         }
       });
     };
     const nextPage = () => {
-      store.dispatch(action, links.next).then(() => {
+
+
+      store.dispatch(action.value, links.value.next).then(() => {
         if (path) {
           router.push({
-            path: path,
-            query: { page: meta.current_page + 1 },
+            path: path.value,
+            query: { page: meta.value.current_page + 1 },
           });
         }
       });
     };
     const lastPage = () => {
-      store.dispatch(action, links.last).then(() => {
+
+
+      store.dispatch(action.value, links.value.last).then(() => {
         if (path) {
           router.push({
-            path: path,
-            query: { page: meta.last_page },
+            path: path.value,
+            query: { page: meta.value.last_page },
           });
         }
       });
     };
+const users = computed(()=>store.getters["user/users"])
 
-    console.log(users.value);
-    console.log(meta);
-
-    console.log(links);
     return {
       people,
       users,
-      meta,
-      links,
-      action,
+
       firstPage,
       prevPage,
       nextPage,

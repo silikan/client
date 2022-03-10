@@ -11,6 +11,7 @@ export default {
     return API.apiClient.delete(`users/${userId}}`);
   },
   paginateUsers(link) {
+    console.log(link);
     return API.apiClient.get(link);
   },
 };
