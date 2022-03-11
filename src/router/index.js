@@ -15,7 +15,7 @@ import Requests from '@/views/Requests.view.vue';
 import Services from '@/views/Services.view.vue';
 import EditProfile from '@/views/Edit_Profile.view.vue';
 import Profile from '@/views/Profile.view.vue';
-
+import VisitProfile from '@/views/Visit_Profile.view.vue';
 import AuthEdit from '../components/Profile/Edit/AuthEdit.component.vue';
 import AccountEdit from '../components/Profile/Edit/AccountEdit.component.vue';
 import ProfileEdit from '../components/Profile/Edit/ProfileEdit.component.vue';
@@ -69,6 +69,14 @@ const routes = [
     meta: { middleware: [auth, guest] },
 
     component: Requests,
+  },
+  {
+    path: '/user/:id',
+    name: 'VisitProfile',
+
+    component: VisitProfile,
+    props: true
+
   },
   {
     path: '/services',

@@ -1,8 +1,9 @@
 import * as API from '@/services/API';
 
 export default {
-  getUser(userId) {
-    return API.apiClient.get(`/guest-users/${userId}`);
+  async getUser(userId) {
+    let data = await API.apiClient.get(`/users/${userId}`);
+    return data
   },
   getUsers(page) {
     return API.apiClient.get(`/guest-users/?page=${page}`);

@@ -1,32 +1,25 @@
 <template>
-<Profile  :authUser="authUser"/>
-
+  <Profile :authUser="authUser" />
 </template>
 
 <script>
-import Profile from "../components/Profile/Profile.component.vue"
-import { computed } from '@vue/runtime-core';
-import { useStore } from 'vuex';
-
+import Profile from "../components/Profile/Profile.component.vue";
+import { computed } from "@vue/runtime-core";
+import { useStore } from "vuex";
 
 export default {
-    components:{Profile },
-setup(){
+  components: { Profile },
+  setup() {
+    const store = useStore();
 
-  const store = useStore    ();
+    const authUser = computed(() => store.getters["auth/authUser"]);
 
-  const authUser = computed(() => store.getters["auth/authUser"]);
-
-
-  return {
-
-    authUser
-  }
-
-}
-}
+    return {
+      authUser,
+    };
+  },
+};
 </script>
 
 <style>
-
 </style>
