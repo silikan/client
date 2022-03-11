@@ -5,8 +5,8 @@
        :path="path"
         :meta="meta"
         :links="links"
-        action="user/paginateUsers"
-        v-if="meta && meta.last_page > 1"
+        action="handyman/paginateHandymen"
+        v-if="meta && meta.last_page >= 1"
     />
  </div>
 </template>
@@ -23,11 +23,13 @@ export default {
 
   setup() {
 
-    let action = "user/paginateUsers";
+    let action = "handyman/paginateHandymen";
 
     let path = "handymen";
-    const meta = computed(()=>store.getters["user/meta"])
-    const links =computed(()=> store.getters["user/links"])
+    const meta = computed(()=>store.getters["handyman/meta"])
+    const links =computed(()=> store.getters["handyman/links"])
+
+
 
     return{
       meta,
@@ -40,7 +42,7 @@ export default {
 
   beforeRouteEnter(to, from, next) {
     const currentPage = parseInt(to.query.page) || 1;
-    store.dispatch("user/getUsers", currentPage).then(() => {
+    store.dispatch("handyman/getHandymen", currentPage).then(() => {
       to.params.page = currentPage;
       next();
     });

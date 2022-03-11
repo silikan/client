@@ -408,9 +408,9 @@ import { SearchIcon } from "@heroicons/vue/solid";
 const navigation = [
   { name: "About", link: "/about" },
   { name: "Contact Us", link: "/contact" },
-  { name: "Services", link: "/handymen" },
-  { name: "Requests", link: "/services" },
-  { name: "Handymen", link: "/requests" },
+  { name: "Services", link: "/services" },
+  { name: "Requests", link: "/requests" },
+  { name: "Handymen", link: "/handymen" },
 ];
 
 export default {

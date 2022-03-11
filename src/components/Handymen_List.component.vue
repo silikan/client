@@ -1,5 +1,4 @@
 <template>
-{{users}}
   <div class="bg-white">
     <div class="mx-auto py-12 px-4 max-w-7xl sm:px-6 lg:px-8 lg:py-24">
       <div class="flex w-full items-center justify-between mb-5">
@@ -29,7 +28,14 @@
               <div class="aspect-w-3 aspect-h-2">
                 <img
                   class="md:h-60 md:w-96 object-cover shadow-lg rounded-lg h-69"
-                  :src="person.imageUrl"
+                  :src="person.avatar_svg"
+                  v-if="person.avatarWithoutLocalhost === null"
+                  alt=""
+                />
+                <img
+                  class="md:h-60 md:w-96 object-cover shadow-lg rounded-lg h-69"
+                  :src="person.avatar"
+                  v-if="person.avatarWithoutLocalhost !== null"
                   alt=""
                 />
               </div>
@@ -99,10 +105,10 @@
           mb-10
         "
       >
-        <div class="flex-1 flex justify-between">
+        <div class="flex-1 flex justify-between sm:hidden">
           <a
-            href="#"
             class="
+              cursor-pointer
               relative
               inline-flex
               items-center
@@ -116,17 +122,16 @@
               bg-white
               hover:bg-gray-50
             "
-              rel="prev"
-        type="button"
-               @click="prevPage"
-        v-if="links.prev"
-
+            rel="prev"
+            type="button"
+            @click="prevPage"
+            v-if="links.prev"
           >
             Previous
           </a>
           <a
-            href="#"
             class="
+              cursor-pointer
               ml-3
               relative
               inline-flex
@@ -140,25 +145,168 @@
               text-gray-700
               bg-white
               hover:bg-gray-50
+              max-w-md
             "
-
-                rel="next"
-        type="button"
-        @click="nextPage"
-        v-if="links.next"
-
+            rel="next"
+            type="button"
+            @click="nextPage"
+            v-if="links.next"
           >
             Next
           </a>
         </div>
-        <div
-          class="mt-3 hidden sm:flex-1 sm:flex sm:items-center sm:justify-end"
-        >
-          <div>
+        <div class="sm:flex-1 sm:flex sm:items-center sm:justify-between">
+          <div class="flex justify-end items-center mt-3">
             <p class="text-sm text-indigo-700">
-            Page {{ meta.current_page }} of {{ meta.last_page }}
-
+              Page {{ meta.current_page }} of {{ meta.last_page }}
             </p>
+          </div>
+          <div>
+            <nav
+              class="
+                hidden
+                relative
+                z-0
+                sm:inline-flex
+                rounded-md
+                shadow-sm
+                -space-x-px
+              "
+              aria-label="Pagination"
+            >
+              <a
+                class="
+                                cursor-pointer
+
+                  relative
+                  inline-flex
+                  items-center
+                  px-2
+                  py-2
+                  rounded-l-md
+                  border border-gray-300
+                  bg-white
+                  text-sm
+                  font-medium
+                  text-gray-500
+                  hover:bg-gray-50
+                  max-w-md
+                "
+                @click="prevPage"
+                            v-if="links.prev"
+
+              >
+                <span class="sr-only">Previous</span>
+                <ChevronLeftIcon class="h-5 w-5" aria-hidden="true" />
+              </a>
+              <!-- Current: "z-10 bg-indigo-50 border-indigo-500 text-indigo-600", Default: "bg-white border-gray-300 text-gray-500 hover:bg-gray-50" -->
+              <a
+                class="
+                  border-gray-300
+                  text-gray-500
+                  hover:bg-gray-50
+                  cursor-pointer
+                  hidden
+                  md:inline-flex
+                  relative
+                  items-center
+                  px-4
+                  py-2
+                  border
+                  text-sm
+                  font-medium
+                  max-w-md
+                "
+                :class="{
+                  'bg-indigo-50 border-indigo-500 text-indigo-600':
+                    1 === meta.current_page,
+                  'bg-white border-gray-300 text-gray-500 hover:bg-gray-50':
+                    1 !== meta.current_page,
+                }"
+                @click="setPage(1)"
+              >
+                <span>01</span>
+              </a>
+              <a v-for="page in filterPages" :key="page" @click="setPage(page)">
+                <span
+                  class="
+                    border-gray-300
+                    text-gray-500
+                    hover:bg-gray-50
+                    cursor-pointer
+                    hidden
+                    md:inline-flex
+                    relative
+                    items-center
+                    px-4
+                    py-2
+                    border
+                    text-sm
+                    font-medium
+                  "
+                  :class="{
+                    'bg-indigo-50 border-indigo-500 text-indigo-600':
+                      page === meta.current_page,
+                    'bg-white border-gray-300 text-gray-500 hover:bg-gray-50':
+                      page !== meta.current_page,
+                  }"
+                  v-if="Math.abs(page - currentPage) < 3"
+                >
+                  <span v-if="page < 10">0 </span> {{ page }}</span
+                >
+              </a>
+
+              <a
+              v-if="totalPages > 1"
+                class="
+                  cursor-pointer
+                  border-gray-300
+                  text-gray-500
+                  hover:bg-gray-50
+                  hidden
+                  md:inline-flex
+                  relative
+                  items-center
+                  px-4
+                  py-2
+                  border
+                  text-sm
+                  font-medium
+                "
+                @click="setPage(totalPages)"
+                :class="{
+                  'bg-indigo-50 border-indigo-500 text-indigo-600':
+                    totalPages === meta.current_page,
+                  'bg-white border-gray-300 text-gray-500 hover:bg-gray-50':
+                    totalPages !== meta.current_page,
+                }"
+              >
+                <span>{{ totalPages }}</span>
+              </a>
+              <a
+                class="
+                cursor-pointer
+                  relative
+                  inline-flex
+                  items-center
+                  px-2
+                  py-2
+                  rounded-r-md
+                  border border-gray-300
+                  bg-white
+                  text-sm
+                  font-medium
+                  text-gray-500
+                  hover:bg-gray-50
+                "
+                @click="nextPage"
+                            v-if="links.next"
+
+              >
+                <span class="sr-only">Next</span>
+                <ChevronRightIcon class="h-5 w-5" aria-hidden="true" />
+              </a>
+            </nav>
           </div>
         </div>
       </div>
@@ -167,23 +315,22 @@
 </template>
 
 <script>
+import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/vue/solid";
+
 import { AdjustmentsIcon } from "@heroicons/vue/outline";
 import Search from "./Search/search.component.vue";
 import store from "@/store/index";
-
+import { createAvatar } from "@dicebear/avatars";
+import * as style from "@dicebear/avatars-initials-sprites";
 import { useRouter } from "vue-router";
-import { computed, } from '@vue/runtime-core';
-
-const people = [
-
-
-  // More people...
-];
+import { computed, reactive } from "@vue/runtime-core";
 
 export default {
   components: {
     Search,
     AdjustmentsIcon,
+    ChevronLeftIcon,
+    ChevronRightIcon,
   },
   props: {
     action: {
@@ -204,37 +351,17 @@ export default {
     },
   },
   setup(props) {
+    console.log(props);
+    const router = useRouter();
 
-const router = useRouter();
+    let action = computed(() => props.action);
+    let path = computed(() => props.path);
+    let meta = computed(() => props.meta);
+    let links = computed(() => props.links);
 
+    console.log(links.value);
 
-
-
-let action = computed(() => props.action) ;
-let path = computed(() => props.path) ;
-let meta = computed(() => props.meta) ;
-let links = computed(() => props.links) ;
-
-console.log(links.value.next);
-
-
-    const firstPage = () => {
-
-
-
-
-      store.dispatch(action.value.value, links.value.first).then(() => {
-        if (path) {
-          router.push({
-            path: path.value,
-            query: { page: 1 },
-          });
-        }
-      });
-    };
     const prevPage = () => {
-
-
       store.dispatch(action.value, links.value.prev).then(() => {
         if (path) {
           router.push({
@@ -245,8 +372,7 @@ console.log(links.value.next);
       });
     };
     const nextPage = () => {
-
-
+      console.log(links.value.next);
       store.dispatch(action.value, links.value.next).then(() => {
         if (path) {
           router.push({
@@ -256,31 +382,103 @@ console.log(links.value.next);
         }
       });
     };
-    const lastPage = () => {
 
+    let avatar_svg, avatar, avatarWithoutLocalhost, OathAvatar;
 
-      store.dispatch(action.value, links.value.last).then(() => {
+    const users = computed(() => store.getters["handyman/Handymen"]);
+console.log(users.value);
+
+    let people = computed(() => {
+      let data = reactive([]);
+
+      users.value.forEach((user) => {
+        avatar_svg = createAvatar(style, {
+          seed: user.name,
+          dataUri: true,
+          // ... and other options
+        });
+        avatar = `${process.env.VUE_APP_API_URL}/${user.avatar}`;
+        OathAvatar = user.avatar;
+
+        avatarWithoutLocalhost = user.avatar;
+
+        if (user.avatar !== null) {
+          if (
+            user.avatar.includes("googleusercontent.com") ||
+            user.avatar.includes("graph.facebook.com") ||
+            user.avatar.includes("licdn.com")
+          ) {
+            avatar = OathAvatar;
+          }
+        }
+
+        data.push({
+          id: user.id,
+          name: user.name,
+          avatar_svg: avatar_svg,
+          avatar: avatar,
+          avatarWithoutLocalhost: avatarWithoutLocalhost,
+          email: user.email,
+          role: user.role,
+        });
+      });
+      return data;
+    });
+    let currentPage = computed(() => meta.value.current_page);
+    let totalPages = computed(() => meta.value.last_page);
+    const setPage = (pageNumber) => {
+      let paginationlink = `${process.env.VUE_APP_API_URL}/api/guest-users/handymen/?page=${pageNumber}`;
+
+      store.dispatch(action.value, paginationlink).then(() => {
         if (path) {
           router.push({
             path: path.value,
-            query: { page: meta.value.last_page },
+            query: pageNumber,
           });
         }
       });
     };
-const users = computed(()=>store.getters["user/users"])
+    totalPages.value;
 
+    let filterPages = computed(() => {
+      //keep the first and last page
+
+      let data = reactive([]);
+      let start = currentPage.value - 2;
+      let end = currentPage.value + 2;
+      let totalPages = meta.value.last_page;
+      if (start < 1) {
+        start = 1;
+        end = 5;
+      }
+
+      if (end > totalPages.value) {
+        end = totalPages.value;
+        start = totalPages.value - 4;
+      }
+      for (let i = start; i <= end; i++) {
+        if (i !== totalPages.value && i !== 1 && i < totalPages) {
+          data.push(i);
+        }
+      }
+
+      return data;
+    });
+    console.log(filterPages.value);
     return {
       people,
-      users,
 
-      firstPage,
       prevPage,
       nextPage,
-      lastPage,
+      avatar_svg,
+      avatar,
+      avatarWithoutLocalhost,
+      OathAvatar,
+      setPage,
+      currentPage,
+      totalPages,
+      filterPages,
     };
   },
-
-
 };
 </script>
