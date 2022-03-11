@@ -20,7 +20,8 @@
                 class="text-sm font-medium text-gray-900"
                 passive
               >
-                Handyman
+                                Available to hire
+
               </SwitchLabel>
               <SwitchDescription class="text-sm text-gray-500">
                 Nulla amet tempus sit accumsan. Aliquet turpis sed sit lacinia.
@@ -49,7 +50,7 @@
                 class="text-sm font-medium text-gray-900"
                 passive
               >
-                Available to hire
+                Handyman
               </SwitchLabel>
               <SwitchDescription class="text-sm text-gray-500">
                 Pharetra morbi dui mi mattis tellus sollicitudin cursus
