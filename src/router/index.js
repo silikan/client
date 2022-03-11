@@ -75,7 +75,8 @@ const routes = [
     name: 'VisitProfile',
 
     component: VisitProfile,
-    props: true
+    meta: { middleware: [auth, guest] },
+
 
   },
   {

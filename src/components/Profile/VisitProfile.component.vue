@@ -412,7 +412,8 @@ import { onMounted, reactive, ref } from "@vue/runtime-core";
 import { createAvatar } from "@dicebear/avatars";
 import * as style from "@dicebear/avatars-initials-sprites";
 import UserService from "@/services/UserService.js";
-import { useRoute } from "vue-router";
+import { useRoute, useRouter } from "vue-router";
+import { useStore } from 'vuex';
 
 const Gigs_Requests_tabs = [
   { name: "Requests", href: "#", current: true },
@@ -461,9 +462,10 @@ export default {
 
   setup() {
     let route = useRoute();
+    let store = useStore();
+    let router = useRouter();
     let timerange = reactive(null);
     let id = route.params.id;
-    let a = ref("");
     let authUserData = ref({});
     let avatar_svg = ref("");
     let avatar = ref("");
@@ -472,9 +474,13 @@ export default {
     let isHandyman = ref(false);
     let isClient = ref(false);
      let ParsedTime = ref(null);
-    UserService.getUser(id).then((data) => {
+    UserService.getUser(id).then(async (data) => {
       authUserData.value = data.data.data;
-
+      const idGetter = await  store.getters["auth/id"];
+console.log(idGetter , id)
+if(idGetter == id){
+  router.push("/profile");
+}
       onMounted(() => {
         isHandyman.value = authUserData.value.isHandyman;
         isClient.value = authUserData.value.isClient;
@@ -535,7 +541,7 @@ export default {
 
     return {
       authUserData,
-      a,
+
       avatar,
       avatar_svg,
       avatarWithoutLocalhost,

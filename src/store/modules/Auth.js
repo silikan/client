@@ -77,6 +77,7 @@ export const getters = {
   isClient: (state) => (state.user.isClient),
   isModerator: (state) => (state.user.isModerator),
   error: (state) => state.error,
+  id: (state) => state.user.id,
   loading: (state) => state.loading,
   emailVerified: (state) => state.user.emailVerified,
   education: (state) => (state.user.education !== null ? state.user.education : JSON.stringify([])),
