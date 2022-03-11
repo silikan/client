@@ -385,7 +385,8 @@ export default {
 
     let avatar_svg, avatar, avatarWithoutLocalhost, OathAvatar;
 
-    const users = computed(() => store.getters["handyman/Handymen"]);
+    let users = computed(() => store.getters["handyman/Handymen"]);
+
 console.log(users.value);
 
     let people = computed(() => {
