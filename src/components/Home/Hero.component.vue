@@ -321,6 +321,7 @@
                           "
                         >
                           <button
+                          @click="searchUserFun"
                             type="button"
                             class="
                               inline-flex
@@ -349,6 +350,7 @@
                         <input
                           id="search"
                           name="search"
+                          v-model="search"
                           class="
                             rounded-full
                             block
@@ -404,7 +406,8 @@
 import { Popover, PopoverButton, PopoverPanel } from "@headlessui/vue";
 import { MenuIcon, XIcon } from "@heroicons/vue/outline";
 import { SearchIcon } from "@heroicons/vue/solid";
-
+import { ref } from '@vue/reactivity';
+import UserService from '@/services/UserService';
 const navigation = [
   { name: "About", link: "/about" },
   { name: "Contact Us", link: "/contact" },
@@ -423,8 +426,21 @@ export default {
     SearchIcon,
   },
   setup() {
+let search = ref('');
+
+const searchUserFun = async () =>{
+  console.log(search.value)
+
+let data = await UserService.searchUser(search.value);
+console.log(data.data)
+}
+
+
+
     return {
       navigation,
+      searchUserFun,
+      search
     };
   },
 };

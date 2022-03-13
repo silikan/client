@@ -14,4 +14,13 @@ export default {
   paginateUsers(link) {
     return API.apiClient.get(link);
   },
+
+  async searchUser(search) {
+
+    return API.apiClient.get('/guest-users/search', {
+      params: {
+        search
+      }
+    });
+  },
 };
