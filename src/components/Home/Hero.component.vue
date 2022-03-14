@@ -101,7 +101,7 @@
           </div>
           <div class="flex justify-between">
             <div class="hidden md:flex mx-4">
-                 <router-link
+              <router-link
                 to="/signin"
                 class="
                   inline-flex
@@ -122,7 +122,7 @@
               </router-link>
             </div>
             <div class="hidden md:flex">
-            <router-link
+              <router-link
                 to="/signup"
                 class="
                   inline-flex
@@ -321,7 +321,6 @@
                           "
                         >
                           <button
-                          @click="searchUserFun"
                             type="button"
                             class="
                               inline-flex
@@ -351,6 +350,7 @@
                           id="search"
                           name="search"
                           v-model="search"
+                          @keyup="searchUserFun"
                           class="
                             rounded-full
                             block
@@ -374,6 +374,50 @@
                         />
                       </div>
                     </div>
+                  </div>
+                  <div
+                    class="
+                      mt-5
+                      rounded-md
+                      shadow-lg
+                      bg-white
+                      ring-1 ring-black ring-opacity-5
+                      focus:outline-none
+                      max-w-7xl
+                      mx-auto
+                      sm:px-6
+                      lg:px-8
+                      bg-white
+                    "
+                  >
+                    <ul role="list" class="divide-y divide-gray-200">
+                      <li
+                        v-for="person in users"
+                        :key="person.email"
+                        class="py-4 flex"
+                      >
+                        <img
+                          class="h-10 w-10 rounded-full"
+                          :src="person.avatar_svg"
+                          v-if="person.avatarWithoutLocalhost === null"
+                          alt=""
+                        />
+                        <img
+                          class="h-10 w-10 rounded-full"
+                          :src="person.avatar"
+                          v-if="person.avatarWithoutLocalhost !== null"
+                          alt=""
+                        />
+                        <div class="ml-3">
+                          <p class="text-sm font-medium text-gray-900">
+                            {{ person.name }}
+                          </p>
+                          <p class="text-sm text-gray-500">
+                            {{ person.email }}
+                          </p>
+                        </div>
+                      </li>
+                    </ul>
                   </div>
                 </div>
               </div>
@@ -404,10 +448,12 @@
 
 <script>
 import { Popover, PopoverButton, PopoverPanel } from "@headlessui/vue";
+ import { createAvatar } from "@dicebear/avatars";
+import * as style from "@dicebear/avatars-initials-sprites";
 import { MenuIcon, XIcon } from "@heroicons/vue/outline";
 import { SearchIcon } from "@heroicons/vue/solid";
-import { ref } from '@vue/reactivity';
-import UserService from '@/services/UserService';
+import { ref } from "@vue/reactivity";
+import UserService from "@/services/UserService";
 const navigation = [
   { name: "About", link: "/about" },
   { name: "Contact Us", link: "/contact" },
@@ -426,21 +472,64 @@ export default {
     SearchIcon,
   },
   setup() {
-let search = ref('');
+    let search = ref("");
+    let data = ref([]);
+    let avatar_svg = ref("");
+    let avatar = ref("");
+    let avatarWithoutLocalhost = ref("");
+    let OathAvatar = ref("");
+    let users = ref([]);
+    const searchUserFun = async () => {
 
-const searchUserFun = async () =>{
-  console.log(search.value)
 
-let data = await UserService.searchUser(search.value);
-console.log(data.data)
-}
+      data.value = await UserService.searchUser(search.value);
+
+    users.value = data.value.data.map((user) => {
+        avatar_svg = createAvatar(style, {
+          seed: user.name,
+          dataUri: true,
+          // ... and other options
+        });
+        avatar = `${process.env.VUE_APP_API_URL}/${user.avatar}`;
+        OathAvatar = user.avatar;
+
+        avatarWithoutLocalhost = user.avatar;
+
+        if (user.avatar !== null) {
+          if (
+            user.avatar.includes("googleusercontent.com") ||
+            user.avatar.includes("graph.facebook.com") ||
+            user.avatar.includes("licdn.com")
+          ) {
+            avatar = OathAvatar;
+          }
+        }
+
+
+
+      return {
+        name: user.name,
+        email: user.email,
+        avatar: avatar,
+        avatar_svg: avatar_svg,
+        avatarWithoutLocalhost: avatarWithoutLocalhost,
+      };
+    });
+
+    };
 
 
 
     return {
       navigation,
       searchUserFun,
-      search
+      search,
+      data,
+      avatar_svg,
+      avatar,
+      avatarWithoutLocalhost,
+      OathAvatar,
+      users,
     };
   },
 };
