@@ -377,6 +377,8 @@
                   </div>
                   <div
                     class="
+                      absolute
+                      z-50
                       mt-5
                       rounded-md
                       shadow-lg
@@ -387,15 +389,15 @@
                       mx-auto
                       sm:px-6
                       lg:px-8
-                      bg-white
                     "
                   >
                     <ul role="list" class="divide-y divide-gray-200">
                       <li
                         v-for="person in users"
                         :key="person.email"
-                        class="py-4 flex"
+
                       >
+                      <router-link :to="`/user/${person.id}`"  class="py-4 flex">
                         <img
                           class="h-10 w-10 rounded-full"
                           :src="person.avatar_svg"
@@ -416,6 +418,7 @@
                             {{ person.email }}
                           </p>
                         </div>
+                      </router-link>
                       </li>
                     </ul>
                   </div>
@@ -448,7 +451,7 @@
 
 <script>
 import { Popover, PopoverButton, PopoverPanel } from "@headlessui/vue";
- import { createAvatar } from "@dicebear/avatars";
+import { createAvatar } from "@dicebear/avatars";
 import * as style from "@dicebear/avatars-initials-sprites";
 import { MenuIcon, XIcon } from "@heroicons/vue/outline";
 import { SearchIcon } from "@heroicons/vue/solid";
@@ -480,11 +483,9 @@ export default {
     let OathAvatar = ref("");
     let users = ref([]);
     const searchUserFun = async () => {
-
-
       data.value = await UserService.searchUser(search.value);
 
-    users.value = data.value.data.map((user) => {
+      users.value = data.value.data.map((user) => {
         avatar_svg = createAvatar(style, {
           seed: user.name,
           dataUri: true,
@@ -505,20 +506,16 @@ export default {
           }
         }
 
-
-
-      return {
-        name: user.name,
-        email: user.email,
-        avatar: avatar,
-        avatar_svg: avatar_svg,
-        avatarWithoutLocalhost: avatarWithoutLocalhost,
-      };
-    });
-
+        return {
+          id: user.id,
+          name: user.name,
+          email: user.email,
+          avatar: avatar,
+          avatar_svg: avatar_svg,
+          avatarWithoutLocalhost: avatarWithoutLocalhost,
+        };
+      });
     };
-
-
 
     return {
       navigation,

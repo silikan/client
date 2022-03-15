@@ -2,12 +2,13 @@ import * as API from '@/services/API';
 
 export default {
   async getUser(userId) {
-    let data = await API.apiClient.get(`/users/${userId}`);
+    let data = await API.apiClient.get(`/guest-users/${userId}`);
     return data
   },
   getUsers(page) {
     return API.apiClient.get(`/guest-users/?page=${page}`);
   },
+
   deleteUser(userId) {
     return API.apiClient.delete(`users/${userId}}`);
   },
@@ -17,7 +18,7 @@ export default {
 
   async searchUser(search) {
 
-    return API.apiClient.get('/guest-users/search', {
+    return API.apiClient.get('/guest-users/handymen/search', {
       params: {
         search
       }
