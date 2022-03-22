@@ -53,11 +53,10 @@
 
 <script>
 import { PaperAirplaneIcon } from "@heroicons/vue/solid";
-import { computed, onUpdated, ref } from "@vue/runtime-core";
+import { computed, ref } from "@vue/runtime-core";
 import { useStore } from "vuex";
 
 import ChatService from '@/services/ChatService';
-import { io } from "socket.io-client";
 import { useRouter } from 'vue-router';
 
 export default {
@@ -69,11 +68,7 @@ export default {
   setup(props) {
     let roomId = ref("");
     let router = useRouter();
-    let socket = io("http://localhost:3000");
-    socket.on('room-1:App\\Events\\MessageSent', function (event) {
-       alert(event.data);
-});
-    console.log(socket);
+
 const store = useStore();
     const authUser = computed(() => store.getters["auth/authUser"]);
 
@@ -99,32 +94,12 @@ const store = useStore();
 
     };
 
-    const sendMessage = async () => {
-      let payload = {
-        message:{
-   to: ToUserIdData.value,
-        from: authUser.value.id,
-        message: "hello",
-        room_id: "1",
-      },
-        }
 
-      await ChatService.sendMessage(payload);
-socket.emit("room-1", payload);
-
-    }
-
-onUpdated(() => {
-   socket.on('room-1', function (data) {
-       console.log(data);
-    });
-});
 
     return {
       ToUserIdData,
       CreateRoom,
       authUser,
-      sendMessage,
     };
   },
 };

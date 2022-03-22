@@ -1,9 +1,9 @@
 <template>
-<div>
-to : {{to}}
-<br>
-from : {{from}}
-</div>
+  <div>
+    to : {{ to }}
+    <br />
+    from : {{ from }}
+  </div>
 
   <div class="flex justify-center p-10">
     <div class="w-full border rounded">
@@ -124,7 +124,8 @@ from : {{from}}
                 />
               </svg>
             </button>
-            <button type="submit">
+
+            <button @click="sendMessage">
               <svg
                 class="w-5 h-5 text-gray-500 origin-center transform rotate-90"
                 xmlns="http://www.w3.org/2000/svg"
@@ -147,54 +148,75 @@ from : {{from}}
 import ChatService from "@/services/ChatService";
 import { computed, ref } from "@vue/runtime-core";
 import { useRoute } from "vue-router";
-import { useStore } from 'vuex';
+import { useStore } from "vuex";
+import { io } from "socket.io-client";
 
 export default {
   setup() {
-
-     let to = ref(null);
-    let from = ref(null);
-    let data = ref();
+    let to = ref("");
+    let from = ref("");
+    let data = ref("");
     let route = useRoute();
     let store = useStore();
     let id = route.params.id;
-
-(async () => {
-         await ChatService.getRoomUsers(id).then((result) => {
-          const authUser = computed(() => store.getters["auth/authUser"]);
-        console.log(authUser.value.id);
-let AuthUserId = authUser.value.id;
-console.log(AuthUserId);
-//if one of the users array id is equal to auth user id set it to to and the other to from
-    if(result.data[0].id == AuthUserId){
-      to.value = result.data[1];
-      from.value = result.data[0];
-      console.log(to.value);
-console.log(from.value);
-    }else{
-      to.value = result.data[0];
-      from.value = result.data[1];
-      console.log(to.value);
-console.log(from.value);
-
-    }
-
-       }).catch((err) => {
-         console.log(err);
-       });
-
-})().catch(err => {
-    console.error(err);
-});
+    let socket = io("http://localhost:3000");
+    const authUser = computed(() => store.getters["auth/authUser"]);
 
 
 
+    const sendMessage = async () => {
+        store.dispatch("Chat/getRoomUsers" , id).then(result => {
+  let AuthUserId = authUser.value.id;
+        if (result.data[0].id == AuthUserId) {
+          to.value = result.data[1];
+          from.value = result.data[0];
+        } else {
+          to.value = result.data[0];
+          from.value = result.data[1];
+        }
+   })
+
+      let payload = {
+        message: {
+          to: to.value.id,
+          from: from.value.id,
+          message: "hello",
+          room_id: id,
+        },
+      };
+
+      await ChatService.sendMessage(payload);
+      socket.emit(`room-${id}`, payload);
+
+    };
+
+socket.on(`room-${id}`, async (data) => {
+  console.log(data);
+})
+
+
+   store.dispatch("Chat/getRoomUsers" , id).then(result => {
+  let AuthUserId = authUser.value.id;
+        if (result.data[0].id == AuthUserId) {
+          to.value = result.data[1];
+          from.value = result.data[0];
+        } else {
+          to.value = result.data[0];
+          from.value = result.data[1];
+        }
+   })
+
+
+
+
+console.log(to.value);
 
 
     return {
       to,
       from,
-      data
+      data,
+      sendMessage,
     };
   },
 };
