@@ -24,4 +24,20 @@ export default {
       }
     });
   },
+
+  paginateSearchUsers(search, page) {
+    return API.apiClient.delete(`http://localhost:8000/api/guest-users/handymen/search/paginate`, {
+      params: {
+        search,
+        page
+
+      }
+    });
+
+  },
+
+
 };
+
+
+//http://localhost:8000/api/guest-users/handymen/search/paginate/?search=bentabet&page=2

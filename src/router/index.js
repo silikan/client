@@ -19,6 +19,8 @@ import VisitProfile from '@/views/Visit_Profile.view.vue';
 import AuthEdit from '../components/Profile/Edit/AuthEdit.component.vue';
 import AccountEdit from '../components/Profile/Edit/AccountEdit.component.vue';
 import ProfileEdit from '../components/Profile/Edit/ProfileEdit.component.vue';
+import Chat from '@/views/Chat.view.vue';
+
 const routes = [
 
   {
@@ -53,6 +55,7 @@ const routes = [
 
         component: AccountEdit,
       },
+
       {
         path: 'profile',
         name: 'ProfileEdit',
@@ -62,7 +65,12 @@ const routes = [
       // ...other sub routes
     ],
   },
+  {
+    path: '/chat',
+    name: 'Chat',
 
+    component: Chat,
+  },
   {
     path: '/requests',
     name: 'Requests',

@@ -45,10 +45,10 @@
             <div class="flex flex-col items-center sm:block">
               <div class="flex items-center sm:mt-6 min-w-0 flex-1">
                 <h3 class="font-bold text-xl text-gray-900 sm:text-2xl">
-                  {{ authUserData.name }}
+                  {{ VisitUserData.name }}
                 </h3>
                 <span
-                  v-if="authUserData.is_online === true"
+                  v-if="VisitUserData.is_online === true"
                   class="
                     ml-2.5
                     bg-green-400
@@ -62,7 +62,7 @@
                   <span class="sr-only">Online</span>
                 </span>
                 <span
-                  v-if="authUserData.is_online === false"
+                  v-if="VisitUserData.is_online === false"
                   class="
                     ml-2.5
                     bg-red-400
@@ -78,11 +78,11 @@
               </div>
               <p
                 class="text-sm text-gray-500"
-                v-if="authUserData.username !== null"
+                v-if="VisitUserData.username !== null"
               >
-                @{{ authUserData.username }}
+                @{{ VisitUserData.username }}
               </p>
-              <div class="flex" v-if="authUserData.username === null">
+              <div class="flex" v-if="VisitUserData.username === null">
                 <div
                   class="flex font-bold items-center text-indigo-800"
 
@@ -94,53 +94,7 @@
             <div
               class="mt-5 flex flex-wrap space-y-3 sm:space-y-0 sm:space-x-3"
             >
-              <div
-                class="
-                  flex-shrink-0
-                  sm:w-full
-                  flex-1
-                  inline-flex
-                  items-center
-                  justify-center
-                  px-4
-                  py-2
-                  border border-gray-300
-                  rounded-md
-                  shadow-sm
-                  text-sm
-                  font-medium
-                  text-black
-                  bg-white
-                  hover:border-transparent
-                "
-                tag="button"
-
-              >
-                <!--        <button
-                  type="button"
-                  class="
-                    flex-shrink-0
-                    w-full
-                    inline-flex
-                    items-center
-                    justify-center
-                    px-4
-                    py-2
-                    border border-gray-300
-                    rounded-md
-                    shadow-sm
-                    text-sm
-                    font-medium
-                    text-black
-                    bg-white
-                    hover:border-transparent
-                    sm:flex-1
-                  "
-                > -->
-                <PencilIcon class="h-5 w-5 rotate-90" aria-hidden="true" />
-                <!--                 </button>
- -->
-              </div>
+        <ChatButton :ToUserId="VisitUserData.id"/>
 
               <span class="ml-3 inline-flex sm:ml-0">
                 <Menu as="div" class="relative inline-block text-left w-full">
@@ -244,9 +198,9 @@
               {{ tab.name }}
             </a>
           </nav>
-          <About :Data="authUserData" v-if="tabs[0].current === true" />
-          <Info :Data="authUserData" v-if="tabs[1].current === true" />
-          <Resume :Data="authUserData" v-if="tabs[2].current === true" />
+          <About :Data="VisitUserData" v-if="tabs[0].current === true" />
+          <Info :Data="VisitUserData" v-if="tabs[1].current === true" />
+          <Resume :Data="VisitUserData" v-if="tabs[2].current === true" />
           <div class="sm:flex sm:px-6 sm:py-5 mt-10 sm:mt-0">
             <div class="flex flex-col">
               <div class="mb-5 mt-2 flex items-center text-sm text-gray-500">
@@ -261,10 +215,10 @@
                     sm:mt-0 sm:ml-6 sm:col-span-2
                   "
                 >
-                  <p v-if="authUserData.work_time_length !== null">
-                    {{ authUserData.work_time_length }}
+                  <p v-if="VisitUserData.work_time_length !== null">
+                    {{ VisitUserData.work_time_length }}
                   </p>
-                  <div v-if="authUserData.work_time_length === null">
+                  <div v-if="VisitUserData.work_time_length === null">
                     <div
                       class="flex font-bold items-center text-indigo-800"
 
@@ -287,10 +241,10 @@
                     sm:mt-0 sm:ml-6 sm:col-span-2
                   "
                 >
-                  <p v-if="authUserData.work_place !== null">
-                    {{ authUserData.work_place }}
+                  <p v-if="VisitUserData.work_place !== null">
+                    {{ VisitUserData.work_place }}
                   </p>
-                  <div v-if="authUserData.work_place === null">
+                  <div v-if="VisitUserData.work_place === null">
                     <div
                       class="flex font-bold items-center text-indigo-800"
 
@@ -313,10 +267,10 @@
                     sm:mt-0 sm:ml-6 sm:col-span-2
                   "
                 >
-                  <p v-if="authUserData.salary !== null">
-                    {{ authUserData.salary }}$
+                  <p v-if="VisitUserData.salary !== null">
+                    {{ VisitUserData.salary }}$
                   </p>
-                  <div v-if="authUserData.salary === null">
+                  <div v-if="VisitUserData.salary === null">
                     <div
                       class="flex font-bold items-center text-indigo-800"
 
@@ -339,11 +293,11 @@
                     sm:mt-0 sm:ml-6 sm:col-span-2
                   "
                 >
-                  <p v-if="authUserData.work_hours !== null ">
+                  <p v-if="VisitUserData.work_hours !== null ">
 <!--                     FROM {{ timerange.start }}:00 am TO {{ timerange.end }}:00
  -->                    pm
                   </p>
-                  <div v-if="authUserData.work_hours === null">
+                  <div v-if="VisitUserData.work_hours === null">
                     <div
                       class="flex font-bold items-center text-indigo-800"
 
@@ -404,7 +358,6 @@ import Info from "./VisitInfo.component.vue";
 import ClientRequests from "./Client_Requests.component.vue";
 import HandymanGigs from "./Handyman_Gigs.component.vue";
 
-import { PencilIcon } from "@heroicons/vue/solid";
 
 import { DotsVerticalIcon } from "@heroicons/vue/solid";
 import { Menu, MenuButton, MenuItem, MenuItems } from "@headlessui/vue";
@@ -414,7 +367,7 @@ import * as style from "@dicebear/avatars-initials-sprites";
 import UserService from "@/services/UserService.js";
 import { useRoute, useRouter } from "vue-router";
 import { useStore } from 'vuex';
-
+import ChatButton from "../Chat/ChatButton.component.vue";
 const Gigs_Requests_tabs = [
   { name: "Requests", href: "#", current: true },
   { name: "Gigs", href: "#", current: false, isHandyman: true },
@@ -438,6 +391,7 @@ const profile = {
   ],
 };
 
+
 export default {
   components: {
     Menu,
@@ -446,7 +400,6 @@ export default {
     MenuItems,
 
     DotsVerticalIcon,
-    PencilIcon,
     ClientRequests,
     HandymanGigs,
     About,
@@ -458,6 +411,7 @@ export default {
     CurrencyDollarIcon,
 
     LocationMarkerIcon,
+    ChatButton
   },
 
   setup() {
@@ -466,7 +420,7 @@ export default {
     let router = useRouter();
     let timerange = reactive(null);
     let id = route.params.id;
-    let authUserData = ref({});
+    let VisitUserData = ref({});
     let avatar_svg = ref("");
     let avatar = ref("");
     let OathAvatar = ref("");
@@ -475,38 +429,38 @@ export default {
     let isClient = ref(false);
      let ParsedTime = ref(null);
     UserService.getUser(id).then(async (data) => {
-      authUserData.value = data.data.data;
+      VisitUserData.value = data.data.data;
       const idGetter = await  store.getters["auth/id"];
 console.log(idGetter , id)
 if(idGetter == id){
   router.push("/profile");
 }
       onMounted(() => {
-        isHandyman.value = authUserData.value.isHandyman;
-        isClient.value = authUserData.value.isClient;
+        isHandyman.value = VisitUserData.value.isHandyman;
+        isClient.value = VisitUserData.value.isClient;
       });
 
       avatar_svg.value = createAvatar(style, {
-        seed: authUserData.value.name,
+        seed: VisitUserData.value.name,
         dataUri: true,
         // ... and other options
       });
-      avatar.value = `${process.env.VUE_APP_API_URL}/${authUserData.value.avatar}`;
-      OathAvatar.value = authUserData.value.avatar;
+      avatar.value = `${process.env.VUE_APP_API_URL}/${VisitUserData.value.avatar}`;
+      OathAvatar.value = VisitUserData.value.avatar;
 
-      avatarWithoutLocalhost.value = authUserData.value.avatar;
+      avatarWithoutLocalhost.value = VisitUserData.value.avatar;
 
-      if (authUserData.value.avatar !== null) {
+      if (VisitUserData.value.avatar !== null) {
         if (
-          authUserData.value.avatar.includes("googleusercontent.com") ||
-          authUserData.value.avatar.includes("graph.facebook.com") ||
-          authUserData.value.avatar.includes("licdn.com")
+          VisitUserData.value.avatar.includes("googleusercontent.com") ||
+          VisitUserData.value.avatar.includes("graph.facebook.com") ||
+          VisitUserData.value.avatar.includes("licdn.com")
         ) {
           avatar.value = OathAvatar.value;
         }
       }
 
-       ParsedTime = JSON.parse(authUserData.value.work_hours);
+       ParsedTime = JSON.parse(VisitUserData.value.work_hours);
       if (ParsedTime !== null) {
         timerange = reactive({
           start: ParsedTime[0].hours,
@@ -540,7 +494,7 @@ if(idGetter == id){
     };
 
     return {
-      authUserData,
+      VisitUserData,
 
       avatar,
       avatar_svg,
