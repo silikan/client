@@ -19,7 +19,7 @@ import VisitProfile from '@/views/Visit_Profile.view.vue';
 import AuthEdit from '../components/Profile/Edit/AuthEdit.component.vue';
 import AccountEdit from '../components/Profile/Edit/AccountEdit.component.vue';
 import ProfileEdit from '../components/Profile/Edit/ProfileEdit.component.vue';
-import Chat from '@/views/Chat.view.vue';
+import ChatRoom from '@/views/ChatRoom.view.vue';
 
 const routes = [
 
@@ -66,10 +66,12 @@ const routes = [
     ],
   },
   {
-    path: '/chat',
-    name: 'Chat',
+    path: '/room/:id',
+    name: 'ChatRoom',
 
-    component: Chat,
+    component: ChatRoom,
+    meta: { middleware: [auth] },
+
   },
   {
     path: '/requests',

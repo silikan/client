@@ -49,16 +49,16 @@
  -->
   </div>
 
-  <button @click="sendMessage">seeeeeeeeend it</button>
 </template>
 
 <script>
 import { PaperAirplaneIcon } from "@heroicons/vue/solid";
-import { computed, onUpdated } from "@vue/runtime-core";
+import { computed, onUpdated, ref } from "@vue/runtime-core";
 import { useStore } from "vuex";
 
 import ChatService from '@/services/ChatService';
 import { io } from "socket.io-client";
+import { useRouter } from 'vue-router';
 
 export default {
   components: {
@@ -67,6 +67,8 @@ export default {
   props: ["ToUserId"],
 
   setup(props) {
+    let roomId = ref("");
+    let router = useRouter();
     let socket = io("http://localhost:3000");
     socket.on('room-1:App\\Events\\MessageSent', function (event) {
        alert(event.data);
@@ -79,12 +81,22 @@ const store = useStore();
       return props.ToUserId;
     });
 
-    const CreateRoom = async () => {
+    const CreateRoom =  () => {
 		let payload = {
 			to: ToUserIdData.value,
 			from: authUser.value.id,
 		};
-     await ChatService.CreateRoom(payload)
+     ChatService.CreateRoom(payload).then((result) => {
+     roomId.value = result.data.id;
+     console.log(result.data.id);
+      router.push({ name: 'ChatRoom', params: { id: roomId.value } })
+
+    }).catch((err) => {
+         console.log(err);
+
+    });
+
+
     };
 
     const sendMessage = async () => {

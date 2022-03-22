@@ -2,14 +2,18 @@ import * as API from '@/services/API';
 
 export default {
 	async CreateRoom(payload) {
-		await API.apiClient.post(`/room`, payload);
+		let data = await API.apiClient.post(`/room`, payload);
+		return data;
 	},
 
 	async sendMessage(payload) {
 		await API.apiClient.post(`/chat`, payload);
+	},
+
+	async getRoomUsers(room_id) {
+		let data = await API.apiClient.get(`/room/${room_id}/users/`);
+		return data;
 	}
-
-
 
 
 };
