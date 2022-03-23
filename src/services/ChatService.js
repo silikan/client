@@ -1,5 +1,6 @@
 import * as API from '@/services/API';
 
+
 export default {
 	async CreateRoom(payload) {
 		let data = await API.apiClient.post(`/room`, payload);
@@ -7,6 +8,7 @@ export default {
 	},
 
 	async sendMessage(payload) {
+
 		await API.apiClient.post(`/chat`, payload);
 	},
 

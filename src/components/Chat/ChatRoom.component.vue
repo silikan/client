@@ -1,14 +1,8 @@
 <template>
-  <div>
-    to : {{ to }}
-    <br />
-    from : {{ from }}
-  </div>
-
   <div class="flex justify-center p-10">
     <div class="w-full border rounded">
-      <div>
-        <div class="w-full">
+      <div class="">
+        <div class="w-full h-screen flex flex-col">
           <div class="relative flex items-center p-3 border-b border-gray-300">
             <img
               class="object-cover w-10 h-10 rounded-full"
@@ -21,7 +15,9 @@
             >
             </span>
           </div>
-          <div class="relative w-full p-6 overflow-y-auto h-[40rem]">
+          <div
+            class="flex flex-col justify-end flex-1 w-full p-6 overflow-y-auto"
+          >
             <ul class="space-y-2">
               <li class="flex justify-end">
                 <div
@@ -74,22 +70,6 @@
                 />
               </svg>
             </button>
-            <button>
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                class="w-5 h-5 text-gray-500"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M15.172 7l-6.586 6.586a2 2 0 102.828 2.828l6.414-6.586a4 4 0 00-5.656-5.656l-6.415 6.585a6 6 0 108.486 8.486L20.5 13"
-                />
-              </svg>
-            </button>
 
             <input
               type="text"
@@ -108,35 +88,29 @@
               name="message"
               required
             />
-            <button>
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                class="w-5 h-5 text-gray-500"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z"
-                />
-              </svg>
-            </button>
 
-            <button @click="sendMessage">
-              <svg
-                class="w-5 h-5 text-gray-500 origin-center transform rotate-90"
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 20 20"
-                fill="currentColor"
-              >
-                <path
-                  d="M10.894 2.553a1 1 0 00-1.788 0l-7 14a1 1 0 001.169 1.409l5-1.429A1 1 0 009 15.571V11a1 1 0 112 0v4.571a1 1 0 00.725.962l5 1.428a1 1 0 001.17-1.408l-7-14z"
-                />
-              </svg>
-            </button>
+            <div
+              class="
+                flex-shrink-0
+                sm:w-full
+                flex-1
+                inline-flex
+                items-center
+                justify-center
+                px-2
+                py-2
+                text-sm
+                font-medium
+                text-black
+                bg-white
+                hover:border-transparent
+                cursor-pointer
+              "
+              tag="button"
+              @click="sendMessage"
+            >
+              <PaperAirplaneIcon class="btn-chat h-5 w-5" aria-hidden="true" />
+            </div>
           </div>
         </div>
       </div>
@@ -149,9 +123,13 @@ import ChatService from "@/services/ChatService";
 import { computed, ref } from "@vue/runtime-core";
 import { useRoute } from "vue-router";
 import { useStore } from "vuex";
+import { PaperAirplaneIcon } from "@heroicons/vue/solid";
 import { io } from "socket.io-client";
 
 export default {
+  components: {
+    PaperAirplaneIcon,
+  },
   setup() {
     let to = ref("");
     let from = ref("");
@@ -160,13 +138,12 @@ export default {
     let store = useStore();
     let id = route.params.id;
     let socket = io("http://localhost:3000");
+
     const authUser = computed(() => store.getters["auth/authUser"]);
 
-
-
     const sendMessage = async () => {
-        store.dispatch("Chat/getRoomUsers" , id).then(result => {
-  let AuthUserId = authUser.value.id;
+      store.dispatch("Chat/getRoomUsers", id).then((result) => {
+        let AuthUserId = authUser.value.id;
         if (result.data[0].id == AuthUserId) {
           to.value = result.data[1];
           from.value = result.data[0];
@@ -174,7 +151,7 @@ export default {
           to.value = result.data[0];
           from.value = result.data[1];
         }
-   })
+      });
 
       let payload = {
         message: {
@@ -185,32 +162,32 @@ export default {
         },
       };
 
-      await ChatService.sendMessage(payload);
-      socket.emit(`room-${id}`, payload);
+      ChatService.sendMessage(payload);
+
 
     };
 
-socket.on(`room-${id}`, async (data) => {
-  console.log(data);
-})
+socket.on('message', function (data) {
+			console.log('Incoming message:', data);
+		});
 
+    socket.on("connect", function () {
+      // Connected, let's sign-up for to receive messages for this room
+      socket.emit("room", `room-${id}`);
+    });
 
-   store.dispatch("Chat/getRoomUsers" , id).then(result => {
-  let AuthUserId = authUser.value.id;
-        if (result.data[0].id == AuthUserId) {
-          to.value = result.data[1];
-          from.value = result.data[0];
-        } else {
-          to.value = result.data[0];
-          from.value = result.data[1];
-        }
-   })
+    store.dispatch("Chat/getRoomUsers", id).then((result) => {
+      let AuthUserId = authUser.value.id;
+      if (result.data[0].id == AuthUserId) {
+        to.value = result.data[1];
+        from.value = result.data[0];
+      } else {
+        to.value = result.data[0];
+        from.value = result.data[1];
+      }
+    });
 
-
-
-
-console.log(to.value);
-
+    console.log(to.value);
 
     return {
       to,
