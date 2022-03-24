@@ -42,7 +42,7 @@ export default {
   components: {
     PaperAirplaneIcon,
   },
-  props: ["ToUserId"],
+  props: ["UserId"],
 
   setup(props) {
     let roomId = ref("");
@@ -51,13 +51,13 @@ export default {
 const store = useStore();
     const authUser = computed(() => store.getters["auth/authUser"]);
 
-    let ToUserIdData = computed(() => {
-      return props.ToUserId;
+    let UserIdData = computed(() => {
+      return props.UserId;
     });
 
     const CreateRoom =  () => {
 		let payload = {
-			to: ToUserIdData.value,
+			to: UserIdData.value,
 			from: authUser.value.id,
 		};
      ChatService.CreateRoom(payload).then((result) => {
@@ -76,7 +76,7 @@ const store = useStore();
 
 
     return {
-      ToUserIdData,
+      UserIdData,
       CreateRoom,
       authUser,
     };

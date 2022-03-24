@@ -19,26 +19,45 @@
             class="flex flex-col justify-end flex-1 w-full p-6 overflow-y-auto"
           >
             <ul class="space-y-2">
-              <li class="flex justify-end">
-                <div
-                  class="
-                    relative
-                    max-w-xl
-                    px-4
-                    py-2
-                    text-gray-700
-                    bg-gray-100
-                    rounded
-                  "
-                >
-                  <span class="block">how are you?</span>
+              <li v-for="msg in messages" :key="msg.room_id">
+                <div class="flex justify-end">
+                  <div
+                    class="
+                      relative
+                      max-w-xl
+                      px-4
+                      py-2
+                      text-gray-700
+                      bg-gray-100
+                      rounded
+                      flex
+                    "
+
+                    v-if="msg.from == authUser.id"
+
+                  >
+                    <span class="block flex-1">{{ msg.message }}</span>
+                    <ChatAvatar :UserId="msg.from" class="ml-2" />
+                  </div>
                 </div>
-              </li>
-              <li class="flex justify-start">
-                <div class="relative max-w-xl px-4 py-2 text-gray-700 rounded">
-                  <span class="block"
-                    >Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-                  </span>
+                <div class="flex justify-start">
+                  <div
+                    v-if="msg.from != authUser.id"
+                    class="
+                      relative
+                      max-w-xl
+                      px-4
+                      py-2
+                      text-gray-700
+                      bg-blue-100
+                      rounded
+                      flex
+                    "
+                  >
+                    <ChatAvatar :UserId="msg.from" class="mr-2" />
+
+                    <span class="block flex-1">{{ msg.message }}</span>
+                  </div>
                 </div>
               </li>
             </ul>
@@ -73,6 +92,7 @@
 
             <input
               type="text"
+              v-model="message"
               placeholder="Message"
               class="
                 block
@@ -87,6 +107,7 @@
               "
               name="message"
               required
+              @keyup.enter="sendMessage"
             />
 
             <div
@@ -120,20 +141,22 @@
 
 <script>
 import ChatService from "@/services/ChatService";
-import { computed, ref } from "@vue/runtime-core";
+import { computed, reactive, ref } from "@vue/runtime-core";
 import { useRoute } from "vue-router";
 import { useStore } from "vuex";
 import { PaperAirplaneIcon } from "@heroicons/vue/solid";
 import { io } from "socket.io-client";
-
+import ChatAvatar from "@/components/Chat/ChatAvatar.component";
 export default {
   components: {
     PaperAirplaneIcon,
+    ChatAvatar,
   },
   setup() {
     let to = ref("");
     let from = ref("");
-    let data = ref("");
+    let message = ref("");
+    let messages = reactive([]);
     let route = useRoute();
     let store = useStore();
     let id = route.params.id;
@@ -152,24 +175,26 @@ export default {
           from.value = result.data[1];
         }
       });
+      if (message.value != "" && message.value != null) {
+        let payload = {
+          message: {
+            to: to.value.id,
+            from: from.value.id,
+            message: message.value,
+            room_id: id,
+          },
+        };
 
-      let payload = {
-        message: {
-          to: to.value.id,
-          from: from.value.id,
-          message: "hello",
-          room_id: id,
-        },
-      };
+        ChatService.sendMessage(payload);
 
-      ChatService.sendMessage(payload);
-
-
+        message.value = "";
+      }
     };
 
-socket.on('message', function (data) {
-			console.log('Incoming message:', data);
-		});
+    socket.on("message", function (data) {
+      console.log("Incoming message:", data);
+      messages.push(data);
+    });
 
     socket.on("connect", function () {
       // Connected, let's sign-up for to receive messages for this room
@@ -192,8 +217,10 @@ socket.on('message', function (data) {
     return {
       to,
       from,
-      data,
+      message,
       sendMessage,
+      messages,
+      authUser,
     };
   },
 };
