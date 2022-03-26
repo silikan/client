@@ -94,7 +94,7 @@
             <div
               class="mt-5 flex flex-wrap space-y-3 sm:space-y-0 sm:space-x-3"
             >
-        <ChatButton :ToUserId="VisitUserData.id"/>
+        <ChatButton :UserId="id"/>
 
               <span class="ml-3 inline-flex sm:ml-0">
                 <Menu as="div" class="relative inline-block text-left w-full">
@@ -508,6 +508,7 @@ if(idGetter == id){
       profile,
       tabs,
       ParsedTime,
+      id
     };
   },
 };

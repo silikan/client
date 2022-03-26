@@ -9,7 +9,7 @@ export default {
 
 	async sendMessage(payload) {
 
-		await API.apiClient.post(`/chat`, payload);
+		await API.apiClient.post(`/sendmsg`, payload);
 	},
 
 	async getRoomUsers(room_id) {

@@ -20,7 +20,7 @@ import AuthEdit from '../components/Profile/Edit/AuthEdit.component.vue';
 import AccountEdit from '../components/Profile/Edit/AccountEdit.component.vue';
 import ProfileEdit from '../components/Profile/Edit/ProfileEdit.component.vue';
 import ChatRoom from '@/views/ChatRoom.view.vue';
-
+import RoomList from '@/views/RoomList.view.vue';
 const routes = [
 
   {
@@ -72,6 +72,13 @@ const routes = [
     component: ChatRoom,
     meta: { middleware: [auth] },
 
+  },
+  {
+    path: '/rooms',
+    name: 'RoomList',
+
+    component: RoomList,
+    meta: { middleware: [auth] },
   },
   {
     path: '/requests',

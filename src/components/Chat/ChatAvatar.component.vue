@@ -1,5 +1,5 @@
 	<template>
-  <div>
+<span class="inline-block relative">
     <img
       class="h-8 w-8 rounded-full"
       :src="avatar_svg"
@@ -12,7 +12,10 @@
       v-if="avatarWithoutLocalhost !== null"
       alt=""
     />
-  </div>
+      <span class="absolute top-0 right-0 block h-2 w-2 rounded-full ring-2 ring-white bg-red-400"></span>
+  <span class="absolute top-0 right-0 block h-2 w-2 rounded-full ring-2 ring-white bg-red-400"></span>
+
+</span>
 </template>
 
 	<script>
@@ -42,7 +45,7 @@ console.log(VisitUserData.value);
         seed: VisitUserData.value.name,
         dataUri: true,
         // ... and other options
-      });
+      })
       avatar.value = `${process.env.VUE_APP_API_URL}/${VisitUserData.value.avatar}`;
       OathAvatar.value = VisitUserData.value.avatar;
 
@@ -57,6 +60,8 @@ console.log(VisitUserData.value);
           avatar.value = OathAvatar.value;
         }
       }
+    }).catch((err) => {
+      console.log(err);
     });
     return {
       user,

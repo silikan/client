@@ -1,19 +1,14 @@
 <template>
+{{to}}
+{{from}}
   <div class="flex justify-center p-10">
     <div class="w-full border rounded">
       <div class="">
         <div class="w-full h-screen flex flex-col">
           <div class="relative flex items-center p-3 border-b border-gray-300">
-            <img
-              class="object-cover w-10 h-10 rounded-full"
-              src="https://cdn.pixabay.com/photo/2018/01/15/07/51/woman-3083383__340.jpg"
-              alt="username"
-            />
-            <span class="block ml-2 font-bold text-gray-600">Emma</span>
-            <span
-              class="absolute w-3 h-3 bg-green-600 rounded-full left-10 top-3"
-            >
-            </span>
+            <ChatAvatar :UserId="to.id" class="mr-2" />
+
+            <p class="text-sm font-medium text-gray-900">{{ to.name }}</p>
           </div>
           <div
             class="flex flex-col justify-end flex-1 w-full p-6 overflow-y-auto"
@@ -21,42 +16,42 @@
             <ul class="space-y-2">
               <li v-for="msg in messages" :key="msg.room_id">
                 <div class="flex justify-end">
-                  <div
-                    class="
-                      relative
-                      max-w-xl
-                      px-4
-                      py-2
-                      text-gray-700
-                      bg-gray-100
-                      rounded
-                      flex
-                    "
-
-                    v-if="msg.from == authUser.id"
-
-                  >
-                    <span class="block flex-1">{{ msg.message }}</span>
+                  <div class="flex" v-if="msg.from == authUser.id">
+                    <span
+                      class="
+                        block
+                        flex-1
+                        relative
+                        max-w-xl
+                        px-4
+                        py-2
+                        text-gray-700
+                        bg-gray-100
+                        rounded
+                      "
+                      >{{ msg.message }}</span
+                    >
                     <ChatAvatar :UserId="msg.from" class="ml-2" />
                   </div>
                 </div>
                 <div class="flex justify-start">
-                  <div
-                    v-if="msg.from != authUser.id"
-                    class="
-                      relative
-                      max-w-xl
-                      px-4
-                      py-2
-                      text-gray-700
-                      bg-blue-100
-                      rounded
-                      flex
-                    "
-                  >
+                  <div v-if="msg.from != authUser.id" class="flex">
                     <ChatAvatar :UserId="msg.from" class="mr-2" />
 
-                    <span class="block flex-1">{{ msg.message }}</span>
+                    <span
+                      class="
+                        relative
+                        max-w-xl
+                        px-4
+                        py-2
+                        text-gray-700
+                        bg-blue-100
+                        rounded
+                        block
+                        flex-1
+                      "
+                      >{{ msg.message }}</span
+                    >
                   </div>
                 </div>
               </li>
@@ -140,7 +135,7 @@
 </template>
 
 <script>
-import ChatService from "@/services/ChatService";
+import ChatService from "@/services/ChatService.js";
 import { computed, reactive, ref } from "@vue/runtime-core";
 import { useRoute } from "vue-router";
 import { useStore } from "vuex";
@@ -165,7 +160,8 @@ export default {
     const authUser = computed(() => store.getters["auth/authUser"]);
 
     const sendMessage = async () => {
-      store.dispatch("Chat/getRoomUsers", id).then((result) => {
+
+       store.dispatch("Chat/getRoomUsers", id).then((result) => {
         let AuthUserId = authUser.value.id;
         if (result.data[0].id == AuthUserId) {
           to.value = result.data[1];
@@ -177,18 +173,21 @@ export default {
       });
       if (message.value != "" && message.value != null) {
         let payload = {
-          message: {
+          data: {
             to: to.value.id,
             from: from.value.id,
             message: message.value,
             room_id: id,
           },
         };
-
-        ChatService.sendMessage(payload);
-
+        socket.emit("message", payload);
+ChatService.sendMessage(payload)
         message.value = "";
       }
+
+
+
+
     };
 
     socket.on("message", function (data) {
