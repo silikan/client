@@ -15,8 +15,11 @@ export default {
 	async getRoomUsers(room_id) {
 		let data = await API.apiClient.get(`/room/${room_id}/users/`);
 		return data;
+	},
+	async getUserRooms(user_id) {
+		let data = await API.apiClient.get(`/user/${user_id}/rooms/`);
+		return data;
 	}
-
 
 };
 

@@ -1,4 +1,5 @@
 <template>
+
   <div>
     <div class="min-h-full flex">
       <div class="flex flex-col justify-center py-12 px-4 flex-1">
@@ -33,7 +34,6 @@
                   <div>
                     <a
                       :href="facebook"
-
                       class="
                         w-full
                         inline-flex
@@ -67,7 +67,6 @@
                   <div>
                     <a
                       :href="linkedin"
-
                       class="
                         w-full
                         inline-flex
@@ -101,7 +100,6 @@
                   <div>
                     <a
                       :href="google"
-
                       class="
                         w-full
                         inline-flex
@@ -286,7 +284,9 @@
                 </div>
 
                 <div>
+                  {{loading ? 'Loading...' : 'not loading'}}
                   <button
+                  v-if="loading == false"
                     type="submit"
                     class="
                       w-full
@@ -309,6 +309,52 @@
                     "
                   >
                     Sign in
+                  </button>
+
+                  <button
+                  v-if="loading == true "
+                    class="
+                      w-full
+                      flex
+                      justify-center
+                      py-2
+                      px-4
+                      border border-transparent
+                      rounded-md
+                      shadow-sm
+                      text-sm
+                      font-medium
+                      text-white
+                      bg-indigo-600
+                      hover:bg-indigo-700
+                      focus:outline-none
+                      focus:ring-2
+                      focus:ring-offset-2
+                      focus:ring-indigo-500
+
+                    "
+
+                  >
+                    <svg
+                      class="animate-spin -ml-1 mr-3 h-5 w-5 text-white"
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                    >
+                      <circle
+                        class="opacity-25"
+                        cx="12"
+                        cy="12"
+                        r="10"
+                        stroke="currentColor"
+                        stroke-width="4"
+                      ></circle>
+                      <path
+                        class="opacity-75"
+                        fill="currentColor"
+                        d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+                      ></path>
+                    </svg>
                   </button>
                 </div>
               </form>
@@ -345,11 +391,16 @@ export default {
 
     email = ref("");
     password = ref("");
-
+    let loading = ref(false);
     const store = useStore();
     const router = useRouter();
 
+
+
     const login = async () => {
+       store.dispatch("Loading/changeLoading", loading.value);
+
+loading.value = store.getters["Loading/loading"];
       const payload = {
         email: email.value,
         password: password.value,
@@ -359,10 +410,18 @@ export default {
         await AuthService.login(payload);
         const authUser = await store.dispatch("auth/getAuthUser");
         if (authUser) {
-          store.dispatch("auth/setGuest", { value: "isNotGuest" });
-          router.push("/profile");
 
+
+          store.dispatch("auth/setGuest", { value: "isNotGuest" });
+ store.dispatch("Loading/changeLoading", loading.value);
+
+loading.value = store.getters["Loading/loading"];
+          router.push("/profile");
         } else {
+       store.dispatch("Loading/changeLoading", loading.value);
+
+loading.value = store.getters["Loading/loading"];
+
           const error = Error(
             "Unable to fetch user after login, check your API settings."
           );
@@ -370,6 +429,9 @@ export default {
           throw error;
         }
       } catch (error) {
+         store.dispatch("Loading/changeLoading", loading.value);
+
+loading.value = store.getters["Loading/loading"];
         console.log(email, password);
       }
     };
@@ -382,6 +444,7 @@ export default {
       google,
       facebook,
       linkedin,
+      loading,
     };
   },
 };

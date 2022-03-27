@@ -1,18 +1,18 @@
 <template>
-  <div class="sm:px-6 lg:px-8 m-10 ">
-    <div class="bg-white px-4 py-5 border-b border-gray-200 sm:px-6">
+  <div class="px-6 lg:px-8 my-10 mx-20 border rounded">
+    <div class="bg-white px-4 py-10 border-b border-gray-200 sm:px-6">
       <h3 class="text-lg leading-6 font-medium text-gray-900">Rooms</h3>
     </div>
     <div class="bg-white overflow-hidden sm:rounded-md">
-      <div class="px-4 py-4  sm:px-6">
+      <div class="px-4 py-4 sm:px-6">
         <ul role="list" class="divide-y divide-gray-200 w-full">
           <li
             v-for="person in people"
             :key="person.email"
-            class="flex items-center justify-between py-5 "
+            class="flex items-center justify-between py-5"
           >
             <div class="flex">
-              <img class="h-10 w-10 rounded-full" :src="person.image" alt="" />
+                    <ChatAvatar :UserId="person.id" class="mr-2" />
               <div class="ml-3">
                 <p class="text-sm font-medium text-gray-900">
                   {{ person.name }}
@@ -21,8 +21,8 @@
               </div>
             </div>
 
-            <div class=" sm:mt-0 sm:ml-5">
-              <div
+            <div class="sm:mt-0 sm:ml-5">
+              <router-link
                 class="
                   flex-shrink-0
                   sm:w-full
@@ -41,13 +41,13 @@
                   cursor-pointer
                 "
                 tag="button"
-                @click="CreateRoom"
+              :to="`/room/${person.id}`"
               >
                 <PaperAirplaneIcon
                   class="btn-chat h-5 w-5"
                   aria-hidden="true"
                 />
-              </div>
+              </router-link>
             </div>
           </li>
         </ul>
@@ -57,64 +57,45 @@
 </template>
 <script>
 import { PaperAirplaneIcon } from "@heroicons/vue/solid";
+import { useStore } from "vuex";
+import { computed, ref } from '@vue/runtime-core';
+import ChatAvatar from "@/components/Chat/ChatAvatar.component";
 
-const people = [
-  {
-    name: "Calvin Hawkins",
-    email: "rah hna??",
-    image:
-      "https://images.unsplash.com/photo-1491528323818-fdd1faba62cc?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
-  },
-    {
-    name: "Calvin Hawkins",
-    email: "rah hna??",
-    image:
-      "https://images.unsplash.com/photo-1491528323818-fdd1faba62cc?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
-  },  {
-    name: "Calvin Hawkins",
-    email: "rah hna??",
-    image:
-      "https://images.unsplash.com/photo-1491528323818-fdd1faba62cc?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
-  },  {
-    name: "Calvin Hawkins",
-    email: "rah hna??",
-    image:
-      "https://images.unsplash.com/photo-1491528323818-fdd1faba62cc?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
-  },  {
-    name: "Calvin Hawkins",
-    email: "rah hna??",
-    image:
-      "https://images.unsplash.com/photo-1491528323818-fdd1faba62cc?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
-  },  {
-    name: "Calvin Hawkins",
-    email: "rah hna??",
-    image:
-      "https://images.unsplash.com/photo-1491528323818-fdd1faba62cc?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
-  },  {
-    name: "Calvin Hawkins",
-    email: "rah hna??",
-    image:
-      "https://images.unsplash.com/photo-1491528323818-fdd1faba62cc?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
-  },  {
-    name: "Calvin Hawkins",
-    email: "rah hna??",
-    image:
-      "https://images.unsplash.com/photo-1491528323818-fdd1faba62cc?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
-  },  {
-    name: "Calvin Hawkins",
-    email: "rah hna??",
-    image:
-      "https://images.unsplash.com/photo-1491528323818-fdd1faba62cc?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
-  },
-];
 
 export default {
   components: {
     PaperAirplaneIcon,
+    ChatAvatar
   },
   setup() {
+    const people = ref([])
+
+    const store = useStore();
+
+    const authUser = computed(() => store.getters["auth/authUser"]);
+
+    let userRooms = store.dispatch("Chat/getUserRooms", authUser.value.id).then((result) => {
+    result.forEach((room) => {
+      store.dispatch("Chat/getRoomUsers", room.id).then((res) => {
+
+       res.data.filter((user) => user.id !== authUser.value.id).forEach((user) => {
+         console.log(user);
+         people.value.push({
+           name: user.name,
+           email: user.email,
+           id: user.id,
+         });
+       });
+      });
+
+    });
+    });
+
+
+
     return {
       people,
+      userRooms,
     };
   },
 };

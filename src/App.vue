@@ -1,11 +1,13 @@
 <template>
   <div class="h-screen min-h-full flex flex-col justify-between">
     <Navbar :authUser="authUser" v-if="path" />
+    <LoadingBar/>
     <router-view />
     <Footer />
   </div>
 </template>
 <script>
+import LoadingBar from './components/Loading/LoadingBar.component.vue'
 import { computed,  watchEffect } from "vue";
 import { useRoute } from "vue-router";
 import { useStore } from "vuex";
@@ -14,7 +16,7 @@ import Navbar from "./components/Navbar/Navbar.component.vue";
 
 export default {
   name: "App",
-  components: { Footer, Navbar },
+  components: { Footer, Navbar,LoadingBar },
 
   setup() {
 
