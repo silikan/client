@@ -6,7 +6,10 @@ function setPaginatedMessages(commit, response) {
 	commit("SET_MESSAGES", response.data.data);
 	commit("SET_META", response.data.meta);
 	commit("SET_LINKS", response.data.links);
+
 	commit("SET_LOADING", false);
+	commit("SET_PAGES", response.data.last_page);
+
 }
 
 export const state = {
@@ -17,6 +20,7 @@ export const state = {
 	links: null,
 	loading: false,
 	error: null,
+	last_page: null
 };
 
 export const mutations = {
@@ -44,7 +48,9 @@ export const mutations = {
 	SET_ERROR(state, error) {
 		state.error = error;
 	},
-
+	SET_PAGES(state, last_page) {
+		state.last_page = last_page;
+	}
 
 
 };
@@ -120,4 +126,7 @@ export const getters = {
 	error: (state) => {
 		return state.error;
 	},
+	last_page: (state) => {
+		return state.last_page;
+	}
 };

@@ -123,7 +123,7 @@
           <div
             class="flex flex-col justify-end flex-1 w-full py-6 overflow-y-auto"
           >
-            <ul class="space-y-2 overflow-y-auto scrollbar" @scroll.up="setPage(pages)  ">
+            <ul class="space-y-2 overflow-y-auto scrollbar"   >
               <li
                 v-for="msg in savedMessages.slice().reverse()"
                 :key="msg.room_id"
@@ -156,6 +156,7 @@
                         rounded
                         block
                         flex-1
+                        break-all
                       "
                       >{{ msg.message }}</span
                     >
@@ -176,6 +177,7 @@
                         text-gray-700
                         bg-gray-100
                         rounded
+                        break-all
                       "
                       >{{ msg.message }}</span
                     >
@@ -197,6 +199,7 @@
                         rounded
                         block
                         flex-1
+                        break-all
                       "
                       >{{ msg.message }}</span
                     >
@@ -322,7 +325,8 @@ export default {
     store.dispatch("Chat/getMessages", id, pages);
     let savedMessages = computed(() => store.getters["Chat/messages"]);
         console.log(savedMessages.value);
-
+const last_page =computed(()=> store.getters["Chat/last_page"])
+console.log(last_page.value);
     const setPage = (pageNumber) => {
       pageNumber++;
       let paginationlink = `${process.env.VUE_APP_API_URL}/api/chat/${id}?page=${pageNumber}`;
