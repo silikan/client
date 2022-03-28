@@ -2,8 +2,9 @@
 
   <div class="relative" v-if="loading === true">
     <div class="overflow-hidden h-0.5 mb-4 text-xs flex bg-indigo-200">
+
+
       <div
-        style="width: 30%"
         class="
           shadow-none
           flex flex-col
@@ -12,8 +13,13 @@
           text-white
           justify-center
           bg-indigo-600
+        ease-in duration-300
         "
-      ></div>
+
+         :style="{'width':  progress  + '%'}"
+      >
+
+      </div>
     </div>
   </div>
 </template>
@@ -25,16 +31,19 @@ export default {
   setup() {
     let store = useStore();
     let loading = ref(false);
+    let progress = ref(0);
     watchEffect(() => {
 
       loading.value = store.getters["Loading/loading"];
-
+progress.value = store.getters["Loading/progress"];
+console.log(progress.value);
       return {
         loading,
+        progress,
       };
     });
 
-    return {loading};
+    return { loading, progress };
   },
 };
 </script>

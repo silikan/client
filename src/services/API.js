@@ -28,3 +28,22 @@ apiClient.interceptors.response.use(
     return Promise.reject(error);
   },
 );
+
+//setup loading
+apiClient.interceptors.request.use(
+  (config) => {
+    store.dispatch('Loading/start');
+    return config;
+  }
+);
+//setup Loading
+apiClient.interceptors.response.use(
+  (response) => {
+    store.dispatch('Loading/stop');
+    return response;
+  },
+  (error) => {
+    store.dispatch('Loading/stop');
+    return Promise.reject(error);
+  }
+);

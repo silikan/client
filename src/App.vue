@@ -1,7 +1,7 @@
 <template>
   <div class="h-screen min-h-full flex flex-col justify-between">
-    <Navbar :authUser="authUser" v-if="path" />
-    <LoadingBar/>
+    <Navbar :authUser="authUser" v-if="path" class="mb-0"/>
+    <LoadingBar class="mt-0"/>
     <router-view />
     <Footer />
   </div>
