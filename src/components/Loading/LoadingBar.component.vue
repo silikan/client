@@ -36,7 +36,6 @@ export default {
 
       loading.value = store.getters["Loading/loading"];
 progress.value = store.getters["Loading/progress"];
-console.log(progress.value);
       return {
         loading,
         progress,

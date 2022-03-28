@@ -1,11 +1,9 @@
 <template>
-<button @click="setPage(2)" >sqdqsd</button>
-{{users}}
   <div class="flex justify-center p-10">
     <div class="w-full border rounded">
       <div class="">
         <div class="w-full h-screen flex flex-col">
-          <div class="bg-white px-4 py-5 sm:px-6  border-b border-gray-300">
+          <div class="bg-white px-4 py-5 sm:px-6 border-b border-gray-300">
             <div class="flex space-x-3">
               <div class="flex-shrink-0">
                 <img
@@ -123,10 +121,48 @@
             </div>
           </div>
           <div
-            class="flex flex-col justify-end flex-1 w-full p-6 overflow-y-auto"
+            class="flex flex-col justify-end flex-1 w-full py-6 overflow-y-auto"
           >
-            <ul class="space-y-2">
-              <li v-for="msg in messages" :key="msg.room_id">
+            <ul class="space-y-2 overflow-y-auto scrollbar" @scroll.up="setPage(pages)  ">
+              <li
+                v-for="msg in savedMessages.slice().reverse()"
+                :key="msg.room_id"
+                class="mx-6"
+              >
+                <div class="flex justify-end">
+                  <div class="flex" v-if="msg.from == authUser.id">
+                    <div class="block flex-1 relative max-w-xl px-4 py-2 text-gray-700 bg-gray-100 rounded break-all">
+                      <p class="">
+                        {{ msg.message }}
+
+                      </p>
+                    </div>
+
+                    <ChatAvatar :UserId="msg.from" class="ml-2" />
+                  </div>
+                </div>
+                <div class="flex justify-start">
+                  <div v-if="msg.from != authUser.id" class="flex">
+                    <ChatAvatar :UserId="msg.from" class="mr-2" />
+
+                    <span
+                      class="
+                        relative
+                        max-w-xl
+                        px-4
+                        py-2
+                        text-gray-700
+                        bg-blue-100
+                        rounded
+                        block
+                        flex-1
+                      "
+                      >{{ msg.message }}</span
+                    >
+                  </div>
+                </div>
+              </li>
+              <li v-for="msg in messages" :key="msg.room_id" class="mx-6">
                 <div class="flex justify-end">
                   <div class="flex" v-if="msg.from == authUser.id">
                     <span
@@ -275,24 +311,29 @@ export default {
     StarIcon,
   },
   setup() {
+    let pages = ref(1);
     let to = ref("");
     let from = ref("");
     let message = ref("");
     let messages = reactive([]);
-const store = useStore();
-let route = useRoute();
+    const store = useStore();
+    let route = useRoute();
     let id = route.params.id;
+    store.dispatch("Chat/getMessages", id, pages);
+    let savedMessages = computed(() => store.getters["Chat/messages"]);
+        console.log(savedMessages.value);
 
- let users = computed(() => store.getters["Chat/messages"]);
-
-   const setPage = (pageNumber) => {
+    const setPage = (pageNumber) => {
+      pageNumber++;
       let paginationlink = `${process.env.VUE_APP_API_URL}/api/chat/${id}?page=${pageNumber}`;
 
-      store.dispatch("Chat/paginatemessages", paginationlink).then((result) => {
-       console.log(result);
+      store.dispatch("Chat/paginatemessages", paginationlink).then(() => {
+        let data = computed(() => store.getters["Chat/messages"]);
+        savedMessages.push(...data.value);
+
+        console.log(savedMessages.value);
       });
     };
-
 
     let socket = io("http://localhost:3000");
 
@@ -309,6 +350,9 @@ let route = useRoute();
           from.value = result.data[1];
         }
       });
+
+      console.log(to.value.id);
+
       if (message.value != "" && message.value != null) {
         let payload = {
           data: {
@@ -331,6 +375,7 @@ let route = useRoute();
 
     socket.on("message", function (data) {
       console.log("Incoming message:", data);
+      console.log(data);
       messages.push(data);
     });
 
@@ -360,11 +405,34 @@ let route = useRoute();
       messages,
       authUser,
       setPage,
-      users
+      savedMessages,
+      pages,
     };
   },
 };
 </script>
 
 <style>
+.scrollbar {
+  cursor: pointer;
+}
+.scrollbar::-webkit-scrollbar {
+  width: 15px;
+  height: 20px;
+}
+
+.scrollbar::-webkit-scrollbar-track {
+  border-radius: 100vh;
+  background: #e2e8f0;
+}
+
+.scrollbar::-webkit-scrollbar-thumb {
+  background: #94a3b8;
+  border-radius: 100vh;
+  border: 3px solid #e2e8f0;
+}
+
+.scrollbar::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
+}
 </style>

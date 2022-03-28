@@ -40,7 +40,6 @@ export default {
 
     UserService.getUser(userId.value).then(async (data) => {
       VisitUserData.value = data.data.data;
-console.log(VisitUserData.value);
       avatar_svg.value = createAvatar(style, {
         seed: VisitUserData.value.name,
         dataUri: true,
