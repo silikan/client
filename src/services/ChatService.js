@@ -19,8 +19,22 @@ export default {
 	async getUserRooms(user_id) {
 		let data = await API.apiClient.get(`/user/${user_id}/rooms/`);
 		return data;
-	}
+	},
 
+	async saveMessage(payload) {
+		let data = await API.apiClient.post(`/chat`, payload);
+		return data;
+	}
+	,
+	async getMessages(room_id, page) {
+		let data = await API.apiClient.get(`/chat/${room_id}?page=${page}`);
+		return data;
+	},
+
+
+	async paginateMessages(link) {
+		return API.apiClient.get(link);
+	},
 };
 
 

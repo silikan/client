@@ -1,4 +1,6 @@
 <template>
+<button @click="setPage(2)" >sqdqsd</button>
+{{users}}
   <div class="flex justify-center p-10">
     <div class="w-full border rounded">
       <div class="">
@@ -277,9 +279,21 @@ export default {
     let from = ref("");
     let message = ref("");
     let messages = reactive([]);
-    let route = useRoute();
-    let store = useStore();
+const store = useStore();
+let route = useRoute();
     let id = route.params.id;
+
+ let users = computed(() => store.getters["Chat/messages"]);
+
+   const setPage = (pageNumber) => {
+      let paginationlink = `${process.env.VUE_APP_API_URL}/api/chat/${id}?page=${pageNumber}`;
+
+      store.dispatch("Chat/paginatemessages", paginationlink).then((result) => {
+       console.log(result);
+      });
+    };
+
+
     let socket = io("http://localhost:3000");
 
     const authUser = computed(() => store.getters["auth/authUser"]);
@@ -310,6 +324,7 @@ export default {
         };
         socket.emit("message", payload);
         ChatService.sendMessage(payload);
+        ChatService.saveMessage(payload);
         message.value = "";
       }
     };
@@ -344,6 +359,8 @@ export default {
       sendMessage,
       messages,
       authUser,
+      setPage,
+      users
     };
   },
 };
