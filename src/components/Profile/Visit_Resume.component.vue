@@ -362,7 +362,6 @@ export default {
       return JSON.parse(authUserData.value.skills);
     });
 
-    console.log(typeof education.value);
 
     return {
       authUserData,

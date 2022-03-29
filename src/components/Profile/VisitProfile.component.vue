@@ -83,10 +83,7 @@
                 @{{ VisitUserData.username }}
               </p>
               <div class="flex" v-if="VisitUserData.username === null">
-                <div
-                  class="flex font-bold items-center text-indigo-800"
-
-                >
+                <div class="flex font-bold items-center text-indigo-800">
                   <span class="">No Username</span>
                 </div>
               </div>
@@ -94,7 +91,7 @@
             <div
               class="mt-5 flex flex-wrap space-y-3 sm:space-y-0 sm:space-x-3"
             >
-        <ChatButton :UserId="id"/>
+              <ChatButton :UserId="id" />
 
               <span class="ml-3 inline-flex sm:ml-0">
                 <Menu as="div" class="relative inline-block text-left w-full">
@@ -219,11 +216,7 @@
                     {{ VisitUserData.work_time_length }}
                   </p>
                   <div v-if="VisitUserData.work_time_length === null">
-                    <div
-                      class="flex font-bold items-center text-indigo-800"
-
-                    >
-
+                    <div class="flex font-bold items-center text-indigo-800">
                       <span class="">No Work Time Length</span>
                     </div>
                   </div>
@@ -245,11 +238,7 @@
                     {{ VisitUserData.work_place }}
                   </p>
                   <div v-if="VisitUserData.work_place === null">
-                    <div
-                      class="flex font-bold items-center text-indigo-800"
-
-                    >
-
+                    <div class="flex font-bold items-center text-indigo-800">
                       <span class="">No Work Place</span>
                     </div>
                   </div>
@@ -271,11 +260,7 @@
                     {{ VisitUserData.salary }}$
                   </p>
                   <div v-if="VisitUserData.salary === null">
-                    <div
-                      class="flex font-bold items-center text-indigo-800"
-
-                    >
-
+                    <div class="flex font-bold items-center text-indigo-800">
                       <span class="">No Salary</span>
                     </div>
                   </div>
@@ -293,16 +278,13 @@
                     sm:mt-0 sm:ml-6 sm:col-span-2
                   "
                 >
-                  <p v-if="VisitUserData.work_hours !== null ">
-<!--                     FROM {{ timerange.start }}:00 am TO {{ timerange.end }}:00
- -->                    pm
+                  <p v-if="VisitUserData.work_hours !== null">
+                    <!--                     FROM {{ timerange.start }}:00 am TO {{ timerange.end }}:00
+ -->
+                    pm
                   </p>
                   <div v-if="VisitUserData.work_hours === null">
-                    <div
-                      class="flex font-bold items-center text-indigo-800"
-
-                    >
-
+                    <div class="flex font-bold items-center text-indigo-800">
                       <span class="">No Work Hours</span>
                     </div>
                   </div>
@@ -354,10 +336,8 @@ import About from "./Visit_About.component.vue";
 import Resume from "./Visit_Resume.component.vue";
 import Info from "./VisitInfo.component.vue";
 
-
 import ClientRequests from "./Client_Requests.component.vue";
 import HandymanGigs from "./Handyman_Gigs.component.vue";
-
 
 import { DotsVerticalIcon } from "@heroicons/vue/solid";
 import { Menu, MenuButton, MenuItem, MenuItems } from "@headlessui/vue";
@@ -366,7 +346,7 @@ import { createAvatar } from "@dicebear/avatars";
 import * as style from "@dicebear/avatars-initials-sprites";
 import UserService from "@/services/UserService.js";
 import { useRoute, useRouter } from "vue-router";
-import { useStore } from 'vuex';
+import { useStore } from "vuex";
 import ChatButton from "../Chat/ChatButton.component.vue";
 const Gigs_Requests_tabs = [
   { name: "Requests", href: "#", current: true },
@@ -391,7 +371,6 @@ const profile = {
   ],
 };
 
-
 export default {
   components: {
     Menu,
@@ -411,7 +390,7 @@ export default {
     CurrencyDollarIcon,
 
     LocationMarkerIcon,
-    ChatButton
+    ChatButton,
   },
 
   setup() {
@@ -427,14 +406,20 @@ export default {
     let avatarWithoutLocalhost = ref("");
     let isHandyman = ref(false);
     let isClient = ref(false);
-     let ParsedTime = ref(null);
+    let ParsedTime = ref(null);
     UserService.getUser(id).then(async (data) => {
       VisitUserData.value = data.data.data;
-      const idGetter = await  store.getters["auth/id"];
-console.log(idGetter , id)
-if(idGetter == id){
-  router.push("/profile");
-}
+      //get isloggedin
+      let isLoggedIn = await store.getters["auth/loggedIn"];
+      console.log(isLoggedIn);
+      if (isLoggedIn) {
+        const idGetter = await store.getters["auth/id"];
+        console.log(idGetter, id);
+        if (idGetter == id) {
+          router.push("/profile");
+        }
+      }
+
       onMounted(() => {
         isHandyman.value = VisitUserData.value.isHandyman;
         isClient.value = VisitUserData.value.isClient;
@@ -460,7 +445,7 @@ if(idGetter == id){
         }
       }
 
-       ParsedTime = JSON.parse(VisitUserData.value.work_hours);
+      ParsedTime = JSON.parse(VisitUserData.value.work_hours);
       if (ParsedTime !== null) {
         timerange = reactive({
           start: ParsedTime[0].hours,
@@ -508,7 +493,7 @@ if(idGetter == id){
       profile,
       tabs,
       ParsedTime,
-      id
+      id,
     };
   },
 };

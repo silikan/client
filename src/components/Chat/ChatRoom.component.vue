@@ -123,7 +123,38 @@
           <div
             class="flex flex-col justify-end flex-1 w-full py-6 overflow-y-auto"
           >
-            <ul class="space-y-2 overflow-y-auto scrollbar"   >
+            <ul class="space-y-2 overflow-y-auto scrollbar">
+              <div class="flex justify-center" >
+                <p v-if="loading">loading...</p>
+                     <button
+                     v-if="loading === false"
+                type="button"
+                class="
+                  inline-flex
+                  items-center
+                  px-3
+                  py-1
+                  border border-gray-300
+                  shadow-sm
+                  text-xs
+                  leading-4
+                  font-medium
+                  text-gray-700
+                  bg-white
+                  hover:bg-gray-50
+                  focus:outline-none
+                  focus:ring-2
+                  focus:ring-offset-2
+                  focus:ring-indigo-500
+                  rounded-full
+                "
+                @click="setPage(pages)"
+              >
+               More
+              </button>
+              </div>
+
+
               <li
                 v-for="msg in savedMessages.slice().reverse()"
                 :key="msg.room_id"
@@ -131,10 +162,22 @@
               >
                 <div class="flex justify-end">
                   <div class="flex" v-if="msg.from == authUser.id">
-                    <div class="block flex-1 relative max-w-xl px-4 py-2 text-gray-700 bg-gray-100 rounded break-all">
+                    <div
+                      class="
+                        block
+                        flex-1
+                        relative
+                        max-w-xl
+                        px-4
+                        py-2
+                        text-gray-700
+                        bg-gray-100
+                        rounded
+                        break-all
+                      "
+                    >
                       <p class="">
                         {{ msg.message }}
-
                       </p>
                     </div>
 
@@ -322,21 +365,27 @@ export default {
     const store = useStore();
     let route = useRoute();
     let id = route.params.id;
+    let loading = computed(() => store.getters["Loading/loading"]);
     store.dispatch("Chat/getMessages", id, pages);
-    let savedMessages = computed(() => store.getters["Chat/messages"]);
-        console.log(savedMessages.value);
-const last_page =computed(()=> store.getters["Chat/last_page"])
-console.log(last_page.value);
+    let savedMessages = ref( []);
+savedMessages.value.push(...store.getters["Chat/messages"]);
+
+    console.log(savedMessages.value);
+    const last_page = computed(() => store.getters["Chat/last_page"]);
+    console.log(last_page.value);
     const setPage = (pageNumber) => {
       pageNumber++;
+      console.log(pageNumber);
       let paginationlink = `${process.env.VUE_APP_API_URL}/api/chat/${id}?page=${pageNumber}`;
+      if (pageNumber <= last_page.value) {
+        store.dispatch("Chat/paginatemessages", paginationlink).then(() => {
+          let data = computed(() => store.getters["Chat/messages"]);
 
-      store.dispatch("Chat/paginatemessages", paginationlink).then(() => {
-        let data = computed(() => store.getters["Chat/messages"]);
-        savedMessages.push(...data.value);
+          savedMessages.value.push(...data.value);
 
-        console.log(savedMessages.value);
-      });
+          console.log(savedMessages.value);
+        });
+      }
     };
 
     let socket = io("http://localhost:3000");
@@ -411,6 +460,7 @@ console.log(last_page.value);
       setPage,
       savedMessages,
       pages,
+      loading,
     };
   },
 };

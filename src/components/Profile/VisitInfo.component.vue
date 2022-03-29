@@ -202,7 +202,6 @@ export default {
     let authUserData = computed(() => {
       return props.Data;
     });
-    console.log(authUserData);
 
     return {
       authUserData,
