@@ -146,7 +146,8 @@
               </router-link>
             </div>
           </div>
-          <button
+          <router-link
+          to="/rooms"
             v-if="isLoggedin === true"
             type="button"
             class="
@@ -159,10 +160,10 @@
 
             "
           >
-            <span class="sr-only">View notifications</span>
+            <span class="sr-only">chat rooms</span>
                         <ChatAlt2Icon class="h-6 w-6" aria-hidden="true" />
 
-          </button
+          </router-link
           >
            <button
             v-if="isLoggedin === true"

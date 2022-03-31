@@ -96,6 +96,7 @@ export const actions = {
 		commit("SET_LOADING", true);
 		ChatService.paginateMessages(link)
 			.then((response) => {
+
 				setPaginatedMessages(commit, response);
 			})
 			.catch((error) => {

@@ -127,7 +127,7 @@
               <div class="flex justify-center" >
                 <p v-if="loading">loading...</p>
                      <button
-                     v-if="loading === false"
+                     v-if="loading === false && meta.current_page < meta.last_page"
                 type="button"
                 class="
                   inline-flex
@@ -181,13 +181,13 @@
                       </p>
                     </div>
 
-                    <ChatAvatar :UserId="msg.from" class="ml-2" />
-                  </div>
+<!--                     <ChatAvatar :UserId="msg.from" class="ml-2" />
+ -->                  </div>
                 </div>
                 <div class="flex justify-start">
                   <div v-if="msg.from != authUser.id" class="flex">
-                    <ChatAvatar :UserId="msg.from" class="mr-2" />
-
+<!--                     <ChatAvatar :UserId="msg.from" class="mr-2" />
+ -->
                     <span
                       class="
                         relative
@@ -224,13 +224,13 @@
                       "
                       >{{ msg.message }}</span
                     >
-                    <ChatAvatar :UserId="msg.from" class="ml-2" />
-                  </div>
+<!--                     <ChatAvatar :UserId="msg.from" class="ml-2" />
+ -->                  </div>
                 </div>
                 <div class="flex justify-start">
                   <div v-if="msg.from != authUser.id" class="flex">
-                    <ChatAvatar :UserId="msg.from" class="mr-2" />
-
+<!--                     <ChatAvatar :UserId="msg.from" class="mr-2" />
+ -->
                     <span
                       class="
                         relative
@@ -337,17 +337,17 @@ import {
   StarIcon,
 } from "@heroicons/vue/solid";
 import ChatService from "@/services/ChatService.js";
-import { computed, reactive, ref } from "@vue/runtime-core";
+import { computed, reactive, ref, watchEffect } from "@vue/runtime-core";
 import { useRoute } from "vue-router";
 import { useStore } from "vuex";
 import { PaperAirplaneIcon } from "@heroicons/vue/solid";
 import { io } from "socket.io-client";
-import ChatAvatar from "@/components/Chat/ChatAvatar.component";
-export default {
+/* import ChatAvatar from "@/components/Chat/ChatAvatar.component";
+ */export default {
   components: {
     PaperAirplaneIcon,
-    ChatAvatar,
-    Menu,
+/*     ChatAvatar,
+ */    Menu,
     MenuButton,
     MenuItem,
     MenuItems,
@@ -366,26 +366,28 @@ export default {
     let route = useRoute();
     let id = route.params.id;
     let loading = computed(() => store.getters["Loading/loading"]);
+    let meta = computed(() => store.getters["Chat/meta"]);
+
     store.dispatch("Chat/getMessages", id , 1)
+let savedMessagesReactive = reactive([])
+let  savedMessages = computed(()=>{
+  savedMessagesReactive.push(...store.getters["Chat/messages"])
+  return [...savedMessagesReactive]
 
-let  savedMessages = computed(()=>store.getters["Chat/messages"]);
 
-    console.log(savedMessages.value);
-    const setPage = () => {
-      let data = savedMessages.value
+  });
           let links = computed(()=>store.getters["Chat/links"]);
 
-      let savedMessagesdata = ref([]);
+    const setPage = () => {
+
+
     store.dispatch("Chat/paginatemessages", links.value.next).then(()=>{
-      savedMessagesdata.value.push(...store.getters["Chat/messages"]);
+    })
 
-savedMessages = computed(()=>data.concat(savedMessagesdata.value));
-
-    });
-      console.log(savedMessages.value);
 
 
     };
+
 
     let socket = io("http://localhost:3000");
 
@@ -394,6 +396,7 @@ savedMessages = computed(()=>data.concat(savedMessagesdata.value));
     const sendMessage = async () => {
       store.dispatch("Chat/getRoomUsers", id).then((result) => {
         let AuthUserId = authUser.value.id;
+        console.log(result);
         if (result.data[0].id == AuthUserId) {
           to.value = result.data[1];
           from.value = result.data[0];
@@ -438,6 +441,10 @@ savedMessages = computed(()=>data.concat(savedMessagesdata.value));
 
     store.dispatch("Chat/getRoomUsers", id).then((result) => {
       let AuthUserId = authUser.value.id;
+      watchEffect(() => {
+   console.log(result);
+
+      });
       if (result.data[0].id == AuthUserId) {
         to.value = result.data[1];
         from.value = result.data[0];
@@ -448,7 +455,11 @@ savedMessages = computed(()=>data.concat(savedMessagesdata.value));
     });
 
     console.log(to.value);
+watchEffect(()=>{
+console.log(savedMessages.value);
+  return {savedMessages}
 
+})
     return {
       to,
       from,
@@ -460,6 +471,8 @@ savedMessages = computed(()=>data.concat(savedMessagesdata.value));
       savedMessages,
       pages,
       loading,
+      savedMessagesReactive,
+      meta
     };
   },
 };
