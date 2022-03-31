@@ -148,7 +148,7 @@
                   focus:ring-indigo-500
                   rounded-full
                 "
-                @click="setPage(pages)"
+                @click="setPage()"
               >
                More
               </button>
@@ -366,26 +366,25 @@ export default {
     let route = useRoute();
     let id = route.params.id;
     let loading = computed(() => store.getters["Loading/loading"]);
-    store.dispatch("Chat/getMessages", id, pages);
-    let savedMessages = ref( []);
-savedMessages.value.push(...store.getters["Chat/messages"]);
+    store.dispatch("Chat/getMessages", id , 1)
+
+let  savedMessages = computed(()=>store.getters["Chat/messages"]);
 
     console.log(savedMessages.value);
-    const last_page = computed(() => store.getters["Chat/last_page"]);
-    console.log(last_page.value);
-    const setPage = (pageNumber) => {
-      pageNumber++;
-      console.log(pageNumber);
-      let paginationlink = `${process.env.VUE_APP_API_URL}/api/chat/${id}?page=${pageNumber}`;
-      if (pageNumber <= last_page.value) {
-        store.dispatch("Chat/paginatemessages", paginationlink).then(() => {
-          let data = computed(() => store.getters["Chat/messages"]);
+    const setPage = () => {
+      let data = savedMessages.value
+          let links = computed(()=>store.getters["Chat/links"]);
 
-          savedMessages.value.push(...data.value);
+      let savedMessagesdata = ref([]);
+    store.dispatch("Chat/paginatemessages", links.value.next).then(()=>{
+      savedMessagesdata.value.push(...store.getters["Chat/messages"]);
 
-          console.log(savedMessages.value);
-        });
-      }
+savedMessages = computed(()=>data.concat(savedMessagesdata.value));
+
+    });
+      console.log(savedMessages.value);
+
+
     };
 
     let socket = io("http://localhost:3000");

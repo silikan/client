@@ -41,6 +41,7 @@ export default {
   },
 
   beforeRouteEnter(to, from, next) {
+
     const currentPage = parseInt(to.query.page) || 1;
     store.dispatch("handyman/getHandymen", currentPage).then(() => {
       to.params.page = currentPage;
