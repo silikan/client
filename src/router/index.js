@@ -21,6 +21,8 @@ import AccountEdit from '../components/Profile/Edit/AccountEdit.component.vue';
 import ProfileEdit from '../components/Profile/Edit/ProfileEdit.component.vue';
 import ChatRoom from '@/views/ChatRoom.view.vue';
 import RoomList from '@/views/RoomList.view.vue';
+import CreateGig from '@/views/CreateGig.view.vue';
+
 const routes = [
 
   {
@@ -110,25 +112,14 @@ const routes = [
 
     component: Handymen,
   },
-  /*  {
-     path: "/dashboard",
-     name: "dashboard",
-     meta: { middleware: [auth] },
-     component: () =>
-       import( "../views/Dashboard"),
-   }, */
-  /*   {
-      path: "/user",
-      name: "user",
-      meta: { middleware: [auth] },
-      component: () => import( "../views/User"),
-    },
-    {
-      path: "/users",
-      name: "users",
-      meta: { middleware: [auth, admin] },
-      component: () => import( "../views/Users"),
-    }, */
+  {
+    path: '/gig/create',
+    name: 'CreateGig',
+    component: CreateGig,
+
+/*     meta: { middleware: [auth, guest] },
+ */  },
+
   {
     path: '/signin',
     name: 'Signin',
