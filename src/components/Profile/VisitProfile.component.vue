@@ -303,7 +303,8 @@
           <a
             v-for="tab in Gigs_Requests_tabs"
             :key="tab.name"
-            :href="tab.href"
+            @click="GigRequestNavigation(tab)"
+            class="cursor-pointer"
             :class="[
               tab.current
                 ? 'border-pink-500 text-gray-900'
@@ -348,10 +349,7 @@ import UserService from "@/services/UserService.js";
 import { useRoute, useRouter } from "vue-router";
 import { useStore } from "vuex";
 import ChatButton from "../Chat/ChatButton.component.vue";
-const Gigs_Requests_tabs = [
-  { name: "Requests", href: "#", current: true },
-  { name: "Gigs", href: "#", current: false, isHandyman: true },
-];
+
 const profile = {
   name: "Ricardo Cooper",
   email: "ricardo.cooper@example.com",
@@ -462,6 +460,12 @@ export default {
       { name: "Resume", number: 3, current: false },
     ]);
 
+
+const Gigs_Requests_tabs = reactive([
+  { name: "Requests", href: "#", current: true , number: 1 },
+  { name: "Gigs", href: "#", current: false, isHandyman: true ,  number: 2, },
+]);
+
     const navigateTabs = (tab) => {
       if (tab.name === "About" && tab.number === 1) {
         tab.current = true;
@@ -477,7 +481,21 @@ export default {
         tabs[1].current = false;
       }
     };
+const GigRequestNavigation = (tab) =>{
+  console.log(tab);
+if(tab.name === "Requests" && tab.number === 1){
+ tab.current = true
+  Gigs_Requests_tabs[1].current = false
+}else
+if(tab.name === "Gigs" && tab.number === 2){
+   tab.current = true
+  Gigs_Requests_tabs[0].current = false
 
+}
+
+
+
+}
     return {
       VisitUserData,
 
@@ -494,6 +512,8 @@ export default {
       tabs,
       ParsedTime,
       id,
+
+      GigRequestNavigation
     };
   },
 };
