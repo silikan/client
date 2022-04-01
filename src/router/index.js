@@ -23,6 +23,7 @@ import ChatRoom from '@/views/ChatRoom.view.vue';
 import RoomList from '@/views/RoomList.view.vue';
 import CreateGig from '@/views/CreateGig.view.vue';
 import CreateRequest from '@/views/CreateRequest.view.vue';
+import Buying from '@/views/Buying.view.vue';
 const routes = [
 
   {
@@ -119,6 +120,11 @@ const routes = [
 
 /*     meta: { middleware: [auth, guest] },
  */  },
+  {
+    path: '/buying',
+    name: 'Buying',
+    component: Buying,
+  },
 
   {
     path: '/request/create',
