@@ -7,8 +7,8 @@
 </template>
 
 <script>
-import Stepper from "../components/Gig/CreateGig/Stepper.component.vue"
-import General from "../components/Gig/CreateGig/General.component.vue"
+import Stepper from "../components/Request/CreateRequest/Stepper.component.vue"
+import General from "../components/Request/CreateRequest/General.component.vue"
 /* import Pricing from "../components/CreateGig/Pricing.component.vue"
 import PaymentMthod from "../components/CreateGig/Payment_Mthod.component.vue"
 import Upload from "../components/CreateGig/Upload.component.vue" */

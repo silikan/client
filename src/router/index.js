@@ -22,7 +22,7 @@ import ProfileEdit from '../components/Profile/Edit/ProfileEdit.component.vue';
 import ChatRoom from '@/views/ChatRoom.view.vue';
 import RoomList from '@/views/RoomList.view.vue';
 import CreateGig from '@/views/CreateGig.view.vue';
-
+import CreateRequest from '@/views/CreateRequest.view.vue';
 const routes = [
 
   {
@@ -120,6 +120,13 @@ const routes = [
 /*     meta: { middleware: [auth, guest] },
  */  },
 
+  {
+    path: '/request/create',
+    name: 'CreateRequest',
+    component: CreateRequest,
+
+/*     meta: { middleware: [auth, guest] },
+*/  },
   {
     path: '/signin',
     name: 'Signin',
