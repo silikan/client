@@ -47,32 +47,45 @@ const routes = [
   {
     path: '/cart',
     name: 'Cart',
-    component: Cart
+    component: Cart,
+    meta: { middleware: [auth] },
+
   },
   {
     path: '/task',
     name: 'Task',
-    component: Task
+    component: Task,
+    meta: { middleware: [auth] },
+
   },
   {
     path: '/gig/:id',
     name: 'GigPage',
-    component: GigPage
+    component: GigPage,
+    meta: { middleware: [auth, guest] },
+
   },
   {
     path: '/request/:id',
     name: 'RequestPage',
-    component: RequestPage
+    component: RequestPage,
+    meta: { middleware: [auth, guest] },
+
   },
   {
     path: '/selling',
     name: 'Selling',
-    component: Selling
+    component: Selling,
+    meta: { middleware: [auth] },
+
   },
   {
     path: '/searchResultPgae',
     name: 'searchResultPgae',
-    component: searchResultPgae
+    component: searchResultPgae,
+    meta: { middleware: [auth, guest] },
+
+
   },
   {
     path: '/edit/',
@@ -100,6 +113,7 @@ const routes = [
         name: 'ProfileEdit',
 
         component: ProfileEdit,
+
       },
       // ...other sub routes
     ],
@@ -153,6 +167,7 @@ const routes = [
     path: '/gig/create',
     name: 'CreateGig',
     component: CreateGig,
+    meta: { middleware: [auth] },
 
 /*     meta: { middleware: [auth, guest] },
  */  },
@@ -160,12 +175,16 @@ const routes = [
     path: '/buying',
     name: 'Buying',
     component: Buying,
+    meta: { middleware: [auth] },
+
   },
 
   {
     path: '/request/create',
     name: 'CreateRequest',
     component: CreateRequest,
+    meta: { middleware: [auth] },
+
 
 /*     meta: { middleware: [auth, guest] },
 */  },
