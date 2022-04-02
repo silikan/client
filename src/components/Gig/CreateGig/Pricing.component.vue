@@ -124,29 +124,7 @@
                 </div>
               </div>
               <div class="flex-shrink-0">
-                <button
-                  type="submit"
-                  class="
-                    inline-flex
-                    items-center
-                    px-20
-                    py-2
-                    -transparent
-                    text-sm
-                    font-medium
-                    rounded-md
-                    shadow-sm
-                    text-white
-                    bg-indigo-600
-                    hover:bg-indigo-700
-                    focus:outline-none
-                    focus:ring-2
-                    focus:ring-offset-2
-                    focus:ring-indigo-500
-                  "
-                >
-                  next
-                </button>
+
               </div>
             </div>
           </div>
@@ -157,21 +135,10 @@
 </template>
 <script>
 import { PaperClipIcon } from "@heroicons/vue/solid";
-import {
-  Listbox,
-  ListboxButton,
-  ListboxLabel,
-  ListboxOption,
-  ListboxOptions,
-} from "@headlessui/vue";
 
 export default {
   components: {
-    Listbox,
-    ListboxButton,
-    ListboxLabel,
-    ListboxOption,
-    ListboxOptions,
+
 
     PaperClipIcon,
   },
