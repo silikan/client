@@ -1,5 +1,5 @@
 <template>
-  <div class="flex flex-col md:p-10 m-5">
+  <div class="flex flex-col md:p-10 m-5 sm:m-1">
     <div class="profile flex justify-between flex-col ml-5 md:ml-0 mt-10">
       <nav class="flex mb-3" aria-label="Breadcrumb">
         <ol role="list" class="flex items-center space-x-4">

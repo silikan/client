@@ -145,9 +145,9 @@
 <script>
 import { CheckIcon } from "@heroicons/vue/outline";
 const tabs = [
-  { name: "My Account", href: "#", current: false },
-  { name: "Company", href: "#", current: false },
-  { name: "Team Members", href: "#", current: true },
+  { name: "Basic", href: "#", current: false },
+  { name: "Standard", href: "#", current: false },
+  { name: "Premium", href: "#", current: true },
 ];
 const tiers = [
   {
