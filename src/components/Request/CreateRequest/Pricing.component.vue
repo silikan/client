@@ -99,56 +99,7 @@
               </div>
             </div>
 
-            <div
-              class="absolute bottom-0 inset-x-0 pl-3 py-2 flex justify-between"
-            >
-              <div class="flex items-center space-x-5">
-                <div class="flex items-center">
-                  <button
-                    type="button"
-                    class="
-                      -m-2.5
-                      w-10
-                      h-10
-                      rounded-full
-                      flex
-                      items-center
-                      justify-center
-                      text-gray-400
-                      hover:text-gray-500
-                    "
-                  >
-                    <PaperClipIcon class="h-5 w-5" aria-hidden="true" />
-                    <span class="sr-only">Attach a file</span>
-                  </button>
-                </div>
-              </div>
-              <div class="flex-shrink-0">
-                <button
-                  type="submit"
-                  class="
-                    inline-flex
-                    items-center
-                    px-20
-                    py-2
-                    -transparent
-                    text-sm
-                    font-medium
-                    rounded-md
-                    shadow-sm
-                    text-white
-                    bg-indigo-600
-                    hover:bg-indigo-700
-                    focus:outline-none
-                    focus:ring-2
-                    focus:ring-offset-2
-                    focus:ring-indigo-500
-                  "
-                >
-                  next
-                </button>
-              </div>
-            </div>
+
           </div>
         </div>
       </div>
@@ -156,24 +107,12 @@
   </form>
 </template>
 <script>
-import { PaperClipIcon } from "@heroicons/vue/solid";
-import {
-  Listbox,
-  ListboxButton,
-  ListboxLabel,
-  ListboxOption,
-  ListboxOptions,
-} from "@headlessui/vue";
+
 
 export default {
   components: {
-    Listbox,
-    ListboxButton,
-    ListboxLabel,
-    ListboxOption,
-    ListboxOptions,
 
-    PaperClipIcon,
+
   },
   setup() {
     return {};

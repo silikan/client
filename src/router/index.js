@@ -24,6 +24,12 @@ import RoomList from '@/views/RoomList.view.vue';
 import CreateGig from '@/views/CreateGig.view.vue';
 import CreateRequest from '@/views/CreateRequest.view.vue';
 import Buying from '@/views/Buying.view.vue';
+import Cart from '@/views/Cart.view.vue';
+import Task from '@/views/Task.view.vue';
+import GigPage from '@/views/GigPage.view.vue';
+import RequestPage from '@/views/RequestPage.view.vue';
+import Selling from '@/views/Selling.view.vue';
+import searchResultPgae from '@/views/searchResultPgae.view.vue';
 const routes = [
 
   {
@@ -37,6 +43,49 @@ const routes = [
     name: 'Profile',
     meta: { middleware: [auth] },
     component: Profile,
+  },
+  {
+    path: '/cart',
+    name: 'Cart',
+    component: Cart,
+    meta: { middleware: [auth] },
+
+  },
+  {
+    path: '/task',
+    name: 'Task',
+    component: Task,
+    meta: { middleware: [auth] },
+
+  },
+  {
+    path: '/gig/:id',
+    name: 'GigPage',
+    component: GigPage,
+    meta: { middleware: [auth, guest] },
+
+  },
+  {
+    path: '/request/:id',
+    name: 'RequestPage',
+    component: RequestPage,
+    meta: { middleware: [auth, guest] },
+
+  },
+  {
+    path: '/selling',
+    name: 'Selling',
+    component: Selling,
+    meta: { middleware: [auth] },
+
+  },
+  {
+    path: '/searchResultPgae',
+    name: 'searchResultPgae',
+    component: searchResultPgae,
+    meta: { middleware: [auth, guest] },
+
+
   },
   {
     path: '/edit/',
@@ -64,6 +113,7 @@ const routes = [
         name: 'ProfileEdit',
 
         component: ProfileEdit,
+
       },
       // ...other sub routes
     ],
@@ -117,6 +167,7 @@ const routes = [
     path: '/gig/create',
     name: 'CreateGig',
     component: CreateGig,
+    meta: { middleware: [auth] },
 
 /*     meta: { middleware: [auth, guest] },
  */  },
@@ -124,12 +175,16 @@ const routes = [
     path: '/buying',
     name: 'Buying',
     component: Buying,
+    meta: { middleware: [auth] },
+
   },
 
   {
     path: '/request/create',
     name: 'CreateRequest',
     component: CreateRequest,
+    meta: { middleware: [auth] },
+
 
 /*     meta: { middleware: [auth, guest] },
 */  },

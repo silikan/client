@@ -12,9 +12,9 @@
       <div class="relative h-16 flex justify-between">
         <div class="">
           <div class="flex-shrink-0 flex items-center h-full">
-            <router-link to="/" class="cursor-pointer">
+            <router-link to="/" class="cursor-pointer" tag="img">
               <img
-                class="block h-8 w-auto"
+                class="block h-8 w-auto cursor-pointer"
                 src="https://tailwindui.com/img/logos/workflow-mark-indigo-600.svg"
                 alt="Workflow"
               />
@@ -147,7 +147,7 @@
             </div>
           </div>
           <router-link
-          to="/rooms"
+            to="/rooms"
             v-if="isLoggedin === true"
             type="button"
             class="
@@ -157,17 +157,14 @@
               p-1
               text-gray-400
               hover:text-gray-500
-
             "
           >
             <span class="sr-only">chat rooms</span>
-                        <ChatAlt2Icon class="h-6 w-6" aria-hidden="true" />
-
-          </router-link
-          >
-           <button
+            <ChatAlt2Icon class="h-6 w-6" aria-hidden="true" />
+          </router-link>
+          <router-link
             v-if="isLoggedin === true"
-            type="button"
+            type="router-link"
             class="
               flex-shrink-0
               bg-white
@@ -175,15 +172,13 @@
               p-1
               text-gray-400
               hover:text-gray-500
-
             "
+            to="/task"
           >
             <span class="sr-only">View notifications</span>
-                        <ClipboardCheckIcon class="h-6 w-6" aria-hidden="true" />
-
-          </button
-          >
-             <button
+            <ClipboardCheckIcon class="h-6 w-6" aria-hidden="true" />
+          </router-link>
+          <router-link
             v-if="isLoggedin === true"
             type="button"
             class="
@@ -193,15 +188,13 @@
               p-1
               text-gray-400
               hover:text-gray-500
-
             "
+            to="/cart"
           >
             <span class="sr-only">View notifications</span>
-                        <ShoppingBagIcon class="h-6 w-6" aria-hidden="true" />
-
-          </button
-          >
-             <button
+            <ShoppingBagIcon class="h-6 w-6" aria-hidden="true" />
+          </router-link>
+          <button
             v-if="isLoggedin === true"
             type="button"
             class="
@@ -211,13 +204,11 @@
               p-1
               text-gray-400
               hover:text-gray-500
-
             "
           >
             <span class="sr-only">View notifications</span>
             <BellIcon class="h-6 w-6" aria-hidden="true" />
-          </button
-          >
+          </button>
 
           <!-- Profile dropdown -->
           <Menu as="div" class="flex-shrink-0 relative ml-4">
@@ -376,7 +367,7 @@
             </div>
           </router-link>
 
-      <button
+          <router-link
             v-if="isLoggedin === true"
             type="button"
             class="
@@ -386,14 +377,13 @@
               p-1
               text-gray-400
               hover:text-gray-500
-
             "
+            to="/rooms"
           >
             <span class="sr-only">View notifications</span>
             <ChatAlt2Icon class="h-6 w-6" aria-hidden="true" />
-          </button
-          >
-           <button
+          </router-link>
+          <router-link
             v-if="isLoggedin === true"
             type="button"
             class="
@@ -403,15 +393,13 @@
               p-1
               text-gray-400
               hover:text-gray-500
-
             "
+            to="/cart"
           >
             <span class="sr-only">View notifications</span>
             <ShoppingBagIcon class="h-6 w-6" aria-hidden="true" />
-
-          </button
-          >
-             <button
+          </router-link>
+          <router-link
             v-if="isLoggedin === true"
             type="button"
             class="
@@ -421,14 +409,13 @@
               p-1
               text-gray-400
               hover:text-gray-500
-
             "
+            to="/task"
           >
             <span class="sr-only">View notifications</span>
             <ClipboardCheckIcon class="h-6 w-6" aria-hidden="true" />
-          </button
-          >
-             <button
+          </router-link>
+          <button
             v-if="isLoggedin === true"
             type="button"
             class="
@@ -438,14 +425,11 @@
               p-1
               text-gray-400
               hover:text-gray-500
-
             "
           >
             <span class="sr-only">View notifications</span>
-                        <BellIcon class="h-6 w-6" aria-hidden="true" />
-
-          </button
-          >
+            <BellIcon class="h-6 w-6" aria-hidden="true" />
+          </button>
         </div>
         <div class="mt-3 px-2 space-y-1">
           <router-link to="/profile">
@@ -522,7 +506,7 @@ import {
   BellIcon,
   MenuIcon,
   XIcon,
-   ShoppingBagIcon,
+  ShoppingBagIcon,
   ClipboardCheckIcon,
   ChatAlt2Icon,
 } from "@heroicons/vue/outline";
@@ -561,7 +545,7 @@ export default {
     MenuIcon,
     SearchIcon,
     XIcon,
-   ShoppingBagIcon,
+    ShoppingBagIcon,
     ClipboardCheckIcon,
     ChatAlt2Icon,
   },
