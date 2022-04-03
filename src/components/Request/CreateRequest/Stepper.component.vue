@@ -2,7 +2,7 @@
 <template>
   <nav aria-label="Progress">
     <ol role="list" class="flex items-center">
-      <li v-for="(step, stepIdx) in steps" :key="step.name" :class="[stepIdx !== steps.length - 1 ? 'pr-8 sm:pr-20' : '', 'relative']">
+      <li v-for="(step, stepIdx) in stepsdata" :key="step.name" :class="[stepIdx !== steps.length - 1 ? 'pr-8 sm:pr-20' : '', 'relative']">
         <template v-if="step.status === 'complete'">
           <div class="absolute inset-0 flex items-center" aria-hidden="true">
             <div class="h-0.5 w-full bg-indigo-600" />
@@ -37,21 +37,23 @@
 
 <script>
 import { CheckIcon } from '@heroicons/vue/solid'
+import { computed } from '@vue/runtime-core';
 
-const steps = [
-  { name: 'Step 1', href: '#', status: 'complete' },
-  { name: 'Step 2', href: '#', status: 'complete' },
-  { name: 'Step 3', href: '#', status: 'current' },
-  { name: 'Step 4', href: '#', status: 'upcoming' },
-]
 
 export default {
   components: {
     CheckIcon,
   },
-  setup() {
+   props: ["steps"],
+  setup(props) {
+
+
+     let stepsdata = computed(() => {
+    return props.steps;
+  });
+
     return {
-      steps,
+      stepsdata,
     }
   },
 }

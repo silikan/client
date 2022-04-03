@@ -367,7 +367,7 @@
             </div>
           </router-link>
 
-          <button
+          <router-link
             v-if="isLoggedin === true"
             type="button"
             class="
@@ -378,11 +378,12 @@
               text-gray-400
               hover:text-gray-500
             "
+            to="/rooms"
           >
             <span class="sr-only">View notifications</span>
             <ChatAlt2Icon class="h-6 w-6" aria-hidden="true" />
-          </button>
-          <button
+          </router-link>
+          <router-link
             v-if="isLoggedin === true"
             type="button"
             class="
@@ -393,11 +394,12 @@
               text-gray-400
               hover:text-gray-500
             "
+            to="/cart"
           >
             <span class="sr-only">View notifications</span>
             <ShoppingBagIcon class="h-6 w-6" aria-hidden="true" />
-          </button>
-          <button
+          </router-link>
+          <router-link
             v-if="isLoggedin === true"
             type="button"
             class="
@@ -408,10 +410,11 @@
               text-gray-400
               hover:text-gray-500
             "
+            to="/task"
           >
             <span class="sr-only">View notifications</span>
             <ClipboardCheckIcon class="h-6 w-6" aria-hidden="true" />
-          </button>
+          </router-link>
           <button
             v-if="isLoggedin === true"
             type="button"
