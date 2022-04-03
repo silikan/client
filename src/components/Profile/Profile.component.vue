@@ -378,14 +378,15 @@
       </div>
     </div>
   </div>
-  <div class="mt-6 sm:mt-2 2xl:mt-5">
+   <div class="mt-6 sm:mt-2 2xl:mt-5">
     <div class="border-b border-gray-200">
       <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
         <nav class="-mb-px flex space-x-8" aria-label="Tabs">
           <a
             v-for="tab in Gigs_Requests_tabs"
             :key="tab.name"
-            :href="tab.href"
+            @click="GigRequestNavigation(tab)"
+            class="cursor-pointer"
             :class="[
               tab.current
                 ? 'border-pink-500 text-gray-900'
@@ -430,10 +431,7 @@ import { DotsVerticalIcon } from "@heroicons/vue/solid";
 import { Menu, MenuButton, MenuItem, MenuItems } from "@headlessui/vue";
 import { computed, onMounted, reactive, ref } from "@vue/runtime-core";
 
-const Gigs_Requests_tabs = [
-  { name: "Requests", href: "#", current: true },
-  { name: "Gigs", href: "#", current: false, isHandyman: true },
-];
+
 const profile = {
   name: "Ricardo Cooper",
   email: "ricardo.cooper@example.com",
@@ -522,7 +520,7 @@ export default {
 ];
  */
 
-    const navigateTabs = (tab) => {
+  const navigateTabs = (tab) => {
       if (tab.name === "About" && tab.number === 1) {
         tab.current = true;
         tabs[1].current = false;
@@ -548,6 +546,22 @@ export default {
     } else {
       timerange = reactive(null);
     }
+    const Gigs_Requests_tabs = reactive([
+  { name: "Requests", href: "#", current: true , number: 1 },
+  { name: "Gigs", href: "#", current: false, isHandyman: true ,  number: 2, },
+]);
+const GigRequestNavigation = (tab) =>{
+  console.log(tab);
+if(tab.name === "Requests" && tab.number === 1){
+ tab.current = true
+  Gigs_Requests_tabs[1].current = false
+}else
+if(tab.name === "Gigs" && tab.number === 2){
+   tab.current = true
+  Gigs_Requests_tabs[0].current = false
+
+}
+}
 
     return {
       profile,
@@ -561,6 +575,7 @@ export default {
       Gigs_Requests_tabs,
       navigateTabs,
       timerange,
+      GigRequestNavigation
     };
   },
 };
