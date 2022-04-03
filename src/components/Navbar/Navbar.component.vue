@@ -9,17 +9,17 @@
         lg:divide-y lg:divide-gray-200 lg:px-8
       "
     >
+
       <div class="relative h-16 flex justify-between">
-        <div class="">
-          <div class="flex-shrink-0 flex items-center h-full">
-            <router-link to="/" class="cursor-pointer" tag="img">
-              <img
-                class="block h-8 w-auto cursor-pointer"
-                src="https://tailwindui.com/img/logos/workflow-mark-indigo-600.svg"
-                alt="Workflow"
-              />
-            </router-link>
-          </div>
+
+        <div class="flex-shrink-0 flex items-center h-full">
+          <router-link type="button" to="/" class="cursor-pointer" >
+            <img
+              class="block h-8 w-auto cursor-pointer"
+              src="https://tailwindui.com/img/logos/workflow-mark-indigo-600.svg"
+              alt="Workflow"
+            />
+          </router-link>
         </div>
 
         <div

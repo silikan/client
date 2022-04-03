@@ -39,6 +39,19 @@
                   sm:text-sm
                   border-gray-300
                   rounded-md
+                       appearance-none
+                  block
+                  w-full
+                  px-3
+                  py-2
+                  border border-gray-300
+                  rounded-md
+                  shadow-sm
+                  placeholder-gray-400
+                  focus:outline-none
+                  focus:ring-indigo-500
+                  focus:border-indigo-500
+                  sm:text-sm
                 "
                 placeholder="0.00"
                 aria-describedby="price-currency"
@@ -85,6 +98,19 @@
                   -0
                   resize-none
                   focus:ring-0
+                  sm:text-sm
+                       appearance-none
+                  block
+                  w-full
+                  px-3
+                  py-2
+                  border border-gray-300
+                  rounded-md
+                  shadow-sm
+                  placeholder-gray-400
+                  focus:outline-none
+                  focus:ring-indigo-500
+                  focus:border-indigo-500
                   sm:text-sm
                 "
                 placeholder="Add your description..."
@@ -142,7 +168,10 @@ export default {
 
     PaperClipIcon,
   },
-  setup() {
+  props:["Data"],
+  setup(props) {
+
+console.log(props.Data)
     return {};
   },
 };

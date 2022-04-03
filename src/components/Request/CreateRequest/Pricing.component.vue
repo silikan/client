@@ -7,7 +7,7 @@
           <h3 class="text-lg leading-6 font-medium text-gray-900">Pricing</h3>
           <p class="mt-1 max-w-2xl text-sm text-gray-500">create that gig</p>
         </div>
-        <div class="space-y-6 sm:space-y-5">
+       <div class="space-y-6 sm:space-y-5">
           <div class="-gray-300 rounded-lg shadow-sm overflow-hidden">
             <label for="price" class="block text-sm font-medium text-gray-700"
               >Price</label
@@ -39,6 +39,19 @@
                   sm:text-sm
                   border-gray-300
                   rounded-md
+                       appearance-none
+                  block
+                  w-full
+                  px-3
+                  py-2
+                  border border-gray-300
+                  rounded-md
+                  shadow-sm
+                  placeholder-gray-400
+                  focus:outline-none
+                  focus:ring-indigo-500
+                  focus:border-indigo-500
+                  sm:text-sm
                 "
                 placeholder="0.00"
                 aria-describedby="price-currency"
@@ -86,6 +99,20 @@
                   resize-none
                   focus:ring-0
                   sm:text-sm
+                    appearance-none
+                  block
+                  w-full
+                  px-3
+                  py-2
+                  border border-gray-300
+                  rounded-md
+                  shadow-sm
+                  placeholder-gray-400
+                  focus:outline-none
+                  focus:ring-indigo-500
+                  focus:border-indigo-500
+                  sm:text-sm
+
                 "
                 placeholder="Add your description..."
               />

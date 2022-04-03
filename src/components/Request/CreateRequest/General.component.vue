@@ -4,8 +4,8 @@
     <div class="space-y-8 divide-y max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="pt-8 space-y-6 sm:pt-10 sm:space-y-5">
         <div>
-          <h3 class="text-lg leading-6 font-medium text-gray-900">Gig</h3>
-          <p class="mt-1 max-w-2xl text-sm text-gray-500">create that gig</p>
+          <h3 class="text-lg leading-6 font-medium text-gray-900">Request</h3>
+          <p class="mt-1 max-w-2xl text-sm text-gray-500">create that Request</p>
         </div>
         <div class="space-y-6 sm:space-y-5">
           <div class="-gray-300 rounded-lg shadow-sm overflow-hidden">
@@ -22,13 +22,19 @@
                 id="title"
                 autocomplete="given-name"
                 class="
+                  appearance-none
                   block
                   w-full
-                  shadow-sm
-                  focus:ring-indigo-500 focus:-indigo-500
-                  sm:text-sm
-                  -gray-300
+                  px-3
+                  py-2
+                  border border-gray-300
                   rounded-md
+                  shadow-sm
+                  placeholder-gray-400
+                  focus:outline-none
+                  focus:ring-indigo-500
+                  focus:border-indigo-500
+                  sm:text-sm
                 "
               />
             </div>
@@ -54,6 +60,19 @@
                   sm:text-sm
                   -gray-300
                   rounded-md
+                       appearance-none
+                  block
+                  w-full
+                  px-3
+                  py-2
+                  border border-gray-300
+                  rounded-md
+                  shadow-sm
+                  placeholder-gray-400
+                  focus:outline-none
+                  focus:ring-indigo-500
+                  focus:border-indigo-500
+                  sm:text-sm
                 "
               >
                 <option>United States</option>
@@ -87,6 +106,19 @@
                   -0
                   resize-none
                   focus:ring-0
+                  sm:text-sm
+                       appearance-none
+                  block
+                  w-full
+                  px-3
+                  py-2
+                  border border-gray-300
+                  rounded-md
+                  shadow-sm
+                  placeholder-gray-400
+                  focus:outline-none
+                  focus:ring-indigo-500
+                  focus:border-indigo-500
                   sm:text-sm
                 "
                 placeholder="Add your description..."

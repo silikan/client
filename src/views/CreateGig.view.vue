@@ -8,7 +8,6 @@
     <Upload v-if="steps[3].active === true"/>
     <div class="my-10 flex justify-around w-full mx-auto sm:px-6 lg:px-8">
       <button
-        type="submit"
         class="
           inline-flex
           items-center
@@ -34,7 +33,6 @@
         prev
       </button>
       <button
-        type="submit"
         class="
           inline-flex
           items-center

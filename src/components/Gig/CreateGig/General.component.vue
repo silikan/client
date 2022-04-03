@@ -17,18 +17,25 @@
             </label>
             <div class="mt-1 sm:mt-0 sm:col-span-2">
               <input
+                v-model="title"
                 type="text"
                 name="title"
                 id="title"
                 autocomplete="given-name"
                 class="
+                  appearance-none
                   block
                   w-full
-                  shadow-sm
-                  focus:ring-indigo-500 focus:-indigo-500
-                  sm:text-sm
-                  -gray-300
+                  px-3
+                  py-2
+                  border border-gray-300
                   rounded-md
+                  shadow-sm
+                  placeholder-gray-400
+                  focus:outline-none
+                  focus:ring-indigo-500
+                  focus:border-indigo-500
+                  sm:text-sm
                 "
               />
             </div>
@@ -43,17 +50,25 @@
             </label>
             <div class="mt-1 sm:mt-0 sm:col-span-2">
               <select
+                v-model="category"
                 id="category"
                 name="category"
                 autocomplete="category-name"
                 class="
+                  appearance-none
                   block
                   w-full
-                  shadow-sm
-                  focus:ring-indigo-500 focus:-indigo-500
-                  sm:text-sm
-                  -gray-300
+                  px-3
+                  py-2
+                  border border-gray-300
                   rounded-md
+                  shadow-sm
+                  placeholder-gray-400
+                  focus:outline-none
+                  focus:ring-indigo-500
+                  focus:border-indigo-500
+                  sm:text-sm
+
                 "
               >
                 <option>United States</option>
@@ -76,6 +91,7 @@
                 Description
               </label>
               <textarea
+                v-model="description"
                 rows="3"
                 name="description"
                 id="description"
@@ -88,6 +104,15 @@
                   resize-none
                   focus:ring-0
                   sm:text-sm
+                  appearance-none
+                  px-3
+                  border border-gray-300
+                  rounded-md
+                  shadow-sm
+                  placeholder-gray-400
+                  focus:outline-none
+                  focus:ring-indigo-500
+                  focus:border-indigo-500
                 "
                 placeholder="Add your description..."
               />
@@ -125,9 +150,7 @@
                   </button>
                 </div>
               </div>
-              <div class="flex-shrink-0">
-
-              </div>
+              <div class="flex-shrink-0"></div>
             </div>
           </div>
         </div>
@@ -137,15 +160,22 @@
 </template>
 <script>
 import { PaperClipIcon } from "@heroicons/vue/solid";
+import { ref } from "@vue/reactivity";
 
 export default {
   components: {
-
-
     PaperClipIcon,
   },
   setup() {
-    return {};
+    let title = ref("");
+    let description = ref("");
+    let category = ref("");
+
+    return {
+      title,
+      description,
+      category,
+    };
   },
 };
 </script>
