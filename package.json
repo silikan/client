@@ -28,6 +28,7 @@
     "vee-validate": "^4.5.9",
     "vue": "^3.0.0",
     "vue-heroicons": "^0.9.4",
+    "vue-media-upload": "^1.1.3",
     "vue-router": "^4.0.0-0",
     "vue-uuid": "^3.0.0",
     "vue3-date-time-picker": "^2.7.0",

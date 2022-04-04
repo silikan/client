@@ -11,7 +11,7 @@ export const state = {
 	standard: {},
 	premium: {},
 	paymentMethod: '',
-	formDataImage: {},
+	GigImages: {},
 
 };
 
@@ -43,8 +43,8 @@ export const mutations = {
 	SET_PAYMENT_METHOD(state, paymentMethod) {
 		state.paymentMethod = paymentMethod;
 	},
-	SET_FORM_DATA_IMAGE(state, formDataImage) {
-		state.formDataImage = formDataImage;
+	SET_GIG_IMAGES(state, GigImages) {
+		state.GigImages = GigImages;
 	}
 
 
@@ -65,8 +65,8 @@ export const actions = {
 		let standard = payload.state.standard;
 		let premium = payload.state.premium;
 		let paymentMethod = payload.state.paymentMethod;
-
-		return await GigService.createGig({
+		let GigImages = payload.state.GigImages;
+		let data = await GigService.createGig({
 			title,
 			description,
 			category,
@@ -75,6 +75,8 @@ export const actions = {
 			premium,
 			paymentMethod
 		})
+		let gigId = data.data.id;
+		await GigService.UploadImage(GigImages, gigId)
 	}
 
 

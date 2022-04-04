@@ -129,6 +129,8 @@ export default {
       let premium = JSON.stringify(store.state.Gig.premium);
       let standard = JSON.stringify(store.state.Gig.standard);
       let paymentMethod = store.state.Gig.paymentMethod;
+      let GigImages = store.state.Gig.GigImages;
+      console.log(GigImages);
       let data = {
         title,
         description,
@@ -137,6 +139,7 @@ export default {
         premium,
         standard,
         paymentMethod,
+        GigImages
       };
       let jsonData = JSON.stringify(data);
       store.dispatch("Gig/createGig",jsonData);

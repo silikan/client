@@ -46,7 +46,7 @@
           </svg>
           <div class="flex text-sm text-gray-600">
             <label
-              for="file-upload"
+              for="GigImages"
               class="
                 relative
                 cursor-pointer
@@ -92,10 +92,10 @@ export default {
      imagesArray = event.target.files;
   const GigImages = new FormData();
       for (const i of Object.keys(imagesArray)) {
-        GigImages.append("GigImages",imagesArray[i]);
+        GigImages.append('GigImages[' + i + ']',imagesArray[i]);
       }
 
-store.commit ('Gig/SET_FORM_DATA_IMAGE', GigImages);
+store.commit ('Gig/SET_GIG_IMAGES', GigImages);
 
   };
 
