@@ -57,8 +57,24 @@ export const actions = {
 
 	async createGig(payload) {
 
+		console.log(payload.state.title)
+		let title = payload.state.title;
+		let description = payload.state.description;
+		let category = payload.state.category;
+		let basic = payload.state.basic;
+		let standard = payload.state.standard;
+		let premium = payload.state.premium;
+		let paymentMethod = payload.state.paymentMethod;
 
-		return await GigService.createGig(payload)
+		return await GigService.createGig({
+			title,
+			description,
+			category,
+			basic,
+			standard,
+			premium,
+			paymentMethod
+		})
 	}
 
 

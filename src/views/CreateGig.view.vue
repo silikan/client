@@ -70,10 +70,9 @@
           focus:ring-offset-2
           focus:ring-indigo-500
         "
-
         @click="createGig"
       >
-      create that gig
+        create that gig
       </button>
     </div>
   </div>
@@ -86,6 +85,7 @@ import Pricing from "../components/Gig/CreateGig/tabbedPricind.component.vue";
 import PaymentMthod from "../components/Gig/CreateGig/Payment_Mthod.component.vue";
 import Upload from "../components/Gig/CreateGig/Upload.component.vue";
 import { reactive } from "@vue/reactivity";
+import { useStore } from "vuex";
 export default {
   components: { Stepper, General, Pricing, PaymentMthod, Upload },
   setup() {
@@ -118,10 +118,28 @@ export default {
       }
     };
 
-
+    let store = useStore();
 
     let createGig = () => {
+      let title = store.state.Gig.title;
+      let description = store.state.Gig.description;
+      let category = store.state.Gig.category;
 
+      let basic = JSON.stringify(store.state.Gig.basic);
+      let premium = JSON.stringify(store.state.Gig.premium);
+      let standard = JSON.stringify(store.state.Gig.standard);
+      let paymentMethod = store.state.Gig.paymentMethod;
+      let data = {
+        title,
+        description,
+        category,
+        basic,
+        premium,
+        standard,
+        paymentMethod,
+      };
+      let jsonData = JSON.stringify(data);
+      store.dispatch("Gig/createGig",jsonData);
     };
     return {
       steps,
