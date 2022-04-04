@@ -1,6 +1,6 @@
 
 <template>
-  <form class="space-y-8 divide-y divide-gray-200 w-full">
+  <form class="space-y-8 divide-y divide-gray-200 w-full" autocomplete="on">
     <div class="space-y-8 divide-y max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="pt-8 space-y-6 sm:pt-10 sm:space-y-5">
         <div>
@@ -30,6 +30,7 @@
                 type="text"
                 name="price"
                 id="price"
+                v-model="price"
                 class="
                   focus:ring-indigo-500 focus:border-indigo-500
                   block
@@ -39,7 +40,7 @@
                   sm:text-sm
                   border-gray-300
                   rounded-md
-                       appearance-none
+                  appearance-none
                   block
                   w-full
                   px-3
@@ -87,6 +88,7 @@
                 Description
               </label>
               <textarea
+                v-model="description"
                 rows="3"
                 name="description"
                 id="description"
@@ -99,7 +101,7 @@
                   resize-none
                   focus:ring-0
                   sm:text-sm
-                       appearance-none
+                  appearance-none
                   block
                   w-full
                   px-3
@@ -149,9 +151,7 @@
                   </button>
                 </div>
               </div>
-              <div class="flex-shrink-0">
-
-              </div>
+              <div class="flex-shrink-0"></div>
             </div>
           </div>
         </div>
@@ -161,18 +161,48 @@
 </template>
 <script>
 import { PaperClipIcon } from "@heroicons/vue/solid";
+import { computed, ref, watchEffect } from "@vue/runtime-core";
+import { useStore } from "vuex";
 
 export default {
   components: {
-
-
     PaperClipIcon,
   },
-  props:["Data"],
+  props: ["Data"],
   setup(props) {
+    let tier = computed(() => {
+      return props.Data;
+    });
+    let price = ref();
+    let description = ref();
+    let store = useStore();
+    watchEffect(() => {
+      switch (tier.value.name) {
+        case "Basic":
+          store.commit("Gig/SET_BASIC", {
+            price: price.value,
+            description: description.value,
+          });
+          break;
+        case "Standard":
+          store.commit("Gig/SET_STANDARD", {
+            price: price.value,
+            description: description.value,
+          });
+          break;
+        case "Premium":
+          store.commit("Gig/SET_PREMIUM", {
+            price: price.value,
+            description: description.value,
+          });
+          break;
 
-console.log(props.Data)
-    return {};
+      }
+    });
+    return {
+      price,
+      description,
+    };
   },
 };
 </script>

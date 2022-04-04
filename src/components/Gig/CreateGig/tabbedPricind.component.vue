@@ -21,9 +21,9 @@
               {{ tab.name }}
             </a>
           </nav>
-          <Pricing :Data="tabs[0]" v-if="tabs[0].current === true" />
-          <Pricing :Data="tabs[1]" v-if="tabs[1].current === true" />
-          <Pricing :Data="tabs[2]" v-if="tabs[2].current === true" />
+          <Pricing :Data="tabs[0]" v-show="tabs[0].current === true" />
+          <Pricing :Data="tabs[1]" v-show="tabs[1].current === true" />
+          <Pricing :Data="tabs[2]" v-show="tabs[2].current === true" />
 
 
 
@@ -44,9 +44,9 @@ export default {
 
 
      const tabs = reactive([
-      { name: "Basic", number: 1, current: true },
-       { name: "Standard", number: 2, current: false },
-      { name: "Premium", number: 3, current: false },
+      { name: "Basic", number: 1, current: true , price: 'basicPrice' , description : 'basicDescription' },
+       { name: "Standard", number: 2, current: false,   price: 'standardPrice' , description : 'standardDescription' },
+       { name: "Premium", number: 3, current: false,   price: 'premiumPrice' , description : 'premiumDescription' },
     ]);
 
      const navigateTabs = (tab) => {

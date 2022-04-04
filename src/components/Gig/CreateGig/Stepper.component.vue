@@ -113,7 +113,6 @@ export default {
   props: ["steps"],
 
   setup(props) {
-    console.log(props);
  let stepsdata = computed(() => {
     return props.steps;
   });

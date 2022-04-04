@@ -2,9 +2,9 @@
   <div class="flex flex-col items-center p-10 h-screen">
 
     <Stepper :steps="steps"/>
-    <General v-if="steps[0].active === true" />
-     <Pricing v-if="steps[1].active === true"/>
-    <PaymentMthod v-if="steps[2].active === true"/>
+    <General v-show="steps[0].active === true" />
+     <Pricing v-show="steps[1].active === true"/>
+    <PaymentMthod v-show="steps[2].active === true"/>
     <div class="my-10 flex justify-around w-full mx-auto sm:px-6 lg:px-8">
       <button
         type="submit"

@@ -33,9 +33,10 @@
 </template>
 
 <script>
-import { ref } from 'vue'
+import { ref, watchEffect } from 'vue'
 import { RadioGroup, RadioGroupDescription, RadioGroupLabel, RadioGroupOption } from '@headlessui/vue'
 import { CheckCircleIcon } from '@heroicons/vue/solid'
+import { useStore } from 'vuex'
 
 const mailingLists = [
   { id: 1, title: 'PayPal', description: 'Last message sent an hour ago', users: '621 users' },
@@ -53,6 +54,10 @@ export default {
   },
   setup() {
     const selectedMailingLists = ref(mailingLists[0])
+let store = useStore()
+    watchEffect(() => {
+      store.commit('Gig/SET_PAYMENT_METHOD', selectedMailingLists.value.title)
+    })
 
     return {
       mailingLists,

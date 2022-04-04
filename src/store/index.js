@@ -4,6 +4,8 @@ import * as user from '@/store/modules/User';
 import * as handyman from '@/store/modules/Handyman';
 import * as Chat from '@/store/modules/Chat';
 import * as Loading from '@/store/modules/Loading';
+import * as Gig from '@/store/modules/Gig';
+
 export default createStore({
   strict: true,
 
@@ -13,5 +15,6 @@ export default createStore({
     handyman,
     Chat,
     Loading,
+    Gig
   },
 });

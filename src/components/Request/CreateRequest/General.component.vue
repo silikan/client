@@ -1,11 +1,13 @@
 
 <template>
-  <form class="space-y-8 divide-y divide-gray-200 w-full">
+  <form class="space-y-8 divide-y divide-gray-200 w-full" method="post"  autocomplete="on">
     <div class="space-y-8 divide-y max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="pt-8 space-y-6 sm:pt-10 sm:space-y-5">
         <div>
           <h3 class="text-lg leading-6 font-medium text-gray-900">Request</h3>
-          <p class="mt-1 max-w-2xl text-sm text-gray-500">create that Request</p>
+          <p class="mt-1 max-w-2xl text-sm text-gray-500">
+            create that Request
+          </p>
         </div>
         <div class="space-y-6 sm:space-y-5">
           <div class="-gray-300 rounded-lg shadow-sm overflow-hidden">
@@ -17,10 +19,10 @@
             </label>
             <div class="mt-1 sm:mt-0 sm:col-span-2">
               <input
+                autocomplete="on"
                 type="text"
                 name="title"
                 id="title"
-                autocomplete="given-name"
                 class="
                   appearance-none
                   block
@@ -51,7 +53,7 @@
               <select
                 id="category"
                 name="category"
-                autocomplete="category-name"
+                autocomplete="on"
                 class="
                   block
                   w-full
@@ -60,7 +62,7 @@
                   sm:text-sm
                   -gray-300
                   rounded-md
-                       appearance-none
+                  appearance-none
                   block
                   w-full
                   px-3
@@ -96,6 +98,7 @@
               </label>
               <textarea
                 rows="3"
+                autocomplete="on"
                 name="description"
                 id="description"
                 class="
@@ -107,7 +110,7 @@
                   resize-none
                   focus:ring-0
                   sm:text-sm
-                       appearance-none
+                  appearance-none
                   block
                   w-full
                   px-3
@@ -132,8 +135,6 @@
                 </div>
               </div>
             </div>
-
-
           </div>
         </div>
       </div>
@@ -141,12 +142,8 @@
   </form>
 </template>
 <script>
-
 export default {
-  components: {
-
-
-  },
+  components: {},
   setup() {
     return {};
   },

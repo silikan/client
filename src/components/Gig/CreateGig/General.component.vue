@@ -1,6 +1,10 @@
 
 <template>
-  <form class="space-y-8 divide-y divide-gray-200 w-full">
+  <form
+    class="space-y-8 divide-y divide-gray-200 w-full"
+    method="post"
+    autocomplete="on"
+  >
     <div class="space-y-8 divide-y max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="pt-8 space-y-6 sm:pt-10 sm:space-y-5">
         <div>
@@ -21,7 +25,7 @@
                 type="text"
                 name="title"
                 id="title"
-                autocomplete="given-name"
+                autocomplete="on"
                 class="
                   appearance-none
                   block
@@ -53,7 +57,7 @@
                 v-model="category"
                 id="category"
                 name="category"
-                autocomplete="category-name"
+                autocomplete="on"
                 class="
                   appearance-none
                   block
@@ -68,7 +72,6 @@
                   focus:ring-indigo-500
                   focus:border-indigo-500
                   sm:text-sm
-
                 "
               >
                 <option>United States</option>
@@ -91,6 +94,7 @@
                 Description
               </label>
               <textarea
+                autocomplete="on"
                 v-model="description"
                 rows="3"
                 name="description"
@@ -161,15 +165,24 @@
 <script>
 import { PaperClipIcon } from "@heroicons/vue/solid";
 import { ref } from "@vue/reactivity";
+import { useStore } from "vuex";
+import { watchEffect } from "@vue/runtime-core";
 
 export default {
   components: {
     PaperClipIcon,
   },
   setup() {
-    let title = ref("");
-    let description = ref("");
-    let category = ref("");
+    let store = useStore();
+
+    let title = ref(null);
+    let description = ref(null);
+    let category = ref(null);
+    watchEffect(() => {
+      store.commit("Gig/SET_TITLE", title.value);
+      store.commit("Gig/SET_DESCRIPTION", description.value);
+      store.commit("Gig/SET_CATEGORY", category.value);
+    });
 
     return {
       title,
