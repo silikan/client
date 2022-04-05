@@ -19,6 +19,7 @@
             </label>
             <div class="mt-1 sm:mt-0 sm:col-span-2">
               <input
+              v-model="title"
                 autocomplete="on"
                 type="text"
                 name="title"
@@ -51,6 +52,7 @@
             </label>
             <div class="mt-1 sm:mt-0 sm:col-span-2">
               <select
+              v-model="category"
                 id="category"
                 name="category"
                 autocomplete="on"
@@ -97,6 +99,7 @@
                 Description
               </label>
               <textarea
+              v-model="description"
                 rows="3"
                 autocomplete="on"
                 name="description"
@@ -142,10 +145,28 @@
   </form>
 </template>
 <script>
+import { ref } from "@vue/reactivity";
+import { useStore } from "vuex";
+import { watchEffect } from "@vue/runtime-core";
 export default {
   components: {},
   setup() {
-    return {};
+    let store = useStore();
+
+    let title = ref(null);
+    let description = ref(null);
+    let category = ref(null);
+    watchEffect(() => {
+      store.commit("Gig/SET_TITLE", title.value);
+      store.commit("Gig/SET_DESCRIPTION", description.value);
+      store.commit("Gig/SET_CATEGORY", category.value);
+    });
+
+    return {
+      title,
+      description,
+      category,
+    };
   },
 };
 </script>

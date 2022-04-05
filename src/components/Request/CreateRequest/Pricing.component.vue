@@ -7,7 +7,7 @@
           <h3 class="text-lg leading-6 font-medium text-gray-900">Pricing</h3>
           <p class="mt-1 max-w-2xl text-sm text-gray-500">create that gig</p>
         </div>
-       <div class="space-y-6 sm:space-y-5">
+        <div class="space-y-6 sm:space-y-5">
           <div class="-gray-300 rounded-lg shadow-sm overflow-hidden">
             <label for="price" class="block text-sm font-medium text-gray-700"
               >Price</label
@@ -39,7 +39,7 @@
                   sm:text-sm
                   border-gray-300
                   rounded-md
-                       appearance-none
+                  appearance-none
                   block
                   w-full
                   px-3
@@ -99,7 +99,7 @@
                   resize-none
                   focus:ring-0
                   sm:text-sm
-                    appearance-none
+                  appearance-none
                   block
                   w-full
                   px-3
@@ -112,7 +112,6 @@
                   focus:ring-indigo-500
                   focus:border-indigo-500
                   sm:text-sm
-
                 "
                 placeholder="Add your description..."
               />
@@ -125,8 +124,6 @@
                 </div>
               </div>
             </div>
-
-
           </div>
         </div>
       </div>
@@ -134,15 +131,27 @@
   </form>
 </template>
 <script>
-
+import { ref } from "@vue/reactivity";
+import { watchEffect } from "@vue/runtime-core";
+import { useStore } from 'vuex';
 
 export default {
-  components: {
-
-
-  },
+  components: {},
   setup() {
-    return {};
+    let price = ref(0);
+    let description = ref("");
+let store = useStore();
+    watchEffect(() => {
+      if (price.value > 0) {
+        store.commit("Gig/SET_PRICE", price.value);
+        store.commit("Gig/SET_PRICE_DESCRIPTION", description.value);
+
+      }
+    });
+    return {
+      price,
+      description,
+    };
   },
 };
 </script>
