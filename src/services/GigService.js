@@ -1,15 +1,21 @@
 import * as API from '@/services/API';
 
 export default {
-	createGig(payload) {
-		return API.apiClient.post(`/gig`, payload);
+	async createGig(payload) {
+		return await API.apiClient.post(`/gig`, payload);
 	},
-	UploadImage(payload, gigId) {
-		return API.apiClient.post(`/gig/image/${gigId}`, payload, {
+	async UploadImage(payload, gigId) {
+		return await API.apiClient.post(`/gig/image/${gigId}`, payload, {
 			headers: {
 				"Content-Type": "multipart/form-data"
 			}
 		});
+	},
+	async getGig(id) {
+		return await API.apiClient.get(`/gig/${id}`);
+	},
+	async getGigImages(id) {
+		return await API.apiClient.get(`/gig/${id}}/image`);
 	}
 
 };

@@ -66,7 +66,7 @@
                 id="GigImages"
                 name="GigImages"
                 type="file"
-
+                accept="image/*"
                 class="sr-only"
                 multiple
                 @change="onChange"
@@ -82,25 +82,28 @@
 </template>
 
 <script>
-import { reactive } from '@vue/reactivity';
-import { useStore } from 'vuex';
+import { reactive } from "@vue/reactivity";
+import { useStore } from "vuex";
 export default {
   setup() {
     let store = useStore();
     let imagesArray = reactive([]);
     const onChange = (event) => {
-     imagesArray = event.target.files;
-  const GigImages = new FormData();
+   if (event.target.files.length > 5) {
+        alert("more than 6 files");
+
+      }else {
+  imagesArray = event.target.files;
+      const GigImages = new FormData();
       for (const i of Object.keys(imagesArray)) {
-        GigImages.append('GigImages[' + i + ']',imagesArray[i]);
+        GigImages.append("GigImages[" + i + "]", imagesArray[i]);
       }
 
-store.commit ('Gig/SET_GIG_IMAGES', GigImages);
-
-  };
-
+      store.commit("Gig/SET_GIG_IMAGES", GigImages);
+      }
 
 
+    };
 
     return {
       onChange,

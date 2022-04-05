@@ -10,13 +10,17 @@
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
+    "@coreui/vue": "^4.2.0",
     "@dicebear/avatars": "^4.10.2",
     "@dicebear/avatars-initials-sprites": "^4.10.2",
     "@headlessui/vue": "^1.5.0",
     "@heroicons/vue": "^1.0.5",
     "axios": "^0.26.0",
+    "bootstrap": "^5.1.3",
+    "bootstrap-vue-3": "^0.1.9",
     "core-js": "^3.6.5",
-    "flowbite": "^1.3.4",
+    "element-plus": "^2.1.8",
+    "flowbite": "^1.4.1",
     "litepie-datepicker": "^1.0.14",
     "lodash": "^4.17.21",
     "moment": "^2.29.1",
@@ -31,8 +35,10 @@
     "vue-media-upload": "^1.1.3",
     "vue-router": "^4.0.0-0",
     "vue-uuid": "^3.0.0",
+    "vue3-carousel": "^0.1.38",
     "vue3-date-time-picker": "^2.7.0",
     "vue3-tailwind-datepicker": "^1.0.16",
+    "vuestic-ui": "^1.3.1",
     "vuex": "^4.0.0-0"
   },
   "devDependencies": {
@@ -60,12 +66,14 @@
     "eslint-plugin-standard": "^4.0.0",
     "eslint-plugin-vue": "^7.0.0",
     "laravel-echo": "^1.11.4",
+    "naive-ui": "^2.27.0",
     "postcss": "^7.0.39",
     "prettier": "^2.2.1",
     "sass": "^1.26.5",
     "sass-loader": "^8.0.2",
     "tailwindcss": "npm:@tailwindcss/postcss7-compat@^2.2.17",
     "typescript": "~3.9.3",
+    "vue-cli-plugin-vuestic-ui": "~1.0.5",
     "vue-jest": "^5.0.0-0"
   }
 }

@@ -13,6 +13,9 @@ export const state = {
 	paymentMethod: '',
 	GigImages: {},
 
+	fetchedGigs: [],
+	fetchedGigImages: [],
+
 };
 
 export const mutations = {
@@ -46,6 +49,15 @@ export const mutations = {
 	SET_GIG_IMAGES(state, GigImages) {
 		state.GigImages = GigImages;
 	}
+	,
+	SET_FETCHED_GIGS(state, fetchedGigs) {
+		state.fetchedGigs = fetchedGigs;
+	}
+	,
+
+	SET_FETCHED_GIG_IMAGES(state, fetchedGigImages) {
+		state.fetchedGigImages = fetchedGigImages;
+	}
 
 
 
@@ -77,9 +89,20 @@ export const actions = {
 		})
 		let gigId = data.data.id;
 		await GigService.UploadImage(GigImages, gigId)
+	},
+
+	async getGig({ commit }, id) {
+		let data = await GigService.getGig(id)
+		commit('SET_FETCHED_GIGS', data);
+
+		return data.data
 	}
-
-
+	,
+	async getGigImages({ commit }, id) {
+		let data = await GigService.getGigImages(id)
+		commit('SET_FETCHED_GIG_IMAGES', data);
+		return data.data
+	}
 
 
 
@@ -116,6 +139,16 @@ export const getters = {
 	,
 	getFormDataImage(state) {
 		return state.formDataImage;
+	}
+	,
+
+	getFetchedGigs(state) {
+		return state.fetchedGigs;
+	}
+	,
+
+	getFetchedGigImages(state) {
+		return state.fetchedGigImages;
 	}
 
 

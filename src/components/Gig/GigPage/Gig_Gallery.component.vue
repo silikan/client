@@ -74,156 +74,35 @@
       class="carousel slide relative md:mb-3 h-full md:h-auto"
       data-bs-ride="carousel"
     >
-      <div class="carousel-inner relative w-full overflow-hidden">
-        <div class="carousel-item active relative float-left w-full">
+      <el-carousel :interval="4000" indicator-position="none" class="hidden lg:block"	 autoplay="false" type="card"  height="30rem">
+        <el-carousel-item v-for="img in gigImages" :key="img.id">
           <img
-            src="https://mdbcdn.b-cdn.net/img/new/slides/041.webp"
+            :src="`${preurl}/${img.url}`"
             class="block w-full"
             alt="Wild Landscape"
           />
-        </div>
-        <div class="carousel-item relative float-left w-full">
-          <img
-            src="https://mdbcdn.b-cdn.net/img/new/slides/042.webp"
-            class="block w-full"
-            alt="Camera"
-          />
-        </div>
-        <div class="carousel-item relative float-left w-full">
-          <img
-            src="https://mdbcdn.b-cdn.net/img/new/slides/043.webp"
-            class="block w-full"
-            alt="Exotic Fruits"
-          />
-        </div>
-        <div class="carousel-item relative float-left w-full">
-          <img
-            src="https://mdbcdn.b-cdn.net/img/new/slides/043.webp"
-            class="block w-full"
-            alt="Exotic Fruits"
-          />
-        </div>
-      </div>
-      <button
-        class="
-          carousel-control-prev
-          absolute
-          top-0
-          bottom-0
-          flex
-          items-center
-          justify-center
-          p-0
-          text-center
-          border-0
-          hover:outline-none hover:no-underline
-          focus:outline-none focus:no-underline
-          left-0
-        "
-        type="button"
-        data-bs-target="#carouselExampleControls"
-        data-bs-slide="prev"
-      >
-        <span
-          class="carousel-control-prev-icon inline-block bg-no-repeat"
-          aria-hidden="true"
-        ></span>
-        <span class="visually-hidden">Previous</span>
-      </button>
-      <button
-        class="
-          carousel-control-next
-          absolute
-          top-0
-          bottom-0
-          flex
-          items-center
-          justify-center
-          p-0
-          text-center
-          border-0
-          hover:outline-none hover:no-underline
-          focus:outline-none focus:no-underline
-          right-0
-        "
-        type="button"
-        data-bs-target="#carouselExampleControls"
-        data-bs-slide="next"
-      >
-        <span
-          class="carousel-control-next-icon inline-block bg-no-repeat"
-          aria-hidden="true"
-        ></span>
-        <span class="visually-hidden">Next</span>
-      </button>
-    </div>
-    <div
-      class="md:flex-1 md:grid md:grid-cols-4 md:gap-10 md:items-between hidden"
-    >
-      <div class="w-full rounded">
-        <img
-          src="https://mdbcdn.b-cdn.net/img/new/slides/041.webp"
-          class="active cursor-pointer block w-full"
-          alt="Wild Landscape"
-          type="button"
-          data-bs-target="#carouselExampleControls"
-          data-bs-slide-to="0"
-          aria-current="true"
-          aria-label="Slide 1"
-        />
-      </div>
+        </el-carousel-item>
+      </el-carousel>
 
-      <div class="w-full rounded">
-        <img
-          src="https://mdbcdn.b-cdn.net/img/new/slides/042.webp"
-          class="active cursor-pointer block w-full"
-          alt="Wild Landscape"
-          type="button"
-          data-bs-target="#carouselExampleControls"
-          data-bs-slide-to="1"
-          aria-current="true"
-          aria-label="Slide 2"
-        />
-      </div>
-      <div class="w-full rounded">
-        <img
-          src="https://mdbcdn.b-cdn.net/img/new/slides/043.webp"
-          class="active cursor-pointer block w-full"
-          alt="Wild Landscape"
-          type="button"
-          data-bs-target="#carouselExampleControls"
-          data-bs-slide-to="2"
-          aria-current="true"
-          aria-label="Slide 3"
-        />
-      </div>
-      <div class="w-full rounded">
-        <img
-          src="https://mdbcdn.b-cdn.net/img/new/slides/043.webp"
-          class="active cursor-pointer block w-full"
-          alt="Wild Landscape"
-          type="button"
-          data-bs-target="#carouselExampleControls"
-          data-bs-slide-to="3"
-          aria-current="true"
-          aria-label="Slide 4"
-        />
+        <el-carousel :interval="4000" class=" overflow-hidden lg:hidden" indicator-position="none"	 autoplay="false"   height="30rem">
+        <el-carousel-item v-for="img in gigImages" :key="img.id">
+          <img
+            :src="`${preurl}/${img.url}`"
+            class="block w-full"
+            alt="Wild Landscape"
+          />
+        </el-carousel-item>
+      </el-carousel>
+    </div>
+
+    <div class="container mx-auto sm:px-6 lg:px-8 my-10">
+      <h4 class="text-lg font-bold">Description</h4>
+      <div class="mt-5 prose prose-indigo text-gray-500">
+        <p class="mt-1">
+          put description here
+        </p>
       </div>
     </div>
-      <div class="container mx-auto sm:px-6 lg:px-8 my-10">
-    <h4 class="text-lg font-bold">Lorem ipsum</h4>
-    <div class="mt-5 prose prose-indigo text-gray-500">
-      <p class="mt-1">
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Obcaecati totam
-        illum enim iste hic deserunt dolorem fugiat iure nihil unde cum a ipsam
-        neque sed dolorum explicabo consectetur, inventore dolore. Lorem, ipsum
-        dolor sit amet consectetur adipisicing elit. Facilis molestias itaque
-        consequuntur rerum maxime nobis aliquid officia? Corrupti suscipit,
-        omnis minus maiores eius voluptatum quae, laborum tenetur aliquam minima
-        vitae?
-      </p>
-    </div>
-  </div>
   </div>
 </template>
 
@@ -235,16 +114,74 @@ const pages = [
   { name: "Project Nero", href: "#", current: true },
 ];
 import "tw-elements";
+import { computed } from "@vue/runtime-core";
 
 export default {
   components: {
     ChevronRightIcon,
     HomeIcon,
   },
-  setup() {
+  props: ["images", "data"],
+  setup(props) {
+    let gigData = computed(() => {
+      return props.data;
+    });
+    let gigImages = computed(() => {
+      return props.images;
+    });
+    //`${process.env.VUE_APP_API_URL}`
+    let gigImagesData = computed(() => {
+      return gigImages.value;
+    });
+
+    let srcs = [
+      "https://i.picsum.photos/id/96/536/354.jpg?hmac=BkHTCZXyYAIIlUP9rQCjPGZ_maJq-EG9xMd0W5kr9z0",
+      "https://i.picsum.photos/id/96/536/354.jpg?hmac=BkHTCZXyYAIIlUP9rQCjPGZ_maJq-EG9xMd0W5kr9z0",
+      "https://i.picsum.photos/id/882/536/354.jpg?hmac=LrekxoqI1NUSQ0lz5-itEd5TFAkHbFm6Qm0aRoZykts",
+    ];
+
+    let preurl = `${process.env.VUE_APP_API_URL}`;
+
+    let carouselType = ""
     return {
       pages,
+      gigData,
+      gigImages,
+      gigImagesData,
+      preurl,
+      srcs,
+      carouselType
     };
   },
 };
 </script>
+<style scoped>
+.el-carousel__item h3 {
+  color: #475669;
+  font-size: 14px;
+  opacity: 0.75;
+  line-height: 200px;
+  margin: 0;
+  text-align: center;
+
+}
+
+.el-carousel__item:nth-child(2n) {
+  background-color: #99a9bf;
+
+}
+
+.el-carousel__item:nth-child(2n + 1) {
+  background-color: #d3dce6;
+
+
+
+
+}
+.el-carousel__item{
+     height: auto;
+
+
+}
+
+</style>
