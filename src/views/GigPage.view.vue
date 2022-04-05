@@ -11,17 +11,17 @@
       items-center
     "
   >
-    <GigGallery class="col-span-2" :images="gigImages.data" :data="gigData.data" />
+    <GigGallery class="col-span-2" :images="gigImages.data"/>
 
     <!-- ... -->
-    <GigPricing  :data="gigData.data" />
+    <GigPricing  />
   </div>
 
 
 </template>
 
 <script>
-import { computed, onMounted } from '@vue/runtime-core';
+import { computed } from '@vue/runtime-core';
 import { useStore } from 'vuex';
 
 import GigGallery from "../components/Gig/GigPage/Gig_Gallery.component.vue";
@@ -34,22 +34,20 @@ export default {
     const store = useStore();
     let route = useRoute();
     let id = route.params.id;
-    onMounted(() => {
-      store.dispatch('Gig/getGig', id);
-      store.dispatch('Gig/getGigImages', id);
-    });
 
-    let gigData = computed(() => {
-      return store.getters['Gig/getFetchedGigs'];
-    });
+
+      store.dispatch('Gig/getGigImages', id);
+
+
+
     let gigImages = computed(() => {
       return store.getters['Gig/getFetchedGigImages'];
     });
 
 
     return {
-      gigData,
-      gigImages
+      gigImages,
+
     };
   },
 };

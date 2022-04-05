@@ -38,7 +38,6 @@
     "vue3-carousel": "^0.1.38",
     "vue3-date-time-picker": "^2.7.0",
     "vue3-tailwind-datepicker": "^1.0.16",
-    "vuestic-ui": "^1.3.1",
     "vuex": "^4.0.0-0"
   },
   "devDependencies": {

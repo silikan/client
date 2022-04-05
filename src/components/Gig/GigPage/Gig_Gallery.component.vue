@@ -1,4 +1,5 @@
 <template>
+{{user}}
   <div class="flex flex-col md:p-10 m-5 sm:m-1">
     <div class="profile flex justify-between flex-col ml-5 md:ml-0 mt-10">
       <nav class="flex mb-3" aria-label="Breadcrumb">
@@ -33,7 +34,7 @@
           </li>
         </ol>
       </nav>
-      <h1 class="mb-2 text-3xl font-medium">I will Kil Ur Mom Today yaay</h1>
+      <h1 class="mb-2 text-3xl font-medium">{{title}}</h1>
       <a href="#" class="flex-shrink-0 group block mb-5">
         <div class="flex items-center">
           <div>
@@ -74,7 +75,12 @@
       class="carousel slide relative md:mb-3 h-full md:h-auto"
       data-bs-ride="carousel"
     >
-      <el-carousel :interval="4000" indicator-position="none" class="hidden lg:block"	 autoplay="false" type="card"  height="30rem">
+      <el-carousel
+        :interval="4000"
+        class="hidden lg:block"
+        type="card"
+        height="30rem"
+      >
         <el-carousel-item v-for="img in gigImages" :key="img.id">
           <img
             :src="`${preurl}/${img.url}`"
@@ -84,7 +90,12 @@
         </el-carousel-item>
       </el-carousel>
 
-        <el-carousel :interval="4000" class=" overflow-hidden lg:hidden" indicator-position="none"	 autoplay="false"   height="30rem">
+      <el-carousel
+        :interval="4000"
+        class="overflow-hidden lg:hidden"
+        autoplay="false"
+        height="30rem"
+      >
         <el-carousel-item v-for="img in gigImages" :key="img.id">
           <img
             :src="`${preurl}/${img.url}`"
@@ -99,7 +110,7 @@
       <h4 class="text-lg font-bold">Description</h4>
       <div class="mt-5 prose prose-indigo text-gray-500">
         <p class="mt-1">
-          put description here
+          {{ description }}
         </p>
       </div>
     </div>
@@ -114,18 +125,17 @@ const pages = [
   { name: "Project Nero", href: "#", current: true },
 ];
 import "tw-elements";
-import { computed } from "@vue/runtime-core";
+import { computed, ref } from "@vue/runtime-core";
+import { useStore } from "vuex";
 
 export default {
   components: {
     ChevronRightIcon,
     HomeIcon,
   },
-  props: ["images", "data"],
+  props: ["images"],
   setup(props) {
-    let gigData = computed(() => {
-      return props.data;
-    });
+    let store = useStore();
     let gigImages = computed(() => {
       return props.images;
     });
@@ -134,23 +144,43 @@ export default {
       return gigImages.value;
     });
 
-    let srcs = [
-      "https://i.picsum.photos/id/96/536/354.jpg?hmac=BkHTCZXyYAIIlUP9rQCjPGZ_maJq-EG9xMd0W5kr9z0",
-      "https://i.picsum.photos/id/96/536/354.jpg?hmac=BkHTCZXyYAIIlUP9rQCjPGZ_maJq-EG9xMd0W5kr9z0",
-      "https://i.picsum.photos/id/882/536/354.jpg?hmac=LrekxoqI1NUSQ0lz5-itEd5TFAkHbFm6Qm0aRoZykts",
-    ];
+    let description = ref("");
+    let title = ref("");
+    let user = ref(null);
+    store
+      .dispatch("Gig/getGig", 1)
+      .then((result) => {
+        console.log(result);
+        description.value = result.description;
+        title.value = result.title;
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+
+
+        store
+      .dispatch("Gig/getGigUser", 1)
+      .then((result) => {
+        console.log(result);
+        user.value = result;
+      })
+      .catch((err) => {
+        console.log(err);
+      });
 
     let preurl = `${process.env.VUE_APP_API_URL}`;
 
-    let carouselType = ""
+    let carouselType = "";
     return {
       pages,
-      gigData,
       gigImages,
       gigImagesData,
       preurl,
-      srcs,
-      carouselType
+      carouselType,
+      description,
+      title,
+      user
     };
   },
 };
@@ -163,25 +193,16 @@ export default {
   line-height: 200px;
   margin: 0;
   text-align: center;
-
 }
 
 .el-carousel__item:nth-child(2n) {
   background-color: #99a9bf;
-
 }
 
 .el-carousel__item:nth-child(2n + 1) {
   background-color: #d3dce6;
-
-
-
-
 }
-.el-carousel__item{
-     height: auto;
-
-
+.el-carousel__item {
+  height: auto;
 }
-
 </style>

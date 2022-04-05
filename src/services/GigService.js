@@ -16,6 +16,9 @@ export default {
 	},
 	async getGigImages(id) {
 		return await API.apiClient.get(`/gig/${id}}/image`);
-	}
+	},
+	async getGigUser(id) {
+		return await API.apiClient.get(`/gig/${id}}/user`);
 
+	}
 };
