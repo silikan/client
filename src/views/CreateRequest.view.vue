@@ -56,6 +56,29 @@
       >
         next
       </button>
+       <button
+        class="
+          inline-flex
+          items-center
+          px-20
+          py-2
+          -transparent
+          text-sm
+          font-medium
+          rounded-md
+          shadow-sm
+          text-white
+          bg-indigo-600
+          hover:bg-indigo-700
+          focus:outline-none
+          focus:ring-2
+          focus:ring-offset-2
+          focus:ring-indigo-500
+        "
+        @click="createRequest"
+      >
+        create that request
+      </button>
     </div>
   </div>
 </template>
@@ -66,11 +89,12 @@ import General from "../components/Request/CreateRequest/General.component.vue"
 import Pricing from "../components/Request/CreateRequest/Pricing.component.vue"
 import PaymentMthod from "../components/Request/CreateRequest/Payment_Mthod.component.vue"
 import { reactive } from '@vue/reactivity'
+import { useStore } from 'vuex'
 export default {
     components:{Stepper,General, Pricing,PaymentMthod },
 
  setup() {
-
+let store = useStore()
     const steps = reactive([
       { name: "General", href: "#", status: "current", active: true },
       { name: "Pricing", href: "#", status: "upcoming", active: false },
@@ -106,12 +130,32 @@ export default {
 
     };
 
+let createRequest = () => {
+    let title = store.state.Request.title;
+      let description = store.state.Request.description;
+      let category = store.state.Request.category;
+      let price = store.state.Request.price;
+      let paymentMethod = store.state.Request.paymentMethod;
+      let priceDescription = store.state.Request.priceDescription;
+
+      let data = {
+        title,
+        description,
+        category,
+        price,
+        paymentMethod,
+        priceDescription
+      };
+      let jsonData = JSON.stringify(data);
+      store.dispatch("Request/createRequest",jsonData);
+    };
 
 
     return {
       steps,
       nextStep,
       prevStep,
+      createRequest
     };
   },
 };

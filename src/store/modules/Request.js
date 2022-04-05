@@ -50,7 +50,20 @@ export const mutations = {
 export const actions = {
 
 	async createRequest(payload) {
-
+		let title = payload.state.title;
+		let description = payload.state.description;
+		let category = payload.state.category;
+		let price = payload.state.price;
+		let paymentMethod = JSON.stringify(payload.state.paymentMethod);
+		let priceDescription = payload.state.priceDescription;
+		await RequestService.createRequest({
+			title,
+			description,
+			category,
+			price,
+			paymentMethod,
+			priceDescription
+		})
 	}
 
 

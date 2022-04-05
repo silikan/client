@@ -56,7 +56,7 @@ export default {
     const selectedMailingLists = ref(mailingLists[0])
 let store = useStore()
     watchEffect(() => {
-      store.commit('Gig/SET_PAYMENT_METHOD', selectedMailingLists.value.title)
+      store.commit('Request/SET_PAYMENT_METHOD', selectedMailingLists.value.title)
     })
 
     return {

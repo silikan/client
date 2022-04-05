@@ -27,7 +27,7 @@
                 <span class="text-gray-500 sm:text-sm"> $ </span>
               </div>
               <input
-                type="text"
+                type="number"
                 name="price"
                 id="price"
                 v-model="price"

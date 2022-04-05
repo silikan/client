@@ -157,9 +157,9 @@ export default {
     let description = ref(null);
     let category = ref(null);
     watchEffect(() => {
-      store.commit("Gig/SET_TITLE", title.value);
-      store.commit("Gig/SET_DESCRIPTION", description.value);
-      store.commit("Gig/SET_CATEGORY", category.value);
+      store.commit("Request/SET_TITLE", title.value);
+      store.commit("Request/SET_DESCRIPTION", description.value);
+      store.commit("Request/SET_CATEGORY", category.value);
     });
 
     return {

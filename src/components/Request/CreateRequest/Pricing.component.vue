@@ -27,7 +27,8 @@
                 <span class="text-gray-500 sm:text-sm"> $ </span>
               </div>
               <input
-                type="text"
+              v-model="price"
+                type="number"
                 name="price"
                 id="price"
                 class="
@@ -87,6 +88,7 @@
                 Description
               </label>
               <textarea
+              v-model="description"
                 rows="3"
                 name="description"
                 id="description"
@@ -142,11 +144,10 @@ export default {
     let description = ref("");
 let store = useStore();
     watchEffect(() => {
-      if (price.value > 0) {
-        store.commit("Gig/SET_PRICE", price.value);
-        store.commit("Gig/SET_PRICE_DESCRIPTION", description.value);
+        store.commit("Request/SET_PRICE", price.value);
+        store.commit("Request/SET_PRICE_DESCRIPTION", description.value);
 
-      }
+
     });
     return {
       price,
