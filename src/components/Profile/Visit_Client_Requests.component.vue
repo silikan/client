@@ -56,11 +56,7 @@
                     <td class="px-6 py-4 whitespace-nowrap">
                       <div class="flex items-center">
                         <div class="flex-shrink-0 h-10 w-10">
-                          <img
-                            class="h-10 w-10 rounded-full"
-                            :src="request.avatar"
-                            alt=""
-                          >
+                         <Avatar :url="request.userAvatar" :name="request.username"/>
                         </div>
                         <div class="ml-4">
                           <div class="text-sm font-medium text-gray-900">
@@ -105,6 +101,7 @@
 
 
 <script>
+import Avatar from "@/components/Avatar/Avatar.component.vue";
 const people = [
   {
     name: "Jane Cooper",
@@ -124,6 +121,7 @@ import { useStore } from "vuex";
 import { reactive } from "@vue/reactivity";
 import { useRoute } from 'vue-router';
 export default {
+  components: { Avatar },
   setup() {
     let store = useStore();
     let requests = reactive([]);

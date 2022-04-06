@@ -38,11 +38,8 @@
       <a href="#" class="flex-shrink-0 group block mb-5">
         <div class="flex items-center">
           <div>
-            <img
-              class="inline-block h-9 w-9 rounded-full"
-              src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-              alt=""
-            />
+                      <Avatar :url="avatar" :name="name"/>
+
           </div>
           <div class="ml-3">
             <p
@@ -119,6 +116,7 @@
 
 <script>
 import { ChevronRightIcon, HomeIcon } from "@heroicons/vue/solid";
+import Avatar from "@/components/Avatar/Avatar.component.vue";
 
 const pages = [
   { name: "Projects", href: "#", current: false },
@@ -133,6 +131,7 @@ export default {
   components: {
     ChevronRightIcon,
     HomeIcon,
+    Avatar
   },
   props: ["images"],
   setup(props) {
@@ -150,6 +149,7 @@ export default {
     let description = ref("");
     let title = ref("");
     let name = ref(null);
+      let avatar = ref(null);
     store
       .dispatch("Gig/getGig", id)
       .then((result) => {
@@ -165,8 +165,10 @@ export default {
         store
       .dispatch("Gig/getGigUser", id)
       .then((result) => {
-
+console.log(result);
         name.value = result.name;
+                avatar.value = result.avatar;
+
       })
       .catch((err) => {
         console.log(err);
@@ -183,7 +185,8 @@ export default {
       carouselType,
       description,
       title,
-      name
+      name,
+      avatar
     };
   },
 };

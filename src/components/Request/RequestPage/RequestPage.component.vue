@@ -1,4 +1,5 @@
 <template>
+
   <div class="flex flex-col md:p-10 m-5 sm:m-1">
     <div class="profile flex justify-between flex-col ml-5 md:ml-0 mt-10">
       <nav class="flex mb-3" aria-label="Breadcrumb">
@@ -37,11 +38,10 @@
       <a href="#" class="flex-shrink-0 group block mb-5">
         <div class="flex">
           <div>
-            <img
-              class="inline-block h-9 w-9 rounded-full"
-              src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-              alt=""
-            />
+
+          <Avatar :url="avatar" :name="name"/>
+
+
           </div>
           <div class="ml-3">
             <p
@@ -161,7 +161,8 @@ const pages = [
 import "tw-elements";
 import { useStore } from "vuex";
 import { useRoute } from "vue-router";
-import { ref } from "@vue/reactivity";
+import { reactive, ref } from "@vue/reactivity";
+import Avatar from "@/components/Avatar/Avatar.component.vue";
 
 export default {
   components: {
@@ -170,6 +171,7 @@ export default {
     ChatButton,
     CashIcon,
     ClockIcon,
+    Avatar,
   },
   setup() {
     let route = useRoute();
@@ -193,19 +195,20 @@ export default {
       });
   let name = ref("");
     let userId = ref("");
-    let avatar = ref("");
+    let avatar = reactive(null);
          store
       .dispatch("Request/getRequestUser", id)
       .then((result) => {
         name.value = result.name
         userId.value = result.id
-        avatar.value = result.avatar
+        avatar = result.avatar
 
         console.log(result);
       })
       .catch((err) => {
         console.log(err);
       });
+
     return {
       pages,
       title,
