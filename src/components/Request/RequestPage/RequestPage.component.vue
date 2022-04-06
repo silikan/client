@@ -33,7 +33,7 @@
           </li>
         </ol>
       </nav>
-      <h1 class="mb-2 text-3xl font-medium">I will Kil Ur Mom Today yaay</h1>
+      <h1 class="mb-2 text-3xl font-medium">{{title}}</h1>
       <a href="#" class="flex-shrink-0 group block mb-5">
         <div class="flex">
           <div>
@@ -52,18 +52,22 @@
                 group-hover:text-gray-900
               "
             >
-              Tom Cook
+              {{name}}
             </p>
-            <p
-              class="
+
+            <router-link
+        :to="`/user/${userId}`"
+            >
+            <p   class="
                 text-xs
                 font-medium
                 text-gray-500
                 group-hover:text-gray-700
-              "
-            >
-              View profile
-            </p>
+              ">
+                            View profile
+
+              </p>
+            </router-link>
           </div>
         </div>
       </a>
@@ -73,12 +77,11 @@
         <div class="sm:flex sm:items-start sm:justify-between">
           <div>
             <h3 class="text-lg leading-6 font-medium text-gray-900">
-              Manage subscription
+              {{title}}
             </h3>
             <div class="my-2 max-w-xl text-sm text-gray-500">
               <p>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                Recusandae voluptatibus corrupti atque repudiandae nam.
+               {{description}}
               </p>
             </div>
             <div
@@ -90,7 +93,7 @@
               "
             >
               <CashIcon class="btn-cash h-5 w-5" />
-              <span>budget</span>
+              <span>{{price}} DZD</span>
             </div>
 
             <div
@@ -156,6 +159,9 @@ const pages = [
   { name: "Project Nero", href: "#", current: true },
 ];
 import "tw-elements";
+import { useStore } from "vuex";
+import { useRoute } from "vue-router";
+import { ref } from "@vue/reactivity";
 
 export default {
   components: {
@@ -166,8 +172,48 @@ export default {
     ClockIcon,
   },
   setup() {
+    let route = useRoute();
+    let id = route.params.id;
+    let store = useStore();
+    let title = ref("");
+    let description = ref("");
+    let price = ref("");
+
+    store
+      .dispatch("Request/getRequest", id)
+      .then((result) => {
+        title.value = result.title;
+        description.value = result.description;
+        price.value = result.price;
+
+        console.log(result);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  let name = ref("");
+    let userId = ref("");
+    let avatar = ref("");
+         store
+      .dispatch("Request/getRequestUser", id)
+      .then((result) => {
+        name.value = result.name
+        userId.value = result.id
+        avatar.value = result.avatar
+
+        console.log(result);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
     return {
       pages,
+      title,
+      description,
+      price,
+      name,
+      userId,
+      avatar,
     };
   },
 };

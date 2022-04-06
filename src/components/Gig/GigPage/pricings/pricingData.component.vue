@@ -26,7 +26,7 @@
           </h3>
         </div>
         <div class="mt-4 flex items-baseline text-6xl font-extrabold">
-          ${{ Data.price }}
+          DZD {{ Data.price }}
           <span class="ml-1 text-2xl font-medium text-gray-500"> /mo </span>
         </div>
         <p class="mt-5 text-lg text-gray-500">
