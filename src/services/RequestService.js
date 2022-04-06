@@ -8,5 +8,20 @@ export default {
 
 		return response.data;
 
+	},
+
+	async getRequest(id) {
+		return await API.apiClient.get(`/request/${id}`);
+	},
+
+	async getRequestUser(id) {
+		return await API.apiClient.get(`/request/${id}}/user`);
+
+	},
+
+	getUserRequests(id) {
+		return API.apiClient.get(`/user/${id}/request`);
 	}
+
+
 };

@@ -10,7 +10,9 @@ export const state = {
 	price: '',
 	priceDescription: '',
 	paymentMethod: '',
-
+	fetchedRequests: [],
+	requestUser: {},
+	userRequests: [],
 
 };
 
@@ -38,6 +40,20 @@ export const mutations = {
 	,
 	SET_PAYMENT_METHOD(state, paymentMethod) {
 		state.paymentMethod = paymentMethod;
+	},
+
+
+	SET_FETCHED_REQUESTS(state, fetchedRequests) {
+		state.fetchedGigs = fetchedRequests;
+	}
+	,
+
+
+	SET_REQUESTS_USER(state, requestUser) {
+		state.gigUser = requestUser;
+	},
+	SET_USER_REQUESTS(state, userRequests) {
+		state.userGigs = userRequests;
 	}
 
 
@@ -64,9 +80,28 @@ export const actions = {
 			paymentMethod,
 			priceDescription
 		})
+	},
+
+	async getRequest({ commit }, id) {
+		let data = await RequestService.getRequest(id)
+		commit('SET_FETCHED_REQUESTS', data);
+
+		return data.data
 	}
+	,
 
 
+
+	async getRequestUser({ commit }, id) {
+		let data = await RequestService.getRequestUser(id)
+		commit('SET_GIG_USERS', data);
+		return data.data
+	},
+	async getUserRequests({ commit }, id) {
+		let data = await RequestService.getUserRequests(id)
+		commit('SET_USER_REQUESTS', data.data);
+		return data.data
+	}
 
 
 
@@ -96,7 +131,19 @@ export const getters = {
 	getPaymentMethod(state) {
 		return state.paymentMethod;
 	}
+	,
+	getFetchedRequests(state) {
+		return state.fetchedRequests;
+	}
+	,
 
+
+	getRequestUser(state) {
+		return state.requestUser;
+	},
+	getUserResuests(state) {
+		return state.userRequests;
+	}
 
 
 };
