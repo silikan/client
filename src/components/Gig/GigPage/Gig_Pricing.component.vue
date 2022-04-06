@@ -21,9 +21,7 @@
             placeholder-gray-400
             focus:outline-none focus:ring-indigo-500 focus:border-indigo-500
             sm:text-sm
-
           "
-
           @change="selectTab"
         >
           <option v-for="tab in tabs" :key="tab.name" :selected="tab.current">
@@ -64,9 +62,17 @@
       </div>
     </div>
 
-    <Pricing :tiers="basic" v-if="tabs[0].current === true" />
-    <Pricing :tiers="standard" v-if="tabs[1].current === true" />
-    <Pricing :tiers="Premium" v-if="tabs[2].current === true" />
+    <Pricing :data="basicData" :tiers="basic" v-if="tabs[0].current === true" />
+    <Pricing
+      :data="standardData"
+      :tiers="standard"
+      v-if="tabs[1].current === true"
+    />
+    <Pricing
+      :data="premiumData"
+      :tiers="Premium"
+      v-if="tabs[2].current === true"
+    />
   </div>
 </template>
 
@@ -81,43 +87,16 @@ const tabs = reactive([
 const basic = reactive([
   {
     name: "Basic",
-    href: "#",
-    priceMonthly: 49,
-    description: "Lorem ipsum dolor sit amet consectetur, adipisicing elit.",
-    features: [
-      "Pariatur quod similique",
-      "Sapiente libero doloribus modi nostrum",
-      "Vel ipsa esse repudiandae excepturi",
-      "Itaque cupiditate adipisci quibusdam",
-    ],
   },
 ]);
 const Premium = reactive([
   {
-    name: "premium",
-    href: "#",
-    priceMonthly: 49,
-    description: "Lorem ipsum dolor sit amet consectetur, adipisicing elit.",
-    features: [
-      "Pariatur quod similique",
-      "Sapiente libero doloribus modi nostrum",
-      "Vel ipsa esse repudiandae excepturi",
-      "Itaque cupiditate adipisci quibusdam",
-    ],
+    name: "Premium",
   },
 ]);
 const standard = reactive([
   {
     name: "Standard",
-    href: "#",
-    priceMonthly: 49,
-    description: "Lorem ipsum dolor sit amet consectetur, adipisicing elit.",
-    features: [
-      "Pariatur quod similique",
-      "Sapiente libero doloribus modi nostrum",
-      "Vel ipsa esse repudiandae excepturi",
-      "Itaque cupiditate adipisci quibusdam",
-    ],
   },
 ]);
 
@@ -126,6 +105,7 @@ export default {
     Pricing,
   },
   setup() {
+
     //get current tab
     const navigateTabs = (tab) => {
       tabs.forEach((t) => {
@@ -143,11 +123,10 @@ export default {
     return {
       tabs,
       navigateTabs,
-    basic,
+      basic,
       Premium,
       standard,
-selectTab
-
+      selectTab,
     };
   },
 };

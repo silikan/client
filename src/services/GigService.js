@@ -20,5 +20,11 @@ export default {
 	async getGigUser(id) {
 		return await API.apiClient.get(`/gig/${id}}/user`);
 
+	},
+
+	getUserGigs(id) {
+		return API.apiClient.get(`/user/${id}/gig`);
 	}
+
+
 };

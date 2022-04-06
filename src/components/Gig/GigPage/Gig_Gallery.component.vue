@@ -1,5 +1,5 @@
 <template>
-{{user}}
+
   <div class="flex flex-col md:p-10 m-5 sm:m-1">
     <div class="profile flex justify-between flex-col ml-5 md:ml-0 mt-10">
       <nav class="flex mb-3" aria-label="Breadcrumb">
@@ -53,7 +53,7 @@
                 group-hover:text-gray-900
               "
             >
-              Tom Cook
+              {{name}}
             </p>
             <p
               class="
@@ -127,6 +127,7 @@ const pages = [
 import "tw-elements";
 import { computed, ref } from "@vue/runtime-core";
 import { useStore } from "vuex";
+import { useRoute } from 'vue-router';
 
 export default {
   components: {
@@ -136,6 +137,8 @@ export default {
   props: ["images"],
   setup(props) {
     let store = useStore();
+    let route = useRoute();
+    let id = route.params.id;
     let gigImages = computed(() => {
       return props.images;
     });
@@ -146,9 +149,9 @@ export default {
 
     let description = ref("");
     let title = ref("");
-    let user = ref(null);
+    let name = ref(null);
     store
-      .dispatch("Gig/getGig", 1)
+      .dispatch("Gig/getGig", id)
       .then((result) => {
         console.log(result);
         description.value = result.description;
@@ -160,10 +163,10 @@ export default {
 
 
         store
-      .dispatch("Gig/getGigUser", 1)
+      .dispatch("Gig/getGigUser", id)
       .then((result) => {
-        console.log(result);
-        user.value = result;
+
+        name.value = result.name;
       })
       .catch((err) => {
         console.log(err);
@@ -180,7 +183,7 @@ export default {
       carouselType,
       description,
       title,
-      user
+      name
     };
   },
 };

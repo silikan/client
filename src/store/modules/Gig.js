@@ -15,7 +15,8 @@ export const state = {
 
 	fetchedGigs: [],
 	fetchedGigImages: [],
-	gigUser: {}
+	gigUser: {},
+	userGigs: [],
 
 };
 
@@ -63,6 +64,9 @@ export const mutations = {
 
 	SET_GIG_USER(state, gigUser) {
 		state.gigUser = gigUser;
+	},
+	SET_USER_GIGS(state, userGigs) {
+		state.userGigs = userGigs;
 	}
 
 
@@ -114,6 +118,11 @@ export const actions = {
 		let data = await GigService.getGigUser(id)
 		commit('SET_GIG_USE R', data);
 		return data.data
+	},
+	async getUserGigs({ commit }, id) {
+		let data = await GigService.getUserGigs(id)
+		commit('SET_USER_GIGS', data.data);
+		return data.data
 	}
 };
 
@@ -163,6 +172,10 @@ export const getters = {
 
 	getGigUser(state) {
 		return state.gigUser;
+	},
+	getUserGigs(state) {
+		return state.userGigs;
 	}
+
 
 };

@@ -26,11 +26,11 @@
           </h3>
         </div>
         <div class="mt-4 flex items-baseline text-6xl font-extrabold">
-          ${{ tier.priceMonthly }}
+          ${{ Data.price }}
           <span class="ml-1 text-2xl font-medium text-gray-500"> /mo </span>
         </div>
         <p class="mt-5 text-lg text-gray-500">
-          {{ tier.description }}
+          {{ Data.description }}
         </p>
       </div>
       <div
@@ -75,10 +75,11 @@
               text-white
               bg-gray-800
               hover:bg-gray-900
+              cursor-pointer
             "
             aria-describedby="tier-standard"
           >
-            Get started
+            Add To Cart
           </a>
         </div>
       </div>
@@ -89,6 +90,9 @@
 <script>
 import { CheckIcon } from "@heroicons/vue/outline";
 import { computed } from "@vue/runtime-core";
+import { ref } from "@vue/reactivity";
+import { useStore } from "vuex";
+import { useRoute } from "vue-router";
 
 export default {
   components: {
@@ -96,10 +100,35 @@ export default {
   },
   props: ["tiers"],
   setup(props) {
+    let route = useRoute();
+    let id = route.params.id;
     let tabs = computed(() => props.tiers);
+    let store = useStore();
+    let Data = ref("");
 
+    store
+      .dispatch("Gig/getGig", id)
+      .then((result) => {
+        console.log(tabs.value);
+        if (tabs.value[0].name == "Basic") {
+          Data.value = JSON.parse(result.basic);
+        }
+
+        if (tabs.value[0].name == "Standard") {
+          Data.value = JSON.parse(result.standard);
+        }
+
+        if (tabs.value[0].name == "Premium") {
+          console.log(result.premium);
+          Data.value = JSON.parse(result.premium);
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
     return {
       tabs,
+      Data,
     };
   },
 };

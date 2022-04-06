@@ -1,5 +1,6 @@
 <!-- This example requires Tailwind CSS v2.0+ -->
 <template>
+
   <div
     class="
       border-t border-gray-200
@@ -25,8 +26,8 @@
         "
       >
         <div
-          v-for="post in posts"
-          :key="post.title"
+          v-for="gig in gigs"
+          :key="gig.id"
           class="
             flex flex-col
             rounded-lg
@@ -36,31 +37,31 @@
           "
         >
           <div class="flex justify-center  relative w-full h-72  overflow-hidden">
-              <img :src="post.imageUrl" class="w-full h-full object-center object-cover " />
+              <img :src="`${preurl}/${gig.Image}`" class="w-full h-full object-center object-cover " />
             </div>
           <div class="flex-1 bg-white px-5  pt-5 flex flex-col justify-between  ">
             <div class="flex items-center ">
               <div class="flex-shrink-0">
-                <a :href="post.author.href">
-                  <span class="sr-only">{{ post.author.name }}</span>
+                <a href="#">
+                  <span class="sr-only">{{ gig.username }}</span>
                   <img
                     class="h-10 w-10 rounded-full"
-                    :src="post.author.imageUrl"
+                    :src="gig.userAvatar"
                     alt=""
                   />
                 </a>
               </div>
               <div class="ml-3">
                 <p class="text-md font-medium text-gray-600">
-                  <a :href="post.author.href" class="hover:underline">
-                    {{ post.author.name }}
+                  <a href="gig.author.href" class="hover:underline">
+                    {{ gig.username }}
                   </a>
                 </p>
               </div>
             </div>
             <div class="">
                 <p class="text-md font-medium text-gray-500 mt-2">
-                  {{ post.title }}
+                  {{ gig.title }}
                 </p>
 
             </div>
@@ -74,7 +75,7 @@
                 p-3
               "
             >
-              <p class="font-bold text-2xl text-gray-400">35$</p>
+              <p class="font-bold text-2xl text-gray-400">{{gig.basic.price}}$</p>
               <div class="flex justify-center items-center">
                 <button class="text-black font-bold  rounded-full">
                   <span class="sr-only">Button</span>
@@ -103,99 +104,8 @@
 
 <script>
 import { BookmarkIcon, ShoppingCartIcon } from "@heroicons/vue/solid";
-const posts = [
-
-  {
-    title: "I Will How to use search engine optimization to drive sales",
-    href: "#",
-    category: { name: "Video", href: "#" },
-    description:
-      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Velit facilis asperiores porro quaerat doloribus, eveniet dolore. Adipisci tempora aut inventore optio animi., tempore temporibus quo laudantium.",
-    date: "Mar 10, 2020",
-    datetime: "2020-03-10",
-    imageUrl:
-      "https://images.unsplash.com/photo-1547586696-ea22b4d4235d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1679&q=80",
-    readingTime: "4 min",
-    author: {
-      name: "Brenna Goyette",
-      href: "#",
-      imageUrl:
-        "https://images.unsplash.com/photo-1550525811-e5869dd03032?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
-    },
-  },
-  {
-    title: "I Will Improve your customer experience",
-    href: "#",
-    category: { name: "Case Study", href: "#" },
-    description:
-      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Sint harum rerum voluptatem quo recusandae magni placeat saepe molestiae, sed excepturi cumque corporis perferendis hic.",
-    date: "Feb 12, 2020",
-    datetime: "2020-02-12",
-    imageUrl:
-      "https://images.unsplash.com/photo-1492724441997-5dc865305da7?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1679&q=80",
-    readingTime: "11 min",
-    author: {
-      name: "Daniela Metz",
-      href: "#",
-      imageUrl:
-        "https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
-    },
-  },
-  {
-    title: "I Will Improve your customer experience",
-    href: "#",
-    category: { name: "Case Study", href: "#" },
-    description:
-      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Sint harum rerum voluptatem quo recusandae magni placeat saepe molestiae, sed excepturi cumque corporis perferendis hic.",
-    date: "Feb 12, 2020",
-    datetime: "2020-02-12",
-    imageUrl:
-      "https://images.unsplash.com/photo-1492724441997-5dc865305da7?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1679&q=80",
-    readingTime: "11 min",
-    author: {
-      name: "Daniela Metz",
-      href: "#",
-      imageUrl:
-        "https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
-    },
-  },
-    {
-    title: "Improve your customer experience",
-    href: "#",
-    category: { name: "Case Study", href: "#" },
-    description:
-      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Sint harum rerum voluptatem quo recusandae magni placeat saepe molestiae, sed excepturi cumque corporis perferendis hic.",
-    date: "Feb 12, 2020",
-    datetime: "2020-02-12",
-    imageUrl:
-      "https://images.unsplash.com/photo-1492724441997-5dc865305da7?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1679&q=80",
-    readingTime: "11 min",
-    author: {
-      name: "Daniela Metz",
-      href: "#",
-      imageUrl:
-        "https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
-    },
-  },
-    {
-    title: "Improve your customer experience",
-    href: "#",
-    category: { name: "Case Study", href: "#" },
-    description:
-      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Sint harum rerum voluptatem quo recusandae magni placeat saepe molestiae, sed excepturi cumque corporis perferendis hic.",
-    date: "Feb 12, 2020",
-    datetime: "2020-02-12",
-    imageUrl:
-      "https://images.unsplash.com/photo-1492724441997-5dc865305da7?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1679&q=80",
-    readingTime: "11 min",
-    author: {
-      name: "Daniela Metz",
-      href: "#",
-      imageUrl:
-        "https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
-    },
-  },
-];
+import { useStore } from 'vuex';
+import { reactive } from '@vue/reactivity';
 
 export default {
   components: {
@@ -203,8 +113,34 @@ export default {
     ShoppingCartIcon,
   },
   setup() {
+let store = useStore()
+let gigs = reactive([])
+ store
+      .dispatch("Gig/getUserGigs", 1)
+      .then((result) => {
+
+  let dataArray = Object.values(result)
+  dataArray.forEach(element => {
+    console.log(element.gig.images)
+    gigs.push({
+      "id": element.gig.data.id,
+      "title" : element.gig.data.title,
+      "basic" : JSON.parse(element.gig.data.basic),
+      "username" : element.gig.user.name,
+      "userId" : element.gig.user.id,
+      "userAvatar" : element.gig.user.avatar,
+      "Image" : element.gig.images[0].url,
+    })
+  });
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+    let preurl = `${process.env.VUE_APP_API_URL}`;
+
     return {
-      posts,
+      gigs,
+      preurl
     };
   },
 };
