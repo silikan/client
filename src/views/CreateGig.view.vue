@@ -7,6 +7,7 @@
     <Upload v-show="steps[3].active === true" />
     <div class="my-10 flex justify-around w-full mx-auto sm:px-6 lg:px-8">
       <button
+      v-if="steps.findIndex((step) => step.active) >0"
         class="
           inline-flex
           items-center
@@ -29,6 +30,7 @@
         prev
       </button>
       <button
+      v-if="steps.findIndex((step) => step.active) < 3"
         class="
           inline-flex
           items-center
@@ -52,6 +54,7 @@
         next
       </button>
       <button
+      v-if="steps.findIndex((step) => step.active) === 3"
         class="
           inline-flex
           items-center
@@ -117,6 +120,7 @@ export default {
         steps[currentStep - 1].status = "current";
       }
     };
+    
 
     let store = useStore();
 
