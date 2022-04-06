@@ -106,7 +106,7 @@
 import { BookmarkIcon, ShoppingCartIcon } from "@heroicons/vue/solid";
 import { useStore } from 'vuex';
 import { reactive } from '@vue/reactivity';
-import { computed } from '@vue/runtime-core';
+import { useRoute } from 'vue-router';
 
 export default {
   components: {
@@ -116,10 +116,10 @@ export default {
   setup() {
 let store = useStore()
 let gigs = reactive([])
-
-let myId =  computed(()=>store.getters["auth/id"])
+let route = useRoute()
+let id = route.params.id
  store
-      .dispatch("Gig/getUserGigs", myId.value)
+      .dispatch("Gig/getUserGigs", id)
       .then((result) => {
 
   let dataArray = Object.values(result)

@@ -322,7 +322,7 @@
   <ClientRequests v-if="Gigs_Requests_tabs[0].current === true" />
 
   <HandymanGigs
-    v-if="Gigs_Requests_tabs[1].current === true && isHandyman === true"
+    v-if="Gigs_Requests_tabs[1].current === true "
   />
 </template>
 
@@ -337,8 +337,8 @@ import About from "./Visit_About.component.vue";
 import Resume from "./Visit_Resume.component.vue";
 import Info from "./VisitInfo.component.vue";
 
-import ClientRequests from "./Client_Requests.component.vue";
-import HandymanGigs from "./Handyman_Gigs.component.vue";
+import ClientRequests from "./Visit_Client_Requests.component.vue";
+import HandymanGigs from "./Visit_Handyman_Gigs.component.vue";
 
 import { DotsVerticalIcon } from "@heroicons/vue/solid";
 import { Menu, MenuButton, MenuItem, MenuItems } from "@headlessui/vue";
