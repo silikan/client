@@ -1,14 +1,16 @@
-<template>
+<template >
   <img
+  referrerpolicy="no-referrer"
     class="h-8 w-8 rounded-full"
     :src="avatar_svg"
-    v-if="avatarWithoutLocalhost === null"
+    v-if="avatarWithoutLocalhost === null && nameData !== null"
     alt=""
   />
   <img
+  referrerpolicy="no-referrer"
     class="h-8 w-8 rounded-full"
     :src="avatar"
-    v-if="avatarWithoutLocalhost !== null"
+    v-if="avatarWithoutLocalhost !== null && nameData !== null"
     alt=""
   />
 </template>
@@ -28,8 +30,7 @@ export default {
 
     let nameData = computed(() => props.name);
     let urlData = computed(() => props.url);
-
-console.log(props.url);
+console.log(nameData.value)
     avatar_svg = createAvatar(style, {
       seed: nameData.value,
       dataUri: true,
@@ -54,6 +55,7 @@ console.log(props.url);
       avatar_svg,
       avatar,
       avatarWithoutLocalhost,
+      nameData
     };
   },
 };

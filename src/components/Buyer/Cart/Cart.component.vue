@@ -118,12 +118,11 @@
                 <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                   <div class="flex items-center">
                     <div class="flex-shrink-0 h-10 w-10">
-                      <img
-                        class="h-10 w-10 rounded-full"
-                        :src="person.image"
-                        alt=""
-                      />
-                    </div>
+
+                          <router-link :to="`/user/${person.item.handyman.id}`">
+                    <Avatar v-if="person.item.handyman.name" :url="person.item.handyman.avatar" :name="person.item.handyman.name"/>
+                     </router-link>
+                     </div>
                     <div class="ml-4">
                       <div class="text-sm font-medium text-gray-900">
                         {{ person.name }}
@@ -143,8 +142,8 @@
                     font-medium
                   "
                 >
-                  <a href="#" class="text-indigo-600 hover:text-indigo-900"
-                    >Check</a
+                  <router-link  :to="`/gig/${person.item.gig[0].id}`" class="text-indigo-600 hover:text-indigo-900"
+                    >Check</router-link
                   >
                 </td>
                  <td
@@ -172,6 +171,7 @@
 <script>
 import { computed, ref } from '@vue/runtime-core';
 import { useStore } from 'vuex';
+import Avatar from "@/components/Avatar/Avatar.component.vue";
 const people = [
   {
     name: "Jane Cooper",
@@ -205,6 +205,9 @@ const people = [
 ];
 
 export default {
+  components: {
+    Avatar,
+  },
   setup() {
         let store = useStore();
   let cart = ref([]);

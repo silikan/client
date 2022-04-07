@@ -39,7 +39,7 @@
         <div class="flex">
           <div>
 
-          <Avatar :url="avatar" :name="name"/>
+          <Avatar v-if="name" :url="avatar" :name="name"/>
 
 
           </div>
@@ -193,9 +193,9 @@ export default {
       .catch((err) => {
         console.log(err);
       });
-  let name = ref("");
-    let userId = ref("");
-    let avatar = reactive(null);
+  let name = ref();
+    let userId = ref();
+    let avatar = reactive();
          store
       .dispatch("Request/getRequestUser", id)
       .then((result) => {

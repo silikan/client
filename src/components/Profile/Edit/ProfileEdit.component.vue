@@ -137,12 +137,14 @@
                 aria-hidden="true"
               >
                 <img
+                referrerpolicy="no-referrer"
                   class="rounded-full w-10 h-10"
                   :src="avatar_svg"
                   v-if="avatarWithoutLocalhost === null"
                   alt=""
                 />
                 <img
+                referrerpolicy="no-referrer"
                   class="rounded-full w-10 h-10"
                   :src="avatar"
                   v-if="avatarWithoutLocalhost !== null"
@@ -206,6 +208,7 @@
 
           <div class="hidden relative rounded-full overflow-hidden lg:block">
             <img
+            referrerpolicy="no-referrer"
               class="relative rounded-full w-40 h-40"
               :src="avatar_svg"
               v-if="avatarWithoutLocalhost === null"

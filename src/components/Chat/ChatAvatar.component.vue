@@ -1,12 +1,14 @@
 	<template>
 <span class="inline-block relative">
     <img
+    referrerpolicy="no-referrer"
       class="h-8 w-8 rounded-full"
       :src="avatar_svg"
       v-if="avatarWithoutLocalhost === null"
       alt=""
     />
     <img
+    referrerpolicy="no-referrer"
       class="h-8 w-8 rounded-full"
       :src="avatar"
       v-if="avatarWithoutLocalhost !== null"

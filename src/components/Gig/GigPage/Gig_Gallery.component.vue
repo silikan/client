@@ -38,7 +38,7 @@
       <a href="#" class="flex-shrink-0 group block mb-5">
         <div class="flex items-center">
           <div>
-                      <Avatar :url="avatar" :name="name"/>
+                      <Avatar v-if="name" :url="avatar" :name="name"/>
 
           </div>
           <div class="ml-3">
@@ -52,16 +52,18 @@
             >
               {{name}}
             </p>
-            <p
+            <router-link  :to="`/user/${userId}`">
+              <p
               class="
                 text-xs
                 font-medium
                 text-gray-500
                 group-hover:text-gray-700
               "
-            >
+          >
               View profile
-            </p>
+              </p>
+            </router-link>
           </div>
         </div>
       </a>
@@ -150,6 +152,7 @@ export default {
     let title = ref("");
     let name = ref(null);
       let avatar = ref(null);
+      let userId = ref(null);
     store
       .dispatch("Gig/getGig", id)
       .then((result) => {
@@ -168,7 +171,7 @@ export default {
 console.log(result);
         name.value = result.name;
                 avatar.value = result.avatar;
-
+                userId.value = result.id;
       })
       .catch((err) => {
         console.log(err);
@@ -186,7 +189,8 @@ console.log(result);
       description,
       title,
       name,
-      avatar
+      avatar,
+      userId
     };
   },
 };

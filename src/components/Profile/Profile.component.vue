@@ -16,12 +16,14 @@
             aria-hidden="true"
           >
             <img
+            referrerpolicy="no-referrer"
               class="h-40 w-40 rounded-full ring-4 ring-white sm:h-48 sm:w-48"
               :src="avatar_svg"
               v-if="avatarWithoutLocalhost === null"
               alt=""
             />
             <img
+            referrerpolicy="no-referrer"
               class="h-40 w-40 rounded-full ring-4 ring-white sm:h-48 sm:w-48"
               :src="avatar"
               v-if="avatarWithoutLocalhost !== null"
