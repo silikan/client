@@ -80,11 +80,16 @@ export const actions = {
 			});
 
 	},
-	getMessages({ commit }, room_id, page) {
+	getMessages({ commit }, payload) {
+
+		let room_id = payload.room_id;
+		let page = payload.page;
+		console.log(page);
 		commit("SET_LOADING", true);
 		ChatService.getMessages(room_id, page)
 			.then((response) => {
 				setPaginatedMessages(commit, response);
+				console.log(response);
 			})
 			.catch((error) => {
 				commit("SET_LOADING", false);

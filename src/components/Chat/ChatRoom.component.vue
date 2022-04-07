@@ -6,11 +6,7 @@
           <div class="bg-white px-4 py-5 sm:px-6 border-b border-gray-300">
             <div class="flex space-x-3">
               <div class="flex-shrink-0">
-                <img
-                  class="h-10 w-10 rounded-full"
-                  src="https://images.unsplash.com/photo-1550525811-e5869dd03032?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-                  alt=""
-                />
+                <Avatar v-if="name" :url="avatar" :name="name" />
               </div>
               <div class="min-w-0 flex-1">
                 <p class="text-sm font-medium text-gray-900">
@@ -124,36 +120,35 @@
             class="flex flex-col justify-end flex-1 w-full py-6 overflow-y-auto"
           >
             <ul class="space-y-2 overflow-y-auto scrollbar">
-              <div class="flex justify-center" >
+              <div class="flex justify-center">
                 <p v-if="loading">loading...</p>
-                     <button
-                     v-if="loading === false && meta.current_page < meta.last_page"
-                type="button"
-                class="
-                  inline-flex
-                  items-center
-                  px-3
-                  py-1
-                  border border-gray-300
-                  shadow-sm
-                  text-xs
-                  leading-4
-                  font-medium
-                  text-gray-700
-                  bg-white
-                  hover:bg-gray-50
-                  focus:outline-none
-                  focus:ring-2
-                  focus:ring-offset-2
-                  focus:ring-indigo-500
-                  rounded-full
-                "
-                @click="setPage()"
-              >
-               More
-              </button>
+                <button
+                  v-if="loading === false && meta.current_page < meta.last_page"
+                  type="button"
+                  class="
+                    inline-flex
+                    items-center
+                    px-3
+                    py-1
+                    border border-gray-300
+                    shadow-sm
+                    text-xs
+                    leading-4
+                    font-medium
+                    text-gray-700
+                    bg-white
+                    hover:bg-gray-50
+                    focus:outline-none
+                    focus:ring-2
+                    focus:ring-offset-2
+                    focus:ring-indigo-500
+                    rounded-full
+                  "
+                  @click="setPage()"
+                >
+                  More
+                </button>
               </div>
-
 
               <li
                 v-for="msg in savedMessages.slice().reverse()"
@@ -181,13 +176,18 @@
                       </p>
                     </div>
 
-<!--                     <ChatAvatar :UserId="msg.from" class="ml-2" />
- -->                  </div>
+                    <!--                     <ChatAvatar :UserId="msg.from" class="ml-2" />
+ -->
+
+                    <Avatar v-if="name" :url="toavatar" :name="toname" />
+                  </div>
                 </div>
                 <div class="flex justify-start">
                   <div v-if="msg.from != authUser.id" class="flex">
-<!--                     <ChatAvatar :UserId="msg.from" class="mr-2" />
+                    <!--                     <ChatAvatar :UserId="msg.from" class="mr-2" />
  -->
+
+                    <Avatar v-if="name" :url="avatar" :name="name" />
                     <span
                       class="
                         relative
@@ -224,13 +224,18 @@
                       "
                       >{{ msg.message }}</span
                     >
-<!--                     <ChatAvatar :UserId="msg.from" class="ml-2" />
- -->                  </div>
+                    <!--                     <ChatAvatar :UserId="msg.from" class="ml-2" />
+ -->
+
+                    <Avatar v-if="name" :url="toavatar" :name="toname" />
+                  </div>
                 </div>
                 <div class="flex justify-start">
                   <div v-if="msg.from != authUser.id" class="flex">
-<!--                     <ChatAvatar :UserId="msg.from" class="mr-2" />
+                    <!--                     <ChatAvatar :UserId="msg.from" class="mr-2" />
  -->
+
+                    <Avatar v-if="name" :url="avatar" :name="name" />
                     <span
                       class="
                         relative
@@ -342,12 +347,12 @@ import { useRoute } from "vue-router";
 import { useStore } from "vuex";
 import { PaperAirplaneIcon } from "@heroicons/vue/solid";
 import { io } from "socket.io-client";
-/* import ChatAvatar from "@/components/Chat/ChatAvatar.component";
- */export default {
+import Avatar from "@/components/Avatar/Avatar.component.vue";
+export default {
   components: {
     PaperAirplaneIcon,
-/*     ChatAvatar,
- */    Menu,
+    /*     ChatAvatar,
+     */ Menu,
     MenuButton,
     MenuItem,
     MenuItems,
@@ -355,6 +360,7 @@ import { io } from "socket.io-client";
     DotsVerticalIcon,
     FlagIcon,
     StarIcon,
+    Avatar,
   },
   setup() {
     let pages = ref(1);
@@ -367,27 +373,23 @@ import { io } from "socket.io-client";
     let id = route.params.id;
     let loading = computed(() => store.getters["Loading/loading"]);
     let meta = computed(() => store.getters["Chat/meta"]);
+    let firstPage = reactive(1);
 
-    store.dispatch("Chat/getMessages", id , 1)
-let savedMessagesReactive = reactive([])
-let  savedMessages = computed(()=>{
-  savedMessagesReactive.push(...store.getters["Chat/messages"])
-  return [...savedMessagesReactive]
-
-
-  });
-          let links = computed(()=>store.getters["Chat/links"]);
+    let payload = {
+      page: firstPage,
+      room_id: id,
+    };
+    store.dispatch("Chat/getMessages", payload);
+    let savedMessagesReactive = reactive([]);
+    let savedMessages = computed(() => {
+      savedMessagesReactive.push(...store.getters["Chat/messages"]);
+      return [...savedMessagesReactive];
+    });
+    let links = computed(() => store.getters["Chat/links"]);
 
     const setPage = () => {
-
-
-    store.dispatch("Chat/paginatemessages", links.value.next).then(()=>{
-    })
-
-
-
+      store.dispatch("Chat/paginatemessages", links.value.next).then(() => {});
     };
-
 
     let socket = io("http://localhost:3000");
 
@@ -438,28 +440,38 @@ let  savedMessages = computed(()=>{
       // Connected, let's sign-up for to receive messages for this room
       socket.emit("room", `room-${id}`);
     });
+    let name = ref();
+    let avatar = ref();
 
+    let toname = ref();
+    let toavatar = ref();
     store.dispatch("Chat/getRoomUsers", id).then((result) => {
       let AuthUserId = authUser.value.id;
       watchEffect(() => {
-   console.log(result);
-
+        console.log(result.data);
       });
       if (result.data[0].id == AuthUserId) {
+        name.value = result.data[1].name;
+        avatar.value = result.data[1].avatar;
+        toname.value = result.data[0].name;
+        toavatar.value = result.data[0].avatar;
         to.value = result.data[1];
         from.value = result.data[0];
       } else {
+        name.value = result.data[0].name;
+        avatar.value = result.data[0].avatar;
+        toname.value = result.data[1].name;
+        toavatar.value = result.data[1].avatar;
         to.value = result.data[0];
         from.value = result.data[1];
       }
     });
 
     console.log(to.value);
-watchEffect(()=>{
-console.log(savedMessages.value);
-  return {savedMessages}
-
-})
+    watchEffect(() => {
+      console.log(savedMessages.value);
+      return { savedMessages };
+    });
     return {
       to,
       from,
@@ -472,7 +484,11 @@ console.log(savedMessages.value);
       pages,
       loading,
       savedMessagesReactive,
-      meta
+      meta,
+      name,
+      avatar,
+      toname,
+      toavatar,
     };
   },
 };
