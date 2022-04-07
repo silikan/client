@@ -69,14 +69,72 @@
                 "
               >
                 <span class="text-gray-500 sm:text-sm" id="price-currency">
-                  USD
+                  DZD
                 </span>
               </div>
             </div>
           </div>
         </div>
       </div>
+    <div class="pt-8 space-y-6 sm:pt-10 sm:space-y-5">
 
+        <div class="space-y-6 sm:space-y-5">
+          <div class="-gray-300 rounded-lg shadow-sm overflow-hidden">
+            <label for="price" class="block text-sm font-medium text-gray-700"
+              >Duration</label
+            >
+            <div class="mt-1 relative rounded-md shadow-sm">
+
+              <input
+              v-model="duration"
+                type="number"
+                name="duration"
+                id="duration"
+                class="
+                  focus:ring-indigo-500 focus:border-indigo-500
+                  block
+                  w-full
+                  pl-7
+                  pr-12
+                  sm:text-sm
+                  border-gray-300
+                  rounded-md
+                  appearance-none
+                  block
+                  w-full
+                  px-3
+                  py-2
+                  border border-gray-300
+                  rounded-md
+                  shadow-sm
+                  placeholder-gray-400
+                  focus:outline-none
+                  focus:ring-indigo-500
+                  focus:border-indigo-500
+                  sm:text-sm
+                "
+                placeholder="0"
+                aria-describedby="price-currency"
+              />
+              <div
+                class="
+                  absolute
+                  inset-y-0
+                  right-0
+                  pr-3
+                  flex
+                  items-center
+                  pointer-events-none
+                "
+              >
+                <span class="text-gray-500 sm:text-sm" id="price-currency">
+                  Days
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
       <div class="flex items-start space-x-4 pb-">
         <div class="min-w-0 flex-1">
           <div action="#" class="relative">
@@ -142,16 +200,18 @@ export default {
   setup() {
     let price = ref(0);
     let description = ref("");
+    let duration = ref(0);
 let store = useStore();
     watchEffect(() => {
         store.commit("Request/SET_PRICE", price.value);
         store.commit("Request/SET_PRICE_DESCRIPTION", description.value);
-
+        store.commit("Request/SET_DURATION", duration.value);
 
     });
     return {
       price,
       description,
+      duration
     };
   },
 };

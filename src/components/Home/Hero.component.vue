@@ -55,10 +55,10 @@
           <div class="flex items-center flex-1">
             <div class="flex items-center justify-between w-full md:w-auto">
               <a href="#">
-                <span class="sr-only">Workflow</span>
+                <span class="sr-only">Silikan</span>
                 <img
                   class="h-8 w-auto sm:h-10"
-                  src="https://tailwindui.com/img/logos/workflow-mark-indigo-500.svg"
+                  src="https://tailwindui.com/img/logos/Silikan-mark-indigo-500.svg"
                   alt=""
                 />
               </a>
@@ -180,7 +180,7 @@
                 <div>
                   <img
                     class="h-8 w-auto"
-                    src="https://tailwindui.com/img/logos/workflow-mark-indigo-600.svg"
+                    src="https://tailwindui.com/img/logos/Silikan-mark-indigo-600.svg"
                     alt=""
                   />
                 </div>

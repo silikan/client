@@ -7,8 +7,8 @@
           <div>
             <img
               class="h-12 w-auto"
-              src="https://tailwindui.com/img/logos/workflow-mark-indigo-600.svg"
-              alt="Workflow"
+              src="https://tailwindui.com/img/logos/Silikan-mark-indigo-600.svg"
+              alt="Silikan"
             />
             <h2 class="mt-6 text-3xl font-extrabold text-gray-900">
               Sign in to your account

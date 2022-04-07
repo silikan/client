@@ -13,6 +13,7 @@ export const state = {
 	fetchedRequests: [],
 	requestUser: {},
 	userRequests: [],
+	duration: 0,
 
 };
 
@@ -54,7 +55,11 @@ export const mutations = {
 	},
 	SET_USER_REQUESTS(state, userRequests) {
 		state.userGigs = userRequests;
+	},
+	SET_DURATION(state, duration) {
+		state.duration = duration;
 	}
+
 
 
 
@@ -72,13 +77,15 @@ export const actions = {
 		let price = payload.state.price;
 		let paymentMethod = JSON.stringify(payload.state.paymentMethod);
 		let priceDescription = payload.state.priceDescription;
+		let duration = payload.state.duration;
 		await RequestService.createRequest({
 			title,
 			description,
 			category,
 			price,
 			paymentMethod,
-			priceDescription
+			priceDescription,
+			duration
 		})
 	},
 

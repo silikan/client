@@ -137,6 +137,7 @@ let createRequest = () => {
       let price = store.state.Request.price;
       let paymentMethod = store.state.Request.paymentMethod;
       let priceDescription = store.state.Request.priceDescription;
+      let duration = store.state.Request.duration;
 
       let data = {
         title,
@@ -144,7 +145,8 @@ let createRequest = () => {
         category,
         price,
         paymentMethod,
-        priceDescription
+        priceDescription,
+        duration
       };
       let jsonData = JSON.stringify(data);
       store.dispatch("Request/createRequest",jsonData);

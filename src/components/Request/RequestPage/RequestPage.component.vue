@@ -105,7 +105,7 @@
               "
             >
               <ClockIcon class="btn-cash h-5 w-5" />
-              <span>3 days</span>
+              <span>{{duration}} days</span>
             </div>
           </div>
 
@@ -161,7 +161,7 @@ const pages = [
 import "tw-elements";
 import { useStore } from "vuex";
 import { useRoute } from "vue-router";
-import { reactive, ref } from "@vue/reactivity";
+import {  ref } from "@vue/reactivity";
 import Avatar from "@/components/Avatar/Avatar.component.vue";
 
 export default {
@@ -180,6 +180,7 @@ export default {
     let title = ref("");
     let description = ref("");
     let price = ref("");
+    let duration = ref("");
 
     store
       .dispatch("Request/getRequest", id)
@@ -187,6 +188,7 @@ export default {
         title.value = result.title;
         description.value = result.description;
         price.value = result.price;
+        duration.value = result.duration;
 
         console.log(result);
       })
@@ -195,14 +197,13 @@ export default {
       });
   let name = ref();
     let userId = ref();
-    let avatar = reactive();
+    let avatar = ref();
          store
       .dispatch("Request/getRequestUser", id)
       .then((result) => {
         name.value = result.name
         userId.value = result.id
-        avatar = result.avatar
-
+        avatar.value = result.avatar
         console.log(result);
       })
       .catch((err) => {
@@ -217,6 +218,7 @@ export default {
       name,
       userId,
       avatar,
+      duration
     };
   },
 };
