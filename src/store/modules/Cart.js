@@ -1,5 +1,6 @@
 //get rooms from server
 import CartService from '@/services/CartService.js'
+
 export const namespaced = true;
 
 
@@ -23,10 +24,25 @@ export const actions = {
 		const cart = await CartService.createCart();
 		commit('SET_CART', cart);
 	},
-	async addToCart({ commit, dispatch }, payload) {
-		dispatch('Gig/createCart').then(() => {
-			const cart = await CartService.addToCart(payload);
-			commit('SET_CART_ITEMS', cartItems);
+	async addToCart({ commit }, payload) {
+
+		let data = {
+			user_id: payload.user_id,
+		}
+		console.log(data);
+		await CartService.createCart(data).then(async (result) => {
+			console.log(result.data);
+			console.log(payload);
+
+			let sentData = {
+				type: payload.type,
+				gig_id: payload.gig_id,
+				cart_id: result.data.id,
+			}
+
+
+			commit('SET_CART', result.data);
+			await CartService.addToCart(sentData);
 		}).catch(() => {
 			console.log('error');
 		});

@@ -7,6 +7,8 @@ import * as Loading from '@/store/modules/Loading';
 import * as Gig from '@/store/modules/Gig';
 import * as Request from '@/store/modules/Request';
 import * as Cart from '@/store/modules/Cart';
+import * as Task from '@/store/modules/Task';
+
 export default createStore({
   strict: true,
 
@@ -18,6 +20,7 @@ export default createStore({
     Loading,
     Gig,
     Request,
-    Cart
+    Cart,
+    Task
   },
 });

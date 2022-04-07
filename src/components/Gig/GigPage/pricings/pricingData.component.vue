@@ -61,7 +61,7 @@
         </ul>
         <div class="rounded-md shadow">
           <a
-            :href="tier.href"
+            @click="addToCart"
             class="
               flex
               items-center
@@ -126,9 +126,41 @@ export default {
       .catch((err) => {
         console.log(err);
       });
+    const addToTaskList = () => {
+
+       store.dispatch("Gig/getGigUser" , id).then((result) => {
+
+    let payload = {
+        type:"gig",
+        gig_id:id,
+        user_id:result.id,
+      }
+      store.dispatch("Task/addToTaskList" , payload);
+      }).catch((err) => {
+        console.log(err);
+      });
+
+    };
+
+    const addToCart = () => {
+      let userId = computed(() => store.getters["auth/id"]);
+  console.log(userId.value);
+      let payload = {
+        type:"gig",
+        gig_id:id,
+        user_id:userId.value,
+      }
+      store.dispatch("Cart/addToCart" , payload).then(() => {
+        addToTaskList()
+      }).catch((err) => {
+        console.log(err);
+      });
+    };
+
     return {
       tabs,
       Data,
+      addToCart,
     };
   },
 };
