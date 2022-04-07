@@ -38,6 +38,9 @@ export const actions = {
 				type: payload.type,
 				gig_id: payload.gig_id,
 				cart_id: result.data.id,
+				client_id: payload.client_id,
+				handyman_id: payload.handyman_id,
+
 			}
 
 
@@ -48,10 +51,18 @@ export const actions = {
 		});
 
 	}
+
+	,
+	async getUserCartItems({ commit }, id) {
+		const cartItems = await CartService.getUserCartItems(id);
+		commit('SET_CART_ITEMS', cartItems.data);
+		return cartItems.data;
+	}
 };
 
 
 export const getters = {
 	cart: state => state.cart,
 	cartItems: state => state.cartItems,
+
 };

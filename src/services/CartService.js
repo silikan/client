@@ -7,5 +7,9 @@ export default {
 	async addToCart(payload) {
 		return await API.apiClient.post(`/add-to-cart`, payload);
 	}
-
+	,
+	async getUserCartItems(id) {
+		console.log(id);
+		return await API.apiClient.get(`/user/${id}/cart`);
+	},
 };

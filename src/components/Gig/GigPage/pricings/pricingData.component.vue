@@ -127,34 +127,50 @@ export default {
         console.log(err);
       });
     const addToTaskList = () => {
+      let userId = computed(() => store.getters["auth/id"]);
 
-       store.dispatch("Gig/getGigUser" , id).then((result) => {
-
-    let payload = {
-        type:"gig",
-        gig_id:id,
-        user_id:result.id,
-      }
-      store.dispatch("Task/addToTaskList" , payload);
-      }).catch((err) => {
-        console.log(err);
-      });
-
+      store
+        .dispatch("Gig/getGigUser", id)
+        .then((result) => {
+          let payload = {
+            type: "gig",
+            gig_id: id,
+            user_id: result.id,
+            client_id: userId.value,
+            handyman_id: result.id,
+          };
+          store.dispatch("Task/addToTaskList", payload);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
     };
 
     const addToCart = () => {
-      let userId = computed(() => store.getters["auth/id"]);
-  console.log(userId.value);
-      let payload = {
-        type:"gig",
-        gig_id:id,
-        user_id:userId.value,
-      }
-      store.dispatch("Cart/addToCart" , payload).then(() => {
-        addToTaskList()
-      }).catch((err) => {
-        console.log(err);
-      });
+      store
+        .dispatch("Gig/getGigUser", id)
+        .then((result) => {
+          let userId = computed(() => store.getters["auth/id"]);
+          console.log(userId.value);
+          let payload = {
+            type: "gig",
+            gig_id: id,
+            user_id: userId.value,
+            client_id: userId.value,
+            handyman_id: result.id,
+          };
+          store
+            .dispatch("Cart/addToCart", payload)
+            .then(() => {
+              addToTaskList();
+            })
+            .catch((err) => {
+              console.log(err);
+            });
+        })
+        .catch((err) => {
+          console.log(err);
+        });
     };
 
     return {

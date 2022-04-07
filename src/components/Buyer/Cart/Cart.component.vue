@@ -1,5 +1,6 @@
 <!-- This example requires Tailwind CSS v2.0+ -->
 <template>
+
   <div class="flex flex-col">
     <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
       <div class="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
@@ -71,12 +72,12 @@
               </tr>
             </thead>
             <tbody class="bg-white divide-y divide-gray-200">
-              <tr v-for="person in people" :key="person.email">
+              <tr v-for="person in cart" :key="person.email">
                 <td class="px-6 py-4 whitespace-nowrap">
                   <div class="flex items-center">
                     <div class="ml-4">
-                      <div class="text-sm font-medium text-gray-900">
-                        {{ person.name }}
+                      <div class="text-sm font-medium text-gray-900 ">
+                        {{ person.item.gig[0].title }}
                       </div>
                     </div>
                   </div>
@@ -95,7 +96,7 @@
                       text-indigo-800
                     "
                   >
-                    Gig
+                     {{ person.item.cart_item.type }}
                   </span>
                 </td>
                 <td class="px-6 py-4 whitespace-nowrap">
@@ -111,7 +112,7 @@
                       text-green-800
                     "
                   >
-                    Completed
+                    {{ person.item.cart_item.is_completed ? 'Completed' : 'On Progess' }}
                   </span>
                 </td>
                 <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
@@ -146,6 +147,19 @@
                     >Check</a
                   >
                 </td>
+                 <td
+                  class="
+                    px-6
+                    py-4
+                    whitespace-nowrap
+                    text-right text-sm
+                    font-medium
+                  "
+                >
+                  <a href="#" class="text-indigo-600 hover:text-indigo-900"
+                    >Mark as Completed</a
+                  >
+                </td>
               </tr>
             </tbody>
           </table>
@@ -156,6 +170,8 @@
 </template>
 
 <script>
+import { computed, ref } from '@vue/runtime-core';
+import { useStore } from 'vuex';
 const people = [
   {
     name: "Jane Cooper",
@@ -190,8 +206,19 @@ const people = [
 
 export default {
   setup() {
+        let store = useStore();
+  let cart = ref([]);
+    let userId = computed(()=> store.getters['auth/id']) ;
+    console.log(userId.value);
+    store.dispatch('Cart/getUserCartItems', userId.value).then((result) => {
+      console.log(result);
+      cart.value = result;
+    }).catch((error) => {
+      console.log(error);
+    });
     return {
       people,
+      cart
     };
   },
 };
