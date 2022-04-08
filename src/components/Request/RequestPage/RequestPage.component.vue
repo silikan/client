@@ -1,5 +1,4 @@
 <template>
-
   <div class="flex flex-col md:p-10 m-5 sm:m-1">
     <div class="profile flex justify-between flex-col ml-5 md:ml-0 mt-10">
       <nav class="flex mb-3" aria-label="Breadcrumb">
@@ -34,14 +33,11 @@
           </li>
         </ol>
       </nav>
-      <h1 class="mb-2 text-3xl font-medium">{{title}}</h1>
+      <h1 class="mb-2 text-3xl font-medium">{{ title }}</h1>
       <a href="#" class="flex-shrink-0 group block mb-5">
         <div class="flex">
           <div>
-
-          <Avatar v-if="name" :url="avatar" :name="name"/>
-
-
+            <Avatar v-if="name" :url="avatar" :name="name" />
           </div>
           <div class="ml-3">
             <p
@@ -52,20 +48,19 @@
                 group-hover:text-gray-900
               "
             >
-              {{name}}
+              {{ name }}
             </p>
 
-            <router-link
-        :to="`/user/${userId}`"
-            >
-            <p   class="
-                text-xs
-                font-medium
-                text-gray-500
-                group-hover:text-gray-700
-              ">
-                            View profile
-
+            <router-link :to="`/user/${userId}`">
+              <p
+                class="
+                  text-xs
+                  font-medium
+                  text-gray-500
+                  group-hover:text-gray-700
+                "
+              >
+                View profile
               </p>
             </router-link>
           </div>
@@ -77,11 +72,11 @@
         <div class="sm:flex sm:items-start sm:justify-between">
           <div>
             <h3 class="text-lg leading-6 font-medium text-gray-900">
-              {{title}}
+              {{ title }}
             </h3>
             <div class="my-2 max-w-xl text-sm text-gray-500">
               <p>
-               {{description}}
+                {{ description }}
               </p>
             </div>
             <div
@@ -93,7 +88,7 @@
               "
             >
               <CashIcon class="btn-cash h-5 w-5" />
-              <span>{{price}} DZD</span>
+              <span>{{ price }} DZD</span>
             </div>
 
             <div
@@ -105,7 +100,7 @@
               "
             >
               <ClockIcon class="btn-cash h-5 w-5" />
-              <span>{{duration}} days</span>
+              <span>{{ duration }} days</span>
             </div>
           </div>
 
@@ -135,8 +130,9 @@
                 sm:text-sm
                 mx-2
               "
+              @click="addToTaskList"
             >
-              Submit a Proposal
+              Add To Task
             </button>
             <ChatButton />
           </div>
@@ -161,8 +157,9 @@ const pages = [
 import "tw-elements";
 import { useStore } from "vuex";
 import { useRoute } from "vue-router";
-import {  ref } from "@vue/reactivity";
+import { ref } from "@vue/reactivity";
 import Avatar from "@/components/Avatar/Avatar.component.vue";
+import { computed } from "@vue/runtime-core";
 
 export default {
   components: {
@@ -195,20 +192,67 @@ export default {
       .catch((err) => {
         console.log(err);
       });
-  let name = ref();
+    let name = ref();
     let userId = ref();
     let avatar = ref();
-         store
+    store
       .dispatch("Request/getRequestUser", id)
       .then((result) => {
-        name.value = result.name
-        userId.value = result.id
-        avatar.value = result.avatar
+        name.value = result.name;
+        userId.value = result.id;
+        avatar.value = result.avatar;
         console.log(result);
       })
       .catch((err) => {
         console.log(err);
       });
+
+    const addToTaskList = () => {
+      let authuserId = computed(() => store.getters["auth/id"]);
+
+      store
+        .dispatch("Request/getRequestUser", id)
+        .then((result) => {
+          let payload = {
+            type: "request",
+            request_id: id,
+            user_id: authuserId.value,
+            client_id: result.id,
+            handyman_id: authuserId.value,
+          };
+          store
+            .dispatch("Task/addToTaskList", payload)
+            .then(() => {
+              addToCart();
+            })
+            .catch((err) => {
+              console.log(err);
+            });
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    };
+
+    const addToCart = () => {
+      store
+        .dispatch("Request/getRequestUser", id)
+        .then((result) => {
+          let authuserId = computed(() => store.getters["auth/id"]);
+          console.log(userId.value);
+          let payload = {
+            type: "request",
+            request_id: id,
+            user_id: result.id,
+            client_id: result.id,
+            handyman_id: authuserId.value,
+          };
+          store.dispatch("Cart/addToCart", payload);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    };
 
     return {
       pages,
@@ -218,7 +262,8 @@ export default {
       name,
       userId,
       avatar,
-      duration
+      duration,
+      addToTaskList,
     };
   },
 };

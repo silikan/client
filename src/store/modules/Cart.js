@@ -37,6 +37,7 @@ export const actions = {
 			let sentData = {
 				type: payload.type,
 				gig_id: payload.gig_id,
+				request_id: payload.request_id,
 				cart_id: result.data.id,
 				client_id: payload.client_id,
 				handyman_id: payload.handyman_id,

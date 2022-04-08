@@ -62,16 +62,16 @@
       </div>
     </div>
 
-    <Pricing :data="basicData" :tiers="basic" v-if="tabs[0].current === true" />
+    <Pricing :data="basicData" :tiers="basic" v-show="tabs[0].current === true" />
     <Pricing
       :data="standardData"
       :tiers="standard"
-      v-if="tabs[1].current === true"
+      v-show="tabs[1].current === true"
     />
     <Pricing
       :data="premiumData"
       :tiers="Premium"
-      v-if="tabs[2].current === true"
+      v-show="tabs[2].current === true"
     />
   </div>
 </template>

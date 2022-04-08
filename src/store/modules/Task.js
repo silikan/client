@@ -36,6 +36,7 @@ export const actions = {
 				type: payload.type,
 				gig_id: payload.gig_id,
 				task_id: result.data.id,
+				request_id: payload.request_id,
 				client_id: payload.client_id,
 				handyman_id: payload.handyman_id
 
