@@ -21,8 +21,8 @@ export const mutations = {
 
 export const actions = {
 	async createTaskList({ commit }) {
-		const cart = await TaskService.createTaskList();
-		commit('SET_TASK', cart);
+		const task = await TaskService.createTaskList();
+		commit('SET_TASK', task);
 	},
 	async addToTaskList({ commit }, payload) {
 		let data = {
@@ -49,6 +49,12 @@ export const actions = {
 			console.log('error');
 		});
 
+	}
+	,
+	async getUserTaskItems({ commit }, id) {
+		const taskItems = await TaskService.getUserTaskItems(id);
+		commit('SET_TASK_ITEMS', taskItems);
+		return taskItems.data;
 	}
 };
 
