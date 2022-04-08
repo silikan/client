@@ -79,9 +79,9 @@
                   sm:text-sm
                 "
               >
-                <option>United States</option>
-                <option>Canada</option>
-                <option>Mexico</option>
+                      <option v-for="item in categories" :key="item" :value="item">
+                  {{ item }}
+                </option>
               </select>
             </div>
           </div>
@@ -145,6 +145,22 @@
   </form>
 </template>
 <script>
+let categories = [
+  "Cleaning",
+  "Cooking",
+  "Plumbing",
+  "Electrical",
+  "Painting",
+  "Moving",
+  "Carpentry",
+  "Building",
+  "Massage",
+  "Tutoring",
+  "Woodwork",
+  "Cooking",
+  "Other",
+];
+
 import { ref } from "@vue/reactivity";
 import { useStore } from "vuex";
 import { watchEffect } from "@vue/runtime-core";
@@ -166,6 +182,7 @@ export default {
       title,
       description,
       category,
+          categories,
     };
   },
 };

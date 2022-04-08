@@ -74,9 +74,9 @@
                   sm:text-sm
                 "
               >
-                <option>United States</option>
-                <option>Canada</option>
-                <option>Mexico</option>
+                <option v-for="item in categories" :key="item" :value="item">
+                  {{ item }}
+                </option>
               </select>
             </div>
           </div>
@@ -167,6 +167,21 @@ import { PaperClipIcon } from "@heroicons/vue/solid";
 import { ref } from "@vue/reactivity";
 import { useStore } from "vuex";
 import { watchEffect } from "@vue/runtime-core";
+let categories = [
+  "Cleaning",
+  "Cooking",
+  "Plumbing",
+  "Electrical",
+  "Painting",
+  "Moving",
+  "Carpentry",
+  "Building",
+  "Massage",
+  "Tutoring",
+  "Woodwork",
+  "Cooking",
+  "Other",
+];
 
 export default {
   components: {
@@ -188,6 +203,7 @@ export default {
       title,
       description,
       category,
+      categories,
     };
   },
 };

@@ -32,6 +32,7 @@ import Selling from "@/views/Selling.view.vue";
 import searchResultPgae from "@/views/searchResultPgae.view.vue";
 import AboutUs from "@/views/AboutUs.view.vue";
 import ContactUs from "@/views/ContactUs.view.vue";
+import SearchList from "@/views/SearchList.view.vue";
 const routes = [
   {
     path: "/",
@@ -39,7 +40,12 @@ const routes = [
     meta: { middleware: [guest] },
     component: Home,
   },
+  {
+    path: "/searchlist",
+    name: "SearchList",
 
+    component: SearchList,
+  },
   {
     path: "/profile",
     name: "Profile",
