@@ -321,10 +321,10 @@
       </div>
     </div>
   </div>
-  <ClientRequests v-if="Gigs_Requests_tabs[0].current === true" />
+  <ClientRequests v-show="Gigs_Requests_tabs[0].current === true" />
 
   <HandymanGigs
-    v-if="Gigs_Requests_tabs[1].current === true "
+    v-show="Gigs_Requests_tabs[1].current === true "
   />
 </template>
 

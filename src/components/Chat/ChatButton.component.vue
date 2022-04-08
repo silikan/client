@@ -54,7 +54,8 @@ const store = useStore();
     let UserIdData = computed(() => {
       return props.UserId;
     });
-
+let isLoggedIn = store.getters["auth/loggedIn"];
+if(isLoggedIn){
     const CreateRoom =  () => {
 		let payload = {
 			to: UserIdData.value,
@@ -73,13 +74,26 @@ const store = useStore();
 
     };
 
-
-
+      return {
+      UserIdData,
+      CreateRoom,
+      authUser,
+    };
+}
+else {
+  const CreateRoom = () => {
+    router.push({ path: '/signin' })
+  }
     return {
       UserIdData,
       CreateRoom,
       authUser,
     };
+}
+
+
+
+
   },
 };
 </script>
