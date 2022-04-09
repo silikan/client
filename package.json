@@ -20,6 +20,7 @@
     "bootstrap-vue-3": "^0.1.9",
     "core-js": "^3.6.5",
     "element-plus": "^2.1.8",
+    "emoji-picker-element": "^1.11.2",
     "flowbite": "^1.4.1",
     "litepie-datepicker": "^1.0.14",
     "lodash": "^4.17.21",
@@ -37,6 +38,7 @@
     "vue-uuid": "^3.0.0",
     "vue3-carousel": "^0.1.38",
     "vue3-date-time-picker": "^2.7.0",
+    "vue3-discordpicker": "^1.1.0",
     "vue3-tailwind-datepicker": "^1.0.16",
     "vuex": "^4.0.0-0"
   },

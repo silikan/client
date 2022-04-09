@@ -9,11 +9,9 @@
         lg:divide-y lg:divide-gray-200 lg:px-8
       "
     >
-
       <div class="relative h-16 flex justify-between">
-
         <div class="flex-shrink-0 flex items-center h-full">
-          <router-link type="button" to="/" class="cursor-pointer" >
+          <router-link type="button" to="/" class="cursor-pointer">
             <img
               class="block h-8 w-auto cursor-pointer"
               src="https://tailwindui.com/img/logos/workflow-mark-indigo-600.svg"
@@ -53,6 +51,7 @@
               <input
                 id="search"
                 name="search"
+                v-model="search"
                 class="
                   block
                   w-full
@@ -75,7 +74,14 @@
                 placeholder="Search"
                 type="search"
               />
+              <SearchList
+                v-if="search != ''"
+                :searchData="search"
+                class="test absolute z-50 shadow-lg w-full"
+              />
             </div>
+
+            <div></div>
           </div>
         </div>
         <div class="relative z-10 flex items-center lg:hidden">
@@ -489,7 +495,9 @@
 </template>
 
 <script>
-import { computed } from "@vue/runtime-core";
+import SearchList from "@/components/Search/SearchList.component.vue";
+
+import { computed, ref } from "@vue/runtime-core";
 import { createAvatar } from "@dicebear/avatars";
 import * as style from "@dicebear/avatars-initials-sprites";
 import {
@@ -548,13 +556,14 @@ export default {
     ShoppingBagIcon,
     ClipboardCheckIcon,
     ChatAlt2Icon,
+    SearchList,
   },
   props: ["authUser"],
 
   setup(props) {
     const route = useRoute();
     const store = useStore();
-
+    let search = ref("");
     let isLoggedin = computed(() => store.getters["auth/loggedIn"]);
 
     const signin = computed(() => route.path === "/signin");
@@ -612,7 +621,16 @@ export default {
       signin,
       signup,
       navBarImg,
+      search,
     };
   },
 };
 </script>
+
+
+<style scoped>
+.test {
+  z-index: 1000;
+  position: absolute;
+}
+</style>
