@@ -77,7 +77,7 @@
               <SearchList
                 v-if="search != ''"
                 :searchData="search"
-                class="test absolute z-50 shadow-lg w-full"
+                class=" absolute z-50 shadow-lg w-full"
               />
             </div>
 
@@ -629,8 +629,5 @@ export default {
 
 
 <style scoped>
-.test {
-  z-index: 1000;
-  position: absolute;
-}
+
 </style>

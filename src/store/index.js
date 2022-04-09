@@ -9,7 +9,7 @@ import * as Request from "@/store/modules/Request";
 import * as Cart from "@/store/modules/Cart";
 import * as Task from "@/store/modules/Task";
 import * as Search from "@/store/modules/Search";
-
+import * as Category from "@/store/modules/Category";
 export default createStore({
   strict: true,
 
@@ -24,5 +24,6 @@ export default createStore({
     Cart,
     Task,
     Search,
+    Category,
   },
 });

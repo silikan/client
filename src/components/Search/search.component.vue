@@ -5,7 +5,7 @@
         for="search"
         class="sr-only"
       >Search</label>
-      <div class="relative">
+      <div class="block">
         <div
           class="
             absolute

@@ -60,6 +60,7 @@
                 </a>
               </div>
             </router-link>
+
           </div>
           <div
             v-if="section === 'categories'"
