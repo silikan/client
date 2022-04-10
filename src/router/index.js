@@ -29,16 +29,35 @@ import Task from "@/views/Task.view.vue";
 import GigPage from "@/views/GigPage.view.vue";
 import RequestPage from "@/views/RequestPage.view.vue";
 import Selling from "@/views/Selling.view.vue";
-import searchResultPgae from "@/views/searchResultPgae.view.vue";
 import AboutUs from "@/views/AboutUs.view.vue";
 import ContactUs from "@/views/ContactUs.view.vue";
 import SearchList from "@/views/SearchList.view.vue";
+import GigSearchResultPage from "@/views/GigSearchResultPage.view.vue";
+import RequestSearchResultPage from "@/views/RequestSearchResultPage.view.vue";
+import HandymenSearchResultPage from "@/views/HandymenSearchResultPage.view.vue";
 const routes = [
   {
     path: "/",
     name: "Home",
     meta: { middleware: [guest] },
     component: Home,
+  },
+  {
+    path: "/search/gigs/:query",
+    name: "GigSearchResultPage",
+    component: GigSearchResultPage,
+  },
+  {
+    path: "/search/requests/:query",
+    name: "RequestSearchResultPage",
+    meta: { middleware: [auth, guest] },
+    component: RequestSearchResultPage,
+  },
+  {
+    path: "/search/handymen/:query",
+    name: "HandymenSearchResultPage",
+    meta: { middleware: [auth, guest] },
+    component: HandymenSearchResultPage,
   },
   {
     path: "/searchlist",
@@ -82,12 +101,7 @@ const routes = [
     component: Selling,
     meta: { middleware: [auth] },
   },
-  {
-    path: "/searchResultPgae",
-    name: "searchResultPgae",
-    component: searchResultPgae,
-    meta: { middleware: [auth, guest] },
-  },
+
   {
     path: "/edit/",
     name: "EditProfile",

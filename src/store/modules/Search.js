@@ -8,6 +8,7 @@ function setPaginatedSeachGigs(commit, response) {
   commit("SET_SEARCH_GIGS_LOADING", false);
 }
 function setPaginatedSearchHandymen(commit, response) {
+  console.log(response.data.meta);
   commit("SET_SEARCH_HANDYMEN", response.data.data);
   commit("SET_SEARCH_HANDYMEN_META", response.data.meta);
   commit("SET_SEARCH_HANDYMEN_LINKS", response.data.links);
@@ -88,39 +89,46 @@ export const actions = {
     commit("SET_SEARCH_RESULTS", searchResults);
     return searchResults.data;
   },
-  async searchGigsPaginate({ commit }, search) {
+  async searchGigsPaginate({ commit }, payload) {
+    let page = payload.page;
+    let query = payload.query;
+    console.log(query, page);
     commit("SET_SEARCH_GIGS_LOADING", true);
-    const searchGigs = await SearchService.searchGigsPaginate(search);
+    const searchGigs = await SearchService.searchGigsPaginate(query, page);
     setPaginatedSeachGigs(commit, searchGigs);
     return searchGigs.data;
   },
-  async paginateGigs({ commit }, search) {
+  async paginateGigs({ commit }, link) {
     commit("SET_SEARCH_GIGS_LOADING", true);
-    const searchGigs = await SearchService.paginateGigs(search);
+    const searchGigs = await SearchService.paginateSeachGigs(link);
     setPaginatedSeachGigs(commit, searchGigs);
     return searchGigs.data;
   },
-  async searchHandymenPaginate({ commit }, search) {
+  async searchHandymenPaginate({ commit }, payload) {
+    let page = payload.page;
+    let query = payload.query;
     commit("SET_SEARCH_HANDYMEN_LOADING", true);
-    const searchHandymen = await SearchService.searchHandymenPaginate(search);
+    const searchHandymen = await SearchService.searchHandymenPaginate(query, page);
     setPaginatedSearchHandymen(commit, searchHandymen);
     return searchHandymen.data;
   },
-  async paginateHandymen({ commit }, search) {
+  async paginateHandymen({ commit }, link) {
     commit("SET_SEARCH_HANDYMEN_LOADING", true);
-    const searchHandymen = await SearchService.paginateHandymen(search);
+    const searchHandymen = await SearchService.paginateSeachHandymen(link);
     setPaginatedSearchHandymen(commit, searchHandymen);
     return searchHandymen.data;
   },
-  async searchClientRequestPaginate({ commit }, search) {
+  async searchClientRequestPaginate({ commit }, payload) {
+    let page = payload.page;
+    let query = payload.query;
     commit("SET_SEARCH_CLIENT_REQUEST_LOADING", true);
-    const searchClientRequest = await SearchService.searchClientRequestPaginate(search);
+    const searchClientRequest = await SearchService.searchClientRequestPaginate(query, page);
     setPaginatedSearchClientRequest(commit, searchClientRequest);
     return searchClientRequest.data;
   },
-  async paginateClientRequest({ commit }, search) {
+  async paginateSeachClientRequest({ commit }, link) {
     commit("SET_SEARCH_CLIENT_REQUEST_LOADING", true);
-    const searchClientRequest = await SearchService.paginateClientRequest(search);
+    const searchClientRequest = await SearchService.paginateSeachClientRequest(link);
     setPaginatedSearchClientRequest(commit, searchClientRequest);
     return searchClientRequest.data;
   },
@@ -129,5 +137,41 @@ export const actions = {
 export const getters = {
   getSearchResults(state) {
     return state.searchResults;
+  },
+  getSearchGigs(state) {
+    return state.searchGigs;
+  },
+  getSearchGigsMeta(state) {
+    return state.searchGigsMeta;
+  },
+  getSearchGigsLinks(state) {
+    return state.searchGigsLinks;
+  },
+  getSearchGigsLoading(state) {
+    return state.searchGigsLoading;
+  },
+  getSearchHandymen(state) {
+    return state.searchHandymen;
+  },
+  getSearchHandymenMeta(state) {
+    return state.searchHandymenMeta;
+  },
+  getSearchHandymenLinks(state) {
+    return state.searchHandymenLinks;
+  },
+  getSearchHandymenLoading(state) {
+    return state.searchHandymenLoading;
+  },
+  getSearchClientRequest(state) {
+    return state.searchClientRequest;
+  },
+  getSearchClientRequestMeta(state) {
+    return state.searchClientRequestMeta;
+  },
+  getSearchClientRequestLinks(state) {
+    return state.searchClientRequestLinks;
+  },
+  getSearchClientRequestLoading(state) {
+    return state.searchClientRequestLoading;
   },
 };

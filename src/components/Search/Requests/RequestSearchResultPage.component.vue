@@ -1,12 +1,13 @@
 <template>
-  <div class="bg-white">
+
+  <div class="bg-white" v-if="links && meta">
     <div class="mx-auto py-12 px-4 max-w-7xl sm:px-6 lg:px-8 lg:py-24">
       <div class="flex w-full items-center justify-between mb-5">
         <div
           class="space-y-5 sm:space-y-4 md:max-w-xl lg:max-w-3xl xl:max-w-none"
         >
           <h2 class="text-3xl font-extrabold tracking-tight hidden md:block">
-            Handymen
+            Requests
           </h2>
         </div>
         <div class="flex items-center flex-1 md:flex-none">
@@ -14,124 +15,153 @@
           <AdjustmentsIcon class="h-5 w-5 border-black rounded-md" />
         </div>
       </div>
-      <div class="space-y-12 mb-10">
-        <ul
-          role="list"
-          class="
-            space-y-12
-            sm:grid sm:grid-cols-2 sm:gap-x-6 sm:gap-y-12 sm:space-y-0
-            lg:grid-cols-3 lg:gap-x-8
-          "
-        >
-          <li v-for="person in people" :key="person.name">
-            <div class="space-y-4">
-              <div class="aspect-w-3 aspect-h-2">
-                <router-link :to="`/user/${person.id}`">
-                  <img
-                    class="
-                      md:h-60 md:w-96
-                      object-cover
-                      shadow-lg
-                      rounded-lg
-                      h-69
-                    "
-                    :src="person.avatar_svg"
-                    v-if="person.avatarWithoutLocalhost === null"
-                    alt=""
-                  />
-                  <img
-                    class="
-                      md:h-60 md:w-96
-                      object-cover
-                      shadow-lg
-                      rounded-lg
-                      h-69
-                    "
-                    :src="person.avatar"
-                    v-if="person.avatarWithoutLocalhost !== null"
-                    alt=""
-                  />
-                </router-link>
-              </div>
-              <div class="flex justify-between">
-                <div class="space-y-2">
-                  <div class="text-xl leading-6 font-medium space-y-1">
-                    <h3>{{ person.name }}</h3>
-                    <p class="text-sm font-bold text-indigo-600">
-                      @{{ person.username }}
-                    </p>
-                  </div>
-                  <ul role="list" class="flex space-x-5">
-                    <li>
-                      <a
-                        :href="person.twitterUrl"
-                        class="text-gray-400 hover:text-gray-500"
-                      >
-                        <span class="sr-only">Twitter</span>
-                        <svg
-                          class="w-5 h-5"
-                          aria-hidden="true"
-                          fill="currentColor"
-                          viewBox="0 0 20 20"
-                        >
-                          <path
-                            d="M6.29 18.251c7.547 0 11.675-6.253 11.675-11.675 0-.178 0-.355-.012-.53A8.348 8.348 0 0020 3.92a8.19 8.19 0 01-2.357.646 4.118 4.118 0 001.804-2.27 8.224 8.224 0 01-2.605.996 4.107 4.107 0 00-6.993 3.743 11.65 11.65 0 01-8.457-4.287 4.106 4.106 0 001.27 5.477A4.073 4.073 0 01.8 7.713v.052a4.105 4.105 0 003.292 4.022 4.095 4.095 0 01-1.853.07 4.108 4.108 0 003.834 2.85A8.233 8.233 0 010 16.407a11.616 11.616 0 006.29 1.84"
-                          />
-                        </svg>
-                      </a>
-                    </li>
-                    <li>
-                      <a
-                        :href="person.linkedinUrl"
-                        class="text-gray-400 hover:text-gray-500"
-                      >
-                        <span class="sr-only">LinkedIn</span>
-                        <svg
-                          class="w-5 h-5"
-                          aria-hidden="true"
-                          fill="currentColor"
-                          viewBox="0 0 20 20"
-                        >
-                          <path
-                            fill-rule="evenodd"
-                            d="M16.338 16.338H13.67V12.16c0-.995-.017-2.277-1.387-2.277-1.39 0-1.601 1.086-1.601 2.207v4.248H8.014v-8.59h2.559v1.174h.037c.356-.675 1.227-1.387 2.526-1.387 2.703 0 3.203 1.778 3.203 4.092v4.711zM5.005 6.575a1.548 1.548 0 11-.003-3.096 1.548 1.548 0 01.003 3.096zm-1.337 9.763H6.34v-8.59H3.667v8.59zM17.668 1H2.328C1.595 1 1 1.581 1 2.298v15.403C1 18.418 1.595 19 2.328 19h15.34c.734 0 1.332-.582 1.332-1.299V2.298C19 1.581 18.402 1 17.668 1z"
-                            clip-rule="evenodd"
-                          />
-                        </svg>
-                      </a>
-                    </li>
-                  </ul>
-                </div>
-                <div class="self-end">
-                  <router-link :to="`/user/${person.id}`">
-                    <button
+      <div class="flex flex-col">
+        <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
+          <div
+            class="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8"
+          >
+            <div
+              class="
+                shadow
+                overflow-hidden
+                border-b border-gray-200
+                sm:rounded-lg
+              "
+            >
+              <table class="min-w-full divide-y divide-gray-200">
+                <thead class="bg-gray-50">
+                  <tr>
+                    <th
+                      scope="col"
                       class="
-                        inline-flex
-                        items-center
-                        px-12
-                        py-1
-                        border border-transparent
-                        text-sm
+                        px-6
+                        py-3
+                        text-left text-xs
                         font-medium
-                        rounded-full
-                        shadow-sm
-                        text-white
-                        bg-indigo-600
-                        hover:bg-indigo-700
-                        focus:outline-none
-                        focus:ring-2
-                        focus:ring-offset-2
-                        focus:ring-indigo-500
+                        text-gray-500
+                        uppercase
+                        tracking-wider
                       "
                     >
-                      Hire
-                    </button>
-                  </router-link>
-                </div>
-              </div>
+                      Name
+                    </th>
+                    <th
+                      scope="col"
+                      class="
+                        px-6
+                        py-3
+                        text-left text-xs
+                        font-medium
+                        text-gray-500
+                        uppercase
+                        tracking-wider
+                      "
+                    >
+                      Title
+                    </th>
+                    <th
+                      scope="col"
+                      class="
+                        px-6
+                        py-3
+                        text-left text-xs
+                        font-medium
+                        text-gray-500
+                        uppercase
+                        tracking-wider
+                      "
+                    >
+                      Status
+                    </th>
+                    <th
+                      scope="col"
+                      class="
+                        px-6
+                        py-3
+                        text-left text-xs
+                        font-medium
+                        text-gray-500
+                        uppercase
+                        tracking-wider
+                      "
+                    >
+                      Role
+                    </th>
+                    <th scope="col" class="relative px-6 py-3">
+                      <span class="sr-only">Edit</span>
+                    </th>
+                  </tr>
+                </thead>
+                <tbody class="bg-white divide-y divide-gray-200">
+                  <tr v-for="person in requests" :key="person.id">
+                    <td class="px-6 py-4 whitespace-nowrap">
+                      <div class="flex items-center">
+                        <div class="flex-shrink-0 h-10 w-10">
+                          <img
+                            class="h-10 w-10 rounded-full"
+
+                            alt=""
+                          />
+
+                        </div>
+                        <div class="ml-4">
+                          <div class="text-sm font-medium text-gray-900">
+                            {{ person.name }}
+                          </div>
+                          <div class="text-sm text-gray-500">
+                            {{ person.email }}
+                          </div>
+                        </div>
+                      </div>
+                    </td>
+                    <td class="px-6 py-4 whitespace-nowrap">
+                      <div class="text-sm text-gray-900">
+                        {{ person.title }}
+                      </div>
+                      <div class="text-sm text-gray-500">
+                        {{  }}
+                      </div>
+                    </td>
+                    <td class="px-6 py-4 whitespace-nowrap">
+                      <span
+                        class="
+                          px-2
+                          inline-flex
+                          text-xs
+                          leading-5
+                          font-semibold
+                          rounded-full
+                          bg-green-100
+                          text-green-800
+                        "
+                      >
+                        Active
+                      </span>
+                    </td>
+                    <td
+                      class="px-6 py-4 whitespace-nowrap text-sm text-gray-500"
+                    >
+                      {{ person.role }}
+                    </td>
+                    <td
+                      class="
+                        px-6
+                        py-4
+                        whitespace-nowrap
+                        text-right text-sm
+                        font-medium
+                      "
+                    >
+                      <a href="#" class="text-indigo-600 hover:text-indigo-900"
+                        >Edit</a
+                      >
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
             </div>
-          </li>
-        </ul>
+          </div>
+        </div>
       </div>
       <div
         class="
@@ -356,13 +386,41 @@
 import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/vue/solid";
 
 import { AdjustmentsIcon } from "@heroicons/vue/outline";
-import Search from "./Search/search.component.vue";
-import store from "@/store/index";
-import { createAvatar } from "@dicebear/avatars";
-import * as style from "@dicebear/avatars-initials-sprites";
-import { useRouter } from "vue-router";
+import Search from "../search.component.vue";
 import { computed, reactive } from "@vue/runtime-core";
+import { useStore } from "vuex";
+import { useRoute } from "vue-router";
 
+const people = [
+  {
+    name: "Jane Cooper",
+    title: "Regional Paradigm Technician",
+    department: "Optimization",
+    role: "Admin",
+    email: "jane.cooper@example.com",
+    image:
+      "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=4&w=256&h=256&q=60",
+  },
+  {
+    name: "Jane Cooper",
+    title: "Regional Paradigm Technician",
+    department: "Optimization",
+    role: "Admin",
+    email: "jane.cooper@example.com",
+    image:
+      "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=4&w=256&h=256&q=60",
+  },
+  {
+    name: "Jane Cooper",
+    title: "Regional Paradigm Technician",
+    department: "Optimization",
+    role: "Admin",
+    email: "jane.cooper@example.com",
+    image:
+      "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=4&w=256&h=256&q=60",
+  },
+  // More people...
+];
 export default {
   components: {
     Search,
@@ -370,114 +428,54 @@ export default {
     ChevronLeftIcon,
     ChevronRightIcon,
   },
-  props: {
-    action: {
-      type: String,
-      required: true,
-    },
-    path: {
-      type: String,
-      default: null,
-    },
-    meta: {
-      type: Object,
-      required: true,
-    },
-    links: {
-      type: Object,
-      required: true,
-    },
-  },
-  setup(props) {
-    console.log(props);
-    const router = useRouter();
 
-    let action = computed(() => props.action);
-    let path = computed(() => props.path);
-    let meta = computed(() => props.meta);
-    let links = computed(() => props.links);
+  setup() {
+    let action = "Search/paginateHandymen";
+    let route = useRoute();
+    let store = useStore();
+    let query = route.params.query;
+    console.log(query);
+    let meta, links, requests;
+    let path = "handymen";
 
-    console.log(links.value);
+    let page = 1;
+    let payload = {
+      page: page,
+      query: query,
+    };
 
+    /* let router = useRouter
+     */ store.dispatch("Search/searchClientRequestPaginate", payload).then((res) => {
+      console.log(res);
+
+
+    });
+    meta = computed(() => {
+      return store.getters["Search/getSearchClientRequestMeta"];
+    });
+    links = computed(() => {
+      return store.getters["Search/getSearchClientRequestLinks"];
+    });
+    requests = computed(() => {
+      return store.getters["Search/getSearchClientRequest"];
+    });
     const prevPage = () => {
-      store.dispatch(action.value, links.value.prev).then(() => {
-        if (path) {
-          router.push({
-            path: path.value,
-            query: { page: meta.value.current_page - 1 },
-          });
-        }
-      });
+      store.dispatch("Search/paginateSeachClientRequest", links.value.prev);
     };
     const nextPage = () => {
       console.log(links.value.next);
-      store.dispatch(action.value, links.value.next).then(() => {
-        if (path) {
-          router.push({
-            path: path.value,
-            query: { page: meta.value.current_page + 1 },
-          });
-        }
-      });
+      store.dispatch("Search/paginateSeachClientRequest", links.value.next);
     };
 
-    let avatar_svg, avatar, avatarWithoutLocalhost, OathAvatar;
+    const setPage = (pageNumber) => {
+      let paginationlink = `${process.env.VUE_APP_API_URL}/api/search/requests/paginate?page=${pageNumber}&query=${query}`;
 
-    let users = computed(() => store.getters["handyman/Handymen"]);
+      store.dispatch("Search/paginateSeachClientRequest", paginationlink);
+      console.log(meta.value);
+    };
 
-    console.log(users.value);
-
-    let people = computed(() => {
-      let data = reactive([]);
-
-      users.value.forEach((user) => {
-        avatar_svg = createAvatar(style, {
-          seed: user.name,
-          dataUri: true,
-          // ... and other options
-        });
-        avatar = `${process.env.VUE_APP_API_URL}/${user.avatar}`;
-        OathAvatar = user.avatar;
-
-        avatarWithoutLocalhost = user.avatar;
-
-        if (user.avatar !== null) {
-          if (
-            user.avatar.includes("googleusercontent.com") ||
-            user.avatar.includes("graph.facebook.com") ||
-            user.avatar.includes("licdn.com")
-          ) {
-            avatar = OathAvatar;
-          }
-        }
-
-        data.push({
-          id: user.id,
-          name: user.name,
-          avatar_svg: avatar_svg,
-          avatar: avatar,
-          avatarWithoutLocalhost: avatarWithoutLocalhost,
-          email: user.email,
-          username: user.username,
-        });
-      });
-      return data;
-    });
     let currentPage = computed(() => meta.value.current_page);
     let totalPages = computed(() => meta.value.last_page);
-    const setPage = (pageNumber) => {
-      let paginationlink = `${process.env.VUE_APP_API_URL}/api/guest-users/handymen/?page=${pageNumber}`;
-
-      store.dispatch(action.value, paginationlink).then(() => {
-        if (path) {
-          router.push({
-            path: path.value,
-            query: pageNumber,
-          });
-        }
-      });
-    };
-    totalPages.value;
 
     let filterPages = computed(() => {
       //keep the first and last page
@@ -503,20 +501,24 @@ export default {
 
       return data;
     });
-    console.log(people.value);
+let preurl = `${process.env.VUE_APP_API_URL}`;
     return {
       people,
 
+      query,
+      action,
+      path,
+
       prevPage,
       nextPage,
-      avatar_svg,
-      avatar,
-      avatarWithoutLocalhost,
-      OathAvatar,
       setPage,
+      meta,
+      links,
+      requests,
+      filterPages,
       currentPage,
       totalPages,
-      filterPages,
+      preurl
     };
   },
 };

@@ -9,49 +9,49 @@ export default {
     });
   },
 
-  async searchGigs(search) {
+  async searchGigs(query) {
     return API.apiClient.get("/search/gigs", {
       params: {
-        search,
+        query,
       },
     });
   },
-  async searchGigsPaginate(search, page) {
-    return API.apiClient.get("/search/gigs", {
+  async searchGigsPaginate(query, page) {
+    return API.apiClient.get("/search/gigs/paginate", {
       params: {
-        search,
         page,
+        query,
       },
     });
   },
-  async searchClientRequest(search) {
+  async searchClientRequest(query) {
     return API.apiClient.get("/search/requests", {
       params: {
-        search,
+        query,
       },
     });
   },
 
-  async searchClientRequestPaginate(search, page) {
+  async searchClientRequestPaginate(query, page) {
     return API.apiClient.get("/search/requests/paginate", {
       params: {
-        search,
+        query,
         page,
       },
     });
   },
 
-  async searchHandymen(search) {
+  async searchHandymen(query) {
     return API.apiClient.get("/search/handymen", {
       params: {
-        search,
+        query,
       },
     });
   },
-  async searchHandymenPaginate(search, page) {
+  async searchHandymenPaginate(query, page) {
     return API.apiClient.get("/search/handymen/paginate", {
       params: {
-        search,
+        query,
         page,
       },
     });
