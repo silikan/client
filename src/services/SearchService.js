@@ -56,4 +56,7 @@ export default {
       },
     });
   },
+  paginateHandymen(link) {
+    return API.apiClient.get(link);
+  },
 };

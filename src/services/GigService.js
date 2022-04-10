@@ -32,4 +32,7 @@ export default {
       },
     });
   },
+  async paginateGigs(link) {
+    return API.apiClient.get(link);
+  },
 };

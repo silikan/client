@@ -25,4 +25,7 @@ export default {
       },
     });
   },
+  async paginateClientRequests(link) {
+    return API.apiClient.get(link);
+  },
 };
