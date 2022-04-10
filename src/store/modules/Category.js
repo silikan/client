@@ -1,8 +1,10 @@
 import CategoryService from "@/services/CategoryService";
+export const namespaced = true;
 
 export const state = {
   gigs: [],
   requests: [],
+  categories: [],
 };
 
 export const mutations = {
@@ -11,6 +13,9 @@ export const mutations = {
   },
   SET_REQUESTS(state, payload) {
     state.requests = payload;
+  },
+  SET_CATEGORIES(state, payload) {
+    state.categories = payload;
   },
 };
 
@@ -25,9 +30,16 @@ export const actions = {
     commit("SET_REQUESTS", response.data);
     return response.data;
   },
+  async getCategories({ commit }) {
+    const response = await CategoryService.getCategories();
+    console.log(response.data);
+    commit("SET_CATEGORIES", response.data);
+    return response.data;
+  },
 };
 
 export const getters = {
   gigs: (state) => state.gigs,
   requests: (state) => state.requests,
+  categories: (state) => state.categories,
 };

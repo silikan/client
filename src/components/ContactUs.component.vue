@@ -431,7 +431,7 @@ import { ExternalLinkIcon } from "@heroicons/vue/solid";
 
 const navigation = [
   { name: "Work", href: "#" },
-  { name: "Services", href: "#" },
+  { name: "Categories", href: "#" },
   { name: "About", href: "#" },
   { name: "Blog", href: "#" },
 ];

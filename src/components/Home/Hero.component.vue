@@ -418,7 +418,7 @@ import { ref } from "@vue/reactivity";
 const navigation = [
   { name: "About", link: "/about" },
   { name: "Contact Us", link: "/contact" },
-  { name: "Services", link: "/services" },
+  { name: "Categories", link: "/categories" },
   { name: "Requests", link: "/requests" },
   { name: "Handymen", link: "/handymen" },
 ];

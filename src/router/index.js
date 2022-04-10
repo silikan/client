@@ -12,7 +12,7 @@ import Home from "@/views/Home.view.vue";
 import NotFound from "@/views/404NotFound.view.vue";
 import Handymen from "@/views/Handymen.view.vue";
 import Requests from "@/views/Requests.view.vue";
-import Services from "@/views/Services.view.vue";
+import Categories from "@/views/Categories.view.vue";
 import EditProfile from "@/views/Edit_Profile.view.vue";
 import Profile from "@/views/Profile.view.vue";
 import VisitProfile from "@/views/Visit_Profile.view.vue";
@@ -161,11 +161,11 @@ const routes = [
     meta: { middleware: [auth, guest] },
   },
   {
-    path: "/services",
-    name: "Services",
+    path: "/categories",
+    name: "Categories",
     meta: { middleware: [auth, guest] },
 
-    component: Services,
+    component: Categories,
   },
   {
     path: "/handymen",

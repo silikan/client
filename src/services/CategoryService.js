@@ -7,4 +7,7 @@ export default {
   async getclientRequestsByCategory(title) {
     return await API.apiClient.get(`category/${title}/requests`);
   },
+  async getCategories() {
+    return await API.apiClient.get(`category`);
+  },
 };

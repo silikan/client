@@ -15,9 +15,16 @@
           text-sm
           font-medium
           text-gray-500
+          flex
+          justify-between
+          items-center
         "
       >
         <h3>{{ section }}</h3>
+
+            <div class="text-sm" v-if="section != 'categories'">
+              <router-link class="font-medium text-indigo-600 hover:text-indigo-500" :to="`/search/${section}/${search}`">View all</router-link>
+            </div>
       </div>
       <ul role="list" class="relative z-0 divide-y divide-gray-200">
         <li v-for="item in data[section]" :key="item.id" class="bg-white">
