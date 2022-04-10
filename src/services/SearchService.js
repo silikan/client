@@ -56,7 +56,13 @@ export default {
       },
     });
   },
-  paginateHandymen(link) {
+  paginateSeachGigs(link) {
+    return API.apiClient.get(link);
+  },
+  paginateSeachClientRequest(link) {
+    return API.apiClient.get(link);
+  },
+  paginateSeachHandymen(link) {
     return API.apiClient.get(link);
   },
 };

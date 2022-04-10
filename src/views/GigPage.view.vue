@@ -23,7 +23,6 @@
 <script>
 import { computed } from '@vue/runtime-core';
 import { useStore } from 'vuex';
-
 import GigGallery from "../components/Gig/GigPage/Gig_Gallery.component.vue";
 import GigPricing from "../components/Gig/GigPage/Gig_Pricing.component.vue";
 import { useRoute } from 'vue-router';
