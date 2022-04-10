@@ -9,10 +9,7 @@
             Requests
           </h2>
         </div>
-        <div class="flex items-center flex-1 md:flex-none">
-          <Search />
-          <AdjustmentsIcon class="h-5 w-5 border-black rounded-md" />
-        </div>
+
       </div>
       <div class="flex flex-col">
         <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">

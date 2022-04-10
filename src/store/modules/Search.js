@@ -8,7 +8,6 @@ function setPaginatedSeachGigs(commit, response) {
   commit("SET_SEARCH_GIGS_LOADING", false);
 }
 function setPaginatedSearchHandymen(commit, response) {
-  console.log(response.data.meta);
   commit("SET_SEARCH_HANDYMEN", response.data.data);
   commit("SET_SEARCH_HANDYMEN_META", response.data.meta);
   commit("SET_SEARCH_HANDYMEN_LINKS", response.data.links);

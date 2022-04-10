@@ -1,18 +1,17 @@
 <template>
 
-  <div class="bg-white" v-if="links">
+  <div class="bg-white" v-if="links && meta">
     <div class="mx-auto py-12 px-4 max-w-7xl sm:px-6 lg:px-8 lg:py-24">
       <div class="flex w-full items-center justify-between mb-5">
         <div
           class="space-y-5 sm:space-y-4 md:max-w-xl lg:max-w-3xl xl:max-w-none"
         >
           <h2 class="text-3xl font-extrabold tracking-tight hidden md:block">
-            Requests
+            Gigs Search Results "{{query}}"
           </h2>
         </div>
         <div class="flex items-center flex-1 md:flex-none">
-          <Search />
-          <AdjustmentsIcon class="h-5 w-5 border-black rounded-md" />
+
         </div>
       </div>
       <div class="flex flex-col">
@@ -43,7 +42,7 @@
                         tracking-wider
                       "
                     >
-                      Name
+                      Thumbnail
                     </th>
                     <th
                       scope="col"
@@ -71,7 +70,7 @@
                         tracking-wider
                       "
                     >
-                      Status
+                      Category
                     </th>
                     <th
                       scope="col"
@@ -85,7 +84,7 @@
                         tracking-wider
                       "
                     >
-                      Role
+                      Price
                     </th>
                     <th scope="col" class="relative px-6 py-3">
                       <span class="sr-only">Edit</span>
@@ -93,13 +92,13 @@
                   </tr>
                 </thead>
                 <tbody class="bg-white divide-y divide-gray-200">
-                  <tr v-for="person in gigs" :key="person.id">
+                  <tr v-for="gig in gigs" :key="gig.id">
                     <td class="px-6 py-4 whitespace-nowrap">
                       <div class="flex items-center">
                         <div class="flex-shrink-0 h-10 w-10">
                           <img
-                            class="h-10 w-10 rounded-full"
-                            :src="`${preurl}/${person.images[0].url}`"
+                            class="h-10 w-10 rounded-md"
+                            :src="`${preurl}/${gig.images[0].url}`"
 
                             alt=""
                           />
@@ -107,17 +106,17 @@
                         </div>
                         <div class="ml-4">
                           <div class="text-sm font-medium text-gray-900">
-                            {{ person.name }}
+                            {{ gig.name }}
                           </div>
                           <div class="text-sm text-gray-500">
-                            {{ person.email }}
+                            {{ gig.email }}
                           </div>
                         </div>
                       </div>
                     </td>
                     <td class="px-6 py-4 whitespace-nowrap">
                       <div class="text-sm text-gray-900">
-                        {{ person.title }}
+                        {{ gig.title }}
                       </div>
                       <div class="text-sm text-gray-500">
                         {{  }}
@@ -136,13 +135,13 @@
                           text-green-800
                         "
                       >
-                        Active
+                        {{gig.category[0].title}}
                       </span>
                     </td>
                     <td
                       class="px-6 py-4 whitespace-nowrap text-sm text-gray-500"
                     >
-                      {{ person.role }}
+                      {{ JSON.parse(gig.basic).price }} DZD
                     </td>
                     <td
                       class="
@@ -153,8 +152,8 @@
                         font-medium
                       "
                     >
-                      <a href="#" class="text-indigo-600 hover:text-indigo-900"
-                        >Edit</a
+                      <router-link :to="`/gig/${gig.id}`" class="text-indigo-600 hover:text-indigo-900"
+                        >Visit</router-link
                       >
                     </td>
                   </tr>
@@ -386,46 +385,14 @@
 <script>
 import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/vue/solid";
 
-import { AdjustmentsIcon } from "@heroicons/vue/outline";
-import Search from "../search.component.vue";
 import { computed, reactive } from "@vue/runtime-core";
 import { useStore } from "vuex";
 import { useRoute } from "vue-router";
 
-const people = [
-  {
-    name: "Jane Cooper",
-    title: "Regional Paradigm Technician",
-    department: "Optimization",
-    role: "Admin",
-    email: "jane.cooper@example.com",
-    image:
-      "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=4&w=256&h=256&q=60",
-  },
-  {
-    name: "Jane Cooper",
-    title: "Regional Paradigm Technician",
-    department: "Optimization",
-    role: "Admin",
-    email: "jane.cooper@example.com",
-    image:
-      "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=4&w=256&h=256&q=60",
-  },
-  {
-    name: "Jane Cooper",
-    title: "Regional Paradigm Technician",
-    department: "Optimization",
-    role: "Admin",
-    email: "jane.cooper@example.com",
-    image:
-      "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=4&w=256&h=256&q=60",
-  },
-  // More people...
-];
+
 export default {
   components: {
-    Search,
-    AdjustmentsIcon,
+
     ChevronLeftIcon,
     ChevronRightIcon,
   },
@@ -499,7 +466,6 @@ export default {
     });
 let preurl = `${process.env.VUE_APP_API_URL}`;
     return {
-      people,
 
       query,
       action,
