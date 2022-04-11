@@ -6,11 +6,8 @@
           class="space-y-5 sm:space-y-4 md:max-w-xl lg:max-w-3xl xl:max-w-none"
         >
           <h2 class="text-3xl font-extrabold tracking-tight hidden md:block">
-            handymen search results "{{query}}"
+            Request Category Results : "{{ title }}"
           </h2>
-        </div>
-        <div class="flex items-center flex-1 md:flex-none">
-
         </div>
       </div>
       <div class="flex flex-col">
@@ -29,7 +26,7 @@
               <table class="min-w-full divide-y divide-gray-200">
                 <thead class="bg-gray-50">
                   <tr>
-                    <th
+                      <th
                       scope="col"
                       class="
                         px-6
@@ -41,22 +38,7 @@
                         tracking-wider
                       "
                     >
-                      Name
-                    </th>
-
-                    <th
-                      scope="col"
-                      class="
-                        px-6
-                        py-3
-                        text-left text-xs
-                        font-medium
-                        text-gray-500
-                        uppercase
-                        tracking-wider
-                      "
-                    >
-                      Status
+                      Client
                     </th>
                     <th
                       scope="col"
@@ -70,7 +52,49 @@
                         tracking-wider
                       "
                     >
-                      Role
+                      Title
+                    </th>
+                    <th
+                      scope="col"
+                      class="
+                        px-6
+                        py-3
+                        text-left text-xs
+                        font-medium
+                        text-gray-500
+                        uppercase
+                        tracking-wider
+                      "
+                    >
+                      Price
+                    </th>
+                    <th
+                      scope="col"
+                      class="
+                        px-6
+                        py-3
+                        text-left text-xs
+                        font-medium
+                        text-gray-500
+                        uppercase
+                        tracking-wider
+                      "
+                    >
+                      Duration
+                    </th>
+                        <th
+                      scope="col"
+                      class="
+                        px-6
+                        py-3
+                        text-left text-xs
+                        font-medium
+                        text-gray-500
+                        uppercase
+                        tracking-wider
+                      "
+                    >
+                      Payment Method
                     </th>
                     <th scope="col" class="relative px-6 py-3">
                       <span class="sr-only">Edit</span>
@@ -78,35 +102,46 @@
                   </tr>
                 </thead>
                 <tbody class="bg-white divide-y divide-gray-200">
-                  <tr v-for="person in handymen" :key="person.id">
+                  <tr v-for="request in requests" :key="request.id">
                     <td class="px-6 py-4 whitespace-nowrap">
-                      <div class="flex items-center">
-                        <div class="flex-shrink-0 h-10 w-10">
-                          <router-link
-                            :to="`/user/${person.id}`"
-                            class="text-indigo-600 hover:text-indigo-900"
-                          >
+                      <router-link :to="`/user/${request.user.id}`">
+                        <div class="flex items-center">
+                          <div class="flex-shrink-0 h-10 w-10">
                             <Avatar
-                              v-if="person.name"
-                              :url="person.avatar"
-                              :name="person.name"
+                              v-if="request.user.name"
+                              :url="request.user.avatar"
+                              :name="request.user.name"
                             />
-                          </router-link>
+                          </div>
+                          <div class="ml-4">
+                            <div class="text-sm font-medium text-gray-900">
+                              {{ request.user.name }}
+                            </div>
+                            <div class="text-sm text-gray-500">
+                              {{ request.user.email }}
+                            </div>
+                          </div>
                         </div>
-                        <div class="ml-4">
-                          <div class="text-sm font-medium text-gray-900">
-                            {{ person.name }}
-                          </div>
-                          <div class="text-sm text-gray-500">
-                            {{ person.email }}
-                          </div>
+                      </router-link>
+                    </td>
+                    <td class="px-6 py-4 whitespace-nowrap">
+                      <div
+                        class="
+                          flex-shrink-0
+                          h-10
+                          w-10
+                          flex flex-col
+                          justify-center
+                          items-center
+                        "
+                      >
+                        <div class="pl-7 text-sm text-gray-900">
+                          {{ request.title }}
                         </div>
                       </div>
                     </td>
-
                     <td class="px-6 py-4 whitespace-nowrap">
                       <span
-                        v-if="person.is_online === true"
                         class="
                           px-2
                           inline-flex
@@ -118,10 +153,11 @@
                           text-green-800
                         "
                       >
-                        Online
+                        {{ request.price }} DZD
                       </span>
+                    </td>
+                    <td class="px-6 py-4 whitespace-nowrap">
                       <span
-                        v-else-if="person.is_online === false"
                         class="
                           px-2
                           inline-flex
@@ -129,24 +165,28 @@
                           leading-5
                           font-semibold
                           rounded-full
-                          bg-red-100
-                          text-red-800
+                          bg-green-100
+                          text-green-800
                         "
                       >
-                        Offline
+                        {{ request.duration }} Days
                       </span>
                     </td>
-                    <td
-                    v-if="person.isAdmin === false && person.isHandyman === true"
-                      class="px-6 py-4 whitespace-nowrap text-sm text-gray-500"
-                    >
-                      Handyman
-                    </td>
-                      <td
-                       v-if="person.isAdmin === true && person.isHandyman === true"
-                      class="px-6 py-4 whitespace-nowrap text-sm text-gray-500"
-                    >
-                      Admin
+                      <td class="px-6 py-4 whitespace-nowrap">
+                      <span
+                        class="
+                          px-2
+                          inline-flex
+                          text-xs
+                          leading-5
+                          font-semibold
+                          rounded-full
+                          bg-green-100
+                          text-green-800
+                        "
+                      >
+                       {{JSON.parse( request.payment_method ) }}
+                      </span>
                     </td>
                     <td
                       class="
@@ -158,9 +198,10 @@
                       "
                     >
                       <router-link
-                        :to="`/user/${person.id}`"
+                        :to="`/request/${request.id}`"
+                        href="#"
                         class="text-indigo-600 hover:text-indigo-900"
-                        >Visit</router-link
+                        >Check</router-link
                       >
                     </td>
                   </tr>
@@ -405,49 +446,48 @@ export default {
   },
 
   setup() {
-    let action = "Search/paginateHandymen";
+    let action = "Category/paginateHandymen";
     let route = useRoute();
     let store = useStore();
-    let query = route.params.query;
-    console.log(query);
-    let meta, links, handymen;
+    let title = route.params.title;
+    console.log(title);
+    let meta, links, requests;
     let path = "handymen";
 
     let page = 1;
     let payload = {
       page: page,
-      query: query,
+      title: title,
     };
 
     /* let router = useRouter
-     */ store.dispatch("Search/searchHandymenPaginate", payload).then((res) => {
-      console.log(res);
-      let newmeta = computed(() => {
-        return store.getters["Search/getSearchHandymenMeta"];
+     */ store
+      .dispatch("Category/getclientRequestsByCategoryPaginate", payload)
+      .then((res) => {
+        console.log(res);
       });
-      console.log(newmeta.value);
-    });
     meta = computed(() => {
-      return store.getters["Search/getSearchHandymenMeta"];
+      return store.getters["Category/requestsMeta"];
     });
     links = computed(() => {
-      return store.getters["Search/getSearchHandymenLinks"];
+      return store.getters["Category/requestsLinks"];
     });
-    handymen = computed(() => {
-      return store.getters["Search/getSearchHandymen"];
+    requests = computed(() => {
+      return store.getters["Category/requests"];
     });
+    console.log(meta);
     const prevPage = () => {
-      store.dispatch("Search/paginateHandymen", links.value.prev);
+      store.dispatch("Category/paginateCategoryClientRequest", links.value.prev);
     };
     const nextPage = () => {
       console.log(links.value.next);
-      store.dispatch("Search/paginateHandymen", links.value.next);
+      store.dispatch("Category/paginateCategoryClientRequest", links.value.next);
     };
 
     const setPage = (pageNumber) => {
-      let paginationlink = `${process.env.VUE_APP_API_URL}/api/search/handymen/paginate?page=${pageNumber}&query=${query}`;
+      let paginationlink = `${process.env.VUE_APP_API_URL}/api/category/${title}/requests/paginate?page=${pageNumber}`;
 
-      store.dispatch("Search/paginateHandymen", paginationlink);
+      store.dispatch("Category/paginateCategoryClientRequest", paginationlink);
       console.log(meta.value);
     };
 
@@ -480,7 +520,7 @@ export default {
     });
     let preurl = `${process.env.VUE_APP_API_URL}`;
     return {
-      query,
+      title,
       action,
       path,
 
@@ -489,7 +529,7 @@ export default {
       setPage,
       meta,
       links,
-      handymen,
+      requests,
       filterPages,
       currentPage,
       totalPages,

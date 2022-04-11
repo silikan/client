@@ -1,17 +1,18 @@
 import CategoryService from "@/services/CategoryService";
 
 function setPaginatedCategoryGigs(commit, response) {
-  commit("SET_CATEGORY_GIGS", response.data.data);
-  commit("SET_CATEGORY_GIGS_META", response.data.meta);
-  commit("SET_CATEGORY_GIGS_LINKS", response.data.links);
-  commit("SET_CATEGORY_GIGS_LOADING", false);
+  commit("SET_GIGS", response.data.data);
+  commit("SET_GIGS_META", response.data.meta);
+  commit("SET_GIGS_LINKS", response.data.links);
+  commit("SET_GIGS_LOADING", false);
 }
 
 function setPaginatedCategoryClientRequest(commit, response) {
-  commit("SET_CATEGORY_CLIENT_REQUEST", response.data.data);
-  commit("SET_CATEGORY_CLIENT_REQUEST_META", response.data.meta);
-  commit("SET_CATEGORY_CLIENT_REQUEST_LINKS", response.data.links);
-  commit("SET_CATEGORY_CLIENT_REQUEST_LOADING", false);
+  console.log(response.data);
+  commit("SET_REQUESTS", response.data.data);
+  commit("SET_REQUESTS_META", response.data.meta);
+  commit("SET_REQUESTS_LINKS", response.data.links);
+  commit("SET_REQUESTS_LOADING", false);
 }
 export const namespaced = true;
 
@@ -70,19 +71,23 @@ export const actions = {
     setPaginatedCategoryGigs(commit, response);
     return response.data;
   },
-  async getClientRequestsByCategoryPaginate({ commit }, { title, page }) {
+  async getclientRequestsByCategoryPaginate({ commit }, { title, page }) {
     commit("SET_REQUESTS_LOADING", true);
-    const response = await CategoryService.getClientRequestsByCategoryPaginate(title, page);
+    const response = await CategoryService.getclientRequestsByCategoryPaginate(title, page);
     setPaginatedCategoryClientRequest(commit, response);
     return response.data;
   },
-  paginateCategoryGigs({ commit }, link) {
+  async paginateCategoryGigs({ commit }, link) {
     commit("SET_GIGS_LOADING", true);
-    return CategoryService.paginateCategoryGigs(link);
+    let data = await CategoryService.paginateCategoryGigs(link);
+    setPaginatedCategoryGigs(commit, data);
+    return data.data;
   },
-  paginateCategoryClientRequest({ commit }, link) {
+  async paginateCategoryClientRequest({ commit }, link) {
     commit("SET_REQUESTS_LOADING", true);
-    return CategoryService.paginateCategoryClientRequest(link);
+    let data = await CategoryService.paginateCategoryClientRequest(link);
+    setPaginatedCategoryClientRequest(commit, data);
+    return data.data;
   },
 };
 

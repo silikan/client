@@ -7,12 +7,10 @@
           class="space-y-5 sm:space-y-4 md:max-w-xl lg:max-w-3xl xl:max-w-none"
         >
           <h2 class="text-3xl font-extrabold tracking-tight hidden md:block">
-            Gigs Search Results "{{query}}"
+            Gigs Category Results "{{ title }}"
           </h2>
         </div>
-        <div class="flex items-center flex-1 md:flex-none">
-
-        </div>
+        <div class="flex items-center flex-1 md:flex-none"></div>
       </div>
       <div class="flex flex-col">
         <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
@@ -99,10 +97,8 @@
                           <img
                             class="h-10 w-10 rounded-md"
                             :src="`${preurl}/${gig.images[0].url}`"
-
                             alt=""
                           />
-
                         </div>
                         <div class="ml-4">
                           <div class="text-sm font-medium text-gray-900">
@@ -119,7 +115,7 @@
                         {{ gig.title }}
                       </div>
                       <div class="text-sm text-gray-500">
-                        {{  }}
+                        {{}}
                       </div>
                     </td>
                     <td class="px-6 py-4 whitespace-nowrap">
@@ -135,7 +131,7 @@
                           text-green-800
                         "
                       >
-                        {{gig.category[0].title}}
+                        {{ gig.category[0].title }}
                       </span>
                     </td>
                     <td
@@ -152,7 +148,9 @@
                         font-medium
                       "
                     >
-                      <router-link :to="`/gig/${gig.id}`" class="text-indigo-600 hover:text-indigo-900"
+                      <router-link
+                        :to="`/gig/${gig.id}`"
+                        class="text-indigo-600 hover:text-indigo-900"
                         >Visit</router-link
                       >
                     </td>
@@ -389,10 +387,8 @@ import { computed, reactive } from "@vue/runtime-core";
 import { useStore } from "vuex";
 import { useRoute } from "vue-router";
 
-
 export default {
   components: {
-
     ChevronLeftIcon,
     ChevronRightIcon,
   },
@@ -401,39 +397,39 @@ export default {
     let action = "Search/paginateGigs";
     let route = useRoute();
     let store = useStore();
-    let query = route.params.query;
     let meta, links, gigs;
     let path = "handymen";
+    let title = route.params.title;
 
     let page = 1;
     let payload = {
       page: page,
-      query: query,
+      title: title,
     };
 
     /* let router = useRouter
-     */ store.dispatch("Search/searchGigsPaginate", payload);
+     */ store.dispatch("Category/getGigsByCategoryPaginate", payload);
     meta = computed(() => {
-      return store.getters["Search/getSearchGigsMeta"];
+      return store.getters["Category/gigsMeta"];
     });
     links = computed(() => {
-      return store.getters["Search/getSearchGigsLinks"];
+      return store.getters["Category/gigsLinks"];
     });
     gigs = computed(() => {
-      return store.getters["Search/getSearchGigs"];
+      return store.getters["Category/gigs"];
     });
     const prevPage = () => {
-      store.dispatch("Search/paginateGigs", links.value.prev);
+      store.dispatch("Category/paginateCategoryGigs", links.value.prev);
     };
     const nextPage = () => {
       console.log(links.value.next);
-      store.dispatch("Search/paginateGigs", links.value.next);
+      store.dispatch("Category/paginateCategoryGigs", links.value.next);
     };
 
     const setPage = (pageNumber) => {
-      let paginationlink = `${process.env.VUE_APP_API_URL}/api/search/gigs/paginate?page=${pageNumber}&query=${query}`;
+      let paginationlink = `${process.env.VUE_APP_API_URL}/api/category/${title}/gigs/paginate?page=${pageNumber}`;
 
-      store.dispatch("Search/paginateGigs", paginationlink);
+      store.dispatch("Category/paginateCategoryGigs", paginationlink);
       console.log(meta.value);
     };
 
@@ -464,13 +460,11 @@ export default {
 
       return data;
     });
-let preurl = `${process.env.VUE_APP_API_URL}`;
+    let preurl = `${process.env.VUE_APP_API_URL}`;
     return {
-
-      query,
       action,
       path,
-
+title,
       prevPage,
       nextPage,
       setPage,
@@ -480,7 +474,7 @@ let preurl = `${process.env.VUE_APP_API_URL}`;
       filterPages,
       currentPage,
       totalPages,
-      preurl
+      preurl,
     };
   },
 };
