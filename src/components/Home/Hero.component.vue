@@ -372,15 +372,15 @@
                           placeholder="Search"
                           type="search"
                         />
+
+                          <SearchList
+                            v-if="search != ''"
+                            :searchData="search"
+                            class="absolute w-full"
+                          />
+
                       </div>
                     </div>
-                  </div>
-                  <div class=" inline-block text-left z-50 mt-5 rounded-md">
-                    <SearchList
-                      v-if="search != ''"
-                      :searchData="search"
-                      class="absolute"
-                    />
                   </div>
                 </div>
               </div>
@@ -420,6 +420,7 @@ const navigation = [
   { name: "Contact Us", link: "/contact" },
   { name: "Categories", link: "/categories" },
   { name: "Requests", link: "/requests" },
+  { name: "Gigs", link: "/gigs" },
   { name: "Handymen", link: "/handymen" },
 ];
 

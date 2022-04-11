@@ -3,7 +3,8 @@ import RequestService from "@/services/RequestService.js";
 export const namespaced = true;
 
 function setPaginatedClientRequest(commit, response) {
-  commit("SET_GIGS", response.data.data);
+  console.log(response.data.data);
+  commit("SET_REQUESTS", response.data.data);
   commit("SET_META", response.data.meta);
   commit("SET_LINKS", response.data.links);
   commit("SET_LOADING", false);
@@ -59,7 +60,7 @@ export const mutations = {
   SET_DURATION(state, duration) {
     state.duration = duration;
   },
-  SET_Requests(state, requests) {
+  SET_REQUESTS(state, requests) {
     state.requests = requests;
   },
 

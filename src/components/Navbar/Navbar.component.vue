@@ -77,7 +77,7 @@
               <SearchList
                 v-if="search != ''"
                 :searchData="search"
-                class=" absolute z-50 shadow-lg w-full"
+                class=" absolute z-50 shadow-lg w-full "
               />
             </div>
 
@@ -531,8 +531,10 @@ const navigation = [
   { name: "Categories", link: "/categories" },
   { name: "Requests", link: "/requests" },
   { name: "Handymen", link: "/handymen" },
-  { name: "About", link: "/about" },
-  { name: "Contact Us", link: "/contact" },
+  { name: "Gigs", link: "/gigs" },
+  { name: "About", link: "/aboutus" },
+  { name: "Contact Us", link: "/contactus" },
+
 ];
 const userNavigation = [
   { name: "Your Profile", href: "#", route: "/profile" },

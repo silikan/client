@@ -26,7 +26,7 @@ export default {
   },
 
   async getGigsPaginate(page) {
-    return await API.apiClient.get(`/gig/paginate`, {
+    return await API.apiClient.get(`/paginate/gig`, {
       params: {
         page,
       },

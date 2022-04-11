@@ -214,5 +214,6 @@ console.log(result);
 }
 .el-carousel__item {
   height: auto;
+
 }
 </style>

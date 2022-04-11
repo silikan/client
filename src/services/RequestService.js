@@ -19,7 +19,7 @@ export default {
     return API.apiClient.get(`/user/${id}/request`);
   },
   async getClientRequestsPaginate(page) {
-    return await API.apiClient.get(`/request/paginate`, {
+    return await API.apiClient.get(`/paginate/request`, {
       params: {
         page,
       },

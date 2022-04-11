@@ -3,6 +3,7 @@ import GigService from "@/services/GigService.js";
 export const namespaced = true;
 
 function setPaginatedGig(commit, response) {
+  console.log(response.data.data);
   commit("SET_GIGS", response.data.data);
   commit("SET_META", response.data.meta);
   commit("SET_LINKS", response.data.links);

@@ -6,207 +6,110 @@
           class="space-y-5 sm:space-y-4 md:max-w-xl lg:max-w-3xl xl:max-w-none"
         >
           <h2 class="text-3xl font-extrabold tracking-tight hidden md:block">
-            Requests
+            Gigs
           </h2>
         </div>
+        <div class="flex items-center flex-1 md:flex-none"></div>
       </div>
-      <div class="flex flex-col">
-        <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
+      <div
+        class="
+          relative
+          bg-white
+
+
+        "
+      >
+        <div class="relative mx-auto">
           <div
-            class="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8"
+            class="
+              lg:mx-10
+              grid
+              gap-5
+              grid-cols-1
+              sm:grid-cols-2
+              xl:grid-cols-3
+
+            "
           >
             <div
+              v-for="gig in gigs"
+              :key="gig.id"
               class="
-                shadow
+                flex flex-col
+                rounded-lg
+                border-x border-b border-gray-200
                 overflow-hidden
-                border-b border-gray-200
-                sm:rounded-lg
+                shadow-inner
               "
             >
-              <table class="min-w-full divide-y divide-gray-200">
-                <thead class="bg-gray-50">
-                  <tr>
-                      <th
-                      scope="col"
-                      class="
-                        px-6
-                        py-3
-                        text-left text-xs
-                        font-medium
-                        text-gray-500
-                        uppercase
-                        tracking-wider
-                      "
-                    >
-                      Client
-                    </th>
-                    <th
-                      scope="col"
-                      class="
-                        px-6
-                        py-3
-                        text-left text-xs
-                        font-medium
-                        text-gray-500
-                        uppercase
-                        tracking-wider
-                      "
-                    >
-                      Title
-                    </th>
-                    <th
-                      scope="col"
-                      class="
-                        px-6
-                        py-3
-                        text-left text-xs
-                        font-medium
-                        text-gray-500
-                        uppercase
-                        tracking-wider
-                      "
-                    >
-                      Price
-                    </th>
-                    <th
-                      scope="col"
-                      class="
-                        px-6
-                        py-3
-                        text-left text-xs
-                        font-medium
-                        text-gray-500
-                        uppercase
-                        tracking-wider
-                      "
-                    >
-                      Duration
-                    </th>
-                        <th
-                      scope="col"
-                      class="
-                        px-6
-                        py-3
-                        text-left text-xs
-                        font-medium
-                        text-gray-500
-                        uppercase
-                        tracking-wider
-                      "
-                    >
-                      Payment Method
-                    </th>
-                    <th scope="col" class="relative px-6 py-3">
-                      <span class="sr-only">Edit</span>
-                    </th>
-                  </tr>
-                </thead>
-                <tbody class="bg-white divide-y divide-gray-200">
-                  <tr v-for="request in requests" :key="request.id">
-                    <td class="px-6 py-4 whitespace-nowrap">
-                      <router-link :to="`/user/${request.user.id}`">
-                        <div class="flex items-center">
-                          <div class="flex-shrink-0 h-10 w-10">
-                            <Avatar
-                              v-if="request.user.name"
-                              :url="request.user.avatar"
-                              :name="request.user.name"
-                            />
-                          </div>
-                          <div class="ml-4">
-                            <div class="text-sm font-medium text-gray-900">
-                              {{ request.user.name }}
-                            </div>
-                            <div class="text-sm text-gray-500">
-                              {{ request.user.email }}
-                            </div>
-                          </div>
-                        </div>
-                      </router-link>
-                    </td>
-                    <td class="px-6 py-4 whitespace-nowrap">
-                      <div
-                        class="
-                          flex-shrink-0
-                          h-10
-                          w-10
-                          flex flex-col
-                          justify-center
-                          items-center
-                        "
-                      >
-                        <div class="pl-7 text-sm text-gray-900">
-                          {{ request.title }}
-                        </div>
-                      </div>
-                    </td>
-                    <td class="px-6 py-4 whitespace-nowrap">
-                      <span
-                        class="
-                          px-2
-                          inline-flex
-                          text-xs
-                          leading-5
-                          font-semibold
-                          rounded-full
-                          bg-green-100
-                          text-green-800
-                        "
-                      >
-                        {{ request.price }} DZD
+              <div
+                class="flex justify-center relative w-full h-72 overflow-hidden"
+              >
+                <img
+                  :src="`${preurl}/${gig.images[0].url}`"
+                  class="w-full h-full object-center object-cover"
+                />
+              </div>
+              <div
+                class="flex-1 bg-white px-5 pt-5 flex flex-col justify-between"
+              >
+                <div class="flex items-center">
+                  <div class="flex-shrink-0">
+                    <a href="#">
+                      <span class="sr-only">{{ gig.user.name }}</span>
+                      <Avatar
+                        v-if="gig.user.name"
+                        :url="gig.user.avatar"
+                        :name="gig.user.name"
+                      />
+                    </a>
+                  </div>
+                  <div class="ml-3">
+                    <p class="text-md font-medium text-gray-600">
+                      <a href="gig.author.href" class="hover:underline">
+                        {{ gig.user.name }}
+                      </a>
+                    </p>
+                  </div>
+                </div>
+                <div class="">
+                  <p class="text-md font-medium text-gray-500 mt-2">
+                    {{ gig.title }}
+                  </p>
+                </div>
+                <div
+                  class="
+                    border-t border-gray-200
+                    mt-4
+                    flex
+                    justify-between
+                    items-center
+                    p-3
+                  "
+                >
+                  <p class="font-bold text-2xl text-gray-400">
+                    {{ JSON.parse(gig.basic).price }}$
+                  </p>
+                  <div class="flex justify-center items-center">
+                    <button class="text-black font-bold rounded-full">
+                      <span class="sr-only">Button</span>
+                      <span class="icon">
+                        <ShoppingCartIcon
+                          class="flex-shrink-0 mr-1.5 h-6 w-6 text-gray-400"
+                        />
                       </span>
-                    </td>
-                    <td class="px-6 py-4 whitespace-nowrap">
-                      <span
-                        class="
-                          px-2
-                          inline-flex
-                          text-xs
-                          leading-5
-                          font-semibold
-                          rounded-full
-                          bg-green-100
-                          text-green-800
-                        "
-                      >
-                        {{ request.duration }} Days
+                    </button>
+                    <button class="text-black font-bold rounded-full">
+                      <span class="sr-only">Button</span>
+                      <span class="icon">
+                        <BookmarkIcon
+                          class="flex-shrink-0 mr-1.5 h-6 w-6 text-gray-400"
+                        />
                       </span>
-                    </td>
-                      <td class="px-6 py-4 whitespace-nowrap">
-                      <span
-                        class="
-                          px-2
-                          inline-flex
-                          text-xs
-                          leading-5
-                          font-semibold
-                          rounded-full
-                          bg-green-100
-                          text-green-800
-                        "
-                      >
-                       {{JSON.parse( request.payment_method ) }}
-                      </span>
-                    </td>
-                    <td
-                      class="
-                        px-6
-                        py-4
-                        whitespace-nowrap
-                        text-right text-sm
-                        font-medium
-                      "
-                    >
-                      <router-link
-                        :to="`/request/${request.id}`"
-                        href="#"
-                        class="text-indigo-600 hover:text-indigo-900"
-                        >Check</router-link
-                      >
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
+                    </button>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -432,55 +335,52 @@
 
 <script>
 import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/vue/solid";
-import Avatar from "@/components/Avatar/Avatar.component.vue";
+import { BookmarkIcon, ShoppingCartIcon } from "@heroicons/vue/solid";
 
 import { computed, reactive } from "@vue/runtime-core";
 import { useStore } from "vuex";
+import Avatar from "@/components/Avatar/Avatar.component.vue";
 
 export default {
   components: {
     ChevronLeftIcon,
     ChevronRightIcon,
     Avatar,
+    BookmarkIcon,
+    ShoppingCartIcon,
   },
 
   setup() {
-    let action = "Search/paginateHandymen";
+    let action = "Search/paginateGigs";
     let store = useStore();
-    let meta, links, requests;
+    let meta, links, gigs;
     let path = "handymen";
 
     let page = 1;
 
-
     /* let router = useRouter
-     */ store
-      .dispatch("Request/getClientRequestsPaginate", page)
-      .then((res) => {
-        console.log(res);
-      });
+     */ store.dispatch("Gig/getGigsPaginate", page);
     meta = computed(() => {
-      return store.getters["Request/meta"];
+      return store.getters["Gig/meta"];
     });
     links = computed(() => {
-      return store.getters["Request/links"];
+      return store.getters["Gig/links"];
     });
-    requests = computed(() => {
-      return store.getters["Request/requests"];
+    gigs = computed(() => {
+      return store.getters["Gig/gigs"];
     });
-    console.log(meta);
     const prevPage = () => {
-      store.dispatch("Request/paginateClientRequests", links.value.prev);
+      store.dispatch("Gig/paginateGigs", links.value.prev);
     };
     const nextPage = () => {
       console.log(links.value.next);
-      store.dispatch("Request/paginateClientRequests", links.value.next);
+      store.dispatch("Gig/paginateGigs", links.value.next);
     };
 
     const setPage = (pageNumber) => {
-      let paginationlink = `${process.env.VUE_APP_API_URL}/api/paginate/request?page=${pageNumber}`;
+      let paginationlink = `${process.env.VUE_APP_API_URL}/api/paginate/gig?page=${pageNumber}`;
 
-      store.dispatch("Request/paginateClientRequests", paginationlink);
+      store.dispatch("Gig/paginateGigs", paginationlink);
       console.log(meta.value);
     };
 
@@ -521,7 +421,7 @@ export default {
       setPage,
       meta,
       links,
-      requests,
+      gigs,
       filterPages,
       currentPage,
       totalPages,

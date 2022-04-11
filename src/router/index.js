@@ -35,6 +35,7 @@ import SearchList from "@/views/SearchList.view.vue";
 import GigSearchResultPage from "@/views/GigSearchResultPage.view.vue";
 import RequestSearchResultPage from "@/views/RequestSearchResultPage.view.vue";
 import HandymenSearchResultPage from "@/views/HandymenSearchResultPage.view.vue";
+import Gig from "@/views/Gig.view.vue";
 const routes = [
   {
     path: "/",
@@ -173,6 +174,13 @@ const routes = [
     meta: { middleware: [auth, guest] },
 
     component: Handymen,
+  },
+  {
+    path: "/gigs",
+    name: "Gig",
+    meta: { middleware: [auth, guest] },
+
+    component: Gig,
   },
   {
     path: "/gig/create",
