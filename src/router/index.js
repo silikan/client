@@ -36,12 +36,24 @@ import GigSearchResultPage from "@/views/GigSearchResultPage.view.vue";
 import RequestSearchResultPage from "@/views/RequestSearchResultPage.view.vue";
 import HandymenSearchResultPage from "@/views/HandymenSearchResultPage.view.vue";
 import Gig from "@/views/Gig.view.vue";
+import GigCategory from "@/views/GigCategory.view.vue";
+import RequestCategory from "@/views/RequestCategory.view.vue";
 const routes = [
   {
     path: "/",
     name: "Home",
     meta: { middleware: [guest] },
     component: Home,
+  },
+  {
+    path: "/category/:title/gigs",
+    name: "GigCategory",
+    component: GigCategory,
+  },
+  {
+    path: "/category/:title/requests",
+    name: "RequestCategory",
+    component: RequestCategory,
   },
   {
     path: "/search/gigs/:query",
