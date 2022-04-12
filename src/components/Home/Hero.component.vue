@@ -84,6 +84,7 @@
                 </PopoverButton>
               </div>
             </div>
+
             <div class="hidden space-x-10 md:flex md:ml-10">
               <router-link
                 v-for="item in navigation"

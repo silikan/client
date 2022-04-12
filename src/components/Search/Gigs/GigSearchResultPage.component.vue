@@ -416,6 +416,7 @@ export default {
     meta = computed(() => {
       return store.getters["Search/getSearchGigsMeta"];
     });
+    console.log(meta);
     links = computed(() => {
       return store.getters["Search/getSearchGigsLinks"];
     });

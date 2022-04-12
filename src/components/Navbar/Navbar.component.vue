@@ -1,5 +1,6 @@
 <template>
   <Disclosure v-slot="{ open }" as="header" class="bg-white shadow">
+
     <div
       class="
         max-w-7xl
@@ -10,7 +11,7 @@
       "
     >
       <div class="relative h-16 flex justify-between">
-        <div class="flex-shrink-0 flex items-center h-full">
+        <div class="flex-shrink-0 flex items-center h-full z-50">
           <router-link type="button" to="/" class="cursor-pointer">
             <img
               class="block h-8 w-auto cursor-pointer"
@@ -106,6 +107,7 @@
             <XIcon v-else class="block h-6 w-6" aria-hidden="true" />
           </DisclosureButton>
         </div>
+
         <div class="hidden lg:relative lg:z-10 lg:ml-4 lg:flex lg:items-center">
           <div class="flex justify-between" v-if="isLoggedin === false">
             <div class="hidden md:flex mx-4" v-if="signin === false">
@@ -323,6 +325,7 @@
         >
           {{ item.name }}
         </router-link>
+
       </nav>
     </div>
 
@@ -340,9 +343,56 @@
             :aria-current="item.current ? 'page' : undefined"
           >
             {{ item.name }}
+
           </DisclosureButton>
+
         </div>
       </router-link>
+       <div class=" m-5 flex flex-col justify-between space-y-4 items-start"  v-if="isLoggedin === false">
+            <div class="hidden md:flex " v-if="signin === false">
+              <router-link
+                to="/signin"
+                class="
+                  inline-flex
+                  items-center
+                  px-5
+                  py-2
+                  border
+                  text-sm
+                  font-medium
+                  rounded-full
+                  shadow-sm
+                  text-black
+                  bg-white
+                  hover:bg-transparent hover:border-white
+                "
+              >
+                Signin
+              </router-link>
+            </div>
+            <div class="hidden md:flex">
+              <router-link
+                v-if="signup === false"
+                to="/signup"
+                class="
+                  inline-flex
+                  items-center
+                  px-5
+                  py-2
+                  border border-transparent
+                  text-sm
+                  font-medium
+                  rounded-full
+                  shadow-sm
+                  text-white
+                  bg-indigo-600
+                  hover:bg-indigo-700
+                "
+              >
+                Signup
+              </router-link>
+            </div>
+          </div>
       <div
         v-if="isLoggedin === true"
         class="border-t border-gray-200 pt-4 pb-3"
