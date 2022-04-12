@@ -16,14 +16,14 @@
             aria-hidden="true"
           >
             <img
-            referrerpolicy="no-referrer"
+              referrerpolicy="no-referrer"
               class="h-40 w-40 rounded-full ring-4 ring-white sm:h-48 sm:w-48"
               :src="avatar_svg"
               v-if="avatarWithoutLocalhost === null"
               alt=""
             />
             <img
-            referrerpolicy="no-referrer"
+              referrerpolicy="no-referrer"
               class="h-40 w-40 rounded-full ring-4 ring-white sm:h-48 sm:w-48"
               :src="avatar"
               v-if="avatarWithoutLocalhost !== null"
@@ -118,7 +118,6 @@
                   text-black
                   bg-white
                   hover:border-transparent
-
                 "
                 tag="button"
                 to="/edit/profile"
@@ -155,8 +154,8 @@
                     class="
                       inline-flex
                       items-center
-                           px-4
-                  py-2
+                      px-4
+                      py-2
                       border border-gray-300
                       rounded-md
                       shadow-sm
@@ -226,7 +225,6 @@
                   </transition>
                 </Menu>
               </span>
-
             </div>
           </div>
         </div>
@@ -380,7 +378,7 @@
       </div>
     </div>
   </div>
-   <div class="mt-6 sm:mt-2 2xl:mt-5">
+  <div class="mt-6 sm:mt-2 2xl:mt-5">
     <div class="border-b border-gray-200">
       <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
         <nav class="-mb-px flex space-x-8" aria-label="Tabs">
@@ -397,7 +395,12 @@
             ]"
             :aria-current="tab.current ? 'page' : undefined"
           >
-            {{ tab.name }}
+            <span v-if="tab.name == 'Gigs' && isHandyman === true">
+              {{ tab.name }}
+            </span>
+            <span v-if="tab.name == 'Requests' && tab.name !== 'Gigs'">
+              {{ tab.name }}
+            </span>
           </a>
         </nav>
       </div>
@@ -432,7 +435,6 @@ import { PencilIcon } from "@heroicons/vue/solid";
 import { DotsVerticalIcon } from "@heroicons/vue/solid";
 import { Menu, MenuButton, MenuItem, MenuItems } from "@headlessui/vue";
 import { computed, onMounted, reactive, ref } from "@vue/runtime-core";
-
 
 const profile = {
   name: "Ricardo Cooper",
@@ -522,7 +524,7 @@ export default {
 ];
  */
 
-  const navigateTabs = (tab) => {
+    const navigateTabs = (tab) => {
       if (tab.name === "About" && tab.number === 1) {
         tab.current = true;
         tabs[1].current = false;
@@ -549,21 +551,19 @@ export default {
       timerange = reactive(null);
     }
     const Gigs_Requests_tabs = reactive([
-  { name: "Requests", href: "#", current: true , number: 1 },
-  { name: "Gigs", href: "#", current: false, isHandyman: true ,  number: 2, },
-]);
-const GigRequestNavigation = (tab) =>{
-  console.log(tab);
-if(tab.name === "Requests" && tab.number === 1){
- tab.current = true
-  Gigs_Requests_tabs[1].current = false
-}else
-if(tab.name === "Gigs" && tab.number === 2){
-   tab.current = true
-  Gigs_Requests_tabs[0].current = false
-
-}
-}
+      { name: "Requests", href: "#", current: true, number: 1 },
+      { name: "Gigs", href: "#", current: false, isHandyman: true, number: 2 },
+    ]);
+    const GigRequestNavigation = (tab) => {
+      console.log(tab);
+      if (tab.name === "Requests" && tab.number === 1) {
+        tab.current = true;
+        Gigs_Requests_tabs[1].current = false;
+      } else if (tab.name === "Gigs" && tab.number === 2) {
+        tab.current = true;
+        Gigs_Requests_tabs[0].current = false;
+      }
+    };
 
     return {
       profile,
@@ -577,7 +577,7 @@ if(tab.name === "Gigs" && tab.number === 2){
       Gigs_Requests_tabs,
       navigateTabs,
       timerange,
-      GigRequestNavigation
+      GigRequestNavigation,
     };
   },
 };

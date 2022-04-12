@@ -315,7 +315,13 @@
             ]"
             :aria-current="tab.current ? 'page' : undefined"
           >
-            {{ tab.name }}
+             <span v-if="tab.name == 'Gigs' && isHandyman === true">
+              {{ tab.name }}
+            </span>
+            <span v-if="tab.name == 'Requests' && tab.name !== 'Gigs'">
+              {{ tab.name }}
+
+            </span>
           </a>
         </nav>
       </div>
@@ -324,7 +330,8 @@
   <ClientRequests v-show="Gigs_Requests_tabs[0].current === true" />
 
   <HandymanGigs
-    v-show="Gigs_Requests_tabs[1].current === true "
+    v-show="Gigs_Requests_tabs[1].current === true  && isHandyman === true "
+
   />
 </template>
 
@@ -344,7 +351,7 @@ import HandymanGigs from "./Visit_Handyman_Gigs.component.vue";
 
 import { DotsVerticalIcon } from "@heroicons/vue/solid";
 import { Menu, MenuButton, MenuItem, MenuItems } from "@headlessui/vue";
-import { onMounted, reactive, ref } from "@vue/runtime-core";
+import {  reactive, ref } from "@vue/runtime-core";
 import { createAvatar } from "@dicebear/avatars";
 import * as style from "@dicebear/avatars-initials-sprites";
 import UserService from "@/services/UserService.js";
@@ -419,11 +426,11 @@ export default {
           router.push("/profile");
         }
       }
+console.log(VisitUserData.value);
 
-      onMounted(() => {
         isHandyman.value = VisitUserData.value.isHandyman;
         isClient.value = VisitUserData.value.isClient;
-      });
+
 
       avatar_svg.value = createAvatar(style, {
         seed: VisitUserData.value.name,
@@ -515,7 +522,8 @@ if(tab.name === "Gigs" && tab.number === 2){
       ParsedTime,
       id,
 
-      GigRequestNavigation
+      GigRequestNavigation,
+
     };
   },
 };

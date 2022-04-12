@@ -130,11 +130,12 @@
                 sm:text-sm
                 mx-2
               "
+               v-if="handymanId !== authUserId"
               @click="addToTaskList"
             >
               Add To Task
             </button>
-            <ChatButton />
+            <ChatButton  v-if="handymanId !== authUserId"/>
           </div>
         </div>
       </div>
@@ -179,6 +180,26 @@ export default {
     let price = ref("");
     let duration = ref("");
 
+
+     let authUserId = ref(null);
+let handymanId = ref(null);
+
+let loggedIn = computed(() => store.getters["auth/loggedIn"]);
+if (loggedIn.value === true) {
+ let authUser = computed(()=>store.getters["auth/authUser"])
+  authUserId.value = authUser.value.id
+}
+
+store
+        .dispatch("Gig/getGigUser", id)
+        .then((result) => {
+
+          handymanId.value = result.id;
+
+        })
+        .catch((err) => {
+          console.log(err);
+        });
     store
       .dispatch("Request/getRequest", id)
       .then((result) => {
@@ -264,6 +285,8 @@ export default {
       avatar,
       duration,
       addToTaskList,
+       handymanId,
+      authUserId
     };
   },
 };
