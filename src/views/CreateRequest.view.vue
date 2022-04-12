@@ -7,6 +7,7 @@
     <PaymentMthod v-show="steps[2].active === true"/>
     <div class="my-10 flex justify-around w-full mx-auto sm:px-6 lg:px-8">
       <button
+        v-if="steps.findIndex((step) => step.active) > 0"
         type="submit"
         class="
           inline-flex
@@ -33,6 +34,7 @@
         prev
       </button>
       <button
+        v-if="steps.findIndex((step) => step.active) < 2"
         type="submit"
         class="
           inline-flex
@@ -57,6 +59,7 @@
         next
       </button>
        <button
+        v-if="steps.findIndex((step) => step.active) === 2"
         class="
           inline-flex
           items-center
