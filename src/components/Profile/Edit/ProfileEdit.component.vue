@@ -1183,7 +1183,12 @@ export default {
     });
 
     const updateUser = () => {
-      console.log(Educationdata);
+/*       var today = new Date();
+      var dd = String(today.getDate()).padStart(2, '0');
+var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+var yyyy = today.getFullYear();
+today = mm + '/' + dd + '/' + yyyy;
+      console.log(date_of_birth.value); */
       const payload = {
         gender: gender.value,
         name: name.value,
@@ -1195,7 +1200,7 @@ export default {
         email: email.value,
         username: username.value,
         bio: bio.value,
-        date_of_birth: moment(date_of_birth.value).format("YYYY-MM-DD"),
+        date_of_birth:date_of_birth.value == null ? ""  : moment(date_of_birth.value).format("YYYY-MM-DD") || Date.now(),
 
         phone_number: phone_number.value,
         address: address.value,
