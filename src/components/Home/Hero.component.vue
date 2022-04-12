@@ -320,7 +320,7 @@
                             items-center
                           "
                         >
-                          <button
+                          <router-link
                             type="button"
                             class="
                               inline-flex
@@ -342,9 +342,10 @@
                               focus:ring-indigo-500
                               cursor-pointer
                             "
+                            :to="`/search/gigs/${search}`"
                           >
                             Search
-                          </button>
+                          </router-link>
                         </div>
                         <input
                           id="search"
@@ -373,11 +374,7 @@
                           type="search"
                         />
 
-                          <SearchList
-                            v-if="search != ''"
-                            :searchData="search"
-                            class="absolute w-full"
-                          />
+
 
                       </div>
                     </div>
@@ -413,11 +410,10 @@
 import { Popover, PopoverButton, PopoverPanel } from "@headlessui/vue";
 import { MenuIcon, XIcon } from "@heroicons/vue/outline";
 import { SearchIcon } from "@heroicons/vue/solid";
-import SearchList from "@/components/Search/SearchList.component.vue";
 import { ref } from "@vue/reactivity";
 const navigation = [
-  { name: "About", link: "/about" },
-  { name: "Contact Us", link: "/contact" },
+  { name: "About", link: "/aboutus" },
+  { name: "Contact", link: "/contactus" },
   { name: "Categories", link: "/categories" },
   { name: "Requests", link: "/requests" },
   { name: "Gigs", link: "/gigs" },
@@ -432,7 +428,6 @@ export default {
     MenuIcon,
     XIcon,
     SearchIcon,
-    SearchList,
   },
   setup() {
     let search = ref("");

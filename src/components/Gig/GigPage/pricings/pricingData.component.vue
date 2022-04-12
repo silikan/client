@@ -78,7 +78,9 @@
               cursor-pointer
             "
             aria-describedby="tier-standard"
+            v-if="handymanId !== authUserId"
           >
+
             Add To Cart
           </a>
         </div>
@@ -105,6 +107,28 @@ export default {
     let tabs = computed(() => props.tiers);
     let store = useStore();
     let Data = ref("");
+
+
+ let authUserId = ref(null);
+let handymanId = ref(null);
+
+let loggedIn = computed(() => store.getters["auth/loggedIn"]);
+if (loggedIn.value === true) {
+ let authUser = computed(()=>store.getters["auth/authUser"])
+  authUserId.value = authUser.value.id
+}
+
+store
+        .dispatch("Gig/getGigUser", id)
+        .then((result) => {
+
+          handymanId.value = result.id;
+
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+
 
     store
       .dispatch("Gig/getGig", id)
@@ -177,6 +201,8 @@ export default {
       tabs,
       Data,
       addToCart,
+      handymanId,
+      authUserId
     };
   },
 };

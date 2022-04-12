@@ -10,8 +10,7 @@
           </h2>
         </div>
         <div class="flex items-center flex-1 md:flex-none">
-          <Search />
-          <AdjustmentsIcon class="h-5 w-5 border-black rounded-md" />
+
         </div>
       </div>
       <div class="space-y-12 mb-10">
@@ -355,8 +354,6 @@
 <script>
 import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/vue/solid";
 
-import { AdjustmentsIcon } from "@heroicons/vue/outline";
-import Search from "./Search/search.component.vue";
 import store from "@/store/index";
 import { createAvatar } from "@dicebear/avatars";
 import * as style from "@dicebear/avatars-initials-sprites";
@@ -365,8 +362,6 @@ import { computed, reactive } from "@vue/runtime-core";
 
 export default {
   components: {
-    Search,
-    AdjustmentsIcon,
     ChevronLeftIcon,
     ChevronRightIcon,
   },

@@ -45,10 +45,13 @@
               <div
                 class="flex justify-center relative w-full h-72 overflow-hidden"
               >
-                <img
+              <router-link :to="`/gig/${gig.id}`" class="flex justify-center relative w-full h-auto overflow-hidden">
+  <img
                   :src="`${preurl}/${gig.images[0].url}`"
                   class="w-full h-full object-center object-cover"
                 />
+              </router-link>
+
               </div>
               <div
                 class="flex-1 bg-white px-5 pt-5 flex flex-col justify-between"

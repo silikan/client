@@ -41,7 +41,7 @@
                   cursor-pointer
                 "
                 tag="button"
-              :to="`/room/${person.id}`"
+              :to="`/room/${person.roomId}`"
               >
                 <PaperAirplaneIcon
                   class="btn-chat h-5 w-5"
@@ -80,10 +80,12 @@ export default {
 
        res.data.filter((user) => user.id !== authUser.value.id).forEach((user) => {
          console.log(user);
+
          people.value.push({
            name: user.name,
            email: user.email,
            id: user.id,
+           roomId: room.id
          });
        });
       });
