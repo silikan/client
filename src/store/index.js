@@ -10,6 +10,13 @@ import * as Cart from "@/store/modules/Cart";
 import * as Task from "@/store/modules/Task";
 import * as Search from "@/store/modules/Search";
 import * as Category from "@/store/modules/Category";
+import * as Admin from "@/store/modules/Admin";
+import * as Moderator from "@/store/modules/Moderator";
+import * as Review from "@/store/modules/Review";
+import * as Checkout from "@/store/modules/Moderator";
+import * as BuyerFeed from "@/store/modules/BuyerFeed";
+import * as SellerFeed from "@/store/modules/SellerFeed";
+
 export default createStore({
   strict: true,
 
@@ -25,5 +32,11 @@ export default createStore({
     Task,
     Search,
     Category,
+    Admin,
+    Moderator,
+    Review,
+    Checkout,
+    BuyerFeed,
+    SellerFeed,
   },
 });
