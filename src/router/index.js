@@ -43,12 +43,19 @@ import GigCategory from "@/views/GigCategory.view.vue";
 import RequestCategory from "@/views/RequestCategory.view.vue";
 import AdminDashboard from "@/views/AdminDashboard.view.vue";
 import ModeratorDashboard from "@/views/ModeratorDashboard.view.vue";
+import Checkout from "@/views/Checkout.view.vue";
 const routes = [
   {
     path: "/",
     name: "Home",
     meta: { middleware: [guest] },
     component: Home,
+  },
+  {
+    path: "/checkout",
+    name: "Checkout",
+    meta: { middleware: [auth] },
+    component: Checkout,
   },
   {
     path: "/dashboard/admin",
