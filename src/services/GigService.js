@@ -35,4 +35,8 @@ export default {
   async paginateGigs(link) {
     return API.apiClient.get(link);
   },
+
+  async gigPageViews(id) {
+    return await API.apiClient.get(`/gig/${id}/views`);
+  },
 };

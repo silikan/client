@@ -28,6 +28,7 @@ export const state = {
   links: null,
   loading: false,
   error: null,
+  pageViews: 0,
 };
 
 export const mutations = {
@@ -81,6 +82,12 @@ export const mutations = {
   },
   SET_LOADING(state, loading) {
     state.loading = loading;
+  },
+  SET_ERROR(state, error) {
+    state.error = error;
+  },
+  SET_PAGE_VIEWS(state, pageViews) {
+    state.pageViews = pageViews;
   },
 };
 
@@ -139,7 +146,7 @@ export const actions = {
       });
   },
 
-  paginateGigs({ commit }, page) {
+  async paginateGigs({ commit }, page) {
     GigService.paginateGigs(page)
       .then((response) => {
         setPaginatedGig(commit, response);
@@ -147,6 +154,11 @@ export const actions = {
       .catch((error) => {
         console.log(error);
       });
+  },
+  async gigPageViews({ commit }, id) {
+    let data = await GigService.gigPageViews(id);
+    commit("SET_PAGE_VIEWS", data.data);
+    return data.data;
   },
 };
 
@@ -201,5 +213,8 @@ export const getters = {
   },
   error: (state) => {
     return state.error;
+  },
+  pageViews: (state) => {
+    return state.pageViews;
   },
 };

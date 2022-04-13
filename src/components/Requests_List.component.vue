@@ -26,7 +26,7 @@
               <table class="min-w-full divide-y divide-gray-200">
                 <thead class="bg-gray-50">
                   <tr>
-                      <th
+                    <th
                       scope="col"
                       class="
                         px-6
@@ -82,7 +82,7 @@
                     >
                       Duration
                     </th>
-                        <th
+                    <th
                       scope="col"
                       class="
                         px-6
@@ -135,7 +135,7 @@
                           items-center
                         "
                       >
-                        <div class="pl-7 text-sm text-gray-900">
+                        <div class="break-all pl-7 text-sm text-gray-900">
                           {{ request.title }}
                         </div>
                       </div>
@@ -172,7 +172,7 @@
                         {{ request.duration }} Days
                       </span>
                     </td>
-                      <td class="px-6 py-4 whitespace-nowrap">
+                    <td class="px-6 py-4 whitespace-nowrap">
                       <span
                         class="
                           px-2
@@ -185,7 +185,7 @@
                           text-green-800
                         "
                       >
-                       {{JSON.parse( request.payment_method ) }}
+                        {{ JSON.parse(request.payment_method) }}
                       </span>
                     </td>
                     <td
@@ -451,7 +451,6 @@ export default {
     let path = "handymen";
 
     let page = 1;
-
 
     /* let router = useRouter
      */ store

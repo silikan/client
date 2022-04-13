@@ -28,4 +28,8 @@ export default {
   async paginateClientRequests(link) {
     return API.apiClient.get(link);
   },
+
+  async requestPageViews(id) {
+    return await API.apiClient.get(`/request/${id}/views`);
+  },
 };

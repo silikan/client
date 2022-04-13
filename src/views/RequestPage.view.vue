@@ -6,10 +6,22 @@
   </div>
 </template>
 <script>
+import { useRoute } from 'vue-router';
+import { useStore } from 'vuex';
 import RequestPage from "../components/Request/RequestPage/RequestPage.component.vue";
 export default {
 components: {
 RequestPage
+}
+,
+setup() {
+  let store = useStore();
+  let route = useRoute();
+      let id = route.params.id;
+      store.dispatch('Request/requestPageViews', id);
+
+return {
+};
 }
 }
 </script>

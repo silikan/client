@@ -1,5 +1,4 @@
 <template>
-
   <div class="flex flex-col md:p-10 m-5 sm:m-1">
     <div class="profile flex justify-between flex-col ml-5 md:ml-0 mt-10">
       <nav class="flex mb-3" aria-label="Breadcrumb">
@@ -34,12 +33,16 @@
           </li>
         </ol>
       </nav>
-      <h1 class="mb-2 text-3xl font-medium">{{title}}</h1>
+      <div class="flex text-gray-400 items-center ">
+      <EyeIcon class=" text-gray-400 flex-shrink-0 h-5 w-5 mr-2" aria-hidden="true" />
+<span>{{views}}</span>
+      </div>
+
+      <h1 class="mb-2 text-3xl font-medium">{{ title }}</h1>
       <a href="#" class="flex-shrink-0 group block mb-5">
         <div class="flex items-center">
           <div>
-                      <Avatar v-if="name" :url="avatar" :name="name"/>
-
+            <Avatar v-if="name" :url="avatar" :name="name" />
           </div>
           <div class="ml-3">
             <p
@@ -50,18 +53,18 @@
                 group-hover:text-gray-900
               "
             >
-              {{name}}
+              {{ name }}
             </p>
-            <router-link  :to="`/user/${userId}`">
+            <router-link :to="`/user/${userId}`">
               <p
-              class="
-                text-xs
-                font-medium
-                text-gray-500
-                group-hover:text-gray-700
-              "
-          >
-              View profile
+                class="
+                  text-xs
+                  font-medium
+                  text-gray-500
+                  group-hover:text-gray-700
+                "
+              >
+                View profile
               </p>
             </router-link>
           </div>
@@ -117,7 +120,7 @@
 </template>
 
 <script>
-import { ChevronRightIcon, HomeIcon } from "@heroicons/vue/solid";
+import { ChevronRightIcon, HomeIcon, EyeIcon } from "@heroicons/vue/solid";
 import Avatar from "@/components/Avatar/Avatar.component.vue";
 
 const pages = [
@@ -127,13 +130,14 @@ const pages = [
 import "tw-elements";
 import { computed, ref } from "@vue/runtime-core";
 import { useStore } from "vuex";
-import { useRoute } from 'vue-router';
+import { useRoute } from "vue-router";
 
 export default {
   components: {
     ChevronRightIcon,
     HomeIcon,
-    Avatar
+    Avatar,
+    EyeIcon,
   },
   props: ["images"],
   setup(props) {
@@ -151,27 +155,28 @@ export default {
     let description = ref("");
     let title = ref("");
     let name = ref(null);
-      let avatar = ref(null);
-      let userId = ref(null);
+    let avatar = ref(null);
+    let userId = ref(null);
+    let views = ref(null);
     store
       .dispatch("Gig/getGig", id)
       .then((result) => {
         console.log(result);
         description.value = result.description;
         title.value = result.title;
+        views.value = result.total_views;
       })
       .catch((err) => {
         console.log(err);
       });
 
-
-        store
+    store
       .dispatch("Gig/getGigUser", id)
       .then((result) => {
-console.log(result);
+        console.log(result);
         name.value = result.name;
-                avatar.value = result.avatar;
-                userId.value = result.id;
+        avatar.value = result.avatar;
+        userId.value = result.id;
       })
       .catch((err) => {
         console.log(err);
@@ -190,7 +195,8 @@ console.log(result);
       title,
       name,
       avatar,
-      userId
+      userId,
+      views
     };
   },
 };
@@ -214,6 +220,5 @@ console.log(result);
 }
 .el-carousel__item {
   height: auto;
-
 }
 </style>

@@ -39,9 +39,7 @@ import { CheckCircleIcon } from '@heroicons/vue/solid'
 import { useStore } from 'vuex'
 
 const mailingLists = [
-  { id: 1, title: 'PayPal', description: 'Last message sent an hour ago', users: '621 users' },
-  { id: 2, title: 'Cash On Delivery', description: 'Last message sent 2 weeks ago', users: '1200 users' },
-  { id: 3, title: 'CCP', description: 'Last message sent 4 days ago', users: '2740 users' },
+  { id: 2, title: 'Cash On Delivery', description: 'You Guys Meet And Fight For Money', users: '100% effective' },
 ]
 
 export default {

@@ -33,6 +33,10 @@
           </li>
         </ol>
       </nav>
+        <div class="flex text-gray-400 items-center ">
+      <EyeIcon class=" text-gray-400 flex-shrink-0 h-5 w-5 mr-2" aria-hidden="true" />
+<span>{{views}}</span>
+      </div>
       <h1 class="mb-2 text-3xl font-medium">{{ title }}</h1>
       <a href="#" class="flex-shrink-0 group block mb-5">
         <div class="flex">
@@ -149,6 +153,7 @@ import {
   HomeIcon,
   CashIcon,
   ClockIcon,
+  EyeIcon
 } from "@heroicons/vue/solid";
 import ChatButton from "@/components/Chat/ChatButton.component.vue";
 const pages = [
@@ -170,6 +175,7 @@ export default {
     CashIcon,
     ClockIcon,
     Avatar,
+    EyeIcon
   },
   setup() {
     let route = useRoute();
@@ -179,6 +185,7 @@ export default {
     let description = ref("");
     let price = ref("");
     let duration = ref("");
+    let views = ref(null);
 
 
      let authUserId = ref(null);
@@ -207,6 +214,7 @@ store
         description.value = result.description;
         price.value = result.price;
         duration.value = result.duration;
+        views.value = result.total_views;
 
         console.log(result);
       })
@@ -286,7 +294,8 @@ store
       duration,
       addToTaskList,
        handymanId,
-      authUserId
+      authUserId,
+      views
     };
   },
 };

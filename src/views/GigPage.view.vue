@@ -37,7 +37,7 @@ export default {
 
       store.dispatch('Gig/getGigImages', id);
 
-
+  store.dispatch('Gig/gigPageViews', id);
 
     let gigImages = computed(() => {
       return store.getters['Gig/getFetchedGigImages'];
