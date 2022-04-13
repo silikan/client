@@ -1,7 +1,12 @@
 import { createRouter, createWebHistory } from "vue-router";
 import store from "@/store/index";
 import auth from "@/middleware/auth";
-// import admin from "@/middleware/admin";
+import admin from "@/middleware/admin";
+import moderator from "@/middleware/moderator";
+
+import handyman from "@/middleware/handyman";
+import client from "@/middleware/client";
+
 import guest from "@/middleware/guest";
 import middlewarePipeline from "@/router/middlewarePipeline";
 import Signup from "@/views/Signup.view.vue";
@@ -38,12 +43,26 @@ import HandymenSearchResultPage from "@/views/HandymenSearchResultPage.view.vue"
 import Gig from "@/views/Gig.view.vue";
 import GigCategory from "@/views/GigCategory.view.vue";
 import RequestCategory from "@/views/RequestCategory.view.vue";
+import AdminDashboard from "@/views/AdminDashboard.view.vue";
+import ModeratorDashboard from "@/views/ModeratorDashboard.view.vue";
 const routes = [
   {
     path: "/",
     name: "Home",
     meta: { middleware: [guest] },
     component: Home,
+  },
+  {
+    path: "/dashboard/admin",
+    name: "AdminDashboard",
+    meta: { middleware: [auth, admin] },
+    component: AdminDashboard,
+  },
+  {
+    path: "/dashboard/moderator",
+    name: "ModeratorDashboard",
+    meta: { middleware: [auth, moderator] },
+    component: ModeratorDashboard,
   },
   {
     path: "/category/:title/gigs",
@@ -207,14 +226,14 @@ const routes = [
     path: "/buying",
     name: "Buying",
     component: Buying,
-    meta: { middleware: [auth] },
+    meta: { middleware: [auth, client] },
   },
 
   {
     path: "/request/create",
     name: "CreateRequest",
     component: CreateRequest,
-    meta: { middleware: [auth] },
+    meta: { middleware: [auth, client, handyman] },
 
     /*     meta: { middleware: [auth, guest] },
      */
