@@ -3,10 +3,8 @@ import store from "@/store/index";
 import auth from "@/middleware/auth";
 import admin from "@/middleware/admin";
 import moderator from "@/middleware/moderator";
-
 import handyman from "@/middleware/handyman";
 import client from "@/middleware/client";
-
 import guest from "@/middleware/guest";
 import middlewarePipeline from "@/router/middlewarePipeline";
 import Signup from "@/views/Signup.view.vue";
@@ -131,7 +129,7 @@ const routes = [
     path: "/selling",
     name: "Selling",
     component: Selling,
-    meta: { middleware: [auth] },
+    meta: { middleware: [auth, handyman] },
   },
 
   {
@@ -217,7 +215,7 @@ const routes = [
     path: "/gig/create",
     name: "CreateGig",
     component: CreateGig,
-    meta: { middleware: [auth] },
+    meta: { middleware: [auth, handyman] },
 
     /*     meta: { middleware: [auth, guest] },
      */
@@ -226,7 +224,7 @@ const routes = [
     path: "/buying",
     name: "Buying",
     component: Buying,
-    meta: { middleware: [auth, client] },
+    meta: { middleware: [auth, client, handyman] },
   },
 
   {
