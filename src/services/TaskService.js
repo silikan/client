@@ -10,4 +10,13 @@ export default {
   async getUserTaskItems(id) {
     return await API.apiClient.get(`/user/${id}/task`);
   },
+  async setTaskItemStatusToAccepted(payload) {
+    return await API.apiClient.post(`/set-task-item-status-to-accepted`, payload);
+  },
+  async setTaskItemStatusToDeclined(payload) {
+    return await API.apiClient.post(`/set-task-item-status-to-declined`, payload);
+  },
+  async setTaskItemStatusToPaid(payload) {
+    return await API.apiClient.post(`/set-task-item-status-to-paid`, payload);
+  },
 };

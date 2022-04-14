@@ -11,4 +11,14 @@ export default {
     console.log(id);
     return await API.apiClient.get(`/user/${id}/cart`);
   },
+
+  async setCartItemsStatusToInProgress(payload) {
+    return await API.apiClient.post(`/set-cart-items-status-to-in-progress`, payload);
+  },
+  async setCartItemsStatusToCancelled(payload) {
+    return await API.apiClient.post(`/set-cart-items-status-to-cancelled`, payload);
+  },
+  async setCartItemsStatusToCompleted(payload) {
+    return await API.apiClient.post(`/set-cart-items-status-to-completed`, payload);
+  },
 };
