@@ -130,7 +130,7 @@
                     pending
                   </span>
                   <span
-                    v-else-if="person.item.cart_item.is_accepted"
+                    v-if="person.item.cart_item.is_accepted"
                     class="
                       px-2
                       inline-flex
@@ -145,7 +145,7 @@
                     accepted
                   </span>
                   <span
-                    v-else-if="person.item.cart_item.is_rejected"
+                    v-if="person.item.cart_item.is_rejected"
                     class="
                       px-2
                       inline-flex
@@ -160,7 +160,7 @@
                     rejected
                   </span>
                   <span
-                    v-else-if="person.item.cart_item.is_cancelled"
+                    v-if="person.item.cart_item.is_cancelled"
                     class="
                       px-2
                       inline-flex
@@ -175,7 +175,7 @@
                     cancelled
                   </span>
                   <span
-                    v-else-if="person.item.cart_item.is_in_progress"
+                    v-if="person.item.cart_item.is_in_progress"
                     class="
                       px-2
                       inline-flex
@@ -190,7 +190,7 @@
                     in Progress
                   </span>
                   <span
-                    v-else-if="person.item.cart_item.is_completed"
+                    v-if="person.item.cart_item.is_completed"
                     class="
                       px-2
                       inline-flex
@@ -206,7 +206,7 @@
                   </span>
 
                   <span
-                    v-else-if="person.item.cart_item.is_on_checkout"
+                    v-if="person.item.cart_item.is_on_checkout"
                     class="
                       px-2
                       inline-flex
@@ -222,7 +222,7 @@
                   </span>
 
                   <span
-                    v-else-if="person.item.cart_item.is_paid"
+                    v-if="person.item.cart_item.is_paid"
                     class="
                       px-2
                       inline-flex
@@ -318,6 +318,7 @@
                       rounded-full
                       shadow-sm
                     "
+                    @click="setCartItemStatusToAccepted(person.item.cart_item.id)"
                     >accept</a
                   >
                   <a
@@ -334,7 +335,8 @@
                       font-medium
                       rounded-full
                       shadow-sm"
-                    >reject</a
+                    @click="setCartItemStatusToDeclined(person.item.cart_item.id)"
+                    >decline</a
                   >
                 </td>
               </tr>
@@ -347,40 +349,10 @@
 </template>
 
 <script>
-import { computed, ref, watchEffect } from "@vue/runtime-core";
+import { computed, ref } from "@vue/runtime-core";
 import { useStore } from "vuex";
 import Avatar from "@/components/Avatar/Avatar.component.vue";
-const people = [
-  {
-    name: "Jane Cooper",
-    title: "Regional Paradigm Technician",
-    department: "Optimization",
-    role: "Admin",
-    email: "jane.cooper@example.com",
-    image:
-      "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=4&w=256&h=256&q=60",
-  },
-  {
-    name: "Jane Cooper",
-    title: "Regional Paradigm Technician",
-    department: "Optimization",
-    role: "Admin",
-    email: "jane.cooper@example.com",
-    image:
-      "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=4&w=256&h=256&q=60",
-  },
-  {
-    name: "Jane Cooper",
-    title: "Regional Paradigm Technician",
-    department: "Optimization",
-    role: "Admin",
-    email: "jane.cooper@example.com",
-    image:
-      "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=4&w=256&h=256&q=60",
-  },
 
-  // More people...
-];
 
 export default {
   components: {
@@ -403,12 +375,57 @@ export default {
         console.log(error);
       });
 
-    watchEffect(() => {
-      console.log(cart.value);
+const  setCartItemStatusToAccepted = (cartItemId) => {
+  let payload = {
+    cart_item_id: cartItemId,
+    status: "accepted",
+  };
+  store
+    .dispatch("Cart/setCartItemStatusToAccepted", payload)
+    .then((result) => {
+      console.log(result);
+    })
+    .catch((error) => {
+      console.log(error);
     });
+}
+
+const setCartItemStatusToDeclined = (cartItemId) => {
+    let payload = {
+    cart_item_id: cartItemId,
+    status: "declined",
+  };
+  store
+    .dispatch("Cart/setCartItemStatusToDeclined", payload)
+    .then((result) => {
+      console.log(result);
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+}
+
+const setCartItemStatusToPaid = (cartItemId) => {
+      let payload = {
+    cart_item_id: cartItemId,
+    status: "paid",
+  };
+  store
+    .dispatch("Cart/setCartItemStatusToPaid", payload)
+    .then((result) => {
+      console.log(result);
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+}
+
     return {
-      people,
+
       cart,
+      setCartItemStatusToAccepted,
+      setCartItemStatusToDeclined,
+      setCartItemStatusToPaid,
     };
   },
 };

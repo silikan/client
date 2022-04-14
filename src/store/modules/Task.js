@@ -71,8 +71,8 @@ export const actions = {
     commit("SET_TASK_ITEM_DATA", taskItemData.data);
     return taskItemData.data;
   },
-  async setTaskItemsStatusToCompleted({ commit }, payload) {
-    let taskItemData = await TaskService.setTaskItemsStatusToCompleted(payload);
+  async setTaskItemStatusToCompleted({ commit }, payload) {
+    let taskItemData = await TaskService.setTaskItemStatusToCompleted(payload);
     commit("SET_TASK_ITEM_DATA", taskItemData.data);
     return taskItemData.data;
   },

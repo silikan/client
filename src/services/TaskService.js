@@ -11,12 +11,12 @@ export default {
     return await API.apiClient.get(`/user/${id}/task`);
   },
   async setTaskItemsStatusToInProgress(payload) {
-    return await API.apiClient.post(`/set-task-item-status-to-in-progress`, payload);
+    return await API.apiClient.post(`/set-task-items-status-to-in-progress`, payload);
   },
   async setTaskItemsStatusToCancelled(payload) {
-    return await API.apiClient.post(`/set-task-item-status-to-cancelled`, payload);
+    return await API.apiClient.post(`/set-task-items-status-to-cancelled`, payload);
   },
-  async setTaskItemsStatusToCompleted(payload) {
-    return await API.apiClient.post(`/set-task-item-status-to-completed`, payload);
+  async setTaskItemStatusToCompleted(payload) {
+    return await API.apiClient.post(`/set-task-items-status-to-completed`, payload);
   },
 };

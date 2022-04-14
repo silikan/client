@@ -124,7 +124,7 @@
                     pending
                   </span>
                   <span
-                    v-else-if="person.item.task_item.is_accepted"
+                    v-if="person.item.task_item.is_accepted"
                     class="
                       px-2
                       inline-flex
@@ -139,7 +139,7 @@
                     accepted
                   </span>
                   <span
-                    v-else-if="person.item.task_item.is_rejected"
+                    v-if="person.item.task_item.is_rejected"
                     class="
                       px-2
                       inline-flex
@@ -154,7 +154,7 @@
                     rejected
                   </span>
                   <span
-                    v-else-if="person.item.task_item.is_cancelled"
+                    v-if="person.item.task_item.is_cancelled"
                     class="
                       px-2
                       inline-flex
@@ -169,7 +169,7 @@
                     cancelled
                   </span>
                   <span
-                    v-else-if="person.item.task_item.is_in_progress"
+                    v-if="person.item.task_item.is_in_progress"
                     class="
                       px-2
                       inline-flex
@@ -184,7 +184,7 @@
                     in Progress
                   </span>
                   <span
-                    v-else-if="person.item.task_item.is_completed"
+                    v-if="person.item.task_item.is_completed"
                     class="
                       px-2
                       inline-flex
@@ -200,7 +200,7 @@
                   </span>
 
                   <span
-                    v-else-if="person.item.task_item.is_on_checkout"
+                    v-if="person.item.task_item.is_on_checkout"
                     class="
                       px-2
                       inline-flex
@@ -216,7 +216,7 @@
                   </span>
 
                   <span
-                    v-else-if="person.item.task_item.is_paid"
+                    v-if="person.item.task_item.is_paid"
                     class="
                       px-2
                       inline-flex
@@ -277,17 +277,70 @@
                     >Check</router-link
                   >
                 </td>
-                 <td
+                       <td
+                  v-if="person.item.task_item.is_accepted"
                   class="
                     px-6
                     py-4
                     whitespace-nowrap
                     text-right text-sm
                     font-medium
+                    space-x-4
                   "
                 >
-                  <a href="#" class="text-indigo-600 hover:text-indigo-900"
-                    >Mark as Completed</a
+
+                  <a
+                    type="button"
+                    class="      cursor-pointer
+                      text-white
+                      bg-green-500
+                      inline-flex
+                      items-center
+                      px-2
+                      py-1
+                      border border-transparent
+                      text-xs
+                      font-medium
+                      rounded-full
+                      shadow-sm"
+                    @click="setTaskItemsStatusToInProgress(person.item.task_item.id)"
+                    >Start </a
+                  >
+
+                   <a
+                    type="button"
+                    class="      cursor-pointer
+                      text-white
+                      bg-green-500
+                      inline-flex
+                      items-center
+                      px-2
+                      py-1
+                      border border-transparent
+                      text-xs
+                      font-medium
+                      rounded-full
+                      shadow-sm"
+                    @click="setTaskItemStatusToCompleted(person.item.task_item.id)"
+                    >Complete </a
+                  >
+
+                      <a
+                    type="button"
+                    class="      cursor-pointer
+                      text-white
+                      bg-green-500
+                      inline-flex
+                      items-center
+                      px-2
+                      py-1
+                      border border-transparent
+                      text-xs
+                      font-medium
+                      rounded-full
+                      shadow-sm"
+                    @click="setTaskItemsStatusToCancelled(person.item.task_item.id)"
+                    >cancel </a
                   >
                 </td>
               </tr>
@@ -325,10 +378,58 @@ export default {
     }).catch((error) => {
       console.log(error);
     });
+    const setTaskItemsStatusToInProgress = (taskItemId) => {
+
+      let payload = {
+        task_item_id: taskItemId,
+        status: 'in_progress'
+      };
+      console.log(payload);
+      store.dispatch('Task/setTaskItemsStatusToInProgress',
+        payload,
+
+      ).then((result) => {
+        console.log(result);
+      }).catch((error) => {
+        console.log(error);
+      });
+    };
+
+    const setTaskItemsStatusToCancelled = (taskItemId) => {
+        let payload = {
+        task_item_id: taskItemId,
+        status: 'canceled'
+      };
+      store.dispatch('Task/setTaskItemsStatusToCancelled',
+        payload,
+   ).then((result) => {
+        console.log(result);
+      }).catch((error) => {
+        console.log(error);
+      });
+    };
+
+    const setTaskItemStatusToCompleted = (taskItemId) => {
+        let payload = {
+        task_item_id: taskItemId,
+        status: 'completed'
+      };
+      store.dispatch('Task/setTaskItemStatusToCompleted',
+        payload,
+
+      ).then((result) => {
+        console.log(result);
+      }).catch((error) => {
+        console.log(error);
+      });
+    };
 
     return {
       people,
-      task
+      task,
+      setTaskItemsStatusToInProgress,
+      setTaskItemsStatusToCancelled,
+      setTaskItemStatusToCompleted
     };
   },
 };
