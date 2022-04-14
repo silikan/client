@@ -252,7 +252,9 @@ store
           store
             .dispatch("Task/addToTaskList", payload)
             .then(() => {
-              addToCart();
+                          let taskItemId = computed(() => store.getters["Task/getTaskItemData"]);
+  let taskItemIdValue = taskItemId.value.id;
+              addToCart(taskItemIdValue);
             })
             .catch((err) => {
               console.log(err);
@@ -263,7 +265,7 @@ store
         });
     };
 
-    const addToCart = () => {
+    const addToCart = (taskItemId) => {
       store
         .dispatch("Request/getRequestUser", id)
         .then((result) => {
@@ -275,6 +277,8 @@ store
             user_id: result.id,
             client_id: result.id,
             handyman_id: authuserId.value,
+          task_item_id : taskItemId
+
           };
           store.dispatch("Cart/addToCart", payload);
         })

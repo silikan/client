@@ -238,7 +238,7 @@ const routes = [
     path: "/request/create",
     name: "CreateRequest",
     component: CreateRequest,
-    meta: { middleware: [auth, client, handyman] },
+    meta: { middleware: [auth] },
 
     /*     meta: { middleware: [auth, guest] },
      */

@@ -6,6 +6,7 @@ export const namespaced = true;
 export const state = {
   task: {},
   taskItems: [],
+  taskItemData: [],
 };
 
 export const mutations = {
@@ -14,6 +15,9 @@ export const mutations = {
   },
   SET_TASK_ITEMS(state, payload) {
     state.taskItems = payload;
+  },
+  SET_TASK_ITEM_DATA(state, payload) {
+    state.taskItemData = payload;
   },
 };
 
@@ -38,10 +42,14 @@ export const actions = {
           request_id: payload.request_id,
           client_id: payload.client_id,
           handyman_id: payload.handyman_id,
+          cart_item_id: payload.cart_item_id,
         };
 
         commit("SET_TASK", result.data);
-        await TaskService.addToTaskList(sentData);
+        let data = await TaskService.addToTaskList(sentData);
+
+        commit("SET_TASK_ITEM_DATA", data.data);
+        return data.data;
       })
       .catch(() => {
         console.log("error");
@@ -60,5 +68,8 @@ export const getters = {
   },
   getTaskItems(state) {
     return state.taskItems;
+  },
+  getTaskItemData(state) {
+    return state.taskItemData;
   },
 };

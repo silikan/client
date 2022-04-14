@@ -143,14 +143,13 @@ store
         }
 
         if (tabs.value[0].name == "Premium") {
-          console.log(result.premium);
           Data.value = JSON.parse(result.premium);
         }
       })
       .catch((err) => {
         console.log(err);
       });
-    const addToTaskList = () => {
+    const addToTaskList = (cartItemId) => {
       let userId = computed(() => store.getters["auth/id"]);
 
       store
@@ -162,6 +161,7 @@ store
             user_id: result.id,
             client_id: userId.value,
             handyman_id: result.id,
+            cart_item_id: cartItemId,
           };
           store.dispatch("Task/addToTaskList", payload);
         })
@@ -176,6 +176,8 @@ store
         .then((result) => {
           let userId = computed(() => store.getters["auth/id"]);
           console.log(userId.value);
+
+
           let payload = {
             type: "gig",
             gig_id: id,
@@ -186,7 +188,11 @@ store
           store
             .dispatch("Cart/addToCart", payload)
             .then(() => {
-              addToTaskList();
+
+              let cartItemId = computed(() => store.getters["Cart/cartItemData"]);
+  console.log(cartItemId.value.id);
+  let cartItemIdValue = cartItemId.value.id;
+              addToTaskList(cartItemIdValue);
             })
             .catch((err) => {
               console.log(err);

@@ -6,6 +6,7 @@ export const namespaced = true;
 export const state = {
   cart: {},
   cartItems: [],
+  cartItemData: [],
 };
 
 export const mutations = {
@@ -14,6 +15,9 @@ export const mutations = {
   },
   SET_CART_ITEMS(state, payload) {
     state.cartItems = payload;
+  },
+  SET_CART_ITEM_DATA(state, payload) {
+    state.cartItemData = payload;
   },
 };
 
@@ -39,13 +43,16 @@ export const actions = {
           cart_id: result.data.id,
           client_id: payload.client_id,
           handyman_id: payload.handyman_id,
+          task_item_id: payload.task_item_id,
         };
-
+        console.log(sentData);
         commit("SET_CART", result.data);
-        await CartService.addToCart(sentData);
+        let cartItemData = await CartService.addToCart(sentData);
+        console.log(cartItemData.data);
+        commit("SET_CART_ITEM_DATA", cartItemData.data);
       })
-      .catch(() => {
-        console.log("error");
+      .catch((err) => {
+        console.log(err);
       });
   },
 
@@ -59,4 +66,5 @@ export const actions = {
 export const getters = {
   cart: (state) => state.cart,
   cartItems: (state) => state.cartItems,
+  cartItemData: (state) => state.cartItemData,
 };
