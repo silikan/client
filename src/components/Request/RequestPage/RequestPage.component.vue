@@ -134,7 +134,6 @@
                 sm:text-sm
                 mx-2
               "
-               v-if="handymanId !== authUserId"
               @click="addToTaskList"
             >
               Add To Task

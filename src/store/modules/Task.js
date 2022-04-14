@@ -58,6 +58,7 @@ export const actions = {
   async getUserTaskItems({ commit }, id) {
     const taskItems = await TaskService.getUserTaskItems(id);
     commit("SET_TASK_ITEMS", taskItems);
+    console.log(taskItems);
     return taskItems.data;
   },
   async setTaskItemStatusToAccepted({ commit }, payload) {

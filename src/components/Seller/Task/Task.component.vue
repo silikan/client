@@ -72,11 +72,20 @@
             </thead>
             <tbody class="bg-white divide-y divide-gray-200">
               <tr v-for="person in task" :key="person.email">
-                <td class="px-6 py-4 whitespace-nowrap">
+                 <td class="px-6 py-4 whitespace-nowrap" v-if="person.item.gig.length > 0">
                   <div class="flex items-center">
                     <div class="ml-4">
                       <div class="text-sm font-medium text-gray-900 ">
-                        {{ person.item.clientRequest[0].title }}
+                        {{ person.item.gig[0].title }}
+                      </div>
+                    </div>
+                  </div>
+                </td>
+                  <td class="px-6 py-4 whitespace-nowrap" v-if="person.item.request.length > 0">
+                  <div class="flex items-center">
+                    <div class="ml-4">
+                      <div class="text-sm font-medium text-gray-900 ">
+                        {{ person.item.request[0].title }}
                       </div>
                     </div>
                   </div>
@@ -132,7 +141,7 @@
                     </div>
                   </div>
                 </td>
-                <td
+              <td
                   class="
                     px-6
                     py-4
@@ -140,8 +149,23 @@
                     text-right text-sm
                     font-medium
                   "
+                   v-if="person.item.gig.length > 0"
                 >
-                  <router-link  :to="`/request/${person.item.clientRequest[0].id}`" class="text-indigo-600 hover:text-indigo-900"
+                  <router-link  :to="`/gig/${person.item.gig[0].id}`" class="text-indigo-600 hover:text-indigo-900"
+                    >Check</router-link
+                  >
+                </td>
+                  <td
+                  class="
+                    px-6
+                    py-4
+                    whitespace-nowrap
+                    text-right text-sm
+                    font-medium
+                  "
+                   v-if="person.item.request.length > 0"
+                >
+                  <router-link  :to="`/request/${person.item.request[0].id}`" class="text-indigo-600 hover:text-indigo-900"
                     >Check</router-link
                   >
                 </td>
