@@ -7,6 +7,7 @@ export const state = {
   cart: {},
   cartItems: [],
   cartItemData: [],
+  cartItem: {},
 };
 
 export const mutations = {
@@ -18,6 +19,9 @@ export const mutations = {
   },
   SET_CART_ITEM_DATA(state, payload) {
     state.cartItemData = payload;
+  },
+  SET_CART_ITEM(state, payload) {
+    state.cartItem = payload;
   },
 };
 
@@ -92,10 +96,16 @@ export const actions = {
     commit("SET_CART_ITEMS", cartItems.data);
     return cartItems.data;
   },
+  async getCartItemById({ commit }, id) {
+    const cartItem = await CartService.getCartItemById(id);
+    commit("SET_CART_ITEM", cartItem.data);
+    return cartItem.data;
+  },
 };
 
 export const getters = {
   cart: (state) => state.cart,
   cartItems: (state) => state.cartItems,
   cartItemData: (state) => state.cartItemData,
+  cartItem: (state) => state.cartItem,
 };

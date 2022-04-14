@@ -7,6 +7,7 @@ export const state = {
   task: {},
   taskItems: [],
   taskItemData: [],
+  taskItem: {},
 };
 
 export const mutations = {
@@ -18,6 +19,9 @@ export const mutations = {
   },
   SET_TASK_ITEM_DATA(state, payload) {
     state.taskItemData = payload;
+  },
+  SET_TASK_ITEM(state, payload) {
+    state.taskItem = payload;
   },
 };
 
@@ -91,6 +95,11 @@ export const actions = {
     commit("SET_TASK_ITEM_DATA", taskItemData.data);
     return taskItemData.data;
   },
+  async getTaskItemById({ commit }, id) {
+    const taskItem = await TaskService.getTaskItemById(id);
+    commit("SET_TASK_ITEM", taskItem);
+    return taskItem.data;
+  },
 };
 
 export const getters = {
@@ -102,5 +111,8 @@ export const getters = {
   },
   getTaskItemData(state) {
     return state.taskItemData;
+  },
+  getTaskItem(state) {
+    return state.taskItem;
   },
 };

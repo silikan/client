@@ -31,4 +31,8 @@ export default {
   async setCartItemStatusToCompleted(payload) {
     return await API.apiClient.post(`/set-cart-items-status-to-completed`, payload);
   },
+
+  async getCartItemById(id) {
+    return await API.apiClient.get(`/cart/${id}`);
+  },
 };

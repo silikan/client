@@ -28,4 +28,7 @@ export default {
   async setTaskItemStatusToPaid(payload) {
     return await API.apiClient.post(`/set-task-items-status-to-paid`, payload);
   },
+  async getTaskItemById(id) {
+    return await API.apiClient.get(`/task/${id}`);
+  },
 };

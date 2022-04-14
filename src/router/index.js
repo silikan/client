@@ -54,13 +54,13 @@ const routes = [
     component: Home,
   },
   {
-    path: "/cartitem/:id/feed",
+    path: "/cart/:id/feed",
     name: "CartitemFeed",
     meta: { middleware: [auth] },
     component: CartitemFeed,
   },
   {
-    path: "/taskitem/:id/feed",
+    path: "/task/:id/feed",
     name: "TaskItemFeed",
     meta: { middleware: [auth] },
     component: TaskItemFeed,
