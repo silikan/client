@@ -107,8 +107,9 @@
                      {{ person.item.task_item.type }}
                   </span>
                 </td>
-                <td class="px-6 py-4 whitespace-nowrap">
+               <td class="px-6 py-4 whitespace-nowrap">
                   <span
+                    v-if="person.item.task_item.is_pending"
                     class="
                       px-2
                       inline-flex
@@ -120,7 +121,114 @@
                       text-green-800
                     "
                   >
-                    {{ person.item.task_item.is_completed ? 'Completed' : 'On Progess' }}
+                    pending
+                  </span>
+                  <span
+                    v-else-if="person.item.task_item.is_accepted"
+                    class="
+                      px-2
+                      inline-flex
+                      text-xs
+                      leading-5
+                      font-semibold
+                      rounded-full
+                      bg-green-100
+                      text-green-800
+                    "
+                  >
+                    accepted
+                  </span>
+                  <span
+                    v-else-if="person.item.task_item.is_rejected"
+                    class="
+                      px-2
+                      inline-flex
+                      text-xs
+                      leading-5
+                      font-semibold
+                      rounded-full
+                      bg-red-100
+                      text-red-800
+                    "
+                  >
+                    rejected
+                  </span>
+                  <span
+                    v-else-if="person.item.task_item.is_cancelled"
+                    class="
+                      px-2
+                      inline-flex
+                      text-xs
+                      leading-5
+                      font-semibold
+                      rounded-full
+                      bg-red-100
+                      text-red-800
+                    "
+                  >
+                    cancelled
+                  </span>
+                  <span
+                    v-else-if="person.item.task_item.is_in_progress"
+                    class="
+                      px-2
+                      inline-flex
+                      text-xs
+                      leading-5
+                      font-semibold
+                      rounded-full
+                      bg-green-100
+                      text-green-800
+                    "
+                  >
+                    in Progress
+                  </span>
+                  <span
+                    v-else-if="person.item.task_item.is_completed"
+                    class="
+                      px-2
+                      inline-flex
+                      text-xs
+                      leading-5
+                      font-semibold
+                      rounded-full
+                      bg-green-100
+                      text-green-800
+                    "
+                  >
+                    Completed
+                  </span>
+
+                  <span
+                    v-else-if="person.item.task_item.is_on_checkout"
+                    class="
+                      px-2
+                      inline-flex
+                      text-xs
+                      leading-5
+                      font-semibold
+                      rounded-full
+                      bg-green-100
+                      text-green-800
+                    "
+                  >
+                    On Checkout
+                  </span>
+
+                  <span
+                    v-else-if="person.item.task_item.is_paid"
+                    class="
+                      px-2
+                      inline-flex
+                      text-xs
+                      leading-5
+                      font-semibold
+                      rounded-full
+                      bg-green-100
+                      text-green-800
+                    "
+                  >
+                    Paid
                   </span>
                 </td>
                 <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">

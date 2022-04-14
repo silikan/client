@@ -61,18 +61,18 @@ export const actions = {
     console.log(taskItems);
     return taskItems.data;
   },
-  async setTaskItemStatusToAccepted({ commit }, payload) {
-    let taskItemData = await TaskService.setTaskItemStatusToAccepted(payload);
+  async setTaskItemsStatusToInProgress({ commit }, payload) {
+    let taskItemData = await TaskService.setTaskItemsStatusToInProgress(payload);
     commit("SET_TASK_ITEM_DATA", taskItemData.data);
     return taskItemData.data;
   },
-  async setTaskItemStatusToDeclined({ commit }, payload) {
-    let taskItemData = await TaskService.setTaskItemStatusToDeclined(payload);
+  async setTaskItemsStatusToCancelled({ commit }, payload) {
+    let taskItemData = await TaskService.setTaskItemsStatusToCancelled(payload);
     commit("SET_TASK_ITEM_DATA", taskItemData.data);
     return taskItemData.data;
   },
-  async setTaskItemStatusToPaid({ commit }, payload) {
-    let taskItemData = await TaskService.setTaskItemStatusToPaid(payload);
+  async setTaskItemsStatusToCompleted({ commit }, payload) {
+    let taskItemData = await TaskService.setTaskItemsStatusToCompleted(payload);
     commit("SET_TASK_ITEM_DATA", taskItemData.data);
     return taskItemData.data;
   },

@@ -62,18 +62,18 @@ export const actions = {
     return cartItems.data;
   },
 
-  async setCartItemsStatusToInProgress({ commit }, payload) {
-    const cartItems = await CartService.setCartItemsStatusToInProgress(payload);
+  async setCartItemStatusToAccepted({ commit }, payload) {
+    const cartItems = await CartService.setCartItemStatusToAccepted(payload);
     commit("SET_CART_ITEMS", cartItems.data);
     return cartItems.data;
   },
-  async setCartItemsStatusToCancelled({ commit }, payload) {
-    const cartItems = await CartService.setCartItemsStatusToCancelled(payload);
+  async setCartItemStatusToDeclined({ commit }, payload) {
+    const cartItems = await CartService.setCartItemStatusToDeclined(payload);
     commit("SET_CART_ITEMS", cartItems.data);
     return cartItems.data;
   },
-  async setCartItemsStatusToCompleted({ commit }, payload) {
-    const cartItems = await CartService.setCartItemsStatusToCompleted(payload);
+  async setCartItemStatusToPaid({ commit }, payload) {
+    const cartItems = await CartService.setCartItemStatusToPaid(payload);
     commit("SET_CART_ITEMS", cartItems.data);
     return cartItems.data;
   },
