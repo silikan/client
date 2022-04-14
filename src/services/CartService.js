@@ -13,7 +13,7 @@ export default {
   },
 
   async setCartItemStatusToAccepted(payload) {
-    return await API.apiClient.post(`/set-cart-items-status-accepted`, payload);
+    return await API.apiClient.post(`/set-cart-items-status-to-accepted`, payload);
   },
   async setCartItemStatusToDeclined(payload) {
     return await API.apiClient.post(`/set-cart-items-status-to-declined`, payload);

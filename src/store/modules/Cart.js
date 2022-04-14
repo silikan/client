@@ -77,6 +77,21 @@ export const actions = {
     commit("SET_CART_ITEMS", cartItems.data);
     return cartItems.data;
   },
+  async setCartItemStatusToCancelled({ commit }, payload) {
+    const cartItems = await CartService.setCartItemStatusToCancelled(payload);
+    commit("SET_CART_ITEMS", cartItems.data);
+    return cartItems.data;
+  },
+  async setCartItemStatusToInProgress({ commit }, payload) {
+    const cartItems = await CartService.setCartItemStatusToInProgress(payload);
+    commit("SET_CART_ITEMS", cartItems.data);
+    return cartItems.data;
+  },
+  async setCartItemStatusToCompleted({ commit }, payload) {
+    const cartItems = await CartService.setCartItemStatusToCompleted(payload);
+    commit("SET_CART_ITEMS", cartItems.data);
+    return cartItems.data;
+  },
 };
 
 export const getters = {

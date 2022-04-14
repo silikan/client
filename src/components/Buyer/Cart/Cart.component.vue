@@ -185,10 +185,7 @@
                   >
                 </td>
                 <td
-                  v-if="
-                    person.item.cart_item.status == 'pending' &&
-                    person.item.cart_item.type == 'request'
-                  "
+
                   class="
                     px-6
                     py-4
@@ -199,6 +196,10 @@
                   "
                 >
                   <a
+                      v-if="
+                    person.item.cart_item.status == 'pending' &&
+                    person.item.cart_item.type == 'request'
+                  "
                     type="button"
                     class="
                       cursor-pointer
@@ -220,6 +221,10 @@
                     >accept</a
                   >
                   <a
+                      v-if="
+                    person.item.cart_item.status == 'pending' &&
+                    person.item.cart_item.type == 'request'
+                  "
                     type="button"
                     class="
                       cursor-pointer
@@ -240,16 +245,14 @@
                     "
                     >decline</a
                   >
-                  <a
-                    v-if="
-                      person.item.cart_item.status == 'accepted' &&
-                      person.item.cart_item.type == 'gig'
-                    "
+     <a
+                      v-if="
+                    person.item.cart_item.status == 'checkout' "
                     type="button"
                     class="
                       cursor-pointer
                       text-white
-                      bg-green-500
+                      bg-red-500
                       inline-flex
                       items-center
                       px-2
@@ -260,63 +263,9 @@
                       rounded-full
                       shadow-sm
                     "
-                    @click="
-                      setTaskItemsStatusToInProgress(person.item.cart_item.id)
-                    "
-                    >Start
-                  </a>
 
-                  <a
-                    v-if="
-                      person.item.cart_item.status == 'in progress ' &&
-                      person.item.cart_item.type == 'gig'
-                    "
-                    type="button"
-                    class="
-                      cursor-pointer
-                      text-white
-                      bg-green-500
-                      inline-flex
-                      items-center
-                      px-2
-                      py-1
-                      border border-transparent
-                      text-xs
-                      font-medium
-                      rounded-full
-                      shadow-sm
-                    "
-                    @click="
-                      setTaskItemStatusToCompleted(person.item.cart_item.id)
-                    "
-                    >Complete
-                  </a>
-
-                  <a
-                    v-if="
-                      person.item.cart_item.status == 'in progress' &&
-                      person.item.cart_item.type == 'gig'
-                    "
-                    type="button"
-                    class="
-                      cursor-pointer
-                      text-white
-                      bg-green-500
-                      inline-flex
-                      items-center
-                      px-2
-                      py-1
-                      border border-transparent
-                      text-xs
-                      font-medium
-                      rounded-full
-                      shadow-sm
-                    "
-                    @click="
-                      setTaskItemsStatusToCancelled(person.item.cart_item.id)
-                    "
-                    >cancel
-                  </a>
+                    >pay</a
+                  >
                 </td>
               </tr>
             </tbody>
@@ -397,60 +346,59 @@ export default {
           console.log(error);
         });
     };
-    const setTaskItemsStatusToInProgress = (taskItemId) => {
-      let payload = {
-        task_item_id: taskItemId,
-        status: "in_progress",
-      };
-      console.log(payload);
-      store
-        .dispatch("Task/setTaskItemsStatusToInProgress", payload)
-        .then((result) => {
-          console.log(result);
-        })
-        .catch((error) => {
-          console.log(error);
-        });
+  async function setCartItemStatusToInProgress(cartItemId) {
+    let payload = {
+      cart_item_id: cartItemId,
+      status: "in progress",
     };
+    store
+      .dispatch("Cart/setCartItemStatusToInProgress", payload)
+      .then((result) => {
+        console.log(result);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }
+async function  setCartItemStatusToCancelled (cartItemId) {
+    let payload = {
+      cart_item_id: cartItemId,
+      status: "cancelled",
+    };
+    store
+      .dispatch("Cart/setCartItemStatusToCancelled", payload)
+      .then((result) => {
+        console.log(result);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }
 
-    const setTaskItemsStatusToCancelled = (taskItemId) => {
-      let payload = {
-        task_item_id: taskItemId,
-        status: "canceled",
-      };
-      store
-        .dispatch("Task/setTaskItemsStatusToCancelled", payload)
-        .then((result) => {
-          console.log(result);
-        })
-        .catch((error) => {
-          console.log(error);
-        });
+  async function setCartItemStatusToCompleted (cartItemId) {
+    let payload = {
+      cart_item_id: cartItemId,
+      status: "completed",
     };
+    store
+      .dispatch("Cart/setCartItemStatusToCompleted", payload)
+      .then((result) => {
+        console.log(result);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }
 
-    const setTaskItemStatusToCompleted = (taskItemId) => {
-      let payload = {
-        task_item_id: taskItemId,
-        status: "completed",
-      };
-      store
-        .dispatch("Task/setTaskItemStatusToCompleted", payload)
-        .then((result) => {
-          console.log(result);
-        })
-        .catch((error) => {
-          console.log(error);
-        });
-    };
 
     return {
       cart,
       setCartItemStatusToAccepted,
       setCartItemStatusToDeclined,
       setCartItemStatusToPaid,
-      setTaskItemsStatusToInProgress,
-      setTaskItemsStatusToCancelled,
-      setTaskItemStatusToCompleted,
+      setCartItemStatusToInProgress,
+      setCartItemStatusToCancelled,
+      setCartItemStatusToCompleted,
     };
   },
 };

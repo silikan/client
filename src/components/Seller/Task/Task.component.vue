@@ -193,10 +193,7 @@
                   "
                 >
                   <a
-                    v-if="
-                      person.item.task_item.status == 'accepted' &&
-                      person.item.task_item.type == 'gig'
-                    "
+                    v-if="person.item.task_item.status == 'accepted'"
                     type="button"
                     class="
                       cursor-pointer
@@ -219,10 +216,7 @@
                   </a>
 
                   <a
-                    v-if="
-                      person.item.task_item.status == 'in progress' &&
-                      person.item.task_item.type == 'gig'
-                    "
+                    v-if="person.item.task_item.status == 'in progress'"
                     type="button"
                     class="
                       cursor-pointer
@@ -245,10 +239,7 @@
                   </a>
 
                   <a
-                    v-if="
-                      person.item.task_item.status == 'in progress' &&
-                      person.item.task_item.type == 'gig'
-                    "
+                    v-if="person.item.task_item.status == 'in progress'"
                     type="button"
                     class="
                       cursor-pointer
@@ -291,7 +282,7 @@
                       shadow-sm
                     "
                     @click="
-                      setCartItemStatusToAccepted(person.item.task_item.id)
+                      setTaskItemStatusToAccepted(person.item.task_item.id)
                     "
                     >accept</a
                   >
@@ -316,7 +307,7 @@
                       shadow-sm
                     "
                     @click="
-                      setCartItemStatusToDeclined(person.item.task_item.id)
+                      setTaskItemStatusToDeclined(person.item.task_item.id)
                     "
                     >decline</a
                   >
@@ -403,50 +394,50 @@ export default {
         });
     };
 
-    const setCartItemStatusToAccepted = (cartItemId) => {
+    async function setTaskItemStatusToAccepted(taskItemId) {
       let payload = {
-        cart_item_id: cartItemId,
+        task_item_id: taskItemId,
         status: "accepted",
       };
       store
-        .dispatch("Cart/setCartItemStatusToAccepted", payload)
+        .dispatch("Task/setTaskItemStatusToAccepted", payload)
         .then((result) => {
           console.log(result);
         })
         .catch((error) => {
           console.log(error);
         });
-    };
+    }
 
-    const setCartItemStatusToDeclined = (cartItemId) => {
+    async function setTaskItemStatusToDeclined(taskItemId) {
       let payload = {
-        cart_item_id: cartItemId,
+        task_item_id: taskItemId,
         status: "declined",
       };
       store
-        .dispatch("Cart/setCartItemStatusToDeclined", payload)
+        .dispatch("Task/setTaskItemStatusToDeclined", payload)
         .then((result) => {
           console.log(result);
         })
         .catch((error) => {
           console.log(error);
         });
-    };
+    }
 
-    const setCartItemStatusToPaid = (cartItemId) => {
+    async function setTaskItemStatusToPaid(taskItemId) {
       let payload = {
-        cart_item_id: cartItemId,
+        task_item_id: taskItemId,
         status: "paid",
       };
       store
-        .dispatch("Cart/setCartItemStatusToPaid", payload)
+        .dispatch("Task/setTaskItemStatusToPaid", payload)
         .then((result) => {
           console.log(result);
         })
         .catch((error) => {
           console.log(error);
         });
-    };
+    }
 
     return {
       people,
@@ -454,9 +445,9 @@ export default {
       setTaskItemsStatusToInProgress,
       setTaskItemsStatusToCancelled,
       setTaskItemStatusToCompleted,
-      setCartItemStatusToAccepted,
-      setCartItemStatusToDeclined,
-      setCartItemStatusToPaid,
+      setTaskItemStatusToAccepted,
+      setTaskItemStatusToDeclined,
+      setTaskItemStatusToPaid,
     };
   },
 };

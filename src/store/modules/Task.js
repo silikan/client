@@ -76,6 +76,21 @@ export const actions = {
     commit("SET_TASK_ITEM_DATA", taskItemData.data);
     return taskItemData.data;
   },
+  async setTaskItemStatusToAccepted({ commit }, payload) {
+    let taskItemData = await TaskService.setTaskItemStatusToAccepted(payload);
+    commit("SET_TASK_ITEM_DATA", taskItemData.data);
+    return taskItemData.data;
+  },
+  async setTaskItemStatusToDeclined({ commit }, payload) {
+    let taskItemData = await TaskService.setTaskItemStatusToDeclined(payload);
+    commit("SET_TASK_ITEM_DATA", taskItemData.data);
+    return taskItemData.data;
+  },
+  async setTaskItemStatusToPaid({ commit }, payload) {
+    let taskItemData = await TaskService.setTaskItemStatusToPaid(payload);
+    commit("SET_TASK_ITEM_DATA", taskItemData.data);
+    return taskItemData.data;
+  },
 };
 
 export const getters = {
