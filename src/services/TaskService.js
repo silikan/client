@@ -19,4 +19,13 @@ export default {
   async setTaskItemStatusToCompleted(payload) {
     return await API.apiClient.post(`/set-task-items-status-to-completed`, payload);
   },
+  async setTaskItemStatusToAccepted(payload) {
+    return await API.apiClient.post(`/set-task-items-status-to-accepted`, payload);
+  },
+  async setTaskItemStatusToDeclined(payload) {
+    return await API.apiClient.post(`/set-task-items-status-to-declined`, payload);
+  },
+  async setTaskItemStatusToPaid(payload) {
+    return await API.apiClient.post(`/set-task-items-status-to-paid`, payload);
+  },
 };

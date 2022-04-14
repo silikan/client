@@ -115,126 +115,19 @@
                 </td>
                 <td class="px-6 py-4 whitespace-nowrap">
                   <span
-                    v-if="person.item.cart_item.is_pending"
                     class="
-                      px-2
                       inline-flex
-                      text-xs
-                      leading-5
-                      font-semibold
+                      items-center
+                      px-2.5
+                      py-0.5
                       rounded-full
-                      bg-green-100
-                      text-green-800
+                      text-xs
+                      font-medium
+                      bg-indigo-100
+                      text-indigo-800
                     "
                   >
-                    pending
-                  </span>
-                  <span
-                    v-if="person.item.cart_item.is_accepted"
-                    class="
-                      px-2
-                      inline-flex
-                      text-xs
-                      leading-5
-                      font-semibold
-                      rounded-full
-                      bg-green-100
-                      text-green-800
-                    "
-                  >
-                    accepted
-                  </span>
-                  <span
-                    v-if="person.item.cart_item.is_rejected"
-                    class="
-                      px-2
-                      inline-flex
-                      text-xs
-                      leading-5
-                      font-semibold
-                      rounded-full
-                      bg-red-100
-                      text-red-800
-                    "
-                  >
-                    rejected
-                  </span>
-                  <span
-                    v-if="person.item.cart_item.is_cancelled"
-                    class="
-                      px-2
-                      inline-flex
-                      text-xs
-                      leading-5
-                      font-semibold
-                      rounded-full
-                      bg-red-100
-                      text-red-800
-                    "
-                  >
-                    cancelled
-                  </span>
-                  <span
-                    v-if="person.item.cart_item.is_in_progress"
-                    class="
-                      px-2
-                      inline-flex
-                      text-xs
-                      leading-5
-                      font-semibold
-                      rounded-full
-                      bg-green-100
-                      text-green-800
-                    "
-                  >
-                    in Progress
-                  </span>
-                  <span
-                    v-if="person.item.cart_item.is_completed"
-                    class="
-                      px-2
-                      inline-flex
-                      text-xs
-                      leading-5
-                      font-semibold
-                      rounded-full
-                      bg-green-100
-                      text-green-800
-                    "
-                  >
-                    Completed
-                  </span>
-
-                  <span
-                    v-if="person.item.cart_item.is_on_checkout"
-                    class="
-                      px-2
-                      inline-flex
-                      text-xs
-                      leading-5
-                      font-semibold
-                      rounded-full
-                      bg-green-100
-                      text-green-800
-                    "
-                  >
-                    On Checkout
-                  </span>
-
-                  <span
-                    v-if="person.item.cart_item.is_paid"
-                    class="
-                      px-2
-                      inline-flex
-                      text-xs
-                      leading-5
-                      font-semibold
-                      rounded-full
-                      bg-green-100
-                      text-green-800
-                    "
-                  >
-                    Paid
+                    {{ person.item.cart_item.status }}
                   </span>
                 </td>
 
@@ -292,7 +185,10 @@
                   >
                 </td>
                 <td
-                  v-if="person.item.cart_item.is_pending"
+                  v-if="
+                    person.item.cart_item.status == 'pending' &&
+                    person.item.cart_item.type == 'request'
+                  "
                   class="
                     px-6
                     py-4
@@ -318,12 +214,15 @@
                       rounded-full
                       shadow-sm
                     "
-                    @click="setCartItemStatusToAccepted(person.item.cart_item.id)"
+                    @click="
+                      setCartItemStatusToAccepted(person.item.cart_item.id)
+                    "
                     >accept</a
                   >
                   <a
                     type="button"
-                    class="      cursor-pointer
+                    class="
+                      cursor-pointer
                       text-white
                       bg-red-500
                       inline-flex
@@ -334,10 +233,90 @@
                       text-xs
                       font-medium
                       rounded-full
-                      shadow-sm"
-                    @click="setCartItemStatusToDeclined(person.item.cart_item.id)"
+                      shadow-sm
+                    "
+                    @click="
+                      setCartItemStatusToDeclined(person.item.cart_item.id)
+                    "
                     >decline</a
                   >
+                  <a
+                    v-if="
+                      person.item.cart_item.status == 'accepted' &&
+                      person.item.cart_item.type == 'gig'
+                    "
+                    type="button"
+                    class="
+                      cursor-pointer
+                      text-white
+                      bg-green-500
+                      inline-flex
+                      items-center
+                      px-2
+                      py-1
+                      border border-transparent
+                      text-xs
+                      font-medium
+                      rounded-full
+                      shadow-sm
+                    "
+                    @click="
+                      setTaskItemsStatusToInProgress(person.item.cart_item.id)
+                    "
+                    >Start
+                  </a>
+
+                  <a
+                    v-if="
+                      person.item.cart_item.status == 'in progress ' &&
+                      person.item.cart_item.type == 'gig'
+                    "
+                    type="button"
+                    class="
+                      cursor-pointer
+                      text-white
+                      bg-green-500
+                      inline-flex
+                      items-center
+                      px-2
+                      py-1
+                      border border-transparent
+                      text-xs
+                      font-medium
+                      rounded-full
+                      shadow-sm
+                    "
+                    @click="
+                      setTaskItemStatusToCompleted(person.item.cart_item.id)
+                    "
+                    >Complete
+                  </a>
+
+                  <a
+                    v-if="
+                      person.item.cart_item.status == 'in progress' &&
+                      person.item.cart_item.type == 'gig'
+                    "
+                    type="button"
+                    class="
+                      cursor-pointer
+                      text-white
+                      bg-green-500
+                      inline-flex
+                      items-center
+                      px-2
+                      py-1
+                      border border-transparent
+                      text-xs
+                      font-medium
+                      rounded-full
+                      shadow-sm
+                    "
+                    @click="
+                      setTaskItemsStatusToCancelled(person.item.cart_item.id)
+                    "
+                    >cancel
+                  </a>
                 </td>
               </tr>
             </tbody>
@@ -352,7 +331,6 @@
 import { computed, ref } from "@vue/runtime-core";
 import { useStore } from "vuex";
 import Avatar from "@/components/Avatar/Avatar.component.vue";
-
 
 export default {
   components: {
@@ -375,57 +353,104 @@ export default {
         console.log(error);
       });
 
-const  setCartItemStatusToAccepted = (cartItemId) => {
-  let payload = {
-    cart_item_id: cartItemId,
-    status: "accepted",
-  };
-  store
-    .dispatch("Cart/setCartItemStatusToAccepted", payload)
-    .then((result) => {
-      console.log(result);
-    })
-    .catch((error) => {
-      console.log(error);
-    });
-}
-
-const setCartItemStatusToDeclined = (cartItemId) => {
-    let payload = {
-    cart_item_id: cartItemId,
-    status: "declined",
-  };
-  store
-    .dispatch("Cart/setCartItemStatusToDeclined", payload)
-    .then((result) => {
-      console.log(result);
-    })
-    .catch((error) => {
-      console.log(error);
-    });
-}
-
-const setCartItemStatusToPaid = (cartItemId) => {
+    const setCartItemStatusToAccepted = (cartItemId) => {
       let payload = {
-    cart_item_id: cartItemId,
-    status: "paid",
-  };
-  store
-    .dispatch("Cart/setCartItemStatusToPaid", payload)
-    .then((result) => {
-      console.log(result);
-    })
-    .catch((error) => {
-      console.log(error);
-    });
-}
+        cart_item_id: cartItemId,
+        status: "accepted",
+      };
+      store
+        .dispatch("Cart/setCartItemStatusToAccepted", payload)
+        .then((result) => {
+          console.log(result);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    };
+
+    const setCartItemStatusToDeclined = (cartItemId) => {
+      let payload = {
+        cart_item_id: cartItemId,
+        status: "declined",
+      };
+      store
+        .dispatch("Cart/setCartItemStatusToDeclined", payload)
+        .then((result) => {
+          console.log(result);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    };
+
+    const setCartItemStatusToPaid = (cartItemId) => {
+      let payload = {
+        cart_item_id: cartItemId,
+        status: "paid",
+      };
+      store
+        .dispatch("Cart/setCartItemStatusToPaid", payload)
+        .then((result) => {
+          console.log(result);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    };
+    const setTaskItemsStatusToInProgress = (taskItemId) => {
+      let payload = {
+        task_item_id: taskItemId,
+        status: "in_progress",
+      };
+      console.log(payload);
+      store
+        .dispatch("Task/setTaskItemsStatusToInProgress", payload)
+        .then((result) => {
+          console.log(result);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    };
+
+    const setTaskItemsStatusToCancelled = (taskItemId) => {
+      let payload = {
+        task_item_id: taskItemId,
+        status: "canceled",
+      };
+      store
+        .dispatch("Task/setTaskItemsStatusToCancelled", payload)
+        .then((result) => {
+          console.log(result);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    };
+
+    const setTaskItemStatusToCompleted = (taskItemId) => {
+      let payload = {
+        task_item_id: taskItemId,
+        status: "completed",
+      };
+      store
+        .dispatch("Task/setTaskItemStatusToCompleted", payload)
+        .then((result) => {
+          console.log(result);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    };
 
     return {
-
       cart,
       setCartItemStatusToAccepted,
       setCartItemStatusToDeclined,
       setCartItemStatusToPaid,
+      setTaskItemsStatusToInProgress,
+      setTaskItemsStatusToCancelled,
+      setTaskItemStatusToCompleted,
     };
   },
 };

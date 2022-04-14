@@ -1,5 +1,4 @@
 <template>
-
   <div class="flex flex-col">
     <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
       <div class="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
@@ -72,19 +71,25 @@
             </thead>
             <tbody class="bg-white divide-y divide-gray-200">
               <tr v-for="person in task" :key="person.email">
-                 <td class="px-6 py-4 whitespace-nowrap" v-if="person.item.gig.length > 0">
+                <td
+                  class="px-6 py-4 whitespace-nowrap"
+                  v-if="person.item.gig.length > 0"
+                >
                   <div class="flex items-center">
                     <div class="ml-4">
-                      <div class="text-sm font-medium text-gray-900 ">
+                      <div class="text-sm font-medium text-gray-900">
                         {{ person.item.gig[0].title }}
                       </div>
                     </div>
                   </div>
                 </td>
-                  <td class="px-6 py-4 whitespace-nowrap" v-if="person.item.request.length > 0">
+                <td
+                  class="px-6 py-4 whitespace-nowrap"
+                  v-if="person.item.request.length > 0"
+                >
                   <div class="flex items-center">
                     <div class="ml-4">
-                      <div class="text-sm font-medium text-gray-900 ">
+                      <div class="text-sm font-medium text-gray-900">
                         {{ person.item.request[0].title }}
                       </div>
                     </div>
@@ -104,141 +109,37 @@
                       text-indigo-800
                     "
                   >
-                     {{ person.item.task_item.type }}
+                    {{ person.item.task_item.type }}
                   </span>
                 </td>
-               <td class="px-6 py-4 whitespace-nowrap">
+                <td class="px-6 py-4 whitespace-nowrap">
                   <span
-                    v-if="person.item.task_item.is_pending"
                     class="
-                      px-2
                       inline-flex
-                      text-xs
-                      leading-5
-                      font-semibold
+                      items-center
+                      px-2.5
+                      py-0.5
                       rounded-full
-                      bg-green-100
-                      text-green-800
+                      text-xs
+                      font-medium
+                      bg-indigo-100
+                      text-indigo-800
                     "
                   >
-                    pending
-                  </span>
-                  <span
-                    v-if="person.item.task_item.is_accepted"
-                    class="
-                      px-2
-                      inline-flex
-                      text-xs
-                      leading-5
-                      font-semibold
-                      rounded-full
-                      bg-green-100
-                      text-green-800
-                    "
-                  >
-                    accepted
-                  </span>
-                  <span
-                    v-if="person.item.task_item.is_rejected"
-                    class="
-                      px-2
-                      inline-flex
-                      text-xs
-                      leading-5
-                      font-semibold
-                      rounded-full
-                      bg-red-100
-                      text-red-800
-                    "
-                  >
-                    rejected
-                  </span>
-                  <span
-                    v-if="person.item.task_item.is_cancelled"
-                    class="
-                      px-2
-                      inline-flex
-                      text-xs
-                      leading-5
-                      font-semibold
-                      rounded-full
-                      bg-red-100
-                      text-red-800
-                    "
-                  >
-                    cancelled
-                  </span>
-                  <span
-                    v-if="person.item.task_item.is_in_progress"
-                    class="
-                      px-2
-                      inline-flex
-                      text-xs
-                      leading-5
-                      font-semibold
-                      rounded-full
-                      bg-green-100
-                      text-green-800
-                    "
-                  >
-                    in Progress
-                  </span>
-                  <span
-                    v-if="person.item.task_item.is_completed"
-                    class="
-                      px-2
-                      inline-flex
-                      text-xs
-                      leading-5
-                      font-semibold
-                      rounded-full
-                      bg-green-100
-                      text-green-800
-                    "
-                  >
-                    Completed
-                  </span>
-
-                  <span
-                    v-if="person.item.task_item.is_on_checkout"
-                    class="
-                      px-2
-                      inline-flex
-                      text-xs
-                      leading-5
-                      font-semibold
-                      rounded-full
-                      bg-green-100
-                      text-green-800
-                    "
-                  >
-                    On Checkout
-                  </span>
-
-                  <span
-                    v-if="person.item.task_item.is_paid"
-                    class="
-                      px-2
-                      inline-flex
-                      text-xs
-                      leading-5
-                      font-semibold
-                      rounded-full
-                      bg-green-100
-                      text-green-800
-                    "
-                  >
-                    Paid
+                    {{ person.item.task_item.status }}
                   </span>
                 </td>
                 <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                   <div class="flex items-center">
                     <div class="flex-shrink-0 h-10 w-10">
-
-                          <router-link :to="`/user/${person.item.client.id}`">
-                    <Avatar v-if="person.item.client.name" :url="person.item.client.avatar" :name="person.item.client.name"/>
-                     </router-link>
-                     </div>
+                      <router-link :to="`/user/${person.item.client.id}`">
+                        <Avatar
+                          v-if="person.item.client.name"
+                          :url="person.item.client.avatar"
+                          :name="person.item.client.name"
+                        />
+                      </router-link>
+                    </div>
                     <div class="ml-4">
                       <div class="text-sm font-medium text-gray-900">
                         {{ person.name }}
@@ -249,7 +150,7 @@
                     </div>
                   </div>
                 </td>
-              <td
+                <td
                   class="
                     px-6
                     py-4
@@ -257,13 +158,15 @@
                     text-right text-sm
                     font-medium
                   "
-                   v-if="person.item.gig.length > 0"
+                  v-if="person.item.gig.length > 0"
                 >
-                  <router-link  :to="`/gig/${person.item.gig[0].id}`" class="text-indigo-600 hover:text-indigo-900"
+                  <router-link
+                    :to="`/gig/${person.item.gig[0].id}`"
+                    class="text-indigo-600 hover:text-indigo-900"
                     >Check</router-link
                   >
                 </td>
-                  <td
+                <td
                   class="
                     px-6
                     py-4
@@ -271,14 +174,15 @@
                     text-right text-sm
                     font-medium
                   "
-                   v-if="person.item.request.length > 0"
+                  v-if="person.item.request.length > 0"
                 >
-                  <router-link  :to="`/request/${person.item.request[0].id}`" class="text-indigo-600 hover:text-indigo-900"
+                  <router-link
+                    :to="`/request/${person.item.request[0].id}`"
+                    class="text-indigo-600 hover:text-indigo-900"
                     >Check</router-link
                   >
                 </td>
-                       <td
-                  v-if="person.item.task_item.is_accepted"
+                <td
                   class="
                     px-6
                     py-4
@@ -288,10 +192,40 @@
                     space-x-4
                   "
                 >
+                  <a
+                    v-if="
+                      person.item.task_item.status == 'accepted' &&
+                      person.item.task_item.type == 'gig'
+                    "
+                    type="button"
+                    class="
+                      cursor-pointer
+                      text-white
+                      bg-green-500
+                      inline-flex
+                      items-center
+                      px-2
+                      py-1
+                      border border-transparent
+                      text-xs
+                      font-medium
+                      rounded-full
+                      shadow-sm
+                    "
+                    @click="
+                      setTaskItemsStatusToInProgress(person.item.task_item.id)
+                    "
+                    >Start
+                  </a>
 
                   <a
+                    v-if="
+                      person.item.task_item.status == 'in progress' &&
+                      person.item.task_item.type == 'gig'
+                    "
                     type="button"
-                    class="      cursor-pointer
+                    class="
+                      cursor-pointer
                       text-white
                       bg-green-500
                       inline-flex
@@ -302,14 +236,22 @@
                       text-xs
                       font-medium
                       rounded-full
-                      shadow-sm"
-                    @click="setTaskItemsStatusToInProgress(person.item.task_item.id)"
-                    >Start </a
-                  >
+                      shadow-sm
+                    "
+                    @click="
+                      setTaskItemStatusToCompleted(person.item.task_item.id)
+                    "
+                    >Complete
+                  </a>
 
-                   <a
+                  <a
+                    v-if="
+                      person.item.task_item.status == 'in progress' &&
+                      person.item.task_item.type == 'gig'
+                    "
                     type="button"
-                    class="      cursor-pointer
+                    class="
+                      cursor-pointer
                       text-white
                       bg-green-500
                       inline-flex
@@ -320,14 +262,22 @@
                       text-xs
                       font-medium
                       rounded-full
-                      shadow-sm"
-                    @click="setTaskItemStatusToCompleted(person.item.task_item.id)"
-                    >Complete </a
-                  >
+                      shadow-sm
+                    "
+                    @click="
+                      setTaskItemsStatusToCancelled(person.item.task_item.id)
+                    "
+                    >cancel
+                  </a>
 
-                      <a
+                  <a
+                    v-if="
+                      person.item.task_item.status == 'pending' &&
+                      person.item.task_item.type == 'gig'
+                    "
                     type="button"
-                    class="      cursor-pointer
+                    class="
+                      cursor-pointer
                       text-white
                       bg-green-500
                       inline-flex
@@ -338,9 +288,37 @@
                       text-xs
                       font-medium
                       rounded-full
-                      shadow-sm"
-                    @click="setTaskItemsStatusToCancelled(person.item.task_item.id)"
-                    >cancel </a
+                      shadow-sm
+                    "
+                    @click="
+                      setCartItemStatusToAccepted(person.item.task_item.id)
+                    "
+                    >accept</a
+                  >
+                  <a
+                    v-if="
+                      person.item.task_item.status == 'pending' &&
+                      person.item.task_item.type == 'gig'
+                    "
+                    type="button"
+                    class="
+                      cursor-pointer
+                      text-white
+                      bg-red-500
+                      inline-flex
+                      items-center
+                      px-2
+                      py-1
+                      border border-transparent
+                      text-xs
+                      font-medium
+                      rounded-full
+                      shadow-sm
+                    "
+                    @click="
+                      setCartItemStatusToDeclined(person.item.task_item.id)
+                    "
+                    >decline</a
                   >
                 </td>
               </tr>
@@ -353,75 +331,121 @@
 </template>
 
 <script>
-import { ref } from '@vue/reactivity';
-import { useStore } from 'vuex';
-import { computed } from '@vue/runtime-core';
+import { ref } from "@vue/reactivity";
+import { useStore } from "vuex";
+import { computed } from "@vue/runtime-core";
 import Avatar from "@/components/Avatar/Avatar.component.vue";
 const people = [
-
-
   // More people...
 ];
 
 export default {
   components: {
-    Avatar
+    Avatar,
   },
   setup() {
- let store = useStore();
-  let task = ref([]);
-    let userId = computed(()=> store.getters['auth/id']) ;
+    let store = useStore();
+    let task = ref([]);
+    let userId = computed(() => store.getters["auth/id"]);
     console.log(userId.value);
-    store.dispatch('Task/getUserTaskItems', userId.value).then((result) => {
-      console.log(result);
-      task.value = result;
-    }).catch((error) => {
-      console.log(error);
-    });
-    const setTaskItemsStatusToInProgress = (taskItemId) => {
-
-      let payload = {
-        task_item_id: taskItemId,
-        status: 'in_progress'
-      };
-      console.log(payload);
-      store.dispatch('Task/setTaskItemsStatusToInProgress',
-        payload,
-
-      ).then((result) => {
+    store
+      .dispatch("Task/getUserTaskItems", userId.value)
+      .then((result) => {
         console.log(result);
-      }).catch((error) => {
+        task.value = result;
+      })
+      .catch((error) => {
         console.log(error);
       });
+    const setTaskItemsStatusToInProgress = (taskItemId) => {
+      let payload = {
+        task_item_id: taskItemId,
+        status: "in_progress",
+      };
+      console.log(payload);
+      store
+        .dispatch("Task/setTaskItemsStatusToInProgress", payload)
+        .then((result) => {
+          console.log(result);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
     };
 
     const setTaskItemsStatusToCancelled = (taskItemId) => {
-        let payload = {
+      let payload = {
         task_item_id: taskItemId,
-        status: 'canceled'
+        status: "canceled",
       };
-      store.dispatch('Task/setTaskItemsStatusToCancelled',
-        payload,
-   ).then((result) => {
-        console.log(result);
-      }).catch((error) => {
-        console.log(error);
-      });
+      store
+        .dispatch("Task/setTaskItemsStatusToCancelled", payload)
+        .then((result) => {
+          console.log(result);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
     };
 
     const setTaskItemStatusToCompleted = (taskItemId) => {
-        let payload = {
+      let payload = {
         task_item_id: taskItemId,
-        status: 'completed'
+        status: "completed",
       };
-      store.dispatch('Task/setTaskItemStatusToCompleted',
-        payload,
+      store
+        .dispatch("Task/setTaskItemStatusToCompleted", payload)
+        .then((result) => {
+          console.log(result);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    };
 
-      ).then((result) => {
-        console.log(result);
-      }).catch((error) => {
-        console.log(error);
-      });
+    const setCartItemStatusToAccepted = (cartItemId) => {
+      let payload = {
+        cart_item_id: cartItemId,
+        status: "accepted",
+      };
+      store
+        .dispatch("Cart/setCartItemStatusToAccepted", payload)
+        .then((result) => {
+          console.log(result);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    };
+
+    const setCartItemStatusToDeclined = (cartItemId) => {
+      let payload = {
+        cart_item_id: cartItemId,
+        status: "declined",
+      };
+      store
+        .dispatch("Cart/setCartItemStatusToDeclined", payload)
+        .then((result) => {
+          console.log(result);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    };
+
+    const setCartItemStatusToPaid = (cartItemId) => {
+      let payload = {
+        cart_item_id: cartItemId,
+        status: "paid",
+      };
+      store
+        .dispatch("Cart/setCartItemStatusToPaid", payload)
+        .then((result) => {
+          console.log(result);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
     };
 
     return {
@@ -429,7 +453,10 @@ export default {
       task,
       setTaskItemsStatusToInProgress,
       setTaskItemsStatusToCancelled,
-      setTaskItemStatusToCompleted
+      setTaskItemStatusToCompleted,
+      setCartItemStatusToAccepted,
+      setCartItemStatusToDeclined,
+      setCartItemStatusToPaid,
     };
   },
 };

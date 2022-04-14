@@ -44,12 +44,26 @@ import RequestCategory from "@/views/RequestCategory.view.vue";
 import AdminDashboard from "@/views/AdminDashboard.view.vue";
 import ModeratorDashboard from "@/views/ModeratorDashboard.view.vue";
 import Checkout from "@/views/Checkout.view.vue";
+import CartitemFeed from "@/views/CartitemFeed.view.vue";
+import TaskItemFeed from "@/views/TaskItemFeed.view.vue";
 const routes = [
   {
     path: "/",
     name: "Home",
     meta: { middleware: [guest] },
     component: Home,
+  },
+  {
+    path: "/cartitem/:id/feed",
+    name: "CartitemFeed",
+    meta: { middleware: [auth] },
+    component: CartitemFeed,
+  },
+  {
+    path: "/taskitem/:id/feed",
+    name: "TaskItemFeed",
+    meta: { middleware: [auth] },
+    component: TaskItemFeed,
   },
   {
     path: "/checkout",

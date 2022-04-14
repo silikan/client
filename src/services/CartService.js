@@ -21,4 +21,14 @@ export default {
   async setCartItemStatusToPaid(payload) {
     return await API.apiClient.post(`/set-cart-items-status-to-paid`, payload);
   },
+
+  async setCartItemStatusToCancelled(payload) {
+    return await API.apiClient.post(`/set-cart-items-status-to-cancelled`, payload);
+  },
+  async setCartItemStatusToInProgress(payload) {
+    return await API.apiClient.post(`/set-cart-items-status-to-in-progress`, payload);
+  },
+  async setCartItemStatusToCompleted(payload) {
+    return await API.apiClient.post(`/set-cart-items-status-to-completed`, payload);
+  },
 };
