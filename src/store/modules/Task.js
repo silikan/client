@@ -95,7 +95,8 @@ export const actions = {
     commit("SET_TASK_ITEM_DATA", taskItemData.data);
     return taskItemData.data;
   },
-  async getTaskItemById({ commit }, id) {
+  async getTaskItemById({ commit }, payload) {
+    let id = payload.id;
     const taskItem = await TaskService.getTaskItemById(id);
     commit("SET_TASK_ITEM", taskItem);
     return taskItem.data;

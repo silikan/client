@@ -96,7 +96,8 @@ export const actions = {
     commit("SET_CART_ITEMS", cartItems.data);
     return cartItems.data;
   },
-  async getCartItemById({ commit }, id) {
+  async getCartItemById({ commit }, payload) {
+    let id = payload.id;
     const cartItem = await CartService.getCartItemById(id);
     commit("SET_CART_ITEM", cartItem.data);
     return cartItem.data;

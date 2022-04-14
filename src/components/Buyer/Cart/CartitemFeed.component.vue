@@ -35,6 +35,8 @@
 
 <script>
 import { CheckIcon, ThumbUpIcon, UserIcon } from '@heroicons/vue/solid'
+import { useStore } from 'vuex'
+import { useRoute } from 'vue-router'
 
 const timeline = [
   {
@@ -91,6 +93,17 @@ const timeline = [
 
 export default {
   setup() {
+    let store = useStore()
+    let route = useRoute()
+    let id = route.params.id
+let payload = {
+  id: id,
+}
+    store.dispatch('Cart/getCartItemById', payload).then((result) => {
+      console.log(result)
+    }).catch((error) => {
+      console.log(error)
+    })
     return {
       timeline,
     }
