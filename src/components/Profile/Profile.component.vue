@@ -77,7 +77,16 @@
                 >
                   <span class="sr-only">Offline</span>
                 </span>
+
+                <span v-if="authUserData.emailVerified !== null">
+                  <CheckCircleIcon
+                    class="w-5 h-5 stroke-1 mr-3 text-blue-400"
+                    aria-hidden="true"
+                  />
+                  <span class="sr-only">virified</span>
+                </span>
               </div>
+
               <p
                 class="text-sm text-gray-500"
                 v-if="authUserData.username !== null"
@@ -419,6 +428,7 @@ import {
   CalendarIcon,
   CurrencyDollarIcon,
   LocationMarkerIcon,
+  CheckCircleIcon,
 } from "@heroicons/vue/solid";
 import About from "./About.component.vue";
 import Resume from "./Resume.component.vue";
@@ -435,6 +445,7 @@ import { PencilIcon } from "@heroicons/vue/solid";
 import { DotsVerticalIcon } from "@heroicons/vue/solid";
 import { Menu, MenuButton, MenuItem, MenuItems } from "@headlessui/vue";
 import { computed, onMounted, reactive, ref } from "@vue/runtime-core";
+import { useStore } from "vuex";
 
 const profile = {
   name: "Ricardo Cooper",
@@ -476,6 +487,7 @@ export default {
     CurrencyDollarIcon,
 
     LocationMarkerIcon,
+    CheckCircleIcon,
   },
   props: ["authUser"],
 
@@ -564,7 +576,12 @@ export default {
         Gigs_Requests_tabs[0].current = false;
       }
     };
+    let store = useStore();
 
+    let isEmailVirified = computed(() => {
+      return store.getters["auth/emailVerified"];
+    });
+    console.log(isEmailVirified.value);
     return {
       profile,
       tabs,
@@ -578,6 +595,7 @@ export default {
       navigateTabs,
       timerange,
       GigRequestNavigation,
+      isEmailVirified,
     };
   },
 };
