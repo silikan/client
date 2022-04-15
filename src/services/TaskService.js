@@ -31,4 +31,7 @@ export default {
   async getTaskItemById(id) {
     return await API.apiClient.get(`/task/${id}`);
   },
+  async setTaskItemStatusToConfirmed(payload) {
+    return await API.apiClient.post(`/set-task-items-status-to-confirmed`, payload);
+  },
 };

@@ -103,6 +103,11 @@ export const actions = {
     commit("SET_CART_ITEM", cartItem.data);
     return cartItem.data;
   },
+  async setCartItemStatusToConfirmed({ commit }, payload) {
+    const cartItem = await CartService.setCartItemStatusToConfirmed(payload);
+    commit("SET_CART_ITEM", cartItem.data);
+    return cartItem.data;
+  },
 };
 
 export const getters = {

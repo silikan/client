@@ -76,6 +76,7 @@
         focus:ring-offset-2
         focus:ring-indigo-500
       "
+      @click="setCartItemStatusToPaid()"
     >
       Pay
     </button>
@@ -88,6 +89,8 @@ import Price from '@/components/Checkout/Price.component.vue'
 import Review from "@/components/Checkout/Review.component.vue";
 import StepperComponent from "../components/Checkout/Stepper.component.vue";
 import { reactive } from "@vue/reactivity";
+import { useStore } from 'vuex';
+import { useRoute } from 'vue-router';
 export default {
   components: {
     StepperComponent,
@@ -95,6 +98,8 @@ export default {
     Price,
   },
   setup() {
+    let store = useStore();
+    let route = useRoute();
     const steps = reactive([
       { name: "Pricing", href: "#", status: "upcoming", active: true },
       { name: "Reviews", href: "#", status: "upcoming", active: false },
@@ -121,10 +126,29 @@ export default {
       }
     };
 
+    let id = route.params.id;
+
+    const setCartItemStatusToPaid = () =>{
+
+ store
+      .dispatch("Transaction/getTransactionById", id)
+      .then((result) => {
+            let payload = {
+        cart_item_id: result.cartItem.id,
+        status: "paid",
+      };
+      store.dispatch('Cart/setCartItemStatusToConfirmed' , payload)
+      }).catch((error) => {
+        console.log(error);
+      });
+
+    }
+
     return {
       steps,
       nextStep,
       prevStep,
+      setCartItemStatusToPaid
     };
   },
 };

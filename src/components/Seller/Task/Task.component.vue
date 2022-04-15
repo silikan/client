@@ -311,6 +311,30 @@
                     "
                     >decline</a
                   >
+
+                       <a
+                    v-if="person.item.task_item.status == 'paid'"
+                    type="button"
+                    class="
+                      cursor-pointer
+                      text-white
+                      bg-green-500
+                      inline-flex
+                      items-center
+                      px-2
+                      py-1
+                      border border-transparent
+                      text-xs
+                      font-medium
+                      rounded-full
+                      shadow-sm
+                    "
+                    @click="
+                      setTaskItemStatusToConfirmed(person.item.task_item.id)
+                    "
+                    >Confirm Payment
+                  </a>
+
                 </td>
               </tr>
             </tbody>
@@ -437,8 +461,25 @@ export default {
         .catch((error) => {
           console.log(error);
         });
+
+
     }
 
+
+        async function setTaskItemStatusToConfirmed (taskItemId) {
+          let payload = {
+            task_item_id: taskItemId,
+            status: "confirmed",
+          };
+          store
+            .dispatch("Task/setTaskItemStatusToConfirmed", payload)
+            .then((result) => {
+              console.log(result);
+            })
+            .catch((error) => {
+              console.log(error);
+            });
+        }
     return {
       people,
       task,
@@ -448,6 +489,7 @@ export default {
       setTaskItemStatusToAccepted,
       setTaskItemStatusToDeclined,
       setTaskItemStatusToPaid,
+      setTaskItemStatusToConfirmed
     };
   },
 };

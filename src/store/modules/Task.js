@@ -102,6 +102,11 @@ export const actions = {
     commit("SET_TASK_ITEM", taskItem);
     return taskItem.data;
   },
+  async setTaskItemStatusToConfirmed({ commit }, payload) {
+    let taskItemData = await TaskService.setTaskItemStatusToConfirmed(payload);
+    commit("SET_TASK_ITEM_DATA", taskItemData.data);
+    return taskItemData.data;
+  },
 };
 
 export const getters = {
