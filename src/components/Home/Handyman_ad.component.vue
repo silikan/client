@@ -27,7 +27,7 @@
             uppercase
           "
         >
-          Deploy faster yaaay
+          Work and get paid
         </h2>
         <p
           class="
@@ -39,12 +39,10 @@
             sm:text-4xl
           "
         >
-          Everything you need to deploy your app
+          For service providers
         </p>
         <p class="mt-5 max-w-prose mx-auto text-xl text-gray-500">
-          Phasellus lorem quam molestie id quisque diam aenean nulla in.
-          Accumsan in quis quis nunc, ullamcorper malesuada. Eleifend
-          condimentum id viverra nulla.
+          If you're a service provider, signup and get paid for your services
         </p>
         <button
           type="button"
@@ -67,7 +65,7 @@
             focus:ring-indigo-500
           "
         >
-          Button text
+          signup
         </button>
       </div>
     </div>

@@ -19,7 +19,7 @@
             uppercase
           "
         >
-          Deploy faster
+          Fast and relaible services
         </h2>
         <p
           class="
@@ -31,12 +31,10 @@
             sm:text-4xl
           "
         >
-          Everything you need to deploy your app
+          Everything you need to get the job done
         </p>
         <p class="mt-5 max-w-prose mx-auto text-xl text-gray-500">
-          Phasellus lorem quam molestie id quisque diam aenean nulla in.
-          Accumsan in quis quis nunc, ullamcorper malesuada. Eleifend
-          condimentum id viverra nulla.
+         signin and find the best service provider for the task you need
         </p>
         <button
           type="button"
@@ -59,7 +57,7 @@
             focus:ring-indigo-500
           "
         >
-          Button text
+          Signin
         </button>
       </div>
     </div>
