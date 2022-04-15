@@ -77,6 +77,13 @@
                 >
                   <span class="sr-only">Offline</span>
                 </span>
+                    <span v-if="VisitUserData.emailVerified !== null">
+                  <CheckCircleIcon
+                    class="w-5 h-5 stroke-1 mr-3 text-blue-400"
+                    aria-hidden="true"
+                  />
+                  <span class="sr-only">virified</span>
+                </span>
               </div>
               <p
                 class="text-sm text-gray-500"
@@ -341,6 +348,8 @@ import {
   CalendarIcon,
   CurrencyDollarIcon,
   LocationMarkerIcon,
+    CheckCircleIcon,
+
 } from "@heroicons/vue/solid";
 import About from "./Visit_About.component.vue";
 import Resume from "./Visit_Resume.component.vue";
@@ -398,6 +407,7 @@ export default {
 
     LocationMarkerIcon,
     ChatButton,
+    CheckCircleIcon
   },
 
   setup() {
