@@ -61,7 +61,7 @@
         </ul>
         <div class="rounded-md shadow">
           <a
-            @click="addToCart({tier , price :  Data.price})"
+            @click="addToCart({price :  Data.price})"
             class="
               flex
               items-center

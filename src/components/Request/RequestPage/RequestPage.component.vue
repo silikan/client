@@ -134,7 +134,7 @@
                 sm:text-sm
                 mx-2
               "
-              @click="addToTaskList(price)"
+              @click="addToTaskList({price :  price})"
             >
               Add To Task
             </button>
