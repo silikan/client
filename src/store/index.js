@@ -16,6 +16,7 @@ import * as Review from "@/store/modules/Review";
 import * as Checkout from "@/store/modules/Moderator";
 import * as BuyerFeed from "@/store/modules/BuyerFeed";
 import * as SellerFeed from "@/store/modules/SellerFeed";
+import * as Transaction from "@/store/modules/Transaction";
 
 export default createStore({
   strict: true,
@@ -38,5 +39,6 @@ export default createStore({
     Checkout,
     BuyerFeed,
     SellerFeed,
+    Transaction,
   },
 });
