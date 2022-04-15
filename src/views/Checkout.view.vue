@@ -2,7 +2,8 @@
   <div class="flex flex-col items-center p-10 h-screen">
     <StepperComponent :steps="steps" />
     <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-      <Review v-show="steps[2].active === true"/>
+      <Review v-show="steps[1].active === true"/>
+      <Price v-show="steps[0].active === true"/>
     </div>
 
     <Checkout />
@@ -32,7 +33,7 @@
       prev
     </button>
     <button
-      v-if="steps.findIndex((step) => step.active) < 2"
+      v-if="steps.findIndex((step) => step.active) < 1"
       class="
         inline-flex
         items-center
@@ -56,7 +57,7 @@
       next
     </button>
     <button
-      v-if="steps.findIndex((step) => step.active) === 2"
+      v-if="steps.findIndex((step) => step.active) === 1"
       class="
         inline-flex
         items-center
@@ -82,6 +83,8 @@
 </template>
 
 <script>
+
+import Price from '@/components/Checkout/Price.component.vue'
 import Checkout from "@/components/Checkout/Checkout.component.vue";
 import Review from "@/components/Checkout/Review.component.vue";
 import StepperComponent from "../components/Checkout/Stepper.component.vue";
@@ -91,11 +94,11 @@ export default {
     Checkout,
     StepperComponent,
     Review,
+    Price,
   },
   setup() {
     const steps = reactive([
-      { name: "General", href: "#", status: "current", active: true },
-      { name: "Pricing", href: "#", status: "upcoming", active: false },
+      { name: "Pricing", href: "#", status: "upcoming", active: true },
       { name: "Reviews", href: "#", status: "upcoming", active: false },
     ]);
     const nextStep = () => {
