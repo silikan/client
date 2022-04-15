@@ -287,9 +287,9 @@
                     text-left
                   "
                 >
-                  Everything you need to deploy your app
+                  Everything you need to get your services
                 </p>
-                <div class="mt-5 w-full sm:mx-auto sm:max-w-lg lg:ml-0 mt-20">
+                <div class=" w-full sm:mx-auto sm:max-w-lg lg:ml-0 mt-20">
                   <div class="hero bg-gredient-dark h-400px flex flex-col px-2">
                     <div class="w-full">
                       <label for="search" class="sr-only">Search</label>
@@ -362,7 +362,7 @@
                             pr-3
                             py-2
                             border border-transparent
-                            rounded-md
+                           
                             leading-5
                             bg-white
                             text-gray-300

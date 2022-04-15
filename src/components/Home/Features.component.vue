@@ -3,13 +3,13 @@
   <div class="relative bg-white py-16 sm:py-24 lg:py-32">
     <div class="mx-auto max-w-md px-4 text-center sm:max-w-3xl sm:px-6 lg:px-8 lg:max-w-7xl">
       <h2 class="text-base font-semibold tracking-wider text-indigo-600 uppercase">
-        Deploy faster
+        Work faster
       </h2>
       <p class="mt-2 text-3xl font-extrabold text-gray-900 tracking-tight sm:text-4xl">
-        Everything you need to deploy your app
+        Everything you need to get the job done
       </p>
       <p class="mt-5 max-w-prose mx-auto text-xl text-gray-500">
-        Phasellus lorem quam molestie id quisque diam aenean nulla in. Accumsan in quis quis nunc, ullamcorper malesuada. Eleifend condimentum id viverra nulla.
+        you get your services done faster and easier.
       </p>
       <div class="mt-12">
         <div class="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
@@ -19,7 +19,7 @@
             class="pt-6"
           >
             <div class="flow-root bg-gray-50 rounded-lg px-6 pb-8">
-              <div class="-mt-6">
+              <div class="-mt-10">
                 <div>
                   <span class="inline-flex items-center justify-center p-3 bg-indigo-500 rounded-md shadow-lg">
                     <component
@@ -33,7 +33,7 @@
                   {{ feature.name }}
                 </h3>
                 <p class="mt-5 text-base text-gray-500">
-                  Ac tincidunt sapien vehicula erat auctor pellentesque rhoncus. Et magna sit morbi lobortis.
+                  {{ feature.description }}
                 </p>
               </div>
             </div>
@@ -55,12 +55,12 @@ import {
 } from '@heroicons/vue/outline';
 
 const features = [
-  { name: 'Push to Deploy', icon: CloudUploadIcon },
-  { name: 'SSL Certificates', icon: LockClosedIcon },
-  { name: 'Simple Queues', icon: RefreshIcon },
-  { name: 'Advanced Security', icon: ShieldCheckIcon },
-  { name: 'Powerful API', icon: CogIcon },
-  { name: 'Database Backups', icon: ServerIcon },
+  { name: 'Online', icon: CloudUploadIcon , description:'Get the service you want online with no effort .' },
+  { name: 'Security', icon: LockClosedIcon , description:'safe and secure environment.' },
+  { name: '24/7', icon: RefreshIcon , description:'Up and runnig everyday of the week.' },
+  { name: 'Trusted', icon: ShieldCheckIcon , description:'You will get what you came for .' },
+  { name: 'Systematic', icon: CogIcon , description:'All actions taken will be registerd and no data will be lost.' },
+  { name: 'Database Backups', icon: ServerIcon , description:'All data are in sync with the Database with backups.' },
 ];
 
 export default {
