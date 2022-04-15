@@ -66,7 +66,7 @@ const routes = [
     component: TaskItemFeed,
   },
   {
-    path: "/checkout",
+    path: "/checkout/:id",
     name: "Checkout",
     meta: { middleware: [auth] },
     component: Checkout,

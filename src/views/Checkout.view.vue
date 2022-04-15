@@ -85,13 +85,11 @@
 <script>
 
 import Price from '@/components/Checkout/Price.component.vue'
-import Checkout from "@/components/Checkout/Checkout.component.vue";
 import Review from "@/components/Checkout/Review.component.vue";
 import StepperComponent from "../components/Checkout/Stepper.component.vue";
 import { reactive } from "@vue/reactivity";
 export default {
   components: {
-    Checkout,
     StepperComponent,
     Review,
     Price,

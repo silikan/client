@@ -48,6 +48,7 @@ export const actions = {
           client_id: payload.client_id,
           handyman_id: payload.handyman_id,
           task_item_id: payload.task_item_id,
+          plan: payload.plan,
         };
         console.log(sentData);
         commit("SET_CART", result.data);

@@ -185,7 +185,6 @@
                   >
                 </td>
                 <td
-
                   class="
                     px-6
                     py-4
@@ -196,10 +195,10 @@
                   "
                 >
                   <a
-                      v-if="
-                    person.item.cart_item.status == 'pending' &&
-                    person.item.cart_item.type == 'request'
-                  "
+                    v-if="
+                      person.item.cart_item.status == 'pending' &&
+                      person.item.cart_item.type == 'request'
+                    "
                     type="button"
                     class="
                       cursor-pointer
@@ -221,10 +220,10 @@
                     >accept</a
                   >
                   <a
-                      v-if="
-                    person.item.cart_item.status == 'pending' &&
-                    person.item.cart_item.type == 'request'
-                  "
+                    v-if="
+                      person.item.cart_item.status == 'pending' &&
+                      person.item.cart_item.type == 'request'
+                    "
                     type="button"
                     class="
                       cursor-pointer
@@ -245,9 +244,8 @@
                     "
                     >decline</a
                   >
-     <a
-                      v-if="
-                    person.item.cart_item.status == 'checkout' "
+                  <a
+                    v-if="person.item.cart_item.status == 'checkout'"
                     type="button"
                     class="
                       cursor-pointer
@@ -263,9 +261,14 @@
                       rounded-full
                       shadow-sm
                     "
-
-                    >pay</a
-                  >
+                    @click="
+                      createTransaction(
+                        person.item.cart_item.id,
+                        person.item.handyman.id
+                      )
+                    "
+                    >pay
+                  </a>
                 </td>
               </tr>
             </tbody>
@@ -280,12 +283,14 @@
 import { computed, ref } from "@vue/runtime-core";
 import { useStore } from "vuex";
 import Avatar from "@/components/Avatar/Avatar.component.vue";
+import { useRouter } from 'vue-router';
 
 export default {
   components: {
     Avatar,
   },
   setup() {
+    let router = useRouter();
     let store = useStore();
     let cart = ref([]);
     let userId = computed(() => store.getters["auth/id"]);
@@ -346,50 +351,72 @@ export default {
           console.log(error);
         });
     };
-  async function setCartItemStatusToInProgress(cartItemId) {
-    let payload = {
-      cart_item_id: cartItemId,
-      status: "in progress",
-    };
-    store
-      .dispatch("Cart/setCartItemStatusToInProgress", payload)
-      .then((result) => {
-        console.log(result);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  }
-async function  setCartItemStatusToCancelled (cartItemId) {
-    let payload = {
-      cart_item_id: cartItemId,
-      status: "cancelled",
-    };
-    store
-      .dispatch("Cart/setCartItemStatusToCancelled", payload)
-      .then((result) => {
-        console.log(result);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  }
+    async function setCartItemStatusToInProgress(cartItemId) {
+      let payload = {
+        cart_item_id: cartItemId,
+        status: "in progress",
+      };
+      store
+        .dispatch("Cart/setCartItemStatusToInProgress", payload)
+        .then((result) => {
+          console.log(result);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    }
+    async function setCartItemStatusToCancelled(cartItemId) {
+      let payload = {
+        cart_item_id: cartItemId,
+        status: "cancelled",
+      };
+      store
+        .dispatch("Cart/setCartItemStatusToCancelled", payload)
+        .then((result) => {
+          console.log(result);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    }
 
-  async function setCartItemStatusToCompleted (cartItemId) {
-    let payload = {
-      cart_item_id: cartItemId,
-      status: "completed",
-    };
-    store
-      .dispatch("Cart/setCartItemStatusToCompleted", payload)
-      .then((result) => {
-        console.log(result);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  }
+    async function setCartItemStatusToCompleted(cartItemId) {
+      let payload = {
+        cart_item_id: cartItemId,
+        status: "completed",
+      };
+      store
+        .dispatch("Cart/setCartItemStatusToCompleted", payload)
+        .then((result) => {
+          console.log(result);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    }
 
+    const authUser = computed(() => store.getters["auth/authUser"]);
+    const createTransaction = (cartItemId, handymanId) => {
+      let payload = {
+        cart_item_id: cartItemId,
+        client_id: authUser.value.id,
+        handyman_id: handymanId,
+      };
+      store
+        .dispatch("Transaction/createTransaction", payload)
+        .then((result) => {
+          console.log(result);
+          router.push({
+            name: "Checkout",
+            params: {
+              id: result.id,
+            },
+          });
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    };
 
     return {
       cart,
@@ -399,6 +426,7 @@ async function  setCartItemStatusToCancelled (cartItemId) {
       setCartItemStatusToInProgress,
       setCartItemStatusToCancelled,
       setCartItemStatusToCompleted,
+      createTransaction,
     };
   },
 };

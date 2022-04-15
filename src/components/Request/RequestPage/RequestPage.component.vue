@@ -134,7 +134,7 @@
                 sm:text-sm
                 mx-2
               "
-              @click="addToTaskList"
+              @click="addToTaskList(price)"
             >
               Add To Task
             </button>
@@ -235,7 +235,7 @@ store
         console.log(err);
       });
 
-    const addToTaskList = () => {
+    const addToTaskList = (price) => {
       let authuserId = computed(() => store.getters["auth/id"]);
 
       store
@@ -247,13 +247,14 @@ store
             user_id: authuserId.value,
             client_id: result.id,
             handyman_id: authuserId.value,
+            plan: JSON.stringify(price),
           };
           store
             .dispatch("Task/addToTaskList", payload)
             .then(() => {
                           let taskItemId = computed(() => store.getters["Task/getTaskItemData"]);
   let taskItemIdValue = taskItemId.value.id;
-              addToCart(taskItemIdValue);
+              addToCart(taskItemIdValue , price);
             })
             .catch((err) => {
               console.log(err);
@@ -264,7 +265,7 @@ store
         });
     };
 
-    const addToCart = (taskItemId) => {
+    const addToCart = (taskItemId , price) => {
       store
         .dispatch("Request/getRequestUser", id)
         .then((result) => {
@@ -276,7 +277,8 @@ store
             user_id: result.id,
             client_id: result.id,
             handyman_id: authuserId.value,
-          task_item_id : taskItemId
+          task_item_id : taskItemId,
+          plan : JSON.stringify(price),
 
           };
           store.dispatch("Cart/addToCart", payload);

@@ -25,6 +25,7 @@ export const actions = {
   async createTransaction({ commit }, payload) {
     const transaction = await TransactionService.createTransaction(payload);
     commit("SET_TRANSACTION", transaction);
+    return transaction.data;
   },
   async getTaskItemTransactions({ commit }, id) {
     const taskItemTransactions = await TransactionService.getTaskItemTransactions(id);
@@ -47,6 +48,11 @@ export const actions = {
   async setTransactionToCompleted({ commit }, payload) {
     const transaction = await TransactionService.setTransactionToCompleted(payload);
     commit("SET_TRANSACTION", transaction);
+  },
+  async getTransactionById({ commit }, id) {
+    const transaction = await TransactionService.getTransactionById(id);
+    commit("SET_TRANSACTION", transaction);
+    return transaction.data;
   },
 };
 

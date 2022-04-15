@@ -47,6 +47,7 @@ export const actions = {
           client_id: payload.client_id,
           handyman_id: payload.handyman_id,
           cart_item_id: payload.cart_item_id,
+          plan: payload.plan,
         };
 
         commit("SET_TASK", result.data);

@@ -61,7 +61,7 @@
         </ul>
         <div class="rounded-md shadow">
           <a
-            @click="addToCart"
+            @click="addToCart({tier , price :  Data.price})"
             class="
               flex
               items-center
@@ -149,7 +149,7 @@ store
       .catch((err) => {
         console.log(err);
       });
-    const addToTaskList = (cartItemId) => {
+    const addToTaskList = (cartItemId , tier) => {
       let userId = computed(() => store.getters["auth/id"]);
 
       store
@@ -162,6 +162,7 @@ store
             client_id: userId.value,
             handyman_id: result.id,
             cart_item_id: cartItemId,
+           plan : JSON.stringify(tier)
           };
           store.dispatch("Task/addToTaskList", payload);
         })
@@ -170,7 +171,7 @@ store
         });
     };
 
-    const addToCart = () => {
+    const addToCart = (tier) => {
       store
         .dispatch("Gig/getGigUser", id)
         .then((result) => {
@@ -184,6 +185,7 @@ store
             user_id: userId.value,
             client_id: userId.value,
             handyman_id: result.id,
+            plan : JSON.stringify(tier)
           };
           store
             .dispatch("Cart/addToCart", payload)
@@ -192,7 +194,7 @@ store
               let cartItemId = computed(() => store.getters["Cart/cartItemData"]);
   console.log(cartItemId.value.id);
   let cartItemIdValue = cartItemId.value.id;
-              addToTaskList(cartItemIdValue);
+              addToTaskList(cartItemIdValue , tier);
             })
             .catch((err) => {
               console.log(err);

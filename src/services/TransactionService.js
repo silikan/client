@@ -19,4 +19,7 @@ export default {
   async setTransactionToCompleted(payload) {
     return await API.apiClient.post(`/set-transaction-to-completed`, payload);
   },
+  async getTransactionById(id) {
+    return await API.apiClient.get(`/transaction/${id}`);
+  },
 };
