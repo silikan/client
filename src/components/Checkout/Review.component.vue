@@ -42,13 +42,20 @@
                 text-sm
                 leading-5
                 text-gray-800
-
                 flex flex-col
                 justify-center
                 items-center
               "
             >
-              <h2 class="text-2xl font-extrabold tracking-tight text-gray-900 mb-5">
+              <h2
+                class="
+                  text-2xl
+                  font-extrabold
+                  tracking-tight
+                  text-gray-900
+                  mb-5
+                "
+              >
                 Customer Review
               </h2>
 
@@ -77,6 +84,7 @@
               rows="5"
               name="comment"
               id="comment"
+              v-model="comment"
               class="
                 block
                 w-full
@@ -106,7 +114,10 @@
 <script>
 import { Tab, TabGroup, TabList, TabPanel, TabPanels } from "@headlessui/vue";
 import { StarIcon } from "@heroicons/vue/solid";
-import { reactive } from "@vue/reactivity";
+import { reactive, ref } from "@vue/reactivity";
+import { watchEffect } from "@vue/runtime-core";
+import { useStore } from "vuex";
+import { useRoute } from 'vue-router';
 const reviews = [
   {
     rating: 5,
@@ -126,16 +137,61 @@ export default {
   },
 
   setup() {
+    let comment = ref("");
+let type = ref("");
+    let store = useStore();
     let ratingData = reactive({
       rating: 0,
     });
     const revieWStarsLogic = (rating) => {
       ratingData.rating = rating;
     };
+
+  let gigId = ref(null);
+  let requestId = ref(null);
+let route = useRoute();
+let id = route.params.id;
+let clientId = ref(null);
+let handymanId = ref(null);
+    store
+      .dispatch("Transaction/getTransactionById", id)
+      .then((result) => {
+        console.log(result);
+        type.value = result.cartItem.type
+
+        if(type.value == "gig"){
+          gigId.value = result.gig[0].id
+
+        }else if (type.value == "request"){
+          requestId.value = result.request[0].id
+        }
+
+
+          clientId.value = result.cartItem.client_id
+          handymanId.value = result.cartItem.handyman_id
+
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+
+
+        watchEffect(() => {
+      store.commit("Review/SET_COMMENT", comment.value);
+      store.commit("Review/SET_RATING", ratingData.rating);
+            store.commit("Review/SET_TYPE", type.value);
+            store.commit("Review/SET_GIG_ID", gigId.value);
+            store.commit("Review/SET_REQUEST_ID", requestId.value);
+            store.commit("Review/SET_CLIENT_ID", clientId.value);
+            store.commit("Review/SET_HANDYMAN_ID", handymanId.value);
+
+    });
+
     return {
       reviews,
       ratingData,
       revieWStarsLogic,
+      comment,
     };
   },
 };

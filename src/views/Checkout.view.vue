@@ -2,8 +2,8 @@
   <div class="flex flex-col items-center p-10 h-screen">
     <StepperComponent :steps="steps" />
     <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-      <Review v-show="steps[1].active === true"/>
-      <Price v-show="steps[0].active === true"/>
+      <Review v-show="steps[1].active === true" />
+      <Price v-show="steps[0].active === true" />
     </div>
 
     <Checkout />
@@ -76,7 +76,7 @@
         focus:ring-offset-2
         focus:ring-indigo-500
       "
-      @click="setCartItemStatusToPaid()"
+      @click="postAReview()"
     >
       Pay
     </button>
@@ -84,13 +84,12 @@
 </template>
 
 <script>
-
-import Price from '@/components/Checkout/Price.component.vue'
+import Price from "@/components/Checkout/Price.component.vue";
 import Review from "@/components/Checkout/Review.component.vue";
 import StepperComponent from "../components/Checkout/Stepper.component.vue";
 import { reactive } from "@vue/reactivity";
-import { useStore } from 'vuex';
-import { useRoute } from 'vue-router';
+import { useStore } from "vuex";
+import { useRoute } from "vue-router";
 export default {
   components: {
     StepperComponent,
@@ -128,27 +127,52 @@ export default {
 
     let id = route.params.id;
 
-    const setCartItemStatusToPaid = () =>{
+    const setCartItemStatusToPaid = () => {
+      store
+        .dispatch("Transaction/getTransactionById", id)
+        .then((result) => {
+          let payload = {
+            cart_item_id: result.cartItem.id,
+            status: "paid",
+          };
+          store.dispatch("Cart/setCartItemStatusToPaid", payload);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    };
 
- store
-      .dispatch("Transaction/getTransactionById", id)
-      .then((result) => {
-            let payload = {
-        cart_item_id: result.cartItem.id,
-        status: "paid",
+    let postAReview = () => {
+      let comment = store.state.Review.comment;
+      let rating = store.state.Review.rating;
+      let type = store.state.Review.type;
+      let gigId = store.state.Review.gigId;
+      let requestId = store.state.Review.requestId;
+      let clientId = store.state.Review.clientId;
+      let handymanId = store.state.Review.handymanId;
+
+      let data = {
+        comment: comment,
+        rating: rating,
+        type: type,
+        gig_id: gigId,
+        request_id: requestId,
+        client_id: clientId,
+        handyman_id: handymanId,
       };
-      store.dispatch('Cart/setCartItemStatusToConfirmed' , payload)
-      }).catch((error) => {
-        console.log(error);
-      });
+      let jsonData = JSON.stringify(data);
+      store.dispatch("Review/postAReview", jsonData).then(() => {
+        setCartItemStatusToPaid();
 
-    }
+      });
+    };
 
     return {
       steps,
       nextStep,
       prevStep,
-      setCartItemStatusToPaid
+      setCartItemStatusToPaid,
+      postAReview,
     };
   },
 };
