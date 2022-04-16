@@ -3,7 +3,6 @@
   <div class="bg-white">
     <div class="">
       <div class="mt-12 space-y-4 sm:mt-16 sm:space-y-0">
-
         <div
           class="
             border border-gray-200
@@ -12,86 +11,107 @@
             divide-y divide-gray-200
           "
         >
-          <div class="p-6 flex items-center justify-between">
-                    <ul role="list" class="space-y-3">
-          <li class="bg-white overflow-hidden rounded-md px-6 py-4">
-            <a href="#" class="flex-shrink-0 group block">
-              <div class="flex items-center">
-                <div>
-                  <Avatar
-                    v-if="client_name"
-                    :url="client_avatar"
-                    :name="client_name"
-                  />
-                </div>
-                <div class="ml-3">
-                  <p
-                    class="
-                      text-sm
-                      font-medium
-                      text-gray-700
-                      group-hover:text-gray-900
-                    "
-                  >
-                    {{ client_name }}
-                  </p>
-                  <p
-                    class="
-                      text-xs
-                      font-medium
-                      text-gray-500
-                      group-hover:text-gray-700
-                    "
-                  >
-                    client
-                  </p>
-                </div>
+          <div class="p-6 flex flex-col">
+
+            <div class="bg-gray-50 rounded-lg px-4 py-6 sm:p-6 lg:p-8">
+              <h2 id="summary-heading" class="sr-only">Order summary</h2>
+
+              <div class="flow-root">
+                <dl class="-my-4 text-sm divide-y divide-gray-200">
+                         <div class="py-4 flex items-center justify-center">
+                    <dt class="text-gray-600 text-2xl font-extrabold">Checkout</dt>
+
+                  </div>
+
+                  <div class="py-4 flex items-center justify-between">
+                    <dt class="text-gray-600">
+                      <div class="flex items-center">
+                        <div>
+                          <Avatar
+                            v-if="client_name"
+                            :url="client_avatar"
+                            :name="client_name"
+                          />
+                        </div>
+                        <div class="ml-3">
+                          <p
+                            class="
+                              text-sm
+                              font-medium
+                              text-gray-700
+                              group-hover:text-gray-900
+                            "
+                          >
+                            {{ client_name }}
+                          </p>
+                          <p
+                        class="
+                          text-xs
+                          font-medium
+                          text-gray-500
+                          group-hover:text-gray-700
+                        "
+                      >
+                        {{ client_email }}
+                      </p>
+                        </div>
+                      </div>
+                    </dt>
+                    <dd class="font-medium text-gray-900">client</dd>
+                  </div>
+                  <div class="py-4 flex items-center justify-between">
+                    <dt class="text-gray-600">  <div class="flex items-center">
+                    <div>
+                      <Avatar
+                        v-if="handyman_name"
+                        :url="handyman_avatar"
+                        :name="handyman_name"
+                      />
+                    </div>
+                    <div class="ml-3">
+                      <p
+                        class="
+                          text-sm
+                          font-medium
+                          text-gray-700
+                          group-hover:text-gray-900
+                        "
+                      >
+                        {{ handyman_name }}
+                      </p>
+                      <p
+                        class="
+                          text-xs
+                          font-medium
+                          text-gray-500
+                          group-hover:text-gray-700
+                        "
+                      >
+                       {{ handyman_email }}
+                      </p>
+                    </div>
+                  </div></dt>
+                    <dd class="font-medium text-gray-900">handyman</dd>
+                  </div>
+                  <div class="py-4 flex items-center justify-between">
+                    <dt class="text-gray-600">Subtotal</dt>
+                    <dd class="font-medium text-gray-900">{{ price}} DZD
+                    </dd>
+                  </div>
+
+                  <div class="py-4 flex items-center justify-between">
+                    <dt class="text-gray-600">Tax</dt>
+                    <dd class="font-medium text-gray-900">{{ price / 2}} DZD</dd>
+                  </div>
+                  <div class="py-4 flex items-center justify-between">
+                    <dt class="text-base font-medium text-gray-900">
+                       total
+                    </dt>
+                    <dd class="text-base font-medium text-gray-900">{{ price + (price/2)}} DZD</dd>
+                  </div>
+                </dl>
               </div>
-            </a>
-          </li>
-          <li class="bg-white overflow-hidden rounded-md px-6 py-4">
-            <a href="#" class="flex-shrink-0 group block">
-              <div class="flex items-center">
-                <div>
-                  <Avatar
-                    v-if="handyman_name"
-                    :url="handyman_avatar"
-                    :name="handyman_name"
-                  />
-                </div>
-                <div class="ml-3">
-                  <p
-                    class="
-                      text-sm
-                      font-medium
-                      text-gray-700
-                      group-hover:text-gray-900
-                    "
-                  >
-                    {{ handyman_name }}
-                  </p>
-                  <p
-                    class="
-                      text-xs
-                      font-medium
-                      text-gray-500
-                      group-hover:text-gray-700
-                    "
-                  >
-                    handyman
-                  </p>
-                </div>
-              </div>
-            </a>
-          </li>
-        </ul>
-            <h2 class="text-2xl font-md text-gray-900 self-end">
-              Price :
-              <span class="text-1xl font-lg text-gray-900">
-                {{ price }}
-                <span class="text-base font-medium text-gray-500">DZD</span>
-              </span>
-            </h2>
+            </div>
           </div>
         </div>
       </div>
@@ -120,6 +140,7 @@ export default {
     let handyman_name = ref("");
     let handyman_email = ref("");
     let handyman_avatar = ref("");
+
     let price = ref("");
 
     store
@@ -132,6 +153,8 @@ export default {
         handyman_name.value = result.handyman.name;
         handyman_email.value = result.handyman.email;
         handyman_avatar.value = result.handyman.avatar;
+        client_email.value = result.client.email;
+        handyman_email.value = result.handyman.email;
 
         price.value = JSON.parse(result.cartItem.plan).price;
       })
@@ -150,6 +173,7 @@ export default {
       handyman_name,
       handyman_email,
       handyman_avatar,
+
     };
   },
 };
