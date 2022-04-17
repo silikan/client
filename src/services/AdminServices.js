@@ -53,7 +53,9 @@ export default {
     return API.apiClient.put(`/admin/make-user-handyman/${id}`);
   },
   getAllUsersPaginated(page) {
-    return API.apiClient.get(`/admin/get-all-users-paginated/${page}`);
+    return API.apiClient.get(`/admin/get-all-users-paginate`, {
+      params: { page },
+    });
   },
   getAllGigsPaginated(page) {
     return API.apiClient.get(`/admin/get-all-gigs-paginate/`, {

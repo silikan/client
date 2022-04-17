@@ -6,6 +6,14 @@ function setPaginatedGigs(commit, response) {
   commit("SET_GIGS_LINKS", response.data.links);
   commit("SET_GIGS_LOADING", false);
 }
+
+function setPaginatedUsers(commit, response) {
+  console.log(response.data);
+  commit("SET_USERS", response.data.data);
+  commit("SET_USERS_META", response.data.meta);
+  commit("SET_USERS_LINKS", response.data.links);
+  commit("SET_USERS_LOADING", false);
+}
 /* function setPaginatedUsers(commit, response) {
   commit("SET_ADMIN_USERS", response.data.data);
   commit("SET_ADMIN_USERS_META", response.data.meta);
@@ -25,6 +33,10 @@ export const state = {
   gigsMeta: {},
   gigsLinks: {},
   gigsLoading: false,
+  users: [],
+  usersMeta: {},
+  usersLinks: {},
+  usersLoading: false,
 };
 
 export const mutations = {
@@ -40,21 +52,47 @@ export const mutations = {
   SET_GIGS_LOADING(state, loading) {
     state.gigsLoading = loading;
   },
+  SET_USERS(state, users) {
+    state.users = users;
+  },
+  SET_USERS_META(state, meta) {
+    state.usersMeta = meta;
+  },
+  SET_USERS_LINKS(state, links) {
+    state.usersLinks = links;
+  },
+  SET_USERS_LOADING(state, loading) {
+    state.usersLoading = loading;
+  },
 };
 
 export const actions = {
   async getAllGigsPaginated({ commit }, page) {
-    commit("SET_SEARCH_GIGS_LOADING", true);
+    commit("SET_GIGS_LOADING", true);
     const Gigs = await AdminServices.getAllGigsPaginated(page);
     setPaginatedGigs(commit, Gigs);
 
     return Gigs.data;
   },
   async getGigLink({ commit }, link) {
-    commit("SET_SEARCH_GIGS_LOADING", true);
-    const Gigs = await AdminServices.getGigLink(link);
+    commit("SET_GIGS_LOADING", true);
+    const Gigs = await AdminServices.getLink(link);
     setPaginatedGigs(commit, Gigs);
     return Gigs.data;
+  },
+
+  async getAllUsersPaginated({ commit }, page) {
+    commit("SET_USERS_LOADING", true);
+    const Users = await AdminServices.getAllUsersPaginated(page);
+    setPaginatedUsers(commit, Users);
+
+    return Users.data;
+  },
+  async getUserLink({ commit }, link) {
+    commit("SET_USERS_LOADING", true);
+    const Users = await AdminServices.getLink(link);
+    setPaginatedUsers(commit, Users);
+    return Users.data;
   },
 };
 
@@ -70,5 +108,17 @@ export const getters = {
   },
   getGigsLoading(state) {
     return state.gigsLoading;
+  },
+  getUsers(state) {
+    return state.users;
+  },
+  getUsersMeta(state) {
+    return state.usersMeta;
+  },
+  getUsersLinks(state) {
+    return state.usersLinks;
+  },
+  getUsersLoading(state) {
+    return state.usersLoading;
   },
 };

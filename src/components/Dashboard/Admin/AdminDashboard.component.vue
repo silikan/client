@@ -667,6 +667,8 @@
             <Request />
 
             <Gig />
+
+            <User/>
           </div>
 
 
@@ -680,6 +682,8 @@
 import { ref } from "vue";
 import Request from "./Tables/Requests.com.ponent.vue";
 import Gig from "./Tables/Gigs.component.vue";
+import User from "./Tables/Users.component.vue";
+
 
 import {
   Dialog,
@@ -770,7 +774,8 @@ export default {
     SearchIcon,
     XIcon,
     Request,
-    Gig
+    Gig,
+    User
   },
   setup() {
     const sidebarOpen = ref(false);
