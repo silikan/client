@@ -88,10 +88,11 @@
               aria-label="Sidebar"
             >
               <div class="px-2 space-y-1">
-                <a
+                <router-link
                   v-for="item in navigation"
                   :key="item.name"
-                  :href="item.href"
+                  :to="item.link"
+                  class="cursor-pointer"
                   :class="[
                     item.current
                       ? 'bg-indigo-800 text-white'
@@ -106,14 +107,14 @@
                     aria-hidden="true"
                   />
                   {{ item.name }}
-                </a>
+                </router-link>
               </div>
               <div class="mt-6 pt-6">
                 <div class="px-2 space-y-1">
-                  <a
+                  <router-link
                     v-for="item in secondaryNavigation"
                     :key="item.name"
-                    :href="item.href"
+                    :to="item.link"
                     class="
                       group
                       flex
@@ -133,7 +134,7 @@
                       aria-hidden="true"
                     />
                     {{ item.name }}
-                  </a>
+                  </router-link>
                 </div>
               </div>
             </nav>
@@ -475,9 +476,7 @@ import {
   CreditCardIcon,
   HomeIcon,
   MenuAlt1Icon,
-  QuestionMarkCircleIcon,
   ScaleIcon,
-  ShieldCheckIcon,
   XIcon,
 } from "@heroicons/vue/outline";
 import {
@@ -490,13 +489,12 @@ import {
 } from "@heroicons/vue/solid";
 
 const navigation = [
-  { name: "Home", href: "#", icon: HomeIcon, current: true },
-  { name: "Transactions", href: "#", icon: CreditCardIcon, current: false },
+  { name: "Home", link: "/dashboard/admin/home", icon: HomeIcon, current: true },
+  { name: "Transactions", link: "/dashboard/admin/transactions", icon: CreditCardIcon, current: false },
 ];
 const secondaryNavigation = [
-  { name: "Settings", href: "#", icon: CogIcon },
-  { name: "Help", href: "#", icon: QuestionMarkCircleIcon },
-  { name: "Privacy", href: "#", icon: ShieldCheckIcon },
+  { name: "Settings", link: "/dashboard/admin/settings", icon: CogIcon },
+
 ];
 const cards = [
   { name: "Account balance", href: "#", icon: ScaleIcon, amount: "$30,659.45" },

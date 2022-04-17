@@ -80,4 +80,8 @@ export default {
   async getLink(link) {
     return API.apiClient.get(link);
   },
+
+  getAllTransactions() {
+    return API.apiClient.get(`/transaction`);
+  },
 };

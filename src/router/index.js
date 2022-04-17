@@ -46,7 +46,10 @@ import ModeratorDashboard from "@/views/ModeratorDashboard.view.vue";
 import Checkout from "@/views/Checkout.view.vue";
 import CartitemFeed from "@/views/CartitemFeed.view.vue";
 import TaskItemFeed from "@/views/TaskItemFeed.view.vue";
-import ModeratorDashboardHome from "@/components/Dashboard/Admin/Parts/Home.component.vue";
+import AdminDashboardHome from "@/components/Dashboard/Admin/Parts/Home.component.vue";
+import AdminDashboardTransactions from "@/components/Dashboard/Admin/Parts/Transactions.component.vue";
+import AdminDashboardSettings from "@/components/Dashboard/Admin/Parts/Settings.component.vue";
+
 const routes = [
   {
     path: "/",
@@ -78,13 +81,23 @@ const routes = [
     meta: { middleware: [auth, admin] },
     component: AdminDashboard,
     children: [
-      // UserHome will be rendered inside User's <router-view>
-      // when /user/:id is matched
       {
         path: "home",
-        name: "ModeratorDashboardHome",
+        name: "AdminDashboardHome",
 
-        component: ModeratorDashboardHome,
+        component: AdminDashboardHome,
+      },
+      {
+        path: "transactions",
+        name: "AdminDashboardTransactions",
+
+        component: AdminDashboardTransactions,
+      },
+      {
+        path: "settings",
+        name: "AdminDashboardSettings",
+
+        component: AdminDashboardSettings,
       },
     ],
   },

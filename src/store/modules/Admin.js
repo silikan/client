@@ -110,6 +110,12 @@ export const actions = {
     const response = await AdminServices.deleteClientRequest(id);
     return response;
   },
+
+  async getAllTransactions({ commit }, page) {
+    commit("SET_USERS_LOADING", true);
+    const Transactions = await AdminServices.getAllTransactions(page);
+    return Transactions.data;
+  },
 };
 
 export const getters = {
