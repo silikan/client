@@ -94,6 +94,22 @@ export const actions = {
     setPaginatedUsers(commit, Users);
     return Users.data;
   },
+
+  async deleteUser({ commit }, id) {
+    commit("SET_USERS_LOADING", true);
+    const response = await AdminServices.deleteUser(id);
+    return response;
+  },
+  async deleteGig({ commit }, id) {
+    commit("SET_GIGS_LOADING", true);
+    const response = await AdminServices.deleteGig(id);
+    return response;
+  },
+  async deleteClientRequest({ commit }, id) {
+    commit("SET_USERS_LOADING", true);
+    const response = await AdminServices.deleteClientRequest(id);
+    return response;
+  },
 };
 
 export const getters = {

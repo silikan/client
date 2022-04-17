@@ -145,6 +145,21 @@
                         >Visit</router-link
                       >
                     </td>
+                           <td
+                      class="
+                        px-6
+                        py-4
+                        whitespace-nowrap
+                        text-right text-sm
+                        font-medium
+                      "
+                    >
+                      <a
+                        @click="openDiag(gig.id)"
+                        class="text-red-600 hover:text-indigo-900"
+                        >Delete</a
+                      >
+                    </td>
                   </tr>
                 </tbody>
               </table>
@@ -369,12 +384,16 @@
       </div>
     </div>
   </div>
+      <DeleteDiag :idData="RequestId" :openData="open" :typeData="type" />
+
 </template>
 
 <script>
+import DeleteDiag from "../DeleteUserDialogue.component.vue";
+
 import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/vue/solid";
 
-import { computed, reactive } from "@vue/runtime-core";
+import { computed, reactive, ref } from "@vue/runtime-core";
 import { useStore } from "vuex";
 import { useRoute } from "vue-router";
 
@@ -384,9 +403,11 @@ export default {
 
     ChevronLeftIcon,
     ChevronRightIcon,
+    DeleteDiag
   },
 
   setup() {
+
     let action = "Search/paginateGigs";
     let route = useRoute();
     let store = useStore();
@@ -394,7 +415,14 @@ export default {
     let meta, links, gigs;
     let path = "handymen";
 
+        let open = ref(false);
+    let type = ref("request");
+    let RequestId = ref(null);
+    let openDiag = (id) => {
+      open.value = true;
+      RequestId.value = id;
 
+    };
 let page = 1
 
     /* let router = useRouter
@@ -468,7 +496,11 @@ let preurl = `${process.env.VUE_APP_API_URL}`;
       filterPages,
       currentPage,
       totalPages,
-      preurl
+      preurl,
+           open ,
+     type ,
+     RequestId ,
+     openDiag
     };
   },
 };

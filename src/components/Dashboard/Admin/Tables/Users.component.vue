@@ -1,18 +1,6 @@
 <template>
   <div class="bg-white" v-if="links && meta">
     <div class="mx-auto py-12 px-4 max-w-7xl sm:px-6 lg:px-8 lg:py-24">
-      <div class="flex w-full items-center justify-between mb-5">
-        <div
-          class="space-y-5 sm:space-y-4 md:max-w-xl lg:max-w-3xl xl:max-w-none"
-        >
-          <h2 class="text-3xl font-extrabold tracking-tight hidden md:block">
-            handymen search results "{{query}}"
-          </h2>
-        </div>
-        <div class="flex items-center flex-1 md:flex-none">
-
-        </div>
-      </div>
       <div class="flex flex-col">
         <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
           <div
@@ -137,13 +125,17 @@
                       </span>
                     </td>
                     <td
-                    v-if="person.isAdmin === false && person.isHandyman === true"
+                      v-if="
+                        person.isAdmin === false && person.isHandyman === true
+                      "
                       class="px-6 py-4 whitespace-nowrap text-sm text-gray-500"
                     >
                       Handyman
                     </td>
-                      <td
-                       v-if="person.isAdmin === true && person.isHandyman === true"
+                    <td
+                      v-if="
+                        person.isAdmin === true && person.isHandyman === true
+                      "
                       class="px-6 py-4 whitespace-nowrap text-sm text-gray-500"
                     >
                       Admin
@@ -161,6 +153,22 @@
                         :to="`/user/${person.id}`"
                         class="text-indigo-600 hover:text-indigo-900"
                         >Visit</router-link
+                      >
+                    </td>
+
+                    <td
+                      class="
+                        px-6
+                        py-4
+                        whitespace-nowrap
+                        text-right text-sm
+                        font-medium
+                      "
+                    >
+                      <a
+                        @click="openDiag(person.id)"
+                        class="text-red-600 hover:text-indigo-900"
+                        >Delete</a
                       >
                     </td>
                   </tr>
@@ -387,13 +395,14 @@
       </div>
     </div>
   </div>
+  <DeleteDiag :idData="userId" :openData="open" :typeData="type" />
 </template>
 
 <script>
 import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/vue/solid";
 import Avatar from "@/components/Avatar/Avatar.component.vue";
-
-import { computed, reactive } from "@vue/runtime-core";
+import DeleteDiag from "../DeleteUserDialogue.component.vue";
+import { computed, reactive, ref } from "@vue/runtime-core";
 import { useStore } from "vuex";
 import { useRoute } from "vue-router";
 
@@ -402,6 +411,7 @@ export default {
     ChevronLeftIcon,
     ChevronRightIcon,
     Avatar,
+    DeleteDiag,
   },
 
   setup() {
@@ -415,9 +425,11 @@ export default {
 
     let page = 1;
 
-
+    let open = ref(false);
+    let type = ref("user");
+    let userId = ref(null);
     /* let router = useRouter
-     */ store.dispatch("Admin/getAllUsersPaginated", page)
+     */ store.dispatch("Admin/getAllUsersPaginated", page);
     meta = computed(() => {
       return store.getters["Admin/getUsersMeta"];
     });
@@ -451,18 +463,18 @@ export default {
       let data = reactive([]);
       let start = currentPage.value - 2;
       let end = currentPage.value + 2;
-      let totalPages = computed(()=>meta.value.last_page)
+      let totalPages = meta.value.last_page;
       if (start < 1) {
         start = 1;
         end = 5;
       }
 
-      if (end > totalPages.value) {
-        end = totalPages.value;
-        start = totalPages.value - 4;
+      if (end > totalPages) {
+        end = totalPages;
+        start = totalPages - 4;
       }
       for (let i = start; i <= end; i++) {
-        if (i !== totalPages.value && i !== 1 && i < totalPages) {
+        if (i !== totalPages && i !== 1 && i < totalPages) {
           data.push(i);
         }
       }
@@ -470,6 +482,13 @@ export default {
       return data;
     });
     let preurl = `${process.env.VUE_APP_API_URL}`;
+
+    let openDiag = (id) => {
+      open.value = true;
+      userId.value = id;
+
+    };
+
     return {
       query,
       action,
@@ -485,6 +504,11 @@ export default {
       currentPage,
       totalPages,
       preurl,
+      open,
+      type,
+      openDiag,
+      userId,
+
     };
   },
 };

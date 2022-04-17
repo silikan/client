@@ -190,6 +190,22 @@
                         >Check</router-link
                       >
                     </td>
+
+                    <td
+                      class="
+                        px-6
+                        py-4
+                        whitespace-nowrap
+                        text-right text-sm
+                        font-medium
+                      "
+                    >
+                      <a
+                        @click="openDiag(request.id)"
+                        class="text-red-600 hover:text-indigo-900"
+                        >Delete</a
+                      >
+                    </td>
                   </tr>
                 </tbody>
               </table>
@@ -414,13 +430,17 @@
       </div>
     </div>
   </div>
+    <DeleteDiag :idData="RequestId" :openData="open" :typeData="type" />
+
 </template>
 
 <script>
+import DeleteDiag from "../DeleteUserDialogue.component.vue";
+
 import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/vue/solid";
 import Avatar from "@/components/Avatar/Avatar.component.vue";
 
-import { computed, reactive } from "@vue/runtime-core";
+import { computed, reactive, ref } from "@vue/runtime-core";
 import { useStore } from "vuex";
 
 export default {
@@ -428,16 +448,25 @@ export default {
     ChevronLeftIcon,
     ChevronRightIcon,
     Avatar,
+    DeleteDiag
   },
 
   setup() {
+
     let action = "Search/paginateHandymen";
     let store = useStore();
     let meta, links, requests;
     let path = "handymen";
 
     let page = 1;
+        let open = ref(false);
+    let type = ref("request");
+    let RequestId = ref(null);
+    let openDiag = (id) => {
+      open.value = true;
+      RequestId.value = id;
 
+    };
     /* let router = useRouter
      */ store
       .dispatch("Request/getClientRequestsPaginate", page)
@@ -511,6 +540,11 @@ export default {
       currentPage,
       totalPages,
       preurl,
+      open ,
+     type ,
+     RequestId ,
+     openDiag
+
     };
   },
 };
