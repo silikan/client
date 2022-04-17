@@ -169,10 +169,11 @@
           aria-label="Sidebar"
         >
           <div class="px-2 space-y-1">
-            <a
+            <router-link
+            class="cursor-pointer"
               v-for="item in navigation"
               :key="item.name"
-              :href="item.href"
+              :to="item.link"
               :class="[
                 item.current
                   ? 'bg-indigo-800 text-white'
@@ -187,17 +188,19 @@
                 aria-hidden="true"
               />
               {{ item.name }}
-            </a>
+            </router-link>
           </div>
           <div class="mt-6 pt-6">
             <div class="px-2 space-y-1">
-              <a
+                     <router-link
+
                 v-for="item in secondaryNavigation"
                 :key="item.name"
-                :href="item.href"
+                :to="item.link"
                 class="
                   group
                   flex
+                  cursor-pointer
                   items-center
                   px-2
                   py-2
@@ -215,7 +218,7 @@
                   aria-hidden="true"
                 />
                 {{ item.name }}
-              </a>
+              </router-link>
             </div>
           </div>
         </nav>
