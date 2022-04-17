@@ -1,5 +1,6 @@
 //get rooms from server
 import TaskService from "@/services/TaskService.js";
+import { getError } from "@/utils/helpers";
 
 export const namespaced = true;
 
@@ -8,6 +9,7 @@ export const state = {
   taskItems: [],
   taskItemData: [],
   taskItem: {},
+  error: null,
 };
 
 export const mutations = {
@@ -23,14 +25,22 @@ export const mutations = {
   SET_TASK_ITEM(state, payload) {
     state.taskItem = payload;
   },
+  SET_ERROR(state, error) {
+    state.error = error;
+  }
 };
 
 export const actions = {
   async createTaskList({ commit }) {
+    try {
     const task = await TaskService.createTaskList();
     commit("SET_TASK", task);
+    } catch (error) {
+      commit("SET_ERROR", getError(error));
+    }
   },
   async addToTaskList({ commit }, payload) {
+    try{
     let data = {
       user_id: payload.user_id,
     };
@@ -59,53 +69,92 @@ export const actions = {
       .catch(() => {
         console.log("error");
       });
+    } catch (error) {
+      commit("SET_ERROR", getError(error));
+    }
   },
   async getUserTaskItems({ commit }, id) {
+    try {
     const taskItems = await TaskService.getUserTaskItems(id);
     commit("SET_TASK_ITEMS", taskItems);
     console.log(taskItems);
     return taskItems.data;
+    } catch (error) {
+      commit("SET_ERROR", getError(error));
+    }
   },
   async setTaskItemsStatusToInProgress({ commit }, payload) {
+    try {
     let taskItemData = await TaskService.setTaskItemsStatusToInProgress(payload);
     commit("SET_TASK_ITEM_DATA", taskItemData.data);
     return taskItemData.data;
+    } catch (error) {
+      commit("SET_ERROR", getError(error));
+    }
   },
   async setTaskItemsStatusToCancelled({ commit }, payload) {
+    try {
     let taskItemData = await TaskService.setTaskItemsStatusToCancelled(payload);
     commit("SET_TASK_ITEM_DATA", taskItemData.data);
     return taskItemData.data;
+    } catch (error) {
+      commit("SET_ERROR", getError(error));
+    }
   },
   async setTaskItemStatusToCompleted({ commit }, payload) {
+    try {
     let taskItemData = await TaskService.setTaskItemStatusToCompleted(payload);
     commit("SET_TASK_ITEM_DATA", taskItemData.data);
     return taskItemData.data;
+    } catch (error) {
+      commit("SET_ERROR", getError(error));
+    }
   },
   async setTaskItemStatusToAccepted({ commit }, payload) {
+    try {
     let taskItemData = await TaskService.setTaskItemStatusToAccepted(payload);
     commit("SET_TASK_ITEM_DATA", taskItemData.data);
     return taskItemData.data;
+    } catch (error) {
+      commit("SET_ERROR", getError(error));
+    }
   },
   async setTaskItemStatusToDeclined({ commit }, payload) {
+    try {
     let taskItemData = await TaskService.setTaskItemStatusToDeclined(payload);
     commit("SET_TASK_ITEM_DATA", taskItemData.data);
     return taskItemData.data;
+    } catch (error) {
+      commit("SET_ERROR", getError(error));
+    }
   },
   async setTaskItemStatusToPaid({ commit }, payload) {
+    try {
     let taskItemData = await TaskService.setTaskItemStatusToPaid(payload);
     commit("SET_TASK_ITEM_DATA", taskItemData.data);
     return taskItemData.data;
+    } catch (error) {
+      commit("SET_ERROR", getError(error));
+    }
   },
   async getTaskItemById({ commit }, payload) {
+    try {
     let id = payload.id;
     const taskItem = await TaskService.getTaskItemById(id);
     commit("SET_TASK_ITEM", taskItem);
     return taskItem.data;
+    } catch (error) {
+      commit("SET_ERROR", getError(error));
+    }
   },
   async setTaskItemStatusToConfirmed({ commit }, payload) {
+    try {
     let taskItemData = await TaskService.setTaskItemStatusToConfirmed(payload);
     commit("SET_TASK_ITEM_DATA", taskItemData.data);
     return taskItemData.data;
+    } catch (error) {
+      commit("SET_ERROR", getError(error));
+    }
   },
 };
 
@@ -122,4 +171,7 @@ export const getters = {
   getTaskItem(state) {
     return state.taskItem;
   },
+  getError(state) {
+    return state.error;
+  }
 };
