@@ -1,37 +1,6 @@
-<!--
-  This example requires Tailwind CSS v2.0+
 
-  This example requires some changes to your config:
-
-  ```
-  // tailwind.config.js
-  const colors = require('tailwindcss/colors')
-
-  module.exports = {
-    // ...
-    theme: {
-      extend: {
-        colors: {
-          cyan: colors.cyan,
-        },
-      },
-    },
-    plugins: [
-      // ...
-      require('@tailwindcss/forms'),
-    ],
-  }
-  ```
--->
 <template>
-  <!--
-    This example requires updating your template:
 
-    ```
-    <html class="h-full bg-gray-100">
-    <body class="h-full">
-    ```
-  -->
   <div >
     <TransitionRoot as="template" :show="sidebarOpen">
       <Dialog
@@ -67,7 +36,7 @@
               w-full
               pt-5
               pb-4
-              bg-cyan-700
+              bg-indigo-700
             "
           >
             <TransitionChild
@@ -105,7 +74,7 @@
             <div class="flex-shrink-0 flex items-center px-4">
               <img
                 class="h-8 w-auto"
-                src="https://tailwindui.com/img/logos/easywire-logo-cyan-300-mark-white-text.svg"
+                src="https://tailwindui.com/img/logos/easywire-logo-indigo-300-mark-white-text.svg"
                 alt="Easywire logo"
               />
             </div>
@@ -114,7 +83,7 @@
                 mt-5
                 flex-shrink-0
                 h-full
-                divide-y divide-cyan-800
+                divide-y divide-indigo-800
                 overflow-y-auto
               "
               aria-label="Sidebar"
@@ -126,15 +95,15 @@
                   :href="item.href"
                   :class="[
                     item.current
-                      ? 'bg-cyan-800 text-white'
-                      : 'text-cyan-100 hover:text-white hover:bg-cyan-600',
+                      ? 'bg-indigo-800 text-white'
+                      : 'text-indigo-100 hover:text-white hover:bg-indigo-600',
                     'group flex items-center px-2 py-2 text-base font-medium rounded-md',
                   ]"
                   :aria-current="item.current ? 'page' : undefined"
                 >
                   <component
                     :is="item.icon"
-                    class="mr-4 flex-shrink-0 h-6 w-6 text-cyan-200"
+                    class="mr-4 flex-shrink-0 h-6 w-6 text-indigo-200"
                     aria-hidden="true"
                   />
                   {{ item.name }}
@@ -155,13 +124,13 @@
                       text-base
                       font-medium
                       rounded-md
-                      text-cyan-100
-                      hover:text-white hover:bg-cyan-600
+                      text-indigo-100
+                      hover:text-white hover:bg-indigo-600
                     "
                   >
                     <component
                       :is="item.icon"
-                      class="mr-4 h-6 w-6 text-cyan-200"
+                      class="mr-4 h-6 w-6 text-indigo-200"
                       aria-hidden="true"
                     />
                     {{ item.name }}
@@ -181,12 +150,12 @@
     <div class="hidden lg:flex lg:w-64 lg:flex-col lg:fixed lg:inset-y-0">
       <!-- Sidebar component, swap this element with another sidebar if you like -->
       <div
-        class="flex flex-col flex-grow bg-cyan-700 pt-5 pb-4 overflow-y-auto"
+        class="flex flex-col flex-grow bg-indigo-700 pt-5 pb-4 overflow-y-auto"
       >
         <div class="flex items-center flex-shrink-0 px-4">
           <img
             class="h-8 w-auto"
-            src="https://tailwindui.com/img/logos/easywire-logo-cyan-300-mark-white-text.svg"
+            src="https://tailwindui.com/img/logos/easywire-logo-indigo-300-mark-white-text.svg"
             alt="Easywire logo"
           />
         </div>
@@ -194,7 +163,7 @@
           class="
             mt-5
             flex-1 flex flex-col
-            divide-y divide-cyan-800
+            divide-y divide-indigo-800
             overflow-y-auto
           "
           aria-label="Sidebar"
@@ -206,15 +175,15 @@
               :href="item.href"
               :class="[
                 item.current
-                  ? 'bg-cyan-800 text-white'
-                  : 'text-cyan-100 hover:text-white hover:bg-cyan-600',
+                  ? 'bg-indigo-800 text-white'
+                  : 'text-indigo-100 hover:text-white hover:bg-indigo-600',
                 'group flex items-center px-2 py-2 text-sm leading-6 font-medium rounded-md',
               ]"
               :aria-current="item.current ? 'page' : undefined"
             >
               <component
                 :is="item.icon"
-                class="mr-4 flex-shrink-0 h-6 w-6 text-cyan-200"
+                class="mr-4 flex-shrink-0 h-6 w-6 text-indigo-200"
                 aria-hidden="true"
               />
               {{ item.name }}
@@ -236,13 +205,13 @@
                   leading-6
                   font-medium
                   rounded-md
-                  text-cyan-100
-                  hover:text-white hover:bg-cyan-600
+                  text-indigo-100
+                  hover:text-white hover:bg-indigo-600
                 "
               >
                 <component
                   :is="item.icon"
-                  class="mr-4 h-6 w-6 text-cyan-200"
+                  class="mr-4 h-6 w-6 text-indigo-200"
                   aria-hidden="true"
                 />
                 {{ item.name }}
@@ -271,7 +240,7 @@
             px-4
             border-r border-gray-200
             text-gray-400
-            focus:outline-none focus:ring-2 focus:ring-inset focus:ring-cyan-500
+            focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500
             lg:hidden
           "
           @click="sidebarOpen = true"
@@ -343,7 +312,7 @@
                 focus:outline-none
                 focus:ring-2
                 focus:ring-offset-2
-                focus:ring-cyan-500
+                focus:ring-indigo-500
               "
             >
               <span class="sr-only">View notifications</span>
@@ -364,7 +333,7 @@
                     focus:outline-none
                     focus:ring-2
                     focus:ring-offset-2
-                    focus:ring-cyan-500
+                    focus:ring-indigo-500
                     lg:p-2 lg:rounded-md lg:hover:bg-gray-50
                   "
                 >
@@ -561,7 +530,7 @@
                     focus:outline-none
                     focus:ring-2
                     focus:ring-offset-2
-                    focus:ring-cyan-500
+                    focus:ring-indigo-500
                   "
                 >
                   Add money
@@ -579,12 +548,12 @@
                     font-medium
                     rounded-md
                     text-white
-                    bg-cyan-600
-                    hover:bg-cyan-700
+                    bg-indigo-600
+                    hover:bg-indigo-700
                     focus:outline-none
                     focus:ring-2
                     focus:ring-offset-2
-                    focus:ring-cyan-500
+                    focus:ring-indigo-500
                   "
                 >
                   Send money
@@ -635,7 +604,7 @@
                   <div class="text-sm">
                     <a
                       :href="card.href"
-                      class="font-medium text-cyan-700 hover:text-cyan-900"
+                      class="font-medium text-indigo-700 hover:text-indigo-900"
                     >
                       View all
                     </a>
@@ -664,10 +633,13 @@
 
           <!-- Activity list (smallest breakpoint only) -->
           <div class="shadow">
-            <Request />
+          <!--
 
-            <Gig />
 
+
+         -->
+          <Gig />
+ <Request />
             <User/>
           </div>
 

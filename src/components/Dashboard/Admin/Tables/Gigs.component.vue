@@ -1,21 +1,10 @@
 <template>
 
   <div class="bg-white" >
-    <div class="mx-auto py-12 px-4 max-w-7xl sm:px-6 lg:px-8 lg:py-24">
-      <div class="flex w-full items-center justify-between mb-5">
-        <div
-          class="space-y-5 sm:space-y-4 md:max-w-xl lg:max-w-3xl xl:max-w-none"
-        >
-          <h2 class="text-3xl font-extrabold tracking-tight hidden md:block">
-            Gigs
-          </h2>
-        </div>
-        <div class="flex items-center flex-1 md:flex-none">
+    <div class="">
 
-        </div>
-      </div>
       <div class="flex flex-col">
-        <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
+        <div class="-my-2 overflow-x-auto ">
           <div
             class="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8"
           >
