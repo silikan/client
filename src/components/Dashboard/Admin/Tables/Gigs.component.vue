@@ -1,13 +1,13 @@
 <template>
 
-  <div class="bg-white" v-if="links && meta">
+  <div class="bg-white" >
     <div class="mx-auto py-12 px-4 max-w-7xl sm:px-6 lg:px-8 lg:py-24">
       <div class="flex w-full items-center justify-between mb-5">
         <div
           class="space-y-5 sm:space-y-4 md:max-w-xl lg:max-w-3xl xl:max-w-none"
         >
           <h2 class="text-3xl font-extrabold tracking-tight hidden md:block">
-            Gigs Search Results "{{query}}"
+            Gigs
           </h2>
         </div>
         <div class="flex items-center flex-1 md:flex-none">
@@ -405,36 +405,34 @@ export default {
     let meta, links, gigs;
     let path = "handymen";
 
-    let page = 1;
-    let payload = {
-      page: page,
-      query: query,
-    };
+
+let page = 1
 
     /* let router = useRouter
-     */ store.dispatch("Search/searchGigsPaginate", payload);
+     */ store.dispatch("Admin/getAllGigsPaginated" , page);
     meta = computed(() => {
-      return store.getters["Search/getSearchGigsMeta"];
+      return store.getters["Admin/getGigsMeta"];
     });
+	console.log(meta.value)
     console.log(meta);
     links = computed(() => {
-      return store.getters["Search/getSearchGigsLinks"];
+      return store.getters["Admin/getGigsLinks"];
     });
     gigs = computed(() => {
-      return store.getters["Search/getSearchGigs"];
+      return store.getters["Admin/getGigs"];
     });
     const prevPage = () => {
-      store.dispatch("Search/paginateGigs", links.value.prev);
+      store.dispatch("Admin/getGigLink", links.value.prev);
     };
     const nextPage = () => {
       console.log(links.value.next);
-      store.dispatch("Search/paginateGigs", links.value.next);
+      store.dispatch("Admin/getGigLink", links.value.next);
     };
 
     const setPage = (pageNumber) => {
-      let paginationlink = `${process.env.VUE_APP_API_URL}/api/search/gigs/paginate?page=${pageNumber}&query=${query}`;
+      let paginationlink = `${process.env.VUE_APP_API_URL}/api/admin/get-all-gigs-paginated?page=${pageNumber}`;
 
-      store.dispatch("Search/paginateGigs", paginationlink);
+      store.dispatch("Admin/getGigLink", paginationlink);
       console.log(meta.value);
     };
 
@@ -447,7 +445,7 @@ export default {
       let data = reactive([]);
       let start = currentPage.value - 2;
       let end = currentPage.value + 2;
-      let totalPages = computed(()=>meta.value.last_page)
+      let totalPages =computed(()=>meta.value.last_page) ;
       if (start < 1) {
         start = 1;
         end = 5;

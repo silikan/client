@@ -1,5 +1,4 @@
 <template>
-
   <div class="bg-white" v-if="links && meta">
     <div class="mx-auto py-12 px-4 max-w-7xl sm:px-6 lg:px-8 lg:py-24">
       <div class="flex w-full items-center justify-between mb-5">
@@ -7,11 +6,8 @@
           class="space-y-5 sm:space-y-4 md:max-w-xl lg:max-w-3xl xl:max-w-none"
         >
           <h2 class="text-3xl font-extrabold tracking-tight hidden md:block">
-            Gigs Search Results "{{query}}"
+            Requests
           </h2>
-        </div>
-        <div class="flex items-center flex-1 md:flex-none">
-
         </div>
       </div>
       <div class="flex flex-col">
@@ -42,7 +38,7 @@
                         tracking-wider
                       "
                     >
-                      Thumbnail
+                      Client
                     </th>
                     <th
                       scope="col"
@@ -70,7 +66,7 @@
                         tracking-wider
                       "
                     >
-                      Category
+                      Price
                     </th>
                     <th
                       scope="col"
@@ -84,7 +80,21 @@
                         tracking-wider
                       "
                     >
-                      Price
+                      Duration
+                    </th>
+                    <th
+                      scope="col"
+                      class="
+                        px-6
+                        py-3
+                        text-left text-xs
+                        font-medium
+                        text-gray-500
+                        uppercase
+                        tracking-wider
+                      "
+                    >
+                      Payment Method
                     </th>
                     <th scope="col" class="relative px-6 py-3">
                       <span class="sr-only">Edit</span>
@@ -92,34 +102,42 @@
                   </tr>
                 </thead>
                 <tbody class="bg-white divide-y divide-gray-200">
-                  <tr v-for="gig in gigs" :key="gig.id">
+                  <tr v-for="request in requests" :key="request.id">
                     <td class="px-6 py-4 whitespace-nowrap">
-                      <div class="flex items-center">
-                        <div class="flex-shrink-0 h-10 w-10">
-                          <img
-                            class="h-10 w-10 rounded-md"
-                            :src="`${preurl}/${gig.images[0].url}`"
-
-                            alt=""
-                          />
-
-                        </div>
-                        <div class="ml-4">
-                          <div class="text-sm font-medium text-gray-900">
-                            {{ gig.name }}
+                      <router-link :to="`/user/${request.user.id}`">
+                        <div class="flex items-center">
+                          <div class="flex-shrink-0 h-10 w-10">
+                            <Avatar
+                              v-if="request.user.name"
+                              :url="request.user.avatar"
+                              :name="request.user.name"
+                            />
                           </div>
-                          <div class="text-sm text-gray-500">
-                            {{ gig.email }}
+                          <div class="ml-4">
+                            <div class="text-sm font-medium text-gray-900">
+                              {{ request.user.name }}
+                            </div>
+                            <div class="text-sm text-gray-500">
+                              {{ request.user.email }}
+                            </div>
                           </div>
                         </div>
-                      </div>
+                      </router-link>
                     </td>
                     <td class="px-6 py-4 whitespace-nowrap">
-                      <div class="text-sm text-gray-900">
-                        {{ gig.title }}
-                      </div>
-                      <div class="text-sm text-gray-500">
-                        {{  }}
+                      <div
+                        class="
+                          flex-shrink-0
+                          h-10
+                          w-10
+                          flex flex-col
+                          justify-center
+                          items-center
+                        "
+                      >
+                        <div class="break-all pl-7 text-sm text-gray-900">
+                          {{ request.title }}
+                        </div>
                       </div>
                     </td>
                     <td class="px-6 py-4 whitespace-nowrap">
@@ -135,13 +153,40 @@
                           text-green-800
                         "
                       >
-                        {{gig.category[0].title}}
+                        {{ request.price }} DZD
                       </span>
                     </td>
-                    <td
-                      class="px-6 py-4 whitespace-nowrap text-sm text-gray-500"
-                    >
-                      {{ JSON.parse(gig.basic).price }} DZD
+                    <td class="px-6 py-4 whitespace-nowrap">
+                      <span
+                        class="
+                          px-2
+                          inline-flex
+                          text-xs
+                          leading-5
+                          font-semibold
+                          rounded-full
+                          bg-green-100
+                          text-green-800
+                        "
+                      >
+                        {{ request.duration }} Days
+                      </span>
+                    </td>
+                    <td class="px-6 py-4 whitespace-nowrap">
+                      <span
+                        class="
+                          px-2
+                          inline-flex
+                          text-xs
+                          leading-5
+                          font-semibold
+                          rounded-full
+                          bg-green-100
+                          text-green-800
+                        "
+                      >
+                        {{ JSON.parse(request.payment_method) }}
+                      </span>
                     </td>
                     <td
                       class="
@@ -152,8 +197,11 @@
                         font-medium
                       "
                     >
-                      <router-link :to="`/gig/${gig.id}`" class="text-indigo-600 hover:text-indigo-900"
-                        >Visit</router-link
+                      <router-link
+                        :to="`/request/${request.id}`"
+                        href="#"
+                        class="text-indigo-600 hover:text-indigo-900"
+                        >Check</router-link
                       >
                     </td>
                   </tr>
@@ -384,57 +432,54 @@
 
 <script>
 import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/vue/solid";
+import Avatar from "@/components/Avatar/Avatar.component.vue";
 
 import { computed, reactive } from "@vue/runtime-core";
 import { useStore } from "vuex";
-import { useRoute } from "vue-router";
-
 
 export default {
   components: {
-
     ChevronLeftIcon,
     ChevronRightIcon,
+    Avatar,
   },
 
   setup() {
-    let action = "Search/paginateGigs";
-    let route = useRoute();
+    let action = "Search/paginateHandymen";
     let store = useStore();
-    let query = route.params.query;
-    let meta, links, gigs;
+    let meta, links, requests;
     let path = "handymen";
 
     let page = 1;
-    let payload = {
-      page: page,
-      query: query,
-    };
 
     /* let router = useRouter
-     */ store.dispatch("Search/searchGigsPaginate", payload);
+     */ store
+      .dispatch("Request/getClientRequestsPaginate", page)
+      .then((res) => {
+        console.log(res);
+      });
     meta = computed(() => {
-      return store.getters["Search/getSearchGigsMeta"];
+      return store.getters["Request/meta"];
+    });
+    links = computed(() => {
+      return store.getters["Request/links"];
+    });
+    requests = computed(() => {
+      return store.getters["Request/requests"];
     });
     console.log(meta);
-    links = computed(() => {
-      return store.getters["Search/getSearchGigsLinks"];
-    });
-    gigs = computed(() => {
-      return store.getters["Search/getSearchGigs"];
-    });
     const prevPage = () => {
-      store.dispatch("Search/paginateGigs", links.value.prev);
+      store.dispatch("Request/paginateClientRequests", links.value.prev);
     };
     const nextPage = () => {
       console.log(links.value.next);
-      store.dispatch("Search/paginateGigs", links.value.next);
+      store.dispatch("Request/paginateClientRequests", links.value.next);
     };
 
     const setPage = (pageNumber) => {
-      let paginationlink = `${process.env.VUE_APP_API_URL}/api/search/gigs/paginate?page=${pageNumber}&query=${query}`;
+      let paginationlink = `${process.env.VUE_APP_API_URL}/api/paginate/request?page=${pageNumber}`;
 
-      store.dispatch("Search/paginateGigs", paginationlink);
+      store.dispatch("Request/paginateClientRequests", paginationlink);
       console.log(meta.value);
     };
 
@@ -447,7 +492,7 @@ export default {
       let data = reactive([]);
       let start = currentPage.value - 2;
       let end = currentPage.value + 2;
-      let totalPages = computed(()=>meta.value.last_page)
+      let totalPages = meta.value.last_page;
       if (start < 1) {
         start = 1;
         end = 5;
@@ -465,10 +510,8 @@ export default {
 
       return data;
     });
-let preurl = `${process.env.VUE_APP_API_URL}`;
+    let preurl = `${process.env.VUE_APP_API_URL}`;
     return {
-
-      query,
       action,
       path,
 
@@ -477,11 +520,11 @@ let preurl = `${process.env.VUE_APP_API_URL}`;
       setPage,
       meta,
       links,
-      gigs,
+      requests,
       filterPages,
       currentPage,
       totalPages,
-      preurl
+      preurl,
     };
   },
 };

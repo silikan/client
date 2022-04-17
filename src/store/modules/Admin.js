@@ -1,166 +1,74 @@
+import AdminServices from "../../services/AdminServices";
 export const namespaced = true;
+function setPaginatedGigs(commit, response) {
+  commit("SET_GIGS", response.data.data);
+  commit("SET_GIGS_META", response.data.meta);
+  commit("SET_GIGS_LINKS", response.data.links);
+  commit("SET_GIGS_LOADING", false);
+}
+/* function setPaginatedUsers(commit, response) {
+  commit("SET_ADMIN_USERS", response.data.data);
+  commit("SET_ADMIN_USERS_META", response.data.meta);
+  commit("SET_ADMIN_USERS_LINKS", response.data.links);
+  commit("SET_ADMIN_USERS_LOADING", false);
+}
+
+function setPaginatedClientRequest(commit, response) {
+  commit("SET_ADMIN_CLIENT_REQUEST", response.data.data);
+  commit("SET_ADMIN_CLIENT_REQUEST_META", response.data.meta);
+  commit("SET_ADMIN_CLIENT_REQUEST_LINKS", response.data.links);
+  commit("SET_ADMIN_CLIENT_REQUEST_LOADING", false);
+} */
 
 export const state = {
-  users: [],
   gigs: [],
-  requests: [],
-  handymen: [],
-  clients: [],
-  admins: [],
-  moderators: [],
-  user: {},
-  gig: {},
-  request: {},
-  handyman: {},
-  client: {},
-  admin: {},
-  moderator: {},
-  usersPaginated: [],
-  gigsPaginated: [],
-  requestsPaginated: [],
-  handymenPaginated: [],
-  clientsPaginated: [],
-  adminsPaginated: [],
-  moderatorsPaginated: [],
+  gigsMeta: {},
+  gigsLinks: {},
+  gigsLoading: false,
 };
 
 export const mutations = {
-  SET_USERS(state, users) {
-    state.users = users;
-  },
-
   SET_GIGS(state, gigs) {
     state.gigs = gigs;
   },
-
-  SET_REQUESTS(state, requests) {
-    state.requests = requests;
+  SET_GIGS_META(state, meta) {
+    state.gigsMeta = meta;
   },
-
-  SET_HANDYMEN(state, handymen) {
-    state.handymen = handymen;
+  SET_GIGS_LINKS(state, links) {
+    state.gigsLinks = links;
   },
-
-  SET_CLIENTS(state, clients) {
-    state.clients = clients;
-  },
-
-  SET_ADMINS(state, admins) {
-    state.admins = admins;
-  },
-
-  SET_MODERATORS(state, moderators) {
-    state.moderators = moderators;
-  },
-  SET_USER(state, user) {
-    state.user = user;
-  },
-  SET_GIG(state, gig) {
-    state.gig = gig;
-  },
-  SET_REQUEST(state, request) {
-    state.request = request;
-  },
-  SET_HANDYMAN(state, handyman) {
-    state.handyman = handyman;
-  },
-  SET_CLIENT(state, client) {
-    state.client = client;
-  },
-  SET_ADMIN(state, admin) {
-    state.admin = admin;
-  },
-  SET_MODERATOR(state, moderator) {
-    state.moderator = moderator;
-  },
-  SET_USERS_PAGINATED(state, usersPaginated) {
-    state.usersPaginated = usersPaginated;
-  },
-  SET_GIGS_PAGINATED(state, gigsPaginated) {
-    state.gigsPaginated = gigsPaginated;
-  },
-  SET_REQUESTS_PAGINATED(state, requestsPaginated) {
-    state.requestsPaginated = requestsPaginated;
-  },
-  SET_HANDYMEN_PAGINATED(state, handymenPaginated) {
-    state.handymenPaginated = handymenPaginated;
-  },
-  SET_CLIENTS_PAGINATED(state, clientsPaginated) {
-    state.clientsPaginated = clientsPaginated;
-  },
-  SET_ADMINS_PAGINATED(state, adminsPaginated) {
-    state.adminsPaginated = adminsPaginated;
-  },
-  SET_MODERATORS_PAGINATED(state, moderatorsPaginated) {
-    state.moderatorsPaginated = moderatorsPaginated;
+  SET_GIGS_LOADING(state, loading) {
+    state.gigsLoading = loading;
   },
 };
 
-export const actions = {};
+export const actions = {
+  async getAllGigsPaginated({ commit }, page) {
+    commit("SET_SEARCH_GIGS_LOADING", true);
+    const Gigs = await AdminServices.getAllGigsPaginated(page);
+    setPaginatedGigs(commit, Gigs);
+
+    return Gigs.data;
+  },
+  async getGigLink({ commit }, link) {
+    commit("SET_SEARCH_GIGS_LOADING", true);
+    const Gigs = await AdminServices.getGigLink(link);
+    setPaginatedGigs(commit, Gigs);
+    return Gigs.data;
+  },
+};
 
 export const getters = {
-  users(state) {
-    return state.users;
-  },
-  gigs(state) {
+  getGigs(state) {
     return state.gigs;
   },
-  requests(state) {
-    return state.requests;
+  getGigsMeta(state) {
+    return state.gigsMeta;
   },
-  handymen(state) {
-    return state.handymen;
+  getGigsLinks(state) {
+    return state.gigsLinks;
   },
-  clients(state) {
-    return state.clients;
-  },
-  admins(state) {
-    return state.admins;
-  },
-
-  moderators(state) {
-    return state.moderators;
-  },
-  user(state) {
-    return state.user;
-  },
-  gig(state) {
-    return state.gig;
-  },
-  request(state) {
-    return state.request;
-  },
-  handyman(state) {
-    return state.handyman;
-  },
-  client(state) {
-    return state.client;
-  },
-  admin(state) {
-    return state.admin;
-  },
-  moderator(state) {
-    return state.moderator;
-  },
-  usersPaginated(state) {
-    return state.usersPaginated;
-  },
-  gigsPaginated(state) {
-    return state.gigsPaginated;
-  },
-  requestsPaginated(state) {
-    return state.requestsPaginated;
-  },
-  handymenPaginated(state) {
-    return state.handymenPaginated;
-  },
-  clientsPaginated(state) {
-    return state.clientsPaginated;
-  },
-  adminsPaginated(state) {
-    return state.adminsPaginated;
-  },
-  moderatorsPaginated(state) {
-    return state.moderatorsPaginated;
+  getGigsLoading(state) {
+    return state.gigsLoading;
   },
 };
