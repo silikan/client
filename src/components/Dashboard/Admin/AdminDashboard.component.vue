@@ -1,7 +1,6 @@
 
 <template>
-
-  <div >
+  <div>
     <TransitionRoot as="template" :show="sidebarOpen">
       <Dialog
         as="div"
@@ -240,7 +239,10 @@
             px-4
             border-r border-gray-200
             text-gray-400
-            focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500
+            focus:outline-none
+            focus:ring-2
+            focus:ring-inset
+            focus:ring-indigo-500
             lg:hidden
           "
           @click="sidebarOpen = true"
@@ -281,6 +283,7 @@
                 <input
                   id="search-field"
                   name="search-field"
+                  v-model="search"
                   class="
                     block
                     w-full
@@ -294,135 +297,17 @@
                     focus:outline-none focus:ring-0 focus:border-transparent
                     sm:text-sm
                   "
-                  placeholder="Search transactions"
+                  placeholder="Search"
                   type="search"
+                />
+
+                <SearchList
+                  v-if="search != ''"
+                  :searchData="search"
+                  class="absolute z-50 shadow-lg w-full"
                 />
               </div>
             </form>
-          </div>
-          <div class="ml-4 flex items-center md:ml-6">
-            <button
-              type="button"
-              class="
-                bg-white
-                p-1
-                rounded-full
-                text-gray-400
-                hover:text-gray-500
-                focus:outline-none
-                focus:ring-2
-                focus:ring-offset-2
-                focus:ring-indigo-500
-              "
-            >
-              <span class="sr-only">View notifications</span>
-              <BellIcon class="h-6 w-6" aria-hidden="true" />
-            </button>
-
-            <!-- Profile dropdown -->
-            <Menu as="div" class="ml-3 relative">
-              <div>
-                <MenuButton
-                  class="
-                    max-w-xs
-                    bg-white
-                    rounded-full
-                    flex
-                    items-center
-                    text-sm
-                    focus:outline-none
-                    focus:ring-2
-                    focus:ring-offset-2
-                    focus:ring-indigo-500
-                    lg:p-2 lg:rounded-md lg:hover:bg-gray-50
-                  "
-                >
-                  <img
-                    class="h-8 w-8 rounded-full"
-                    src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-                    alt=""
-                  />
-                  <span
-                    class="
-                      hidden
-                      ml-3
-                      text-gray-700 text-sm
-                      font-medium
-                      lg:block
-                    "
-                    ><span class="sr-only">Open user menu for </span>Emilia
-                    Birch</span
-                  >
-                  <ChevronDownIcon
-                    class="
-                      hidden
-                      flex-shrink-0
-                      ml-1
-                      h-5
-                      w-5
-                      text-gray-400
-                      lg:block
-                    "
-                    aria-hidden="true"
-                  />
-                </MenuButton>
-              </div>
-              <transition
-                enter-active-class="transition ease-out duration-100"
-                enter-from-class="transform opacity-0 scale-95"
-                enter-to-class="transform opacity-100 scale-100"
-                leave-active-class="transition ease-in duration-75"
-                leave-from-class="transform opacity-100 scale-100"
-                leave-to-class="transform opacity-0 scale-95"
-              >
-                <MenuItems
-                  class="
-                    origin-top-right
-                    absolute
-                    right-0
-                    mt-2
-                    w-48
-                    rounded-md
-                    shadow-lg
-                    py-1
-                    bg-white
-                    ring-1 ring-black ring-opacity-5
-                    focus:outline-none
-                  "
-                >
-                  <MenuItem v-slot="{ active }">
-                    <a
-                      href="#"
-                      :class="[
-                        active ? 'bg-gray-100' : '',
-                        'block px-4 py-2 text-sm text-gray-700',
-                      ]"
-                      >Your Profile</a
-                    >
-                  </MenuItem>
-                  <MenuItem v-slot="{ active }">
-                    <a
-                      href="#"
-                      :class="[
-                        active ? 'bg-gray-100' : '',
-                        'block px-4 py-2 text-sm text-gray-700',
-                      ]"
-                      >Settings</a
-                    >
-                  </MenuItem>
-                  <MenuItem v-slot="{ active }">
-                    <a
-                      href="#"
-                      :class="[
-                        active ? 'bg-gray-100' : '',
-                        'block px-4 py-2 text-sm text-gray-700',
-                      ]"
-                      >Logout</a
-                    >
-                  </MenuItem>
-                </MenuItems>
-              </transition>
-            </Menu>
           </div>
         </div>
       </div>
@@ -563,99 +448,16 @@
           </div>
         </div>
 
-        <div class="mt-8">
-          <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-            <h2 class="text-lg leading-6 font-medium text-gray-900">
-              Overview
-            </h2>
-            <div
-              class="mt-2 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3"
-            >
-              <!-- Card -->
-              <div
-                v-for="card in cards"
-                :key="card.name"
-                class="bg-white overflow-hidden shadow rounded-lg"
-              >
-                <div class="p-5">
-                  <div class="flex items-center">
-                    <div class="flex-shrink-0">
-                      <component
-                        :is="card.icon"
-                        class="h-6 w-6 text-gray-400"
-                        aria-hidden="true"
-                      />
-                    </div>
-                    <div class="ml-5 w-0 flex-1">
-                      <dl>
-                        <dt class="text-sm font-medium text-gray-500 truncate">
-                          {{ card.name }}
-                        </dt>
-                        <dd>
-                          <div class="text-lg font-medium text-gray-900">
-                            {{ card.amount }}
-                          </div>
-                        </dd>
-                      </dl>
-                    </div>
-                  </div>
-                </div>
-                <div class="bg-gray-50 px-5 py-3">
-                  <div class="text-sm">
-                    <a
-                      :href="card.href"
-                      class="font-medium text-indigo-700 hover:text-indigo-900"
-                    >
-                      View all
-                    </a>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <h2
-            class="
-              max-w-6xl
-              mx-auto
-              mt-8
-              px-4
-              text-lg
-              leading-6
-              font-medium
-              text-gray-900
-              sm:px-6
-              lg:px-8
-            "
-          >
-            Recent activity
-          </h2>
-
-          <!-- Activity list (smallest breakpoint only) -->
-          <div class="shadow">
-          <!--
-
-
-
-         -->
-          <Gig />
- <Request />
-            <User/>
-          </div>
-
-
-        </div>
+        <router-view />
       </main>
     </div>
   </div>
 </template>
 
 <script>
-import { ref } from "vue";
-import Request from "./Tables/Requests.com.ponent.vue";
-import Gig from "./Tables/Gigs.component.vue";
-import User from "./Tables/Users.component.vue";
+import SearchList from "@/components/Search/SearchList.component.vue";
 
+import { ref } from "vue";
 
 import {
   Dialog,
@@ -669,16 +471,13 @@ import {
 } from "@headlessui/vue";
 import {
   BellIcon,
-  ClockIcon,
   CogIcon,
   CreditCardIcon,
-  DocumentReportIcon,
   HomeIcon,
   MenuAlt1Icon,
   QuestionMarkCircleIcon,
   ScaleIcon,
   ShieldCheckIcon,
-  UserGroupIcon,
   XIcon,
 } from "@heroicons/vue/outline";
 import {
@@ -692,11 +491,7 @@ import {
 
 const navigation = [
   { name: "Home", href: "#", icon: HomeIcon, current: true },
-  { name: "History", href: "#", icon: ClockIcon, current: false },
-  { name: "Balances", href: "#", icon: ScaleIcon, current: false },
-  { name: "Cards", href: "#", icon: CreditCardIcon, current: false },
-  { name: "Recipients", href: "#", icon: UserGroupIcon, current: false },
-  { name: "Reports", href: "#", icon: DocumentReportIcon, current: false },
+  { name: "Transactions", href: "#", icon: CreditCardIcon, current: false },
 ];
 const secondaryNavigation = [
   { name: "Settings", href: "#", icon: CogIcon },
@@ -745,13 +540,11 @@ export default {
     OfficeBuildingIcon,
     SearchIcon,
     XIcon,
-    Request,
-    Gig,
-    User
+    SearchList,
   },
   setup() {
     const sidebarOpen = ref(false);
-
+    let search = ref("");
     return {
       navigation,
       secondaryNavigation,
@@ -759,6 +552,7 @@ export default {
       transactions,
       statusStyles,
       sidebarOpen,
+      search,
     };
   },
 };

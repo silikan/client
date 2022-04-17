@@ -416,7 +416,7 @@ export default {
     let path = "handymen";
 
         let open = ref(false);
-    let type = ref("request");
+    let type = ref("gig");
     let RequestId = ref(null);
     let openDiag = (id) => {
       open.value = true;
