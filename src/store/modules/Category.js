@@ -1,4 +1,5 @@
 import CategoryService from "@/services/CategoryService";
+import { getError } from "@/utils/helpers";
 
 function setPaginatedCategoryGigs(commit, response) {
   commit("SET_GIGS", response.data.data);
@@ -26,6 +27,7 @@ export const state = {
   requestsMeta: null,
   requestsLinks: null,
   requestsLoading: false,
+  error: null,
 };
 
 export const mutations = {
@@ -56,38 +58,61 @@ export const mutations = {
   SET_REQUESTS_LOADING(state, payload) {
     state.requestsLoading = payload;
   },
+  SET_ERROR(state, payload) {
+    state.error = payload;
+  },
 };
 
 export const actions = {
   async getCategories({ commit }) {
+    try {
     const response = await CategoryService.getCategories();
     console.log(response.data);
     commit("SET_CATEGORIES", response.data);
     return response.data;
+    } catch (error) {
+      commit("SET_ERROR", getError(error));
+    }
   },
   async getGigsByCategoryPaginate({ commit }, { title, page }) {
+    try {
     commit("SET_GIGS_LOADING", true);
     const response = await CategoryService.getGigsByCategoryPaginate(title, page);
     setPaginatedCategoryGigs(commit, response);
     return response.data;
+    } catch (error) {
+      commit("SET_ERROR", getError(error));
+    }
   },
   async getclientRequestsByCategoryPaginate({ commit }, { title, page }) {
+    try {
     commit("SET_REQUESTS_LOADING", true);
     const response = await CategoryService.getclientRequestsByCategoryPaginate(title, page);
     setPaginatedCategoryClientRequest(commit, response);
     return response.data;
+    } catch (error) {
+      commit("SET_ERROR", getError(error));
+    }
   },
   async paginateCategoryGigs({ commit }, link) {
+    try {
     commit("SET_GIGS_LOADING", true);
     let data = await CategoryService.paginateCategoryGigs(link);
     setPaginatedCategoryGigs(commit, data);
     return data.data;
+    } catch (error) {
+      commit("SET_ERROR", getError(error));
+    }
   },
   async paginateCategoryClientRequest({ commit }, link) {
+    try {
     commit("SET_REQUESTS_LOADING", true);
     let data = await CategoryService.paginateCategoryClientRequest(link);
     setPaginatedCategoryClientRequest(commit, data);
     return data.data;
+    } catch (error) {
+      commit("SET_ERROR", getError(error));
+    }
   },
 };
 
@@ -101,4 +126,5 @@ export const getters = {
   requestsMeta: (state) => state.requestsMeta,
   requestsLinks: (state) => state.requestsLinks,
   requestsLoading: (state) => state.requestsLoading,
+  getError: (state) => state.error,
 };

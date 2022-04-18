@@ -1,3 +1,4 @@
+import { getError } from "@/utils/helpers";
 export const namespaced = true;
 
 export const state = {
@@ -22,6 +23,7 @@ export const state = {
   clientsPaginated: [],
   adminsPaginated: [],
   moderatorsPaginated: [],
+  error: null,
 };
 
 export const mutations = {
@@ -94,6 +96,9 @@ export const mutations = {
   SET_MODERATORS_PAGINATED(state, moderatorsPaginated) {
     state.moderatorsPaginated = moderatorsPaginated;
   },
+  SET_ERROR(state, error) {
+    state.error = error;
+  }
 };
 
 export const actions = {};
@@ -163,4 +168,8 @@ export const getters = {
   moderatorsPaginated(state) {
     return state.moderatorsPaginated;
   },
+  getError(state) {
+    return getError(state.error);
+  }
+  
 };

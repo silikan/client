@@ -1,4 +1,6 @@
 import AdminServices from "../../services/AdminServices";
+import { getError } from "@/utils/helpers";
+
 export const namespaced = true;
 function setPaginatedGigs(commit, response) {
   commit("SET_GIGS", response.data.data);
@@ -37,6 +39,7 @@ export const state = {
   usersMeta: {},
   usersLinks: {},
   usersLoading: false,
+  error: null,
 };
 
 export const mutations = {
@@ -64,57 +67,93 @@ export const mutations = {
   SET_USERS_LOADING(state, loading) {
     state.usersLoading = loading;
   },
+  SET_ERROR(state, error) {
+    state.error = error;
+  },
 };
 
 export const actions = {
   async getAllGigsPaginated({ commit }, page) {
-    commit("SET_GIGS_LOADING", true);
-    const Gigs = await AdminServices.getAllGigsPaginated(page);
-    setPaginatedGigs(commit, Gigs);
+    try {
+      commit("SET_GIGS_LOADING", true);
+      const Gigs = await AdminServices.getAllGigsPaginated(page);
+      setPaginatedGigs(commit, Gigs);
+      return Gigs.data;
+    } catch (error) {
+      commit("SET_ERROR", getError(error));
+    }
 
-    return Gigs.data;
   },
   async getGigLink({ commit }, link) {
+    try {
     commit("SET_GIGS_LOADING", true);
     const Gigs = await AdminServices.getLink(link);
     setPaginatedGigs(commit, Gigs);
     return Gigs.data;
+  } catch (error) {
+    commit("SET_ERROR", getError(error));
+  }
   },
 
   async getAllUsersPaginated({ commit }, page) {
+    try {
     commit("SET_USERS_LOADING", true);
     const Users = await AdminServices.getAllUsersPaginated(page);
     setPaginatedUsers(commit, Users);
 
     return Users.data;
+  } catch (error) {
+    commit("SET_ERROR", getError(error));
+
+  }
   },
   async getUserLink({ commit }, link) {
+    try {
     commit("SET_USERS_LOADING", true);
     const Users = await AdminServices.getLink(link);
     setPaginatedUsers(commit, Users);
     return Users.data;
+  } catch (error) {
+    commit("SET_ERROR", getError(error));
+  }
   },
 
   async deleteUser({ commit }, id) {
+    try {
     commit("SET_USERS_LOADING", true);
     const response = await AdminServices.deleteUser(id);
     return response;
+  } catch (error) {
+    commit("SET_ERROR", getError(error));
+  }
   },
   async deleteGig({ commit }, id) {
+    try {
     commit("SET_GIGS_LOADING", true);
     const response = await AdminServices.deleteGig(id);
     return response;
+  } catch (error) {
+    commit("SET_ERROR", getError(error));
+  }
   },
   async deleteClientRequest({ commit }, id) {
+    try {
     commit("SET_USERS_LOADING", true);
     const response = await AdminServices.deleteClientRequest(id);
     return response;
+  } catch (error) {
+    commit("SET_ERROR", getError(error));
+  }
   },
 
   async getAllTransactions({ commit }, page) {
+    try {
     commit("SET_USERS_LOADING", true);
     const Transactions = await AdminServices.getAllTransactions(page);
     return Transactions.data;
+  } catch (error) {
+    commit("SET_ERROR", getError(error));
+  }
   },
   async deleteAllUsers({ commit }) {
     commit("SET_USERS_LOADING", true);
@@ -162,5 +201,8 @@ export const getters = {
   },
   getUsersLoading(state) {
     return state.usersLoading;
+  },
+  getError(state) {
+    return state.error;
   },
 };

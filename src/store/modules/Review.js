@@ -1,5 +1,5 @@
 import ReviewServices from "@/services/ReviewServices";
-
+import { getError } from "@/utils/helpers";
 export const namespaced = true;
 
 export const state = {
@@ -15,6 +15,7 @@ export const state = {
   requestId: 0,
   clientId: 0,
   handymanId: 0,
+  error: null,
 };
 
 export const mutations = {
@@ -52,32 +53,56 @@ export const mutations = {
   SET_HANDYMAN_ID(state, handymanId) {
     state.handymanId = handymanId;
   },
+  SET_ERROR(state, error) {
+    state.error = error;
+  }
+
+
 };
 
 export const actions = {
   async postAReview({ commit }, payload) {
+    try{
     console.log(payload);
     let parsed = JSON.parse(payload);
     const review = await ReviewServices.postAReview(parsed);
     commit("SET_REVIEW", review);
     return review.data;
+
+  } catch (error) {
+    commit("SET_ERROR", getError(error));
+  }
   },
   async getUserReviews({ commit }, id) {
+    try{
     const reviews = await ReviewServices.getUserReviews(id);
 
     commit("SET_USER_REVIEWS", reviews);
     return reviews.data;
+  } catch (error) {
+    commit("SET_ERROR", getError(error));
+  }
   },
   async getGigReviews({ commit }, id) {
+    try{
     const reviews = await ReviewServices.getGigReviews(id);
     commit("SET_GIG_REVIEWS", reviews);
     return reviews.data;
+  } catch (error) {
+    commit("SET_ERROR", getError(error));
+  }
   },
   async getClientRequestReviews({ commit }, id) {
+    try{ 
     const reviews = await ReviewServices.getClientRequestReviews(id);
     commit("SET_CLIENT_REQUEST_REVIEWS", reviews);
     return reviews.data;
+  } catch (error) {
+    commit("SET_ERROR", getError(error));
+  }
+
   },
+  
 };
 
 export const getters = {
@@ -96,5 +121,8 @@ export const getters = {
   getClientRequestReviews(state) {
     return state.clientRequestReviews;
   },
+  getError(state) {
+    return state.error;
+  }
 };
 /* SQLSTATE[22007]: Invalid datetime format: 1366 Incorrect integer value: 'gig' for column `server`.`ratings`.`type` at row 1 (SQL: insert into `ratings` (`type`, `client_id`, `handyman_id`, `rating`, `comment`, `user_id`, `gig_id`, `updated_at`, `created_at`) values (gig, 2, 1, 4, sqdsqdqsdsq, 1, 1, 2022-04-16 15:35:24, 2022-04-16 15:35:24)) */
