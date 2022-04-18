@@ -429,6 +429,7 @@ loading.value = store.getters["Loading/loading"];
           throw error;
         }
       } catch (error) {
+
          store.dispatch("Loading/changeLoading", loading.value);
 
 loading.value = store.getters["Loading/loading"];

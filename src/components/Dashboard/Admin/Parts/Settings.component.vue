@@ -32,6 +32,7 @@
               focus:ring-red-500
               sm:text-sm
             "
+            @click="assignValue('users')"
           >
             Delete All Users
           </button>
@@ -70,6 +71,7 @@
               focus:ring-red-500
               sm:text-sm
             "
+            @click="assignValue('gigs')"
           >
             Delete All Gigs
           </button>
@@ -108,6 +110,7 @@
               focus:ring-red-500
               sm:text-sm
             "
+            @click="assignValue('requests')"
           >
             Delete All Requests
           </button>
@@ -144,6 +147,7 @@
               focus:ring-red-500
               sm:text-sm
             "
+            @click="assignValue('all')"
           >
             Delete All
           </button>
@@ -151,10 +155,35 @@
       </div>
     </div>
   </div>
+    <DeleteAllDialogue  :openData="open" :typeData="type" />
+
 </template>
 
 <script>
-export default {};
+import DeleteAllDialogue from '@/components/Dashboard/Admin/DeleteAllDialogue.component.vue'
+import { ref } from '@vue/reactivity';
+export default {
+  components: {
+    DeleteAllDialogue
+  },
+  setup() {
+
+
+    let open = ref(false)
+    let type = ref('')
+    const assignValue = (data) => {
+      open.value = true
+      type.value = data
+      console.log(type)
+    }
+    return {
+      open,
+      type,
+      assignValue,
+
+    }
+  }
+};
 </script>
 
 <style>

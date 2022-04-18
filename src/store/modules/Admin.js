@@ -116,6 +116,26 @@ export const actions = {
     const Transactions = await AdminServices.getAllTransactions(page);
     return Transactions.data;
   },
+  async deleteAllUsers({ commit }) {
+    commit("SET_USERS_LOADING", true);
+    const response = await AdminServices.deleteAllUsers();
+    return response;
+  },
+  async deleteAllGigs({ commit }) {
+    commit("SET_GIGS_LOADING", true);
+    const response = await AdminServices.deleteAllGigs();
+    return response;
+  },
+  async deleteAll({ commit }) {
+    commit("SET_USERS_LOADING", true);
+    const response = await AdminServices.deleteAll();
+    return response;
+  },
+  async deleteAllClientRequests({ commit }) {
+    commit("SET_USERS_LOADING", true);
+    const response = await AdminServices.deleteAllClientRequests();
+    return response;
+  },
 };
 
 export const getters = {
