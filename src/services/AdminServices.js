@@ -63,7 +63,9 @@ export default {
     });
   },
   getAllRequestsPaginated(page) {
-    return API.apiClient.get(`/admin/get-all-requests-paginated/${page}`);
+    return API.apiClient.get(`/admin/get-all-requests-paginate`, {
+      params: { page },
+    });
   },
   getAllHandymenPaginated(page) {
     return API.apiClient.get(`/admin/get-all-handymen-paginated/${page}`);

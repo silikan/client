@@ -1,6 +1,5 @@
 <!-- This example requires Tailwind CSS v2.0+ -->
 <template>
-{{type}}
   <TransitionRoot as="template" :show="open">
     <Dialog
       as="div"
@@ -288,7 +287,7 @@ export default {
   props: ["typeData", "openData"],
   setup(props) {
     let type = computed(() => props.typeData);
-console.log(type.value);
+
     const { openData: open } = toRefs(props);
 
     let store = useStore();
@@ -319,6 +318,7 @@ console.log(type.value);
       type,
       closeDiag,
       deleteAll,
+
     };
   },
 };

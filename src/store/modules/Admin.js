@@ -16,19 +16,14 @@ function setPaginatedUsers(commit, response) {
   commit("SET_USERS_LINKS", response.data.links);
   commit("SET_USERS_LOADING", false);
 }
-/* function setPaginatedUsers(commit, response) {
-  commit("SET_ADMIN_USERS", response.data.data);
-  commit("SET_ADMIN_USERS_META", response.data.meta);
-  commit("SET_ADMIN_USERS_LINKS", response.data.links);
-  commit("SET_ADMIN_USERS_LOADING", false);
-}
 
 function setPaginatedClientRequest(commit, response) {
-  commit("SET_ADMIN_CLIENT_REQUEST", response.data.data);
-  commit("SET_ADMIN_CLIENT_REQUEST_META", response.data.meta);
-  commit("SET_ADMIN_CLIENT_REQUEST_LINKS", response.data.links);
-  commit("SET_ADMIN_CLIENT_REQUEST_LOADING", false);
-} */
+  console.log(response.data);
+  commit("SET_CLIENT_REQUEST", response.data.data);
+  commit("SET_CLIENT_REQUEST_META", response.data.meta);
+  commit("SET_CLIENT_REQUEST_LINKS", response.data.links);
+  commit("SET_CLIENT_REQUEST_LOADING", false);
+}
 
 export const state = {
   gigs: [],
@@ -40,6 +35,10 @@ export const state = {
   usersLinks: {},
   usersLoading: false,
   error: null,
+  clientRequest: [],
+  clientRequestMeta: {},
+  clientRequestLinks: {},
+  clientRequestLoading: false,
 };
 
 export const mutations = {
@@ -70,6 +69,18 @@ export const mutations = {
   SET_ERROR(state, error) {
     state.error = error;
   },
+  SET_CLIENT_REQUEST(state, clientRequest) {
+    state.clientRequest = clientRequest;
+  },
+  SET_CLIENT_REQUEST_META(state, meta) {
+    state.clientRequestMeta = meta;
+  },
+  SET_CLIENT_REQUEST_LINKS(state, links) {
+    state.clientRequestLinks = links;
+  },
+  SET_CLIENT_REQUEST_LOADING(state, loading) {
+    state.clientRequestLoading = loading;
+  },
 };
 
 export const actions = {
@@ -82,78 +93,76 @@ export const actions = {
     } catch (error) {
       commit("SET_ERROR", getError(error));
     }
-
   },
   async getGigLink({ commit }, link) {
     try {
-    commit("SET_GIGS_LOADING", true);
-    const Gigs = await AdminServices.getLink(link);
-    setPaginatedGigs(commit, Gigs);
-    return Gigs.data;
-  } catch (error) {
-    commit("SET_ERROR", getError(error));
-  }
+      commit("SET_GIGS_LOADING", true);
+      const Gigs = await AdminServices.getLink(link);
+      setPaginatedGigs(commit, Gigs);
+      return Gigs.data;
+    } catch (error) {
+      commit("SET_ERROR", getError(error));
+    }
   },
 
   async getAllUsersPaginated({ commit }, page) {
     try {
-    commit("SET_USERS_LOADING", true);
-    const Users = await AdminServices.getAllUsersPaginated(page);
-    setPaginatedUsers(commit, Users);
+      commit("SET_USERS_LOADING", true);
+      const Users = await AdminServices.getAllUsersPaginated(page);
+      setPaginatedUsers(commit, Users);
 
-    return Users.data;
-  } catch (error) {
-    commit("SET_ERROR", getError(error));
-
-  }
+      return Users.data;
+    } catch (error) {
+      commit("SET_ERROR", getError(error));
+    }
   },
   async getUserLink({ commit }, link) {
     try {
-    commit("SET_USERS_LOADING", true);
-    const Users = await AdminServices.getLink(link);
-    setPaginatedUsers(commit, Users);
-    return Users.data;
-  } catch (error) {
-    commit("SET_ERROR", getError(error));
-  }
+      commit("SET_USERS_LOADING", true);
+      const Users = await AdminServices.getLink(link);
+      setPaginatedUsers(commit, Users);
+      return Users.data;
+    } catch (error) {
+      commit("SET_ERROR", getError(error));
+    }
   },
 
   async deleteUser({ commit }, id) {
     try {
-    commit("SET_USERS_LOADING", true);
-    const response = await AdminServices.deleteUser(id);
-    return response;
-  } catch (error) {
-    commit("SET_ERROR", getError(error));
-  }
+      commit("SET_USERS_LOADING", true);
+      const response = await AdminServices.deleteUser(id);
+      return response;
+    } catch (error) {
+      commit("SET_ERROR", getError(error));
+    }
   },
   async deleteGig({ commit }, id) {
     try {
-    commit("SET_GIGS_LOADING", true);
-    const response = await AdminServices.deleteGig(id);
-    return response;
-  } catch (error) {
-    commit("SET_ERROR", getError(error));
-  }
+      commit("SET_GIGS_LOADING", true);
+      const response = await AdminServices.deleteGig(id);
+      return response;
+    } catch (error) {
+      commit("SET_ERROR", getError(error));
+    }
   },
   async deleteClientRequest({ commit }, id) {
     try {
-    commit("SET_USERS_LOADING", true);
-    const response = await AdminServices.deleteClientRequest(id);
-    return response;
-  } catch (error) {
-    commit("SET_ERROR", getError(error));
-  }
+      commit("SET_USERS_LOADING", true);
+      const response = await AdminServices.deleteClientRequest(id);
+      return response;
+    } catch (error) {
+      commit("SET_ERROR", getError(error));
+    }
   },
 
   async getAllTransactions({ commit }, page) {
     try {
-    commit("SET_USERS_LOADING", true);
-    const Transactions = await AdminServices.getAllTransactions(page);
-    return Transactions.data;
-  } catch (error) {
-    commit("SET_ERROR", getError(error));
-  }
+      commit("SET_USERS_LOADING", true);
+      const Transactions = await AdminServices.getAllTransactions(page);
+      return Transactions.data;
+    } catch (error) {
+      commit("SET_ERROR", getError(error));
+    }
   },
   async deleteAllUsers({ commit }) {
     commit("SET_USERS_LOADING", true);
@@ -174,6 +183,26 @@ export const actions = {
     commit("SET_USERS_LOADING", true);
     const response = await AdminServices.deleteAllClientRequests();
     return response;
+  },
+  async getAllClientRequests({ commit }, page) {
+    try {
+      commit("SET_CLIENT_REQUEST_LOADING", true);
+      const ClientRequest = await AdminServices.getAllRequestsPaginated(page);
+      setPaginatedClientRequest(commit, ClientRequest);
+      return ClientRequest.data;
+    } catch (error) {
+      commit("SET_ERROR", getError(error));
+    }
+  },
+  async getClientRequestLink({ commit }, link) {
+    try {
+      commit("SET_CLIENT_REQUEST_LOADING", true);
+      const ClientRequest = await AdminServices.getLink(link);
+      setPaginatedClientRequest(commit, ClientRequest);
+      return ClientRequest.data;
+    } catch (error) {
+      commit("SET_ERROR", getError(error));
+    }
   },
 };
 
@@ -204,5 +233,17 @@ export const getters = {
   },
   getError(state) {
     return state.error;
+  },
+  getClientRequest(state) {
+    return state.clientRequest;
+  },
+  getClientRequestMeta(state) {
+    return state.clientRequestMeta;
+  },
+  getClientRequestLinks(state) {
+    return state.clientRequestLinks;
+  },
+  getClientRequestLoading(state) {
+    return state.clientRequestLoading;
   },
 };

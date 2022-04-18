@@ -1,9 +1,8 @@
 <template>
   <div class="bg-white" v-if="links && meta">
     <div class="">
-
       <div class="flex flex-col">
-        <div class="-my-2 overflow-x-auto ">
+        <div class="-my-2 overflow-x-auto">
           <div
             class="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8"
           >
@@ -430,8 +429,7 @@
       </div>
     </div>
   </div>
-    <DeleteDiag :idData="RequestId" :openData="open" :typeData="type" />
-
+  <DeleteDiag :idData="RequestId" :openData="open" :typeData="type" />
 </template>
 
 <script>
@@ -448,53 +446,49 @@ export default {
     ChevronLeftIcon,
     ChevronRightIcon,
     Avatar,
-    DeleteDiag
+    DeleteDiag,
   },
 
   setup() {
-
     let action = "Search/paginateHandymen";
     let store = useStore();
     let meta, links, requests;
     let path = "handymen";
 
     let page = 1;
-        let open = ref(false);
+    let open = ref(false);
     let type = ref("request");
     let RequestId = ref(null);
     let openDiag = (id) => {
       open.value = true;
       RequestId.value = id;
-
     };
     /* let router = useRouter
-     */ store
-      .dispatch("Request/getClientRequestsPaginate", page)
-      .then((res) => {
-        console.log(res);
-      });
+     */ store.dispatch("Admin/getAllClientRequests", page).then((res) => {
+      console.log(res);
+    });
     meta = computed(() => {
-      return store.getters["Request/meta"];
+      return store.getters["Admin/getClientRequestMeta"];
     });
     links = computed(() => {
-      return store.getters["Request/links"];
+      return store.getters["Admin/getClientRequestLinks"];
     });
     requests = computed(() => {
-      return store.getters["Request/requests"];
+      return store.getters["Admin/getClientRequest"];
     });
     console.log(meta);
     const prevPage = () => {
-      store.dispatch("Request/paginateClientRequests", links.value.prev);
+      store.dispatch("Admin/getClientRequestLink", links.value.prev);
     };
     const nextPage = () => {
       console.log(links.value.next);
-      store.dispatch("Request/paginateClientRequests", links.value.next);
+      store.dispatch("Admin/getClientRequestLink", links.value.next);
     };
 
     const setPage = (pageNumber) => {
-      let paginationlink = `${process.env.VUE_APP_API_URL}/api/paginate/request?page=${pageNumber}`;
+      let paginationlink = `${process.env.VUE_APP_API_URL}/api/admin/get-all-requests-paginate?page=${pageNumber}`;
 
-      store.dispatch("Request/paginateClientRequests", paginationlink);
+      store.dispatch("Admin/getClientRequestLink", paginationlink);
       console.log(meta.value);
     };
 
@@ -540,11 +534,10 @@ export default {
       currentPage,
       totalPages,
       preurl,
-      open ,
-     type ,
-     RequestId ,
-     openDiag
-
+      open,
+      type,
+      RequestId,
+      openDiag,
     };
   },
 };
