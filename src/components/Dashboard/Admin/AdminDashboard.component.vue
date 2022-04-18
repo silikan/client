@@ -70,13 +70,7 @@
                 </button>
               </div>
             </TransitionChild>
-            <div class="flex-shrink-0 flex items-center px-4">
-              <img
-                class="h-8 w-auto"
-                src="https://tailwindui.com/img/logos/easywire-logo-indigo-300-mark-white-text.svg"
-                alt="Easywire logo"
-              />
-            </div>
+
             <nav
               class="
                 mt-5
@@ -152,13 +146,6 @@
       <div
         class="flex flex-col flex-grow bg-indigo-700 pt-5 pb-4 overflow-y-auto"
       >
-        <div class="flex items-center flex-shrink-0 px-4">
-          <img
-            class="h-8 w-auto"
-            src="https://tailwindui.com/img/logos/easywire-logo-indigo-300-mark-white-text.svg"
-            alt="Easywire logo"
-          />
-        </div>
         <nav
           class="
             mt-5
@@ -170,7 +157,7 @@
         >
           <div class="px-2 space-y-1">
             <router-link
-            class="cursor-pointer"
+              class="cursor-pointer"
               v-for="item in navigation"
               :key="item.name"
               :to="item.link"
@@ -192,8 +179,7 @@
           </div>
           <div class="mt-6 pt-6">
             <div class="px-2 space-y-1">
-                     <router-link
-
+              <router-link
                 v-for="item in secondaryNavigation"
                 :key="item.name"
                 :to="item.link"
@@ -329,17 +315,12 @@
               <div class="flex-1 min-w-0">
                 <!-- Profile -->
                 <div class="flex items-center">
-                  <img
-                    class="hidden h-16 w-16 rounded-full sm:block"
-                    src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2.6&w=256&h=256&q=80"
-                    alt=""
-                  />
                   <div>
                     <div class="flex items-center">
-                      <img
-                        class="h-16 w-16 rounded-full sm:hidden"
-                        src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2.6&w=256&h=256&q=80"
-                        alt=""
+                      <Avatar
+                        v-if="authUser.name"
+                        :url="authUser.avatar"
+                        :name="authUser.name"
                       />
                       <h1
                         class="
@@ -350,8 +331,9 @@
                           text-gray-900
                           sm:leading-9 sm:truncate
                         "
+                        v-if="authUser.name"
                       >
-                        Good morning, Emilia Birch
+                        Good morning, {{ authUser.name }}
                       </h1>
                     </div>
                     <dl
@@ -460,8 +442,8 @@
 
 <script>
 import SearchList from "@/components/Search/SearchList.component.vue";
-
-import { ref } from "vue";
+import Avatar from "./Avatar.component.vue";
+import { computed, ref } from "vue";
 
 import {
   Dialog,
@@ -490,14 +472,24 @@ import {
   OfficeBuildingIcon,
   SearchIcon,
 } from "@heroicons/vue/solid";
+import { useStore } from "vuex";
 
 const navigation = [
-  { name: "Home", link: "/dashboard/admin/home", icon: HomeIcon, current: true },
-  { name: "Transactions", link: "/dashboard/admin/transactions", icon: CreditCardIcon, current: false },
+  {
+    name: "Home",
+    link: "/dashboard/admin/home",
+    icon: HomeIcon,
+    current: true,
+  },
+  {
+    name: "Transactions",
+    link: "/dashboard/admin/transactions",
+    icon: CreditCardIcon,
+    current: false,
+  },
 ];
 const secondaryNavigation = [
   { name: "Settings", link: "/dashboard/admin/settings", icon: CogIcon },
-
 ];
 const cards = [
   { name: "Account balance", href: "#", icon: ScaleIcon, amount: "$30,659.45" },
@@ -542,10 +534,15 @@ export default {
     SearchIcon,
     XIcon,
     SearchList,
+    Avatar,
   },
   setup() {
     const sidebarOpen = ref(false);
     let search = ref("");
+    let store = useStore();
+
+    let authUser = computed(() => store.getters["auth/authUser"]);
+
     return {
       navigation,
       secondaryNavigation,
@@ -554,6 +551,8 @@ export default {
       statusStyles,
       sidebarOpen,
       search,
+
+      authUser,
     };
   },
 };
