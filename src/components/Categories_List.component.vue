@@ -1,5 +1,9 @@
 <!-- This example requires Tailwind CSS v2.0+ -->
 <template>
+<div v-if="loading === true">
+  <Categories/>
+</div>
+<div v-if="loading === false">
       <div class="flex w-full items-center justify-between mb-5">
         <div
           class="space-y-5 sm:space-y-4 md:max-w-xl lg:max-w-3xl xl:max-w-none"
@@ -62,6 +66,7 @@
       </li>
     </ul>
   </div>
+  </div>
 </template>
 
 <script>
@@ -78,10 +83,13 @@ const projects = [
 import { useStore } from 'vuex';
 import { createAvatar } from "@dicebear/avatars";
 import * as style from "@dicebear/avatars-initials-sprites";
+import { computed } from '@vue/runtime-core';
+  import Categories from "@/components/Loading/Skeletons/Categories.component.vue"
 
 export default {
   components: {
     ChevronRightIcon,
+    Categories
   },
   setup() {
     let categories = ref([]);
@@ -105,9 +113,13 @@ let avatar_svg = ref()
 
       console.log(categories.value)
     });
+
+                let loading = computed(() => store.getters["Loading/loading"]);
+
     return {
       categories,
-      projects
+      projects,
+      loading
     };
   },
 };
