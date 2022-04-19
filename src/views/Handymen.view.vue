@@ -1,5 +1,10 @@
 <template>
-  <div class="flex flex-col justify-center items-center m-10">
+
+
+<div v-if="loading === true">
+<HandymenLoadingSkeleton/>
+</div>
+  <div class="flex flex-col justify-center items-center m-10 " v-if="loading === false">
     <HandymanList
 
        :path="path"
@@ -13,12 +18,14 @@
 
 <script>
  import HandymanList from '@/components/Handymen_List.component.vue';
+import HandymenLoadingSkeleton from "@/components/Loading/Skeletons/UserCard.component.vue"
 
 import store from "@/store/index";
 import { computed } from '@vue/runtime-core';
 export default {
   components: {
      HandymanList,
+     HandymenLoadingSkeleton
   },
 
   setup() {
@@ -29,6 +36,7 @@ export default {
     const meta = computed(()=>store.getters["handyman/meta"])
     const links =computed(()=> store.getters["handyman/links"])
 
+        let loading = computed(() => store.getters["Loading/loading"]);
 
 
     return{
@@ -37,6 +45,7 @@ export default {
 
       action,
       path,
+      loading,
     }
   },
 

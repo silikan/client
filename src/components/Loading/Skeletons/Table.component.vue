@@ -20,7 +20,7 @@
                     tracking-wider
                   "
                 >
-                  <div class="w-25 bg-gray-300 h-2 rounded-md mt-1"></div>
+                  <div class="w-32 bg-gray-300 h-2 rounded-md mt-1"></div>
                 </th>
                 <th
                   scope="col"
@@ -34,7 +34,7 @@
                     tracking-wider
                   "
                 >
-                  <div class="w-25 bg-gray-300 h-2 rounded-md mt-1"></div>
+                  <div class="w-32 bg-gray-300 h-2 rounded-md mt-1"></div>
                 </th>
                 <th
                   scope="col"
@@ -48,7 +48,7 @@
                     tracking-wider
                   "
                 >
-                  <div class="w-25 bg-gray-300 h-2 rounded-md mt-1"></div>
+                  <div class="w-32 bg-gray-300 h-2 rounded-md mt-1"></div>
                 </th>
                 <th
                   scope="col"
@@ -62,11 +62,11 @@
                     tracking-wider
                   "
                 >
-                  <div class="w-25 bg-gray-300 h-2 rounded-md mt-1"></div>
+                  <div class="w-32 bg-gray-300 h-2 rounded-md mt-1"></div>
                 </th>
                 <th scope="col" class="relative px-6 py-3">
                   <span class="sr-only">
-                    <div class="w-25 bg-gray-300 h-2 rounded-md mt-1"></div>
+                    <div class="w-32 bg-gray-300 h-2 rounded-md mt-1"></div>
                   </span>
                 </th>
               </tr>
@@ -80,23 +80,23 @@
                     </div>
                     <div class="ml-4">
                       <div class="text-sm font-medium text-gray-900">
-                        <div class="w-25 bg-gray-300 h-2 rounded-md"></div>
+                        <div class="w-32  bg-gray-300 h-2 rounded-md"></div>
                       </div>
                       <div class="text-sm text-gray-500">
-                        <div class="w-25 bg-gray-300 h-2 rounded-md mt-1"></div>
+                        <div class="w-32 bg-gray-300 h-2 rounded-md mt-1"></div>
                       </div>
                     </div>
                   </div>
                 </td>
                 <td class="px-6 py-4 whitespace-nowrap">
-                  <div class="w-25 bg-gray-300 h-2 rounded-md"></div>
-                  <div class="w-25 bg-gray-300 h-2 rounded-md mt-1"></div>
+                  <div class="w-32 bg-gray-300 h-2 rounded-md"></div>
+                  <div class="w-32 bg-gray-300 h-2 rounded-md mt-1"></div>
                 </td>
                 <td class="px-6 py-4 whitespace-nowrap">
-                  <div class="w-25 bg-gray-300 h-2 rounded-md"></div>
+                  <div class="w-32 bg-gray-300 h-2 rounded-md"></div>
                 </td>
                 <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                  <div class="w-25 bg-gray-300 h-2 rounded-md"></div>
+                  <div class="w-32 bg-gray-300 h-2 rounded-md"></div>
                 </td>
                 <td
                   class="
@@ -107,7 +107,7 @@
                     font-medium
                   "
                 >
-                  <div class="w-25 bg-gray-300 h-2 rounded-md"></div>
+                  <div class="w-32 bg-gray-300 h-2 rounded-md"></div>
                 </td>
               </tr>
             </tbody>

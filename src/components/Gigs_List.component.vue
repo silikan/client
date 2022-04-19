@@ -1,5 +1,8 @@
 <template>
-  <div class="bg-white" v-if="links && meta">
+<div v-if="loading === true">
+<GigLoadingSkeleton/>
+</div>
+  <div class="bg-white" v-if="loading ===false && links && meta">
     <div class="mx-auto py-12 px-4 max-w-7xl sm:px-6 lg:px-8 lg:py-24">
       <div class="flex w-full items-center justify-between mb-5">
         <div
@@ -339,7 +342,7 @@
 <script>
 import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/vue/solid";
 import { BookmarkIcon, ShoppingCartIcon } from "@heroicons/vue/solid";
-
+import GigLoadingSkeleton from "@/components/Loading/Skeletons/Gig.component.vue"
 import { computed, reactive } from "@vue/runtime-core";
 import { useStore } from "vuex";
 import Avatar from "@/components/Avatar/Avatar.component.vue";
@@ -351,6 +354,7 @@ export default {
     Avatar,
     BookmarkIcon,
     ShoppingCartIcon,
+    GigLoadingSkeleton
   },
 
   setup() {
@@ -358,6 +362,7 @@ export default {
     let store = useStore();
     let meta, links, gigs;
     let path = "handymen";
+    let loading = computed(() => store.getters["Loading/loading"]);
 
     let page = 1;
 
@@ -429,6 +434,7 @@ export default {
       currentPage,
       totalPages,
       preurl,
+      loading
     };
   },
 };

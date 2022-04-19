@@ -1,16 +1,16 @@
 <template>
 <!--   <div><Tables /></div>
- -->  <div><Categories /></div>
+ -->  <div><Tables /></div>
 </template>
 
 <script>
 /* import Tables from "@/components/Loading/Skeletons/Table.component.vue";
  */
-import Categories from "@/components/Loading/Skeletons/Categories.component.vue";
+ import Tables from "@/components/Loading/Skeletons/Table.component.vue";
 export default {
   components: {
 /*     Tables,
- */    Categories
+ */    Tables
   },
 };
 </script>
