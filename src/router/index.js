@@ -49,13 +49,18 @@ import TaskItemFeed from "@/views/TaskItemFeed.view.vue";
 import AdminDashboardHome from "@/components/Dashboard/Admin/Parts/Home.component.vue";
 import AdminDashboardTransactions from "@/components/Dashboard/Admin/Parts/Transactions.component.vue";
 import AdminDashboardSettings from "@/components/Dashboard/Admin/Parts/Settings.component.vue";
-
+import Skeletons from "@/views/Skeletons.view.vue";
 const routes = [
   {
     path: "/",
     name: "Home",
     meta: { middleware: [guest] },
     component: Home,
+  },
+  {
+    path: "/skeleton",
+    name: "Skeletons",
+    component: Skeletons,
   },
   {
     path: "/cart/:id/feed",
