@@ -1,4 +1,20 @@
 <template>
+  <div class="bg-white" >
+    <div class="mx-auto py-12 px-4 max-w-7xl sm:px-6 lg:px-8 lg:py-24">
+
+      <div class="flex flex-col">
+        <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
+          <div
+            class="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8"
+          >
+            <div
+              class="
+                shadow
+                overflow-hidden
+                border-b border-gray-200
+                sm:rounded-lg
+              "
+            >
   <div class="flex flex-col animate-pulse">
     <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
       <div class="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
@@ -20,7 +36,7 @@
                     tracking-wider
                   "
                 >
-                  <div class="w-32 bg-gray-300 h-2 rounded-md mt-1"></div>
+                  <div class="w-14 bg-gray-300 h-2 rounded-md mt-1"></div>
                 </th>
                 <th
                   scope="col"
@@ -34,7 +50,7 @@
                     tracking-wider
                   "
                 >
-                  <div class="w-32 bg-gray-300 h-2 rounded-md mt-1"></div>
+                  <div class="w-14 bg-gray-300 h-2 rounded-md mt-1"></div>
                 </th>
                 <th
                   scope="col"
@@ -48,7 +64,7 @@
                     tracking-wider
                   "
                 >
-                  <div class="w-32 bg-gray-300 h-2 rounded-md mt-1"></div>
+                  <div class="w-14 bg-gray-300 h-2 rounded-md mt-1"></div>
                 </th>
                 <th
                   scope="col"
@@ -62,11 +78,11 @@
                     tracking-wider
                   "
                 >
-                  <div class="w-32 bg-gray-300 h-2 rounded-md mt-1"></div>
+                  <div class="w-14 bg-gray-300 h-2 rounded-md mt-1"></div>
                 </th>
                 <th scope="col" class="relative px-6 py-3">
                   <span class="sr-only">
-                    <div class="w-32 bg-gray-300 h-2 rounded-md mt-1"></div>
+                    <div class="w-14 bg-gray-300 h-2 rounded-md mt-1"></div>
                   </span>
                 </th>
               </tr>
@@ -80,23 +96,23 @@
                     </div>
                     <div class="ml-4">
                       <div class="text-sm font-medium text-gray-900">
-                        <div class="w-32  bg-gray-300 h-2 rounded-md"></div>
+                        <div class="w-14  bg-gray-300 h-2 rounded-md"></div>
                       </div>
                       <div class="text-sm text-gray-500">
-                        <div class="w-32 bg-gray-300 h-2 rounded-md mt-1"></div>
+                        <div class="w-14 bg-gray-300 h-2 rounded-md mt-1"></div>
                       </div>
                     </div>
                   </div>
                 </td>
                 <td class="px-6 py-4 whitespace-nowrap">
-                  <div class="w-32 bg-gray-300 h-2 rounded-md"></div>
-                  <div class="w-32 bg-gray-300 h-2 rounded-md mt-1"></div>
+                  <div class="w-14 bg-gray-300 h-2 rounded-md"></div>
+                  <div class="w-14 bg-gray-300 h-2 rounded-md mt-1"></div>
                 </td>
                 <td class="px-6 py-4 whitespace-nowrap">
-                  <div class="w-32 bg-gray-300 h-2 rounded-md"></div>
+                  <div class="w-14 bg-gray-300 h-2 rounded-md"></div>
                 </td>
                 <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                  <div class="w-32 bg-gray-300 h-2 rounded-md"></div>
+                  <div class="w-14 bg-gray-300 h-2 rounded-md"></div>
                 </td>
                 <td
                   class="
@@ -107,7 +123,7 @@
                     font-medium
                   "
                 >
-                  <div class="w-32 bg-gray-300 h-2 rounded-md"></div>
+                  <div class="w-14 bg-gray-300 h-2 rounded-md"></div>
                 </td>
               </tr>
             </tbody>
@@ -116,6 +132,13 @@
       </div>
     </div>
   </div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
 </template>
 
 <script>

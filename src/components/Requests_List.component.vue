@@ -1,5 +1,9 @@
 <template>
-  <div class="bg-white" v-if="links && meta">
+<div v-if="loading === true">
+<Table/>
+</div>
+
+  <div class="bg-white" v-if=" loading === false && links && meta">
     <div class="mx-auto py-12 px-4 max-w-7xl sm:px-6 lg:px-8 lg:py-24">
       <div class="flex w-full items-center justify-between mb-5">
         <div
@@ -426,6 +430,7 @@
 <script>
 import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/vue/solid";
 import Avatar from "@/components/Avatar/Avatar.component.vue";
+import Table from "@/components/Loading/Skeletons/Table.component.vue"
 
 import { computed, reactive } from "@vue/runtime-core";
 import { useStore } from "vuex";
@@ -435,6 +440,7 @@ export default {
     ChevronLeftIcon,
     ChevronRightIcon,
     Avatar,
+    Table
   },
 
   setup() {
@@ -504,6 +510,8 @@ export default {
       return data;
     });
     let preurl = `${process.env.VUE_APP_API_URL}`;
+            let loading = computed(() => store.getters["Loading/loading"]);
+
     return {
       action,
       path,
@@ -518,6 +526,7 @@ export default {
       currentPage,
       totalPages,
       preurl,
+      loading,
     };
   },
 };
