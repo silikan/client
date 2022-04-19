@@ -1,6 +1,8 @@
 <template>
-
-  <div class="bg-white" v-if="links && meta">
+<div v-if="loading === true">
+<Table/>
+</div>
+  <div class="bg-white" v-if="  loading === false && links && meta">
     <div class="mx-auto py-12 px-4 max-w-7xl sm:px-6 lg:px-8 lg:py-24">
       <div class="flex w-full items-center justify-between mb-5">
         <div
@@ -389,12 +391,14 @@ import { computed, reactive } from "@vue/runtime-core";
 import { useStore } from "vuex";
 import { useRoute } from "vue-router";
 
+import Table from "@/components/Loading/Skeletons/Table.component.vue"
 
 export default {
   components: {
 
     ChevronLeftIcon,
     ChevronRightIcon,
+    Table,
   },
 
   setup() {
@@ -466,6 +470,8 @@ export default {
       return data;
     });
 let preurl = `${process.env.VUE_APP_API_URL}`;
+            let loading = computed(() => store.getters["Loading/loading"]);
+
     return {
 
       query,
@@ -481,7 +487,8 @@ let preurl = `${process.env.VUE_APP_API_URL}`;
       filterPages,
       currentPage,
       totalPages,
-      preurl
+      preurl,
+      loading,
     };
   },
 };
