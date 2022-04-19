@@ -9,9 +9,7 @@
     <div class="flex items-center flex-1 md:flex-none"></div>
   </div>
   <div class="my-10">
-    <h2 class="text-gray-500 text-xs font-medium uppercase tracking-wide">
-      Gigs
-    </h2>
+
   <ul
       role="list"
       class="mt-3 grid grid-cols-1 gap-5 sm:gap-6 sm:grid-cols-2 lg:grid-cols-4"
@@ -67,9 +65,7 @@
     </ul>
   </div>
   <div class="my-10">
-    <h2 class="text-gray-500 text-xs font-medium uppercase tracking-wide">
-      Requests
-    </h2>
+
     <ul
       role="list"
       class="mt-3 grid grid-cols-1 gap-5 sm:gap-6 sm:grid-cols-2 lg:grid-cols-4"
