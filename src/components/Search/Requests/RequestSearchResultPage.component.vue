@@ -1,7 +1,7 @@
 <template>
-<div v-if="loading === true">
-<Table/>
-</div>
+  <div v-if="loading === true">
+    <Table />
+  </div>
   <div class="bg-white" v-if="loading === false && links && meta">
     <div class="mx-auto py-12 px-4 max-w-7xl sm:px-6 lg:px-8 lg:py-24">
       <div class="flex w-full items-center justify-between mb-5">
@@ -29,7 +29,7 @@
               <table class="min-w-full divide-y divide-gray-200">
                 <thead class="bg-gray-50">
                   <tr>
-                      <th
+                    <th
                       scope="col"
                       class="
                         px-6
@@ -85,7 +85,7 @@
                     >
                       Duration
                     </th>
-                        <th
+                    <th
                       scope="col"
                       class="
                         px-6
@@ -127,7 +127,7 @@
                         </div>
                       </router-link>
                     </td>
-                       <td class="px-6 py-4 whitespace-nowrap">
+                    <td class="px-6 py-4 whitespace-nowrap">
                       <div class="flex items-center">
                         <div class="ml-4">
                           <div class="text-sm text-gray-500">
@@ -168,7 +168,7 @@
                         {{ request.duration }} Days
                       </span>
                     </td>
-                      <td class="px-6 py-4 whitespace-nowrap">
+                    <td class="px-6 py-4 whitespace-nowrap">
                       <span
                         class="
                           px-2
@@ -181,7 +181,7 @@
                           text-green-800
                         "
                       >
-                       {{JSON.parse( request.payment_method ) }}
+                        {{ JSON.parse(request.payment_method) }}
                       </span>
                     </td>
                     <td
@@ -429,7 +429,7 @@
 <script>
 import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/vue/solid";
 import Avatar from "@/components/Avatar/Avatar.component.vue";
-import Table from "@/components/Loading/Skeletons/Table.component.vue"
+import Table from "@/components/Loading/Skeletons/Table.component.vue";
 
 import { computed, reactive } from "@vue/runtime-core";
 import { useStore } from "vuex";
@@ -516,7 +516,7 @@ export default {
 
       return data;
     });
-                    let loading = computed(() => store.getters["Loading/loading"]);
+    let loading = computed(() => store.getters["Loading/loading"]);
 
     let preurl = `${process.env.VUE_APP_API_URL}`;
     return {

@@ -1,5 +1,8 @@
 <template>
-  <div class="bg-white" v-if="links && meta">
+  <div v-if="loading === true">
+    <Table />
+  </div>
+  <div class="bg-white" v-if="loading === false && links && meta">
     <div class="">
       <div class="flex flex-col">
         <div class="-my-2 overflow-x-auto">
@@ -434,6 +437,7 @@
 
 <script>
 import DeleteDiag from "../DeleteUserDialogue.component.vue";
+import Table from "@/components/Loading/Skeletons/Table.component.vue"
 
 import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/vue/solid";
 import Avatar from "@/components/Avatar/Avatar.component.vue";
@@ -447,6 +451,7 @@ export default {
     ChevronRightIcon,
     Avatar,
     DeleteDiag,
+    Table
   },
 
   setup() {
@@ -520,6 +525,8 @@ export default {
       return data;
     });
     let preurl = `${process.env.VUE_APP_API_URL}`;
+                            let loading = computed(() => store.getters["Loading/loading"]);
+
     return {
       action,
       path,
@@ -538,6 +545,7 @@ export default {
       type,
       RequestId,
       openDiag,
+      loading
     };
   },
 };

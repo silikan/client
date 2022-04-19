@@ -1,5 +1,8 @@
 <template>
-  <div class="bg-white" v-if="links && meta">
+  <div v-if="loading === true">
+    <Table />
+  </div>
+  <div class="bg-white" v-if="loading === false && links && meta">
     <div class="mx-auto py-12 px-4 max-w-7xl sm:px-6 lg:px-8 lg:py-24">
       <div class="flex flex-col">
         <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
@@ -399,6 +402,8 @@
 </template>
 
 <script>
+import Table from "@/components/Loading/Skeletons/Table.component.vue"
+
 import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/vue/solid";
 import Avatar from "@/components/Avatar/Avatar.component.vue";
 import DeleteDiag from "../DeleteUserDialogue.component.vue";
@@ -412,6 +417,7 @@ export default {
     ChevronRightIcon,
     Avatar,
     DeleteDiag,
+    Table
   },
 
   setup() {
@@ -488,6 +494,8 @@ export default {
       userId.value = id;
 
     };
+                        let loading = computed(() => store.getters["Loading/loading"]);
+
 
     return {
       query,
@@ -508,7 +516,7 @@ export default {
       type,
       openDiag,
       userId,
-
+loading
     };
   },
 };
