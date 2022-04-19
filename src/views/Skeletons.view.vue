@@ -1,15 +1,17 @@
 <template>
 <!--   <div><Tables /></div>
- -->  <div><Gig /></div>
+ -->  <div><UserCard /></div>
 </template>
 
 <script>
 /* import Tables from "@/components/Loading/Skeletons/Table.component.vue";
- */import Gig from "@/components/Loading/Skeletons/Gig.component.vue";
+ */
+
+ import UserCard from "@/components/Loading/Skeletons/UserCard.component.vue";
 export default {
   components: {
 /*     Tables,
- */    Gig
+ */    UserCard
   },
 };
 </script>
