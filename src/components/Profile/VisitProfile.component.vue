@@ -334,15 +334,26 @@
       </div>
     </div>
   </div>
-  <ClientRequests v-show="Gigs_Requests_tabs[0].current === true" />
+  <ClientRequests v-show="loading === false && Gigs_Requests_tabs[0].current === true" />
+  <Table v-show="loading === true && Gigs_Requests_tabs[0].current === true" />
 
   <HandymanGigs
-    v-show="Gigs_Requests_tabs[1].current === true  && isHandyman === true "
+    v-show="loading === false &&  Gigs_Requests_tabs[1].current === true  && isHandyman === true "
 
+  />
+    <GigLoadingSkeleton
+    v-show="
+      loading === true &&
+      Gigs_Requests_tabs[1].current === true &&
+      isHandyman === true
+    "
   />
 </template>
 
 <script>
+import GigLoadingSkeleton from "@/components/Loading/Skeletons/Gig.component.vue";
+
+import Table from "@/components/Loading/Skeletons/Table.component.vue";
 import {
   BriefcaseIcon,
   CalendarIcon,
@@ -360,7 +371,7 @@ import HandymanGigs from "./Visit_Handyman_Gigs.component.vue";
 
 import { DotsVerticalIcon } from "@heroicons/vue/solid";
 import { Menu, MenuButton, MenuItem, MenuItems } from "@headlessui/vue";
-import {  reactive, ref } from "@vue/runtime-core";
+import {  computed, reactive, ref } from "@vue/runtime-core";
 import { createAvatar } from "@dicebear/avatars";
 import * as style from "@dicebear/avatars-initials-sprites";
 import UserService from "@/services/UserService.js";
@@ -407,7 +418,9 @@ export default {
 
     LocationMarkerIcon,
     ChatButton,
-    CheckCircleIcon
+    CheckCircleIcon,
+    Table,
+    GigLoadingSkeleton,
   },
 
   setup() {
@@ -515,6 +528,9 @@ if(tab.name === "Gigs" && tab.number === 2){
 
 
 }
+
+    let loading = computed(() => store.getters["Loading/loading"]);
+
     return {
       VisitUserData,
 
@@ -533,6 +549,7 @@ if(tab.name === "Gigs" && tab.number === 2){
       id,
 
       GigRequestNavigation,
+      loading
 
     };
   },

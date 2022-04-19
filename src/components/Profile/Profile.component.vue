@@ -415,14 +415,32 @@
       </div>
     </div>
   </div>
-  <ClientRequests v-show="Gigs_Requests_tabs[0].current === true" />
+  <ClientRequests
+    v-show="loading === false && Gigs_Requests_tabs[0].current === true"
+  />
+  <Table v-show="loading === true && Gigs_Requests_tabs[0].current === true" />
 
   <HandymanGigs
-    v-show="Gigs_Requests_tabs[1].current === true && isHandyman === true"
+    v-show="
+      loading === false &&
+      Gigs_Requests_tabs[1].current === true &&
+      isHandyman === true
+    "
+  />
+  <GigLoadingSkeleton
+    v-show="
+      loading === true &&
+      Gigs_Requests_tabs[1].current === true &&
+      isHandyman === true
+    "
   />
 </template>
 
 <script>
+import GigLoadingSkeleton from "@/components/Loading/Skeletons/Gig.component.vue";
+
+import Table from "@/components/Loading/Skeletons/Table.component.vue";
+
 import {
   BriefcaseIcon,
   CalendarIcon,
@@ -488,6 +506,8 @@ export default {
 
     LocationMarkerIcon,
     CheckCircleIcon,
+    Table,
+    GigLoadingSkeleton,
   },
   props: ["authUser"],
 
@@ -582,6 +602,9 @@ export default {
       return store.getters["auth/emailVerified"];
     });
     console.log(isEmailVirified.value);
+
+    let loading = computed(() => store.getters["Loading/loading"]);
+
     return {
       profile,
       tabs,
@@ -596,6 +619,7 @@ export default {
       timerange,
       GigRequestNavigation,
       isEmailVirified,
+      loading,
     };
   },
 };
