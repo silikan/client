@@ -1,4 +1,5 @@
 <template>
+
   <div class="bg-white">
     <div class="mx-auto py-12 px-4 max-w-7xl sm:px-6 lg:px-8 lg:py-24">
       <div class="flex w-full items-center justify-between mb-5">
@@ -13,7 +14,9 @@
 
         </div>
       </div>
-      <div class="space-y-12 mb-10">
+
+<HandymenLoadingSkeleton  v-if="loading === true"/>
+     <div class="space-y-12 mb-10" v-if="loading === false">
         <ul
           role="list"
           class="
@@ -353,6 +356,7 @@
 
 <script>
 import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/vue/solid";
+import HandymenLoadingSkeleton from "@/components/Loading/Skeletons/UserCard.component.vue"
 
 import store from "@/store/index";
 import { createAvatar } from "@dicebear/avatars";
@@ -364,6 +368,7 @@ export default {
   components: {
     ChevronLeftIcon,
     ChevronRightIcon,
+    HandymenLoadingSkeleton
   },
   props: {
     action: {
@@ -499,6 +504,8 @@ export default {
       return data;
     });
     console.log(people.value);
+            let loading = computed(() => store.getters["Loading/loading"]);
+
     return {
       people,
 
@@ -512,6 +519,7 @@ export default {
       currentPage,
       totalPages,
       filterPages,
+      loading,
     };
   },
 };
