@@ -1,6 +1,5 @@
 <template>
   <Disclosure v-slot="{ open }" as="header" class="bg-white shadow">
-
     <div
       class="
         max-w-7xl
@@ -78,7 +77,7 @@
               <SearchList
                 v-if="search != ''"
                 :searchData="search"
-                class=" absolute z-50 shadow-lg w-full "
+                class="absolute z-50 shadow-lg w-full"
               />
             </div>
 
@@ -154,6 +153,44 @@
               </router-link>
             </div>
           </div>
+          <router-link
+            v-if=" isHandyman === true &&  buying === true "
+            to="/selling"
+            class="
+              inline-flex
+              items-center
+              px-5
+              py-2
+              border border-transparent
+              text-sm
+              rounded-full
+              shadow-sm
+
+              text-indigo-600
+              font-bold
+            "
+          >
+            Switch To Selling
+          </router-link>
+              <router-link
+            v-if="  buying === false  "
+            to="/buying"
+            class="
+              inline-flex
+              items-center
+              px-5
+              py-2
+              border border-transparent
+              text-sm
+              rounded-full
+              shadow-sm
+
+              text-indigo-600
+              font-bold
+            "
+          >
+            {{ isHandyman === true ? 'Switch To Buying' : 'Go To Buying' }}
+          </router-link>
           <router-link
             to="/rooms"
             v-if="isLoggedin === true"
@@ -325,7 +362,6 @@
         >
           {{ item.name }}
         </router-link>
-
       </nav>
     </div>
 
@@ -343,57 +379,57 @@
             :aria-current="item.current ? 'page' : undefined"
           >
             {{ item.name }}
-
           </DisclosureButton>
-
         </div>
       </router-link>
-       <div class=" m-5 flex flex-col justify-between space-y-4 items-start"  v-if="isLoggedin === false">
-            <div class="flex " v-if="signin === false">
-              <router-link
-                to="/signin"
-                class="
-                  inline-flex
-                  items-center
-                  px-5
-                  py-2
-
-                  border
-                  text-sm
-                  font-medium
-                  rounded-full
-                  shadow-sm
-                  text-black
-                  bg-white
-                  hover:bg-transparent hover:border-white
-                "
-              >
-                Signin
-              </router-link>
-            </div>
-            <div class="flex">
-              <router-link
-                v-if="signup === false"
-                to="/signup"
-                class="
-                  inline-flex
-                  items-center
-                  px-5
-                  py-2
-                  border border-transparent
-                  text-sm
-                  font-medium
-                  rounded-full
-                  shadow-sm
-                  text-white
-                  bg-indigo-600
-                  hover:bg-indigo-700
-                "
-              >
-                Signup
-              </router-link>
-            </div>
-          </div>
+      <div
+        class="m-5 flex flex-col justify-between space-y-4 items-start"
+        v-if="isLoggedin === false"
+      >
+        <div class="flex" v-if="signin === false">
+          <router-link
+            to="/signin"
+            class="
+              inline-flex
+              items-center
+              px-5
+              py-2
+              border
+              text-sm
+              font-medium
+              rounded-full
+              shadow-sm
+              text-black
+              bg-white
+              hover:bg-transparent hover:border-white
+            "
+          >
+            Signin
+          </router-link>
+        </div>
+        <div class="flex">
+          <router-link
+            v-if="signup === false"
+            to="/signup"
+            class="
+              inline-flex
+              items-center
+              px-5
+              py-2
+              border border-transparent
+              text-sm
+              font-medium
+              rounded-full
+              shadow-sm
+              text-white
+              bg-indigo-600
+              hover:bg-indigo-700
+            "
+          >
+            Signup
+          </router-link>
+        </div>
+      </div>
       <div
         v-if="isLoggedin === true"
         class="border-t border-gray-200 pt-4 pb-3"
@@ -585,7 +621,6 @@ const navigation = [
   { name: "Gigs", link: "/gigs" },
   { name: "About", link: "/aboutus" },
   { name: "Contact Us", link: "/contactus" },
-
 ];
 const userNavigation = [
   { name: "Your Profile", href: "#", route: "/profile" },
@@ -616,11 +651,14 @@ export default {
   setup(props) {
     const route = useRoute();
     const store = useStore();
+    let isHandyman = computed(() => store.getters["auth/isHandyman"]);
     let search = ref("");
     let isLoggedin = computed(() => store.getters["auth/loggedIn"]);
 
     const signin = computed(() => route.path === "/signin");
     const signup = computed(() => route.path === "/signup");
+    const buying = computed(() => route.path === "/buying");
+    const selling = computed(() => route.path === "/selling");
     let authUserData = computed(() => {
       return props.authUser;
     });
@@ -675,6 +713,9 @@ export default {
       signup,
       navBarImg,
       search,
+      isHandyman,
+      buying,
+      selling,
     };
   },
 };
@@ -682,5 +723,4 @@ export default {
 
 
 <style scoped>
-
 </style>

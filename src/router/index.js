@@ -274,7 +274,7 @@ const routes = [
     path: "/buying",
     name: "Buying",
     component: Buying,
-    meta: { middleware: [auth, client, handyman] },
+    meta: { middleware: [auth, client] },
   },
 
   {
