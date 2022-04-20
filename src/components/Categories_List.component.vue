@@ -1,6 +1,5 @@
 <!-- This example requires Tailwind CSS v2.0+ -->
 <template>
-{{true}}
 <div v-if="loading === true">
   <Categories/>
 </div>

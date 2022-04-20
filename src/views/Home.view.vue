@@ -20,6 +20,9 @@ import Stats from '../components/Home/Stats.component.vue';
 import Testemonials from '../components/Home/Testemonials.component.vue';
 import Faq from '../components/Home/Faq.component.vue';
 import Trusted from '../components/Home/Trusted.component.vue';
+import { watchEffect } from '@vue/runtime-core';
+import { useStore } from 'vuex';
+import { useRouter } from 'vue-router';
 
 export default {
   components: {
@@ -31,6 +34,18 @@ export default {
     Testemonials,
     Faq,
     Trusted,
+  },
+  setup() {
+    let store = useStore();
+    let router = useRouter();
+     watchEffect(async () => {
+      const authUser = await store.getters["auth/loggedIn"];
+      console.log(authUser === true);
+      if (authUser) {
+        router.push("/profile");
+      }
+    });
+    return {};
   },
 };
 </script>

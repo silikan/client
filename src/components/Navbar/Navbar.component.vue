@@ -349,7 +349,7 @@
         </div>
       </router-link>
        <div class=" m-5 flex flex-col justify-between space-y-4 items-start"  v-if="isLoggedin === false">
-            <div class="hidden md:flex " v-if="signin === false">
+            <div class="flex " v-if="signin === false">
               <router-link
                 to="/signin"
                 class="
@@ -357,6 +357,7 @@
                   items-center
                   px-5
                   py-2
+
                   border
                   text-sm
                   font-medium
@@ -370,7 +371,7 @@
                 Signin
               </router-link>
             </div>
-            <div class="hidden md:flex">
+            <div class="flex">
               <router-link
                 v-if="signup === false"
                 to="/signup"

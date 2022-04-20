@@ -99,6 +99,7 @@
                 >{{ item.name }}</router-link
               >
             </div>
+
           </div>
           <div class="flex justify-between">
             <div class="hidden md:flex mx-4">
@@ -226,8 +227,23 @@
                   >{{ item.name }}</router-link
                 >
               </div>
-              <a
-                href="#"
+              <router-link
+                :to="`/signup`"
+                class="
+                  block
+                  w-full
+                  px-5
+                  py-3
+                  text-center
+                  font-medium
+                  bg-indigo-600
+                  text-gray-50
+                "
+              >
+                Sign Up
+              </router-link>
+              <router-link
+                :to="`/signin`"
                 class="
                   block
                   w-full
@@ -240,8 +256,8 @@
                   hover:bg-gray-100
                 "
               >
-                Log in
-              </a>
+                Sign In
+              </router-link>
             </div>
           </PopoverPanel>
         </transition>
@@ -289,7 +305,7 @@
                 >
                   Everything you need to get your services
                 </p>
-                <div class=" w-full sm:mx-auto sm:max-w-lg lg:ml-0 mt-20">
+                <div class="w-full sm:mx-auto sm:max-w-lg lg:ml-0 mt-20">
                   <div class="hero bg-gredient-dark h-400px flex flex-col px-2">
                     <div class="w-full">
                       <label for="search" class="sr-only">Search</label>
@@ -362,7 +378,6 @@
                             pr-3
                             py-2
                             border border-transparent
-                           
                             leading-5
                             bg-white
                             text-gray-300
@@ -374,9 +389,6 @@
                           placeholder="Search"
                           type="search"
                         />
-
-
-
                       </div>
                     </div>
                   </div>
