@@ -1,5 +1,6 @@
 //get rooms from server
 import GigService from "@/services/GigService.js";
+import { getError } from "@/utils/helpers";
 export const namespaced = true;
 
 function setPaginatedGig(commit, response) {
@@ -92,7 +93,9 @@ export const mutations = {
 };
 
 export const actions = {
-  async createGig(payload) {
+  async createGig({commit},payload) {
+    commit("SET_LOADING", true);
+    try {
     console.log(payload.state.title);
     let title = payload.state.title;
     let description = payload.state.description;
@@ -113,52 +116,98 @@ export const actions = {
     });
     let gigId = data.data.id;
     await GigService.UploadImage(GigImages, gigId);
+    commit("SET_LOADING", false);
+    } catch (error) {
+      commit("SET_LOADING", false);
+      commit("SET_ERROR", getError(error));
+      
+    }
   },
 
   async getGig({ commit }, id) {
+    commit("SET_LOADING", true);
+    try {
     let data = await GigService.getGig(id);
     commit("SET_FETCHED_GIGS", data);
-
+    commit("SET_LOADING", false);
     return data.data;
+    } catch (error) {
+      commit("SET_LOADING", false);
+      commit("SET_ERROR", getError(error));
+    }
   },
   async getGigImages({ commit }, id) {
+    commit("SET_LOADING", true);
+    try {
     let data = await GigService.getGigImages(id);
     commit("SET_FETCHED_GIG_IMAGES", data);
+    commit("SET_LOADING", false);
     return data.data;
+    } catch (error) {
+      commit("SET_LOADING", false);
+      commit("SET_ERROR", getError(error));
+    }
   },
   async getGigUser({ commit }, id) {
+    commit("SET_LOADING", true);
+    try {
     let data = await GigService.getGigUser(id);
     commit("SET_GIG_USE R", data);
+    commit("SET_LOADING", false);
     return data.data;
+    } catch (error) {
+      commit("SET_LOADING", false);
+      commit("SET_ERROR", getError(error));
+    }
   },
   async getUserGigs({ commit }, id) {
+    commit("SET_LOADING", true);
+    try {
     let data = await GigService.getUserGigs(id);
     commit("SET_USER_GIGS", data.data);
+    commit("SET_LOADING", false);
     return data.data;
+    } catch (error) {
+      commit("SET_LOADING", false);
+      commit("SET_ERROR", getError(error));
+    }
   },
   async getGigsPaginate({ commit }, page) {
+    commit("SET_LOADING", true);
     await GigService.getGigsPaginate(page)
       .then((response) => {
         setPaginatedGig(commit, response);
       })
       .catch((error) => {
         console.log(error);
+        commit("SET_ERROR", getError(error));
+        commit("SET_LOADING", false);
       });
   },
 
   async paginateGigs({ commit }, page) {
+    commit("SET_LOADING", true);
     GigService.paginateGigs(page)
       .then((response) => {
         setPaginatedGig(commit, response);
       })
       .catch((error) => {
+        commit("SET_ERROR", getError(error));
+        commit("SET_LOADING", false);
         console.log(error);
       });
   },
   async gigPageViews({ commit }, id) {
+    commit("SET_LOADING", true);
+    try {
     let data = await GigService.gigPageViews(id);
     commit("SET_PAGE_VIEWS", data.data);
+    commit("SET_LOADING", false);
     return data.data;
+    } catch (error) {
+      commit("SET_LOADING", false);
+      commit("SET_ERROR", getError(error));
+    }
   },
 };
 

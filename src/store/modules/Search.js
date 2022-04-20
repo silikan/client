@@ -38,6 +38,7 @@ export const state = {
   searchClientRequestMeta: null,
   searchClientRequestLinks: null,
   searchClientRequestLoading: false,
+  loading: false,
   error: null,
 };
 
@@ -84,17 +85,23 @@ export const mutations = {
   },
   SET_ERROR(state, error) {
     state.error = error;
+  },
+  SET_LOADING(state, loading) {
+    state.loading = loading;
   }
 };
 
 export const actions = {
   async search({ commit }, search) {
+    commit("SET_LOADING", true);
     try {
     const searchResults = await SearchService.searchFunction(search);
     commit("SET_SEARCH_RESULTS", searchResults);
+    commit("SET_LOADING", false);
     return searchResults.data;
     } catch (error) {
       commit("SET_ERROR", getError(error));
+      commit("SET_LOADING", false);
     }
   },
   async searchGigsPaginate({ commit }, payload) {
@@ -107,6 +114,7 @@ export const actions = {
     setPaginatedSeachGigs(commit, searchGigs);
     return searchGigs.data;
     } catch (error) {
+      commit("SET_SEARCH_GIGS_LOADING", false);
       commit("SET_ERROR", getError(error));
     }
   },
@@ -117,6 +125,7 @@ export const actions = {
     setPaginatedSeachGigs(commit, searchGigs);
     return searchGigs.data;
     } catch (error) {
+      commit("SET_SEARCH_GIGS_LOADING", false);
       commit("SET_ERROR", getError(error));
     }
   },
@@ -129,6 +138,7 @@ export const actions = {
     setPaginatedSearchHandymen(commit, searchHandymen);
     return searchHandymen.data;
     } catch (error) {
+      commit("SET_SEARCH_HANDYMEN_LOADING", false);
       commit("SET_ERROR", getError(error));
     }
   },
@@ -139,6 +149,7 @@ export const actions = {
     setPaginatedSearchHandymen(commit, searchHandymen);
     return searchHandymen.data;
     } catch (error) {
+      commit("SET_SEARCH_HANDYMEN_LOADING", false);
       commit("SET_ERROR", getError(error));
     }
   },
@@ -151,6 +162,7 @@ export const actions = {
     setPaginatedSearchClientRequest(commit, searchClientRequest);
     return searchClientRequest.data;
     } catch (error) {
+      commit("SET_SEARCH_CLIENT_REQUEST_LOADING", true);
       commit("SET_ERROR", getError(error));
     }
   },
@@ -161,6 +173,7 @@ export const actions = {
     setPaginatedSearchClientRequest(commit, searchClientRequest);
     return searchClientRequest.data;
     } catch (error) {
+      commit("SET_SEARCH_CLIENT_REQUEST_LOADING", false);
       commit("SET_ERROR", getError(error));
     }
   },

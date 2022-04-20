@@ -92,6 +92,7 @@ export const actions = {
       return Gigs.data;
     } catch (error) {
       commit("SET_ERROR", getError(error));
+      commit("SET_GIGS_LOADING", false);
     }
   },
   async getGigLink({ commit }, link) {
@@ -102,6 +103,7 @@ export const actions = {
       return Gigs.data;
     } catch (error) {
       commit("SET_ERROR", getError(error));
+      commit("SET_GIGS_LOADING", false);
     }
   },
 
@@ -114,6 +116,7 @@ export const actions = {
       return Users.data;
     } catch (error) {
       commit("SET_ERROR", getError(error));
+      commit("SET_USERS_LOADING", false);
     }
   },
   async getUserLink({ commit }, link) {
@@ -124,6 +127,7 @@ export const actions = {
       return Users.data;
     } catch (error) {
       commit("SET_ERROR", getError(error));
+      commit("SET_USERS_LOADING", false);
     }
   },
 
@@ -134,6 +138,7 @@ export const actions = {
       return response;
     } catch (error) {
       commit("SET_ERROR", getError(error));
+      commit("SET_USERS_LOADING", false);
     }
   },
   async deleteGig({ commit }, id) {
@@ -143,6 +148,7 @@ export const actions = {
       return response;
     } catch (error) {
       commit("SET_ERROR", getError(error));
+      commit("SET_GIGS_LOADING", false);
     }
   },
   async deleteClientRequest({ commit }, id) {
@@ -152,6 +158,7 @@ export const actions = {
       return response;
     } catch (error) {
       commit("SET_ERROR", getError(error));
+      commit("SET_USERS_LOADING", false);
     }
   },
 
@@ -162,27 +169,48 @@ export const actions = {
       return Transactions.data;
     } catch (error) {
       commit("SET_ERROR", getError(error));
+      commit("SET_USERS_LOADING", false);
     }
   },
   async deleteAllUsers({ commit }) {
+    try {
     commit("SET_USERS_LOADING", true);
     const response = await AdminServices.deleteAllUsers();
     return response;
+    } catch (error) {
+      commit("SET_ERROR", getError(error));
+      commit("SET_USERS_LOADING", false);
+    }
   },
   async deleteAllGigs({ commit }) {
+    try {
     commit("SET_GIGS_LOADING", true);
     const response = await AdminServices.deleteAllGigs();
     return response;
+    } catch (error) {
+      commit("SET_ERROR", getError(error));
+      commit("SET_GIGS_LOADING", false);
+    }
   },
   async deleteAll({ commit }) {
+    try {
     commit("SET_USERS_LOADING", true);
     const response = await AdminServices.deleteAll();
     return response;
+    } catch (error) {
+      commit("SET_ERROR", getError(error));
+      commit("SET_USERS_LOADING", false);
+    }
   },
   async deleteAllClientRequests({ commit }) {
+    try {
     commit("SET_USERS_LOADING", true);
     const response = await AdminServices.deleteAllClientRequests();
     return response;
+    } catch (error) {
+      commit("SET_ERROR", getError(error));
+      commit("SET_USERS_LOADING", false);
+    }
   },
   async getAllClientRequests({ commit }, page) {
     try {
@@ -192,6 +220,7 @@ export const actions = {
       return ClientRequest.data;
     } catch (error) {
       commit("SET_ERROR", getError(error));
+      commit("SET_CLIENT_REQUEST_LOADING", false);
     }
   },
   async getClientRequestLink({ commit }, link) {
@@ -202,6 +231,7 @@ export const actions = {
       return ClientRequest.data;
     } catch (error) {
       commit("SET_ERROR", getError(error));
+      commit("SET_CLIENT_REQUEST_LOADING", false);
     }
   },
 };
