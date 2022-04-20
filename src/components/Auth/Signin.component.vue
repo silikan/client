@@ -284,7 +284,6 @@
                 </div>
 
                 <div>
-                  {{loading ? 'Loading...' : 'not loading'}}
                   <button
                   v-if="loading == false"
                     type="submit"
