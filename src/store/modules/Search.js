@@ -88,17 +88,17 @@ export const mutations = {
   },
   SET_LOADING(state, loading) {
     state.loading = loading;
-  }
+  },
 };
 
 export const actions = {
   async search({ commit }, search) {
     commit("SET_LOADING", true);
     try {
-    const searchResults = await SearchService.searchFunction(search);
-    commit("SET_SEARCH_RESULTS", searchResults);
-    commit("SET_LOADING", false);
-    return searchResults.data;
+      const searchResults = await SearchService.searchFunction(search);
+      commit("SET_SEARCH_RESULTS", searchResults);
+      commit("SET_LOADING", false);
+      return searchResults.data;
     } catch (error) {
       commit("SET_ERROR", getError(error));
       commit("SET_LOADING", false);
@@ -106,13 +106,13 @@ export const actions = {
   },
   async searchGigsPaginate({ commit }, payload) {
     try {
-    let page = payload.page;
-    let query = payload.query;
-    console.log(query, page);
-    commit("SET_SEARCH_GIGS_LOADING", true);
-    const searchGigs = await SearchService.searchGigsPaginate(query, page);
-    setPaginatedSeachGigs(commit, searchGigs);
-    return searchGigs.data;
+      let page = payload.page;
+      let query = payload.query;
+      console.log(query, page);
+      commit("SET_SEARCH_GIGS_LOADING", true);
+      const searchGigs = await SearchService.searchGigsPaginate(query, page);
+      setPaginatedSeachGigs(commit, searchGigs);
+      return searchGigs.data;
     } catch (error) {
       commit("SET_SEARCH_GIGS_LOADING", false);
       commit("SET_ERROR", getError(error));
@@ -120,10 +120,10 @@ export const actions = {
   },
   async paginateGigs({ commit }, link) {
     try {
-    commit("SET_SEARCH_GIGS_LOADING", true);
-    const searchGigs = await SearchService.paginateSeachGigs(link);
-    setPaginatedSeachGigs(commit, searchGigs);
-    return searchGigs.data;
+      commit("SET_SEARCH_GIGS_LOADING", true);
+      const searchGigs = await SearchService.paginateSeachGigs(link);
+      setPaginatedSeachGigs(commit, searchGigs);
+      return searchGigs.data;
     } catch (error) {
       commit("SET_SEARCH_GIGS_LOADING", false);
       commit("SET_ERROR", getError(error));
@@ -131,12 +131,12 @@ export const actions = {
   },
   async searchHandymenPaginate({ commit }, payload) {
     try {
-    let page = payload.page;
-    let query = payload.query;
-    commit("SET_SEARCH_HANDYMEN_LOADING", true);
-    const searchHandymen = await SearchService.searchHandymenPaginate(query, page);
-    setPaginatedSearchHandymen(commit, searchHandymen);
-    return searchHandymen.data;
+      let page = payload.page;
+      let query = payload.query;
+      commit("SET_SEARCH_HANDYMEN_LOADING", true);
+      const searchHandymen = await SearchService.searchHandymenPaginate(query, page);
+      setPaginatedSearchHandymen(commit, searchHandymen);
+      return searchHandymen.data;
     } catch (error) {
       commit("SET_SEARCH_HANDYMEN_LOADING", false);
       commit("SET_ERROR", getError(error));
@@ -144,10 +144,10 @@ export const actions = {
   },
   async paginateHandymen({ commit }, link) {
     try {
-    commit("SET_SEARCH_HANDYMEN_LOADING", true);
-    const searchHandymen = await SearchService.paginateSeachHandymen(link);
-    setPaginatedSearchHandymen(commit, searchHandymen);
-    return searchHandymen.data;
+      commit("SET_SEARCH_HANDYMEN_LOADING", true);
+      const searchHandymen = await SearchService.paginateSeachHandymen(link);
+      setPaginatedSearchHandymen(commit, searchHandymen);
+      return searchHandymen.data;
     } catch (error) {
       commit("SET_SEARCH_HANDYMEN_LOADING", false);
       commit("SET_ERROR", getError(error));
@@ -155,12 +155,12 @@ export const actions = {
   },
   async searchClientRequestPaginate({ commit }, payload) {
     try {
-    let page = payload.page;
-    let query = payload.query;
-    commit("SET_SEARCH_CLIENT_REQUEST_LOADING", true);
-    const searchClientRequest = await SearchService.searchClientRequestPaginate(query, page);
-    setPaginatedSearchClientRequest(commit, searchClientRequest);
-    return searchClientRequest.data;
+      let page = payload.page;
+      let query = payload.query;
+      commit("SET_SEARCH_CLIENT_REQUEST_LOADING", true);
+      const searchClientRequest = await SearchService.searchClientRequestPaginate(query, page);
+      setPaginatedSearchClientRequest(commit, searchClientRequest);
+      return searchClientRequest.data;
     } catch (error) {
       commit("SET_SEARCH_CLIENT_REQUEST_LOADING", true);
       commit("SET_ERROR", getError(error));
@@ -168,10 +168,10 @@ export const actions = {
   },
   async paginateSeachClientRequest({ commit }, link) {
     try {
-    commit("SET_SEARCH_CLIENT_REQUEST_LOADING", true);
-    const searchClientRequest = await SearchService.paginateSeachClientRequest(link);
-    setPaginatedSearchClientRequest(commit, searchClientRequest);
-    return searchClientRequest.data;
+      commit("SET_SEARCH_CLIENT_REQUEST_LOADING", true);
+      const searchClientRequest = await SearchService.paginateSeachClientRequest(link);
+      setPaginatedSearchClientRequest(commit, searchClientRequest);
+      return searchClientRequest.data;
     } catch (error) {
       commit("SET_SEARCH_CLIENT_REQUEST_LOADING", false);
       commit("SET_ERROR", getError(error));
@@ -221,5 +221,5 @@ export const getters = {
   },
   getError(state) {
     return state.error;
-  }
+  },
 };
