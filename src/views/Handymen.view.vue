@@ -36,7 +36,7 @@ export default {
     const meta = computed(()=>store.getters["handyman/meta"])
     const links =computed(()=> store.getters["handyman/links"])
 
-        let loading = computed(() => store.getters["Loading/loading"]);
+        let loading = computed(() => store.getters["handyman/loading"]);
 
 
     return{

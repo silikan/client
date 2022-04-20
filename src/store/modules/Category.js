@@ -5,15 +5,14 @@ function setPaginatedCategoryGigs(commit, response) {
   commit("SET_GIGS", response.data.data);
   commit("SET_GIGS_META", response.data.meta);
   commit("SET_GIGS_LINKS", response.data.links);
-  commit("SET_GIGS_LOADING", false);
+  commit("SET_LOADING", false);
 }
 
 function setPaginatedCategoryClientRequest(commit, response) {
-  console.log(response.data);
   commit("SET_REQUESTS", response.data.data);
   commit("SET_REQUESTS_META", response.data.meta);
   commit("SET_REQUESTS_LINKS", response.data.links);
-  commit("SET_REQUESTS_LOADING", false);
+  commit("SET_LOADING", false);
 }
 export const namespaced = true;
 
@@ -28,6 +27,7 @@ export const state = {
   requestsLinks: null,
   requestsLoading: false,
   error: null,
+  loading: false,
 };
 
 export const mutations = {
@@ -61,65 +61,69 @@ export const mutations = {
   SET_ERROR(state, payload) {
     state.error = payload;
   },
+  SET_LOADING(state, payload) {
+    state.loading = payload;
+  },
 };
 
 export const actions = {
   async getCategories({ commit }) {
     try {
-    const response = await CategoryService.getCategories();
-    console.log(response.data);
-    commit("SET_CATEGORIES", response.data);
-    return response.data;
+      commit("SET_LOADING", true);
+
+      const response = await CategoryService.getCategories();
+      commit("SET_LOADING", false);
+
+      console.log(response.data);
+      return response.data;
     } catch (error) {
+      commit("SET_LOADING", false);
+
       commit("SET_ERROR", getError(error));
     }
   },
   async getGigsByCategoryPaginate({ commit }, { title, page }) {
     try {
-    commit("SET_GIGS_LOADING", true);
-    const response = await CategoryService.getGigsByCategoryPaginate(title, page);
-    setPaginatedCategoryGigs(commit, response);
-    commit("SET_GIGS_LOADING", false);
-    return response.data;
+      commit("SET_LOADING", true);
+      const response = await CategoryService.getGigsByCategoryPaginate(title, page);
+      setPaginatedCategoryGigs(commit, response);
+      return response.data;
     } catch (error) {
       commit("SET_ERROR", getError(error));
-      commit("SET_GIGS_LOADING", false);
+      commit("SET_LOADING", false);
     }
   },
   async getclientRequestsByCategoryPaginate({ commit }, { title, page }) {
     try {
-    commit("SET_REQUESTS_LOADING", true);
-    const response = await CategoryService.getclientRequestsByCategoryPaginate(title, page);
-    setPaginatedCategoryClientRequest(commit, response);
-    commit("SET_REQUESTS_LOADING", false);
-    return response.data;
+      commit("SET_LOADING", true);
+      const response = await CategoryService.getclientRequestsByCategoryPaginate(title, page);
+      setPaginatedCategoryClientRequest(commit, response);
+      return response.data;
     } catch (error) {
       commit("SET_ERROR", getError(error));
-      commit("SET_REQUESTS_LOADING", false);
+      commit("SET_LOADING", false);
     }
   },
   async paginateCategoryGigs({ commit }, link) {
     try {
-    commit("SET_GIGS_LOADING", true);
-    let data = await CategoryService.paginateCategoryGigs(link);
-    setPaginatedCategoryGigs(commit, data);
-    commit("SET_GIGS_LOADING", false);
-    return data.data;
+      commit("SET_LOADING", true);
+      let data = await CategoryService.paginateCategoryGigs(link);
+      setPaginatedCategoryGigs(commit, data);
+      return data.data;
     } catch (error) {
       commit("SET_ERROR", getError(error));
-      commit("SET_GIGS_LOADING", false);
+      commit("SET_LOADING", false);
     }
   },
   async paginateCategoryClientRequest({ commit }, link) {
     try {
-    commit("SET_REQUESTS_LOADING", true);
-    let data = await CategoryService.paginateCategoryClientRequest(link);
-    setPaginatedCategoryClientRequest(commit, data);
-    commit("SET_REQUESTS_LOADING", false);
-    return data.data;
+      commit("SET_LOADING", true);
+      let data = await CategoryService.paginateCategoryClientRequest(link);
+      setPaginatedCategoryClientRequest(commit, data);
+      return data.data;
     } catch (error) {
       commit("SET_ERROR", getError(error));
-      commit("SET_REQUESTS_LOADING", false);
+      commit("SET_LOADING", false);
     }
   },
 };
@@ -135,4 +139,5 @@ export const getters = {
   requestsLinks: (state) => state.requestsLinks,
   requestsLoading: (state) => state.requestsLoading,
   getError: (state) => state.error,
+  loading: (state) => state.loading,
 };

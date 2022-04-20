@@ -362,7 +362,7 @@ export default {
     let store = useStore();
     let meta, links, gigs;
     let path = "handymen";
-    let loading = computed(() => store.getters["Loading/loading"]);
+    let loading = computed(() => store.getters["Gig/loading"]);
 
     let page = 1;
 

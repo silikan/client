@@ -504,7 +504,8 @@ export default {
       return data;
     });
     console.log(people.value);
-            let loading = computed(() => store.getters["Loading/loading"]);
+            let loading = computed(() => store.getters["handyman/loading"]);
+            console.log(loading.value);
 
     return {
       people,

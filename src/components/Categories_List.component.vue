@@ -1,5 +1,6 @@
 <!-- This example requires Tailwind CSS v2.0+ -->
 <template>
+{{true}}
 <div v-if="loading === true">
   <Categories/>
 </div>
@@ -103,7 +104,6 @@ let avatar_svg = ref()
           dataUri: true,
           // ... and other options
         })
-        console.log(avatar_svg.value)
         return {
           name: category.title,
           path: `/categories/${category.id}`,
@@ -114,8 +114,8 @@ let avatar_svg = ref()
       console.log(categories.value)
     });
 
-                let loading = computed(() => store.getters["Loading/loading"]);
-
+                let loading = computed(() => store.getters["Category/loading"]);
+console.log(loading.value)
     return {
       categories,
       projects,

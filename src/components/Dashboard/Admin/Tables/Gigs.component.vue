@@ -487,7 +487,7 @@ let page = 1
       return data;
     });
 let preurl = `${process.env.VUE_APP_API_URL}`;
-                        let loading = computed(() => store.getters["Loading/loading"]);
+                        let loading = computed(() => store.getters["Admin/getGigsLoading"]);
 
     return {
 

@@ -494,7 +494,7 @@ export default {
       userId.value = id;
 
     };
-                        let loading = computed(() => store.getters["Loading/loading"]);
+                        let loading = computed(() => store.getters["Admin/getUsersLoading"]);
 
 
     return {

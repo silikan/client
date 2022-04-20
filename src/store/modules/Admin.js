@@ -174,9 +174,9 @@ export const actions = {
   },
   async deleteAllUsers({ commit }) {
     try {
-    commit("SET_USERS_LOADING", true);
-    const response = await AdminServices.deleteAllUsers();
-    return response;
+      commit("SET_USERS_LOADING", true);
+      const response = await AdminServices.deleteAllUsers();
+      return response;
     } catch (error) {
       commit("SET_ERROR", getError(error));
       commit("SET_USERS_LOADING", false);
@@ -184,9 +184,9 @@ export const actions = {
   },
   async deleteAllGigs({ commit }) {
     try {
-    commit("SET_GIGS_LOADING", true);
-    const response = await AdminServices.deleteAllGigs();
-    return response;
+      commit("SET_GIGS_LOADING", true);
+      const response = await AdminServices.deleteAllGigs();
+      return response;
     } catch (error) {
       commit("SET_ERROR", getError(error));
       commit("SET_GIGS_LOADING", false);
@@ -194,9 +194,9 @@ export const actions = {
   },
   async deleteAll({ commit }) {
     try {
-    commit("SET_USERS_LOADING", true);
-    const response = await AdminServices.deleteAll();
-    return response;
+      commit("SET_USERS_LOADING", true);
+      const response = await AdminServices.deleteAll();
+      return response;
     } catch (error) {
       commit("SET_ERROR", getError(error));
       commit("SET_USERS_LOADING", false);
@@ -204,9 +204,9 @@ export const actions = {
   },
   async deleteAllClientRequests({ commit }) {
     try {
-    commit("SET_USERS_LOADING", true);
-    const response = await AdminServices.deleteAllClientRequests();
-    return response;
+      commit("SET_USERS_LOADING", true);
+      const response = await AdminServices.deleteAllClientRequests();
+      return response;
     } catch (error) {
       commit("SET_ERROR", getError(error));
       commit("SET_USERS_LOADING", false);

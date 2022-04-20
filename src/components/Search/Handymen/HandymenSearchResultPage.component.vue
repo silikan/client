@@ -483,7 +483,7 @@ export default {
 
       return data;
     });
-                let loading = computed(() => store.getters["Loading/loading"]);
+                let loading = computed(() => store.getters["Search/getSearchHandymenLoading"]);
 
     let preurl = `${process.env.VUE_APP_API_URL}`;
     return {
