@@ -1,5 +1,6 @@
 //get rooms from server
 import RequestService from "@/services/RequestService.js";
+import { getError } from "@/utils/helpers";
 export const namespaced = true;
 
 function setPaginatedClientRequest(commit, response) {
@@ -83,7 +84,9 @@ export const mutations = {
 };
 
 export const actions = {
-  async createRequest(payload) {
+  async createRequest({commit},payload) {
+    commit("SET_LOADING", true);
+    try {
     let title = payload.state.title;
     let description = payload.state.description;
     let category = payload.state.category;
@@ -100,47 +103,85 @@ export const actions = {
       priceDescription,
       duration,
     });
+    commit("SET_LOADING", true);
+    } catch (error) {
+      commit("SET_ERROR", getError(error));
+      commit("SET_LOADING", true);
+    }
   },
 
   async getRequest({ commit }, id) {
+    commit("SET_LOADING", true);
+    try {
     let data = await RequestService.getRequest(id);
     commit("SET_FETCHED_REQUESTS", data);
-
+    commit("SET_LOADING", false);
     return data.data;
+    } catch (error) {
+      commit("SET_ERROR", getError(error));
+      commit("SET_LOADING", true);
+    }
   },
   async getRequestUser({ commit }, id) {
+    commit("SET_LOADING", true);
+    try {
     let data = await RequestService.getRequestUser(id);
     commit("SET_GIG_USERS", data);
+    commit("SET_LOADING", false);
     return data.data;
+    } catch (error) {
+      commit("SET_ERROR", getError(error));
+      commit("SET_LOADING", true);
+    }
   },
   async getUserRequests({ commit }, id) {
+    commit("SET_LOADING", true);
+    try {
     let data = await RequestService.getUserRequests(id);
     commit("SET_USER_REQUESTS", data.data);
+    commit("SET_LOADING", false);
     return data.data;
+    } catch (error) {
+      commit("SET_ERROR", getError(error));
+      commit("SET_LOADING", true);
+    }
   },
 
   async getClientRequestsPaginate({ commit }, page) {
+    commit("SET_LOADING", true);
     await RequestService.getClientRequestsPaginate(page)
       .then((response) => {
         setPaginatedClientRequest(commit, response);
       })
       .catch((error) => {
+        commit("SET_ERROR", getError(error));
+        commit("SET_LOADING", false);
         console.log(error);
       });
   },
   paginateClientRequests({ commit }, page) {
+    commit("SET_LOADING", true);
     RequestService.paginateClientRequests(page)
       .then((response) => {
         setPaginatedClientRequest(commit, response);
       })
       .catch((error) => {
+        commit("SET_ERROR", getError(error));
+        commit("SET_LOADING", false);
         console.log(error);
       });
   },
   async requestPageViews({ commit }, id) {
+    commit("SET_LOADING", true);
+    try {
     let data = await RequestService.requestPageViews(id);
     commit("SET_PAGE_VIEWS", data.data);
+    commit("SET_LOADING", false);
     return data.data;
+    } catch (error) {
+      commit("SET_ERROR", getError(error));
+      commit("SET_LOADING", true);
+    }
   },
 };
 

@@ -79,9 +79,11 @@ export const actions = {
     commit("SET_GIGS_LOADING", true);
     const response = await CategoryService.getGigsByCategoryPaginate(title, page);
     setPaginatedCategoryGigs(commit, response);
+    commit("SET_GIGS_LOADING", false);
     return response.data;
     } catch (error) {
       commit("SET_ERROR", getError(error));
+      commit("SET_GIGS_LOADING", false);
     }
   },
   async getclientRequestsByCategoryPaginate({ commit }, { title, page }) {
@@ -89,9 +91,11 @@ export const actions = {
     commit("SET_REQUESTS_LOADING", true);
     const response = await CategoryService.getclientRequestsByCategoryPaginate(title, page);
     setPaginatedCategoryClientRequest(commit, response);
+    commit("SET_REQUESTS_LOADING", false);
     return response.data;
     } catch (error) {
       commit("SET_ERROR", getError(error));
+      commit("SET_REQUESTS_LOADING", false);
     }
   },
   async paginateCategoryGigs({ commit }, link) {
@@ -99,9 +103,11 @@ export const actions = {
     commit("SET_GIGS_LOADING", true);
     let data = await CategoryService.paginateCategoryGigs(link);
     setPaginatedCategoryGigs(commit, data);
+    commit("SET_GIGS_LOADING", false);
     return data.data;
     } catch (error) {
       commit("SET_ERROR", getError(error));
+      commit("SET_GIGS_LOADING", false);
     }
   },
   async paginateCategoryClientRequest({ commit }, link) {
@@ -109,9 +115,11 @@ export const actions = {
     commit("SET_REQUESTS_LOADING", true);
     let data = await CategoryService.paginateCategoryClientRequest(link);
     setPaginatedCategoryClientRequest(commit, data);
+    commit("SET_REQUESTS_LOADING", false);
     return data.data;
     } catch (error) {
       commit("SET_ERROR", getError(error));
+      commit("SET_REQUESTS_LOADING", false);
     }
   },
 };

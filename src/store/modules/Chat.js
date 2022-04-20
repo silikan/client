@@ -1,5 +1,6 @@
 //get rooms from server
 import ChatService from "@/services/ChatService";
+import { getError } from "@/utils/helpers";
 
 export const namespaced = true;
 function setPaginatedMessages(commit, response) {
@@ -53,24 +54,32 @@ export const mutations = {
 
 export const actions = {
   async getRoomUsers({ commit }, id) {
+    commit("SET_LOADING", true);
     return await ChatService.getRoomUsers(id)
       .then((response) => {
         commit("SET_ROOM_USERS", response.data.data);
+        commit("SET_LOADING", false);
         return response;
+
       })
       .catch((error) => {
+        commit("SET_ERROR", getError(error));
+        commit("SET_LOADING", false);
         console.log(error);
       });
   },
   async getUserRooms({ commit }, id) {
+    commit("SET_LOADING", true);
     return await ChatService.getUserRooms(id)
       .then((response) => {
         //set user rooms
         commit("SET_USER_ROOMS", response.data.data);
-
+        commit("SET_LOADING", false);
         return response.data;
       })
       .catch((error) => {
+        commit("SET_ERROR", getError(error));
+        commit("SET_LOADING", false);
         console.log(error);
       });
   },
@@ -86,6 +95,7 @@ export const actions = {
       })
       .catch((error) => {
         commit("SET_LOADING", false);
+        commit("SET_ERROR", getError(error));
         console.log(error);
       });
   },
@@ -97,6 +107,7 @@ export const actions = {
       })
       .catch((error) => {
         commit("SET_LOADING", false);
+        commit("SET_ERROR", getError(error));
         console.log(error);
       });
   },

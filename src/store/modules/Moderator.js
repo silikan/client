@@ -24,6 +24,7 @@ export const state = {
   adminsPaginated: [],
   moderatorsPaginated: [],
   error: null,
+  loading: false,
 };
 
 export const mutations = {
@@ -98,6 +99,9 @@ export const mutations = {
   },
   SET_ERROR(state, error) {
     state.error = error;
+  },
+  SET_LOADING(state, loading) {
+    state.loading = loading;
   }
 };
 
@@ -170,6 +174,10 @@ export const getters = {
   },
   getError(state) {
     return getError(state.error);
+  },
+  loading(state) {
+    return state.loading;
   }
+
   
 };

@@ -10,6 +10,7 @@ export const state = {
   cartItemData: [],
   cartItem: {},
   error: null,
+  loading: false,
 };
 
 export const mutations = {
@@ -27,6 +28,9 @@ export const mutations = {
   },
   SET_ERROR(state, payload) {
     state.error = payload;
+  },
+  SET_LOADING(state, payload) {
+    state.loading = payload;
   }
 
 };
@@ -34,15 +38,19 @@ export const mutations = {
 export const actions = {
   async createCart({ commit }) {
     try {
+    commit("SET_LOADING", true);
     const cart = await CartService.createCart();
     commit("SET_CART", cart);
+    commit("SET_LOADING", false);
     } catch (error) {
-      commit("SET_ERROR", error);
+      commit("SET_ERROR", getError(error));
+      commit("SET_LOADING", false);
     }
 
   },
   async addToCart({ commit }, payload) {
     try{ 
+      commit("SET_LOADING", true);
       let data = {
         user_id: payload.user_id,
       };
@@ -69,97 +77,128 @@ export const actions = {
           commit("SET_CART_ITEM_DATA", cartItemData.data);
         })
         .catch((err) => {
+          commit("SET_ERROR", getError(err));
           console.log(err);
         });
+      commit("SET_LOADING", false);
      } catch (error) {
       commit("SET_ERROR", getError(error));
+      commit("SET_LOADING", false);
     }
     
   },
 
   async getUserCartItems({ commit }, id) {
     try{ 
+      commit("SET_LOADING", true);
       const cartItems = await CartService.getUserCartItems(id);
       commit("SET_CART_ITEMS", cartItems.data);
+      commit("SET_LOADING", false);
       return cartItems.data;
      } catch (error) {
       commit("SET_ERROR", getError(error));
+      commit("SET_LOADING", false);
     }
 
   },
 
   async setCartItemStatusToAccepted({ commit }, payload) {
     try{ 
+      commit("SET_LOADING", true);
       const cartItems = await CartService.setCartItemStatusToAccepted(payload);
       commit("SET_CART_ITEMS", cartItems.data);
+      commit("SET_LOADING", false);
       return cartItems.data;
      } catch (error) {
       commit("SET_ERROR", getError(error));
+      commit("SET_LOADING", false);
     }
 
   },
   async setCartItemStatusToDeclined({ commit }, payload) {
     try{
+    commit("SET_LOADING", true);
     const cartItems = await CartService.setCartItemStatusToDeclined(payload);
     commit("SET_CART_ITEMS", cartItems.data);
+    commit("SET_LOADING", false);
     return cartItems.data;
     } catch (error) {
       commit("SET_ERROR", getError(error));
+      commit("SET_LOADING", false);
     }
   },
   async setCartItemStatusToPaid({ commit }, payload) {
     try{
+    commit("SET_LOADING", true);
     const cartItems = await CartService.setCartItemStatusToPaid(payload);
     commit("SET_CART_ITEMS", cartItems.data);
+    commit("SET_LOADING", false);
     return cartItems.data;
     } catch (error) {
       commit("SET_ERROR", getError(error));
+      commit("SET_LOADING", false);
     }
   },
   async setCartItemStatusToCancelled({ commit }, payload) {
     try{
+    commit("SET_LOADING", true);
     const cartItems = await CartService.setCartItemStatusToCancelled(payload);
     commit("SET_CART_ITEMS", cartItems.data);
+    commit("SET_LOADING", false);
     return cartItems.data;
     } catch (error) {
       commit("SET_ERROR", getError(error));
+      commit("SET_LOADING", false);
     }
   },
   async setCartItemStatusToInProgress({ commit }, payload) {
     try{
+    commit("SET_LOADING", true);
     const cartItems = await CartService.setCartItemStatusToInProgress(payload);
     commit("SET_CART_ITEMS", cartItems.data);
+    commit("SET_LOADING", false);
     return cartItems.data;
     } catch (error) {
       commit("SET_ERROR", getError(error));
+      commit("SET_LOADING", false);
     }
   },
   async setCartItemStatusToCompleted({ commit }, payload) {
     try{
+    commit("SET_LOADING", true);
     const cartItems = await CartService.setCartItemStatusToCompleted(payload);
     commit("SET_CART_ITEMS", cartItems.data);
+    commit("SET_LOADING", false);
     return cartItems.data;
     } catch (error) {
+     
       commit("SET_ERROR", getError(error));
+      commit("SET_LOADING", false);
     }
   },
   async getCartItemById({ commit }, payload) {
     try{
+    commit("SET_LOADING", true);
     let id = payload.id;
     const cartItem = await CartService.getCartItemById(id);
     commit("SET_CART_ITEM", cartItem.data);
+    commit("SET_LOADING", false);
     return cartItem.data;
     } catch (error) {
       commit("SET_ERROR", getError(error));
+      commit("SET_LOADING", false);
     }
   },
   async setCartItemStatusToConfirmed({ commit }, payload) {
     try{
+    commit("SET_LOADING", true);
     const cartItem = await CartService.setCartItemStatusToConfirmed(payload);
     commit("SET_CART_ITEM", cartItem.data);
+    commit("SET_LOADING", false);
     return cartItem.data;
     } catch (error) {
       commit("SET_ERROR", getError(error));
+      commit("SET_LOADING", false);
     }
   },
 };
@@ -170,4 +209,5 @@ export const getters = {
   cartItemData: (state) => state.cartItemData,
   cartItem: (state) => state.cartItem,
   getError: (state) => state.error,
+  loading: (state) => state.loading,
 };
