@@ -129,19 +129,35 @@
                     </td>
                     <td
                       v-if="
-                        person.isAdmin === false && person.isHandyman === true
+                        person.isAdmin === false &&
+                        person.isHandyman === true &&
+                        person.isModerator === false
                       "
                       class="px-6 py-4 whitespace-nowrap text-sm text-gray-500"
                     >
                       Handyman
                     </td>
                     <td
-                      v-if="
-                        person.isAdmin === true && person.isHandyman === true
-                      "
+                      v-if="person.isAdmin === true"
                       class="px-6 py-4 whitespace-nowrap text-sm text-gray-500"
                     >
                       Admin
+                    </td>
+                    <td
+                      v-if="
+                        person.isAdmin === false && person.isModerator === true
+                      "
+                      class="px-6 py-4 whitespace-nowrap text-sm text-gray-500"
+                    >
+                      Moderator
+                    </td>
+                    <td
+                      v-if="
+                        person.isAdmin === false && person.isHandyman === false
+                      "
+                      class="px-6 py-4 whitespace-nowrap text-sm text-gray-500"
+                    >
+                      Client
                     </td>
                     <td
                       class="
@@ -158,7 +174,41 @@
                         >Visit</router-link
                       >
                     </td>
-
+                    <td
+                      class="
+                        px-6
+                        py-4
+                        whitespace-nowrap
+                        text-right text-sm
+                        font-medium
+                      "
+                    >
+                      <a
+                        v-if="person.isAdmin === false"
+                        @click="makeUserAdmin(person.id)"
+                        class="text-red-600 hover:text-indigo-900 cursor-pointer"
+                        >Make Admin</a
+                      >
+                    </td>
+                    <td
+                      class="
+                        px-6
+                        py-4
+                        whitespace-nowrap
+                        text-right text-sm
+                        font-medium
+                      "
+                    >
+                      <a
+                        v-if="
+                          person.isAdmin === false &&
+                          person.isModerator === false
+                        "
+                        @click="makeUserModerator(person.id)"
+                        class="text-red-600 hover:text-indigo-900 cursor-pointer"
+                        >Make Moderator</a
+                      >
+                    </td>
                     <td
                       class="
                         px-6
@@ -170,7 +220,7 @@
                     >
                       <a
                         @click="openDiag(person.id)"
-                        class="text-red-600 hover:text-indigo-900"
+                        class="text-red-600 hover:text-indigo-900 cursor-pointer"
                         >Delete</a
                       >
                     </td>
@@ -402,7 +452,7 @@
 </template>
 
 <script>
-import Table from "@/components/Loading/Skeletons/Table.component.vue"
+import Table from "@/components/Loading/Skeletons/Table.component.vue";
 
 import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/vue/solid";
 import Avatar from "@/components/Avatar/Avatar.component.vue";
@@ -417,7 +467,7 @@ export default {
     ChevronRightIcon,
     Avatar,
     DeleteDiag,
-    Table
+    Table,
   },
 
   setup() {
@@ -492,10 +542,15 @@ export default {
     let openDiag = (id) => {
       open.value = true;
       userId.value = id;
-
     };
-                        let loading = computed(() => store.getters["Admin/getUsersLoading"]);
+    let loading = computed(() => store.getters["Admin/getUsersLoading"]);
 
+const makeUserAdmin = (id) => {
+  store.dispatch("Admin/makeUserAdmin", id);
+};
+const makeUserModerator = (id) => {
+  store.dispatch("Admin/makeUserModerator", id);
+};
 
     return {
       query,
@@ -516,7 +571,9 @@ export default {
       type,
       openDiag,
       userId,
-loading
+      loading,
+      makeUserAdmin,
+      makeUserModerator,
     };
   },
 };

@@ -44,13 +44,13 @@ export default {
     return API.apiClient.get(`/admin/get-all-moderators`);
   },
   makeUserAdmin(id) {
-    return API.apiClient.put(`/admin/make-user-admin/${id}`);
+    return API.apiClient.post(`/admin/make-user-admin/${id}`);
   },
   makeUserModerator(id) {
-    return API.apiClient.put(`/admin/make-user-moderator/${id}`);
+    return API.apiClient.post(`/admin/make-user-moderator/${id}`);
   },
   makeUserHandyman(id) {
-    return API.apiClient.put(`/admin/make-user-handyman/${id}`);
+    return API.apiClient.post(`/admin/make-user-handyman/${id}`);
   },
   getAllUsersPaginated(page) {
     return API.apiClient.get(`/admin/get-all-users-paginate`, {

@@ -234,6 +234,23 @@ export const actions = {
       commit("SET_CLIENT_REQUEST_LOADING", false);
     }
   },
+
+  async makeUserAdmin({ commit }, id) {
+    try {
+      const response = await AdminServices.makeUserAdmin(id);
+      return response;
+    } catch (error) {
+      commit("SET_ERROR", getError(error));
+    }
+  },
+  async makeUserModerator({ commit }, id) {
+    try {
+      const response = await AdminServices.makeUserModerator(id);
+      return response;
+    } catch (error) {
+      commit("SET_ERROR", getError(error));
+    }
+  },
 };
 
 export const getters = {
