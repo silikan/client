@@ -93,44 +93,46 @@ export const mutations = {
 };
 
 export const actions = {
-  async createGig({commit},payload) {
-    commit("SET_LOADING", true);
-    try {
-    console.log(payload.state.title);
-    let title = payload.state.title;
-    let description = payload.state.description;
-    let category = payload.state.category;
-    let basic = payload.state.basic;
-    let standard = payload.state.standard;
-    let premium = payload.state.premium;
-    let paymentMethod = payload.state.paymentMethod;
-    let GigImages = payload.state.GigImages;
-    let data = await GigService.createGig({
-      title,
-      description,
-      category,
-      basic,
-      standard,
-      premium,
-      paymentMethod,
-    });
-    let gigId = data.data.id;
-    await GigService.UploadImage(GigImages, gigId);
-    commit("SET_LOADING", false);
+  async createGig(payload) {
+    /*     commit("SET_LOADING", true);
+     */ try {
+      console.log(payload.state.title);
+      let title = payload.state.title;
+      let description = payload.state.description;
+      let category = payload.state.category;
+      let basic = payload.state.basic;
+      let standard = payload.state.standard;
+      let premium = payload.state.premium;
+      let paymentMethod = payload.state.paymentMethod;
+      let GigImages = payload.state.GigImages;
+      let data = await GigService.createGig({
+        title,
+        description,
+        category,
+        basic,
+        standard,
+        premium,
+        paymentMethod,
+      });
+      let gigId = data.data.id;
+      await GigService.UploadImage(GigImages, gigId);
+      /*       commit("SET_LOADING", false);
+       */
     } catch (error) {
-      commit("SET_LOADING", false);
-      commit("SET_ERROR", getError(error));
-      
+      /*       commit("SET_LOADING", false);
+       */
+      /*       commit("SET_ERROR", getError(error));
+       */
     }
   },
 
   async getGig({ commit }, id) {
     commit("SET_LOADING", true);
     try {
-    let data = await GigService.getGig(id);
-    commit("SET_FETCHED_GIGS", data);
-    commit("SET_LOADING", false);
-    return data.data;
+      let data = await GigService.getGig(id);
+      commit("SET_FETCHED_GIGS", data);
+      commit("SET_LOADING", false);
+      return data.data;
     } catch (error) {
       commit("SET_LOADING", false);
       commit("SET_ERROR", getError(error));
@@ -139,10 +141,10 @@ export const actions = {
   async getGigImages({ commit }, id) {
     commit("SET_LOADING", true);
     try {
-    let data = await GigService.getGigImages(id);
-    commit("SET_FETCHED_GIG_IMAGES", data);
-    commit("SET_LOADING", false);
-    return data.data;
+      let data = await GigService.getGigImages(id);
+      commit("SET_FETCHED_GIG_IMAGES", data);
+      commit("SET_LOADING", false);
+      return data.data;
     } catch (error) {
       commit("SET_LOADING", false);
       commit("SET_ERROR", getError(error));
@@ -151,10 +153,10 @@ export const actions = {
   async getGigUser({ commit }, id) {
     commit("SET_LOADING", true);
     try {
-    let data = await GigService.getGigUser(id);
-    commit("SET_GIG_USE R", data);
-    commit("SET_LOADING", false);
-    return data.data;
+      let data = await GigService.getGigUser(id);
+      commit("SET_GIG_USE R", data);
+      commit("SET_LOADING", false);
+      return data.data;
     } catch (error) {
       commit("SET_LOADING", false);
       commit("SET_ERROR", getError(error));
@@ -163,10 +165,10 @@ export const actions = {
   async getUserGigs({ commit }, id) {
     commit("SET_LOADING", true);
     try {
-    let data = await GigService.getUserGigs(id);
-    commit("SET_USER_GIGS", data.data);
-    commit("SET_LOADING", false);
-    return data.data;
+      let data = await GigService.getUserGigs(id);
+      commit("SET_USER_GIGS", data.data);
+      commit("SET_LOADING", false);
+      return data.data;
     } catch (error) {
       commit("SET_LOADING", false);
       commit("SET_ERROR", getError(error));
@@ -200,10 +202,10 @@ export const actions = {
   async gigPageViews({ commit }, id) {
     commit("SET_LOADING", true);
     try {
-    let data = await GigService.gigPageViews(id);
-    commit("SET_PAGE_VIEWS", data.data);
-    commit("SET_LOADING", false);
-    return data.data;
+      let data = await GigService.gigPageViews(id);
+      commit("SET_PAGE_VIEWS", data.data);
+      commit("SET_LOADING", false);
+      return data.data;
     } catch (error) {
       commit("SET_LOADING", false);
       commit("SET_ERROR", getError(error));

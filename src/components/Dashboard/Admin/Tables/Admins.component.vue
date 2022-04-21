@@ -440,7 +440,7 @@ export default {
       let data = reactive([]);
       let start = currentPage.value - 2;
       let end = currentPage.value + 2;
-      let totalPages = meta.value.last_page;
+      let totalPages = computed(()=>meta.value.last_page) ;
       if (start < 1) {
         start = 1;
         end = 5;

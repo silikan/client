@@ -1,5 +1,5 @@
 <template>
-  <Disclosure v-slot="{ open }" as="header" class="bg-white shadow">
+  <Disclosure v-slot="{ open }" as="header" class="bg-white shadow" >
     <div
       class="
         max-w-7xl
@@ -154,7 +154,7 @@
             </div>
           </div>
           <router-link
-            v-if=" isHandyman === true &&  buying === true "
+            v-if="isLoggedin  &&  isHandyman === true &&  buying === true "
             to="/selling"
             class="
               inline-flex
@@ -173,7 +173,7 @@
             Switch To Selling
           </router-link>
               <router-link
-            v-if="  buying === false  "
+            v-if="isLoggedin &&  buying === false  "
             to="/buying"
             class="
               inline-flex
@@ -459,7 +459,44 @@
               </div>
             </div>
           </router-link>
+    <router-link
+            v-if=" isHandyman === true &&  buying === true "
+            to="/selling"
+            class="
+              inline-flex
+              items-center
+              px-5
+              py-2
+              border border-transparent
+              text-sm
+              rounded-full
+          flex-1
 
+              text-indigo-600
+              font-bold
+            "
+          >
+            Switch To Selling
+          </router-link>
+              <router-link
+            v-if="  buying === false  "
+            to="/buying"
+            class="
+              inline-flex
+              items-center
+              px-5
+              py-2
+              border border-transparent
+              text-sm
+              rounded-full
+
+ flex-1
+              text-indigo-600
+              font-bold
+            "
+          >
+            {{ isHandyman === true ? 'Switch To Buying' : 'Go To Buying' }}
+          </router-link>
           <router-link
             v-if="isLoggedin === true"
             type="button"

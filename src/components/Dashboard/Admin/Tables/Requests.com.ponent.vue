@@ -437,7 +437,7 @@
 
 <script>
 import DeleteDiag from "../DeleteUserDialogue.component.vue";
-import Table from "@/components/Loading/Skeletons/Table.component.vue"
+import Table from "@/components/Loading/Skeletons/Table.component.vue";
 
 import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/vue/solid";
 import Avatar from "@/components/Avatar/Avatar.component.vue";
@@ -451,7 +451,7 @@ export default {
     ChevronRightIcon,
     Avatar,
     DeleteDiag,
-    Table
+    Table,
   },
 
   setup() {
@@ -506,7 +506,9 @@ export default {
       let data = reactive([]);
       let start = currentPage.value - 2;
       let end = currentPage.value + 2;
-      let totalPages = computed(()=>meta.value.last_page)
+      let totalPages = computed(() => meta.value.last_page);
+
+      console.log(totalPages.value);
       if (start < 1) {
         start = 1;
         end = 5;
@@ -525,10 +527,11 @@ export default {
       return data;
     });
     let preurl = `${process.env.VUE_APP_API_URL}`;
-                            let loading = computed(() => store.getters["Admin/getClientRequestLoading"]);
+    let loading = computed(
+      () => store.getters["Admin/getClientRequestLoading"]
+    );
 
-
-console.log(loading.value);
+    console.log(loading.value);
     return {
       action,
       path,
@@ -547,7 +550,7 @@ console.log(loading.value);
       type,
       RequestId,
       openDiag,
-      loading
+      loading,
     };
   },
 };

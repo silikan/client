@@ -453,7 +453,7 @@ let page = 1
     };
 
     const setPage = (pageNumber) => {
-      let paginationlink = `${process.env.VUE_APP_API_URL}/api/admin/get-all-gigs-paginated?page=${pageNumber}`;
+      let paginationlink = `${process.env.VUE_APP_API_URL}/api/admin/get-all-gigs-paginate?page=${pageNumber}`;
 
       store.dispatch("Admin/getGigLink", paginationlink);
       console.log(meta.value);
