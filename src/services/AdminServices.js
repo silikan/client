@@ -83,7 +83,9 @@ export default {
     return API.apiClient.get(link);
   },
 
-  getAllTransactions() {
-    return API.apiClient.get(`/transaction`);
+  async getAllTransactionsPaginated(page) {
+    return API.apiClient.get(`/admin/get-all-transactions`, {
+      params: { page },
+    });
   },
 };

@@ -24,7 +24,12 @@ function setPaginatedClientRequest(commit, response) {
   commit("SET_CLIENT_REQUEST_LINKS", response.data.links);
   commit("SET_CLIENT_REQUEST_LOADING", false);
 }
-
+function setPaginatedTransactions(commit, response) {
+  commit("SET_TRANSACTIONS", response.data.data);
+  commit("SET_TRANSACTIONS_META", response.data.meta);
+  commit("SET_TRANSACTIONS_LINKS", response.data.links);
+  commit("SET_TRANSACTIONS_LOADING", false);
+}
 export const state = {
   gigs: [],
   gigsMeta: {},
@@ -39,6 +44,10 @@ export const state = {
   clientRequestMeta: {},
   clientRequestLinks: {},
   clientRequestLoading: false,
+  transactions: [],
+  transactionsMeta: {},
+  transactionsLinks: {},
+  transactionsLoading: false,
 };
 
 export const mutations = {
@@ -80,6 +89,18 @@ export const mutations = {
   },
   SET_CLIENT_REQUEST_LOADING(state, loading) {
     state.clientRequestLoading = loading;
+  },
+  SET_TRANSACTIONS(state, transactions) {
+    state.transactions = transactions;
+  },
+  SET_TRANSACTIONS_META(state, meta) {
+    state.transactionsMeta = meta;
+  },
+  SET_TRANSACTIONS_LINKS(state, links) {
+    state.transactionsLinks = links;
+  },
+  SET_TRANSACTIONS_LOADING(state, loading) {
+    state.transactionsLoading = loading;
   },
 };
 
@@ -251,6 +272,28 @@ export const actions = {
       commit("SET_ERROR", getError(error));
     }
   },
+  async getAllTransactionsPaginated({ commit }, page) {
+    try {
+      commit("SET_TRANSACTIONS_LOADING", true);
+      const Transactions = await AdminServices.getAllTransactionsPaginated(page);
+      setPaginatedTransactions(commit, Transactions);
+      return Transactions.data;
+    } catch (error) {
+      commit("SET_ERROR", getError(error));
+      commit("SET_TRANSACTIONS_LOADING", false);
+    }
+  },
+  async getTransactionLink({ commit }, link) {
+    try {
+      commit("SET_TRANSACTIONS_LOADING", true);
+      const Transactions = await AdminServices.getLink(link);
+      setPaginatedTransactions(commit, Transactions);
+      return Transactions.data;
+    } catch (error) {
+      commit("SET_ERROR", getError(error));
+      commit("SET_TRANSACTIONS_LOADING", false);
+    }
+  },
 };
 
 export const getters = {
@@ -292,5 +335,17 @@ export const getters = {
   },
   getClientRequestLoading(state) {
     return state.clientRequestLoading;
+  },
+  getTransactions(state) {
+    return state.transactions;
+  },
+  getTransactionsMeta(state) {
+    return state.transactionsMeta;
+  },
+  getTransactionsLinks(state) {
+    return state.transactionsLinks;
+  },
+  getTransactionsLoading(state) {
+    return state.transactionsLoading;
   },
 };
