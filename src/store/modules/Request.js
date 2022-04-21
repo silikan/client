@@ -84,39 +84,42 @@ export const mutations = {
 };
 
 export const actions = {
-  async createRequest({commit},payload) {
-    commit("SET_LOADING", true);
-    try {
-    let title = payload.state.title;
-    let description = payload.state.description;
-    let category = payload.state.category;
-    let price = payload.state.price;
-    let paymentMethod = JSON.stringify(payload.state.paymentMethod);
-    let priceDescription = payload.state.priceDescription;
-    let duration = payload.state.duration;
-    await RequestService.createRequest({
-      title,
-      description,
-      category,
-      price,
-      paymentMethod,
-      priceDescription,
-      duration,
-    });
-    commit("SET_LOADING", true);
+  async createRequest(payload) {
+    /*     commit("SET_LOADING", true);
+     */ try {
+      let title = payload.state.title;
+      let description = payload.state.description;
+      let category = payload.state.category;
+      let price = payload.state.price;
+      let paymentMethod = JSON.stringify(payload.state.paymentMethod);
+      let priceDescription = payload.state.priceDescription;
+      let duration = payload.state.duration;
+      await RequestService.createRequest({
+        title,
+        description,
+        category,
+        price,
+        paymentMethod,
+        priceDescription,
+        duration,
+      });
+      /*     commit("SET_LOADING", true);
+       */
     } catch (error) {
-      commit("SET_ERROR", getError(error));
-      commit("SET_LOADING", true);
+      /*       commit("SET_ERROR", getError(error));
+       */
+      /*       commit("SET_LOADING", true);
+       */
     }
   },
 
   async getRequest({ commit }, id) {
     commit("SET_LOADING", true);
     try {
-    let data = await RequestService.getRequest(id);
-    commit("SET_FETCHED_REQUESTS", data);
-    commit("SET_LOADING", false);
-    return data.data;
+      let data = await RequestService.getRequest(id);
+      commit("SET_FETCHED_REQUESTS", data);
+      commit("SET_LOADING", false);
+      return data.data;
     } catch (error) {
       commit("SET_ERROR", getError(error));
       commit("SET_LOADING", true);
@@ -125,10 +128,10 @@ export const actions = {
   async getRequestUser({ commit }, id) {
     commit("SET_LOADING", true);
     try {
-    let data = await RequestService.getRequestUser(id);
-    commit("SET_GIG_USERS", data);
-    commit("SET_LOADING", false);
-    return data.data;
+      let data = await RequestService.getRequestUser(id);
+      commit("SET_GIG_USERS", data);
+      commit("SET_LOADING", false);
+      return data.data;
     } catch (error) {
       commit("SET_ERROR", getError(error));
       commit("SET_LOADING", true);
@@ -137,10 +140,10 @@ export const actions = {
   async getUserRequests({ commit }, id) {
     commit("SET_LOADING", true);
     try {
-    let data = await RequestService.getUserRequests(id);
-    commit("SET_USER_REQUESTS", data.data);
-    commit("SET_LOADING", false);
-    return data.data;
+      let data = await RequestService.getUserRequests(id);
+      commit("SET_USER_REQUESTS", data.data);
+      commit("SET_LOADING", false);
+      return data.data;
     } catch (error) {
       commit("SET_ERROR", getError(error));
       commit("SET_LOADING", true);
@@ -174,10 +177,10 @@ export const actions = {
   async requestPageViews({ commit }, id) {
     commit("SET_LOADING", true);
     try {
-    let data = await RequestService.requestPageViews(id);
-    commit("SET_PAGE_VIEWS", data.data);
-    commit("SET_LOADING", false);
-    return data.data;
+      let data = await RequestService.requestPageViews(id);
+      commit("SET_PAGE_VIEWS", data.data);
+      commit("SET_LOADING", false);
+      return data.data;
     } catch (error) {
       commit("SET_ERROR", getError(error));
       commit("SET_LOADING", true);
