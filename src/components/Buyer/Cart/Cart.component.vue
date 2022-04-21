@@ -316,6 +316,7 @@ export default {
         .dispatch("Cart/setCartItemStatusToAccepted", payload)
         .then((result) => {
           console.log(result);
+          router.push(`/cart/${cartItemId}/feed`);
         })
         .catch((error) => {
           console.log(error);
@@ -331,6 +332,8 @@ export default {
         .dispatch("Cart/setCartItemStatusToDeclined", payload)
         .then((result) => {
           console.log(result);
+                    router.push(`/cart/${cartItemId}/feed`);
+
         })
         .catch((error) => {
           console.log(error);
@@ -346,6 +349,8 @@ export default {
         .dispatch("Cart/setCartItemStatusToPaid", payload)
         .then((result) => {
           console.log(result);
+                    router.push(`/cart/${cartItemId}/feed`);
+
         })
         .catch((error) => {
           console.log(error);
@@ -360,6 +365,8 @@ export default {
         .dispatch("Cart/setCartItemStatusToInProgress", payload)
         .then((result) => {
           console.log(result);
+                    router.push(`/cart/${cartItemId}/feed`);
+
         })
         .catch((error) => {
           console.log(error);
@@ -374,6 +381,8 @@ export default {
         .dispatch("Cart/setCartItemStatusToCancelled", payload)
         .then((result) => {
           console.log(result);
+                    router.push(`/cart/${cartItemId}/feed`);
+
         })
         .catch((error) => {
           console.log(error);
@@ -389,6 +398,8 @@ export default {
         .dispatch("Cart/setCartItemStatusToCompleted", payload)
         .then((result) => {
           console.log(result);
+                    router.push(`/cart/${cartItemId}/feed`);
+
         })
         .catch((error) => {
           console.log(error);

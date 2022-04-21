@@ -350,6 +350,7 @@ import { ref } from "@vue/reactivity";
 import { useStore } from "vuex";
 import { computed } from "@vue/runtime-core";
 import Avatar from "@/components/Avatar/Avatar.component.vue";
+import { useRouter } from 'vue-router';
 const people = [
   // More people...
 ];
@@ -362,6 +363,7 @@ export default {
     let store = useStore();
     let task = ref([]);
     let userId = computed(() => store.getters["auth/id"]);
+    let router = useRouter();
     console.log(userId.value);
     store
       .dispatch("Task/getUserTaskItems", userId.value)
@@ -382,6 +384,7 @@ export default {
         .dispatch("Task/setTaskItemsStatusToInProgress", payload)
         .then((result) => {
           console.log(result);
+          router.push(`/task/${taskItemId}/feed`);
         })
         .catch((error) => {
           console.log(error);
@@ -397,6 +400,7 @@ export default {
         .dispatch("Task/setTaskItemsStatusToCancelled", payload)
         .then((result) => {
           console.log(result);
+          router.push(`/task/${taskItemId}/feed`);
         })
         .catch((error) => {
           console.log(error);
@@ -412,6 +416,7 @@ export default {
         .dispatch("Task/setTaskItemStatusToCompleted", payload)
         .then((result) => {
           console.log(result);
+          router.push(`/task/${taskItemId}/feed`);
         })
         .catch((error) => {
           console.log(error);
@@ -427,6 +432,7 @@ export default {
         .dispatch("Task/setTaskItemStatusToAccepted", payload)
         .then((result) => {
           console.log(result);
+          router.push(`/task/${taskItemId}/feed`);
         })
         .catch((error) => {
           console.log(error);
@@ -442,6 +448,7 @@ export default {
         .dispatch("Task/setTaskItemStatusToDeclined", payload)
         .then((result) => {
           console.log(result);
+          router.push(`/task/${taskItemId}/feed`);
         })
         .catch((error) => {
           console.log(error);
@@ -457,6 +464,7 @@ export default {
         .dispatch("Task/setTaskItemStatusToPaid", payload)
         .then((result) => {
           console.log(result);
+          router.push(`/task/${taskItemId}/feed`);
         })
         .catch((error) => {
           console.log(error);
@@ -475,6 +483,7 @@ export default {
             .dispatch("Task/setTaskItemStatusToConfirmed", payload)
             .then((result) => {
               console.log(result);
+              router.push(`/task/${taskItemId}/feed`);
             })
             .catch((error) => {
               console.log(error);
