@@ -1,12 +1,15 @@
 <template>
 <div>
-	hi i am transactions
+	<TransactionsTable/>
 </div>
 </template>
 
 <script>
+import TransactionsTable from '../Tables/TransactionsTable.component.vue'
 export default {
-
+components: {
+	TransactionsTable
+},
 }
 </script>
 
