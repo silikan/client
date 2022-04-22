@@ -1,6 +1,7 @@
 <!-- This example requires Tailwind CSS v2.0+ -->
 <template>
   <div class="bg-white">
+
     <div
       class="
         max-w-2xl

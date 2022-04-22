@@ -348,10 +348,12 @@
       isHandyman === true
     "
   />
+  <VisitReview/>
 </template>
 
 <script>
 import GigLoadingSkeleton from "@/components/Loading/Skeletons/Gig.component.vue";
+import VisitReview from "@/components/Profile/Visit_Reviews.component.vue";
 
 import Table from "@/components/Loading/Skeletons/Table.component.vue";
 import {
@@ -421,6 +423,7 @@ export default {
     CheckCircleIcon,
     Table,
     GigLoadingSkeleton,
+    VisitReview
   },
 
   setup() {
