@@ -2,6 +2,7 @@
   <div v-if="loading === true">
     <Table />
   </div>
+
   <div class="bg-white" v-if="loading === false && links && meta">
     <div class="">
       <div class="flex flex-col">
@@ -34,7 +35,7 @@
                     >
                       Client
                     </th>
-                    <th
+                         <th
                       scope="col"
                       class="
                         px-6
@@ -46,8 +47,9 @@
                         tracking-wider
                       "
                     >
-                      Title
+                      Handyman
                     </th>
+
                     <th
                       scope="col"
                       class="
@@ -97,36 +99,49 @@
                 </thead>
                 <tbody class="bg-white divide-y divide-gray-200">
                   <tr v-for="request in requests" :key="request.id">
-                    <td class="px-6 py-4 whitespace-nowrap">
-                      <router-link :to="`/user/${request.user.id}`">
-                        <div class="flex items-center">
+                    <td class="px-6 py-4 whitespace-nowrap"  v-if="request.client !== null">
+                       <router-link :to="`/user/${request.client.id}`">
+                         <div class="flex items-center">
                           <div class="flex-shrink-0 h-10 w-10">
-                            <Avatar
-                              v-if="request.user.name"
-                              :url="request.user.avatar"
-                              :name="request.user.name"
+                             <Avatar
+                              v-if="request.client.name"
+                              :url="request.client.avatar"
+                              :name="request.client.name"
                             />
                           </div>
                           <div class="ml-4">
                             <div class="text-sm font-medium text-gray-900">
-                              {{ request.user.name }}
+                               {{ request.client.name }}
                             </div>
                             <div class="text-sm text-gray-500">
-                              {{ request.user.email }}
+                              {{ request.client.email }}
                             </div>
                           </div>
                         </div>
-                      </router-link>
+                       </router-link>
                     </td>
-                    <td class="px-6 py-4 whitespace-nowrap">
-                      <div class="flex items-center">
-                        <div class="ml-4">
-                          <div class="text-sm text-gray-500">
-                            {{ request.title }}
+                       <td class="px-6 py-4 whitespace-nowrap" v-if="request.handyman !== null">
+                       <router-link :to="`/user/${request.handyman.id}`">
+                         <div class="flex items-center">
+                          <div class="flex-shrink-0 h-10 w-10">
+                             <Avatar
+                              v-if="request.handyman.name"
+                              :url="request.handyman.avatar"
+                              :name="request.handyman.name"
+                            />
+                          </div>
+                          <div class="ml-4">
+                            <div class="text-sm font-medium text-gray-900">
+                               {{ request.handyman.name }}
+                            </div>
+                            <div class="text-sm text-gray-500">
+                              {{ request.handyman.email }}
+                            </div>
                           </div>
                         </div>
-                      </div>
+                       </router-link>
                     </td>
+
 
                     <td class="px-6 py-4 whitespace-nowrap">
                       <span
@@ -141,7 +156,7 @@
                           text-green-800
                         "
                       >
-                        {{ request.price }} DZD
+                        {{ JSON.parse(request.cart_item.plan).price }} DZD
                       </span>
                     </td>
                     <td class="px-6 py-4 whitespace-nowrap">
@@ -157,7 +172,7 @@
                           text-green-800
                         "
                       >
-                        {{ request.duration }} Days
+                    <!--     {{ request.duration }} Days -->
                       </span>
                     </td>
                     <td class="px-6 py-4 whitespace-nowrap">
@@ -173,41 +188,12 @@
                           text-green-800
                         "
                       >
-                        {{ JSON.parse(request.payment_method) }}
+                     <!--    {{ JSON.parse(request.payment_method) }} -->
                       </span>
-                    </td>
-                    <td
-                      class="
-                        px-6
-                        py-4
-                        whitespace-nowrap
-                        text-right text-sm
-                        font-medium
-                      "
-                    >
-                      <router-link
-                        :to="`/request/${request.id}`"
-                        href="#"
-                        class="text-indigo-600 hover:text-indigo-900"
-                        >Check</router-link
-                      >
                     </td>
 
-                    <td
-                      class="
-                        px-6
-                        py-4
-                        whitespace-nowrap
-                        text-right text-sm
-                        font-medium
-                      "
-                    >
-                      <a
-                        @click="openDiag(request.id)"
-                        class="text-red-600 hover:text-indigo-900"
-                        >Delete</a
-                      >
-                    </td>
+
+
                   </tr>
                 </tbody>
               </table>
@@ -440,7 +426,7 @@ import DeleteDiag from "../DeleteUserDialogue.component.vue";
 import Table from "@/components/Loading/Skeletons/Table.component.vue";
 
 import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/vue/solid";
-import Avatar from "@/components/Avatar/Avatar.component.vue";
+ import Avatar from "@/components/Avatar/Avatar.component.vue";
 
 import { computed, reactive, ref } from "@vue/runtime-core";
 import { useStore } from "vuex";
@@ -450,7 +436,7 @@ export default {
     ChevronLeftIcon,
     ChevronRightIcon,
     Avatar,
-    DeleteDiag,
+     DeleteDiag,
     Table,
   },
 
@@ -469,31 +455,31 @@ export default {
       RequestId.value = id;
     };
     /* let router = useRouter
-     */ store.dispatch("Admin/getAllClientRequests", page).then((res) => {
+     */ store.dispatch("Admin/getAllTransactionsPaginated", page).then((res) => {
       console.log(res);
     });
     meta = computed(() => {
-      return store.getters["Admin/getClientRequestMeta"];
+      return store.getters["Admin/getTransactionsMeta"];
     });
     links = computed(() => {
-      return store.getters["Admin/getClientRequestLinks"];
+      return store.getters["Admin/getTransactionsLinks"];
     });
     requests = computed(() => {
-      return store.getters["Admin/getClientRequest"];
+      return store.getters["Admin/getTransactions"];
     });
     console.log(meta);
     const prevPage = () => {
-      store.dispatch("Admin/getClientRequestLink", links.value.prev);
+      store.dispatch("Admin/getTransactionsLinks", links.value.prev);
     };
     const nextPage = () => {
       console.log(links.value.next);
-      store.dispatch("Admin/getClientRequestLink", links.value.next);
+      store.dispatch("Admin/getTransactionsLinks", links.value.next);
     };
 
     const setPage = (pageNumber) => {
-      let paginationlink = `${process.env.VUE_APP_API_URL}/api/admin/get-all-requests-paginate?page=${pageNumber}`;
+      let paginationlink = `${process.env.VUE_APP_API_URL}/api/admin/get-all-transactions?page=${pageNumber}`;
 
-      store.dispatch("Admin/getClientRequestLink", paginationlink);
+      store.dispatch("Admin/getTransactionsLinks", paginationlink);
       console.log(meta.value);
     };
 
@@ -528,7 +514,7 @@ export default {
     });
     let preurl = `${process.env.VUE_APP_API_URL}`;
     let loading = computed(
-      () => store.getters["Admin/getClientRequestLoading"]
+      () => store.getters["Admin/getTransactionsLoading"]
     );
 
     console.log(loading.value);

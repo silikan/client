@@ -496,6 +496,8 @@
                     />
                   </div>
                 </div>
+                    <ErrorMessage :errorData="errorData" />
+
                 <div class="flex items-center justify-between">
                   <div class="flex items-center">
                     <input
@@ -629,6 +631,7 @@
       </div>
     </div>
   </div>
+
 </template>
 
 <script>
@@ -640,11 +643,13 @@ import {
   RadioGroupOption,
 } from "@headlessui/vue";
 
-import { getError } from "@/utils/helpers";
 import AuthService from "@/services/AuthService";
 import { useRouter } from "vue-router";
 import { reactive, ref } from "vue";
 import { useStore } from "vuex";
+import { getError } from "@/utils/helpers";
+
+import ErrorMessage from "@/components/Alerts/ErrorMessage.componenet.vue";
 
 const Roles = [
   {
@@ -664,6 +669,7 @@ export default {
     RadioGroupDescription,
     RadioGroupLabel,
     RadioGroupOption,
+    ErrorMessage,
   },
   setup() {
     const steps = reactive([
@@ -671,6 +677,9 @@ export default {
 
       { name: "Signup", href: "#", status: "upnext" },
     ]);
+    let errorData = ref("");
+let errorMessage =  ref("");
+
     const selected = ref(Roles[0]);
     console.log(selected.value);
     let name;
@@ -724,7 +733,7 @@ export default {
         .catch((error) => {
           loading.value = false;
 
-          error.value = getError(error);
+          errorData.value = getError(error);
         });
     };
 
@@ -758,6 +767,9 @@ export default {
       facebook,
       linkedin,
       loading,
+      errorMessage,
+      errorData
+
     };
   },
 };

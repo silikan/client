@@ -249,7 +249,7 @@
                     />
                   </div>
                 </div>
-
+ <ErrorMessage :errorData="errorData" />
                 <div class="flex items-center justify-between">
                   <div class="flex items-center">
                     <input
@@ -370,20 +370,26 @@
       </div>
     </div>
   </div>
+
 </template>
 
 <script>
 import AuthService from "@/services/AuthService";
+import { getError } from "@/utils/helpers";
 
+import ErrorMessage from "@/components/Alerts/ErrorMessage.componenet.vue";
 import { useStore } from "vuex";
 import { useRouter } from "vue-router";
 import { ref } from "vue";
 
 export default {
+  components: {
+    ErrorMessage,
+  },
   setup() {
     let email;
     let password;
-    let error;
+
     let google = `${process.env.VUE_APP_API_URL}/social/google`;
     let facebook = `${process.env.VUE_APP_API_URL}/social/facebook`;
     let linkedin = `${process.env.VUE_APP_API_URL}/social/linkedin`;
@@ -394,7 +400,8 @@ export default {
     const store = useStore();
     const router = useRouter();
 
-
+let errorData = ref("");
+let errorMessage =  ref("");
 
     const login = async () => {
        store.dispatch("Loading/changeLoading", loading.value);
@@ -404,7 +411,6 @@ loading.value = store.getters["Loading/loading"];
         email: email.value,
         password: password.value,
       };
-      error = null;
       try {
         await AuthService.login(payload);
         const authUser = await store.dispatch("auth/getAuthUser");
@@ -420,31 +426,33 @@ loading.value = store.getters["Loading/loading"];
        store.dispatch("Loading/changeLoading", loading.value);
 
 loading.value = store.getters["Loading/loading"];
-
+/*
           const error = Error(
             "Unable to fetch user after login, check your API settings."
           );
           error.name = "Fetch User";
-          throw error;
+          throw error; */
         }
-      } catch (error) {
-
+      } catch (err) {
+console.log(err);
          store.dispatch("Loading/changeLoading", loading.value);
 
 loading.value = store.getters["Loading/loading"];
-        console.log(email, password);
+        errorData.value = getError(err)
       }
     };
 
     return {
       email,
       password,
-      error,
+      errorData,
       login,
       google,
       facebook,
       linkedin,
       loading,
+      errorMessage,
+
     };
   },
 };

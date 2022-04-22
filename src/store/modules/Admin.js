@@ -25,6 +25,7 @@ function setPaginatedClientRequest(commit, response) {
   commit("SET_CLIENT_REQUEST_LOADING", false);
 }
 function setPaginatedTransactions(commit, response) {
+  console.log(response.data);
   commit("SET_TRANSACTIONS", response.data.data);
   commit("SET_TRANSACTIONS_META", response.data.meta);
   commit("SET_TRANSACTIONS_LINKS", response.data.links);
@@ -288,6 +289,7 @@ export const actions = {
       commit("SET_TRANSACTIONS_LOADING", true);
       const Transactions = await AdminServices.getLink(link);
       setPaginatedTransactions(commit, Transactions);
+
       return Transactions.data;
     } catch (error) {
       commit("SET_ERROR", getError(error));
