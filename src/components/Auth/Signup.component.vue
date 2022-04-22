@@ -370,7 +370,7 @@
                   >
                     name
                   </label>
-                  <div class="mt-1">
+    <div class="mt-1 relative rounded-md shadow-sm">
                     <input
                       id="name"
                       v-model="name"
@@ -378,23 +378,33 @@
                       type="name"
                       autocomplete="name"
                       required=""
-                      class="
-                        appearance-none
-                        block
-                        w-full
-                        px-3
-                        py-2
-                        border border-gray-300
-                        rounded-md
-                        shadow-sm
-                        placeholder-gray-400
-                        focus:outline-none
-                        focus:ring-indigo-500
-                        focus:border-indigo-500
-                        sm:text-sm
-                      "
+                     :class="[
+                        errorData.name
+                          ? 'block w-full pr-10 border-red-300 text-red-900 placeholder-red-300 focus:outline-none focus:ring-red-500 focus:border-red-500 sm:text-sm rounded-md w-full px-3 py-2 border border-red-300  text-red-900 rounded-md  shadow-smplaceholder-red-400 focus:outline-nonefocus:ring-red-500 focus:border-red-500 sm:text-sm'
+                          : ' block w-full px-3 py-2 border border-gray-300 rounded-md  shadow-smplaceholder-gray-400 focus:outline-nonefocus:ring-indigo-500 focus:border-indigo-500 sm:text-sm',
+                      ]"
                     />
+                    <div
+                      class="
+                        absolute
+                        inset-y-0
+                        right-0
+                        pr-3
+                        flex
+                        items-center
+                        pointer-events-none
+                      "
+                    >
+                      <ExclamationCircleIcon
+                        class="h-5 w-5 text-red-500"
+                        aria-hidden="true"
+                        v-if="errorData.name"
+                      />
+                    </div>
                   </div>
+                  <p v-if="errorData.name" class="mt-2 text-sm text-red-600" id="email-error">
+                   {{errorData.name[à]}}
+                  </p>
                 </div>
                 <div>
                   <label
@@ -403,7 +413,7 @@
                   >
                     Email address
                   </label>
-                  <div class="mt-1">
+    <div class="mt-1 relative rounded-md shadow-sm">
                     <input
                       id="email"
                       v-model="email"
@@ -411,23 +421,33 @@
                       type="email"
                       autocomplete="email"
                       required=""
-                      class="
-                        appearance-none
-                        block
-                        w-full
-                        px-3
-                        py-2
-                        border border-gray-300
-                        rounded-md
-                        shadow-sm
-                        placeholder-gray-400
-                        focus:outline-none
-                        focus:ring-indigo-500
-                        focus:border-indigo-500
-                        sm:text-sm
-                      "
+                      :class="[
+                        errorData.email
+                          ? 'block w-full pr-10 border-red-300 text-red-900 placeholder-red-300 focus:outline-none focus:ring-red-500 focus:border-red-500 sm:text-sm rounded-md w-full px-3 py-2 border border-red-300  text-red-900 rounded-md  shadow-smplaceholder-red-400 focus:outline-nonefocus:ring-red-500 focus:border-red-500 sm:text-sm'
+                          : ' block w-full px-3 py-2 border border-gray-300 rounded-md  shadow-smplaceholder-gray-400 focus:outline-nonefocus:ring-indigo-500 focus:border-indigo-500 sm:text-sm',
+                      ]"
                     />
+                <div
+                      class="
+                        absolute
+                        inset-y-0
+                        right-0
+                        pr-3
+                        flex
+                        items-center
+                        pointer-events-none
+                      "
+                    >
+                      <ExclamationCircleIcon
+                        class="h-5 w-5 text-red-500"
+                        aria-hidden="true"
+                        v-if="errorData.email"
+                      />
+                    </div>
                   </div>
+                  <p v-if="errorData.email" class="mt-2 text-sm text-red-600" id="email-error">
+                   {{errorData.email[0]}}
+                  </p>
                 </div>
 
                 <div class="space-y-1">
@@ -437,7 +457,7 @@
                   >
                     Password
                   </label>
-                  <div class="mt-1">
+    <div class="mt-1 relative rounded-md shadow-sm">
                     <input
                       id="password"
                       v-model="password"
@@ -445,23 +465,33 @@
                       type="password"
                       autocomplete="current-password"
                       required=""
-                      class="
-                        appearance-none
-                        block
-                        w-full
-                        px-3
-                        py-2
-                        border border-gray-300
-                        rounded-md
-                        shadow-sm
-                        placeholder-gray-400
-                        focus:outline-none
-                        focus:ring-indigo-500
-                        focus:border-indigo-500
-                        sm:text-sm
-                      "
+                    :class="[
+                        errorData.password
+                          ? 'block w-full pr-10 border-red-300 text-red-900 placeholder-red-300 focus:outline-none focus:ring-red-500 focus:border-red-500 sm:text-sm rounded-md w-full px-3 py-2 border border-red-300  text-red-900 rounded-md  shadow-smplaceholder-red-400 focus:outline-nonefocus:ring-red-500 focus:border-red-500 sm:text-sm'
+                          : ' block w-full px-3 py-2 border border-gray-300 rounded-md  shadow-smplaceholder-gray-400 focus:outline-nonefocus:ring-indigo-500 focus:border-indigo-500 sm:text-sm',
+                      ]"
                     />
+                     <div
+                      class="
+                        absolute
+                        inset-y-0
+                        right-0
+                        pr-3
+                        flex
+                        items-center
+                        pointer-events-none
+                      "
+                    >
+                      <ExclamationCircleIcon
+                        class="h-5 w-5 text-red-500"
+                        aria-hidden="true"
+                        v-if="errorData.password"
+                      />
+                    </div>
                   </div>
+                  <p v-if="errorData.email" class="mt-2 text-sm text-red-600" id="email-error">
+                   {{errorData.password[0]}}
+                  </p>
                 </div>
                 <div class="space-y-1">
                   <label
@@ -470,7 +500,7 @@
                   >
                     confirm Password
                   </label>
-                  <div class="mt-1">
+    <div class="mt-1 relative rounded-md shadow-sm">
                     <input
                       id="confirm password"
                       v-model="passwordConfirm"
@@ -478,25 +508,35 @@
                       type="password"
                       autocomplete="confirm password"
                       required=""
-                      class="
-                        appearance-none
-                        block
-                        w-full
-                        px-3
-                        py-2
-                        border border-gray-300
-                        rounded-md
-                        shadow-sm
-                        placeholder-gray-400
-                        focus:outline-none
-                        focus:ring-indigo-500
-                        focus:border-indigo-500
-                        sm:text-sm
-                      "
+                   :class="[
+                        errorData.password
+                          ? 'block w-full pr-10 border-red-300 text-red-900 placeholder-red-300 focus:outline-none focus:ring-red-500 focus:border-red-500 sm:text-sm rounded-md w-full px-3 py-2 border border-red-300  text-red-900 rounded-md  shadow-smplaceholder-red-400 focus:outline-nonefocus:ring-red-500 focus:border-red-500 sm:text-sm'
+                          : ' block w-full px-3 py-2 border border-gray-300 rounded-md  shadow-smplaceholder-gray-400 focus:outline-nonefocus:ring-indigo-500 focus:border-indigo-500 sm:text-sm',
+                      ]"
                     />
+                      <div
+                      class="
+                        absolute
+                        inset-y-0
+                        right-0
+                        pr-3
+                        flex
+                        items-center
+                        pointer-events-none
+                      "
+                    >
+                      <ExclamationCircleIcon
+                        class="h-5 w-5 text-red-500"
+                        aria-hidden="true"
+                        v-if="errorData.password"
+                      />
+                    </div>
                   </div>
+                  <p v-if="errorData.email" class="mt-2 text-sm text-red-600" id="email-error">
+                   {{errorData.password[0]}}
+                  </p>
                 </div>
-                    <ErrorMessage :errorData="errorData" />
+                <ErrorMessage :errorData="errorData" />
 
                 <div class="flex items-center justify-between">
                   <div class="flex items-center">
@@ -529,7 +569,6 @@
                       steps[0].status == 'complete' &&
                       steps[1].status == 'current' &&
                       loading == false
-
                     "
                     class="
                       w-full
@@ -553,8 +592,8 @@
                   >
                     sign up
                   </button>
-                          <button
-                  v-if="loading == true "
+                  <button
+                    v-if="loading == true"
                     class="
                       w-full
                       flex
@@ -573,9 +612,7 @@
                       focus:ring-2
                       focus:ring-offset-2
                       focus:ring-indigo-500
-
                     "
-
                   >
                     <svg
                       class="animate-spin -ml-1 mr-3 h-5 w-5 text-white"
@@ -631,11 +668,10 @@
       </div>
     </div>
   </div>
-
 </template>
 
 <script>
-import { CheckIcon } from "@heroicons/vue/solid";
+import { CheckIcon, ExclamationCircleIcon } from "@heroicons/vue/solid";
 import {
   RadioGroup,
   RadioGroupDescription,
@@ -670,6 +706,7 @@ export default {
     RadioGroupLabel,
     RadioGroupOption,
     ErrorMessage,
+    ExclamationCircleIcon,
   },
   setup() {
     const steps = reactive([
@@ -678,7 +715,7 @@ export default {
       { name: "Signup", href: "#", status: "upnext" },
     ]);
     let errorData = ref("");
-let errorMessage =  ref("");
+    let errorMessage = ref("");
 
     const selected = ref(Roles[0]);
     console.log(selected.value);
@@ -734,6 +771,7 @@ let errorMessage =  ref("");
           loading.value = false;
 
           errorData.value = getError(error);
+          console.log(errorData.value);
         });
     };
 
@@ -768,8 +806,7 @@ let errorMessage =  ref("");
       linkedin,
       loading,
       errorMessage,
-      errorData
-
+      errorData,
     };
   },
 };
