@@ -1,5 +1,5 @@
 <template>
-  <div class="flex flex-col items-center p-10 h-screen">
+  <div class="flex flex-col items-center p-10 ">
 
     <Stepper :steps="steps"/>
     <General v-show="steps[0].active === true" />
