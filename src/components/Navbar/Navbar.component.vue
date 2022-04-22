@@ -1,5 +1,5 @@
 <template>
-  <Disclosure v-slot="{ open }" as="header" class="bg-white shadow" >
+  <Disclosure v-slot="{ open }" as="header" class="bg-white shadow">
     <div
       class="
         max-w-7xl
@@ -154,7 +154,7 @@
             </div>
           </div>
           <router-link
-            v-if="isLoggedin  &&  isHandyman === true &&  buying === true "
+            v-if="isLoggedin && isHandyman === true && buying === true"
             to="/selling"
             class="
               inline-flex
@@ -165,15 +165,14 @@
               text-sm
               rounded-full
               shadow-sm
-
               text-indigo-600
               font-bold
             "
           >
             Switch To Selling
           </router-link>
-              <router-link
-            v-if="isLoggedin &&  buying === false  "
+          <router-link
+            v-if="isLoggedin && buying === false"
             to="/buying"
             class="
               inline-flex
@@ -184,12 +183,11 @@
               text-sm
               rounded-full
               shadow-sm
-
               text-indigo-600
               font-bold
             "
           >
-            {{ isHandyman === true ? 'Switch To Buying' : 'Go To Buying' }}
+            {{ isHandyman === true ? "Switch To Buying" : "Go To Buying" }}
           </router-link>
           <router-link
             to="/rooms"
@@ -208,7 +206,7 @@
             <ChatAlt2Icon class="h-6 w-6" aria-hidden="true" />
           </router-link>
           <router-link
-            v-if="isLoggedin === true"
+            v-if="isLoggedin === true && isHandyman === true"
             type="router-link"
             class="
               flex-shrink-0
@@ -459,8 +457,8 @@
               </div>
             </div>
           </router-link>
-    <router-link
-            v-if=" isHandyman === true &&  buying === true "
+          <router-link
+            v-if="isHandyman === true && buying === true"
             to="/selling"
             class="
               inline-flex
@@ -470,16 +468,15 @@
               border border-transparent
               text-sm
               rounded-full
-          flex-1
-
+              flex-1
               text-indigo-600
               font-bold
             "
           >
             Switch To Selling
           </router-link>
-              <router-link
-            v-if="  buying === false  "
+          <router-link
+            v-if="buying === false"
             to="/buying"
             class="
               inline-flex
@@ -489,16 +486,15 @@
               border border-transparent
               text-sm
               rounded-full
-
- flex-1
+              flex-1
               text-indigo-600
               font-bold
             "
           >
-            {{ isHandyman === true ? 'Switch To Buying' : 'Go To Buying' }}
+            {{ isHandyman === true ? "Switch To Buying" : "Go To Buying" }}
           </router-link>
           <router-link
-            v-if="isLoggedin === true"
+            v-if="isLoggedin === true "
             type="button"
             class="
               flex-shrink-0
@@ -530,7 +526,7 @@
             <ShoppingBagIcon class="h-6 w-6" aria-hidden="true" />
           </router-link>
           <router-link
-            v-if="isLoggedin === true"
+            v-if="isLoggedin === true && isHandyman === true"
             type="button"
             class="
               flex-shrink-0

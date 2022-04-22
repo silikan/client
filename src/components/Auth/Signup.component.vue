@@ -1,5 +1,5 @@
 <template>
-  <div class="min-h-full flex">
+  <div class="min-h-full flex ">
     <div class="hidden lg:flex w-full flex-1 justify-center items-center">
       <img
         class="self-center ml-10"
@@ -365,7 +365,7 @@
               >
                 <div>
                   <label
-                    for="n ame"
+                    for="name"
                     class="block text-sm font-medium text-gray-700"
                   >
                     name
@@ -403,7 +403,50 @@
                     </div>
                   </div>
                   <p v-if="errorData.name" class="mt-2 text-sm text-red-600" id="email-error">
-                   {{errorData.name[à]}}
+                   {{errorData.name[0]}}
+                  </p>
+                </div>
+                     <div>
+                  <label
+                    for="username"
+                    class="block text-sm font-medium text-gray-700"
+                  >
+                    username
+                  </label>
+    <div class="mt-1 relative rounded-md shadow-sm">
+                    <input
+                      id="username"
+                      v-model="username"
+                      name="username"
+                      type="username"
+                      autocomplete="username"
+                      required=""
+                     :class="[
+                        errorData.username
+                          ? 'block w-full pr-10 border-red-300 text-red-900 placeholder-red-300 focus:outline-none focus:ring-red-500 focus:border-red-500 sm:text-sm rounded-md w-full px-3 py-2 border border-red-300  text-red-900 rounded-md  shadow-smplaceholder-red-400 focus:outline-nonefocus:ring-red-500 focus:border-red-500 sm:text-sm'
+                          : ' block w-full px-3 py-2 border border-gray-300 rounded-md  shadow-smplaceholder-gray-400 focus:outline-nonefocus:ring-indigo-500 focus:border-indigo-500 sm:text-sm',
+                      ]"
+                    />
+                    <div
+                      class="
+                        absolute
+                        inset-y-0
+                        right-0
+                        pr-3
+                        flex
+                        items-center
+                        pointer-events-none
+                      "
+                    >
+                      <ExclamationCircleIcon
+                        class="h-5 w-5 text-red-500"
+                        aria-hidden="true"
+                        v-if="errorData.username"
+                      />
+                    </div>
+                  </div>
+                  <p v-if="errorData.username" class="mt-2 text-sm text-red-600" id="email-error">
+                   {{errorData.username[0]}}
                   </p>
                 </div>
                 <div>
@@ -727,6 +770,7 @@ export default {
     let is_handyman, is_client;
     is_client = ref(true);
     is_handyman = ref(false);
+    let username = ref("");
 
     name = ref("");
     email = ref("");
@@ -756,6 +800,7 @@ export default {
         is_handyman: is_handyman.value,
         password: password.value,
         password_confirmation: passwordConfirm.value,
+        username: username.value,
       };
       AuthService.registerUser(payload)
         .then(async () => {
@@ -807,6 +852,10 @@ export default {
       loading,
       errorMessage,
       errorData,
+
+      is_handyman,
+      is_client,
+      username,
     };
   },
 };
