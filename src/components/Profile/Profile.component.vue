@@ -434,9 +434,12 @@
       isHandyman === true
     "
   />
+  <Reviews/>
+
 </template>
 
 <script>
+import Reviews from "@/components/Profile/Reviews.component.vue";
 import GigLoadingSkeleton from "@/components/Loading/Skeletons/Gig.component.vue";
 
 import Table from "@/components/Loading/Skeletons/Table.component.vue";
@@ -508,6 +511,7 @@ export default {
     CheckCircleIcon,
     Table,
     GigLoadingSkeleton,
+    Reviews
   },
   props: ["authUser"],
 

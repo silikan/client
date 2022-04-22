@@ -11,7 +11,11 @@
       sm:px-6
     "
   >
+      <h2 class="mb-5 text-3xl font-extrabold tracking-tight hidden md:block">
+            Gigs
+          </h2>
     <div class="relative mx-auto">
+
       <div
         class="
           lg:mx-10

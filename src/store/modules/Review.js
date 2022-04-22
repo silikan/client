@@ -59,66 +59,61 @@ export const mutations = {
   },
   SET_LOADING(state, loading) {
     state.loading = loading;
-  }
-
-
+  },
 };
 
 export const actions = {
   async postAReview({ commit }, payload) {
     commit("SET_LOADING", true);
-    try{
-    console.log(payload);
-    let parsed = JSON.parse(payload);
-    const review = await ReviewServices.postAReview(parsed);
-    commit("SET_REVIEW", review);
-    commit("SET_LOADING", false);
-    return review.data;
-
-  } catch (error) {
-    commit("SET_LOADING", false);
-    commit("SET_ERROR", getError(error));
-  }
+    try {
+      console.log(payload);
+      let parsed = JSON.parse(payload);
+      const review = await ReviewServices.postAReview(parsed);
+      commit("SET_REVIEW", review);
+      commit("SET_LOADING", false);
+      return review.data;
+    } catch (error) {
+      commit("SET_LOADING", false);
+      commit("SET_ERROR", getError(error));
+    }
   },
   async getUserReviews({ commit }, id) {
     commit("SET_LOADING", true);
-    try{
-    const reviews = await ReviewServices.getUserReviews(id);
-    
-    commit("SET_USER_REVIEWS", reviews);
-    commit("SET_LOADING", false);
-    return reviews.data;
-  } catch (error) {
-    commit("SET_LOADING", false);
-    commit("SET_ERROR", getError(error));
-  }
+    try {
+      const reviews = await ReviewServices.getUserRatings(id);
+
+      commit("SET_USER_REVIEWS", reviews);
+      commit("SET_LOADING", false);
+      return reviews.data;
+    } catch (error) {
+      commit("SET_LOADING", false);
+      commit("SET_ERROR", getError(error));
+    }
   },
   async getGigReviews({ commit }, id) {
     commit("SET_LOADING", true);
-    try{
-    const reviews = await ReviewServices.getGigReviews(id);
-    commit("SET_GIG_REVIEWS", reviews);
-    commit("SET_LOADING", false);
-    return reviews.data;
-  } catch (error) {
-    commit("SET_LOADING", false);
-    commit("SET_ERROR", getError(error));
-  }
+    try {
+      const reviews = await ReviewServices.getGigReviews(id);
+      commit("SET_GIG_REVIEWS", reviews);
+      commit("SET_LOADING", false);
+      return reviews.data;
+    } catch (error) {
+      commit("SET_LOADING", false);
+      commit("SET_ERROR", getError(error));
+    }
   },
   async getClientRequestReviews({ commit }, id) {
     commit("SET_LOADING", true);
-    try{ 
-    const reviews = await ReviewServices.getClientRequestReviews(id);
-    commit("SET_CLIENT_REQUEST_REVIEWS", reviews);
-    commit("SET_LOADING", false);
-    return reviews.data;
-  } catch (error) {
-    commit("SET_LOADING", false);
-    commit("SET_ERROR", getError(error));
-  }
-
+    try {
+      const reviews = await ReviewServices.getClientRequestReviews(id);
+      commit("SET_CLIENT_REQUEST_REVIEWS", reviews);
+      commit("SET_LOADING", false);
+      return reviews.data;
+    } catch (error) {
+      commit("SET_LOADING", false);
+      commit("SET_ERROR", getError(error));
+    }
   },
-  
 };
 
 export const getters = {
@@ -142,6 +137,6 @@ export const getters = {
   },
   getLoading(state) {
     return state.loading;
-  }
+  },
 };
 /* SQLSTATE[22007]: Invalid datetime format: 1366 Incorrect integer value: 'gig' for column `server`.`ratings`.`type` at row 1 (SQL: insert into `ratings` (`type`, `client_id`, `handyman_id`, `rating`, `comment`, `user_id`, `gig_id`, `updated_at`, `created_at`) values (gig, 2, 1, 4, sqdsqdqsdsq, 1, 1, 2022-04-16 15:35:24, 2022-04-16 15:35:24)) */
