@@ -1,5 +1,4 @@
 <template>
-
   <div>
     <div class="min-h-full flex">
       <div class="flex flex-col justify-center py-12 px-4 flex-1">
@@ -189,7 +188,7 @@
                   >
                     Email address
                   </label>
-                  <div class="mt-1">
+                  <div class="mt-1 relative rounded-md shadow-sm">
                     <input
                       id="email"
                       v-model="email"
@@ -197,23 +196,37 @@
                       type="email"
                       autocomplete="email"
                       required=""
-                      class="
-                        appearance-none
-                        block
-                        w-full
-                        px-3
-                        py-2
-                        border border-gray-300
-                        rounded-md
-                        shadow-sm
-                        placeholder-gray-400
-                        focus:outline-none
-                        focus:ring-indigo-500
-                        focus:border-indigo-500
-                        sm:text-sm
-                      "
+                      :class="[
+                        errorData.email
+                          ? 'block w-full pr-10 border-red-300 text-red-900 placeholder-red-300 focus:outline-none focus:ring-red-500 focus:border-red-500 sm:text-sm rounded-md w-full px-3 py-2 border border-red-300  text-red-900 rounded-md  shadow-smplaceholder-red-400 focus:outline-nonefocus:ring-red-500 focus:border-red-500 sm:text-sm'
+                          : ' block w-full px-3 py-2 border border-gray-300 rounded-md  shadow-smplaceholder-gray-400 focus:outline-nonefocus:ring-indigo-500 focus:border-indigo-500 sm:text-sm',
+                      ]"
                     />
+                    <div
+                      class="
+                        absolute
+                        inset-y-0
+                        right-0
+                        pr-3
+                        flex
+                        items-center
+                        pointer-events-none
+                      "
+                    >
+                      <ExclamationCircleIcon
+                        class="h-5 w-5 text-red-500"
+                        aria-hidden="true"
+                        v-if="errorData.email"
+                      />
+                    </div>
                   </div>
+                  <p
+                    v-if="errorData.email"
+                    class="mt-2 text-sm text-red-600"
+                    id="email-error"
+                  >
+                    {{ errorData.email[0] }}
+                  </p>
                 </div>
 
                 <div class="space-y-1">
@@ -223,7 +236,7 @@
                   >
                     Password
                   </label>
-                  <div class="mt-1">
+                  <div class="mt-1 relative rounded-md shadow-sm">
                     <input
                       id="password"
                       v-model="password"
@@ -231,25 +244,39 @@
                       type="password"
                       autocomplete="current-password"
                       required=""
-                      class="
-                        appearance-none
-                        block
-                        w-full
-                        px-3
-                        py-2
-                        border border-gray-300
-                        rounded-md
-                        shadow-sm
-                        placeholder-gray-400
-                        focus:outline-none
-                        focus:ring-indigo-500
-                        focus:border-indigo-500
-                        sm:text-sm
-                      "
+                      :class="[
+                        errorData.email
+                          ? 'block w-full pr-10 border-red-300 text-red-900 placeholder-red-300 focus:outline-none focus:ring-red-500 focus:border-red-500 sm:text-sm rounded-md w-full px-3 py-2 border border-red-300  text-red-900 rounded-md  shadow-smplaceholder-red-400 focus:outline-nonefocus:ring-red-500 focus:border-red-500 sm:text-sm'
+                          : ' block w-full px-3 py-2 border border-gray-300 rounded-md  shadow-smplaceholder-gray-400 focus:outline-nonefocus:ring-indigo-500 focus:border-indigo-500 sm:text-sm',
+                      ]"
                     />
+                    <div
+                      class="
+                        absolute
+                        inset-y-0
+                        right-0
+                        pr-3
+                        flex
+                        items-center
+                        pointer-events-none
+                      "
+                    >
+                      <ExclamationCircleIcon
+                        class="h-5 w-5 text-red-500"
+                        aria-hidden="true"
+                        v-if="errorData.email"
+                      />
+                    </div>
                   </div>
+                  <p
+                    v-if="errorData.email"
+                    class="mt-2 text-sm text-red-600"
+                    id="email-error"
+                  >
+                    {{ errorData.email[0] }}
+                  </p>
                 </div>
- <ErrorMessage :errorData="errorData" />
+                <ErrorMessage :errorData="errorData" />
                 <div class="flex items-center justify-between">
                   <div class="flex items-center">
                     <input
@@ -285,7 +312,7 @@
 
                 <div>
                   <button
-                  v-if="loading == false"
+                    v-if="loading == false"
                     type="submit"
                     class="
                       w-full
@@ -311,7 +338,7 @@
                   </button>
 
                   <button
-                  v-if="loading == true "
+                    v-if="loading == true"
                     class="
                       w-full
                       flex
@@ -330,9 +357,7 @@
                       focus:ring-2
                       focus:ring-offset-2
                       focus:ring-indigo-500
-
                     "
-
                   >
                     <svg
                       class="animate-spin -ml-1 mr-3 h-5 w-5 text-white"
@@ -370,12 +395,12 @@
       </div>
     </div>
   </div>
-
 </template>
 
 <script>
 import AuthService from "@/services/AuthService";
 import { getError } from "@/utils/helpers";
+import { ExclamationCircleIcon } from "@heroicons/vue/solid";
 
 import ErrorMessage from "@/components/Alerts/ErrorMessage.componenet.vue";
 import { useStore } from "vuex";
@@ -385,6 +410,7 @@ import { ref } from "vue";
 export default {
   components: {
     ErrorMessage,
+    ExclamationCircleIcon,
   },
   setup() {
     let email;
@@ -400,13 +426,13 @@ export default {
     const store = useStore();
     const router = useRouter();
 
-let errorData = ref("");
-let errorMessage =  ref("");
+    let errorData = ref("");
+    let errorMessage = ref("");
 
     const login = async () => {
-       store.dispatch("Loading/changeLoading", loading.value);
+      store.dispatch("Loading/changeLoading", loading.value);
 
-loading.value = store.getters["Loading/loading"];
+      loading.value = store.getters["Loading/loading"];
       const payload = {
         email: email.value,
         password: password.value,
@@ -415,18 +441,16 @@ loading.value = store.getters["Loading/loading"];
         await AuthService.login(payload);
         const authUser = await store.dispatch("auth/getAuthUser");
         if (authUser) {
-
-
           store.dispatch("auth/setGuest", { value: "isNotGuest" });
- store.dispatch("Loading/changeLoading", loading.value);
+          store.dispatch("Loading/changeLoading", loading.value);
 
-loading.value = store.getters["Loading/loading"];
+          loading.value = store.getters["Loading/loading"];
           router.push("/profile");
         } else {
-       store.dispatch("Loading/changeLoading", loading.value);
+          store.dispatch("Loading/changeLoading", loading.value);
 
-loading.value = store.getters["Loading/loading"];
-/*
+          loading.value = store.getters["Loading/loading"];
+          /*
           const error = Error(
             "Unable to fetch user after login, check your API settings."
           );
@@ -434,11 +458,13 @@ loading.value = store.getters["Loading/loading"];
           throw error; */
         }
       } catch (err) {
-console.log(err);
-         store.dispatch("Loading/changeLoading", loading.value);
+        console.log(err);
+        store.dispatch("Loading/changeLoading", loading.value);
 
-loading.value = store.getters["Loading/loading"];
-        errorData.value = getError(err)
+        loading.value = store.getters["Loading/loading"];
+
+        errorData.value = getError(err);
+        console.log(errorData.value);
       }
     };
 
@@ -452,7 +478,6 @@ loading.value = store.getters["Loading/loading"];
       linkedin,
       loading,
       errorMessage,
-
     };
   },
 };
