@@ -13,18 +13,14 @@ export const mutations = {
   setUsers(state, users) {
     state.users = users;
   },
-  setRequests(state, requests) {
-    state.requests = requests;
-  },
+
   setGigs(state, gigs) {
     state.gigs = gigs;
   },
   setHandymen(state, handymen) {
     state.handymen = handymen;
   },
-  setClients(state, clients) {
-    state.clients = clients;
-  },
+
   setLoading(state, isLoading) {
     state.isLoading = isLoading;
   },
