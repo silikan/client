@@ -89,7 +89,7 @@
               <dd
                 class="ml-3 w-10 text-right tabular-nums text-sm text-gray-900"
               >
-                {{ Math.round((count.count / reviews.totalCount) * 100) }}%
+                 {{  (Math.round((count.count / reviews.totalCount) * 100)) || 0 }}%
               </dd>
             </div>
           </dl>
