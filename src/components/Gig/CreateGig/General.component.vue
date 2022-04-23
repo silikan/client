@@ -83,7 +83,7 @@
                   {{ item }}
                 </option>
               </select>
-            <div
+              <div
                 class="
                   absolute
                   inset-y-0
@@ -128,12 +128,15 @@
                 rows="3"
                 name="description"
                 id="description"
-                :class="[descriptionErrorMessage ?'block w-full py-3 h-40 -0 resize-none focus:ring-0  sm:text-sm  appearance-nonepx-3 text-red-900 border border-red-300 rounded-md-sm placeholder-red-400 focus:outline-none focus:ring-red-500 focus:border-red-500' : 'block w-full py-3 h-40 -0 resize-nonefocus:ring-0  sm:text-sm  appearance-nonepx-3 border border-gray-300rounded-md-smplaceholder-gray-400 focus:outline-nonefocus:ring-indigo-500 focus:border-indigo-500']
-                "
+                :class="[
+                  descriptionErrorMessage
+                    ? 'block w-full py-3 h-40 -0 resize-none focus:ring-0  pr-10 sm:text-sm  appearance-none px-3 border border-red-300 rounded-md-sm placeholder-red-400 text-red-600 focus:outline-none focus:ring-red-500 focus:border-red-500'
+                    : ' block w-full py-3 h-40 -0 resize-none focus:ring-0  pr-10 sm:text-sm  appearance-none px-3 border border-gray-300 rounded-md-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500',
+                ]"
                 placeholder="Add your description..."
               />
 
-           <div
+              <div
                 class="
                   absolute
                   inset-y-0
@@ -158,8 +161,6 @@
             >
               {{ descriptionErrorMessage }}
             </p>
-
-
           </div>
         </div>
       </div>
