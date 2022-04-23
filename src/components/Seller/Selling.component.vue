@@ -21,8 +21,8 @@
           >
             Browse by Category
           </h2>
-          <a
-            href="#"
+          <router-link
+            :to="`/categories`"
             class="
               hidden
               text-sm
@@ -31,7 +31,7 @@
               hover:text-indigo-500
               sm:block
             "
-            >all categories<span aria-hidden="true"> &rarr;</span></a
+            >all categories<span aria-hidden="true"> &rarr;</span></router-link
           >
         </div>
 
@@ -45,6 +45,7 @@
                 h-80
                 overflow-x-auto
                 xl:overflow-visible
+                scrollbar
               "
             >
               <div
@@ -64,10 +65,10 @@
                   xl:gap-x-8
                 "
               >
-                <a
+                <router-link
                   v-for="category in categories"
                   :key="category.name"
-                  :href="category.href"
+                  :to="category.link"
                   class="
                     relative
                     w-56
@@ -82,8 +83,7 @@
                 >
                   <span aria-hidden="true" class="absolute inset-0">
                     <img
-                      :src="category.imageSrc"
-                      alt=""
+                      :src="`${category.imageSrc}`"
                       class="w-full h-full object-center object-cover"
                     />
                   </span>
@@ -109,7 +109,7 @@
                     "
                     >{{ category.name }}</span
                   >
-                </a>
+                </router-link>
               </div>
             </div>
           </div>
@@ -350,81 +350,7 @@ import { ref } from "vue";
 
 const currencies = ["CAD", "USD", "AUD", "EUR", "GBP"];
 const navigation = {
-  categories: [
-    {
-      name: "Women",
-      featured: [
-        {
-          name: "New Arrivals",
-          href: "#",
-          imageSrc:
-            "https://tailwindui.com/img/ecommerce-images/mega-menu-category-01.jpg",
-          imageAlt:
-            "Models sitting back to back, wearing Basic Tee in black and bone.",
-        },
-        {
-          name: "Basic Tees",
-          href: "#",
-          imageSrc:
-            "https://tailwindui.com/img/ecommerce-images/mega-menu-category-02.jpg",
-          imageAlt:
-            "Close up of Basic Tee fall bundle with off-white, ochre, olive, and black tees.",
-        },
-        {
-          name: "Accessories",
-          href: "#",
-          imageSrc:
-            "https://tailwindui.com/img/ecommerce-images/mega-menu-category-03.jpg",
-          imageAlt:
-            "Model wearing minimalist watch with black wristband and white watch face.",
-        },
-        {
-          name: "Carry",
-          href: "#",
-          imageSrc:
-            "https://tailwindui.com/img/ecommerce-images/mega-menu-category-04.jpg",
-          imageAlt:
-            "Model opening tan leather long wallet with credit card pockets and cash pouch.",
-        },
-      ],
-    },
-    {
-      name: "Men",
-      featured: [
-        {
-          name: "New Arrivals",
-          href: "#",
-          imageSrc:
-            "https://tailwindui.com/img/ecommerce-images/mega-menu-01-men-category-01.jpg",
-          imageAlt:
-            "Hats and sweaters on wood shelves next to various colors of t-shirts on hangers.",
-        },
-        {
-          name: "Basic Tees",
-          href: "#",
-          imageSrc:
-            "https://tailwindui.com/img/ecommerce-images/mega-menu-01-men-category-02.jpg",
-          imageAlt: "Model wearing light heather gray t-shirt.",
-        },
-        {
-          name: "Accessories",
-          href: "#",
-          imageSrc:
-            "https://tailwindui.com/img/ecommerce-images/mega-menu-01-men-category-03.jpg",
-          imageAlt:
-            "Grey 6-panel baseball hat with black brim, black mountain graphic on front, and light heather gray body.",
-        },
-        {
-          name: "Carry",
-          href: "#",
-          imageSrc:
-            "https://tailwindui.com/img/ecommerce-images/mega-menu-01-men-category-04.jpg",
-          imageAlt:
-            "Model putting folded cash into slim card holder olive leather wallet with hand stitching.",
-        },
-      ],
-    },
-  ],
+
   pages: [
     { name: "Company", href: "#" },
     { name: "Stores", href: "#" },
@@ -432,34 +358,33 @@ const navigation = {
 };
 const categories = [
   {
-    name: "New Arrivals",
-    href: "#",
-    imageSrc:
-      "https://tailwindui.com/img/ecommerce-images/home-page-01-category-01.jpg",
+    name: "Cooking",
+    link: "/category/Cooking/gigs",
+    imageSrc:require( "../../assets/categories/cooking.jpg"),
   },
   {
-    name: "Productivity",
-    href: "#",
-    imageSrc:
-      "https://tailwindui.com/img/ecommerce-images/home-page-01-category-02.jpg",
+    name: "Cleaning",
+    link: "/category/Cleaning/gigs",
+      imageSrc: require( "../../assets/categories/cleaning.jpg"),
+
   },
   {
-    name: "Workspace",
-    href: "#",
-    imageSrc:
-      "https://tailwindui.com/img/ecommerce-images/home-page-01-category-04.jpg",
+    name: "WoodWork",
+    link: "/category/Woodwork/gigs ",
+      imageSrc: require( "../../assets/categories/woodwork.jpg"),
+
   },
   {
-    name: "Accessories",
-    href: "#",
-    imageSrc:
-      "https://tailwindui.com/img/ecommerce-images/home-page-01-category-05.jpg",
+    name: "Massage",
+    link: "/category/Massage/gigs",
+      imageSrc: require( "../../assets/categories/massage.jpg"),
+
   },
   {
-    name: "Sale",
-    href: "#",
-    imageSrc:
-      "https://tailwindui.com/img/ecommerce-images/home-page-01-category-03.jpg",
+    name: "Plumbing",
+    link: "/category/Plumbing/gigs",
+      imageSrc: require( "../../assets/categories/plumbing.jpg"),
+
   },
 ];
 const collections = [
@@ -539,3 +464,27 @@ export default {
   },
 };
 </script>
+<style>
+.scrollbar {
+  cursor: pointer;
+}
+.scrollbar::-webkit-scrollbar {
+  width: 15px;
+  height: 20px;
+}
+
+.scrollbar::-webkit-scrollbar-track {
+  border-radius: 100vh;
+  background: #e2e8f0;
+}
+
+.scrollbar::-webkit-scrollbar-thumb {
+  background: #94a3b8;
+  border-radius: 100vh;
+  border: 3px solid #e2e8f0;
+}
+
+.scrollbar::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
+}
+</style>
