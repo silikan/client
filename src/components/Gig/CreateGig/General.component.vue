@@ -19,6 +19,7 @@
             >
               Title
             </label>
+
             <div class="mt-1 sm:mt-0 sm:col-span-2">
               <input
                 v-model="title"
@@ -43,6 +44,7 @@
                 "
               />
             </div>
+            <span>{{ errorMessage }}</span>
           </div>
 
           <div class="-gray-300 rounded-lg shadow-sm overflow-hidden">
@@ -164,9 +166,11 @@
 </template>
 <script>
 import { PaperClipIcon } from "@heroicons/vue/solid";
-import { ref } from "@vue/reactivity";
 import { useStore } from "vuex";
 import { watchEffect } from "@vue/runtime-core";
+import { useField } from "vee-validate";
+import * as yup from "yup";
+
 let categories = [
   "Cleaning",
   "Cooking",
@@ -189,10 +193,28 @@ export default {
   },
   setup() {
     let store = useStore();
+    let titleValidation = yup
+      .string()
+      .required("Title is required")
+      .min(3, "Title must be at least 3 characters long")
+      .max(50, "Title must be less than 50 characters long");
+    let descriptionValidation = yup
+      .string()
+      .required("Description is required")
+      .min(3, "Description must be at least 3 characters long")
+      .max(500, "Description must be less than 500 characters long");
+    let categoryValidation = yup.string().required("Category is required");
+    const { value: title, errorMessage: titleErrorMessage } = useField(
+      "title",
+      titleValidation
+    );
+    const { value: description, errorMessage: descriptionErrorMessage } =
+      useField("description", descriptionValidation);
+    const { value: category, errorMessage: categoryErrorMessage } = useField(
+      "category",
+      categoryValidation
+    );
 
-    let title = ref(null);
-    let description = ref(null);
-    let category = ref(null);
     watchEffect(() => {
       store.commit("Gig/SET_TITLE", title.value);
       store.commit("Gig/SET_DESCRIPTION", description.value);
@@ -204,6 +226,10 @@ export default {
       description,
       category,
       categories,
+
+      titleErrorMessage,
+      descriptionErrorMessage,
+      categoryErrorMessage,
     };
   },
 };
