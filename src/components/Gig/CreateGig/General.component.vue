@@ -172,7 +172,6 @@ import { useStore } from "vuex";
 import { watchEffect } from "@vue/runtime-core";
 import { useField } from "vee-validate";
 import { ExclamationCircleIcon } from "@heroicons/vue/solid";
-
 import * as yup from "yup";
 
 let categories = [
