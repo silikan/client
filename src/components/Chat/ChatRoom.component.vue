@@ -10,10 +10,10 @@
               </div>
               <div class="min-w-0 flex-1">
                 <p class="text-sm font-medium text-gray-900">
-                  <a href="#" class="hover:underline">Chelsea Hagon</a>
+                  <a href="#" class="hover:underline">{{ name }}</a>
                 </p>
                 <p class="text-sm text-gray-500">
-                  <a href="#" class="hover:underline">December 9 at 11:43 AM</a>
+                  <a href="#" class="hover:underline">{{ email }}</a>
                 </p>
               </div>
               <div class="flex-shrink-0 self-center flex">
@@ -169,6 +169,7 @@
                         bg-gray-100
                         rounded
                         break-all
+                        mr-2
                       "
                     >
                       <p class="">
@@ -200,6 +201,7 @@
                         block
                         flex-1
                         break-all
+                        ml-2
                       "
                       >{{ msg.message }}</span
                     >
@@ -221,6 +223,7 @@
                         bg-gray-100
                         rounded
                         break-all
+                        mr-2
                       "
                       >{{ msg.message }}</span
                     >
@@ -248,6 +251,7 @@
                         block
                         flex-1
                         break-all
+                        ml-2
                       "
                       >{{ msg.message }}</span
                     >
@@ -442,7 +446,7 @@ export default {
     });
     let name = ref();
     let avatar = ref();
-
+let email = ref();
     let toname = ref();
     let toavatar = ref();
     store.dispatch("Chat/getRoomUsers", id).then((result) => {
@@ -452,6 +456,7 @@ export default {
       });
       if (result.data[0].id == AuthUserId) {
         name.value = result.data[1].name;
+        email.value = result.data[1].email;
         avatar.value = result.data[1].avatar;
         toname.value = result.data[0].name;
         toavatar.value = result.data[0].avatar;
@@ -459,6 +464,7 @@ export default {
         from.value = result.data[0];
       } else {
         name.value = result.data[0].name;
+        email.value = result.data[0].email;
         avatar.value = result.data[0].avatar;
         toname.value = result.data[1].name;
         toavatar.value = result.data[1].avatar;
@@ -467,11 +473,7 @@ export default {
       }
     });
 
-    console.log(to.value);
-    watchEffect(() => {
-      console.log(savedMessages.value);
-      return { savedMessages };
-    });
+
     return {
       to,
       from,
@@ -489,6 +491,7 @@ export default {
       avatar,
       toname,
       toavatar,
+      email
     };
   },
 };
