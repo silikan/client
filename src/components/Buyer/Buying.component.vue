@@ -21,8 +21,8 @@
           >
             Browse by Category
           </h2>
-          <a
-            href="#"
+          <router-link
+            :to="`/categories`"
             class="
               hidden
               text-sm
@@ -31,7 +31,7 @@
               hover:text-indigo-500
               sm:block
             "
-            >all categories<span aria-hidden="true"> &rarr;</span></a
+            >all categories<span aria-hidden="true"> &rarr;</span></router-link
           >
         </div>
 
@@ -45,6 +45,7 @@
                 h-80
                 overflow-x-auto
                 xl:overflow-visible
+                scrollbar
               "
             >
               <div
@@ -64,10 +65,10 @@
                   xl:gap-x-8
                 "
               >
-                <a
+                <router-link
                   v-for="category in categories"
                   :key="category.name"
-                  :href="category.href"
+                  :to="category.link"
                   class="
                     relative
                     w-56
@@ -108,7 +109,7 @@
                     "
                     >{{ category.name }}</span
                   >
-                </a>
+                </router-link>
               </div>
             </div>
           </div>
@@ -358,30 +359,30 @@ const navigation = {
 const categories = [
   {
     name: "Cooking",
-    href: "#",
+    link: "/category/Cooking/gigs",
     imageSrc:require( "../../assets/categories/cooking.jpg"),
   },
   {
     name: "Cleaning",
-    href: "#",
+    link: "/category/Cleaning/gigs",
       imageSrc: require( "../../assets/categories/cleaning.jpg"),
 
   },
   {
     name: "WoodWork",
-    href: "#",
+    link: "/category/Woodwork/gigs ",
       imageSrc: require( "../../assets/categories/woodwork.jpg"),
 
   },
   {
     name: "Massage",
-    href: "#",
+    link: "/category/Massage/gigs",
       imageSrc: require( "../../assets/categories/massage.jpg"),
 
   },
   {
     name: "Plumbing",
-    href: "#",
+    link: "/category/Plumbing/gigs",
       imageSrc: require( "../../assets/categories/plumbing.jpg"),
 
   },
@@ -463,3 +464,27 @@ export default {
   },
 };
 </script>
+<style>
+.scrollbar {
+  cursor: pointer;
+}
+.scrollbar::-webkit-scrollbar {
+  width: 15px;
+  height: 20px;
+}
+
+.scrollbar::-webkit-scrollbar-track {
+  border-radius: 100vh;
+  background: #e2e8f0;
+}
+
+.scrollbar::-webkit-scrollbar-thumb {
+  background: #94a3b8;
+  border-radius: 100vh;
+  border: 3px solid #e2e8f0;
+}
+
+.scrollbar::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
+}
+</style>
