@@ -137,14 +137,14 @@
                 aria-hidden="true"
               >
                 <img
-                referrerpolicy="no-referrer"
+                  referrerpolicy="no-referrer"
                   class="rounded-full w-10 h-10"
                   :src="avatar_svg"
                   v-if="avatarWithoutLocalhost === null"
                   alt=""
                 />
                 <img
-                referrerpolicy="no-referrer"
+                  referrerpolicy="no-referrer"
                   class="rounded-full w-10 h-10"
                   :src="avatar"
                   v-if="avatarWithoutLocalhost !== null"
@@ -208,7 +208,7 @@
 
           <div class="hidden relative rounded-full overflow-hidden lg:block">
             <img
-            referrerpolicy="no-referrer"
+              referrerpolicy="no-referrer"
               class="relative rounded-full w-40 h-40"
               :src="avatar_svg"
               v-if="avatarWithoutLocalhost === null"
@@ -1068,7 +1068,8 @@ import {
 import { CheckIcon, SelectorIcon } from "@heroicons/vue/solid";
 import { createAvatar } from "@dicebear/avatars";
 import * as style from "@dicebear/avatars-initials-sprites";
-
+import { useField } from "vee-validate";
+import * as yup from "yup";
 export default {
   components: {
     ArrayForm,
@@ -1102,39 +1103,125 @@ export default {
     const certificationsState = computed(
       () => store.getters["auth/certifications"]
     );
-    let email = ref("");
-    let username = ref("");
-    let bio = ref("");
-    let date_of_birth = ref(new Date());
-    let phone_number = ref("");
-    let address = ref("");
-    let country = ref("");
-    let city = ref("");
-    let state = ref("");
-    let zip_code = ref("");
-    let website = ref("");
-    let education = ref("");
+
+    const { value: email, errorMessage: emailErrorMessage } = useField(
+      "email",
+      emailValidation
+    );
+    const { value: username, errorMessage: usernameErrorMessage } = useField(
+      "username",
+      usernameValidation
+    );
+    const { value: bio, errorMessage: bioErrorMessage } = useField(
+      "bio",
+      bioValidation
+    );
+    const { value: date_of_birth, errorMessage: date_of_birthErrorMessage } =
+      useField("date_of_birth", date_of_birthValidation);
+    const { value: phone_number, errorMessage: phone_numberErrorMessage } =
+      useField("phone_number", phone_numberValidation);
+    const { value: address, errorMessage: addressErrorMessage } = useField(
+      "address",
+      addressValidation
+    );
+    const { value: country, errorMessage: countryErrorMessage } = useField(
+      "country",
+      countryValidation
+    );
+    const { value: city, errorMessage: cityErrorMessage } = useField(
+      "city",
+      cityValidation
+    );
+    const { value: state, errorMessage: stateErrorMessage } = useField(
+      "state",
+      stateValidation
+    );
+    const { value: zip_code, errorMessage: zip_codeErrorMessage } = useField(
+      "zip_code",
+      zip_codeValidation
+    );
+    //complete them all at once
+    const { value: website, errorMessage: websiteErrorMessage } = useField(
+      "website",
+      websiteValidation
+    );
+     let education = ref("");
     let certifications = ref("");
     let experience = ref("");
     let skills = ref("");
-    let name = ref("");
-    let facebook_social_link = ref("");
-    let linkedin_social_link = ref("");
-    let twitter_social_link = ref("");
-    let gender = ref("");
-
-    let work_hours = ref({
+    const { value: name, errorMessage: nameErrorMessage } = useField(
+      "name",
+      nameValidation
+    );
+    const {
+      value: facebook_social_link,
+      errorMessage: facebook_social_linkErrorMessage,
+    } = useField("facebook_social_link", facebook_social_linkValidation);
+    const {
+      value: linkedin_social_link,
+      errorMessage: linkedin_social_linkErrorMessage,
+    } = useField("linkedin_social_link", linkedin_social_linkValidation);
+    const {
+      value: twitter_social_link,
+      errorMessage: twitter_social_linkErrorMessage,
+    } = useField("twitter_social_link", twitter_social_linkValidation);
+    const {
+      value: work_time_length,
+      errorMessage: work_time_lengthErrorMessage,
+    } = useField("work_time_length", work_time_lengthValidation);
+    const { value: work_place, errorMessage: work_placeErrorMessage } =
+      useField("work_place", work_placeValidation);
+    const { value: work_hours, errorMessage: work_hoursErrorMessage } =
+      useField("work_hours", work_hoursValidation);
+    const { value: salary, errorMessage: salaryErrorMessage } = useField(
+      "salary",
+      salaryValidation
+    );
+     const { value: gender, errorMessage: genderErrorMessage } = useField(
+      "gender",
+      genderValidation
+    );
+    let emailValidation = yup
+      .string()
+      .email("Invalid email address")
+      .required("Email is required");
+    let usernameValidation = yup.string().required("Username is required");
+    let bioValidation = yup.string().required("Bio is required");
+    let date_of_birthValidation = yup.string();
+    const phoneRegExp =
+      /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/;
+    let phone_numberValidation = yup
+      .string()
+      .matches(phoneRegExp, "Phone number is not valid");
+    let addressValidation = yup.string();
+    let countryValidation = yup.string();
+    let cityValidation = yup.string();
+    let stateValidation = yup.string();
+    let zip_codeValidation = yup.string();
+    let websiteValidation = yup.string();
+    let educationValidation = yup.string();
+    let certificationsValidation = yup.string();
+    let experienceValidation = yup.string();
+    let skillsValidation = yup.string();
+    let nameValidation = yup.string().required("Name is required");
+    let facebook_social_linkValidation = yup.string();
+    let linkedin_social_linkValidation = yup.string();
+    let twitter_social_linkValidation = yup.string();
+    let work_time_lengthValidation = yup.string();
+    let work_placeValidation = yup.string();
+    let work_hoursValidation = yup.string();
+    let salaryValidation = yup.string();
+let genderValidation = yup.string();
+    work_hours.value = {
       hours: new Date().getHours(),
       minutes: new Date().getMinutes(),
-    });
-    let salary = ref(null);
+    };
+
     const workLength = ["Part Time", "Full Time"];
     const workPlace = ["remote", "Office"];
 
-    let work_time_length = ref(workLength[0]);
-    let work_place = ref(workPlace[0]);
-
-    console.log(work_time_length.value);
+    work_time_length.value = workLength[0];
+    work_place.value = workPlace[0];
 
     let Educationdata, ExperienceData, Certificationsdata, SkillsData;
 
@@ -1183,7 +1270,7 @@ export default {
     });
 
     const updateUser = () => {
-/*       var today = new Date();
+      /*       var today = new Date();
       var dd = String(today.getDate()).padStart(2, '0');
 var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
 var yyyy = today.getFullYear();
@@ -1200,7 +1287,10 @@ today = mm + '/' + dd + '/' + yyyy;
         email: email.value,
         username: username.value,
         bio: bio.value,
-        date_of_birth:date_of_birth.value == null ? ""  : moment(date_of_birth.value).format("YYYY-MM-DD") || Date.now(),
+        date_of_birth:
+          date_of_birth.value == null
+            ? ""
+            : moment(date_of_birth.value).format("YYYY-MM-DD") || Date.now(),
 
         phone_number: phone_number.value,
         address: address.value,
@@ -1288,8 +1378,6 @@ today = mm + '/' + dd + '/' + yyyy;
       }
     }
 
-    //lh3.googleusercontent.com
-
     return {
       email,
       username,
@@ -1336,6 +1424,54 @@ today = mm + '/' + dd + '/' + yyyy;
       WorkDays,
       salary,
       workPlace,
+      emailValidation,
+      usernameValidation,
+      bioValidation,
+      date_of_birthValidation,
+      phone_numberValidation,
+      addressValidation,
+      countryValidation,
+      cityValidation,
+      stateValidation,
+      zip_codeValidation,
+      websiteValidation,
+      educationValidation,
+      certificationsValidation,
+      experienceValidation,
+      skillsValidation,
+      nameValidation,
+      facebook_social_linkValidation,
+      linkedin_social_linkValidation,
+      twitter_social_linkValidation,
+      work_time_lengthValidation,
+      work_placeValidation,
+      work_hoursValidation,
+      salaryValidation,
+      emailErrorMessage,
+      usernameErrorMessage,
+      bioErrorMessage,
+      date_of_birthErrorMessage,
+      phone_numberErrorMessage,
+      addressErrorMessage,
+      countryErrorMessage,
+      cityErrorMessage,
+      stateErrorMessage,
+      zip_codeErrorMessage,
+      websiteErrorMessage,
+
+      nameErrorMessage,
+      facebook_social_linkErrorMessage,
+      linkedin_social_linkErrorMessage,
+      twitter_social_linkErrorMessage,
+      work_time_lengthErrorMessage,
+      work_placeErrorMessage,
+      work_hoursErrorMessage,
+      salaryErrorMessage,
+
+      genderErrorMessage,
+      genderValidation
+
+
     };
   },
 };

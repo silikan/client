@@ -1,4 +1,3 @@
-<!-- This example requires Tailwind CSS v2.0+ -->
 <template>
 
   <nav class=" " aria-label="Directory">
@@ -180,10 +179,8 @@
 <script>
 import { reactive, ref } from "@vue/reactivity";
 import { useStore } from "vuex";
-
 import Avatar from "@/components/Avatar/Avatar.component.vue";
 import { computed, watchEffect } from '@vue/runtime-core';
-
 export default {
   components: {
     Avatar,
@@ -192,7 +189,6 @@ export default {
   setup(props) {
     let store = useStore();
     let search = computed(() => props.searchData);
-
     let handymen = ref([]);
     let gigs = ref([]);
     let requests = ref([]);
@@ -200,7 +196,6 @@ export default {
     const searchFunction = () => {
       store.dispatch("Search/search", search.value).then((result) => {
         console.log(result);
-
         requests.value = result.requests.map((item) => {
           return {
             id: item.id,
@@ -208,7 +203,6 @@ export default {
             price: item.price,
           };
         });
-
         handymen.value = result.handymen.map((item) => {
           return {
             id: item.id,
@@ -216,14 +210,12 @@ export default {
             avatar: item.avatar,
           };
         });
-
         categories.value = result.categories.map((item) => {
           return {
             id: item.id,
             title: item.title,
           };
         });
-
         gigs.value = result.gigs.map((item) => {
           return {
             id: item.data.id,
@@ -235,8 +227,6 @@ export default {
       });
     };
     let preurl = `${process.env.VUE_APP_API_URL}`;
-
-
     watchEffect(() => {
       searchFunction();
       console.log(search.value);

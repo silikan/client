@@ -497,7 +497,7 @@ let email = ref();
 };
 </script>
 
-<style>
+<style scoped>
 .scrollbar {
   cursor: pointer;
 }

@@ -494,7 +494,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 .scrollbar {
   cursor: pointer;
 }

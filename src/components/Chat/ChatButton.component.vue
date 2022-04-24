@@ -98,7 +98,7 @@ else {
 };
 </script>
 
-<style>
+<style scoped>
 .btn-chat {
     transform: rotate(90deg);
 }
