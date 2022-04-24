@@ -17,7 +17,7 @@
 
       <div class="mt-6 flex flex-col lg:flex-row">
         <div class="flex-grow space-y-6">
-          <div>
+            <div class="mt-1 relative rounded-md -sm">
             <label
               for="username"
               class="block text-sm font-medium text-gray-700"
@@ -44,25 +44,38 @@
                 type="text"
                 name="username"
                 autocomplete="username"
-                class="
-                  appearance-none
-                  block
-                  w-full
-                  pl-5
-                  pr-20
-                  py-3
-                  border border-gray-300
-                  rounded-md
-                  shadow-sm
-                  placeholder-gray-400
-                  focus:outline-none
-                  focus:ring-indigo-500
-                  focus:border-indigo-500
-                  sm:text-sm
-                "
+                :class="[
+                  usernameErrorMessage
+                    ? 'block w-full pr-10 border-red-300 text-red-900 placeholder-red-300 focus:outline-none focus:ring-red-500 focus:border-red-500 sm:text-sm rounded-md w-full px-3 py-2 border border-red-300  text-red-900 rounded-md  -smplaceholder-red-400 focus:outline-nonefocus:ring-red-500 focus:border-red-500 sm:text-sm'
+                    : ' block w-full px-3 py-2 border border-gray-300 rounded-md  -smplaceholder-gray-400 focus:outline-nonefocus:ring-indigo-500 focus:border-indigo-500 sm:text-sm',
+                ]"
                 v-model="username"
               />
+                  <div
+                class="
+                  absolute
+                  inset-y-0
+                  right-0
+                  pr-3
+                  flex
+                  items-center
+                  pointer-events-none
+                "
+              >
+                <ExclamationCircleIcon
+                  class="h-5 w-5 text-red-500"
+                  aria-hidden="true"
+                  v-if="usernameErrorMessage"
+                />
+              </div>
             </div>
+            <p
+              v-if="usernameErrorMessage"
+              class="mt-2 text-sm text-red-600"
+              id="email-error"
+            >
+              {{ usernameErrorMessage }}
+            </p>
           </div>
           <div>
             <label for="email" class="block text-sm font-medium text-gray-700"
@@ -1053,7 +1066,7 @@ import moment from "moment";
 import Datepicker from "vue3-date-time-picker";
 
 import "vue3-date-time-picker/dist/main.css";
-import { onMounted, computed, ref } from "vue";
+import { onMounted, computed, ref, watchEffect } from "vue";
 import AuthService from "@/services/AuthService";
 import FileService from "@/services/FileService";
 import { useStore } from "vuex";
@@ -1070,6 +1083,8 @@ import { createAvatar } from "@dicebear/avatars";
 import * as style from "@dicebear/avatars-initials-sprites";
 import { useField } from "vee-validate";
 import * as yup from "yup";
+import { ExclamationCircleIcon } from "@heroicons/vue/solid";
+
 export default {
   components: {
     ArrayForm,
@@ -1081,6 +1096,7 @@ export default {
     CheckIcon,
     SelectorIcon,
     Datepicker,
+    ExclamationCircleIcon
   },
   created: function () {
     this.moment = moment;
@@ -1103,6 +1119,37 @@ export default {
     const certificationsState = computed(
       () => store.getters["auth/certifications"]
     );
+    let emailValidation = yup
+      .string()
+      .email("Invalid email address")
+      .required("Email is required");
+    let usernameValidation = yup.string().required("Username is required")
+    let bioValidation = yup.string().required("Bio is required");
+    let date_of_birthValidation = yup.string();
+    const phoneRegExp =
+      /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/;
+    let phone_numberValidation = yup
+      .string()
+      .matches(phoneRegExp, "Phone number is not valid");
+    let addressValidation = yup.string();
+    let countryValidation = yup.string();
+    let cityValidation = yup.string();
+    let stateValidation = yup.string();
+    let zip_codeValidation = yup.string();
+    let websiteValidation = yup.string();
+    let educationValidation = yup.string();
+    let certificationsValidation = yup.string();
+    let experienceValidation = yup.string();
+    let skillsValidation = yup.string();
+    let nameValidation = yup.string().required("Name is required");
+    let facebook_social_linkValidation = yup.string();
+    let linkedin_social_linkValidation = yup.string();
+    let twitter_social_linkValidation = yup.string();
+    let work_time_lengthValidation = yup.string();
+    let work_placeValidation = yup.string();
+    let work_hoursValidation = yup.string();
+    let salaryValidation = yup.string();
+    let genderValidation = yup.string();
 
     const { value: email, errorMessage: emailErrorMessage } = useField(
       "email",
@@ -1112,6 +1159,9 @@ export default {
       "username",
       usernameValidation
     );
+    watchEffect(()=>{
+      console.log(usernameErrorMessage.value)
+    })
     const { value: bio, errorMessage: bioErrorMessage } = useField(
       "bio",
       bioValidation
@@ -1145,7 +1195,7 @@ export default {
       "website",
       websiteValidation
     );
-     let education = ref("");
+    let education = ref("");
     let certifications = ref("");
     let experience = ref("");
     let skills = ref("");
@@ -1177,41 +1227,11 @@ export default {
       "salary",
       salaryValidation
     );
-     const { value: gender, errorMessage: genderErrorMessage } = useField(
+    const { value: gender, errorMessage: genderErrorMessage } = useField(
       "gender",
       genderValidation
     );
-    let emailValidation = yup
-      .string()
-      .email("Invalid email address")
-      .required("Email is required");
-    let usernameValidation = yup.string().required("Username is required");
-    let bioValidation = yup.string().required("Bio is required");
-    let date_of_birthValidation = yup.string();
-    const phoneRegExp =
-      /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/;
-    let phone_numberValidation = yup
-      .string()
-      .matches(phoneRegExp, "Phone number is not valid");
-    let addressValidation = yup.string();
-    let countryValidation = yup.string();
-    let cityValidation = yup.string();
-    let stateValidation = yup.string();
-    let zip_codeValidation = yup.string();
-    let websiteValidation = yup.string();
-    let educationValidation = yup.string();
-    let certificationsValidation = yup.string();
-    let experienceValidation = yup.string();
-    let skillsValidation = yup.string();
-    let nameValidation = yup.string().required("Name is required");
-    let facebook_social_linkValidation = yup.string();
-    let linkedin_social_linkValidation = yup.string();
-    let twitter_social_linkValidation = yup.string();
-    let work_time_lengthValidation = yup.string();
-    let work_placeValidation = yup.string();
-    let work_hoursValidation = yup.string();
-    let salaryValidation = yup.string();
-let genderValidation = yup.string();
+
     work_hours.value = {
       hours: new Date().getHours(),
       minutes: new Date().getMinutes(),
@@ -1458,7 +1478,6 @@ today = mm + '/' + dd + '/' + yyyy;
       stateErrorMessage,
       zip_codeErrorMessage,
       websiteErrorMessage,
-
       nameErrorMessage,
       facebook_social_linkErrorMessage,
       linkedin_social_linkErrorMessage,
@@ -1467,11 +1486,8 @@ today = mm + '/' + dd + '/' + yyyy;
       work_placeErrorMessage,
       work_hoursErrorMessage,
       salaryErrorMessage,
-
       genderErrorMessage,
-      genderValidation
-
-
+      genderValidation,
     };
   },
 };
