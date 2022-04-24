@@ -17,7 +17,7 @@
 
       <div class="mt-6 flex flex-col lg:flex-row">
         <div class="flex-grow space-y-6">
-            <div class="mt-1 relative rounded-md -sm">
+          <div class="mt-1 relative rounded-md -sm">
             <label
               for="username"
               class="block text-sm font-medium text-gray-700"
@@ -51,7 +51,7 @@
                 ]"
                 v-model="username"
               />
-                  <div
+              <div
                 class="
                   absolute
                   inset-y-0
@@ -81,58 +81,90 @@
             <label for="email" class="block text-sm font-medium text-gray-700"
               >Email</label
             >
-            <div class="mt-1">
+            <div class="mt-1 rounded-md shadow-sm flex">
               <input
                 id="email"
                 v-model="email"
                 type="email"
                 name="email"
-                class="
-                  appearance-none
-                  block
-                  w-full
-                  pl-5
-                  pr-20
-                  py-3
-                  border border-gray-300
-                  rounded-md
-                  shadow-sm
-                  placeholder-gray-400
-                  focus:outline-none
-                  focus:ring-indigo-500
-                  focus:border-indigo-500
-                  sm:text-sm
-                "
+                :class="[
+                  emailErrorMessage
+                    ? 'block w-full pr-10 border-red-300 text-red-900 placeholder-red-300 focus:outline-none focus:ring-red-500 focus:border-red-500 sm:text-sm rounded-md w-full px-3 py-2 border border-red-300  text-red-900 rounded-md  -smplaceholder-red-400 focus:outline-nonefocus:ring-red-500 focus:border-red-500 sm:text-sm'
+                    : ' block w-full px-3 py-2 border border-gray-300 rounded-md  -smplaceholder-gray-400 focus:outline-nonefocus:ring-indigo-500 focus:border-indigo-500 sm:text-sm',
+                ]"
                 placeholder="you@example.com"
                 aria-describedby="email-description"
               />
+              <div
+                class="
+                  absolute
+                  inset-y-0
+                  right-0
+                  pr-3
+                  flex
+                  items-center
+                  pointer-events-none
+                "
+              >
+                <ExclamationCircleIcon
+                  class="h-5 w-5 text-red-500"
+                  aria-hidden="true"
+                  v-if="emailErrorMessage"
+                />
+              </div>
             </div>
+            <p
+              v-if="emailErrorMessage"
+              class="mt-2 text-sm text-red-600"
+              id="email-error"
+            >
+              {{ emailErrorMessage }}
+            </p>
           </div>
 
           <div>
             <label for="about" class="block text-sm font-medium text-gray-700">
               Bio
             </label>
-            <div class="mt-1">
+            <div class="mt-1 relative rounded-md -sm">
               <textarea
                 id="bio"
                 name="bio"
+                                placeholder="Add your description..."
+
                 rows="7"
-                class="
-                  shadow-sm
-                  focus:ring-indigo-500 focus:border-indigo-500
-                  mt-1
-                  block
-                  w-full
-                  sm:text-sm
-                  border border-gray-300
-                  rounded-md
-                "
-                v-model="bio"
+                       v-model="bio"
+           :class="[
+                  bioErrorMessage
+                    ? 'block w-full py-3 h-40 -0 resize-none focus:ring-0  pr-10 sm:text-sm  appearance-none px-3 border border-red-300 rounded-md-sm placeholder-red-400 text-red-600 focus:outline-none focus:ring-red-500 focus:border-red-500'
+                    : ' block w-full py-3 h-40 -0 resize-none focus:ring-0  pr-10 sm:text-sm  appearance-none px-3 border border-gray-300 rounded-md-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500',
+                ]"
+
               />
+           <div
+                class="
+                  absolute
+                  inset-y-0
+                  right-0
+                  pr-3
+                  flex
+                  items-center
+                  pointer-events-none
+                "
+              >
+                <ExclamationCircleIcon
+                  class="h-5 w-5 text-red-500"
+                  aria-hidden="true"
+                  v-if="bioErrorMessage"
+                />
+              </div>
             </div>
-            <p class="mt-2 text-sm text-gray-500">
-              Brief description for your profile. URLs are hyperlinked.
+            <p
+              v-if="bioErrorMessage"
+              class="mt-2 text-sm text-red-600"
+              id="email-error"
+            >
+              {{ bioErrorMessage }}
             </p>
           </div>
         </div>
@@ -286,27 +318,46 @@
           <label for="name" class="block text-sm font-medium text-gray-700">
             name</label
           >
+                      <div class="mt-1 relative rounded-md -sm">
+
           <input
             id="name"
             type="text"
             name="name"
             autocomplete="name"
             v-model="name"
-            class="
-              mt-1
-              block
-              w-full
-              border border-gray-300
-              rounded-md
-              shadow-sm
-              py-3
-              px-3
-              focus:outline-none focus:ring-indigo-500 focus:border-indigo-500
-              sm:text-sm
-            "
+          :class="[
+                  nameErrorMessage
+                    ? 'block w-full pr-10 px-3 py-3 border-red-300 text-red-900 placeholder-red-300 focus:outline-none focus:ring-red-500 focus:border-red-500 sm:text-sm rounded-md w-full px-3 py-2 border border-red-300  text-red-900 rounded-md  -smplaceholder-red-400 focus:outline-nonefocus:ring-red-500 focus:border-red-500 sm:text-sm'
+                    : ' block w-full px-3 py-3 border border-gray-300 rounded-md  -smplaceholder-gray-400 focus:outline-nonefocus:ring-indigo-500 focus:border-indigo-500 sm:text-sm',
+                ]"
           />
-        </div>
-
+                <div
+                class="
+                  absolute
+                  inset-y-0
+                  right-0
+                  pr-3
+                  flex
+                  items-center
+                  pointer-events-none
+                "
+              >
+                <ExclamationCircleIcon
+                  class="h-5 w-5 text-red-500"
+                  aria-hidden="true"
+                  v-if="nameErrorMessage"
+                />
+              </div>
+            </div>
+            <p
+              v-if="nameErrorMessage"
+              class="mt-2 text-sm text-red-600"
+              id="email-error"
+            >
+              {{ nameErrorMessage }}
+            </p>
+</div>
         <div class="col-span-12 sm:col-span-6">
           <label
             for="phone-number"
@@ -1096,7 +1147,7 @@ export default {
     CheckIcon,
     SelectorIcon,
     Datepicker,
-    ExclamationCircleIcon
+    ExclamationCircleIcon,
   },
   created: function () {
     this.moment = moment;
@@ -1123,33 +1174,33 @@ export default {
       .string()
       .email("Invalid email address")
       .required("Email is required");
-    let usernameValidation = yup.string().required("Username is required")
-    let bioValidation = yup.string().required("Bio is required");
-    let date_of_birthValidation = yup.string();
+    let usernameValidation = yup.string().required("Username is required").nullable();
+    let bioValidation = yup.string().required("Bio is required").nullable();
+    let date_of_birthValidation = yup.string().nullable();
     const phoneRegExp =
       /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/;
     let phone_numberValidation = yup
       .string()
-      .matches(phoneRegExp, "Phone number is not valid");
-    let addressValidation = yup.string();
-    let countryValidation = yup.string();
-    let cityValidation = yup.string();
-    let stateValidation = yup.string();
-    let zip_codeValidation = yup.string();
-    let websiteValidation = yup.string();
-    let educationValidation = yup.string();
-    let certificationsValidation = yup.string();
-    let experienceValidation = yup.string();
-    let skillsValidation = yup.string();
-    let nameValidation = yup.string().required("Name is required");
-    let facebook_social_linkValidation = yup.string();
-    let linkedin_social_linkValidation = yup.string();
-    let twitter_social_linkValidation = yup.string();
-    let work_time_lengthValidation = yup.string();
-    let work_placeValidation = yup.string();
-    let work_hoursValidation = yup.string();
-    let salaryValidation = yup.string();
-    let genderValidation = yup.string();
+      .matches(phoneRegExp, "Phone number is not valid").nullable();
+    let addressValidation = yup.string().nullable();
+    let countryValidation = yup.string().nullable();
+    let cityValidation = yup.string().nullable();
+    let stateValidation = yup.string().nullable();
+    let zip_codeValidation = yup.string().nullable();
+    let websiteValidation = yup.string().nullable();
+    let educationValidation = yup.string().nullable();
+    let certificationsValidation = yup.string().nullable();
+    let experienceValidation = yup.string().nullable();
+    let skillsValidation = yup.string().nullable();
+    let nameValidation = yup.string().required("Name is required").nullable();
+    let facebook_social_linkValidation = yup.string().nullable();
+    let linkedin_social_linkValidation = yup.string().nullable();
+    let twitter_social_linkValidation = yup.string().nullable();
+    let work_time_lengthValidation = yup.string().nullable();
+    let work_placeValidation = yup.string().nullable();
+    let work_hoursValidation = yup.string().nullable();
+    let salaryValidation = yup.string().nullable();
+    let genderValidation = yup.string().nullable();
 
     const { value: email, errorMessage: emailErrorMessage } = useField(
       "email",
@@ -1159,9 +1210,9 @@ export default {
       "username",
       usernameValidation
     );
-    watchEffect(()=>{
-      console.log(usernameErrorMessage.value)
-    })
+    watchEffect(() => {
+      console.log(usernameErrorMessage.value);
+    });
     const { value: bio, errorMessage: bioErrorMessage } = useField(
       "bio",
       bioValidation
