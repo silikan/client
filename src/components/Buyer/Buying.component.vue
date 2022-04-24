@@ -348,7 +348,7 @@
 <script>
 import { ref } from "vue";
 
-const currencies = ["CAD", "USD", "AUD", "EUR", "GBP"];
+const currencies = ["CAD", "DZD", "AUD", "EUR", "GBP"];
 const navigation = {
 
   pages: [

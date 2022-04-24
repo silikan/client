@@ -21,6 +21,7 @@
             </label>
 
             <div class="mt-1 relative rounded-md -sm">
+
               <input
                 v-model="title"
                 type="text"
@@ -51,6 +52,7 @@
                 />
               </div>
             </div>
+
             <p
               v-if="titleErrorMessage"
               class="mt-2 text-sm text-red-600"

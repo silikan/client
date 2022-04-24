@@ -24,7 +24,7 @@
             >
               Username
             </label>
-            <div class="mt-1 rounded-md shadow-sm flex">
+            <div class="mt-1 rounded-md flex">
               <span
                 class="
                   bg-gray-50
@@ -81,7 +81,7 @@
             <label for="email" class="block text-sm font-medium text-gray-700"
               >Email</label
             >
-            <div class="mt-1 rounded-md shadow-sm flex">
+            <div class="mt-1 rounded-md flex">
               <input
                 id="email"
                 v-model="email"
@@ -130,18 +130,16 @@
               <textarea
                 id="bio"
                 name="bio"
-                                placeholder="Add your description..."
-
+                placeholder="Add your description..."
                 rows="7"
-                       v-model="bio"
-           :class="[
+                v-model="bio"
+                :class="[
                   bioErrorMessage
                     ? 'block w-full py-3 h-40 -0 resize-none focus:ring-0  pr-10 sm:text-sm  appearance-none px-3 border border-red-300 rounded-md-sm placeholder-red-400 text-red-600 focus:outline-none focus:ring-red-500 focus:border-red-500'
                     : ' block w-full py-3 h-40 -0 resize-none focus:ring-0  pr-10 sm:text-sm  appearance-none px-3 border border-gray-300 rounded-md-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500',
                 ]"
-
               />
-           <div
+              <div
                 class="
                   absolute
                   inset-y-0
@@ -196,7 +194,7 @@
                   alt=""
                 />
               </div>
-              <div class="ml-5 rounded-md shadow-sm">
+              <div class="ml-5 rounded-md">
                 <div
                   class="
                     group
@@ -318,53 +316,52 @@
           <label for="name" class="block text-sm font-medium text-gray-700">
             name</label
           >
-                      <div class="mt-1 relative rounded-md -sm">
-
-          <input
-            id="name"
-            type="text"
-            name="name"
-            autocomplete="name"
-            v-model="name"
-          :class="[
-                  nameErrorMessage
-                    ? 'block pr-10 px-3 py-3 shadow-none border-red-300 text-red-900 placeholder-red-300 focus:outline-none focus:ring-red-500 focus:border-red-500 sm:text-sm rounded-md w-full px-3 py-2 border border-red-300  text-red-900 rounded-md  -smplaceholder-red-400 focus:outline-nonefocus:ring-red-500 focus:border-red-500 sm:text-sm'
-                    : ' block w-full px-3 py-3 border border-gray-300 rounded-md  -smplaceholder-gray-400 focus:outline-nonefocus:ring-indigo-500 focus:border-indigo-500 sm:text-sm',
-                ]"
-          />
-                <div
-                class="
-                  absolute
-                  inset-y-0
-                  right-0
-                  pr-3
-                  flex
-                  items-center
-                  pointer-events-none
-                "
-              >
-                <ExclamationCircleIcon
-                  class="h-5 w-5 text-red-500"
-                  aria-hidden="true"
-                  v-if="nameErrorMessage"
-                />
-              </div>
-            </div>
-            <p
-              v-if="nameErrorMessage"
-              class="mt-2 text-sm text-red-600"
-              id="email-error"
+          <div class="mt-1 relative rounded-md -sm">
+            <input
+              id="name"
+              type="text"
+              name="name"
+              autocomplete="name"
+              v-model="name"
+              :class="[
+                nameErrorMessage
+                  ? 'block pr-10 px-3 py-3 -none border-red-300 text-red-900 placeholder-red-300 focus:outline-none focus:ring-red-500 focus:border-red-500 sm:text-sm rounded-md w-full px-3 py-2 border border-red-300  text-red-900 rounded-md  -smplaceholder-red-400 focus:outline-nonefocus:ring-red-500 focus:border-red-500 sm:text-sm'
+                  : ' block w-full px-3 py-3 border border-gray-300 rounded-md  -smplaceholder-gray-400 focus:outline-nonefocus:ring-indigo-500 focus:border-indigo-500 sm:text-sm',
+              ]"
+            />
+            <div
+              class="
+                absolute
+                inset-y-0
+                right-0
+                pr-3
+                flex
+                items-center
+                pointer-events-none
+              "
             >
-              {{ nameErrorMessage }}
-            </p>
-</div>
+              <ExclamationCircleIcon
+                class="h-5 w-5 text-red-500"
+                aria-hidden="true"
+                v-if="nameErrorMessage"
+              />
+            </div>
+          </div>
+          <p
+            v-if="nameErrorMessage"
+            class="mt-2 text-sm text-red-600"
+            id="email-error"
+          >
+            {{ nameErrorMessage }}
+          </p>
+        </div>
         <div class="col-span-12 sm:col-span-6">
           <label
             for="phone-number"
             class="block text-sm font-medium text-gray-700"
             >Phone Number</label
           >
-          <div class="mt-1 relative rounded-md shadow-sm">
+          <div class="mt-1 relative rounded-md">
             <div class="absolute inset-y-0 left-0 flex items-center">
               <label for="country" class="sr-only">Country</label>
               <select
@@ -391,27 +388,44 @@
                 <option>EU</option>
               </select>
             </div>
+
             <input
               id="phone_number"
               type="text"
               name="phone_number"
               v-model="phone_number"
-              class="
-                mt-1
-                block
-                w-full
-                border border-gray-300
-                rounded-md
-                shadow-sm
-                py-3
-                px-3
-                pl-24
-                focus:outline-none focus:ring-indigo-500 focus:border-indigo-500
-                sm:text-sm
-              "
+              :class="[
+                phone_numberErrorMessage
+                  ? 'mt-1 block w-full border border-red-300 rounded-md  py-3  text-red-900  px-3 pl-24 focus:outline-none focus:ring-red-500 focus:border-red-500 sm:text-sm'
+                  : ' mt-1 block w-full border border-gray-300 rounded-md  py-3   px-3 pl-24 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm',
+              ]"
               placeholder="+1 (555) 987-6543"
             />
+            <div
+              class="
+                absolute
+                inset-y-0
+                right-0
+                pr-3
+                flex
+                items-center
+                pointer-events-none
+              "
+            >
+              <ExclamationCircleIcon
+                class="h-5 w-5 text-red-500"
+                aria-hidden="true"
+                v-if="phone_numberErrorMessage"
+              />
+            </div>
           </div>
+          <p
+            v-if="phone_numberErrorMessage"
+            class="mt-2 text-sm text-red-600"
+            id="email-error"
+          >
+            {{ phone_numberErrorMessage }}
+          </p>
         </div>
 
         <div class="col-span-12 sm:col-span-8">
@@ -439,44 +453,42 @@
             <label for="salary" class="block text-sm font-medium text-gray-700"
               >salary</label
             >
-            <div class="mt-1 relative rounded-md shadow-sm">
-              <div
-                class="
-                  absolute
-                  inset-y-0
-                  left-0
-                  pl-3
-                  flex
-                  items-center
-                  pointer-events-none
-                "
-              >
-                <span class="text-gray-500 sm:text-sm"> $ </span>
-              </div>
+            <div
+              class="
+                absolute
+                inset-y-0
+                left-0
+                pl-3
+                flex
+                items-center
+                pointer-events-none
+              "
+            >
+              <span class="text-gray-500 sm:text-sm"> $ </span>
+            </div>
+            <div class="mt-1 relative rounded-md -sm">
               <input
-                type="text"
+                type="number"
                 name="salary"
                 id="salary"
                 v-model="salary"
-                class="
-                  appearance-none
-                  block
-                  w-full
-                  pl-5
-                  pr-20
-                  py-3
-                  border border-gray-300
-                  rounded-md
-                  shadow-sm
-                  placeholder-gray-400
-                  focus:outline-none
-                  focus:ring-indigo-500
-                  focus:border-indigo-500
-                  sm:text-sm
-                "
+                :class="[
+                  salaryErrorMessage
+                    ? 'mt-1 block w-full border border-red-300 rounded-md  py-3  text-red-900  px-3 pl-5 focus:outline-none focus:ring-red-500 focus:border-red-500 sm:text-sm'
+                    : ' mt-1 block w-full border border-gray-300 rounded-md  py-3   px-3 pl-5 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm',
+                ]"
                 placeholder="0.00"
               />
-              <div class="absolute inset-y-0 right-0 flex items-center">
+
+
+              <p
+                v-if="salaryErrorMessage"
+                class="mt-2 text-sm text-red-600"
+                id="email-error"
+              >
+                {{ salaryErrorMessage }}
+              </p>
+              <div class="absolute inset-y-0 right-0 flex items-center" v-if="!salaryErrorMessage">
                 <label for="currency" class="sr-only">Currency</label>
                 <select
                   id="currency"
@@ -486,7 +498,6 @@
                     w-full
                     border border-gray-300
                     rounded-md
-                    shadow-sm
                     py-3
                     px-3
                     focus:outline-none
@@ -495,8 +506,8 @@
                     sm:text-sm
                   "
                 >
-                  <option>USD</option>
-                  <option>CAD</option>
+                  <option>DZD</option>
+                  <option>DZD</option>
                   <option>EUR</option>
                 </select>
               </div>
@@ -516,7 +527,6 @@
                   bg-white
                   border border-gray-300
                   rounded-md
-                  shadow-sm
                   pl-3
                   pr-10
                   py-5
@@ -560,7 +570,7 @@
                     mt-1
                     w-full
                     bg-white
-                    shadow-lg
+                    -lg
                     max-h-60
                     rounded-md
                     py-1
@@ -623,7 +633,6 @@
                   bg-white
                   border border-gray-300
                   rounded-md
-                  shadow-sm
                   pl-3
                   pr-10
                   py-5
@@ -667,7 +676,7 @@
                     mt-1
                     w-full
                     bg-white
-                    shadow-lg
+                    -lg
                     max-h-60
                     rounded-md
                     py-1
@@ -732,7 +741,6 @@
               bg-white
               border border-gray-300
               rounded-md
-              shadow-sm
               py-3
               px-3
               focus:outline-none focus:ring-indigo-500 focus:border-indigo-500
@@ -761,7 +769,6 @@
               bg-white
               border border-gray-300
               rounded-md
-              shadow-sm
               py-3
               px-3
               focus:outline-none focus:ring-indigo-500 focus:border-indigo-500
@@ -791,7 +798,6 @@
               w-full
               border border-gray-300
               rounded-md
-              shadow-sm
               py-3
               px-3
               focus:outline-none focus:ring-indigo-500 focus:border-indigo-500
@@ -816,7 +822,6 @@
               w-full
               border border-gray-300
               rounded-md
-              shadow-sm
               py-3
               px-3
               focus:outline-none focus:ring-indigo-500 focus:border-indigo-500
@@ -841,7 +846,6 @@
               w-full
               border border-gray-300
               rounded-md
-              shadow-sm
               py-3
               px-3
               focus:outline-none focus:ring-indigo-500 focus:border-indigo-500
@@ -866,7 +870,6 @@
               w-full
               border border-gray-300
               rounded-md
-              shadow-sm
               py-3
               px-3
               focus:outline-none focus:ring-indigo-500 focus:border-indigo-500
@@ -882,7 +885,7 @@
           >
             Company Website
           </label>
-          <div class="mt-1 flex rounded-md shadow-sm">
+          <div class="mt-1 flex rounded-md">
             <span
               class="
                 inline-flex
@@ -957,7 +960,7 @@
           >
             Facebook
           </label>
-          <div class="mt-1 flex rounded-md shadow-sm">
+          <div class="mt-1 flex rounded-md">
             <span
               class="
                 inline-flex
@@ -1000,7 +1003,7 @@
           >
             Twitter
           </label>
-          <div class="mt-1 flex rounded-md shadow-sm">
+          <div class="mt-1 flex rounded-md">
             <span
               class="
                 inline-flex
@@ -1043,7 +1046,7 @@
           >
             Linkedin
           </label>
-          <div class="mt-1 flex rounded-md shadow-sm">
+          <div class="mt-1 flex rounded-md">
             <span
               class="
                 inline-flex
@@ -1090,7 +1093,6 @@
           bg-indigo-700
           border border-transparent
           rounded-md
-          shadow-sm
           py-2
           px-20
           inline-flex
@@ -1174,14 +1176,18 @@ export default {
       .string()
       .email("Invalid email address")
       .required("Email is required");
-    let usernameValidation = yup.string().required("Username is required").nullable();
-    let bioValidation = yup.string().required("Bio is required").nullable();
+    let usernameValidation = yup
+      .string()
+      .required("Username is required")
+      .nullable();
+    let bioValidation = yup.string().nullable();
     let date_of_birthValidation = yup.string().nullable();
     const phoneRegExp =
       /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/;
     let phone_numberValidation = yup
       .string()
-      .matches(phoneRegExp, "Phone number is not valid").nullable();
+      .matches(phoneRegExp, "Phone number is not valid")
+      .nullable();
     let addressValidation = yup.string().nullable();
     let countryValidation = yup.string().nullable();
     let cityValidation = yup.string().nullable();
@@ -1199,7 +1205,12 @@ export default {
     let work_time_lengthValidation = yup.string().nullable();
     let work_placeValidation = yup.string().nullable();
     let work_hoursValidation = yup.string().nullable();
-    let salaryValidation = yup.string().nullable();
+    let salaryValidation = yup
+      .number()
+      .typeError("Amount must be a number")
+      .min(0, "zid chwiya")
+      .max(1000000000000000000000000, "hold up wait a min ...")
+      .nullable();
     let genderValidation = yup.string().nullable();
 
     const { value: email, errorMessage: emailErrorMessage } = useField(
