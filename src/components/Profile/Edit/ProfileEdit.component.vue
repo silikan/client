@@ -480,7 +480,6 @@
                 placeholder="0.00"
               />
 
-
               <p
                 v-if="salaryErrorMessage"
                 class="mt-2 text-sm text-red-600"
@@ -488,7 +487,10 @@
               >
                 {{ salaryErrorMessage }}
               </p>
-              <div class="absolute inset-y-0 right-0 flex items-center" v-if="!salaryErrorMessage">
+              <div
+                class="absolute inset-y-0 right-0 flex items-center"
+                v-if="!salaryErrorMessage"
+              >
                 <label for="currency" class="sr-only">Currency</label>
                 <select
                   id="currency"
@@ -747,9 +749,9 @@
               sm:text-sm
             "
           >
-            <option>United States</option>
-            <option>Canada</option>
-            <option>Mexico</option>
+            <option>Algeria</option>
+            <option>Algeria</option>
+            <option>Algeria</option>
           </select>
         </div>
 
@@ -786,96 +788,181 @@
             class="block text-sm font-medium text-gray-700"
             >Street address</label
           >
-          <input
-            id="address"
-            type="text"
-            name="address"
-            autocomplete="address"
-            v-model="address"
-            class="
-              mt-1
-              block
-              w-full
-              border border-gray-300
-              rounded-md
-              py-3
-              px-3
-              focus:outline-none focus:ring-indigo-500 focus:border-indigo-500
-              sm:text-sm
-            "
-          />
+          <div class="mt-1 relative rounded-md -sm">
+            <input
+              id="address"
+              type="text"
+              name="address"
+              autocomplete="address"
+              v-model="address"
+              :class="[
+                addressErrorMessage
+                  ? 'block w-full pr-10 border-red-300 text-red-900 placeholder-red-300 focus:outline-none focus:ring-red-500 focus:border-red-500 sm:text-sm rounded-md w-full px-3 py-2 border border-red-300  text-red-900 rounded-md  -smplaceholder-red-400 focus:outline-nonefocus:ring-red-500 focus:border-red-500 sm:text-sm'
+                  : ' block w-full px-3 py-2 border border-gray-300 rounded-md  -smplaceholder-gray-400 focus:outline-nonefocus:ring-indigo-500 focus:border-indigo-500 sm:text-sm',
+              ]"
+            />
+
+            <div
+              class="
+                absolute
+                inset-y-0
+                right-0
+                pr-3
+                flex
+                items-center
+                pointer-events-none
+              "
+            >
+              <ExclamationCircleIcon
+                class="h-5 w-5 text-red-500"
+                aria-hidden="true"
+                v-if="addressErrorMessage"
+              />
+            </div>
+          </div>
+
+          <p
+            v-if="addressErrorMessage"
+            class="mt-2 text-sm text-red-600"
+            id="email-error"
+          >
+            {{ addressErrorMessage }}
+          </p>
         </div>
 
         <div class="col-span-12 sm:col-span-6">
           <label for="city" class="block text-sm font-medium text-gray-700"
             >City</label
           >
-          <input
-            id="city"
-            type="text"
-            name="city"
-            v-model="city"
-            autocomplete="address-level2"
-            class="
-              mt-1
-              block
-              w-full
-              border border-gray-300
-              rounded-md
-              py-3
-              px-3
-              focus:outline-none focus:ring-indigo-500 focus:border-indigo-500
-              sm:text-sm
-            "
-          />
+          <div class="mt-1 relative rounded-md -sm">
+            <input
+              id="city"
+              type="text"
+              name="city"
+              v-model="city"
+              autocomplete="address-level2"
+              :class="[
+                cityErrorMessage
+                  ? 'block w-full pr-10 border-red-300 text-red-900 placeholder-red-300 focus:outline-none focus:ring-red-500 focus:border-red-500 sm:text-sm rounded-md w-full px-3 py-2 border border-red-300  text-red-900 rounded-md  -smplaceholder-red-400 focus:outline-nonefocus:ring-red-500 focus:border-red-500 sm:text-sm'
+                  : ' block w-full px-3 py-2 border border-gray-300 rounded-md  -smplaceholder-gray-400 focus:outline-nonefocus:ring-indigo-500 focus:border-indigo-500 sm:text-sm',
+              ]"
+            />
+            <div
+              class="
+                absolute
+                inset-y-0
+                right-0
+                pr-3
+                flex
+                items-center
+                pointer-events-none
+              "
+            >
+              <ExclamationCircleIcon
+                class="h-5 w-5 text-red-500"
+                aria-hidden="true"
+                v-if="cityErrorMessage"
+              />
+            </div>
+          </div>
+
+          <p
+            v-if="cityErrorMessage"
+            class="mt-2 text-sm text-red-600"
+            id="email-error"
+          >
+            {{ cityErrorMessage }}
+          </p>
         </div>
 
         <div class="col-span-12 sm:col-span-6">
           <label for="region" class="block text-sm font-medium text-gray-700"
             >State / Province</label
           >
-          <input
-            id="state"
-            type="text"
-            name="state"
-            v-model="state"
-            autocomplete="address-level1"
-            class="
-              mt-1
-              block
-              w-full
-              border border-gray-300
-              rounded-md
-              py-3
-              px-3
-              focus:outline-none focus:ring-indigo-500 focus:border-indigo-500
-              sm:text-sm
-            "
-          />
+          <div class="mt-1 relative rounded-md -sm">
+            <input
+              id="state"
+              type="text"
+              name="state"
+              v-model="state"
+              autocomplete="address-level1"
+              :class="[
+                stateErrorMessage
+                  ? 'block w-full pr-10 border-red-300 text-red-900 placeholder-red-300 focus:outline-none focus:ring-red-500 focus:border-red-500 sm:text-sm rounded-md w-full px-3 py-2 border border-red-300  text-red-900 rounded-md  -smplaceholder-red-400 focus:outline-nonefocus:ring-red-500 focus:border-red-500 sm:text-sm'
+                  : ' block w-full px-3 py-2 border border-gray-300 rounded-md  -smplaceholder-gray-400 focus:outline-nonefocus:ring-indigo-500 focus:border-indigo-500 sm:text-sm',
+              ]"
+            />
+            <div
+              class="
+                absolute
+                inset-y-0
+                right-0
+                pr-3
+                flex
+                items-center
+                pointer-events-none
+              "
+            >
+              <ExclamationCircleIcon
+                class="h-5 w-5 text-red-500"
+                aria-hidden="true"
+                v-if="stateErrorMessage"
+              />
+            </div>
+          </div>
+
+          <p
+            v-if="stateErrorMessage"
+            class="mt-2 text-sm text-red-600"
+            id="email-error"
+          >
+            {{ stateErrorMessage }}
+          </p>
         </div>
 
         <div class="col-span-12 sm:col-span-6">
           <label for="zip_code" class="block text-sm font-medium text-gray-700"
             >ZIP / Postal code</label
           >
-          <input
-            id="zip_code"
-            type="text"
-            name="zip_code"
-            v-model="zip_code"
-            autocomplete="postal-code"
-            class="
-              mt-1
-              block
-              w-full
-              border border-gray-300
-              rounded-md
-              py-3
-              px-3
-              focus:outline-none focus:ring-indigo-500 focus:border-indigo-500
-              sm:text-sm
-            "
-          />
+          <div class="mt-1 relative rounded-md -sm">
+            <input
+              id="zip_code"
+              type="text"
+              name="zip_code"
+              v-model="zip_code"
+              autocomplete="postal-code"
+              :class="[
+                zip_codeErrorMessage
+                  ? 'block w-full pr-10 border-red-300 text-red-900 placeholder-red-300 focus:outline-none focus:ring-red-500 focus:border-red-500 sm:text-sm rounded-md w-full px-3 py-2 border border-red-300  text-red-900 rounded-md  -smplaceholder-red-400 focus:outline-nonefocus:ring-red-500 focus:border-red-500 sm:text-sm'
+                  : ' block w-full px-3 py-2 border border-gray-300 rounded-md  -smplaceholder-gray-400 focus:outline-nonefocus:ring-indigo-500 focus:border-indigo-500 sm:text-sm',
+              ]"
+            />
+            <div
+              class="
+                absolute
+                inset-y-0
+                right-0
+                pr-3
+                flex
+                items-center
+                pointer-events-none
+              "
+            >
+              <ExclamationCircleIcon
+                class="h-5 w-5 text-red-500"
+                aria-hidden="true"
+                v-if="zip_codeErrorMessage"
+              />
+            </div>
+          </div>
+
+          <p
+            v-if="zip_codeErrorMessage"
+            class="mt-2 text-sm text-red-600"
+            id="email-error"
+          >
+            {{ zip_codeErrorMessage }}
+          </p>
         </div>
 
         <div class="col-span-12 sm:col-span-6">
@@ -900,27 +987,53 @@
             >
               http://
             </span>
+                      <div class="mt-1 relative rounded-md -sm">
+
             <input
               id="linkedin_social_link"
               v-model="website"
               type="text"
               name="linkedin_social_link"
               class="
-                focus:ring-indigo-500 focus:border-indigo-500
-                block
-                w-full
-                border border-gray-300
-                pl-7
-                pr-12
-                py-3
-                sm:text-sm
-                border-gray-300
-                rounded-md
               "
+                 :class="[
+                websiteErrorMessage
+                  ? 'focus:ring-red-500 focus:border-red-500  block  w-full text-red-900   border border-red-300 pl-7   pr-12 py-3  sm:text-sm  border-red-300   rounded-md'
+                  : ' focus:ring-indigo-500 focus:border-indigo-500  block  w-full    border border-gray-300 pl-7   pr-12 py-3  sm:text-sm  border-gray-300   rounded-md',
+              ]"
               placeholder="www.website.com"
             />
+
+               <div
+              class="
+                absolute
+                inset-y-0
+                right-0
+                pr-3
+                flex
+                items-center
+                pointer-events-none
+              "
+            >
+              <ExclamationCircleIcon
+                class="h-5 w-5 text-red-500"
+                aria-hidden="true"
+                v-if="websiteErrorMessage"
+              />
+            </div>
           </div>
+
+
+          <p
+            v-if="websiteErrorMessage"
+            class="mt-2 text-sm text-red-600"
+            id="email-error"
+          >
+            {{ websiteErrorMessage }}
+          </p>
+
         </div>
+               </div>
 
         <div class="mt-5 col-span-12">
           <div class="col-span-12">
@@ -1193,7 +1306,13 @@ export default {
     let cityValidation = yup.string().nullable();
     let stateValidation = yup.string().nullable();
     let zip_codeValidation = yup.string().nullable();
-    let websiteValidation = yup.string().nullable();
+    let websiteValidation = yup
+      .string()
+      .matches(
+        /((https?):\/\/)?(www.)?[a-z0-9]+(\.[a-z]{2,}){1,3}(#?\/?[a-zA-Z0-9#]+)*\/?(\?[a-zA-Z0-9-_]+=[a-zA-Z0-9-%]+&?)?$/,
+        "Enter correct url!"
+      )
+      .nullable();
     let educationValidation = yup.string().nullable();
     let certificationsValidation = yup.string().nullable();
     let experienceValidation = yup.string().nullable();
