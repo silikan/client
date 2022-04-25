@@ -9,7 +9,7 @@
         <div>
           <h2 class="text-lg leading-6 font-medium text-gray-900">Account</h2>
           <p class="mt-1 text-sm text-gray-500">
-            Ornare eu a volutpat eget vulputate. Fringilla commodo amet.
+            General account settings
           </p>
         </div>
         <ul role="list" class="mt-2 divide-y divide-gray-200">
@@ -24,7 +24,8 @@
 
               </SwitchLabel>
               <SwitchDescription class="text-sm text-gray-500">
-                Nulla amet tempus sit accumsan. Aliquet turpis sed sit lacinia.
+                If you are available to hire, you will be visible to employers
+                and other candidates.
               </SwitchDescription>
             </div>
             <Switch
@@ -53,8 +54,7 @@
                 Handyman
               </SwitchLabel>
               <SwitchDescription class="text-sm text-gray-500">
-                Pharetra morbi dui mi mattis tellus sollicitudin cursus
-                pharetra.
+                Let employers know you are a handyman
               </SwitchDescription>
             </div>
             <Switch
@@ -83,7 +83,7 @@
                 Online
               </SwitchLabel>
               <SwitchDescription class="text-sm text-gray-500">
-                Integer amet, nunc hendrerit adipiscing nam. Elementum ame
+                let other know you are online
               </SwitchDescription>
             </div>
             <Switch

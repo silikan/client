@@ -5,36 +5,36 @@
         <div class="col-span-1 flex justify-center md:col-span-2 lg:col-span-1">
           <img
             class="h-12"
-            src="https://tailwindui.com/img/logos/tuple-logo-gray-400.svg"
-            alt="Tuple"
+            src="../../assets/trusted/naftal-logo.svg"
+            alt="Naftal"
           >
         </div>
         <div class="col-span-1 flex justify-center md:col-span-2 lg:col-span-1">
           <img
             class="h-12"
-            src="https://tailwindui.com/img/logos/mirage-logo-gray-400.svg"
-            alt="Mirage"
+            src="../../assets/trusted/cevital-logo.svg" 
+            alt="Cevital"
           >
         </div>
         <div class="col-span-1 flex justify-center md:col-span-2 lg:col-span-1">
           <img
             class="h-12"
-            src="https://tailwindui.com/img/logos/statickit-logo-gray-400.svg"
-            alt="StaticKit"
+            src="../../assets/trusted/yassir-logo.svg"
+            alt="Yassir"
           >
         </div>
         <div class="col-span-1 flex justify-center md:col-span-3 lg:col-span-1">
           <img
             class="h-12"
-            src="https://tailwindui.com/img/logos/transistor-logo-gray-400.svg"
-            alt="Transistor"
+            src="../../assets/trusted/condor-logo.svg"
+            alt="Condor"
           >
         </div>
         <div class="col-span-2 flex justify-center md:col-span-3 lg:col-span-1">
           <img
             class="h-12"
-            src="https://tailwindui.com/img/logos/workcation-logo-gray-400.svg"
-            alt="Workcation"
+            src="../../assets/trusted/algerie-telecom-logo.png"
+            alt="algerie-telecom"
           >
         </div>
       </div>

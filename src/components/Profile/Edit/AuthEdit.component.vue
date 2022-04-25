@@ -15,7 +15,7 @@
               Verify Email
             </h2>
             <p class="mt-1 text-sm text-gray-500">
-              Ornare eu a volutpat eget vulputate. Fringilla commodo amet.
+              verify your email address and get verified badge
             </p>
           </div>
         </div>
@@ -62,7 +62,7 @@
               Change Oath Password
             </h2>
             <p class="mt-1 text-sm text-gray-500">
-              Ornare eu a volutpat eget vulputate. Fringilla commodo amet.
+              change your password
             </p>
           </div>
 
