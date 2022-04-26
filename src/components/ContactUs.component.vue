@@ -37,9 +37,7 @@
               text-gray-500 text-center
             "
           >
-            Convallis feugiat et aliquet pellentesque dictum nisi, velit.
-            Egestas fermentum adipiscing risus quam ac consectetur mattis turpis
-            tristique.
+            We're always looking for new and interesting projects to work on.
           </p>
         </div>
       </div>
