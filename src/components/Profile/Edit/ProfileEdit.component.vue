@@ -34,26 +34,27 @@
             >
               Username
             </label>
-            <div class="mt-1 rounded-md flex sm:col-span-2">
-              <span
-                class="
-                  bg-gray-50
-                  border border-r-0 border-gray-300
-                  rounded-l-md
-                  px-3
-                  inline-flex
-                  items-center
-                  text-gray-500
-                  sm:text-sm
-                "
-              >
-                Silikan.com/user/
-              </span>
+            <div class="mt-1 relative rounded-md flex sm:col-span-2">
+                     <span
+              class="
+                bg-gray-50
+                border border-r-0 border-gray-300
+                rounded-l-md
+                px-3
+                inline-flex
+                items-center
+                text-gray-500
+                sm:text-sm
+              "
+            >
+          silikan@
+            </span>
               <input
                 id="username"
                 type="text"
                 name="username"
                 autocomplete="username"
+                placeholder=""
                 :class="[
                   usernameErrorMessage
                     ? 'block w-full pr-10 border-red-300 text-red-900 placeholder-red-300 focus:outline-none focus:ring-red-500 focus:border-red-500 sm:text-sm rounded-md w-full px-3 py-2 border border-red-300  text-red-900 rounded-md  -smplaceholder-red-400 focus:outline-nonefocus:ring-red-500 focus:border-red-500 sm:text-sm'
@@ -83,7 +84,8 @@
               v-if="usernameErrorMessage"
               class="mt-2 text-sm text-red-600"
               id="email-error"
-            >
+            ></p>
+            <p v-if="usernameErrorMessage" class="text-red-500 text-xs italic">
               {{ usernameErrorMessage }}
             </p>
           </div>
@@ -103,7 +105,7 @@
               class="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2"
               >Email</label
             >
-            <div class="mt-1 rounded-md flex sm:col-span-2">
+            <div class="mt-1 rounded-md relative flex sm:col-span-2">
               <input
                 id="email"
                 v-model="email"
@@ -139,7 +141,8 @@
               v-if="emailErrorMessage"
               class="mt-2 text-sm text-red-600"
               id="email-error"
-            >
+            ></p>
+            <p v-if="emailErrorMessage" class="text-red-500 text-xs italic">
               {{ emailErrorMessage }}
             </p>
           </div>
@@ -192,11 +195,12 @@
                 />
               </div>
             </div>
-            <p
+          <p
               v-if="bioErrorMessage"
               class="mt-2 text-sm text-red-600"
               id="email-error"
-            >
+            ></p>
+            <p v-if="bioErrorMessage" class="text-red-500 text-xs italic">
               {{ bioErrorMessage }}
             </p>
           </div>
@@ -364,7 +368,7 @@
           >
             name</label
           >
-          <div class="mt-1 sm:mt-0 sm:col-span-2">
+          <div class="mt-1 relative sm:mt-0 sm:col-span-2">
             <input
               id="name"
               type="text"
@@ -395,13 +399,14 @@
               />
             </div>
           </div>
-          <p
-            v-if="nameErrorMessage"
-            class="mt-2 text-sm text-red-600"
-            id="email-error"
-          >
-            {{ nameErrorMessage }}
-          </p>
+     <p
+              v-if="nameErrorMessage"
+              class="mt-2 text-sm text-red-600"
+              id="email-error"
+            ></p>
+            <p v-if="nameErrorMessage" class="text-red-500 text-xs italic">
+              {{ nameErrorMessage }}
+            </p>
         </div>
         <div
           class="
@@ -477,13 +482,14 @@
               />
             </div>
           </div>
-          <p
-            v-if="phone_numberErrorMessage"
-            class="mt-2 text-sm text-red-600"
-            id="email-error"
-          >
-            {{ phone_numberErrorMessage }}
-          </p>
+       <p
+              v-if="phone_numberErrorMessage"
+              class="mt-2 text-sm text-red-600"
+              id="email-error"
+            ></p>
+            <p v-if="phone_numberErrorMessage" class="text-red-500 text-xs italic">
+              {{ phone_numberErrorMessage }}
+            </p>
         </div>
 
         <div
@@ -504,8 +510,12 @@
             Work Hours</label
           >
           <div class="sm:col-span-2">
-          <Datepicker v-model="work_hours" timePicker range noMinutesOverlay />
-
+            <Datepicker
+              v-model="work_hours"
+              timePicker
+              range
+              noMinutesOverlay
+            />
           </div>
         </div>
 
@@ -527,9 +537,9 @@
             Birthday</label
           >
           <div class="sm:col-span-2">
-          <Datepicker v-model="date_of_birth" :enableTimePicker="false" />
+            <Datepicker v-model="date_of_birth" :enableTimePicker="false" />
+          </div>
         </div>
- </div>
         <div
           class="
             sm:grid
@@ -546,8 +556,7 @@
             class="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2"
             >salary</label
           >
-          <div class="sm:col-span-2">
-
+          <div class="sm:col-span-2 relative">
             <div class="mt-1 relative rounded-md sm:col-span-2">
               <input
                 type="number"
@@ -562,13 +571,14 @@
                 placeholder="0.00"
               />
 
-              <p
-                v-if="salaryErrorMessage"
-                class="mt-2 text-sm text-red-600"
-                id="email-error"
-              >
-                {{ salaryErrorMessage }}
-              </p>
+            <p
+              v-if="salaryErrorMessage"
+              class="mt-2 text-sm text-red-600"
+              id="email-error"
+            ></p>
+            <p v-if="salaryErrorMessage" class="text-red-500 text-xs italic">
+              {{ salaryErrorMessage }}
+            </p>
               <div
                 class="absolute inset-y-0 right-0 flex items-center"
                 v-if="!salaryErrorMessage"
@@ -615,7 +625,7 @@
             >Work Place</label
           >
           <Listbox as="div" v-model="work_place" class="sm:col-span-2">
-            <div class="mt-1 relative ">
+            <div class="mt-1 relative">
               <ListboxButton
                 class="
                   relative
@@ -850,28 +860,28 @@
             >Country</label
           >
           <div class="sm:col-span-2">
-          <select
-            id="country"
-            name="country"
-            v-model="country"
-            autocomplete="country-name"
-            class="
-              mt-1
-              block
-              w-full
-              bg-white
-              border border-gray-300
-              rounded-md
-              py-3
-              px-3
-              focus:outline-none focus:ring-indigo-500 focus:border-indigo-500
-              sm:text-sm
-            "
-          >
-            <option>Algeria</option>
-            <option>Algeria</option>
-            <option>Algeria</option>
-          </select>
+            <select
+              id="country"
+              name="country"
+              v-model="country"
+              autocomplete="country-name"
+              class="
+                mt-1
+                block
+                w-full
+                bg-white
+                border border-gray-300
+                rounded-md
+                py-3
+                px-3
+                focus:outline-none focus:ring-indigo-500 focus:border-indigo-500
+                sm:text-sm
+              "
+            >
+              <option>Algeria</option>
+              <option>Algeria</option>
+              <option>Algeria</option>
+            </select>
           </div>
         </div>
 
@@ -892,27 +902,27 @@
             >gender</label
           >
           <div class="sm:col-span-2">
-          <select
-            id="gender"
-            name="gender"
-            v-model="gender"
-            autocomplete="gender"
-            class="
-              mt-1
-              block
-              w-full
-              bg-white
-              border border-gray-300
-              rounded-md
-              py-3
-              px-3
-              focus:outline-none focus:ring-indigo-500 focus:border-indigo-500
-              sm:text-sm
-            "
-          >
-            <option>Male</option>
-            <option>Female</option>
-          </select>
+            <select
+              id="gender"
+              name="gender"
+              v-model="gender"
+              autocomplete="gender"
+              class="
+                mt-1
+                block
+                w-full
+                bg-white
+                border border-gray-300
+                rounded-md
+                py-3
+                px-3
+                focus:outline-none focus:ring-indigo-500 focus:border-indigo-500
+                sm:text-sm
+              "
+            >
+              <option>Male</option>
+              <option>Female</option>
+            </select>
           </div>
         </div>
 
@@ -965,13 +975,14 @@
             </div>
           </div>
 
-          <p
-            v-if="addressErrorMessage"
-            class="mt-2 text-sm text-red-600"
-            id="email-error"
-          >
-            {{ addressErrorMessage }}
-          </p>
+             <p
+              v-if="addressErrorMessage"
+              class="mt-2 text-sm text-red-600"
+              id="email-error"
+            ></p>
+            <p v-if="addressErrorMessage" class="text-red-500 text-xs italic">
+              {{ addressErrorMessage }}
+            </p>
         </div>
 
         <div
@@ -1022,13 +1033,14 @@
             </div>
           </div>
 
-          <p
-            v-if="cityErrorMessage"
-            class="mt-2 text-sm text-red-600"
-            id="email-error"
-          >
-            {{ cityErrorMessage }}
-          </p>
+           <p
+              v-if="cityErrorMessage"
+              class="mt-2 text-sm text-red-600"
+              id="email-error"
+            ></p>
+            <p v-if="cityErrorMessage" class="text-red-500 text-xs italic">
+              {{ cityErrorMessage }}
+            </p>
         </div>
 
         <div
@@ -1079,13 +1091,14 @@
             </div>
           </div>
 
-          <p
-            v-if="stateErrorMessage"
-            class="mt-2 text-sm text-red-600"
-            id="email-error"
-          >
-            {{ stateErrorMessage }}
-          </p>
+            <p
+              v-if="stateErrorMessage"
+              class="mt-2 text-sm text-red-600"
+              id="email-error"
+            ></p>
+            <p v-if="stateErrorMessage" class="text-red-500 text-xs italic">
+              {{ stateErrorMessage }}
+            </p>
         </div>
 
         <div
@@ -1136,13 +1149,14 @@
             </div>
           </div>
 
-          <p
-            v-if="zip_codeErrorMessage"
-            class="mt-2 text-sm text-red-600"
-            id="email-error"
-          >
-            {{ zip_codeErrorMessage }}
-          </p>
+       <p
+              v-if="zip_codeErrorMessage"
+              class="mt-2 text-sm text-red-600"
+              id="email-error"
+            ></p>
+            <p v-if="zip_codeErrorMessage" class="text-red-500 text-xs italic">
+              {{ zip_codeErrorMessage }}
+            </p>
         </div>
 
         <div
@@ -1150,75 +1164,71 @@
             sm:grid
             sm:grid-cols-3
             sm:gap-4
-            sm:items-start
+            sm:items-center
             sm:border-t
             sm:border-gray-200
             sm:pt-5
           "
         >
           <label
-            for="company-website"
+            for="website"
             class="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2"
           >
-            Company Website
+            website
           </label>
-          <div class="mt-1 flex rounded-md">
+          <div class="mt-1 relative rounded-md flex sm:col-span-2">
             <span
               class="
+                bg-gray-50
+                border border-r-0 border-gray-300
+                rounded-l-md
+                px-3
                 inline-flex
                 items-center
-                px-3
-                rounded-l-md
-                border border-r-0 border-gray-300
-                bg-gray-50
                 text-gray-500
                 sm:text-sm
               "
             >
-              http://
+              https://
             </span>
-            <div class="mt-1 relative rounded-md sm:col-span-2">
-              <input
-                id="linkedin_social_link"
-                v-model="website"
-                type="text"
-                name="linkedin_social_link"
-                class=""
-                :class="[
-                  websiteErrorMessage
-                    ? 'focus:ring-red-500 focus:border-red-500  block  w-full text-red-900   border border-red-300 pl-7   pr-12 py-3  sm:text-sm  border-red-300   rounded-md'
-                    : ' focus:ring-indigo-500 focus:border-indigo-500  block  w-full    border border-gray-300 pl-7   pr-12 py-3  sm:text-sm  border-gray-300   rounded-md',
-                ]"
-                placeholder="www.website.com"
+            <input
+              id="website"
+              type="text"
+              name="website"
+              autocomplete="website"
+              :class="[
+                websiteErrorMessage
+                  ? 'block w-full pr-10 border-red-300 text-red-900 placeholder-red-300 focus:outline-none focus:ring-red-500 focus:border-red-500 sm:text-sm rounded-md w-full px-3 py-2 border border-red-300  text-red-900 rounded-md  -smplaceholder-red-400 focus:outline-nonefocus:ring-red-500 focus:border-red-500 sm:text-sm'
+                  : ' block w-full px-3 py-2 border border-gray-300 rounded-md  -smplaceholder-gray-400 focus:outline-nonefocus:ring-indigo-500 focus:border-indigo-500 sm:text-sm',
+              ]"
+              v-model="website"
+            />
+            <div
+              class="
+                absolute
+                inset-y-0
+                right-0
+                pr-3
+                flex
+                items-center
+                pointer-events-none
+              "
+            >
+              <ExclamationCircleIcon
+                class="h-5 w-5 text-red-500"
+                aria-hidden="true"
+                v-if="websiteErrorMessage"
               />
-
-              <div
-                class="
-                  absolute
-                  inset-y-0
-                  right-0
-                  pr-3
-                  flex
-                  items-center
-                  pointer-events-none
-                "
-              >
-                <ExclamationCircleIcon
-                  class="h-5 w-5 text-red-500"
-                  aria-hidden="true"
-                  v-if="websiteErrorMessage"
-                />
-              </div>
             </div>
-
-            <p
+          </div>
+         <p
               v-if="websiteErrorMessage"
               class="mt-2 text-sm text-red-600"
               id="email-error"
-            >
+            ></p>
+            <p v-if="websiteErrorMessage" class="text-red-500 text-xs italic">
               {{ websiteErrorMessage }}
             </p>
-          </div>
         </div>
 
         <div class="mt-5 col-span-12">
@@ -1269,7 +1279,7 @@
           >
             Facebook
           </label>
-          <div class="mt-1 flex rounded-md">
+          <div class="mt-1 flex rounded-md sm:col-span-2">
             <span
               class="
                 inline-flex
@@ -1322,7 +1332,7 @@
           >
             Twitter
           </label>
-          <div class="mt-1 flex rounded-md">
+          <div class="mt-1 flex rounded-md sm:col-span-2">
             <span
               class="
                 inline-flex
@@ -1375,7 +1385,7 @@
           >
             Linkedin
           </label>
-          <div class="mt-1 flex rounded-md">
+          <div class="mt-1 flex rounded-md sm:col-span-2">
             <span
               class="
                 inline-flex
@@ -1507,7 +1517,11 @@ export default {
       .string()
       .required("Username is required")
       .nullable();
-    let bioValidation = yup.string().nullable();
+    let bioValidation = yup
+      .string()
+      .min(10, "Bio must be at least 10 characters")
+      .max(500, "Bio must be less than 500 characters")
+      .nullable();
     let date_of_birthValidation = yup.string().nullable();
     const phoneRegExp =
       /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/;
