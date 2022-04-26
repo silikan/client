@@ -164,7 +164,7 @@
               border border-transparent
               text-sm
               rounded-full
-              shadow-sm
+
               text-indigo-600
               font-bold
             "
@@ -182,7 +182,7 @@
               border border-transparent
               text-sm
               rounded-full
-              shadow-sm
+
               text-indigo-600
               font-bold
             "
