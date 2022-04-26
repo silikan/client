@@ -39,12 +39,13 @@
                   text-black
                   hover:border-transparent
                   cursor-pointer
+                 rotate-6
                 "
                 tag="button"
               :to="`/room/${person.roomId}`"
               >
                 <PaperAirplaneIcon
-                  class="btn-chat h-5 w-5"
+                  class="btn-chat h-5 w-5 transform rotate-90"
                   aria-hidden="true"
                 />
               </router-link>

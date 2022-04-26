@@ -259,6 +259,7 @@
                 </div>
               </li>
             </ul>
+            {{typingit}}
           </div>
 
           <div
@@ -306,6 +307,7 @@
               name="message"
               required
               @keyup.enter="sendMessage"
+               @keydown.once="typing"
             />
 
             <div
@@ -328,7 +330,7 @@
               tag="button"
               @click="sendMessage"
             >
-              <PaperAirplaneIcon class="btn-chat h-5 w-5" aria-hidden="true" />
+              <PaperAirplaneIcon class="btn-chat h-5 w-5 transform rotate-90" aria-hidden="true" />
             </div>
           </div>
         </div>
@@ -346,7 +348,7 @@ import {
   StarIcon,
 } from "@heroicons/vue/solid";
 import ChatService from "@/services/ChatService.js";
-import { computed, reactive, ref, watchEffect } from "@vue/runtime-core";
+import { computed, onUpdated, reactive, ref, watchEffect } from "@vue/runtime-core";
 import { useRoute } from "vue-router";
 import { useStore } from "vuex";
 import { PaperAirplaneIcon } from "@heroicons/vue/solid";
@@ -444,6 +446,11 @@ export default {
       // Connected, let's sign-up for to receive messages for this room
       socket.emit("room", `room-${id}`);
     });
+
+    let     typing = () =>{
+      //keydown
+         socket.emit('typing', {typing:'typing...'});
+    }
     let name = ref();
     let avatar = ref();
 let email = ref();
@@ -472,8 +479,24 @@ let email = ref();
         from.value = result.data[1];
       }
     });
+let typingit = ref("")
+onUpdated(()=>{
+  socket.on('typing', (data)=>{
+    console.log(data);
+    typingit.value = data.typing;
+  })
+})
+watchEffect(()=>{
+  socket.on('typing', (data)=>{
+    console.log(data.typing);
+    typingit.value = data.typing;
+    console.log(typingit.value);
+  })
+})
 
-
+watchEffect(()=>{
+  console.log(typingit.value);
+})
     return {
       to,
       from,
@@ -491,7 +514,9 @@ let email = ref();
       avatar,
       toname,
       toavatar,
-      email
+      email,
+      typing,
+      typingit
     };
   },
 };
