@@ -17,14 +17,24 @@
 
       <div class="mt-6 flex flex-col lg:flex-row">
         <div class="flex-grow space-y-6">
-          <div class="mt-1 relative rounded-md -sm">
+          <div
+            class="
+              sm:grid
+              sm:grid-cols-3
+              sm:gap-4
+              sm:items-center
+              sm:border-t
+              sm:border-gray-200
+              sm:pt-5
+            "
+          >
             <label
               for="username"
-              class="block text-sm font-medium text-gray-700"
+              class="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2"
             >
               Username
             </label>
-            <div class="mt-1 rounded-md flex">
+            <div class="mt-1 rounded-md flex sm:col-span-2">
               <span
                 class="
                   bg-gray-50
@@ -77,11 +87,23 @@
               {{ usernameErrorMessage }}
             </p>
           </div>
-          <div>
-            <label for="email" class="block text-sm font-medium text-gray-700"
+          <div
+            class="
+              sm:grid
+              sm:grid-cols-3
+              sm:gap-4
+              sm:items-center
+              sm:border-t
+              sm:border-gray-200
+              sm:pt-5
+            "
+          >
+            <label
+              for="email"
+              class="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2"
               >Email</label
             >
-            <div class="mt-1 rounded-md flex">
+            <div class="mt-1 rounded-md flex sm:col-span-2">
               <input
                 id="email"
                 v-model="email"
@@ -122,11 +144,24 @@
             </p>
           </div>
 
-          <div>
-            <label for="about" class="block text-sm font-medium text-gray-700">
+          <div
+            class="
+              sm:grid
+              sm:grid-cols-3
+              sm:gap-4
+              sm:items-center
+              sm:border-t
+              sm:border-gray-200
+              sm:pt-5
+            "
+          >
+            <label
+              for="about"
+              class="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2"
+            >
               Bio
             </label>
-            <div class="mt-1 relative rounded-md -sm">
+            <div class="mt-1 relative rounded-md sm:col-span-2">
               <textarea
                 id="bio"
                 name="bio"
@@ -135,8 +170,8 @@
                 v-model="bio"
                 :class="[
                   bioErrorMessage
-                    ? 'block w-full py-3 h-40 -0 resize-none focus:ring-0  pr-10 sm:text-sm  appearance-none px-3 border border-red-300 rounded-md-sm placeholder-red-400 text-red-600 focus:outline-none focus:ring-red-500 focus:border-red-500'
-                    : ' block w-full py-3 h-40 -0 resize-none focus:ring-0  pr-10 sm:text-sm  appearance-none px-3 border border-gray-300 rounded-md-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500',
+                    ? 'rounded-md block w-full py-3 h-40 -0 resize-none focus:ring-0  pr-10 sm:text-sm  appearance-none px-3 border border-red-300 rounded-md-sm placeholder-red-400 text-red-600 focus:outline-none focus:ring-red-500 focus:border-red-500'
+                    : 'rounded-md  block w-full py-3 h-40 -0 resize-none focus:ring-0  pr-10 sm:text-sm  appearance-none px-3 border border-gray-300 rounded-md-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500',
                 ]"
               />
               <div
@@ -311,12 +346,25 @@
         </div>
       </div>
 
-      <div class="mt-6 grid grid-cols-12 gap-6">
-        <div class="col-span-12 sm:col-span-6">
-          <label for="name" class="block text-sm font-medium text-gray-700">
+      <div class="mt-6 space-y-6">
+        <div
+          class="
+            sm:grid
+            sm:grid-cols-3
+            sm:gap-4
+            sm:items-start
+            sm:border-t
+            sm:border-gray-200
+            sm:pt-5
+          "
+        >
+          <label
+            for="name"
+            class="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2"
+          >
             name</label
           >
-          <div class="mt-1 relative rounded-md -sm">
+          <div class="mt-1 sm:mt-0 sm:col-span-2">
             <input
               id="name"
               type="text"
@@ -355,13 +403,23 @@
             {{ nameErrorMessage }}
           </p>
         </div>
-        <div class="col-span-12 sm:col-span-6">
+        <div
+          class="
+            sm:grid
+            sm:grid-cols-3
+            sm:gap-4
+            sm:items-start
+            sm:border-t
+            sm:border-gray-200
+            sm:pt-5
+          "
+        >
           <label
             for="phone-number"
-            class="block text-sm font-medium text-gray-700"
+            class="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2"
             >Phone Number</label
           >
-          <div class="mt-1 relative rounded-md">
+          <div class="mt-1 relative rounded-md sm:col-span-2">
             <div class="absolute inset-y-0 left-0 flex items-center">
               <label for="country" class="sr-only">Country</label>
               <select
@@ -428,45 +486,69 @@
           </p>
         </div>
 
-        <div class="col-span-12 sm:col-span-8">
+        <div
+          class="
+            sm:grid
+            sm:grid-cols-3
+            sm:gap-4
+            sm:items-start
+            sm:border-t
+            sm:border-gray-200
+            sm:pt-5
+          "
+        >
           <label
             for="work_hours"
-            class="block text-sm font-medium text-gray-700"
+            class="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2"
           >
             Work Hours</label
           >
+          <div class="sm:col-span-2">
           <Datepicker v-model="work_hours" timePicker range noMinutesOverlay />
+
+          </div>
         </div>
 
-        <div class="col-span-12 sm:col-span-8">
+        <div
+          class="
+            sm:grid
+            sm:grid-cols-3
+            sm:gap-4
+            sm:items-start
+            sm:border-t
+            sm:border-gray-200
+            sm:pt-5
+          "
+        >
           <label
             for="work_hours"
-            class="block text-sm font-medium text-gray-700"
+            class="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2"
           >
             Birthday</label
           >
+          <div class="sm:col-span-2">
           <Datepicker v-model="date_of_birth" :enableTimePicker="false" />
         </div>
+ </div>
+        <div
+          class="
+            sm:grid
+            sm:grid-cols-3
+            sm:gap-4
+            sm:items-start
+            sm:border-t
+            sm:border-gray-200
+            sm:pt-5
+          "
+        >
+          <label
+            for="salary"
+            class="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2"
+            >salary</label
+          >
+          <div class="sm:col-span-2">
 
-        <div class="col-span-12 sm:col-span-8">
-          <div>
-            <label for="salary" class="block text-sm font-medium text-gray-700"
-              >salary</label
-            >
-            <div
-              class="
-                absolute
-                inset-y-0
-                left-0
-                pl-3
-                flex
-                items-center
-                pointer-events-none
-              "
-            >
-              <span class="text-gray-500 sm:text-sm"> $ </span>
-            </div>
-            <div class="mt-1 relative rounded-md -sm">
+            <div class="mt-1 relative rounded-md sm:col-span-2">
               <input
                 type="number"
                 name="salary"
@@ -516,12 +598,24 @@
             </div>
           </div>
         </div>
-        <div class="col-span-12 sm:col-span-8">
-          <Listbox as="div" v-model="work_place">
-            <ListboxLabel class="block text-sm font-medium text-gray-700">
-              Work Place
-            </ListboxLabel>
-            <div class="mt-1 relative">
+        <div
+          class="
+            sm:grid
+            sm:grid-cols-3
+            sm:gap-4
+            sm:items-start
+            sm:border-t
+            sm:border-gray-200
+            sm:pt-5
+          "
+        >
+          <label
+            for="salary"
+            class="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2"
+            >Work Place</label
+          >
+          <Listbox as="div" v-model="work_place" class="sm:col-span-2">
+            <div class="mt-1 relative ">
               <ListboxButton
                 class="
                   relative
@@ -622,11 +716,23 @@
           </Listbox>
         </div>
 
-        <div class="col-span-12 sm:col-span-8">
-          <Listbox as="div" v-model="work_time_length">
-            <ListboxLabel class="block text-sm font-medium text-gray-700">
-              Work Time Length
-            </ListboxLabel>
+        <div
+          class="
+            sm:grid
+            sm:grid-cols-3
+            sm:gap-4
+            sm:items-start
+            sm:border-t
+            sm:border-gray-200
+            sm:pt-5
+          "
+        >
+          <label
+            for="salary"
+            class="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2"
+            >Work Time Length
+          </label>
+          <Listbox as="div" v-model="work_time_length" class="sm:col-span-2">
             <div class="mt-1 relative">
               <ListboxButton
                 class="
@@ -727,10 +833,23 @@
             </div>
           </Listbox>
         </div>
-        <div class="col-span-12 sm:col-span-8">
-          <label for="country" class="block text-sm font-medium text-gray-700"
+        <div
+          class="
+            sm:grid
+            sm:grid-cols-3
+            sm:gap-4
+            sm:items-start
+            sm:border-t
+            sm:border-gray-200
+            sm:pt-5
+          "
+        >
+          <label
+            for="country"
+            class="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2"
             >Country</label
           >
+          <div class="sm:col-span-2">
           <select
             id="country"
             name="country"
@@ -753,12 +872,26 @@
             <option>Algeria</option>
             <option>Algeria</option>
           </select>
+          </div>
         </div>
 
-        <div class="col-span-12 sm:col-span-8">
-          <label for="gender" class="block text-sm font-medium text-gray-700"
+        <div
+          class="
+            sm:grid
+            sm:grid-cols-3
+            sm:gap-4
+            sm:items-start
+            sm:border-t
+            sm:border-gray-200
+            sm:pt-5
+          "
+        >
+          <label
+            for="gender"
+            class="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2"
             >gender</label
           >
+          <div class="sm:col-span-2">
           <select
             id="gender"
             name="gender"
@@ -780,15 +913,26 @@
             <option>Male</option>
             <option>Female</option>
           </select>
+          </div>
         </div>
 
-        <div class="col-span-12 sm:col-span-12">
+        <div
+          class="
+            sm:grid
+            sm:grid-cols-3
+            sm:gap-4
+            sm:items-start
+            sm:border-t
+            sm:border-gray-200
+            sm:pt-5
+          "
+        >
           <label
             for="street-address"
-            class="block text-sm font-medium text-gray-700"
+            class="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2"
             >Street address</label
           >
-          <div class="mt-1 relative rounded-md -sm">
+          <div class="mt-1 relative rounded-md sm:col-span-2">
             <input
               id="address"
               type="text"
@@ -830,11 +974,23 @@
           </p>
         </div>
 
-        <div class="col-span-12 sm:col-span-6">
-          <label for="city" class="block text-sm font-medium text-gray-700"
+        <div
+          class="
+            sm:grid
+            sm:grid-cols-3
+            sm:gap-4
+            sm:items-start
+            sm:border-t
+            sm:border-gray-200
+            sm:pt-5
+          "
+        >
+          <label
+            for="city"
+            class="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2"
             >City</label
           >
-          <div class="mt-1 relative rounded-md -sm">
+          <div class="mt-1 relative rounded-md sm:col-span-2">
             <input
               id="city"
               type="text"
@@ -875,11 +1031,23 @@
           </p>
         </div>
 
-        <div class="col-span-12 sm:col-span-6">
-          <label for="region" class="block text-sm font-medium text-gray-700"
+        <div
+          class="
+            sm:grid
+            sm:grid-cols-3
+            sm:gap-4
+            sm:items-start
+            sm:border-t
+            sm:border-gray-200
+            sm:pt-5
+          "
+        >
+          <label
+            for="region"
+            class="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2"
             >State / Province</label
           >
-          <div class="mt-1 relative rounded-md -sm">
+          <div class="mt-1 relative rounded-md sm:col-span-2">
             <input
               id="state"
               type="text"
@@ -920,11 +1088,23 @@
           </p>
         </div>
 
-        <div class="col-span-12 sm:col-span-6">
-          <label for="zip_code" class="block text-sm font-medium text-gray-700"
+        <div
+          class="
+            sm:grid
+            sm:grid-cols-3
+            sm:gap-4
+            sm:items-start
+            sm:border-t
+            sm:border-gray-200
+            sm:pt-5
+          "
+        >
+          <label
+            for="zip_code"
+            class="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2"
             >ZIP / Postal code</label
           >
-          <div class="mt-1 relative rounded-md -sm">
+          <div class="mt-1 relative rounded-md sm:col-span-2">
             <input
               id="zip_code"
               type="text"
@@ -965,10 +1145,20 @@
           </p>
         </div>
 
-        <div class="col-span-12 sm:col-span-6">
+        <div
+          class="
+            sm:grid
+            sm:grid-cols-3
+            sm:gap-4
+            sm:items-start
+            sm:border-t
+            sm:border-gray-200
+            sm:pt-5
+          "
+        >
           <label
             for="company-website"
-            class="block text-sm font-medium text-gray-700"
+            class="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2"
           >
             Company Website
           </label>
@@ -987,53 +1177,49 @@
             >
               http://
             </span>
-                      <div class="mt-1 relative rounded-md -sm">
-
-            <input
-              id="linkedin_social_link"
-              v-model="website"
-              type="text"
-              name="linkedin_social_link"
-              class="
-              "
-                 :class="[
-                websiteErrorMessage
-                  ? 'focus:ring-red-500 focus:border-red-500  block  w-full text-red-900   border border-red-300 pl-7   pr-12 py-3  sm:text-sm  border-red-300   rounded-md'
-                  : ' focus:ring-indigo-500 focus:border-indigo-500  block  w-full    border border-gray-300 pl-7   pr-12 py-3  sm:text-sm  border-gray-300   rounded-md',
-              ]"
-              placeholder="www.website.com"
-            />
-
-               <div
-              class="
-                absolute
-                inset-y-0
-                right-0
-                pr-3
-                flex
-                items-center
-                pointer-events-none
-              "
-            >
-              <ExclamationCircleIcon
-                class="h-5 w-5 text-red-500"
-                aria-hidden="true"
-                v-if="websiteErrorMessage"
+            <div class="mt-1 relative rounded-md sm:col-span-2">
+              <input
+                id="linkedin_social_link"
+                v-model="website"
+                type="text"
+                name="linkedin_social_link"
+                class=""
+                :class="[
+                  websiteErrorMessage
+                    ? 'focus:ring-red-500 focus:border-red-500  block  w-full text-red-900   border border-red-300 pl-7   pr-12 py-3  sm:text-sm  border-red-300   rounded-md'
+                    : ' focus:ring-indigo-500 focus:border-indigo-500  block  w-full    border border-gray-300 pl-7   pr-12 py-3  sm:text-sm  border-gray-300   rounded-md',
+                ]"
+                placeholder="www.website.com"
               />
+
+              <div
+                class="
+                  absolute
+                  inset-y-0
+                  right-0
+                  pr-3
+                  flex
+                  items-center
+                  pointer-events-none
+                "
+              >
+                <ExclamationCircleIcon
+                  class="h-5 w-5 text-red-500"
+                  aria-hidden="true"
+                  v-if="websiteErrorMessage"
+                />
+              </div>
             </div>
+
+            <p
+              v-if="websiteErrorMessage"
+              class="mt-2 text-sm text-red-600"
+              id="email-error"
+            >
+              {{ websiteErrorMessage }}
+            </p>
           </div>
-
-
-          <p
-            v-if="websiteErrorMessage"
-            class="mt-2 text-sm text-red-600"
-            id="email-error"
-          >
-            {{ websiteErrorMessage }}
-          </p>
-
         </div>
-               </div>
 
         <div class="mt-5 col-span-12">
           <div class="col-span-12">
@@ -1066,10 +1252,20 @@
           </div>
         </div>
 
-        <div class="col-span-12 sm:col-span-8">
+        <div
+          class="
+            sm:grid
+            sm:grid-cols-3
+            sm:gap-4
+            sm:items-start
+            sm:border-t
+            sm:border-gray-200
+            sm:pt-5
+          "
+        >
           <label
             for="company-website"
-            class="block text-sm font-medium text-gray-700"
+            class="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2"
           >
             Facebook
           </label>
@@ -1109,10 +1305,20 @@
             />
           </div>
         </div>
-        <div class="col-span-12 sm:col-span-8">
+        <div
+          class="
+            sm:grid
+            sm:grid-cols-3
+            sm:gap-4
+            sm:items-start
+            sm:border-t
+            sm:border-gray-200
+            sm:pt-5
+          "
+        >
           <label
             for="company-website"
-            class="block text-sm font-medium text-gray-700"
+            class="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2"
           >
             Twitter
           </label>
@@ -1152,10 +1358,20 @@
             />
           </div>
         </div>
-        <div class="col-span-12 sm:col-span-8">
+        <div
+          class="
+            sm:grid
+            sm:grid-cols-3
+            sm:gap-4
+            sm:items-start
+            sm:border-t
+            sm:border-gray-200
+            sm:pt-5
+          "
+        >
           <label
             for="company-website"
-            class="block text-sm font-medium text-gray-700"
+            class="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2"
           >
             Linkedin
           </label>
@@ -1240,7 +1456,6 @@ import ArrayForm from "./ArrayForm.component.vue";
 import {
   Listbox,
   ListboxButton,
-  ListboxLabel,
   ListboxOption,
   ListboxOptions,
 } from "@headlessui/vue";
@@ -1256,7 +1471,6 @@ export default {
     ArrayForm,
     Listbox,
     ListboxButton,
-    ListboxLabel,
     ListboxOption,
     ListboxOptions,
     CheckIcon,
