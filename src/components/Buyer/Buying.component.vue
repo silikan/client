@@ -1,6 +1,6 @@
 
 <template>
-<Carousel/>
+
   <div class="bg-white">
     <main>
       <!-- Category section -->
@@ -210,7 +210,7 @@
       <section
         aria-labelledby="collection-heading"
         class="
-          max-w-xl
+
           mx-auto
           pt-24
           px-4
@@ -229,54 +229,21 @@
           collection inspired by the natural world.
         </p>
 
-        <div
-          class="
-            mt-10
-            space-y-12
-            lg:space-y-0 lg:grid lg:grid-cols-3 lg:gap-x-8
-          "
-        >
-          <a
-            v-for="collection in collections"
-            :key="collection.name"
-            :href="collection.href"
-            class="group block"
-          >
-            <div
-              aria-hidden="true"
-              class="
-                aspect-w-3 aspect-h-2
-                rounded-lg
-                overflow-hidden
-                group-hover:opacity-75
-                lg:aspect-w-5 lg:aspect-h-6
-              "
-            >
-              <img
-                :src="collection.imageSrc"
-                :alt="collection.imageAlt"
-                class="w-full h-full object-center object-cover"
-              />
-            </div>
-            <h3 class="mt-4 text-base font-semibold text-gray-900">
-              {{ collection.name }}
-            </h3>
-            <p class="mt-2 text-sm text-gray-500">
-              {{ collection.description }}
-            </p>
-          </a>
-        </div>
+
+      <GigCarousel class="mt-10"/>
+
       </section>
+
 
       <!-- Featured section -->
       <section
-        aria-labelledby="comfort-heading"
-        class="max-w-7xl mx-auto py-24 px-4 sm:py-32 sm:px-6 lg:px-8"
+        aria-labelledby="social-impact-heading"
+        class="max-w-7xl mx-auto pt-24 px-4 sm:pt-32 sm:px-6 lg:px-8"
       >
         <div class="relative rounded-lg overflow-hidden">
           <div class="absolute inset-0">
             <img
-              src="https://tailwindui.com/img/ecommerce-images/home-page-01-feature-section-02.jpg"
+              src="https://tailwindui.com/img/ecommerce-images/home-page-01-feature-section-01.jpg"
               alt=""
               class="w-full h-full object-center object-cover"
             />
@@ -302,7 +269,7 @@
               "
             >
               <h2
-                id="comfort-heading"
+                id="social-impact-heading"
                 class="
                   text-3xl
                   font-extrabold
@@ -311,13 +278,13 @@
                   sm:text-4xl
                 "
               >
-                Simple productivity
+                <span class="block sm:inline">Handymen</span>
               </h2>
               <p class="mt-3 text-xl text-white">
-                Endless tasks, limited hours, a single piece of paper. Not
-                really a haiku, but we're doing our best here. No kanban boards,
-                burndown charts, or tangled flowcharts with our Focus system.
-                Just the undeniable urge to fill empty circles.
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minus,
+                illum ipsum laboriosam tenetur maxime, enim libero impedit illo
+                odio sequi fugiat sit beatae repellendus sunt officia quidem
+                eius at quibusdam..
               </p>
               <a
                 href="#"
@@ -336,11 +303,39 @@
                   hover:bg-gray-100
                   sm:w-auto
                 "
-                >Shop Focus</a
+                >Check All Handymen</a
               >
             </div>
           </div>
         </div>
+      </section>
+
+      <!-- Collection section -->
+      <section
+        aria-labelledby="collection-heading"
+        class="
+          mb-10
+          mx-auto
+          pt-24
+          px-4
+          sm:pt-32 sm:px-6
+          lg:max-w-7xl lg:px-8
+        "
+      >
+        <h2
+          id="collection-heading"
+          class="text-2xl font-extrabold tracking-tight text-gray-900"
+        >
+          Latest Gigs
+        </h2>
+        <p class="mt-4 text-base text-gray-500">
+          Each season, we collaborate with world-class designers to create a
+          collection inspired by the natural world.
+        </p>
+
+
+      <HandymanCarousel class="mt-10"/>
+
       </section>
     </main>
   </div>
@@ -348,8 +343,8 @@
 
 <script>
 import { ref } from "vue";
-  import Carousel from "./Carousel.component.vue";
-
+  import GigCarousel from "./GigCarousel.component.vue";
+import HandymanCarousel from "./HandymanCarousel.component.vue";
 const currencies = ["CAD", "DZD", "AUD", "EUR", "GBP"];
 const navigation = {
 
@@ -451,7 +446,7 @@ const footerNavigation = {
 };
 
 export default {
-  components: {Carousel},
+  components: {GigCarousel,HandymanCarousel},
   setup() {
     const mobileMenuOpen = ref(false);
 

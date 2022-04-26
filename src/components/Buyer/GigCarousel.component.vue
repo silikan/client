@@ -9,7 +9,7 @@
       <template #item="gig">
         <div class="relative bg-white">
           <div class="relative mx-auto">
-            <div class="lg:mx-10 grid mx-5">
+            <div class=" grid md:mx-5">
               <div
                 class="
                   flex flex-col
@@ -76,8 +76,9 @@
                     </div>
                   </div>
                   <div class="">
-                    <p class="text-md font-medium text-gray-500 mt-2">
+                    <p class="truncate text-md font-medium text-gray-500 mt-2">
                       {{ gig.data.title }}
+
                     </p>
                   </div>
                   <div
@@ -129,9 +130,15 @@ import { ref } from "@vue/reactivity";
 import "primevue/resources/themes/saga-blue/theme.css";
 import "primevue/resources/primevue.min.css";
 import "primeicons/primeicons.css";
+import { BookmarkIcon, ShoppingCartIcon } from "@heroicons/vue/solid";
+import Avatar from "@/components/Avatar/Avatar.component.vue";
+
 export default {
   components: {
     Carousel,
+    BookmarkIcon,
+    ShoppingCartIcon,
+    Avatar,
   },
   setup() {
     let store = useStore();
