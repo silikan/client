@@ -90,13 +90,7 @@
                       id="first-name"
                       autocomplete="given-name"
                       class="
-                        block
-                        w-full
-                        shadow-sm
-                        sm:text-sm
-                        focus:ring-grape-500 focus:border-grape-500
-                        border-gray-300
-                        rounded-md
+                    block w-full px-3 py-2 border border-gray-300 rounded-md  -smplaceholder-gray-400 focus:outline-nonefocus:ring-indigo-500 focus:border-indigo-500 sm:text-sm
                       "
                     />
                   </div>
@@ -114,13 +108,7 @@
                       id="last-name"
                       autocomplete="family-name"
                       class="
-                        block
-                        w-full
-                        shadow-sm
-                        sm:text-sm
-                        focus:ring-grape-500 focus:border-grape-500
-                        border-gray-300
-                        rounded-md
+                    block w-full px-3 py-2 border border-gray-300 rounded-md  -smplaceholder-gray-400 focus:outline-nonefocus:ring-indigo-500 focus:border-indigo-500 sm:text-sm
                       "
                     />
                   </div>
@@ -138,13 +126,7 @@
                       type="email"
                       autocomplete="email"
                       class="
-                        block
-                        w-full
-                        shadow-sm
-                        sm:text-sm
-                        focus:ring-grape-500 focus:border-grape-500
-                        border-gray-300
-                        rounded-md
+                    block w-full px-3 py-2 border border-gray-300 rounded-md  -smplaceholder-gray-400 focus:outline-nonefocus:ring-indigo-500 focus:border-indigo-500 sm:text-sm
                       "
                     />
                   </div>
@@ -162,13 +144,7 @@
                       id="company"
                       autocomplete="organization"
                       class="
-                        block
-                        w-full
-                        shadow-sm
-                        sm:text-sm
-                        focus:ring-grape-500 focus:border-grape-500
-                        border-gray-300
-                        rounded-md
+                    block w-full px-3 py-2 border border-gray-300 rounded-md  -smplaceholder-gray-400 focus:outline-nonefocus:ring-indigo-500 focus:border-indigo-500 sm:text-sm
                       "
                     />
                   </div>
@@ -192,13 +168,7 @@
                       autocomplete="tel"
                       aria-describedby="phone-description"
                       class="
-                        block
-                        w-full
-                        shadow-sm
-                        sm:text-sm
-                        focus:ring-grape-500 focus:border-grape-500
-                        border-gray-300
-                        rounded-md
+                    block w-full px-3 py-2 border border-gray-300 rounded-md  -smplaceholder-gray-400 focus:outline-nonefocus:ring-indigo-500 focus:border-indigo-500 sm:text-sm
                       "
                     />
                   </div>
@@ -236,13 +206,13 @@
                 </div>
                 <fieldset class="sm:col-span-2">
                   <legend class="block text-sm font-medium text-gray-700">
-                    Expected budget
+                    Expected Salary
                   </legend>
                   <div class="mt-4 grid grid-cols-1 gap-y-4">
                     <div class="flex items-center">
                       <input
-                        id="budget-under-25k"
-                        name="budget"
+                        id="Salary-under-25k"
+                        name="Salary"
                         value="under_25k"
                         type="radio"
                         class="
@@ -253,7 +223,7 @@
                           border-gray-300
                         "
                       />
-                      <label for="budget-under-25k" class="ml-3">
+                      <label for="Salary-under-25k" class="ml-3">
                         <span class="block text-sm text-gray-700"
                           >Less than $25K</span
                         >
@@ -261,8 +231,8 @@
                     </div>
                     <div class="flex items-center">
                       <input
-                        id="budget-25k-50k"
-                        name="budget"
+                        id="Salary-25k-50k"
+                        name="Salary"
                         value="25k-50k"
                         type="radio"
                         class="
@@ -273,7 +243,7 @@
                           border-gray-300
                         "
                       />
-                      <label for="budget-25k-50k" class="ml-3">
+                      <label for="Salary-25k-50k" class="ml-3">
                         <span class="block text-sm text-gray-700"
                           >$25K – $50K</span
                         >
@@ -281,8 +251,8 @@
                     </div>
                     <div class="flex items-center">
                       <input
-                        id="budget-50k-100k"
-                        name="budget"
+                        id="Salary-50k-100k"
+                        name="Salary"
                         value="50k-100k"
                         type="radio"
                         class="
@@ -293,7 +263,7 @@
                           border-gray-300
                         "
                       />
-                      <label for="budget-50k-100k" class="ml-3">
+                      <label for="Salary-50k-100k" class="ml-3">
                         <span class="block text-sm text-gray-700"
                           >$50K – $100K</span
                         >
@@ -301,8 +271,8 @@
                     </div>
                     <div class="flex items-center">
                       <input
-                        id="budget-over-100k"
-                        name="budget"
+                        id="Salary-over-100k"
+                        name="Salary"
                         value="over_100k"
                         type="radio"
                         class="
@@ -313,7 +283,7 @@
                           border-gray-300
                         "
                       />
-                      <label for="budget-over-100k" class="ml-3">
+                      <label for="Salary-over-100k" class="ml-3">
                         <span class="block text-sm text-gray-700">$100K+</span>
                       </label>
                     </div>
@@ -373,59 +343,12 @@
         </div>
       </div>
 
-      <!-- CTA Section -->
-      <div class="bg-grape-400">
-        <div
-          class="
-            max-w-md
-            mx-auto
-            text-center
-            py-16
-            px-4
-            sm:max-w-2xl sm:py-24 sm:px-6
-            lg:px-8 lg:py-32
-          "
-        >
-          <h2 class="text-3xl font-extrabold sm:text-4xl">
-            <span class="block text-white">Looking for a new career?</span>
-            <span class="block text-grape-900">We’re hiring.</span>
-          </h2>
-          <a
-            href="#"
-            class="
-              mt-8
-              w-full
-              inline-flex
-              items-center
-              justify-center
-              py-3
-              px-5
-              bg-white
-              border border-transparent
-              rounded-md
-              shadow-md
-              text-base
-              font-medium
-              text-grape-600
-              hover:bg-grape-50
-              sm:w-auto
-            "
-          >
-            <span>See open positions</span>
-            <ExternalLinkIcon
-              class="ml-3 h-5 w-5 flex-shrink-0 text-gray-400"
-              aria-hidden="true"
-            />
-          </a>
-        </div>
-      </div>
     </main>
   </div>
 </template>
 
 <script>
 import { defineComponent, h } from "vue";
-import { ExternalLinkIcon } from "@heroicons/vue/solid";
 
 const navigation = [
   { name: "Work", href: "#" },
@@ -533,7 +456,6 @@ const footerNavigation = {
 export default {
   components: {
 
-    ExternalLinkIcon,
 
   },
   setup() {

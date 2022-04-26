@@ -22,7 +22,7 @@
             <div class="absolute inset-0 bg-gradient-to-t from-indigo-600 via-indigo-600 opacity-90" />
             <div class="relative px-8">
               <div>
-                <img class="h-12" src="https://tailwindui.com/img/logos/workcation.svg?color=white" alt="Workcation" />
+                <img class="h-12" src="https://tailwindui.com/img/logos/Sillikan.svg?color=white" alt="Sillikan" />
               </div>
               <blockquote class="mt-8">
                 <div class="relative text-lg font-medium text-white md:flex-grow">
@@ -35,7 +35,7 @@
                 </div>
 
                 <footer class="mt-4">
-                  <p class="text-base font-semibold text-indigo-200">Sarah Williams, CTO at silikan</p>
+                  <p class="text-base font-semibold text-indigo-200">Sarah Williams, Top Client at Silikan</p>
                 </footer>
               </blockquote>
             </div>
@@ -70,9 +70,7 @@
               <dd class="text-3xl font-extrabold tracking-tight text-gray-900">{{ stat.value }}</dd>
             </div>
           </dl>
-          <div class="mt-10">
-            <a href="#" class="text-base font-medium text-indigo-600"> Learn more about how we're changing the world <span aria-hidden="true">&rarr;</span> </a>
-          </div>
+
         </div>
       </div>
     </div>
@@ -81,10 +79,9 @@
 
 <script>
 const stats = [
-  { label: 'Founded', value: '2021' },
-  { label: 'Employees', value: '5' },
-  { label: 'Beta Users', value: '521' },
-  { label: 'Raised', value: '$25M' },
+  { label: 'Founded', value: '2022' },
+  { label: 'Employees', value: '2' },
+
 ]
 
 export default {
