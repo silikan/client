@@ -1,6 +1,5 @@
 
 <template>
-
   <div class="bg-white">
     <main>
       <!-- Category section -->
@@ -20,7 +19,7 @@
             id="category-heading"
             class="text-2xl font-extrabold tracking-tight text-gray-900"
           >
-            Browse by Category
+            Browse Gigs by Category
           </h2>
           <router-link
             :to="`/categories`"
@@ -177,13 +176,12 @@
                 <span class="block sm:inline">Handymen</span>
               </h2>
               <p class="mt-3 text-xl text-white">
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minus,
-                illum ipsum laboriosam tenetur maxime, enim libero impedit illo
-                odio sequi fugiat sit beatae repellendus sunt officia quidem
-                eius at quibusdam..
+                We have the best handymen in town. you can check them out. and
+                rest assured they are trustworthy. and by far the best at their
+                craft.
               </p>
-              <a
-                href="#"
+              <router-link
+                to="/handymen"
                 class="
                   mt-8
                   w-full
@@ -199,7 +197,7 @@
                   hover:bg-gray-100
                   sm:w-auto
                 "
-                >Check All Handymen</a
+                >Check All Handymen</router-link
               >
             </div>
           </div>
@@ -209,31 +207,17 @@
       <!-- Collection section -->
       <section
         aria-labelledby="collection-heading"
-        class="
-
-          mx-auto
-          pt-24
-          px-4
-          sm:pt-32 sm:px-6
-          lg:max-w-7xl lg:px-8
-        "
+        class="mx-auto pt-24 px-4 sm:pt-32 sm:px-6 lg:max-w-7xl lg:px-8"
       >
         <h2
           id="collection-heading"
           class="text-2xl font-extrabold tracking-tight text-gray-900"
         >
-          Latest Gigs
+          Discover Gigs
         </h2>
-        <p class="mt-4 text-base text-gray-500">
-          Each season, we collaborate with world-class designers to create a
-          collection inspired by the natural world.
-        </p>
 
-
-      <GigCarousel class="mt-10"/>
-
+        <GigCarousel class="mt-10" />
       </section>
-
 
       <!-- Featured section -->
       <section
@@ -278,16 +262,14 @@
                   sm:text-4xl
                 "
               >
-                <span class="block sm:inline">Handymen</span>
+                <span class="block sm:inline">Gigs</span>
               </h2>
               <p class="mt-3 text-xl text-white">
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minus,
-                illum ipsum laboriosam tenetur maxime, enim libero impedit illo
-                odio sequi fugiat sit beatae repellendus sunt officia quidem
-                eius at quibusdam..
+                Check out the latest gigs posted by our handymen , you can
+                browse and pick and choose whatever suites ur needs;
               </p>
-              <a
-                href="#"
+              <router-link
+                to="/gigs"
                 class="
                   mt-8
                   w-full
@@ -303,7 +285,7 @@
                   hover:bg-gray-100
                   sm:w-auto
                 "
-                >Check All Handymen</a
+                >Check All Gigs</router-link
               >
             </div>
           </div>
@@ -313,29 +295,16 @@
       <!-- Collection section -->
       <section
         aria-labelledby="collection-heading"
-        class="
-          mb-10
-          mx-auto
-          pt-24
-          px-4
-          sm:pt-32 sm:px-6
-          lg:max-w-7xl lg:px-8
-        "
+        class="mb-10 mx-auto pt-24 px-4 sm:pt-32 sm:px-6 lg:max-w-7xl lg:px-8"
       >
         <h2
           id="collection-heading"
           class="text-2xl font-extrabold tracking-tight text-gray-900"
         >
-          Latest Gigs
+          Discover Handymen
         </h2>
-        <p class="mt-4 text-base text-gray-500">
-          Each season, we collaborate with world-class designers to create a
-          collection inspired by the natural world.
-        </p>
 
-
-      <HandymanCarousel class="mt-10"/>
-
+        <HandymanCarousel class="mt-10" />
       </section>
     </main>
   </div>
@@ -343,11 +312,10 @@
 
 <script>
 import { ref } from "vue";
-  import GigCarousel from "./GigCarousel.component.vue";
+import GigCarousel from "./GigCarousel.component.vue";
 import HandymanCarousel from "./HandymanCarousel.component.vue";
 const currencies = ["CAD", "DZD", "AUD", "EUR", "GBP"];
 const navigation = {
-
   pages: [
     { name: "Company", href: "#" },
     { name: "Stores", href: "#" },
@@ -357,31 +325,27 @@ const categories = [
   {
     name: "Cooking",
     link: "/category/Cooking/gigs",
-    imageSrc:require( "../../assets/categories/cooking.jpg"),
+    imageSrc: require("../../assets/categories/cooking.jpg"),
   },
   {
     name: "Cleaning",
     link: "/category/Cleaning/gigs",
-      imageSrc: require( "../../assets/categories/cleaning.jpg"),
-
+    imageSrc: require("../../assets/categories/cleaning.jpg"),
   },
   {
     name: "WoodWork",
-    link: "/category/Woodwork/gigs ",
-      imageSrc: require( "../../assets/categories/woodwork.jpg"),
-
+    link: "/category/WoodWork/gigs",
+    imageSrc: require("../../assets/categories/woodwork.jpg"),
   },
   {
     name: "Massage",
     link: "/category/Massage/gigs",
-      imageSrc: require( "../../assets/categories/massage.jpg"),
-
+    imageSrc: require("../../assets/categories/massage.jpg"),
   },
   {
     name: "Plumbing",
     link: "/category/Plumbing/gigs",
-      imageSrc: require( "../../assets/categories/plumbing.jpg"),
-
+    imageSrc: require("../../assets/categories/plumbing.jpg"),
   },
 ];
 const collections = [
@@ -446,7 +410,7 @@ const footerNavigation = {
 };
 
 export default {
-  components: {GigCarousel,HandymanCarousel},
+  components: { GigCarousel, HandymanCarousel },
   setup() {
     const mobileMenuOpen = ref(false);
 
@@ -457,7 +421,6 @@ export default {
       collections,
       footerNavigation,
       mobileMenuOpen,
-
     };
   },
 };

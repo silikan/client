@@ -40,7 +40,6 @@
           <a href="#" class="hover:underline"> {{request.data.user.name}} </a>
         </p>
         <div class="flex space-x-1 text-sm text-gray-500">
-          <span aria-hidden="true"> &middot; </span>
           <span> {{request.data.user.email}} </span>
         </div>
       </div>

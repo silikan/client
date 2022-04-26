@@ -19,7 +19,7 @@
             id="category-heading"
             class="text-2xl font-extrabold tracking-tight text-gray-900"
           >
-            Browse by Category
+            Browse Requests by Category
           </h2>
           <router-link
             :to="`/categories`"
@@ -173,13 +173,10 @@
                   sm:text-4xl
                 "
               >
-                <span class="block sm:inline">Handymen</span>
+                <span class="block sm:inline">Clients</span>
               </h2>
               <p class="mt-3 text-xl text-white">
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minus,
-                illum ipsum laboriosam tenetur maxime, enim libero impedit illo
-                odio sequi fugiat sit beatae repellendus sunt officia quidem
-                eius at quibusdam..
+                Check out the best clients and their requests for your business and services.
               </p>
               <a
                 href="#"
@@ -206,42 +203,30 @@
       </section>
 
       <!-- Collection section -->
-             <section
+      <section
         aria-labelledby="collection-heading"
-        class="
-          mb-10
-          mx-auto
-          pt-24
-          px-4
-          sm:pt-32 sm:px-6
-          lg:max-w-7xl lg:px-8
-        "
+        class="mb-10 mx-auto pt-24 px-4 sm:pt-32 sm:px-6 lg:max-w-7xl lg:px-8"
       >
         <h2
           id="collection-heading"
           class="text-2xl font-extrabold tracking-tight text-gray-900"
         >
-          Latest Gigs
+          Discover Clients Requests
         </h2>
-        <p class="mt-4 text-base text-gray-500">
-          Each season, we collaborate with world-class designers to create a
-          collection inspired by the natural world.
-        </p>
 
 
-      <RequestCarousel class="mt-10"/>
-
+        <RequestCarousel class="mt-10" />
       </section>
 
       <!-- Featured section -->
       <section
-        aria-labelledby="comfort-heading"
-        class="max-w-7xl mx-auto py-24 px-4 sm:py-32 sm:px-6 lg:px-8"
+        aria-labelledby="social-impact-heading"
+        class="max-w-7xl mx-auto pt-24 px-4 sm:pt-32 sm:px-6 lg:px-8"
       >
         <div class="relative rounded-lg overflow-hidden">
           <div class="absolute inset-0">
             <img
-              src="https://tailwindui.com/img/ecommerce-images/home-page-01-feature-section-02.jpg"
+              src="https://tailwindui.com/img/ecommerce-images/home-page-01-feature-section-01.jpg"
               alt=""
               class="w-full h-full object-center object-cover"
             />
@@ -267,7 +252,7 @@
               "
             >
               <h2
-                id="comfort-heading"
+                id="social-impact-heading"
                 class="
                   text-3xl
                   font-extrabold
@@ -276,16 +261,14 @@
                   sm:text-4xl
                 "
               >
-                Simple productivity
+                <span class="block sm:inline">Requests</span>
               </h2>
               <p class="mt-3 text-xl text-white">
-                Endless tasks, limited hours, a single piece of paper. Not
-                really a haiku, but we're doing our best here. No kanban boards,
-                burndown charts, or tangled flowcharts with our Focus system.
-                Just the undeniable urge to fill empty circles.
+                Check out the latest requests from our dear clients , and get in
+                contact with them.
               </p>
-              <a
-                href="#"
+              <router-link
+                to="/requests"
                 class="
                   mt-8
                   w-full
@@ -301,37 +284,25 @@
                   hover:bg-gray-100
                   sm:w-auto
                 "
-                >Shop Focus</a
+                >Check All Client Requests</router-link
               >
             </div>
           </div>
         </div>
       </section>
-          <section
+      <section
         aria-labelledby="collection-heading"
-        class="
-          mb-10
-          mx-auto
-          pt-24
-          px-4
-          sm:pt-32 sm:px-6
-          lg:max-w-7xl lg:px-8
-        "
+        class="mb-10 mx-auto pt-24 px-4 sm:pt-32 sm:px-6 lg:max-w-7xl lg:px-8"
       >
         <h2
           id="collection-heading"
           class="text-2xl font-extrabold tracking-tight text-gray-900"
         >
-          Latest Gigs
+          Discover Clients
         </h2>
-        <p class="mt-4 text-base text-gray-500">
-          Each season, we collaborate with world-class designers to create a
-          collection inspired by the natural world.
-        </p>
 
 
-      <ClientCarousel class="mt-10"/>
-
+        <ClientCarousel class="mt-10" />
       </section>
     </main>
   </div>
@@ -343,7 +314,6 @@ import ClientCarousel from "./ClientCarousel.component.vue";
 import RequestCarousel from "./RequestCarousel.component.vue";
 const currencies = ["CAD", "DZD", "AUD", "EUR", "GBP"];
 const navigation = {
-
   pages: [
     { name: "Company", href: "#" },
     { name: "Stores", href: "#" },
@@ -352,32 +322,28 @@ const navigation = {
 const categories = [
   {
     name: "Cooking",
-    link: "/category/Cooking/gigs",
-    imageSrc:require( "../../assets/categories/cooking.jpg"),
+    link: "/category/Cooking/requests",
+    imageSrc: require("../../assets/categories/cooking.jpg"),
   },
   {
     name: "Cleaning",
-    link: "/category/Cleaning/gigs",
-      imageSrc: require( "../../assets/categories/cleaning.jpg"),
-
+    link: "/category/Cleaning/requests",
+    imageSrc: require("../../assets/categories/cleaning.jpg"),
   },
   {
     name: "WoodWork",
-    link: "/category/Woodwork/gigs ",
-      imageSrc: require( "../../assets/categories/woodwork.jpg"),
-
+    link: "/category/WoodWork/requests",
+    imageSrc: require("../../assets/categories/woodwork.jpg"),
   },
   {
     name: "Massage",
-    link: "/category/Massage/gigs",
-      imageSrc: require( "../../assets/categories/massage.jpg"),
-
+    link: "/category/Massage/requests",
+    imageSrc: require("../../assets/categories/massage.jpg"),
   },
   {
     name: "Plumbing",
-    link: "/category/Plumbing/gigs",
-      imageSrc: require( "../../assets/categories/plumbing.jpg"),
-
+    link: "/category/Plumbing/requests",
+    imageSrc: require("../../assets/categories/plumbing.jpg"),
   },
 ];
 const collections = [
@@ -442,7 +408,7 @@ const footerNavigation = {
 };
 
 export default {
-  components: {ClientCarousel,RequestCarousel},
+  components: { ClientCarousel, RequestCarousel },
   setup() {
     const mobileMenuOpen = ref(false);
 
