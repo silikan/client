@@ -1,5 +1,6 @@
 export const namespaced = true;
 import { getError } from "@/utils/helpers";
+import BuyerFeedService from "@/services/BuyerFeedService";
 
 export const state = {
   users: [],
@@ -30,8 +31,9 @@ export const actions = {
   async getThreeRandomUsers({ commit }) {
     commit("setLoading", true);
     try {
-      const response = await this.$axios.post("/feed/users");
+      const response = await BuyerFeedService.getThreeRandomUsers();
       commit("setUsers", response.data);
+      return response.data;
     } catch (error) {
       commit("setError", getError(error));
     }
@@ -40,8 +42,9 @@ export const actions = {
   async getThreeRandomGigs({ commit }) {
     commit("setLoading", true);
     try {
-      const response = await this.$axios.post("/feed/gigs");
+      const response = await BuyerFeedService.getThreeRandomGigs();
       commit("setGigs", response.data);
+      return response.data;
     } catch (error) {
       commit("setError", getError(error));
     }
@@ -50,8 +53,9 @@ export const actions = {
   async getThreeRandomHandymen({ commit }) {
     commit("setLoading", true);
     try {
-      const response = await this.$axios.post("/feed/handymen");
+      const response = await BuyerFeedService.getThreeRandomHandymen();
       commit("setHandymen", response.data);
+      return response.data;
     } catch (error) {
       commit("setError", getError(error));
     }

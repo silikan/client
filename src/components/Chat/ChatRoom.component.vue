@@ -121,7 +121,7 @@
           >
             <ul class="space-y-2 overflow-y-auto scrollbar">
               <div class="flex justify-center">
-                <p v-if="loading">loading...</p>
+
                 <button
                   v-if="loading === false && meta.current_page < meta.last_page"
                   type="button"

@@ -1,5 +1,6 @@
 
 <template>
+<Carousel/>
   <div class="bg-white">
     <main>
       <!-- Category section -->
@@ -347,6 +348,7 @@
 
 <script>
 import { ref } from "vue";
+  import Carousel from "./Carousel.component.vue";
 
 const currencies = ["CAD", "DZD", "AUD", "EUR", "GBP"];
 const navigation = {
@@ -449,7 +451,7 @@ const footerNavigation = {
 };
 
 export default {
-  components: {},
+  components: {Carousel},
   setup() {
     const mobileMenuOpen = ref(false);
 
@@ -460,6 +462,7 @@ export default {
       collections,
       footerNavigation,
       mobileMenuOpen,
+
     };
   },
 };
