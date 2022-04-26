@@ -5,6 +5,8 @@
       :numVisible="3"
       :numScroll="1"
       :responsiveOptions="responsiveOptions"
+        :autoplayInterval="1500"
+      :circular="true"
     >
       <template #item="gig">
         <div class="relative bg-white">

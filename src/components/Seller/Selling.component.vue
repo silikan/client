@@ -206,10 +206,10 @@
       </section>
 
       <!-- Collection section -->
-      <section
+             <section
         aria-labelledby="collection-heading"
         class="
-          max-w-xl
+          mb-10
           mx-auto
           pt-24
           px-4
@@ -228,43 +228,9 @@
           collection inspired by the natural world.
         </p>
 
-        <div
-          class="
-            mt-10
-            space-y-12
-            lg:space-y-0 lg:grid lg:grid-cols-3 lg:gap-x-8
-          "
-        >
-          <a
-            v-for="collection in collections"
-            :key="collection.name"
-            :href="collection.href"
-            class="group block"
-          >
-            <div
-              aria-hidden="true"
-              class="
-                aspect-w-3 aspect-h-2
-                rounded-lg
-                overflow-hidden
-                group-hover:opacity-75
-                lg:aspect-w-5 lg:aspect-h-6
-              "
-            >
-              <img
-                :src="collection.imageSrc"
-                :alt="collection.imageAlt"
-                class="w-full h-full object-center object-cover"
-              />
-            </div>
-            <h3 class="mt-4 text-base font-semibold text-gray-900">
-              {{ collection.name }}
-            </h3>
-            <p class="mt-2 text-sm text-gray-500">
-              {{ collection.description }}
-            </p>
-          </a>
-        </div>
+
+      <RequestCarousel class="mt-10"/>
+
       </section>
 
       <!-- Featured section -->
@@ -341,13 +307,40 @@
           </div>
         </div>
       </section>
+          <section
+        aria-labelledby="collection-heading"
+        class="
+          mb-10
+          mx-auto
+          pt-24
+          px-4
+          sm:pt-32 sm:px-6
+          lg:max-w-7xl lg:px-8
+        "
+      >
+        <h2
+          id="collection-heading"
+          class="text-2xl font-extrabold tracking-tight text-gray-900"
+        >
+          Latest Gigs
+        </h2>
+        <p class="mt-4 text-base text-gray-500">
+          Each season, we collaborate with world-class designers to create a
+          collection inspired by the natural world.
+        </p>
+
+
+      <ClientCarousel class="mt-10"/>
+
+      </section>
     </main>
   </div>
 </template>
 
 <script>
 import { ref } from "vue";
-
+import ClientCarousel from "./ClientCarousel.component.vue";
+import RequestCarousel from "./RequestCarousel.component.vue";
 const currencies = ["CAD", "DZD", "AUD", "EUR", "GBP"];
 const navigation = {
 
@@ -449,7 +442,7 @@ const footerNavigation = {
 };
 
 export default {
-  components: {},
+  components: {ClientCarousel,RequestCarousel},
   setup() {
     const mobileMenuOpen = ref(false);
 

@@ -43,8 +43,8 @@
                 </div>
                 <div class="flex justify-between">
                   <div class="space-y-2">
-                    <div class="text-xl leading-6 font-medium space-y-1">
-                      <h3 class="truncate">{{ handyman.data.name }}</h3>
+                    <div class=" text-xl leading-6 font-medium space-y-1">
+                      <h3 class="">{{ handyman.data.name }}</h3>
                       <p class="text-sm font-bold text-indigo-600">
                         @{{ handyman.data.username }}
                       </p>
@@ -174,7 +174,7 @@ export default {
       },
     ]);
     let users = ref([]);
-    store.dispatch("BuyerFeed/getThreeRandomHandymen").then((res) => {
+    store.dispatch("SellerFeed/getThreeRandomClients").then((res) => {
       console.log(res.data);
       users.value = res.data;
     });
