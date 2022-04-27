@@ -220,6 +220,7 @@
                         <MenuItem v-slot="{ active }">
                           <a
                             href="#"
+                             @click="copy"
                             :class="[
                               active
                                 ? 'bg-gray-100 text-gray-900'
@@ -441,6 +442,7 @@
 <script>
 import Reviews from "@/components/Profile/Reviews.component.vue";
 import GigLoadingSkeleton from "@/components/Loading/Skeletons/Gig.component.vue";
+import useClipboard from 'vue-clipboard3'
 
 import Table from "@/components/Loading/Skeletons/Table.component.vue";
 
@@ -608,7 +610,19 @@ export default {
     console.log(isEmailVirified.value);
 
     let loading = computed(() => store.getters["Loading/loading"]);
+    let authUserId = computed(() => store.getters["auth/id"]);
+    const { toClipboard } = useClipboard()
+    let vueAuuUrl =`${process.env.VUE_APP_URL}`;
 
+    const copy = async () => {
+       console.log(vueAuuUrl);
+      try {
+        await toClipboard(`${vueAuuUrl}/user/${authUserId.value}`)
+        console.log('Copied to clipboard' , `${vueAuuUrl}/user/${authUserId.value}`)
+      } catch (e) {
+        console.error(e)
+      }
+    }
     return {
       profile,
       tabs,
@@ -624,6 +638,7 @@ export default {
       GigRequestNavigation,
       isEmailVirified,
       loading,
+      copy
     };
   },
 };

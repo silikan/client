@@ -159,7 +159,7 @@
                                 : 'text-gray-700',
                               'block px-4 py-2 text-sm',
                             ]"
-                            >View profile</a
+                            >Download Resume</a
                           >
                         </MenuItem>
                         <MenuItem v-slot="{ active }">
@@ -171,6 +171,7 @@
                                 : 'text-gray-700',
                               'block px-4 py-2 text-sm',
                             ]"
+                            @click="copy"
                             >Copy profile link</a
                           >
                         </MenuItem>
@@ -354,6 +355,7 @@
 <script>
 import GigLoadingSkeleton from "@/components/Loading/Skeletons/Gig.component.vue";
 import VisitReview from "@/components/Profile/Visit_Reviews.component.vue";
+import useClipboard from 'vue-clipboard3'
 
 import Table from "@/components/Loading/Skeletons/Table.component.vue";
 import {
@@ -531,6 +533,18 @@ if(tab.name === "Gigs" && tab.number === 2){
 
 
 }
+    let vueAuuUrl =`${process.env.VUE_APP_URL}`;
+    const { toClipboard } = useClipboard()
+
+ const copy = async () => {
+
+      try {
+        await toClipboard(`${vueAuuUrl}/user/${id}`)
+        console.log('Copied to clipboard' , `${vueAuuUrl}/user/${id}`)
+      } catch (e) {
+        console.error(e)
+      }
+    }
 
     let loading = computed(() => store.getters["Loading/loading"]);
 
@@ -550,6 +564,7 @@ if(tab.name === "Gigs" && tab.number === 2){
       tabs,
       ParsedTime,
       id,
+      copy,
 
       GigRequestNavigation,
       loading
