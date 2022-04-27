@@ -51,7 +51,6 @@
 <script>
 
 //importing bootstrap 5 and pdf maker Modules
-import "bootstrap/dist/css/bootstrap.min.css";
 import pdfMake from 'pdfmake';
 import pdfFonts from 'pdfmake/build/vfs_fonts';
 import htmlToPdfmake from 'html-to-pdfmake';
