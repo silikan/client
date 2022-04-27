@@ -121,7 +121,6 @@
           >
             <ul class="space-y-2 overflow-y-auto scrollbar">
               <div class="flex justify-center">
-
                 <button
                   v-if="loading === false && meta.current_page < meta.last_page"
                   type="button"
@@ -259,7 +258,13 @@
                 </div>
               </li>
             </ul>
-            {{typingit}}
+
+
+              <div className="typing animate-bounce self-start ml-5 mt-5" v-if="typingit">
+    <div className="typing__dot"></div>
+    <div className="typing__dot"></div>
+    <div className="typing__dot"></div>
+  </div>
           </div>
 
           <div
@@ -307,7 +312,6 @@
               name="message"
               required
               @keyup.enter="sendMessage"
-               @keydown.once="typing"
             />
 
             <div
@@ -330,7 +334,10 @@
               tag="button"
               @click="sendMessage"
             >
-              <PaperAirplaneIcon class="btn-chat h-5 w-5 transform rotate-90" aria-hidden="true" />
+              <PaperAirplaneIcon
+                class="btn-chat h-5 w-5 transform rotate-90"
+                aria-hidden="true"
+              />
             </div>
           </div>
         </div>
@@ -348,7 +355,7 @@ import {
   StarIcon,
 } from "@heroicons/vue/solid";
 import ChatService from "@/services/ChatService.js";
-import { computed, onUpdated, reactive, ref, watchEffect } from "@vue/runtime-core";
+import { computed, reactive, ref, watchEffect } from "@vue/runtime-core";
 import { useRoute } from "vue-router";
 import { useStore } from "vuex";
 import { PaperAirplaneIcon } from "@heroicons/vue/solid";
@@ -447,13 +454,16 @@ export default {
       socket.emit("room", `room-${id}`);
     });
 
-    let     typing = () =>{
+    let typing = () => {
       //keydown
-         socket.emit('typing', {typing:'typing...'});
-    }
+
+      if (message.value !== "") {
+        socket.emit("typing", { typing: "typing...", room: `room-${id}` });
+      }
+    };
     let name = ref();
     let avatar = ref();
-let email = ref();
+    let email = ref();
     let toname = ref();
     let toavatar = ref();
     store.dispatch("Chat/getRoomUsers", id).then((result) => {
@@ -479,24 +489,22 @@ let email = ref();
         from.value = result.data[1];
       }
     });
-let typingit = ref("")
-onUpdated(()=>{
-  socket.on('typing', (data)=>{
-    console.log(data);
-    typingit.value = data.typing;
-  })
-})
-watchEffect(()=>{
-  socket.on('typing', (data)=>{
-    console.log(data.typing);
-    typingit.value = data.typing;
-    console.log(typingit.value);
-  })
-})
+    let typingit = ref("");
 
-watchEffect(()=>{
-  console.log(typingit.value);
-})
+    watchEffect(() => {
+      //typing logic
+      if (message.value != null && message.value != "") {
+        socket.emit("typing", { typing: true, room: `room-${id}` });
+      } else {
+        socket.emit("typing", { typing: false, room: `room-${id}` });
+      }
+      socket.on("typing", function (data) {
+        if (data.room === `room-${id}`) {
+          typingit.value = data.typing;
+        }
+      });
+    });
+
     return {
       to,
       from,
@@ -516,7 +524,7 @@ watchEffect(()=>{
       toavatar,
       email,
       typing,
-      typingit
+      typingit,
     };
   },
 };
@@ -544,5 +552,50 @@ watchEffect(()=>{
 
 .scrollbar::-webkit-scrollbar-thumb:hover {
   background: #94a3b8;
+}
+
+.typing {
+  width: 5em;
+  height: 2em;
+  position: relative;
+  padding: 10px;
+  margin-left: 5px;
+  background: #e6e6e6;
+  border-radius: 20px;
+}
+
+.typing__dot {
+  float: left;
+  width: 8px;
+  height: 8px;
+  margin: 0 4px;
+  background: #8d8c91;
+  border-radius: 50%;
+  opacity: 0;
+  animation: loadingFade 1s infinite;
+}
+
+.typing__dot:nth-child(1) {
+  animation-delay: 0s;
+}
+
+.typing__dot:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+.typing__dot:nth-child(3) {
+  animation-delay: 0.4s;
+}
+
+@keyframes loadingFade {
+  0% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 0.8;
+  }
+  100% {
+    opacity: 0;
+  }
 }
 </style>
