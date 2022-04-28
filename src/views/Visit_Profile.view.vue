@@ -1,6 +1,6 @@
 <template>
 
- <VisitProfile />
+ <VisitProfile/>
 
  <div></div>
 </template>

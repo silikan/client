@@ -51,12 +51,18 @@ import AdminDashboardTransactions from "@/components/Dashboard/Admin/Parts/Trans
 import AdminDashboardSettings from "@/components/Dashboard/Admin/Parts/Settings.component.vue";
 import Skeletons from "@/views/Skeletons.view.vue";
 import Notification from "@/views/Notification.view.vue";
+import Resume from "@/views/Resume.view.vue";
 const routes = [
   {
     path: "/",
     name: "Home",
     meta: { middleware: [guest] },
     component: Home,
+  },
+  {
+    path: "/resume/:id",
+    name: "Resume",
+    component: Resume,
   },
   {
     path: "/notification",
