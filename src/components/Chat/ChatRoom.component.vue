@@ -405,7 +405,7 @@ export default {
     };
 
     let socket = io("http://localhost:3000");
-
+  let notificationsocket = io("http://localhost:4000");
     const authUser = computed(() => store.getters["auth/authUser"]);
 
     const sendMessage = async () => {
@@ -422,7 +422,10 @@ export default {
       });
 
       console.log(to.value.id);
+      let toData = {
+        userId: to.value.id,
 
+      };
       if (message.value != "" && message.value != null) {
         let payload = {
           data: {
@@ -436,10 +439,30 @@ export default {
             },
           },
         };
+
+
         socket.emit("message", payload);
         ChatService.sendMessage(payload);
         ChatService.saveMessage(payload);
-        message.value = "";
+                   message.value = "";
+
+         let getUserNotificationRoom = await store.dispatch("Notification/getUserNotificationRoom" ,toData )
+notificationsocket.on("connect", function () {
+      // Connected, let's sign-up for to receive messages for this room
+      notificationsocket.emit("notificationRoom", `notification-room-${getUserNotificationRoom.id}`);
+    });
+        let notificationpayload = {
+          data: {
+            to: to.value.id,
+            from: from.value.id,
+            message: "sent you a message",
+
+            notification_room_id : getUserNotificationRoom.id,
+
+          },
+        };
+        store.dispatch("Notification/sendChatNotification", notificationpayload);
+
       }
     };
 

@@ -61,6 +61,35 @@ export const actions = {
       commit("SET_ERROR", getError(error));
     }
   },
+  async getUserNotificationRoom({ commit }, payload) {
+    try {
+      console.log(payload);
+      commit("SET_LOADING", true);
+      let id = payload.userId;
+      const response = await NotificationService.getUserNotificationRoom(id);
+      commit("SET_LOADING", false);
+
+      return response.data;
+    } catch (error) {
+      commit("SET_LOADING", false);
+
+      commit("SET_ERROR", getError(error));
+    }
+  },
+  async sendChatNotification({ commit }, payload) {
+    try {
+      commit("SET_LOADING", true);
+
+      const response = await NotificationService.sendChatNotification(payload);
+      commit("SET_LOADING", false);
+
+      return response.data;
+    } catch (error) {
+      commit("SET_LOADING", false);
+
+      commit("SET_ERROR", getError(error));
+    }
+  },
 };
 
 export const getters = {};

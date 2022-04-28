@@ -65,8 +65,10 @@ const routes = [
     component: Resume,
   },
   {
-    path: "/notification",
+    path: "/notification/:id",
     name: "Notification",
+    meta: { middleware: [auth] },
+
     component: Notification,
   },
   {

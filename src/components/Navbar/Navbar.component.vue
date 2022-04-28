@@ -740,7 +740,12 @@ export default {
    let createNotificationRoom = () => {
         store.dispatch("Notification/createNotificationRoom").then((res) => {
           console.log(res);
-          router.push("/notification");
+          router.push({
+            name: "Notification",
+            params: {
+              id: res.id,
+            },
+          });
 
         });
       };
