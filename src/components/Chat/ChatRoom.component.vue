@@ -455,13 +455,14 @@ notificationsocket.on("connect", function () {
           data: {
             to: to.value.id,
             from: from.value.id,
-            message: "sent you a message",
-
+            data: "sent you a message",
+              type : "chat",
             notification_room_id : getUserNotificationRoom.id,
 
           },
         };
         store.dispatch("Notification/sendChatNotification", notificationpayload);
+        store.dispatch("Notification/Sendnotification", notificationpayload);
 
       }
     };

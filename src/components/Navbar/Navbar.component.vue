@@ -164,7 +164,6 @@
               border border-transparent
               text-sm
               rounded-full
-
               text-indigo-600
               font-bold
             "
@@ -182,7 +181,6 @@
               border border-transparent
               text-sm
               rounded-full
-
               text-indigo-600
               font-bold
             "
@@ -247,11 +245,29 @@
               p-1
               text-gray-400
               hover:text-gray-500
+              inline-block
+              relative
             "
             @click="createNotificationRoom"
           >
             <span class="sr-only">View notifications</span>
             <BellIcon class="h-6 w-6" aria-hidden="true" />
+          <span
+              class="
+                absolute
+                top-0
+                right-0
+                block
+                h-2
+                w-2
+                rounded-full
+                ring-2 ring-white
+                bg-red-400
+                font-size-sm
+                font-bold
+              "
+              v-if="notifications.length > 0"
+           />
           </button>
 
           <!-- Profile dropdown -->
@@ -495,7 +511,7 @@
             {{ isHandyman === true ? "Switch To Buying" : "Go To Buying" }}
           </router-link>
           <router-link
-            v-if="isLoggedin === true "
+            v-if="isLoggedin === true"
             type="button"
             class="
               flex-shrink-0
@@ -552,11 +568,31 @@
               p-1
               text-gray-400
               hover:text-gray-500
+              inline-block
+              relative
             "
             @click="createNotificationRoom"
           >
             <span class="sr-only">View notifications</span>
+
             <BellIcon class="h-6 w-6" aria-hidden="true" />
+         <span
+              class="
+                absolute
+                top-0
+                right-0
+                block
+                h-2
+                w-2
+                rounded-full
+                ring-2 ring-white
+                bg-red-400
+                font-size-sm
+                font-bold
+              "
+              v-if="notifications.length > 0"
+           />
+
           </button>
         </div>
         <div class="mt-3 px-2 space-y-1">
@@ -618,6 +654,7 @@
 
 <script>
 import SearchList from "@/components/Search/SearchList.component.vue";
+import { io } from "socket.io-client";
 
 import { computed, ref } from "@vue/runtime-core";
 import { createAvatar } from "@dicebear/avatars";
@@ -728,27 +765,46 @@ export default {
         }
       }
 
-
-
       return {
         avatar_svg,
         avatar,
         avatarWithoutLocalhost,
-
       };
     });
-   let createNotificationRoom = () => {
-        store.dispatch("Notification/createNotificationRoom").then((res) => {
-          console.log(res);
-          router.push({
-            name: "Notification",
-            params: {
-              id: res.id,
-            },
-          });
 
+    let createNotificationRoom = () => {
+      store.dispatch("Notification/createNotificationRoom").then((res) => {
+        console.log(res);
+        router.push({
+          name: "Notification",
+          params: {
+            id: res.id,
+          },
         });
-      };
+      });
+    };
+
+    let notifications = ref([]);
+
+    if (isLoggedin.value) {
+      let notificationSocket = io("http://localhost:4000");
+
+      let roomId = authUserData.value.NotificationRoom.id;
+      console.log(roomId);
+      notificationSocket.on("connect", function () {
+        // Connected, let's sign-up for to receive messages for this room
+        console.log(`room-${roomId}`);
+        notificationSocket.emit(
+          "notificationRoom",
+          `notification-room-${roomId}`
+        );
+      });
+      notificationSocket.on("notification", function (data) {
+        console.log("notification");
+        console.log(data);
+        notifications.value.push(data);
+      });
+    }
     return {
       user,
       navigation,
@@ -767,7 +823,8 @@ export default {
       buying,
       selling,
       OathAvatar,
-      createNotificationRoom
+      createNotificationRoom,
+      notifications,
     };
   },
 };
