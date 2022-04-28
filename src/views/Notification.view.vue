@@ -1,14 +1,14 @@
 <template>
   <div>
-    <Notification />
+    <NotificationRoom />
   </div>
 </template>
 
 <script>
-import Notification from "@/components/Notification/Notification.component";
+import NotificationRoom from "@/components/Notification/NotificationRoom.component";
 export default {
   components: {
-    Notification,
+    NotificationRoom,
   },
 };
 </script>

@@ -1,5 +1,8 @@
 <template>
   <div class="h-screen min-h-full flex flex-col justify-between">
+      <Teleport to=".notifications" >
+    <BasicNotification class="z-50 mt-10" v-if="isLoggedin"    />
+    </Teleport>
     <Navbar :authUser="authUser" v-if="path" class="mb-0"/>
     <LoadingBar class="mt-0"/>
     <router-view />
@@ -13,10 +16,11 @@ import { useRoute } from "vue-router";
 import { useStore } from "vuex";
 import Footer from "./components/Footer.component.vue";
 import Navbar from "./components/Navbar/Navbar.component.vue";
+import BasicNotification from "./components/Notification/Notifications/Basic.component.vue";
 
 export default {
   name: "App",
-  components: { Footer, Navbar,LoadingBar },
+  components: { Footer, Navbar,LoadingBar,BasicNotification },
 
   setup() {
 

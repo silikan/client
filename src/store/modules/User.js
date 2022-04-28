@@ -59,6 +59,12 @@ export const actions = {
         commit("SET_ERROR", getError(error));
       });
   },
+  async getUser({ commit }, id) {
+    commit("SET_LOADING", true);
+    const response = await UserService.getUser(id);
+    commit("SET_LOADING", false);
+    return response.data;
+  },
 };
 
 export const getters = {
