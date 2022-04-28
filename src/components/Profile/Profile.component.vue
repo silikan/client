@@ -220,7 +220,7 @@
                         <MenuItem v-slot="{ active }">
                           <a
                             href="#"
-                             @click="copy"
+                            @click="copy"
                             :class="[
                               active
                                 ? 'bg-gray-100 text-gray-900'
@@ -435,14 +435,13 @@
       isHandyman === true
     "
   />
-  <Reviews/>
-
+  <Reviews />
 </template>
 
 <script>
 import Reviews from "@/components/Profile/Reviews.component.vue";
 import GigLoadingSkeleton from "@/components/Loading/Skeletons/Gig.component.vue";
-import useClipboard from 'vue-clipboard3'
+import useClipboard from "vue-clipboard3";
 
 import Table from "@/components/Loading/Skeletons/Table.component.vue";
 
@@ -513,14 +512,16 @@ export default {
     CheckCircleIcon,
     Table,
     GigLoadingSkeleton,
-    Reviews
+    Reviews,
   },
   props: ["authUser"],
 
   setup(props) {
+    let store = useStore();
+
     let isHandyman = ref(false);
     let isClient = ref(false);
-
+    store.dispatch("Notification/createNotificationRoom");
     let authUserData = computed(() => {
       return props.authUser;
     });
@@ -602,7 +603,6 @@ export default {
         Gigs_Requests_tabs[0].current = false;
       }
     };
-    let store = useStore();
 
     let isEmailVirified = computed(() => {
       return store.getters["auth/emailVerified"];
@@ -611,18 +611,21 @@ export default {
 
     let loading = computed(() => store.getters["Loading/loading"]);
     let authUserId = computed(() => store.getters["auth/id"]);
-    const { toClipboard } = useClipboard()
-    let vueAuuUrl =`${process.env.VUE_APP_URL}`;
+    const { toClipboard } = useClipboard();
+    let vueAuuUrl = `${process.env.VUE_APP_URL}`;
 
     const copy = async () => {
-       console.log(vueAuuUrl);
+      console.log(vueAuuUrl);
       try {
-        await toClipboard(`${vueAuuUrl}/user/${authUserId.value}`)
-        console.log('Copied to clipboard' , `${vueAuuUrl}/user/${authUserId.value}`)
+        await toClipboard(`${vueAuuUrl}/user/${authUserId.value}`);
+        console.log(
+          "Copied to clipboard",
+          `${vueAuuUrl}/user/${authUserId.value}`
+        );
       } catch (e) {
-        console.error(e)
+        console.error(e);
       }
-    }
+    };
     return {
       profile,
       tabs,
@@ -638,7 +641,7 @@ export default {
       GigRequestNavigation,
       isEmailVirified,
       loading,
-      copy
+      copy,
     };
   },
 };

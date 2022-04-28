@@ -1,6 +1,6 @@
 <!-- This example requires Tailwind CSS v2.0+ -->
 <template>
-  <!-- Global notification live region, render this permanently at the end of the document -->
+<div v-if="isLoggedin">
   <div
     v-for="item in notifications"
     :key="item"
@@ -111,6 +111,7 @@
       </transition>
     </div>
   </div>
+    </div>
 </template>
 
 <script>
@@ -127,12 +128,16 @@ export default {
     Avatar,
   },
   setup() {
+
     let store = useStore();
     const show = ref(true);
     let notifications = ref([]);
-    let authUserData = computed(() => store.getters["auth/authUser"]);
+        const isLoggedin = computed(() => store.getters["auth/loggedIn"]);
 
     let notificationSocket = io("http://localhost:4000");
+   let authUserData = computed(() => store.getters["auth/authUser"]);
+console.log(isLoggedin.value);
+   if ( authUserData.value.NotificationRoom ) {
 
     let roomId = authUserData.value.NotificationRoom.id;
     console.log(roomId);
@@ -165,9 +170,12 @@ export default {
       });
     });
 
+   }
+
     return {
       show,
       notifications,
+      isLoggedin
     };
   },
 };

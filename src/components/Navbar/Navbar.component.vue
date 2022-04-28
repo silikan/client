@@ -773,8 +773,8 @@ export default {
     });
 
     let createNotificationRoom = () => {
-      store.dispatch("Notification/createNotificationRoom").then((res) => {
-        console.log(res);
+      store.dispatch("Notification/createNotificationRoom").then(() => {
+
         router.push({
           name: "Notification",
 
@@ -784,7 +784,7 @@ export default {
 
     let notifications = ref([]);
 
-    if (isLoggedin.value) {
+    if (isLoggedin.value &&   authUserData.value.NotificationRoom) {
       let notificationSocket = io("http://localhost:4000");
 
       let roomId = authUserData.value.NotificationRoom.id;

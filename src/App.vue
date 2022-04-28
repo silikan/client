@@ -1,7 +1,7 @@
 <template>
   <div class="h-screen min-h-full flex flex-col justify-between">
       <Teleport to=".notifications" >
-    <BasicNotification class="z-50 mt-10" v-if="isLoggedin"    />
+    <BasicNotification class="z-50 mt-10" v-if="isLoggedin"  />
     </Teleport>
     <Navbar :authUser="authUser" v-if="path" class="mb-0"/>
     <LoadingBar class="mt-0"/>

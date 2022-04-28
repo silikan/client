@@ -61,7 +61,7 @@
         </ul>
         <div class="rounded-md shadow">
           <a
-            @click="addToCart({price :  Data.price})"
+            @click="addToCart({ price: Data.price })"
             class="
               flex
               items-center
@@ -80,7 +80,6 @@
             aria-describedby="tier-standard"
             v-if="handymanId !== authUserId"
           >
-
             Add To Cart
           </a>
         </div>
@@ -95,6 +94,7 @@ import { computed } from "@vue/runtime-core";
 import { ref } from "@vue/reactivity";
 import { useStore } from "vuex";
 import { useRoute } from "vue-router";
+import { io } from "socket.io-client";
 
 export default {
   components: {
@@ -108,27 +108,25 @@ export default {
     let store = useStore();
     let Data = ref("");
 
+    let notificationsocket = io("http://localhost:4000");
 
- let authUserId = ref(null);
-let handymanId = ref(null);
+    let authUserId = ref(null);
+    let handymanId = ref(null);
 
-let loggedIn = computed(() => store.getters["auth/loggedIn"]);
-if (loggedIn.value === true) {
- let authUser = computed(()=>store.getters["auth/authUser"])
-  authUserId.value = authUser.value.id
-}
+    let loggedIn = computed(() => store.getters["auth/loggedIn"]);
+    if (loggedIn.value === true) {
+      let authUser = computed(() => store.getters["auth/authUser"]);
+      authUserId.value = authUser.value.id;
+    }
 
-store
-        .dispatch("Gig/getGigUser", id)
-        .then((result) => {
-
-          handymanId.value = result.id;
-
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-
+    store
+      .dispatch("Gig/getGigUser", id)
+      .then((result) => {
+        handymanId.value = result.id;
+      })
+      .catch((err) => {
+        console.log(err);
+      });
 
     store
       .dispatch("Gig/getGig", id)
@@ -149,12 +147,12 @@ store
       .catch((err) => {
         console.log(err);
       });
-    const addToTaskList = (cartItemId , tier) => {
+    const addToTaskList = async (cartItemId, tier) => {
       let userId = computed(() => store.getters["auth/id"]);
 
       store
         .dispatch("Gig/getGigUser", id)
-        .then((result) => {
+        .then(async (result) => {
           let payload = {
             type: "gig",
             gig_id: id,
@@ -162,9 +160,41 @@ store
             client_id: userId.value,
             handyman_id: result.id,
             cart_item_id: cartItemId,
-           plan : JSON.stringify(tier)
+            plan: JSON.stringify(tier),
           };
           store.dispatch("Task/addToTaskList", payload);
+
+          let toData = {
+            userId: result.id,
+          };
+
+          let getUserNotificationRoom = await store.dispatch(
+            "Notification/getUserNotificationRoom",
+            toData
+          );
+
+          notificationsocket.on("connect", function () {
+            // Connected, let's sign-up for to receive messages for this room
+            notificationsocket.emit(
+              "notificationRoom",
+              `notification-room-${getUserNotificationRoom.id}`
+            );
+          });
+
+          let notificationpayload = {
+            data: {
+              to: result.id,
+              from: userId.value,
+              data: "added your gig to his cart",
+              type: "gig",
+              notification_room_id: getUserNotificationRoom.id,
+            },
+          };
+          store.dispatch(
+            "Notification/sendChatNotification",
+            notificationpayload
+          );
+          store.dispatch("Notification/Sendnotification", notificationpayload);
         })
         .catch((err) => {
           console.log(err);
@@ -178,23 +208,23 @@ store
           let userId = computed(() => store.getters["auth/id"]);
           console.log(userId.value);
 
-
           let payload = {
             type: "gig",
             gig_id: id,
             user_id: userId.value,
             client_id: userId.value,
             handyman_id: result.id,
-            plan : JSON.stringify(tier)
+            plan: JSON.stringify(tier),
           };
           store
             .dispatch("Cart/addToCart", payload)
             .then(() => {
-
-              let cartItemId = computed(() => store.getters["Cart/cartItemData"]);
-  console.log(cartItemId.value.id);
-  let cartItemIdValue = cartItemId.value.id;
-              addToTaskList(cartItemIdValue , tier);
+              let cartItemId = computed(
+                () => store.getters["Cart/cartItemData"]
+              );
+              console.log(cartItemId.value.id);
+              let cartItemIdValue = cartItemId.value.id;
+              addToTaskList(cartItemIdValue, tier);
             })
             .catch((err) => {
               console.log(err);
@@ -205,12 +235,46 @@ store
         });
     };
 
+    /*
+import { io } from "socket.io-client";
+
+let getUserNotificationRoom = await store.dispatch(
+          "Notification/getUserNotificationRoom",
+          toData
+        );
+        let toData = {
+        userId: to.value.id,
+      };
+        notificationsocket.on("connect", function () {
+          // Connected, let's sign-up for to receive messages for this room
+          notificationsocket.emit(
+            "notificationRoom",
+            `notification-room-${getUserNotificationRoom.id}`
+          );
+        });
+        let notificationpayload = {
+          data: {
+            to: to.value.id,
+            from: from.value.id,
+            data: "sent you a message",
+            type: "chat",
+            notification_room_id: getUserNotificationRoom.id,
+            chat_room_id: id,
+          },
+        };
+        store.dispatch(
+          "Notification/sendChatNotification",
+          notificationpayload
+        );
+        store.dispatch("Notification/Sendnotification", notificationpayload);
+*/
+
     return {
       tabs,
       Data,
       addToCart,
       handymanId,
-      authUserId
+      authUserId,
     };
   },
 };
