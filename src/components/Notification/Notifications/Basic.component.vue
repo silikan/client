@@ -65,7 +65,7 @@
                       focus:ring-indigo-500
                     "
                   >
-                    Undo
+                    Visit
                   </button>
                   <button
                     type="button"

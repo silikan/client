@@ -4,16 +4,16 @@
 
 <script>
 import { io } from "socket.io-client";
-import { useRoute } from 'vue-router';
+import { computed } from '@vue/runtime-core';
+import { useStore } from 'vuex';
 export default {
 
 
 setup(){
   let notificationSocket  = io("http://localhost:4000");
-
-let route = useRoute();
-let id = route.params.id;
-
+let store = useStore()
+  let authUserData = computed(() => store.getters["auth/authUser"]);
+  let id = authUserData.value.NotificationRoom.id;
        notificationSocket.on("connect", function () {
       // Connected, let's sign-up for to receive messages for this room
       console.log(`room-${id}`)

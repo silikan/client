@@ -777,9 +777,7 @@ export default {
         console.log(res);
         router.push({
           name: "Notification",
-          params: {
-            id: res.id,
-          },
+
         });
       });
     };

@@ -259,12 +259,14 @@
               </li>
             </ul>
 
-
-              <div className="typing animate-bounce self-start ml-5 mt-5" v-if="typingit">
-    <div className="typing__dot"></div>
-    <div className="typing__dot"></div>
-    <div className="typing__dot"></div>
-  </div>
+            <div
+              className="typing animate-bounce self-start ml-5 mt-5"
+              v-if="typingit"
+            >
+              <div className="typing__dot"></div>
+              <div className="typing__dot"></div>
+              <div className="typing__dot"></div>
+            </div>
           </div>
 
           <div
@@ -405,7 +407,7 @@ export default {
     };
 
     let socket = io("http://localhost:3000");
-  let notificationsocket = io("http://localhost:4000");
+    let notificationsocket = io("http://localhost:4000");
     const authUser = computed(() => store.getters["auth/authUser"]);
 
     const sendMessage = async () => {
@@ -424,7 +426,6 @@ export default {
       console.log(to.value.id);
       let toData = {
         userId: to.value.id,
-
       };
       if (message.value != "" && message.value != null) {
         let payload = {
@@ -440,30 +441,37 @@ export default {
           },
         };
 
-
         socket.emit("message", payload);
         ChatService.sendMessage(payload);
         ChatService.saveMessage(payload);
-                   message.value = "";
+        message.value = "";
 
-         let getUserNotificationRoom = await store.dispatch("Notification/getUserNotificationRoom" ,toData )
-notificationsocket.on("connect", function () {
-      // Connected, let's sign-up for to receive messages for this room
-      notificationsocket.emit("notificationRoom", `notification-room-${getUserNotificationRoom.id}`);
-    });
+        let getUserNotificationRoom = await store.dispatch(
+          "Notification/getUserNotificationRoom",
+          toData
+        );
+        notificationsocket.on("connect", function () {
+          // Connected, let's sign-up for to receive messages for this room
+          notificationsocket.emit(
+            "notificationRoom",
+            `notification-room-${getUserNotificationRoom.id}`
+          );
+        });
         let notificationpayload = {
           data: {
             to: to.value.id,
             from: from.value.id,
             data: "sent you a message",
-              type : "chat",
-            notification_room_id : getUserNotificationRoom.id,
-
+            type: "chat",
+            notification_room_id: getUserNotificationRoom.id,
+            chat_room_id: id,
           },
         };
-        store.dispatch("Notification/sendChatNotification", notificationpayload);
+        store.dispatch(
+          "Notification/sendChatNotification",
+          notificationpayload
+        );
         store.dispatch("Notification/Sendnotification", notificationpayload);
-
       }
     };
 
