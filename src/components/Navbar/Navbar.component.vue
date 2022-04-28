@@ -248,6 +248,7 @@
               text-gray-400
               hover:text-gray-500
             "
+            @click="createNotificationRoom"
           >
             <span class="sr-only">View notifications</span>
             <BellIcon class="h-6 w-6" aria-hidden="true" />
@@ -552,6 +553,7 @@
               text-gray-400
               hover:text-gray-500
             "
+            @click="createNotificationRoom"
           >
             <span class="sr-only">View notifications</span>
             <BellIcon class="h-6 w-6" aria-hidden="true" />
@@ -639,7 +641,7 @@ import {
   ChatAlt2Icon,
 } from "@heroicons/vue/outline";
 import { useStore } from "vuex";
-import { useRoute } from "vue-router";
+import { useRoute, useRouter } from "vue-router";
 
 const user = {
   name: "Tom Cook",
@@ -684,6 +686,7 @@ export default {
   setup(props) {
     const route = useRoute();
     const store = useStore();
+    let router = useRouter();
     let isHandyman = computed(() => store.getters["auth/isHandyman"]);
     let search = ref("");
     let isLoggedin = computed(() => store.getters["auth/loggedIn"]);
@@ -725,13 +728,22 @@ export default {
         }
       }
 
+
+
       return {
         avatar_svg,
         avatar,
         avatarWithoutLocalhost,
+
       };
     });
+   let createNotificationRoom = () => {
+        store.dispatch("Notification/createNotificationRoom").then((res) => {
+          console.log(res);
+          router.push("/notification");
 
+        });
+      };
     return {
       user,
       navigation,
@@ -749,6 +761,8 @@ export default {
       isHandyman,
       buying,
       selling,
+      OathAvatar,
+      createNotificationRoom
     };
   },
 };

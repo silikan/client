@@ -1,5 +1,5 @@
 import { getError } from "@/utils/helpers";
-import NotificationService from "@/services/HandymanService";
+import NotificationService from "@/services/NotificationService";
 
 export const namespaced = true;
 
@@ -22,18 +22,15 @@ export const mutations = {
 };
 
 export const actions = {
-  async createNotificationRoom({ commit }, payload) {
+  async createNotificationRoom({ commit }) {
     try {
       commit("SET_LOADING", true);
-
-      let room = await NotificationService.createNotificationRoom(payload);
+      const notificationRoom = await NotificationService.createNotificationRoom();
       commit("SET_LOADING", false);
-
-      return room;
+      return notificationRoom.data;
     } catch (error) {
-      commit("SET_LOADING", false);
-
       commit("SET_ERROR", getError(error));
+      commit("SET_LOADING", false);
     }
   },
   async getRoomNotifications({ commit }, payload) {
@@ -43,7 +40,7 @@ export const actions = {
       const response = await NotificationService.getRoomNotifications(payload.roomId);
       commit("SET_LOADING", false);
 
-      return response;
+      return response.data;
     } catch (error) {
       commit("SET_LOADING", false);
 
@@ -57,7 +54,7 @@ export const actions = {
       let notification = await NotificationService.Sendnotification(payload);
       commit("SET_LOADING", false);
 
-      return notification;
+      return notification.data;
     } catch (error) {
       commit("SET_LOADING", false);
 
