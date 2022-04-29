@@ -30,7 +30,6 @@ export default {
 
     let nameData = computed(() => props.name);
     let urlData = computed(() => props.url);
-console.log(nameData.value)
     avatar_svg = createAvatar(style, {
       seed: nameData.value,
       dataUri: true,
