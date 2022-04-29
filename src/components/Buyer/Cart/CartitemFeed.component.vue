@@ -165,6 +165,16 @@ export default {
             icon: CurrencyDollarIcon,
             iconBackground: "bg-green-500",
           },
+             {
+            id: 9,
+            content: "Transaction is on Confirmed",
+            status: "confirmed",
+            handyman: result.handyman,
+            client: result.client,
+            condition: result.cart_item.is_confirmed,
+            icon: CheckIcon,
+            iconBackground: "bg-indigo-500",
+            }
         ];
       })
       .catch((error) => {

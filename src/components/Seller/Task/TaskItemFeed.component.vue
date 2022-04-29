@@ -160,7 +160,7 @@ export default {
             handyman: result.handyman,
             client: result.client,
 
-            condition: result.cart_item.is_on_checkout,
+            condition: result.task_item.is_on_checkout,
             icon: CurrencyDollarIcon,
             iconBackground: "bg-yellow-500",
           },
@@ -171,10 +171,20 @@ export default {
             handyman: result.handyman,
             client: result.client,
 
-            condition: result.cart_item.is_paid,
+            condition: result.task_item.is_paid,
             icon: CurrencyDollarIcon,
             iconBackground: "bg-green-500",
           },
+          {
+            id: 9,
+            content: "Transaction is on Confirmed",
+            status: "confirmed",
+            handyman: result.handyman,
+            client: result.client,
+            condition: result.task_item.is_confirmed,
+            icon: CheckIcon,
+            iconBackground: "bg-indigo-500",
+            }
         ];
       })
       .catch((error) => {
