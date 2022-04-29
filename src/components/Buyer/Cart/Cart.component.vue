@@ -218,7 +218,8 @@
                       setCartItemStatusToAccepted(
                         person.item.cart_item.id,
                         person.item.client.id,
-                        person.item.handyman.id
+                        person.item.handyman.id,
+                        person.item.cart_item.type
                       )
                     "
                     >accept</a
@@ -247,7 +248,8 @@
                       setCartItemStatusToDeclined(
                         person.item.cart_item.id,
                         person.item.client.id,
-                        person.item.handyman.id
+                        person.item.handyman.id,
+                        person.item.cart_item.type
                       )
                     "
                     >decline</a
@@ -274,7 +276,8 @@
                         person.item.cart_item.id,
                         person.item.handyman.id,
                         person.item.client.id,
-                        person.item.handyman.id
+                        person.item.handyman.id,
+                        person.item.cart_item.type
                       )
                     "
                     >pay
@@ -320,7 +323,7 @@ export default {
         console.log(error);
       });
 
-    const setCartItemStatusToAccepted = (cartItemId, from, to) => {
+    const setCartItemStatusToAccepted = (cartItemId, from, to, type) => {
       let payload = {
         cart_item_id: cartItemId,
         status: "accepted",
@@ -350,8 +353,8 @@ export default {
             data: {
               to: to,
               from: from,
-              data: "accepted cart item",
-              type: "action",
+              data: `accepted cart ${type} item`,
+              type: type,
               notification_room_id: getUserNotificationRoom.id,
             },
           };
@@ -367,7 +370,7 @@ export default {
         });
     };
 
-    const setCartItemStatusToDeclined = (cartItemId, from, to) => {
+    const setCartItemStatusToDeclined = (cartItemId, from, to, type) => {
       let payload = {
         cart_item_id: cartItemId,
         status: "declined",
@@ -398,8 +401,8 @@ export default {
             data: {
               to: to,
               from: from,
-              data: "desclined cart item",
-              type: "action",
+              data: `declined cart ${type} item`,
+              type: type,
               notification_room_id: getUserNotificationRoom.id,
             },
           };
@@ -478,7 +481,7 @@ export default {
     }
 
     const authUser = computed(() => store.getters["auth/authUser"]);
-    const createTransaction = (cartItemId, handymanId, from, to) => {
+    const createTransaction = (cartItemId, handymanId, from, to, type) => {
       let payload = {
         cart_item_id: cartItemId,
         client_id: authUser.value.id,
@@ -510,8 +513,8 @@ export default {
             data: {
               to: to,
               from: from,
-              data: "started checkout",
-              type: "action",
+              data: `requested cart ${type} item`,
+              type: type,
               notification_room_id: getUserNotificationRoom.id,
             },
           };

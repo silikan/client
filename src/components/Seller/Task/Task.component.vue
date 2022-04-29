@@ -210,7 +210,13 @@
                       shadow-sm
                     "
                     @click="
-                      setTaskItemsStatusToInProgress(person.item.task_item.id)
+                      setTaskItemsStatusToInProgress(
+                        person.item.task_item.id,
+                        person.item.handyman.id,
+                        person.item.client.id,
+
+                        person.item.task_item.type
+                      )
                     "
                     >Start
                   </a>
@@ -233,7 +239,12 @@
                       shadow-sm
                     "
                     @click="
-                      setTaskItemStatusToCompleted(person.item.task_item.id)
+                      setTaskItemStatusToCompleted(
+                        person.item.task_item.id,
+                        person.item.handyman.id,
+                        person.item.client.id,
+                        person.item.task_item.type
+                      )
                     "
                     >Complete
                   </a>
@@ -256,7 +267,12 @@
                       shadow-sm
                     "
                     @click="
-                      setTaskItemsStatusToCancelled(person.item.task_item.id)
+                      setTaskItemsStatusToCancelled(
+                        person.item.task_item.id,
+                        person.item.handyman.id,
+                        person.item.client.id,
+                        person.item.task_item.type
+                      )
                     "
                     >cancel
                   </a>
@@ -282,7 +298,12 @@
                       shadow-sm
                     "
                     @click="
-                      setTaskItemStatusToAccepted(person.item.task_item.id)
+                      setTaskItemStatusToAccepted(
+                        person.item.task_item.id,
+                        person.item.handyman.id,
+                        person.item.client.id,
+                        person.item.task_item.type
+                      )
                     "
                     >accept</a
                   >
@@ -307,12 +328,17 @@
                       shadow-sm
                     "
                     @click="
-                      setTaskItemStatusToDeclined(person.item.task_item.id)
+                      setTaskItemStatusToDeclined(
+                        person.item.task_item.id,
+                        person.item.handyman.id,
+                        person.item.client.id,
+                        person.item.task_item.type
+                      )
                     "
                     >decline</a
                   >
 
-                       <a
+                  <a
                     v-if="person.item.task_item.status == 'paid'"
                     type="button"
                     class="
@@ -330,11 +356,15 @@
                       shadow-sm
                     "
                     @click="
-                      setTaskItemStatusToConfirmed(person.item.task_item.id)
+                      setTaskItemStatusToConfirmed(
+                        person.item.task_item.id,
+                        person.item.handyman.id,
+                        person.item.client.id,
+                        person.item.task_item.type
+                      )
                     "
                     >Confirm Payment
                   </a>
-
                 </td>
               </tr>
             </tbody>
@@ -350,7 +380,9 @@ import { ref } from "@vue/reactivity";
 import { useStore } from "vuex";
 import { computed } from "@vue/runtime-core";
 import Avatar from "@/components/Avatar/Avatar.component.vue";
-import { useRouter } from 'vue-router';
+import { useRouter } from "vue-router";
+import { io } from "socket.io-client";
+
 const people = [
   // More people...
 ];
@@ -360,6 +392,8 @@ export default {
     Avatar,
   },
   setup() {
+    let notificationsocket = io("http://localhost:4000");
+
     let store = useStore();
     let task = ref([]);
     let userId = computed(() => store.getters["auth/id"]);
@@ -367,14 +401,14 @@ export default {
     console.log(userId.value);
     store
       .dispatch("Task/getUserTaskItems", userId.value)
-      .then((result) => {
+      .then(async (result) => {
         console.log(result);
         task.value = result;
       })
       .catch((error) => {
         console.log(error);
       });
-    const setTaskItemsStatusToInProgress = (taskItemId) => {
+    const setTaskItemsStatusToInProgress = (taskItemId, from, to, type) => {
       let payload = {
         task_item_id: taskItemId,
         status: "in_progress",
@@ -382,8 +416,39 @@ export default {
       console.log(payload);
       store
         .dispatch("Task/setTaskItemsStatusToInProgress", payload)
-        .then((result) => {
+        .then(async (result) => {
           console.log(result);
+          let toData = {
+            userId: to,
+          };
+          console.log(result);
+          let getUserNotificationRoom = await store.dispatch(
+            "Notification/getUserNotificationRoom",
+            toData
+          );
+
+          notificationsocket.on("connect", function () {
+            // Connected, let's sign-up for to receive messages for this room
+            notificationsocket.emit(
+              "notificationRoom",
+              `notification-room-${getUserNotificationRoom.id}`
+            );
+          });
+
+          let notificationpayload = {
+            data: {
+              to: to,
+              from: from,
+              data: `task ${type} item inProgress`,
+              type: type,
+              notification_room_id: getUserNotificationRoom.id,
+            },
+          };
+          store.dispatch(
+            "Notification/sendChatNotification",
+            notificationpayload
+          );
+          store.dispatch("Notification/Sendnotification", notificationpayload);
           router.push(`/task/${taskItemId}/feed`);
         })
         .catch((error) => {
@@ -391,15 +456,45 @@ export default {
         });
     };
 
-    const setTaskItemsStatusToCancelled = (taskItemId) => {
+    const setTaskItemsStatusToCancelled = (taskItemId, from, to, type) => {
       let payload = {
         task_item_id: taskItemId,
         status: "canceled",
       };
       store
         .dispatch("Task/setTaskItemsStatusToCancelled", payload)
-        .then((result) => {
+        .then(async (result) => {
+          let toData = {
+            userId: to,
+          };
           console.log(result);
+          let getUserNotificationRoom = await store.dispatch(
+            "Notification/getUserNotificationRoom",
+            toData
+          );
+
+          notificationsocket.on("connect", function () {
+            // Connected, let's sign-up for to receive messages for this room
+            notificationsocket.emit(
+              "notificationRoom",
+              `notification-room-${getUserNotificationRoom.id}`
+            );
+          });
+
+          let notificationpayload = {
+            data: {
+              to: to,
+              from: from,
+              data: `canceled task ${type} item`,
+              type: type,
+              notification_room_id: getUserNotificationRoom.id,
+            },
+          };
+          store.dispatch(
+            "Notification/sendChatNotification",
+            notificationpayload
+          );
+          store.dispatch("Notification/Sendnotification", notificationpayload);
           router.push(`/task/${taskItemId}/feed`);
         })
         .catch((error) => {
@@ -407,15 +502,45 @@ export default {
         });
     };
 
-    const setTaskItemStatusToCompleted = (taskItemId) => {
+    const setTaskItemStatusToCompleted = (taskItemId, from, to, type) => {
       let payload = {
         task_item_id: taskItemId,
         status: "completed",
       };
       store
         .dispatch("Task/setTaskItemStatusToCompleted", payload)
-        .then((result) => {
+        .then(async (result) => {
+          let toData = {
+            userId: to,
+          };
           console.log(result);
+          let getUserNotificationRoom = await store.dispatch(
+            "Notification/getUserNotificationRoom",
+            toData
+          );
+
+          notificationsocket.on("connect", function () {
+            // Connected, let's sign-up for to receive messages for this room
+            notificationsocket.emit(
+              "notificationRoom",
+              `notification-room-${getUserNotificationRoom.id}`
+            );
+          });
+
+          let notificationpayload = {
+            data: {
+              to: to,
+              from: from,
+              data: `completed task ${type} item`,
+              type: type,
+              notification_room_id: getUserNotificationRoom.id,
+            },
+          };
+          store.dispatch(
+            "Notification/sendChatNotification",
+            notificationpayload
+          );
+          store.dispatch("Notification/Sendnotification", notificationpayload);
           router.push(`/task/${taskItemId}/feed`);
         })
         .catch((error) => {
@@ -423,15 +548,46 @@ export default {
         });
     };
 
-    async function setTaskItemStatusToAccepted(taskItemId) {
+    async function setTaskItemStatusToAccepted(taskItemId, from, to, type) {
       let payload = {
         task_item_id: taskItemId,
         status: "accepted",
       };
       store
         .dispatch("Task/setTaskItemStatusToAccepted", payload)
-        .then((result) => {
+        .then(async (result) => {
           console.log(result);
+          let toData = {
+            userId: to,
+          };
+          console.log(result);
+          let getUserNotificationRoom = await store.dispatch(
+            "Notification/getUserNotificationRoom",
+            toData
+          );
+
+          notificationsocket.on("connect", function () {
+            // Connected, let's sign-up for to receive messages for this room
+            notificationsocket.emit(
+              "notificationRoom",
+              `notification-room-${getUserNotificationRoom.id}`
+            );
+          });
+
+          let notificationpayload = {
+            data: {
+              to: to,
+              from: from,
+              data: `accepted task ${type} item`,
+              type: type,
+              notification_room_id: getUserNotificationRoom.id,
+            },
+          };
+          store.dispatch(
+            "Notification/sendChatNotification",
+            notificationpayload
+          );
+          store.dispatch("Notification/Sendnotification", notificationpayload);
           router.push(`/task/${taskItemId}/feed`);
         })
         .catch((error) => {
@@ -439,15 +595,45 @@ export default {
         });
     }
 
-    async function setTaskItemStatusToDeclined(taskItemId) {
+    async function setTaskItemStatusToDeclined(taskItemId, from, to, type) {
       let payload = {
         task_item_id: taskItemId,
         status: "declined",
       };
       store
         .dispatch("Task/setTaskItemStatusToDeclined", payload)
-        .then((result) => {
+        .then(async (result) => {
+          let toData = {
+            userId: to,
+          };
           console.log(result);
+          let getUserNotificationRoom = await store.dispatch(
+            "Notification/getUserNotificationRoom",
+            toData
+          );
+
+          notificationsocket.on("connect", function () {
+            // Connected, let's sign-up for to receive messages for this room
+            notificationsocket.emit(
+              "notificationRoom",
+              `notification-room-${getUserNotificationRoom.id}`
+            );
+          });
+
+          let notificationpayload = {
+            data: {
+              to: to,
+              from: from,
+              data: `declined task ${type} item`,
+              type: type,
+              notification_room_id: getUserNotificationRoom.id,
+            },
+          };
+          store.dispatch(
+            "Notification/sendChatNotification",
+            notificationpayload
+          );
+          store.dispatch("Notification/Sendnotification", notificationpayload);
           router.push(`/task/${taskItemId}/feed`);
         })
         .catch((error) => {
@@ -455,40 +641,98 @@ export default {
         });
     }
 
-    async function setTaskItemStatusToPaid(taskItemId) {
+    async function setTaskItemStatusToPaid(taskItemId, from, to, type) {
       let payload = {
         task_item_id: taskItemId,
         status: "paid",
       };
       store
         .dispatch("Task/setTaskItemStatusToPaid", payload)
-        .then((result) => {
+        .then(async (result) => {
+          let toData = {
+            userId: to,
+          };
           console.log(result);
+          let getUserNotificationRoom = await store.dispatch(
+            "Notification/getUserNotificationRoom",
+            toData
+          );
+
+          notificationsocket.on("connect", function () {
+            // Connected, let's sign-up for to receive messages for this room
+            notificationsocket.emit(
+              "notificationRoom",
+              `notification-room-${getUserNotificationRoom.id}`
+            );
+          });
+
+          let notificationpayload = {
+            data: {
+              to: to,
+              from: from,
+              data: `paid task ${type} item`,
+              type: type,
+              notification_room_id: getUserNotificationRoom.id,
+            },
+          };
+          store.dispatch(
+            "Notification/sendChatNotification",
+            notificationpayload
+          );
+          store.dispatch("Notification/Sendnotification", notificationpayload);
           router.push(`/task/${taskItemId}/feed`);
         })
         .catch((error) => {
           console.log(error);
         });
-
-
     }
 
-
-        async function setTaskItemStatusToConfirmed (taskItemId) {
-          let payload = {
-            task_item_id: taskItemId,
-            status: "confirmed",
+    async function setTaskItemStatusToConfirmed(taskItemId, from, to, type) {
+      let payload = {
+        task_item_id: taskItemId,
+        status: "confirmed",
+      };
+      store
+        .dispatch("Task/setTaskItemStatusToConfirmed", payload)
+        .then(async (result) => {
+          let toData = {
+            userId: to,
           };
-          store
-            .dispatch("Task/setTaskItemStatusToConfirmed", payload)
-            .then((result) => {
-              console.log(result);
-              router.push(`/task/${taskItemId}/feed`);
-            })
-            .catch((error) => {
-              console.log(error);
-            });
-        }
+          console.log(result);
+          let getUserNotificationRoom = await store.dispatch(
+            "Notification/getUserNotificationRoom",
+            toData
+          );
+
+          notificationsocket.on("connect", function () {
+            // Connected, let's sign-up for to receive messages for this room
+            notificationsocket.emit(
+              "notificationRoom",
+              `notification-room-${getUserNotificationRoom.id}`
+            );
+          });
+
+          let notificationpayload = {
+            data: {
+              to: to,
+              from: from,
+              data: `confirmed task ${type} item`,
+              type: type,
+              notification_room_id: getUserNotificationRoom.id,
+            },
+          };
+          store.dispatch(
+            "Notification/sendChatNotification",
+            notificationpayload
+          );
+          store.dispatch("Notification/Sendnotification", notificationpayload);
+
+          router.push(`/task/${taskItemId}/feed`);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    }
     return {
       people,
       task,
@@ -498,7 +742,7 @@ export default {
       setTaskItemStatusToAccepted,
       setTaskItemStatusToDeclined,
       setTaskItemStatusToPaid,
-      setTaskItemStatusToConfirmed
+      setTaskItemStatusToConfirmed,
     };
   },
 };
