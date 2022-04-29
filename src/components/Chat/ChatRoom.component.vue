@@ -397,6 +397,7 @@ export default {
     store.dispatch("Chat/getMessages", payload);
     let savedMessagesReactive = reactive([]);
     let savedMessages = computed(() => {
+      savedMessagesReactive = []
       savedMessagesReactive.push(...store.getters["Chat/messages"]);
       return [...savedMessagesReactive];
     });

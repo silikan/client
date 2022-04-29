@@ -1,8 +1,8 @@
 <template>
-<div v-if="loading === true">
-<Table/>
-</div>
-  <div class="bg-white" v-if=" loading === false && links && meta">
+  <div v-if="loading === true">
+    <Table />
+  </div>
+  <div class="bg-white" v-if="loading === false && links && meta">
     <div class="mx-auto py-12 px-4 max-w-7xl sm:px-6 lg:px-8 lg:py-24">
       <div class="flex w-full items-center justify-between mb-5">
         <div
@@ -55,7 +55,7 @@
                         tracking-wider
                       "
                     >
-                      Title
+                      Data
                     </th>
                     <th
                       scope="col"
@@ -69,7 +69,7 @@
                         tracking-wider
                       "
                     >
-                      Price
+                      Type
                     </th>
                     <th
                       scope="col"
@@ -83,7 +83,7 @@
                         tracking-wider
                       "
                     >
-                      Duration
+                      Read
                     </th>
                     <th
                       scope="col"
@@ -97,7 +97,7 @@
                         tracking-wider
                       "
                     >
-                      Payment Method
+                      Time
                     </th>
                     <th scope="col" class="relative px-6 py-3">
                       <span class="sr-only">Edit</span>
@@ -105,10 +105,12 @@
                   </tr>
                 </thead>
                 <tbody class="bg-white divide-y divide-gray-200">
-                  <tr v-for="notification in notifications" :key="notification.id">
-
+                  <tr
+                    v-for="notification in notifications"
+                    :key="notification.id"
+                  >
                     <td class="px-6 py-4 whitespace-nowrap">
-                     <router-link :to="`/user/${notification.fromData.id}`">
+                      <router-link :to="`/user/${notification.fromData.id}`">
                         <div class="flex items-center">
                           <div class="flex-shrink-0 h-10 w-10">
                             <Avatar
@@ -128,7 +130,7 @@
                         </div>
                       </router-link>
                     </td>
-                  <td class="px-6 py-4 whitespace-nowrap">
+                    <td class="px-6 py-4 whitespace-nowrap">
                       <div class="flex items-center">
                         <div class="ml-4">
                           <div class="text-sm text-gray-500">
@@ -150,7 +152,7 @@
                           text-green-800
                         "
                       >
-                        {{ notification.data }} DZD
+                        {{ notification.type }}
                       </span>
                     </td>
                     <td class="px-6 py-4 whitespace-nowrap">
@@ -166,7 +168,7 @@
                           text-green-800
                         "
                       >
-                        {{ notification.data }} Days
+                        {{ notification.read }}
                       </span>
                     </td>
                     <td class="px-6 py-4 whitespace-nowrap">
@@ -178,11 +180,12 @@
                           leading-5
                           font-semibold
                           rounded-full
-                          bg-green-100
-                          text-green-800
+                          bg-red-100
+                          text-red-800
                         "
                       >
-                        {{ notification.data }}
+                    <timeago :datetime="notification.created_at"/>
+
                       </span>
                     </td>
                     <td
@@ -195,7 +198,22 @@
                       "
                     >
                       <router-link
-                        :to="`/notification/${notification.data}`"
+                      v-if="notification.type === 'chat'"
+                        :to="`/room/${notification.chat_room_id}`"
+                        href="#"
+                        class="text-indigo-600 hover:text-indigo-900"
+                        >Check</router-link
+                      >
+                        <router-link
+                        v-if="notification.type === 'request'"
+                        :to="`/cart`"
+                        href="#"
+                        class="text-indigo-600 hover:text-indigo-900"
+                        >Check</router-link
+                      >
+                        <router-link
+                        v-if="notification.type === 'gig'"
+                        :to="`/task`"
                         href="#"
                         class="text-indigo-600 hover:text-indigo-900"
                         >Check</router-link
@@ -430,17 +448,16 @@
 <script>
 import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/vue/solid";
 import Avatar from "@/components/Avatar/Avatar.component.vue";
- import Table from "@/components/Loading/Skeletons/Table.component.vue"
+import Table from "@/components/Loading/Skeletons/Table.component.vue";
 
 import { computed, reactive } from "@vue/runtime-core";
 import { useStore } from "vuex";
-
 export default {
   components: {
     ChevronLeftIcon,
     ChevronRightIcon,
-     Avatar,
-    Table
+    Avatar,
+    Table,
   },
 
   setup() {
@@ -491,7 +508,7 @@ export default {
       let data = reactive([]);
       let start = currentPage.value - 2;
       let end = currentPage.value + 2;
-      let totalPages = computed(()=>meta.value.last_page) ;
+      let totalPages = computed(() => meta.value.last_page);
       if (start < 1) {
         start = 1;
         end = 5;
@@ -510,7 +527,9 @@ export default {
       return data;
     });
     let preurl = `${process.env.VUE_APP_API_URL}`;
-            let loading = computed(() => store.getters["Notification/getNotificationLoading"]);
+    let loading = computed(
+      () => store.getters["Notification/getNotificationLoading"]
+    );
 
     return {
       action,

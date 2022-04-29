@@ -43,11 +43,13 @@
     "vue-html2pdf": "^1.8.0",
     "vue-media-upload": "^1.1.3",
     "vue-router": "^4.0.0-0",
+    "vue-timeago3": "^2.1.2",
     "vue-uuid": "^3.0.0",
     "vue3-carousel": "^0.1.38",
     "vue3-date-time-picker": "^2.7.0",
     "vue3-discordpicker": "^1.1.0",
     "vue3-tailwind-datepicker": "^1.0.16",
+    "vue3-timeago": "^1.0.6",
     "vuex": "^4.0.0-0",
     "yup": "^0.32.11"
   },
