@@ -8,7 +8,7 @@ export default {
     return await API.apiClient.post("/notification/room");
   },
   async getAthUserRoomNotifications(page) {
-    return await API.apiClient.get(`/notification/room `, {
+    return await API.apiClient.get(`/notification/room`, {
       params: {
         page,
       },

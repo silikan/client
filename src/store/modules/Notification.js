@@ -3,6 +3,7 @@ import NotificationService from "@/services/NotificationService";
 
 export const namespaced = true;
 function setPaginatedNotification(commit, response) {
+  console.log("setPaginatedNotification", response);
   commit("SET_NOTIFICATIONS", response.data.data);
   commit("SET_NOTIFICATION_META", response.data.meta);
   commit("SET_NOTIFICATION_LINKS", response.data.links);
@@ -135,6 +136,12 @@ export const getters = {
     return state.meta;
   },
   getNotificationLinks(state) {
+    return state.links;
+  },
+  meta(state) {
+    return state.meta;
+  },
+  links(state) {
     return state.links;
   },
 };
