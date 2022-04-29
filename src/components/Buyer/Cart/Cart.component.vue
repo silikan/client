@@ -215,7 +215,11 @@
                       shadow-sm
                     "
                     @click="
-                      setCartItemStatusToAccepted(person.item.cart_item.id)
+                      setCartItemStatusToAccepted(
+                        person.item.cart_item.id,
+                        person.item.client.id,
+                        person.item.handyman.id
+                      )
                     "
                     >accept</a
                   >
@@ -240,7 +244,11 @@
                       shadow-sm
                     "
                     @click="
-                      setCartItemStatusToDeclined(person.item.cart_item.id)
+                      setCartItemStatusToDeclined(
+                        person.item.cart_item.id,
+                        person.item.client.id,
+                        person.item.handyman.id
+                      )
                     "
                     >decline</a
                   >
@@ -264,6 +272,8 @@
                     @click="
                       createTransaction(
                         person.item.cart_item.id,
+                        person.item.handyman.id,
+                        person.item.client.id,
                         person.item.handyman.id
                       )
                     "
@@ -283,7 +293,8 @@
 import { computed, ref } from "@vue/runtime-core";
 import { useStore } from "vuex";
 import Avatar from "@/components/Avatar/Avatar.component.vue";
-import { useRouter } from 'vue-router';
+import { useRouter } from "vue-router";
+import { io } from "socket.io-client";
 
 export default {
   components: {
@@ -294,6 +305,8 @@ export default {
     let store = useStore();
     let cart = ref([]);
     let userId = computed(() => store.getters["auth/id"]);
+    let notificationsocket = io("http://localhost:4000");
+
     console.log(userId.value);
     store
       .dispatch("Cart/getUserCartItems", userId.value)
@@ -307,15 +320,46 @@ export default {
         console.log(error);
       });
 
-    const setCartItemStatusToAccepted = (cartItemId) => {
+    const setCartItemStatusToAccepted = (cartItemId, from, to) => {
       let payload = {
         cart_item_id: cartItemId,
         status: "accepted",
       };
+
       store
         .dispatch("Cart/setCartItemStatusToAccepted", payload)
-        .then((result) => {
+        .then(async (result) => {
+          let toData = {
+            userId: to,
+          };
           console.log(result);
+          let getUserNotificationRoom = await store.dispatch(
+            "Notification/getUserNotificationRoom",
+            toData
+          );
+
+          notificationsocket.on("connect", function () {
+            // Connected, let's sign-up for to receive messages for this room
+            notificationsocket.emit(
+              "notificationRoom",
+              `notification-room-${getUserNotificationRoom.id}`
+            );
+          });
+
+          let notificationpayload = {
+            data: {
+              to: to,
+              from: from,
+              data: "accepted cart item",
+              type: "action",
+              notification_room_id: getUserNotificationRoom.id,
+            },
+          };
+          store.dispatch(
+            "Notification/sendChatNotification",
+            notificationpayload
+          );
+          store.dispatch("Notification/Sendnotification", notificationpayload);
           router.push(`/cart/${cartItemId}/feed`);
         })
         .catch((error) => {
@@ -323,17 +367,48 @@ export default {
         });
     };
 
-    const setCartItemStatusToDeclined = (cartItemId) => {
+    const setCartItemStatusToDeclined = (cartItemId, from, to) => {
       let payload = {
         cart_item_id: cartItemId,
         status: "declined",
       };
       store
         .dispatch("Cart/setCartItemStatusToDeclined", payload)
-        .then((result) => {
+        .then(async (result) => {
           console.log(result);
-                    router.push(`/cart/${cartItemId}/feed`);
 
+          let toData = {
+            userId: to,
+          };
+          console.log(result);
+          let getUserNotificationRoom = await store.dispatch(
+            "Notification/getUserNotificationRoom",
+            toData
+          );
+
+          notificationsocket.on("connect", function () {
+            // Connected, let's sign-up for to receive messages for this room
+            notificationsocket.emit(
+              "notificationRoom",
+              `notification-room-${getUserNotificationRoom.id}`
+            );
+          });
+
+          let notificationpayload = {
+            data: {
+              to: to,
+              from: from,
+              data: "desclined cart item",
+              type: "action",
+              notification_room_id: getUserNotificationRoom.id,
+            },
+          };
+          store.dispatch(
+            "Notification/sendChatNotification",
+            notificationpayload
+          );
+          store.dispatch("Notification/Sendnotification", notificationpayload);
+          router.push(`/cart/${cartItemId}/feed`);
         })
         .catch((error) => {
           console.log(error);
@@ -349,8 +424,7 @@ export default {
         .dispatch("Cart/setCartItemStatusToPaid", payload)
         .then((result) => {
           console.log(result);
-                    router.push(`/cart/${cartItemId}/feed`);
-
+          router.push(`/cart/${cartItemId}/feed`);
         })
         .catch((error) => {
           console.log(error);
@@ -365,8 +439,7 @@ export default {
         .dispatch("Cart/setCartItemStatusToInProgress", payload)
         .then((result) => {
           console.log(result);
-                    router.push(`/cart/${cartItemId}/feed`);
-
+          router.push(`/cart/${cartItemId}/feed`);
         })
         .catch((error) => {
           console.log(error);
@@ -381,8 +454,7 @@ export default {
         .dispatch("Cart/setCartItemStatusToCancelled", payload)
         .then((result) => {
           console.log(result);
-                    router.push(`/cart/${cartItemId}/feed`);
-
+          router.push(`/cart/${cartItemId}/feed`);
         })
         .catch((error) => {
           console.log(error);
@@ -398,8 +470,7 @@ export default {
         .dispatch("Cart/setCartItemStatusToCompleted", payload)
         .then((result) => {
           console.log(result);
-                    router.push(`/cart/${cartItemId}/feed`);
-
+          router.push(`/cart/${cartItemId}/feed`);
         })
         .catch((error) => {
           console.log(error);
@@ -407,7 +478,7 @@ export default {
     }
 
     const authUser = computed(() => store.getters["auth/authUser"]);
-    const createTransaction = (cartItemId, handymanId) => {
+    const createTransaction = (cartItemId, handymanId, from, to) => {
       let payload = {
         cart_item_id: cartItemId,
         client_id: authUser.value.id,
@@ -415,8 +486,41 @@ export default {
       };
       store
         .dispatch("Transaction/createTransaction", payload)
-        .then((result) => {
+        .then(async (result) => {
           console.log(result);
+
+          let toData = {
+            userId: to,
+          };
+          console.log(result);
+          let getUserNotificationRoom = await store.dispatch(
+            "Notification/getUserNotificationRoom",
+            toData
+          );
+
+          notificationsocket.on("connect", function () {
+            // Connected, let's sign-up for to receive messages for this room
+            notificationsocket.emit(
+              "notificationRoom",
+              `notification-room-${getUserNotificationRoom.id}`
+            );
+          });
+
+          let notificationpayload = {
+            data: {
+              to: to,
+              from: from,
+              data: "started checkout",
+              type: "action",
+              notification_room_id: getUserNotificationRoom.id,
+            },
+          };
+          store.dispatch(
+            "Notification/sendChatNotification",
+            notificationpayload
+          );
+          store.dispatch("Notification/Sendnotification", notificationpayload);
+
           router.push({
             name: "Checkout",
             params: {
