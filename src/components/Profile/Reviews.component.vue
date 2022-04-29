@@ -134,7 +134,7 @@
                 </div>
               </div>
               <div
-                class="mt-4 space-y-6 text-base italic text-gray-600"
+                class="mt-4 space-y-6 break-all text-base italic text-gray-600"
                 v-html="review.content"
               />
             </div>
