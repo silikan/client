@@ -80,30 +80,46 @@
         <TabPanel class="p-0.5 -m-0.5 rounded-lg">
           <label for="comment" class="sr-only">Comment</label>
           <div>
+                        <div class="mt-1 relative rounded-md sm:col-span-2">
+
             <textarea
               rows="5"
               name="comment"
               id="comment"
               v-model="comment"
-              class="
-                block
-                w-full
-                py-3
-                h-40
-                -0
-                resize-none
-                focus:ring-0
-                sm:text-sm
-                appearance-none
-                px-3
-                border border-gray-300
-                rounded-md
-                shadow-sm
-                placeholder-gray-400
-                focus:outline-none focus:ring-indigo-500 focus:border-indigo-500
-              "
+           :class="[
+                  commentErrorMessage
+                    ? 'rounded-md block w-full py-3 h-40 -0 resize-none focus:ring-0  pr-10 sm:text-sm  appearance-none px-3 border border-red-300 rounded-md-sm placeholder-red-400 text-red-600 focus:outline-none focus:ring-red-500 focus:border-red-500'
+                    : 'rounded-md  block w-full py-3 h-40 -0 resize-none focus:ring-0  pr-10 sm:text-sm  appearance-none px-3 border border-gray-300 rounded-md-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500',
+                ]"
               placeholder="Add your comment..."
             />
+          <div
+                class="
+                  absolute
+                  inset-y-0
+                  right-0
+                  pr-3
+                  flex
+                  items-center
+                  pointer-events-none
+                "
+              >
+                <ExclamationCircleIcon
+                  class="h-5 w-5 text-red-500"
+                  aria-hidden="true"
+                  v-if="commentErrorMessage"
+                />
+              </div>
+            </div>
+          <p
+              v-if="commentErrorMessage"
+              class="mt-2 text-sm text-red-600"
+              id="email-error"
+            ></p>
+            <p v-if="commentErrorMessage" class="text-red-500 text-xs italic">
+              {{ commentErrorMessage }}
+            </p>
           </div>
         </TabPanel>
       </TabPanels>
@@ -118,6 +134,11 @@ import { reactive, ref } from "@vue/reactivity";
 import { watchEffect } from "@vue/runtime-core";
 import { useStore } from "vuex";
 import { useRoute } from 'vue-router';
+import { useField } from "vee-validate";
+import { ExclamationCircleIcon } from "@heroicons/vue/solid";
+
+import * as yup from "yup";
+
 const reviews = [
   {
     rating: 5,
@@ -134,14 +155,24 @@ export default {
     TabPanels,
 
     StarIcon,
+    ExclamationCircleIcon,
   },
 
   setup() {
-    let comment = ref("");
+
+       let commentValidation = yup
+      .string()
+      .min(10, "comment must be at least 10 characters")
+      .max(500, "comment must be less than 500 characters")
+      .nullable();
+       const { value: comment, errorMessage: commentErrorMessage } = useField(
+      "comment",
+      commentValidation
+    );
 let type = ref("");
     let store = useStore();
     let ratingData = reactive({
-      rating: 0,
+      rating: 1,
     });
     const revieWStarsLogic = (rating) => {
       ratingData.rating = rating;
@@ -192,6 +223,7 @@ let handymanId = ref(null);
       ratingData,
       revieWStarsLogic,
       comment,
+      commentErrorMessage,
     };
   },
 };
