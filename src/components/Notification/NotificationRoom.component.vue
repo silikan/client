@@ -1,8 +1,9 @@
 <template>
-  <div v-if="loading === true">
+{{socketnotificationsdata}}
+  <div v-if="loading === true && isLoggedin">
     <Table />
   </div>
-  <div class="bg-white" v-if="loading === false && links && meta">
+  <div class="bg-white" v-if="loading === false && links && meta && isLoggedin">
     <div class="mx-auto py-12 px-4 max-w-7xl sm:px-6 lg:px-8 lg:py-24">
       <div class="flex w-full items-center justify-between mb-5">
         <div
@@ -105,6 +106,121 @@
                   </tr>
                 </thead>
                 <tbody class="bg-white divide-y divide-gray-200">
+                         <tr
+                    v-for="notification in socketnotificationsdata.slice().reverse()"
+                    :key="notification.id"
+                  >
+                    <td class="px-6 py-4 whitespace-nowrap">
+                      <router-link :to="`/user/${notification.id}`">
+                        <div class="flex items-center">
+                          <div class="flex-shrink-0 h-10 w-10">
+                            <Avatar
+                              v-if="notification.name"
+                              :url="notification.avatar"
+                              :name="notification.name"
+                            />
+                          </div>
+                          <div class="ml-4">
+                            <div class="text-sm font-medium text-gray-900">
+                              {{ notification.name }}
+                            </div>
+                            <div class="text-sm text-gray-500">
+                              {{ notification.email }}
+                            </div>
+                          </div>
+                        </div>
+                      </router-link>
+                    </td>
+                    <td class="px-6 py-4 whitespace-nowrap">
+                      <div class="flex items-center">
+                        <div class="ml-4">
+                          <div class="text-sm text-gray-500">
+                            {{ notification.data }}
+                          </div>
+                        </div>
+                      </div>
+                    </td>
+                    <td class="px-6 py-4 whitespace-nowrap">
+                      <span
+                        class="
+                          px-2
+                          inline-flex
+                          text-xs
+                          leading-5
+                          font-semibold
+                          rounded-full
+                          bg-green-100
+                          text-green-800
+                        "
+                      >
+                        {{ notification.type }}
+                      </span>
+                    </td>
+                    <td class="px-6 py-4 whitespace-nowrap">
+                      <span
+                        class="
+                          px-2
+                          inline-flex
+                          text-xs
+                          leading-5
+                          font-semibold
+                          rounded-full
+                          bg-green-100
+                          text-green-800
+                        "
+                      >
+                        false
+                      </span>
+                    </td>
+                    <td class="px-6 py-4 whitespace-nowrap">
+                      <span
+                        class="
+                          px-2
+                          inline-flex
+                          text-xs
+                          leading-5
+                          font-semibold
+                          rounded-full
+                          bg-red-100
+                          text-red-800
+                        "
+                      >
+                    <timeago :datetime="new Date()"/>
+
+                      </span>
+                    </td>
+                    <td
+                      class="
+                        px-6
+                        py-4
+                        whitespace-nowrap
+                        text-right text-sm
+                        font-medium
+                      "
+                    >
+                      <router-link
+                      v-if="notification.type === 'chat'"
+                        :to="`/room/${notification.chat_room_id}`"
+                        href="#"
+                        class="text-indigo-600 hover:text-indigo-900"
+                        >Check</router-link
+                      >
+                        <router-link
+                        v-if="notification.type === 'request'"
+                        :to="`/cart`"
+                        href="#"
+                        class="text-indigo-600 hover:text-indigo-900"
+                        >Check</router-link
+                      >
+                        <router-link
+                        v-if="notification.type === 'gig'"
+                        :to="`/task`"
+                        href="#"
+                        class="text-indigo-600 hover:text-indigo-900"
+                        >Check</router-link
+                      >
+                    </td>
+                  </tr>
                   <tr
                     v-for="notification in notifications"
                     :key="notification.id"
@@ -449,8 +565,9 @@
 import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/vue/solid";
 import Avatar from "@/components/Avatar/Avatar.component.vue";
 import Table from "@/components/Loading/Skeletons/Table.component.vue";
+import { io } from "socket.io-client";
 
-import { computed, reactive } from "@vue/runtime-core";
+import { computed, reactive, ref } from "@vue/runtime-core";
 import { useStore } from "vuex";
 export default {
   components: {
@@ -458,6 +575,7 @@ export default {
     ChevronRightIcon,
     Avatar,
     Table,
+
   },
 
   setup() {
@@ -465,14 +583,14 @@ export default {
     let store = useStore();
     let meta, links, notifications;
     let path = "handymen";
+        const isLoggedin = computed(() => store.getters["auth/loggedIn"]);
 
     let page = 1;
 
     /* let router = useRouter
      */ store
       .dispatch("Notification/getAthUserRoomNotifications", page)
-      .then((res) => {
-        console.log(res);
+      .then(() => {
       });
     meta = computed(() => {
       return store.getters["Notification/meta"];
@@ -483,12 +601,10 @@ export default {
     notifications = computed(() => {
       return store.getters["Notification/getNotifications"];
     });
-    console.log(meta);
     const prevPage = () => {
       store.dispatch("Notification/getLink", links.value.prev);
     };
     const nextPage = () => {
-      console.log(links.value.next);
       store.dispatch("Notification/getLink", links.value.next);
     };
 
@@ -496,7 +612,6 @@ export default {
       let paginationlink = `${process.env.VUE_APP_API_URL}/api/notification/room?page=${pageNumber}`;
 
       store.dispatch("Notification/getLink", paginationlink);
-      console.log(meta.value);
     };
 
     let currentPage = computed(() => meta.value.current_page);
@@ -519,7 +634,7 @@ export default {
         start = totalPages.value - 4;
       }
       for (let i = start; i <= end; i++) {
-        if (i !== totalPages.value && i !== 1 && i < totalPages) {
+        if (i !== totalPages.value && i !== 1 && i < totalPages.value) {
           data.push(i);
         }
       }
@@ -530,6 +645,61 @@ export default {
     let loading = computed(
       () => store.getters["Notification/getNotificationLoading"]
     );
+
+
+
+
+
+
+
+
+
+
+let socketnotificationsdata = ref([]);
+
+
+
+ let notificationSocket = io("http://localhost:4000");
+   let authUserData = computed(() => store.getters["auth/authUser"]);
+
+    let roomId = authUserData.value.NotificationRoom.id;
+    notificationSocket.on("connect", function () {
+      // Connected, let's sign-up for to receive messages for this room
+      notificationSocket.emit(
+        "notificationRoom",
+        `notification-room-${roomId}`
+      );
+    });
+    notificationSocket.on("notification", function (data) {
+
+      store.dispatch("user/getUser", data.from).then((res) => {
+        let notification = {
+          data: data.data,
+          from: data.from,
+          notification_room_id: data.notification_room_id,
+          to: data.to,
+          type: data.type,
+          show: true,
+          name: res.data.name,
+          avatar: res.data.avatar,
+          id: data.from,
+        };
+
+/*         notifications.value.push(notification);
+ */
+
+  socketnotificationsdata.value.push(notification);
+
+
+});
+    });
+
+
+
+
+
+
+
 
     return {
       action,
@@ -546,6 +716,8 @@ export default {
       totalPages,
       preurl,
       loading,
+      isLoggedin,
+      socketnotificationsdata
     };
   },
 };
@@ -554,19 +726,3 @@ export default {
 
 
 
-    /*  let id =  ref(null);
-    let notificationSocket = io("http://localhost:4000");
-    let store = useStore();
-    let authUserData = computed(() => store.getters["auth/authUser"]);
-    if ( authUserData.value.NotificationRoom ) {
-   id.value = authUserData.value.NotificationRoom.id;
-    }
-   notificationSocket.on("connect", function () {
-      // Connected, let's sign-up for to receive messages for this room
-      console.log(`room-${id.value}`);
-      notificationSocket.emit("notificationRoom", `notification-room-${id.value}`);
-    });
-    notificationSocket.on("notification", function (data) {
-      console.log("notification");
-      console.log(data);
-    }); */
