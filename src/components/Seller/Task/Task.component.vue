@@ -716,7 +716,7 @@ export default {
             data: {
               to: to,
               from: from,
-              data: `confirmed task ${type} item`,
+              data: `confirmed payment for task ${type} item`,
               type: type,
               notification_room_id: getUserNotificationRoom.id,
             },

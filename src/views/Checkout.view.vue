@@ -84,6 +84,8 @@
 </template>
 
 <script>
+import { io } from "socket.io-client";
+
 import Price from "@/components/Checkout/Price.component.vue";
 import Review from "@/components/Checkout/Review.component.vue";
 import StepperComponent from "../components/Checkout/Stepper.component.vue";
@@ -99,6 +101,8 @@ export default {
   setup() {
     let store = useStore();
     let route = useRoute();
+        let notificationsocket = io("http://localhost:4000");
+
     const steps = reactive([
       { name: "Pricing", href: "#", status: "upcoming", active: true },
       { name: "Reviews", href: "#", status: "upcoming", active: false },
@@ -135,7 +139,39 @@ export default {
             cart_item_id: result.cartItem.id,
             status: "paid",
           };
-          store.dispatch("Cart/setCartItemStatusToPaid", payload);
+          store.dispatch("Cart/setCartItemStatusToPaid", payload).then(async ()=>{
+             let toData = {
+            userId: result.handyman.id,
+          };
+          console.log(result);
+          let getUserNotificationRoom = await store.dispatch(
+            "Notification/getUserNotificationRoom",
+            toData
+          );
+
+          notificationsocket.on("connect", function () {
+            // Connected, let's sign-up for to receive messages for this room
+            notificationsocket.emit(
+              "notificationRoom",
+              `notification-room-${getUserNotificationRoom.id}`
+            );
+          });
+
+          let notificationpayload = {
+            data: {
+              to: result.handyman.id,
+              from: result.client.id,
+              data: `paid and added rating for ${result.cartItem.type} item`,
+              type: result.taskItem.type,
+              notification_room_id: getUserNotificationRoom.id,
+            },
+          };
+          store.dispatch(
+            "Notification/sendChatNotification",
+            notificationpayload
+          );
+          store.dispatch("Notification/Sendnotification", notificationpayload);
+          })
         })
         .catch((error) => {
           console.log(error);
