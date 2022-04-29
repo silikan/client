@@ -165,6 +165,7 @@ import { useRoute } from "vue-router";
 import { ref } from "@vue/reactivity";
 import Avatar from "@/components/Avatar/Avatar.component.vue";
 import { computed } from "@vue/runtime-core";
+import { io } from "socket.io-client";
 
 export default {
   components: {
@@ -186,6 +187,7 @@ export default {
     let duration = ref("");
     let views = ref(null);
 
+    let notificationsocket = io("http://localhost:4000");
 
      let authUserId = ref(null);
 let handymanId = ref(null);
@@ -268,7 +270,7 @@ store
     const addToCart = (taskItemId , price) => {
       store
         .dispatch("Request/getRequestUser", id)
-        .then((result) => {
+        .then(async (result) => {
           let authuserId = computed(() => store.getters["auth/id"]);
           console.log(userId.value);
           let payload = {
@@ -282,6 +284,41 @@ store
 
           };
           store.dispatch("Cart/addToCart", payload);
+
+
+ let toData = {
+            userId: result.id,
+          };
+
+          let getUserNotificationRoom = await store.dispatch(
+            "Notification/getUserNotificationRoom",
+            toData
+          );
+
+          notificationsocket.on("connect", function () {
+            // Connected, let's sign-up for to receive messages for this room
+            notificationsocket.emit(
+              "notificationRoom",
+              `notification-room-${getUserNotificationRoom.id}`
+            );
+          });
+
+          let notificationpayload = {
+            data: {
+              to: result.id,
+              from: authuserId.value,
+              data: "added your request to his tasklist",
+              type: "request",
+              notification_room_id: getUserNotificationRoom.id,
+            },
+          };
+          store.dispatch(
+            "Notification/sendChatNotification",
+            notificationpayload
+          );
+          store.dispatch("Notification/Sendnotification", notificationpayload);
+
+
         })
         .catch((err) => {
           console.log(err);

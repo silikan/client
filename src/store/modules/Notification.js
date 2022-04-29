@@ -2,11 +2,19 @@ import { getError } from "@/utils/helpers";
 import NotificationService from "@/services/NotificationService";
 
 export const namespaced = true;
-
+function setPaginatedNotification(commit, response) {
+  commit("SET_NOTIFICATIONS", response.data.data);
+  commit("SET_NOTIFICATION_META", response.data.meta);
+  commit("SET_NOTIFICATION_LINKS", response.data.links);
+  commit("SET_NOTIFICATION_LOADING", false);
+}
 export const state = {
   Notifications: [],
   loading: false,
   error: null,
+  notificationLoading: false,
+  meta: {},
+  links: {},
 };
 
 export const mutations = {
@@ -18,6 +26,15 @@ export const mutations = {
   },
   SET_ERROR(state, error) {
     state.error = error;
+  },
+  SET_NOTIFICATION_LOADING(state, loading) {
+    state.notificationLoading = loading;
+  },
+  SET_NOTIFICATION_META(state, meta) {
+    state.meta = meta;
+  },
+  SET_NOTIFICATION_LINKS(state, links) {
+    state.links = links;
   },
 };
 
@@ -33,20 +50,29 @@ export const actions = {
       commit("SET_LOADING", false);
     }
   },
-  async getRoomNotifications({ commit }, payload) {
+  async getAthUserRoomNotifications({ commit }, page) {
     try {
-      commit("SET_LOADING", true);
-
-      const response = await NotificationService.getRoomNotifications(payload.roomId);
-      commit("SET_LOADING", false);
-
-      return response.data;
+      commit("SET_NOTIFICATION_LOADING", true);
+      const Notifications = await NotificationService.getAthUserRoomNotifications(page);
+      setPaginatedNotification(commit, Notifications);
+      return Notifications.data;
     } catch (error) {
-      commit("SET_LOADING", false);
-
       commit("SET_ERROR", getError(error));
+      commit("SET_NOTIFICATION_LOADING", false);
     }
   },
+  async getLink({ commit }, link) {
+    try {
+      commit("SET_NOTIFICATION_LOADING", true);
+      const Notifications = await NotificationService.getLink(link);
+      setPaginatedNotification(commit, Notifications);
+      return Notifications.data;
+    } catch (error) {
+      commit("SET_ERROR", getError(error));
+      commit("SET_NOTIFICATION_LOADING", false);
+    }
+  },
+
   async Sendnotification({ commit }, payload) {
     try {
       commit("SET_LOADING", true);
@@ -92,4 +118,23 @@ export const actions = {
   },
 };
 
-export const getters = {};
+export const getters = {
+  getNotifications(state) {
+    return state.Notifications;
+  },
+  getLoading(state) {
+    return state.loading;
+  },
+  getError(state) {
+    return state.error;
+  },
+  getNotificationLoading(state) {
+    return state.notificationLoading;
+  },
+  getNotificationMeta(state) {
+    return state.meta;
+  },
+  getNotificationLinks(state) {
+    return state.links;
+  },
+};

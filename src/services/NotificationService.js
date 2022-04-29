@@ -7,8 +7,16 @@ export default {
   async createNotificationRoom() {
     return await API.apiClient.post("/notification/room");
   },
-  async getRoomNotifications(id) {
-    return await API.apiClient.get(`/notification/room/${id}`);
+  async getAthUserRoomNotifications(page) {
+    return await API.apiClient.get(`/notification/room `, {
+      params: {
+        page,
+      },
+    });
+  },
+
+  async getLink(link) {
+    return API.apiClient.get(link);
   },
   async getUserNotificationRoom(id) {
     return await API.apiClient.get(`/user/${id}/notification/room`);
