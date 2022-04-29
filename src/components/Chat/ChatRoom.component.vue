@@ -279,22 +279,41 @@
               border-t border-gray-300
             "
           >
-            <button>
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                class="w-6 h-6 text-gray-500"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
+            <Popover ref="popoverRef" class="relative">
+              <PopoverButton>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="w-6 h-6 text-gray-500"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                  />
+                </svg>
+              </PopoverButton>
+
+              <PopoverPanel
+                class="absolute z-10 w-96 bg-white shadow sm:rounded-lg p-5"
               >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-                />
-              </svg>
-            </button>
+                <!-- We've used 3xl here, but feel free to try other max-widths based on your needs -->
+                <div class="mx-auto overflow-y-auto h-96 scrollbar">
+                  <EmojiPicker
+                    :native="true"
+                     @select="onSelectEmoji"
+                    :hide-search="true"
+                    :hide-group-icons="true"
+                    :hide-group-names="true"
+                    :disable-sticky-group-names="true"
+                    :disable-skin-tones="true"
+                  />
+                </div>
+              </PopoverPanel>
+            </Popover>
 
             <input
               type="text"
@@ -349,7 +368,17 @@
 </template>
 
 <script>
-import { Menu, MenuButton, MenuItem, MenuItems } from "@headlessui/vue";
+import EmojiPicker from "vue3-emoji-picker";
+
+import {
+  Menu,
+  MenuButton,
+  MenuItem,
+  MenuItems,
+  Popover,
+  PopoverButton,
+  PopoverPanel,
+} from "@headlessui/vue";
 import {
   CodeIcon,
   DotsVerticalIcon,
@@ -376,6 +405,10 @@ export default {
     FlagIcon,
     StarIcon,
     Avatar,
+    EmojiPicker,
+    Popover,
+    PopoverButton,
+    PopoverPanel,
   },
   setup() {
     let pages = ref(1);
@@ -399,10 +432,10 @@ export default {
     let savedMessages = computed(() => {
       if (meta.value.current_page == 1 && savedMessagesReactive.length > 0) {
         savedMessagesReactive = store.getters["Chat/messages"];
-        return savedMessagesReactive ;
+        return savedMessagesReactive;
       } else {
-      savedMessagesReactive.push(...store.getters["Chat/messages"]);
-      return savedMessagesReactive;
+        savedMessagesReactive.push(...store.getters["Chat/messages"]);
+        return savedMessagesReactive;
       }
     });
     let links = computed(() => store.getters["Chat/links"]);
@@ -541,7 +574,11 @@ export default {
         }
       });
     });
+function onSelectEmoji(emoji) {
+  console.log(emoji);
+message.value += emoji.i;
 
+}
     return {
       to,
       from,
@@ -562,6 +599,7 @@ export default {
       email,
       typing,
       typingit,
+      onSelectEmoji
     };
   },
 };
