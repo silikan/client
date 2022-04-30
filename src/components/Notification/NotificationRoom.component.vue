@@ -1,5 +1,4 @@
 <template>
-{{socketnotificationsdata}}
   <div v-if="loading === true && isLoggedin">
     <Table />
   </div>
