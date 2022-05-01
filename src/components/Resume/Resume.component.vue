@@ -1,219 +1,233 @@
 <template>
 <button @click="printDocument">download</button>
-  <div class="bg-dark-gray w-full print:bg-red-500 " id="divToPrint">
-    <div
-      class="
-        w-full
-        max-w-6xl
-        mx-auto
-        px-4
-        py-8
-        flex
-        justify-between
-        md:flex-no-wrap
-        flex-wrap
-      "
-    >
-      <div class="md:w-1/3 w-full">
-        <header>
-         <!--  <img
-            src="https://i.ibb.co/fDB3tPT/Group-1.png"
-            alt="Profile"
-            class="ml-12"
-          /> -->
+  <div id="divToPrint">
+<div class="p-20 min-h-screen">
+      <div class="bg-white shadow-xl rounded grid grid-rows-2 lg:grid-rows-1 lg:grid-cols-3">
+        <!-- Left section -->
+        <div class="row-span-1 col-span-1 space-y-4 pt-20 bg-gradient-to-b from-green-100 to-blue-100 dark:from-gray-200 dark:to-gray-400">
 
-        </header>
-        <section class="mt-16">
-          <h3 class="uppercase text-white font-medium text-3xl">
-            Career Objectives
-          </h3>
-          <div class="h-1 bg-green w-48 my-4"></div>
-          <p class="text-white">
-            I am a motivated team player and aspiring web developer with great
-            design and branding knowledge. My ultimate goal is to grow my
-            knowledge of the industry and use my conversational skills to help
-            fast-paced startup design UI/UX charismas.
-          </p>
-        </section>
-
-        <section class="mt-16">
-          <h3 class="uppercase text-white font-medium text-3xl">
-            Specializations
-          </h3>
-          <div class="h-1 bg-green w-48 my-4"></div>
-          <ul class="text-white list-disc list-inside">
-            <li>Front End Design (HTML, CSS, Figma, Sass)</li>
-            <li>
-              <a href="https://tailwindcss.com" class="hover:underline"
-                >TailwindCSS (♥)</a
-              >
-            </li>
-            <li>
-              Javascript ES6/*7 (Data Modelling, Debugging, Async Performance)
-            </li>
-            <li>Front End Development (Vue.js, React.js, Svelte)</li>
-            <li>User Interface/User Experience</li>
-            <li>Design Thinking & Problem Solving</li>
-            <li>
-              Can develop high-performant front-end interfaces which interacts
-              with backend API
-            </li>
-          </ul>
-        </section>
-
-        <section class="mt-16">
-          <h3 class="uppercase text-white font-medium text-3xl">
-            Contact Info:
-          </h3>
-          <div class="h-1 bg-green w-48 my-4"></div>
-          <div class="text-white">
-            <a
-              href="https://linkedin.com/in/justaashir"
-              class="hover:underline flex items-center"
-            >
-              <ion-icon name="logo-linkedin" class="mr-2"></ion-icon>
-              LinkedIn
-            </a>
-            <a
-              href="https://twitter.com/justaashir"
-              class="hover:underline flex items-center mt-1"
-            >
-              <ion-icon name="logo-twitter" class="mr-2"></ion-icon> Twitter
-            </a>
-            <a
-              href="mailto:hello@justaashir.com"
-              class="hover:underline flex items-center mt-1"
-            >
-              <ion-icon name="mail" class="mr-2"></ion-icon>
-              hello@justaashir.com
-            </a>
-            <a
-              href="https://justaashir.com"
-              class="hover:underline flex items-center mt-1"
-            >
-              <ion-icon name="globe" class="mr-2"></ion-icon> www.justaashir.com
-            </a>
+          <!-- Image and name -->
+          <div class="flex flex-col justify-start items-center pb-8">
+            <div>
+              <img class="inline-block w-52 h-52 xl:h-72 xl:w-72 rounded-full ring-2 ring-white object-cover mb-4"  src="https://i.pravatar.cc/300?img=68" alt="me">
+            </div>
+            <div>
+              <h1 class="text-gray-800 text-3xl font-semibold mb-2">Amzil Houdaifa</h1>
+            </div>
+            <div>
+              <h2 class="text-gray-700">Junior full stack developer</h2>
+            </div>
           </div>
-        </section>
+
+
+          <!-- Contact -->
+          <div class="flex flex-col justify-center items-center lg:items-start lg:justify-start  pl-8 md:pl-2 xl:pl-12 space-y-4">
+            <div><h1 class="text-2xl font-semibold">Contact</h1></div>
+            <div class="flex justify-around items-center space-x-4">
+              <div><i class="fas fa-envelope text-lg"></i></div>
+              <div><h4 class="sm:text-base 2xl:text-xl text-gray-700 lg:leading-loose sm:leading-relaxed sm:tracking-relaxed">houdaifaamzil@gmail.com</h4></div>
+            </div>
+            <div class="flex justify-around items-center space-x-4">
+              <div><i class="fas fa-phone-alt text-lg"></i></div>
+              <div><h4 class="sm:text-base 2xl:text-xl text-gray-700 lg:leading-loose sm:leading-relaxed sm:tracking-relaxed">+212 634 69 98 99</h4></div>
+            </div>
+            <div class="flex justify-around items-center space-x-4">
+              <div><i class="fas fa-home text-lg"></i></div>
+              <div><h4 class="sm:text-base 2xl:text-xl text-gray-700 lg:leading-loose sm:leading-relaxed sm:tracking-relaxed">Khawa dini n Bni makada NR 53</h4></div>
+            </div>
+          </div>
+
+
+          <!-- Personal -->
+          <div class="flex flex-col justify-center items-center lg:items-start lg:justify-start pl-8 md:pl-2 xl:pl-12 pt-8 space-y-4">
+            <div><h1 class="text-2xl font-semibold">Personal</h1></div>
+            <div class="flex justify-around items-center space-x-4">
+              <div><i class="fas fa-baby text-lg"></i></div>
+              <div><h4 class="sm:text-base 2xl:text-xl text-gray-700 lg:leading-loose sm:leading-relaxed sm:tracking-relaxed">Born on 20th of June 1998</h4></div>
+            </div>
+            <div class="flex justify-around items-center space-x-4">
+              <div><i class="fas fa-male text-lg"></i></div>
+              <div><h4 class="sm:text-base 2xl:text-xl text-gray-700 lg:leading-loose sm:leading-relaxed sm:tracking-relaxed">Single</h4></div>
+            </div>
+          </div>
+
+          <!-- Web -->
+          <div class="flex flex-col justify-center items-center pl-8 md:pl-2 lg:items-start lg:justify-start xl:pl-12 pt-8 space-y-4">
+            <div><h1 class="text-2xl font-semibold">Web</h1></div>
+            <div class="flex justify-around items-center space-x-4">
+              <div><i class="fab fa-twitter text-lg"></i></div>
+              <div><a href="https://twitter.com/H_amzil14" target="_blank" class="sm:text-base 2xl:text-xl hover:text-turquoise text-gray-700 lg:leading-loose sm:leading-relaxed sm:tracking-relaxed">Twitter</a></div>
+            </div>
+            <div class="flex justify-around items-center space-x-4">
+              <div><i class="fab fa-linkedin text-lg"></i></div>
+              <div><a href="https://www.linkedin.com/in/houdaifa-amzil-a4b275158/" target="_blank" class="sm:text-base 2xl:text-xl hover:text-turquoise text-gray-700 lg:leading-loose sm:leading-relaxed sm:tracking-relaxed">LinkedIn</a></div>
+            </div>
+            <div class="flex justify-around items-center space-x-4">
+              <div><i class="fab fa-github text-lg"></i></div>
+              <div><a href="https://github.com/Houdaifi" target="_blank" class="sm:text-base 2xl:text-xl hover:text-turquoise text-gray-700 lg:leading-loose sm:leading-relaxed sm:tracking-relaxed">Github</a></div>
+            </div>
+          </div>
+
+          <!-- Languages -->
+          <div class="flex flex-col justify-center items-center pl-8 lg:items-start lg:justify-start md:pl-2 xl:pl-12 py-4">
+            <div><h1 class="text-2xl font-semibold mb-4">Languages</h1></div>
+            <div class="flex mb-3">
+              <div><h2 class="sm:text-base 2xl:text-xl font-semibold lg:leading-loose sm:leading-relaxed sm:tracking-relaxed">Arabic :</h2></div>
+              <div class="text-gray-700 lg:text-lg ml-2">Native</div>
+            </div>
+            <div class="flex mb-3">
+              <div><h2 class="sm:text-base 2xl:text-xl font-semibold lg:leading-loose sm:leading-relaxed sm:tracking-relaxed">English :</h2></div>
+              <div class="text-gray-700 lg:text-lg ml-2">C1</div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Right section -->
+        <div class="row-span-1 lg:col-span-2 bg-white dark:bg-gray-700 dark:text-gray-300 flex flex-col p-4 sm:p-12 border-r">
+
+          <!-- Profile -->
+          <div class="space-y-4">
+            <h1 class="text-3xl border-l-8 mb-8 border-green-200">Profile</h1>
+            <p class="sm:text-base 2xl:text-xl text-gray-500 dark:text-gray-300 leading-loose sm:tracking-relaxed">Lorem ipsum dolor sit amet consectetur adipisicing elit. Necessitatibus est sed eaque distinctio saepe, commodi, nisi enim aliquam quae labore quidem vitae tempore! Fuga.</p>
+            <hr class="border-gray-200">
+          </div>
+
+          <!-- Experience -->
+          <div class="space-y-4 mt-8">
+            <h1 class="text-3xl border-l-8 border-green-200">Experience</h1>
+
+            <div class="flex space-x-8 md:space-x-14 pt-8 sm:pl-4 lg:pl-8 text-gray-500 dark:text-gray-300 text-base lg:text-xl">
+              <div>
+                <h2 style="max-width:50px;" class="text-sm sm:text-base md:text-xl">2020-</h2>
+              </div>
+              <div class="border border-gray-400"></div>
+              <div>
+                <h2 class="text-gray-800 dark:text-gray-300">Junior Full Stack Developer</h2>
+                <h2 class="text-gray-600 dark:text-gray-400">Company name</h2>
+              </div>
+            </div>
+            <div class="flex space-x-8 md:space-x-14 pt-8 sm:pl-4 lg:pl-8 text-gray-500 dark:text-gray-300 text-base lg:text-xl">
+              <div>
+                <h2 style="max-width:50px;" class="text-sm sm:text-base md:text-xl">2018-2020
+</h2>
+              </div>
+              <div class="border border-gray-400"></div>
+              <div>
+                <h2 class="text-gray-800 dark:text-gray-300">Job</h2>
+                <h2 class="text-gray-600 dark:text-gray-400">Company name</h2>
+              </div>
+            </div>
+            <hr class="border-gray-200">
+          </div>
+
+          <!-- Formation -->
+          <div class="space-y-4 mt-8">
+            <h1 class="text-3xl border-l-8 border-green-200">Formation</h1>
+
+            <div class="flex space-x-8 md:space-x-14 pt-8 sm:pl-4 lg:pl-8 text-gray-500 dark:text-gray-300 text-base lg:text-xl">
+              <div class="flex space-x-4">
+                <h2 style="max-width:50px;" class="text-sm sm:text-base md:text-xl dark:text-gray-300">2020-2021</h2>
+              </div>
+              <div class="border border-gray-400"></div>
+              <div>
+                <h2 class="text-gray-800 dark:text-gray-300">Formation name</h2>
+                <h2 class="text-gray-600 dark:text-gray-400">University</h2>
+              </div>
+            </div>
+
+            <div class="flex space-x-8 md:space-x-14 pt-8 sm:pl-4 lg:pl-8 text-gray-500 dark:text-gray-300 text-base lg:text-xl">
+              <div class="flex space-x-4">
+                <h2 style="max-width:50px;" class="text-sm sm:text-base md:text-xl dark:text-gray-300">2020-2021</h2>
+              </div>
+              <div class="border border-gray-400"></div>
+              <div>
+                <h2 class="text-gray-800 dark:text-gray-300">Formation name</h2>
+                <h2 class="text-gray-600 dark:text-gray-400">University</h2>
+              </div>
+            </div>
+            <hr class="border-gray-200">
+          </div>
+
+          <!-- Projects -->
+          <div class="space-y-4 mt-8">
+            <h1 class="text-3xl border-l-8 border-green-200">Skills</h1>
+
+            <div class="relative pt-8">
+              <div class="flex justify-start space-x-12 mb-4 items-center">
+                <div class="flex-1">
+                  <h2 class="text-gray-800 text-sm sm:text-base md:text-xl mb-2 dark:text-gray-300">Javascript</h2>
+                  <div class="overflow-hidden h-2 mb-4 text-xs  flex space-x-44 rounded bg-gray-200">
+                    <div style="width:70%" class="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-green-200"></div>
+                  </div>
+                </div>
+                <div class="flex-1">
+                  <h2 class="text-gray-800 text-sm sm:text-base md:text-xl mb-2 dark:text-gray-300">Vue JS</h2>
+                  <div class="overflow-hidden h-2 mb-4 text-xs  flex space-x-44 rounded bg-gray-200">
+                    <div style="width:80%" class="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-green-200"></div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="flex justify-start space-x-12 mb-4 items-center">
+                <div class="flex-1">
+                  <h2 class="text-gray-800 text-sm sm:text-base md:text-xl mb-2 dark:text-gray-300">Tailwind CSS</h2>
+                  <div class="overflow-hidden h-2 mb-4 text-xs  flex space-x-44 rounded bg-gray-200">
+                    <div style="width:90%" class="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-green-200"></div>
+                  </div>
+                </div>
+                <div class="flex-1">
+                  <h2 class="text-gray-800 text-sm sm:text-base md:text-xl mb-2 dark:text-gray-300">Bootstrap</h2>
+                  <div class="overflow-hidden h-2 mb-4 text-xs  flex space-x-44 rounded bg-gray-200">
+                    <div style="width:80%" class="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-green-200"></div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="flex justify-start space-x-12 mb-4 items-center">
+                <div class="flex-1">
+                  <h2 class="text-gray-800 text-sm sm:text-base md:text-xl mb-2 dark:text-gray-300">Laravel</h2>
+                  <div class="overflow-hidden h-2 mb-4 text-xs  flex space-x-44 rounded bg-gray-200">
+                    <div style="width:65%" class="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-green-200"></div>
+                  </div>
+                </div>
+                <div class="flex-1">
+                  <h2 class="text-gray-800 text-sm sm:text-base md:text-xl mb-2 dark:text-gray-300">MySQL</h2>
+                  <div class="overflow-hidden h-2 mb-4 text-xs  flex space-x-44 rounded bg-gray-200">
+                    <div style="width:85%" class="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-green-200"></div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="flex justify-start space-x-12 mb-4 items-center">
+                <div class="flex-1">
+                  <h2 class="text-gray-800 text-sm sm:text-base md:text-xl mb-2 dark:text-gray-300">Android Developement</h2>
+                  <div class="overflow-hidden h-2 mb-4 text-xs  flex space-x-44 rounded bg-gray-200">
+                    <div style="width:60%" class="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-green-200"></div>
+                  </div>
+                </div>
+                <div class="flex-1">
+                  <h2 class="text-gray-800 text-sm sm:text-base md:text-xl mb-2 dark:text-gray-300">Flutter</h2>
+                  <div class="overflow-hidden h-2 mb-4 text-xs  flex space-x-44 rounded bg-gray-200">
+                    <div style="width:50%" class="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-green-200"></div>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+
       </div>
-      <div class="md:w-2/4 w-full">
-        <section class="mt-16 md:mt-0">
-          <h3 class="uppercase text-white font-medium text-3xl">
-            Work Summary
-          </h3>
-          <div class="h-1 bg-green w-48 my-4"></div>
-
-          <div class="mt-8">
-            <h4 class="font-medium text-green text-2xl">
-              Junior Front-end engineer
-            </h4>
-            <h5 class="text-xl text-green">
-              <a href="https://renetal.com" class="hover:underline">Renetal</a>
-              | <i>2019 - JULY 2020</i>
-            </h5>
-            <ul class="text-white list-disc list-inside mt-4">
-              <li>Designed high-performant UI Components</li>
-              <li>Complete SaaS app redesign using VueJs</li>
-              <li>
-                Worked with an amazing remote-team from SIngapore in an agile
-                environment.
-              </li>
-            </ul>
-          </div>
-
-          <div class="mt-8">
-            <h4 class="font-medium text-green text-2xl">Founder &lt; CEO</h4>
-            <h5 class="text-xl text-green">
-              <a href="https://justifyagency.com" class="hover:underline"
-                >Justify Agency</a
-              >
-              | <i>2020 - Present</i>
-            </h5>
-            <ul class="text-white list-disc list-inside mt-4">
-              <li>
-                Meeting with clients to discuss project requirements and
-                workflow. (Includes Startups & Products)
-              </li>
-              <li>Working with distributed network of freelancers</li>
-              <li>
-                fuck me
-              </li>
-            </ul>
-          </div>
-        </section>
-        <section class="mt-16">
-          <h3 class="uppercase text-white font-medium text-3xl">
-            Freelance &amp; Other fun stuff
-          </h3>
-          <div class="h-1 bg-green w-48 my-4"></div>
-
-          <div class="mt-8">
-            <h4 class="font-medium text-green text-2xl">
-              Shopify Freelance Associate
-            </h4>
-            <p class="text-white">
-              Proud member of the shopify community, and their partner program.
-              Setting up Shopify stores and making custom themes from a long
-              time.
-            </p>
-          </div>
-
-          <div class="mt-8">
-            <h4 class="font-medium text-green text-2xl">
-              <a href="https://dev.to/justaashir" class="hover:underline"
-                >DEV Community</a
-              >
-              (Volunteer & Technical Writer)
-            </h4>
-            <ul class="text-white list-disc list-inside mt-4">
-              <li>Have written about Vuejs, career advice and resources...</li>
-              <li>Top 500 Author (Award)</li>
-              <li>16,000+ Followers + 150K+ Views</li>
-              <li>5 Badges</li>
-            </ul>
-          </div>
-        </section>
-        <section class="mt-16">
-          <h3 class="uppercase text-white font-medium text-3xl">
-            Passion Projects
-          </h3>
-          <div class="h-1 bg-green w-48 my-4"></div>
-
-          <div class="mt-8">
-            <h4 class="font-medium text-green text-2xl">
-              <a href="https://tailwindcssuikit.com" class="hover:underline"
-                >Tailwind CSS Ui Kit</a
-              >
-            </h4>
-            <p class="text-white mt-2">
-              Building this, in my free time. Making modern design systems and
-              kits possible with TailwindCSS
-            </p>
-          </div>
-
-          <div class="mt-8">
-            <h4 class="font-medium text-green text-2xl">
-              <a href="https://remoteworkjar.com" class="hover:underline"
-                >RemoteWorkJar</a
-              >
-            </h4>
-            <p class="text-white mt-2">
-              Remote Job Board, where the main focus is to manually screen every
-              job posted and help candidates get high-quality remote-only job
-              postings.
-            </p>
-          </div>
-        </section>
-      </div>
-    </div>
+  </div>
   </div>
 </template>
 
 <script>
 //importing bootstrap 5 and pdf maker Modules
-import pdfMake from "pdfmake";
-import pdfFonts from "pdfmake/build/vfs_fonts";
-import htmlToPdfmake from "html-to-pdfmake";
+import html2canvas from "html2canvas"
+import { jsPDF } from "jspdf";
+
 export default {
   methods: {
 
@@ -221,14 +235,22 @@ export default {
 
   setup() {
 const     printDocument = () => {
-      //get table html
-      const pdfTable = document.getElementById("divToPrint");
-      //html to pdf format
-      var html = htmlToPdfmake(pdfTable.innerHTML);
+      const captureElement = document.querySelector('#divToPrint')
 
-      const documentDefinition = { content: html };
-      pdfMake.vfs = pdfFonts.pdfMake.vfs;
-      pdfMake.createPdf(documentDefinition).download();
+    html2canvas(captureElement)
+        .then(canvas => {
+            canvas.style.display = 'none'
+            document.body.appendChild(canvas)
+            return canvas
+        })
+        .then(canvas => {
+           var imgData = canvas.toDataURL("image/svg", 1.0);
+  var pdf = new jsPDF();
+ let width = pdf.internal.pageSize.getWidth();
+    let height = pdf.internal.pageSize.getHeight();
+  pdf.addImage(imgData, 'SVG', 0, 0,width,height);
+  pdf.save("download.pdf");
+        })
     }
     return {
       printDocument
