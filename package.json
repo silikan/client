@@ -51,6 +51,7 @@
     "vue3-date-time-picker": "^2.7.0",
     "vue3-discordpicker": "^1.1.0",
     "vue3-emoji-picker": "^1.1.2",
+    "vue3-popper": "^1.4.2",
     "vue3-tailwind-datepicker": "^1.0.16",
     "vue3-timeago": "^1.0.6",
     "vuex": "^4.0.0-0",
