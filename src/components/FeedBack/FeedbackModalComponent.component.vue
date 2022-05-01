@@ -370,7 +370,7 @@
                     focus:ring-indigo-500
                     sm:col-start-2 sm:text-sm
                   "
-                  @click="open = false"
+                  @click="postFeedback"
                 >
                   Post
                 </button>
@@ -425,6 +425,7 @@ import {
   TransitionRoot,
 } from "@headlessui/vue";
 import { QuestionMarkCircleIcon } from "@heroicons/vue/outline";
+import { useStore } from 'vuex';
 
 export default {
   components: {
@@ -440,7 +441,7 @@ export default {
     const open = ref(true);
     let nameValidation = yup.string().required("Name is required");
     let emailValidation = yup.string().email("Email is invalid");
-
+let store = useStore();
     const phoneRegExp =
       /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/;
     let phoneValidation = yup
@@ -468,6 +469,15 @@ export default {
       "message",
       messageValidation
     );
+    let postFeedback = () => {
+      let payload = {
+        name: name.value,
+        email: email.value,
+        phone: phone.value,
+        message: message.value,
+      }
+      store.dispatch('FeedBack/postFeedBack', payload);
+    };
 
     return {
       open,
@@ -479,6 +489,7 @@ export default {
       emailErrorMessage,
       phoneErrorMessage,
       messageErrorMessage,
+      postFeedback
     };
   },
 };
