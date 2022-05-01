@@ -18,29 +18,30 @@ import * as BuyerFeed from "@/store/modules/BuyerFeed";
 import * as SellerFeed from "@/store/modules/SellerFeed";
 import * as Transaction from "@/store/modules/Transaction";
 import * as Notification from "@/store/modules/Notification";
-
+import * as FeedBack from "@/store/modules/FeedBack";
 export default createStore({
-  strict: true,
+    strict: true,
 
-  modules: {
-    auth,
-    user,
-    handyman,
-    Chat,
-    Loading,
-    Gig,
-    Request,
-    Cart,
-    Task,
-    Search,
-    Category,
-    Admin,
-    Moderator,
-    Review,
-    Checkout,
-    BuyerFeed,
-    SellerFeed,
-    Transaction,
-    Notification,
-  },
+    modules: {
+        auth,
+        user,
+        handyman,
+        Chat,
+        Loading,
+        Gig,
+        Request,
+        Cart,
+        Task,
+        Search,
+        Category,
+        Admin,
+        Moderator,
+        Review,
+        Checkout,
+        BuyerFeed,
+        SellerFeed,
+        Transaction,
+        Notification,
+        FeedBack,
+    },
 });
