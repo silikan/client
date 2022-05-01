@@ -105,6 +105,7 @@
                   focus:ring-offset-2
                   focus:ring-indigo-500
                 "
+                @click="toggleFeedback"
               >
                 <!-- Heroicon name: outline/plus-sm -->
                 <QuestionMarkCircleIcon
@@ -140,15 +141,19 @@ ref
     let store = useStore();
         const isLoggedin = computed(() => store.getters["auth/loggedIn"]);
 let isHandyman = ref(false);
-if(isLoggedin) {
-      let authUser = computed(() => store.getters["auth/authUser"]);
+
+if(isLoggedin.value ) {
+        let authUser = computed(() => store.getters["auth/authUser"]);
+
 watchEffect(() => {
       isHandyman.value= authUser.value.isHandyman;
 });
 }
 console.log(isHandyman.value);
-
-    return {isLoggedin , isHandyman};
+let toggleFeedback = () => {
+        store.dispatch('FeedBack/toggleFeedBack');
+}
+    return {isLoggedin , isHandyman,toggleFeedback};
   },
 };
 </script>

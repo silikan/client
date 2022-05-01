@@ -3,6 +3,7 @@ import { getError } from "@/utils/helpers";
 export const namespaced = true;
 
 export const state = {
+    open: false,
     feedback: {},
     feedbacks: [],
     error: null,
@@ -22,6 +23,9 @@ export const mutations = {
     SET_ERROR(state, payload) {
         state.error = payload;
     },
+    SET_OPEN(state, payload) {
+        state.open = payload;
+    },
 };
 
 export const actions = {
@@ -37,6 +41,9 @@ export const actions = {
             commit("SET_ERROR", getError(error));
         }
     },
+    toggleFeedBack({ commit }) {
+        commit("SET_OPEN", !state.open);
+    },
 };
 
 export const getters = {
@@ -51,5 +58,8 @@ export const getters = {
     },
     loading(state) {
         return state.loading;
+    },
+    open(state) {
+        return state.open;
     },
 };

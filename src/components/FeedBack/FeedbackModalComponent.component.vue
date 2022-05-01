@@ -4,7 +4,7 @@
       <Dialog
         as="div"
         class="fixed z-10 inset-0 overflow-y-auto"
-        @close="open = false"
+        @close="toggleFeedback"
       >
         <div
           class="
@@ -397,7 +397,7 @@
                     focus:ring-indigo-500
                     sm:mt-0 sm:col-start-1 sm:text-sm
                   "
-                  @click="open = false"
+                  @click="toggleFeedback"
                   ref="cancelButtonRef"
                 >
                   Cancel
@@ -416,7 +416,7 @@ import { useField } from "vee-validate";
 import * as yup from "yup";
 import { ExclamationCircleIcon } from "@heroicons/vue/solid";
 
-import { ref } from "vue";
+import { computed } from "vue";
 import {
   Dialog,
   DialogOverlay,
@@ -438,7 +438,6 @@ export default {
     ExclamationCircleIcon
   },
   setup() {
-    const open = ref(true);
     let nameValidation = yup.string().required("Name is required");
     let emailValidation = yup.string().email("Email is invalid");
 let store = useStore();
@@ -479,6 +478,10 @@ let store = useStore();
       store.dispatch('FeedBack/postFeedBack', payload);
     };
 
+let toggleFeedback = () => {
+        store.dispatch('FeedBack/toggleFeedBack');
+}
+let open = computed(()=>store.getters['FeedBack/open'])
     return {
       open,
       name,
@@ -489,7 +492,8 @@ let store = useStore();
       emailErrorMessage,
       phoneErrorMessage,
       messageErrorMessage,
-      postFeedback
+      postFeedback,
+      toggleFeedback
     };
   },
 };

@@ -368,7 +368,7 @@
                           id="search"
                           name="search"
                           v-model="search"
-                          @keyup="searchUserFun"
+                          @keydown.enter="searchUserFun"
                           class="
                             rounded-full
                             block
@@ -424,6 +424,7 @@ import { Popover, PopoverButton, PopoverPanel } from "@headlessui/vue";
 import { MenuIcon, XIcon } from "@heroicons/vue/outline";
 import { SearchIcon } from "@heroicons/vue/solid";
 import { ref } from "@vue/reactivity";
+import { useRouter } from 'vue-router';
 const navigation = [
   { name: "About", link: "/aboutus" },
   { name: "Contact", link: "/contactus" },
@@ -443,11 +444,15 @@ export default {
     SearchIcon,
   },
   setup() {
+    let router = useRouter();
     let search = ref("");
-
+let searchUserFun = () => {
+router.push(`/search/gigs/${search.value}`);
+  }
     return {
       navigation,
       search,
+      searchUserFun
     };
   },
 };
