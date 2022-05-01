@@ -3,7 +3,7 @@
     <Teleport to=".notifications">
       <BasicNotification class="z-50 mt-10" v-if="isLoggedin" />
     </Teleport>
-
+<FeedbackModalComponent/>
     <Teleport to=".action">
       <FloatingActionButton />
     </Teleport>
@@ -15,6 +15,8 @@
 </template>
 <script>
 import FloatingActionButton from "./components/Action/FloatingActionButton.component.vue";
+import FeedbackModalComponent from "./components/FeedBack/FeedbackModalComponent.component.vue";
+
 import LoadingBar from "./components/Loading/LoadingBar.component.vue";
 import { computed, watchEffect } from "vue";
 import { useRoute } from "vue-router";
@@ -31,6 +33,7 @@ export default {
     LoadingBar,
     BasicNotification,
     FloatingActionButton,
+    FeedbackModalComponent
   },
 
   setup() {
