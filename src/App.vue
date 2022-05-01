@@ -1,19 +1,22 @@
 <template>
   <div class="h-screen min-h-full flex flex-col justify-between">
-      <Teleport to=".notifications" >
-    <BasicNotification class="z-50 mt-10" v-if="isLoggedin"  />
+    <Teleport to=".notifications">
+      <BasicNotification class="z-50 mt-10" v-if="isLoggedin" />
     </Teleport>
-    <FloatingActionButton/>
-    <Navbar :authUser="authUser" v-if="path" class="mb-0"/>
-    <LoadingBar class="mt-0"/>
+
+    <Teleport to=".action">
+      <FloatingActionButton />
+    </Teleport>
+    <Navbar :authUser="authUser" v-if="path" class="mb-0" />
+    <LoadingBar class="mt-0" />
     <router-view />
     <Footer />
   </div>
 </template>
 <script>
-import FloatingActionButton from './components/FeedBack/FloatingActionButton.component.vue';
-import LoadingBar from './components/Loading/LoadingBar.component.vue'
-import { computed,  watchEffect } from "vue";
+import FloatingActionButton from "./components/Action/FloatingActionButton.component.vue";
+import LoadingBar from "./components/Loading/LoadingBar.component.vue";
+import { computed, watchEffect } from "vue";
 import { useRoute } from "vue-router";
 import { useStore } from "vuex";
 import Footer from "./components/Footer.component.vue";
@@ -22,10 +25,15 @@ import BasicNotification from "./components/Notification/Notifications/Basic.com
 
 export default {
   name: "App",
-  components: { Footer, Navbar,LoadingBar,BasicNotification ,FloatingActionButton},
+  components: {
+    Footer,
+    Navbar,
+    LoadingBar,
+    BasicNotification,
+    FloatingActionButton,
+  },
 
   setup() {
-
     const route = useRoute();
     const path = computed(() => route.path !== "/");
     const store = useStore();
