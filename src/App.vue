@@ -3,6 +3,7 @@
       <Teleport to=".notifications" >
     <BasicNotification class="z-50 mt-10" v-if="isLoggedin"  />
     </Teleport>
+    <FloatingActionButton/>
     <Navbar :authUser="authUser" v-if="path" class="mb-0"/>
     <LoadingBar class="mt-0"/>
     <router-view />
@@ -10,6 +11,7 @@
   </div>
 </template>
 <script>
+import FloatingActionButton from './components/FeedBack/FloatingActionButton.component.vue';
 import LoadingBar from './components/Loading/LoadingBar.component.vue'
 import { computed,  watchEffect } from "vue";
 import { useRoute } from "vue-router";
@@ -20,7 +22,7 @@ import BasicNotification from "./components/Notification/Notifications/Basic.com
 
 export default {
   name: "App",
-  components: { Footer, Navbar,LoadingBar,BasicNotification },
+  components: { Footer, Navbar,LoadingBar,BasicNotification ,FloatingActionButton},
 
   setup() {
 
