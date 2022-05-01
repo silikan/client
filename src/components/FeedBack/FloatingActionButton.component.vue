@@ -14,7 +14,7 @@
               class="
                 inline-flex
                 items-center
-                p-3
+                p-4
                 border border-transparent
                 rounded-full
                 shadow-sm
@@ -28,8 +28,8 @@
               "
             >
               <!-- Heroicon name: outline/plus-sm -->
-              <QuestionMarkCircleIcon
-                class="h-5 w-5 text-white"
+              <LightningBoltIcon
+                class="h-6 w-6 text-white"
                 aria-hidden="true"
               />
             </button>
@@ -79,7 +79,7 @@
                 "
               >
                 <!-- Heroicon name: outline/plus-sm -->
-                <QuestionMarkCircleIcon
+                <DocumentAddIcon
                   class="h-5 w-5 text-white"
                   aria-hidden="true"
                 />
@@ -103,7 +103,7 @@
                 "
               >
                 <!-- Heroicon name: outline/plus-sm -->
-                <QuestionMarkCircleIcon
+                <FolderAddIcon
                   class="h-5 w-5 text-white"
                   aria-hidden="true"
                 />
@@ -120,10 +120,13 @@
 <script>
 import Popper from "vue3-popper";
 
-import { QuestionMarkCircleIcon } from "@heroicons/vue/solid";
+import { QuestionMarkCircleIcon , LightningBoltIcon , DocumentAddIcon , FolderAddIcon } from "@heroicons/vue/solid";
 export default {
   components: {
     QuestionMarkCircleIcon,
+    LightningBoltIcon,
+    DocumentAddIcon,
+    FolderAddIcon,
     Popper,
   },
 };
