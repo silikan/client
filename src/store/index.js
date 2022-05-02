@@ -19,6 +19,7 @@ import * as SellerFeed from "@/store/modules/SellerFeed";
 import * as Transaction from "@/store/modules/Transaction";
 import * as Notification from "@/store/modules/Notification";
 import * as FeedBack from "@/store/modules/FeedBack";
+import * as Blog from "@/store/modules/Blog";
 export default createStore({
     strict: true,
 
@@ -43,5 +44,6 @@ export default createStore({
         Transaction,
         Notification,
         FeedBack,
+        Blog,
     },
 });
