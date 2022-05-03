@@ -18,7 +18,7 @@
         <!-- Notification panel, dynamically insert this into the live region when it needs to be displayed -->
 
         <div class="pointer-events-auto">
-          <Popper placement="top" :hover="true">
+          <Popper placement="top" >
             <button
               type="button"
               class="

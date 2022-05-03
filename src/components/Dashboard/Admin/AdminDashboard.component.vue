@@ -402,7 +402,7 @@ import {
   ScaleIcon,
     QuestionMarkCircleIcon,
   XIcon,
-} from "@heroicons/vue/outline";
+} from "@heroicons/vue/solid";
 import {
   CashIcon,
   CheckCircleIcon,
