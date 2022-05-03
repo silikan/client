@@ -18,7 +18,7 @@
         <!-- Notification panel, dynamically insert this into the live region when it needs to be displayed -->
 
         <div class="pointer-events-auto">
-          <Popper placement="top" :hover="true">
+          <Popper placement="top" >
             <button
               type="button"
               class="
@@ -192,7 +192,7 @@ import {
   AdjustmentsIcon,
 } from "@heroicons/vue/solid";
 import { useStore } from "vuex";
-import { computed, ref, watchEffect } from "@vue/runtime-core";
+import { computed, ref } from "@vue/runtime-core";
 export default {
   components: {
     QuestionMarkCircleIcon,
@@ -207,20 +207,18 @@ export default {
     ref;
     let store = useStore();
     const isLoggedin = computed(() => store.getters["auth/loggedIn"]);
-    let isHandyman = ref(false);
-    let isAdmin = ref(false);
-    let isModerator = ref(false);
 
-    if (isLoggedin.value) {
+
+let isHandyman , isModerator , isAdmin;
+if (isLoggedin.value === true) {
       let authUser = computed(() => store.getters["auth/authUser"]);
+        isHandyman = computed(() => authUser.value.isHandyman );
+        isAdmin = computed(() => authUser.value.isAdmin);
+       isModerator = computed(()=> authUser.value.isModerator);
+       return {isHandyman , isAdmin , isModerator , isLoggedin , toggleFeedback};
 
-      watchEffect(() => {
-        isHandyman.value = authUser.value.isHandyman;
-        isAdmin.value = authUser.value.isAdmin;
-        isModerator.value = authUser.value.isModerator;
-      });
-    }
-    console.log(isHandyman.value);
+}
+
     let toggleFeedback = () => {
       store.dispatch("FeedBack/toggleFeedBack");
     };

@@ -11,7 +11,6 @@ function setPaginatedGigs(commit, response) {
 }
 
 function setPaginatedUsers(commit, response) {
-    console.log(response.data);
     commit("SET_USERS", response.data.data);
     commit("SET_USERS_META", response.data.meta);
     commit("SET_USERS_LINKS", response.data.links);
@@ -19,7 +18,6 @@ function setPaginatedUsers(commit, response) {
 }
 
 function setPaginatedClientRequest(commit, response) {
-    console.log(response.data);
     commit("SET_CLIENT_REQUEST", response.data.data);
     commit("SET_CLIENT_REQUEST_META", response.data.meta);
     commit("SET_CLIENT_REQUEST_LINKS", response.data.links);
@@ -27,7 +25,6 @@ function setPaginatedClientRequest(commit, response) {
 }
 
 function setPaginatedTransactions(commit, response) {
-    console.log(response.data);
     commit("SET_TRANSACTIONS", response.data.data);
     commit("SET_TRANSACTIONS_META", response.data.meta);
     commit("SET_TRANSACTIONS_LINKS", response.data.links);
@@ -332,7 +329,8 @@ export const actions = {
     async getAllFeedBackPaginate({ commit }, page) {
         try {
             commit("SET_FEEDBACK_LOADING", true);
-            const FeedBack = await AdminServices.getAllFeedBackPaginate(page);
+            const FeedBack = await AdminServices.getAllFeedBackPaginated(page);
+            console.log(FeedBack);
             setPaginatedFeedBack(commit, FeedBack);
             return FeedBack.data;
         } catch (error) {
@@ -406,15 +404,15 @@ export const getters = {
         return state.transactionsLoading;
     },
     getFeedBack(state) {
-        return state.feedBack;
+        return state.feedback;
     },
-    getFeedBackMeta(state) {
-        return state.feedBackMeta;
+    getfeedbackMeta(state) {
+        return state.feedbackMeta;
     },
-    getFeedBackLinks(state) {
-        return state.feedBackLinks;
+    getfeedbackLinks(state) {
+        return state.feedbackLinks;
     },
-    getFeedBackLoading(state) {
-        return state.feedBackLoading;
+    getfeedbackLoading(state) {
+        return state.feedbackLoading;
     },
 };

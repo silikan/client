@@ -35,7 +35,7 @@
                     >
                       Client
                     </th>
-                         <th
+                    <th
                       scope="col"
                       class="
                         px-6
@@ -86,11 +86,14 @@
                 </thead>
                 <tbody class="bg-white divide-y divide-gray-200">
                   <tr v-for="request in requests" :key="request.id">
-                    <td class="px-6 py-4 whitespace-nowrap"  v-if="request.client !== null">
-                       <router-link :to="`/user/${request.client.id}`">
-                         <div class="flex items-center">
+                    <td
+                      class="px-6 py-4 whitespace-nowrap"
+                      v-if="request.client !== null"
+                    >
+                      <router-link :to="`/user/${request.client.id}`">
+                        <div class="flex items-center">
                           <div class="flex-shrink-0 h-10 w-10">
-                             <Avatar
+                            <Avatar
                               v-if="request.client.name"
                               :url="request.client.avatar"
                               :name="request.client.name"
@@ -98,20 +101,23 @@
                           </div>
                           <div class="ml-4">
                             <div class="text-sm font-medium text-gray-900">
-                               {{ request.client.name }}
+                              {{ request.client.name }}
                             </div>
                             <div class="text-sm text-gray-500">
                               {{ request.client.email }}
                             </div>
                           </div>
                         </div>
-                       </router-link>
+                      </router-link>
                     </td>
-                       <td class="px-6 py-4 whitespace-nowrap" v-if="request.handyman !== null">
-                       <router-link :to="`/user/${request.handyman.id}`">
-                         <div class="flex items-center">
+                    <td
+                      class="px-6 py-4 whitespace-nowrap"
+                      v-if="request.handyman !== null"
+                    >
+                      <router-link :to="`/user/${request.handyman.id}`">
+                        <div class="flex items-center">
                           <div class="flex-shrink-0 h-10 w-10">
-                             <Avatar
+                            <Avatar
                               v-if="request.handyman.name"
                               :url="request.handyman.avatar"
                               :name="request.handyman.name"
@@ -119,16 +125,15 @@
                           </div>
                           <div class="ml-4">
                             <div class="text-sm font-medium text-gray-900">
-                               {{ request.handyman.name }}
+                              {{ request.handyman.name }}
                             </div>
                             <div class="text-sm text-gray-500">
                               {{ request.handyman.email }}
                             </div>
                           </div>
                         </div>
-                       </router-link>
+                      </router-link>
                     </td>
-
 
                     <td class="px-6 py-4 whitespace-nowrap">
                       <span
@@ -143,8 +148,11 @@
                           text-green-800
                         "
                       >
-                      {{  Number(JSON.parse(request.cart_item.plan).price) + Number(JSON.parse(request.cart_item.plan).price/2)}} DZD
-
+                        {{
+                          Number(JSON.parse(request.cart_item.plan).price) +
+                          Number(JSON.parse(request.cart_item.plan).price / 2)
+                        }}
+                        DZD
                       </span>
                     </td>
 
@@ -161,12 +169,9 @@
                           text-green-800
                         "
                       >
-                      Cash on Delivery
-                     </span>
+                        Cash on Delivery
+                      </span>
                     </td>
-
-
-
                   </tr>
                 </tbody>
               </table>
@@ -391,15 +396,13 @@
       </div>
     </div>
   </div>
-  <DeleteDiag :idData="RequestId" :openData="open" :typeData="type" />
 </template>
 
 <script>
-import DeleteDiag from "../DeleteUserDialogue.component.vue";
 import Table from "@/components/Loading/Skeletons/Table.component.vue";
 
 import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/vue/solid";
- import Avatar from "@/components/Avatar/Avatar.component.vue";
+import Avatar from "@/components/Avatar/Avatar.component.vue";
 
 import { computed, reactive, ref } from "@vue/runtime-core";
 import { useStore } from "vuex";
@@ -409,7 +412,6 @@ export default {
     ChevronLeftIcon,
     ChevronRightIcon,
     Avatar,
-     DeleteDiag,
     Table,
   },
 
@@ -428,9 +430,11 @@ export default {
       RequestId.value = id;
     };
     /* let router = useRouter
-     */ store.dispatch("Admin/getAllTransactionsPaginated", page).then((res) => {
-      console.log(res);
-    });
+     */ store
+      .dispatch("Admin/getAllTransactionsPaginated", page)
+      .then((res) => {
+        console.log(res);
+      });
     meta = computed(() => {
       return store.getters["Admin/getTransactionsMeta"];
     });
@@ -486,9 +490,7 @@ export default {
       return data;
     });
     let preurl = `${process.env.VUE_APP_API_URL}`;
-    let loading = computed(
-      () => store.getters["Admin/getTransactionsLoading"]
-    );
+    let loading = computed(() => store.getters["Admin/getTransactionsLoading"]);
 
     console.log(loading.value);
     return {
