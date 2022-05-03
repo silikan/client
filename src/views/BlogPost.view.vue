@@ -1,5 +1,5 @@
 <template>
-<div></div>
+  <div>blog post</div>
 </template>
 
 <script>

@@ -52,325 +52,344 @@ import AdminDashboardSettings from "@/components/Dashboard/Admin/Parts/Settings.
 import Skeletons from "@/views/Skeletons.view.vue";
 import Notification from "@/views/Notification.view.vue";
 import Resume from "@/views/Resume.view.vue";
-const routes = [
-  {
-    path: "/",
-    name: "Home",
-    meta: { middleware: [guest] },
-    component: Home,
-  },
-  {
-    path: "/resume/:id",
-    name: "Resume",
-    component: Resume,
-  },
-  {
-    path: "/notification",
-    name: "Notification",
-    meta: { middleware: [auth] },
+import BlogPost from "@/views/BlogPost.view.vue";
+import Blog from "@/views/Blog.view.vue";
+import CreateBlog from "@/views/CreateBlog.view.vue";
+const routes = [{
+        path: "/",
+        name: "Home",
+        meta: { middleware: [guest] },
+        component: Home,
+    },
+    {
+        path: "/blog",
+        name: "Blog",
+        meta: { middleware: [auth, guest] },
+        component: Blog,
+    },
+    {
+        path: "/blog/post/:id",
+        name: "BlogPost",
+        meta: { middleware: [auth, guest] },
+        component: BlogPost,
+    },
+    {
+        path: "/blog/create",
+        name: "CreateBlog",
+        meta: { middleware: [auth] },
+        component: CreateBlog,
+    },
+    {
+        path: "/resume/:id",
+        name: "Resume",
+        component: Resume,
+    },
+    {
+        path: "/notification",
+        name: "Notification",
+        meta: { middleware: [auth] },
 
-    component: Notification,
-  },
-  {
-    path: "/skeleton",
-    name: "Skeletons",
-    component: Skeletons,
-  },
-  {
-    path: "/cart/:id/feed",
-    name: "CartitemFeed",
-    meta: { middleware: [auth] },
-    component: CartitemFeed,
-  },
-  {
-    path: "/task/:id/feed",
-    name: "TaskItemFeed",
-    meta: { middleware: [auth] },
-    component: TaskItemFeed,
-  },
-  {
-    path: "/checkout/:id",
-    name: "Checkout",
-    meta: { middleware: [auth] },
-    component: Checkout,
-  },
-  {
-    path: "/dashboard/admin",
-    name: "AdminDashboard",
-    meta: { middleware: [auth, admin] },
-    component: AdminDashboard,
-    children: [
-      {
-        path: "home",
-        name: "AdminDashboardHome",
+        component: Notification,
+    },
+    {
+        path: "/skeleton",
+        name: "Skeletons",
+        component: Skeletons,
+    },
+    {
+        path: "/cart/:id/feed",
+        name: "CartitemFeed",
+        meta: { middleware: [auth] },
+        component: CartitemFeed,
+    },
+    {
+        path: "/task/:id/feed",
+        name: "TaskItemFeed",
+        meta: { middleware: [auth] },
+        component: TaskItemFeed,
+    },
+    {
+        path: "/checkout/:id",
+        name: "Checkout",
+        meta: { middleware: [auth] },
+        component: Checkout,
+    },
+    {
+        path: "/dashboard/admin",
+        name: "AdminDashboard",
+        meta: { middleware: [auth, admin] },
+        component: AdminDashboard,
+        children: [{
+                path: "home",
+                name: "AdminDashboardHome",
 
-        component: AdminDashboardHome,
-      },
-      {
-        path: "transactions",
-        name: "AdminDashboardTransactions",
+                component: AdminDashboardHome,
+            },
+            {
+                path: "transactions",
+                name: "AdminDashboardTransactions",
 
-        component: AdminDashboardTransactions,
-      },
-      {
-        path: "settings",
-        name: "AdminDashboardSettings",
+                component: AdminDashboardTransactions,
+            },
+            {
+                path: "settings",
+                name: "AdminDashboardSettings",
 
-        component: AdminDashboardSettings,
-      },
-    ],
-  },
-  {
-    path: "/dashboard/moderator",
-    name: "ModeratorDashboard",
-    meta: { middleware: [auth, moderator] },
-    component: ModeratorDashboard,
-  },
-  {
-    path: "/category/:title/gigs",
-    name: "GigCategory",
-    component: GigCategory,
-  },
-  {
-    path: "/category/:title/requests",
-    name: "RequestCategory",
-    component: RequestCategory,
-  },
-  {
-    path: "/search/gigs/:query",
-    name: "GigSearchResultPage",
-    component: GigSearchResultPage,
-  },
-  {
-    path: "/search/requests/:query",
-    name: "RequestSearchResultPage",
-    meta: { middleware: [auth, guest] },
-    component: RequestSearchResultPage,
-  },
-  {
-    path: "/search/handymen/:query",
-    name: "HandymenSearchResultPage",
-    meta: { middleware: [auth, guest] },
-    component: HandymenSearchResultPage,
-  },
-  {
-    path: "/searchlist",
-    name: "SearchList",
+                component: AdminDashboardSettings,
+            },
+        ],
+    },
+    {
+        path: "/dashboard/moderator",
+        name: "ModeratorDashboard",
+        meta: { middleware: [auth, moderator] },
+        component: ModeratorDashboard,
+    },
+    {
+        path: "/category/:title/gigs",
+        name: "GigCategory",
+        component: GigCategory,
+    },
+    {
+        path: "/category/:title/requests",
+        name: "RequestCategory",
+        component: RequestCategory,
+    },
+    {
+        path: "/search/gigs/:query",
+        name: "GigSearchResultPage",
+        component: GigSearchResultPage,
+    },
+    {
+        path: "/search/requests/:query",
+        name: "RequestSearchResultPage",
+        meta: { middleware: [auth, guest] },
+        component: RequestSearchResultPage,
+    },
+    {
+        path: "/search/handymen/:query",
+        name: "HandymenSearchResultPage",
+        meta: { middleware: [auth, guest] },
+        component: HandymenSearchResultPage,
+    },
+    {
+        path: "/searchlist",
+        name: "SearchList",
 
-    component: SearchList,
-  },
-  {
-    path: "/profile",
-    name: "Profile",
-    meta: { middleware: [auth] },
-    component: Profile,
-  },
-  {
-    path: "/cart",
-    name: "Cart",
-    component: Cart,
-    meta: { middleware: [auth] },
-  },
-  {
-    path: "/task",
-    name: "Task",
-    component: Task,
-    meta: { middleware: [auth] },
-  },
-  {
-    path: "/gig/:id",
-    name: "GigPage",
-    component: GigPage,
-    meta: { middleware: [auth, guest] },
-  },
-  {
-    path: "/request/:id",
-    name: "RequestPage",
-    component: RequestPage,
-    meta: { middleware: [auth, guest] },
-  },
-  {
-    path: "/selling",
-    name: "Selling",
-    component: Selling,
-    meta: { middleware: [auth, handyman] },
-  },
+        component: SearchList,
+    },
+    {
+        path: "/profile",
+        name: "Profile",
+        meta: { middleware: [auth] },
+        component: Profile,
+    },
+    {
+        path: "/cart",
+        name: "Cart",
+        component: Cart,
+        meta: { middleware: [auth] },
+    },
+    {
+        path: "/task",
+        name: "Task",
+        component: Task,
+        meta: { middleware: [auth] },
+    },
+    {
+        path: "/gig/:id",
+        name: "GigPage",
+        component: GigPage,
+        meta: { middleware: [auth, guest] },
+    },
+    {
+        path: "/request/:id",
+        name: "RequestPage",
+        component: RequestPage,
+        meta: { middleware: [auth, guest] },
+    },
+    {
+        path: "/selling",
+        name: "Selling",
+        component: Selling,
+        meta: { middleware: [auth, handyman] },
+    },
 
-  {
-    path: "/edit/",
-    name: "EditProfile",
-    meta: { middleware: [auth] },
-    component: EditProfile,
-    children: [
-      // UserHome will be rendered inside User's <router-view>
-      // when /user/:id is matched
-      {
-        path: "auth",
-        name: "AuthEdit",
+    {
+        path: "/edit/",
+        name: "EditProfile",
+        meta: { middleware: [auth] },
+        component: EditProfile,
+        children: [
+            // UserHome will be rendered inside User's <router-view>
+            // when /user/:id is matched
+            {
+                path: "auth",
+                name: "AuthEdit",
 
-        component: AuthEdit,
-      },
-      {
-        path: "account",
-        name: "AccountEdit",
+                component: AuthEdit,
+            },
+            {
+                path: "account",
+                name: "AccountEdit",
 
-        component: AccountEdit,
-      },
+                component: AccountEdit,
+            },
 
-      {
-        path: "profile",
-        name: "ProfileEdit",
+            {
+                path: "profile",
+                name: "ProfileEdit",
 
-        component: ProfileEdit,
-      },
-      // ...other sub routes
-    ],
-  },
-  {
-    path: "/room/:id",
-    name: "ChatRoom",
+                component: ProfileEdit,
+            },
+            // ...other sub routes
+        ],
+    },
+    {
+        path: "/room/:id",
+        name: "ChatRoom",
 
-    component: ChatRoom,
-    meta: { middleware: [auth] },
-  },
-  {
-    path: "/rooms",
-    name: "RoomList",
+        component: ChatRoom,
+        meta: { middleware: [auth] },
+    },
+    {
+        path: "/rooms",
+        name: "RoomList",
 
-    component: RoomList,
-    meta: { middleware: [auth] },
-  },
-  {
-    path: "/requests",
-    name: "Requests",
-    meta: { middleware: [auth, guest] },
+        component: RoomList,
+        meta: { middleware: [auth] },
+    },
+    {
+        path: "/requests",
+        name: "Requests",
+        meta: { middleware: [auth, guest] },
 
-    component: Requests,
-  },
-  {
-    path: "/user/:id",
-    name: "VisitProfile",
+        component: Requests,
+    },
+    {
+        path: "/user/:id",
+        name: "VisitProfile",
 
-    component: VisitProfile,
-    meta: { middleware: [auth, guest] },
-  },
-  {
-    path: "/categories",
-    name: "Categories",
-    meta: { middleware: [auth, guest] },
+        component: VisitProfile,
+        meta: { middleware: [auth, guest] },
+    },
+    {
+        path: "/categories",
+        name: "Categories",
+        meta: { middleware: [auth, guest] },
 
-    component: Categories,
-  },
-  {
-    path: "/handymen",
-    name: "Handymen",
-    meta: { middleware: [auth, guest] },
+        component: Categories,
+    },
+    {
+        path: "/handymen",
+        name: "Handymen",
+        meta: { middleware: [auth, guest] },
 
-    component: Handymen,
-  },
-  {
-    path: "/gigs",
-    name: "Gig",
-    meta: { middleware: [auth, guest] },
+        component: Handymen,
+    },
+    {
+        path: "/gigs",
+        name: "Gig",
+        meta: { middleware: [auth, guest] },
 
-    component: Gig,
-  },
-  {
-    path: "/gig/create",
-    name: "CreateGig",
-    component: CreateGig,
-    meta: { middleware: [auth, handyman] },
+        component: Gig,
+    },
+    {
+        path: "/gig/create",
+        name: "CreateGig",
+        component: CreateGig,
+        meta: { middleware: [auth, handyman] },
 
-    /*     meta: { middleware: [auth, guest] },
-     */
-  },
-  {
-    path: "/buying",
-    name: "Buying",
-    component: Buying,
-    meta: { middleware: [auth, client] },
-  },
+        /*     meta: { middleware: [auth, guest] },
+         */
+    },
+    {
+        path: "/buying",
+        name: "Buying",
+        component: Buying,
+        meta: { middleware: [auth, client] },
+    },
 
-  {
-    path: "/request/create",
-    name: "CreateRequest",
-    component: CreateRequest,
-    meta: { middleware: [auth] },
+    {
+        path: "/request/create",
+        name: "CreateRequest",
+        component: CreateRequest,
+        meta: { middleware: [auth] },
 
-    /*     meta: { middleware: [auth, guest] },
-     */
-  },
-  {
-    path: "/signin",
-    name: "Signin",
-    meta: { middleware: [guest] },
-    component: Signin,
-  },
-  {
-    path: "/signup",
-    name: "Signup",
-    meta: { middleware: [guest] },
-    component: Signup,
-  },
-  {
-    path: "/forgot-password",
-    name: "forgotPassword",
-    meta: { middleware: [guest] },
-    component: ForgotPassword,
-  },
-  {
-    path: "/reset-password",
-    name: "ResetPassword",
-    meta: { middleware: [guest] },
-    component: ResetPassword,
-  },
-  {
-    path: "/aboutus",
-    name: "AboutUs",
-    component: AboutUs,
-  },
-  {
-    path: "/contactus",
-    name: "ContactUs",
-    component: ContactUs,
-  },
-  {
-    path: "/:catchAll(.*)",
-    name: "NotFound",
-    meta: { middleware: [auth, guest] },
+        /*     meta: { middleware: [auth, guest] },
+         */
+    },
+    {
+        path: "/signin",
+        name: "Signin",
+        meta: { middleware: [guest] },
+        component: Signin,
+    },
+    {
+        path: "/signup",
+        name: "Signup",
+        meta: { middleware: [guest] },
+        component: Signup,
+    },
+    {
+        path: "/forgot-password",
+        name: "forgotPassword",
+        meta: { middleware: [guest] },
+        component: ForgotPassword,
+    },
+    {
+        path: "/reset-password",
+        name: "ResetPassword",
+        meta: { middleware: [guest] },
+        component: ResetPassword,
+    },
+    {
+        path: "/aboutus",
+        name: "AboutUs",
+        component: AboutUs,
+    },
+    {
+        path: "/contactus",
+        name: "ContactUs",
+        component: ContactUs,
+    },
+    {
+        path: "/:catchAll(.*)",
+        name: "NotFound",
+        meta: { middleware: [auth, guest] },
 
-    component: NotFound,
-  },
+        component: NotFound,
+    },
 ];
 
 const router = createRouter({
-  history: createWebHistory(process.env.BASE_URL),
-  routes,
-  scrollBehavior(to, from, savedPosition) {
-    if (savedPosition) {
-      return savedPosition;
-    }
-    return { x: 0, y: 0 };
-  },
+    history: createWebHistory(process.env.BASE_URL),
+    routes,
+    scrollBehavior(to, from, savedPosition) {
+        if (savedPosition) {
+            return savedPosition;
+        }
+        return { x: 0, y: 0 };
+    },
 });
 
 router.beforeEach((to, from, next) => {
-  const { middleware } = to.meta;
-  const context = {
-    to,
-    from,
-    next,
-    store,
-  };
+    const { middleware } = to.meta;
+    const context = {
+        to,
+        from,
+        next,
+        store,
+    };
 
-  if (!middleware) {
-    return next();
-  }
+    if (!middleware) {
+        return next();
+    }
 
-  middleware[0]({
-    ...context,
-    next: middlewarePipeline(context, middleware, 1),
-  });
+    middleware[0]({
+        ...context,
+        next: middlewarePipeline(context, middleware, 1),
+    });
 });
 
 export default router;
