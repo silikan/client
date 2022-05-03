@@ -174,6 +174,16 @@
                       <p class="">
                         {{ msg.message }}
                       </p>
+                      <timeago
+
+                         :converter-options="{
+      includeSeconds: true,
+      addSuffix: false,
+      useStrict: false,
+    }"
+
+
+                      :datetime="msg.created_at" />
                     </div>
 
                     <!--                     <ChatAvatar :UserId="msg.from" class="ml-2" />
@@ -304,7 +314,7 @@
                 <div class="mx-auto overflow-y-auto h-96 scrollbar">
                   <EmojiPicker
                     :native="true"
-                     @select="onSelectEmoji"
+                    @select="onSelectEmoji"
                     :hide-search="true"
                     :hide-group-icons="true"
                     :hide-group-names="true"
@@ -574,11 +584,10 @@ export default {
         }
       });
     });
-function onSelectEmoji(emoji) {
-  console.log(emoji);
-message.value += emoji.i;
-
-}
+    function onSelectEmoji(emoji) {
+      console.log(emoji);
+      message.value += emoji.i;
+    }
     return {
       to,
       from,
@@ -599,7 +608,7 @@ message.value += emoji.i;
       email,
       typing,
       typingit,
-      onSelectEmoji
+      onSelectEmoji,
     };
   },
 };
