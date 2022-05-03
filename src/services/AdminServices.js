@@ -92,4 +92,10 @@ export default {
     async stats() {
         return API.apiClient.get(`/admin/stats`);
     },
+
+    async getAllFeedBackPaginated(page) {
+        return API.apiClient.get(`/admin/get-all-feedback-paginate`, {
+            params: { page },
+        });
+    },
 };

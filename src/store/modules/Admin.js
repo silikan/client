@@ -33,6 +33,13 @@ function setPaginatedTransactions(commit, response) {
     commit("SET_TRANSACTIONS_LINKS", response.data.links);
     commit("SET_TRANSACTIONS_LOADING", false);
 }
+
+function setPaginatedFeedBack(commit, response) {
+    commit("SET_FEEDBACK", response.data.data);
+    commit("SET_FEEDBACK_META", response.data.meta);
+    commit("SET_FEEDBACK_LINKS", response.data.links);
+    commit("SET_FEEDBACK_LOADING", false);
+}
 export const state = {
     gigs: [],
     gigsMeta: {},
@@ -51,6 +58,10 @@ export const state = {
     transactionsMeta: {},
     transactionsLinks: {},
     transactionsLoading: false,
+    feedback: [],
+    feedbackMeta: {},
+    feedbackLinks: {},
+    feedbackLoading: false,
 };
 
 export const mutations = {
@@ -104,6 +115,18 @@ export const mutations = {
     },
     SET_TRANSACTIONS_LOADING(state, loading) {
         state.transactionsLoading = loading;
+    },
+    SET_FEEDBACK(state, feedback) {
+        state.feedback = feedback;
+    },
+    SET_FEEDBACK_META(state, meta) {
+        state.feedbackMeta = meta;
+    },
+    SET_FEEDBACK_LINKS(state, links) {
+        state.feedbackLinks = links;
+    },
+    SET_FEEDBACK_LOADING(state, loading) {
+        state.feedbackLoading = loading;
     },
 };
 
@@ -306,6 +329,28 @@ export const actions = {
             commit("SET_ERROR", getError(error));
         }
     },
+    async getAllFeedBackPaginate({ commit }, page) {
+        try {
+            commit("SET_FEEDBACK_LOADING", true);
+            const FeedBack = await AdminServices.getAllFeedBackPaginate(page);
+            setPaginatedFeedBack(commit, FeedBack);
+            return FeedBack.data;
+        } catch (error) {
+            commit("SET_ERROR", getError(error));
+            commit("SET_FEEDBACK_LOADING", false);
+        }
+    },
+    async getFeedBackLink({ commit }, link) {
+        try {
+            commit("SET_FEEDBACK_LOADING", true);
+            const FeedBack = await AdminServices.getLink(link);
+            setPaginatedFeedBack(commit, FeedBack);
+            return FeedBack.data;
+        } catch (error) {
+            commit("SET_ERROR", getError(error));
+            commit("SET_FEEDBACK_LOADING", false);
+        }
+    },
 };
 
 export const getters = {
@@ -359,5 +404,17 @@ export const getters = {
     },
     getTransactionsLoading(state) {
         return state.transactionsLoading;
+    },
+    getFeedBack(state) {
+        return state.feedBack;
+    },
+    getFeedBackMeta(state) {
+        return state.feedBackMeta;
+    },
+    getFeedBackLinks(state) {
+        return state.feedBackLinks;
+    },
+    getFeedBackLoading(state) {
+        return state.feedBackLoading;
     },
 };
