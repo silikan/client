@@ -448,7 +448,7 @@
       </div>
     </div>
   </div>
-  <DeleteDiag :idData="userId" :openData="open" :typeData="type" />
+  <DeleteDiag :idData="userId" :openData="open" :typeData="type"  @toggleModal="toggleModal"/>
 </template>
 
 <script>
@@ -552,6 +552,9 @@ const makeUserModerator = (id) => {
   store.dispatch("Admin/makeUserModerator", id);
 };
 
+let toggleModal= (data) => {
+  open.value = data;
+};
     return {
       query,
       action,
@@ -574,6 +577,7 @@ const makeUserModerator = (id) => {
       loading,
       makeUserAdmin,
       makeUserModerator,
+      toggleModal
     };
   },
 };

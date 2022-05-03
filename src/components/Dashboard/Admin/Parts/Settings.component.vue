@@ -155,7 +155,7 @@
       </div>
     </div>
   </div>
-    <DeleteAllDialogue  :openData="open" :typeData="type" />
+    <DeleteAllDialogue  :openData="open" :typeData="type" @toggleModal="toggleModal" />
 
 </template>
 
@@ -172,14 +172,21 @@ export default {
     let open = ref(false)
     let type = ref('')
     const assignValue = (data) => {
-      open.value = true
+      //toggle the open state
+
+
+      open.value = !open.value
       type.value = data
       console.log(type)
+    }
+    let toggleModal = (data) => {
+      open.value = data
     }
     return {
       open,
       type,
       assignValue,
+      toggleModal
 
     }
   }

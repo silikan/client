@@ -223,7 +223,7 @@
                   focus:ring-indigo-500
                   sm:mt-0 sm:w-auto sm:text-sm
                 "
-                @click="open = false"
+                @click="toggleModal"
               >
                 Cancel
               </button>
@@ -236,7 +236,7 @@
 </template>
 
 <script>
-import { computed, toRefs, watchEffect } from "vue";
+import { computed, watchEffect , ref , watch} from "vue";
 import {
   Dialog,
   DialogOverlay,
@@ -258,12 +258,17 @@ export default {
     XIcon,
   },
   props: ["typeData", "idData", "openData"],
-  setup(props) {
+    emits: ["toggleModal"],
+
+  setup(props , ctx) {
 
     let type = computed(() => props.typeData);
     let id = computed(() => props.idData);
     console.log(id.value);
-    const { openData: open } = toRefs(props);
+let open = ref(false);
+watch(() => props.openData, (newVal) => {
+  open.value = newVal;
+});
 
     let store = useStore();
     const deleteUser = () => {
@@ -276,9 +281,9 @@ export default {
     const deleteClientRequest = () => {
       store.dispatch("Admin/deleteClientRequest", id.value);
     };
-    let closeDiag = () => {
-      open.value = false;
-    };
+let toggleModal = () => {
+ctx.emit("toggleModal", !open.value);
+}
     watchEffect(() => {
       console.log(open.value);
     });
@@ -289,7 +294,7 @@ export default {
       deleteClientRequest,
       type,
       id,
-      closeDiag,
+      toggleModal,
     };
   },
 };

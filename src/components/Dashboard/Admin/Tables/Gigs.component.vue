@@ -387,7 +387,7 @@
       </div>
     </div>
   </div>
-      <DeleteDiag :idData="RequestId" :openData="open" :typeData="type" />
+      <DeleteDiag :idData="RequestId" :openData="open" :typeData="type" @toggleModal="toggleModal" />
 
 </template>
 
@@ -488,7 +488,9 @@ let page = 1
     });
 let preurl = `${process.env.VUE_APP_API_URL}`;
                         let loading = computed(() => store.getters["Admin/getGigsLoading"]);
-
+let toggleModal = (data) => {
+  this.open = data
+};
     return {
 
       query,
@@ -509,7 +511,8 @@ let preurl = `${process.env.VUE_APP_API_URL}`;
      type ,
      RequestId ,
      openDiag,
-     loading
+     loading,
+     toggleModal
     };
   },
 };

@@ -432,7 +432,7 @@
       </div>
     </div>
   </div>
-  <DeleteDiag :idData="RequestId" :openData="open" :typeData="type" />
+  <DeleteDiag :idData="RequestId" :openData="open" :typeData="type" @toggleModal="toggleModal" />
 </template>
 
 <script>
@@ -532,6 +532,9 @@ export default {
     );
 
     console.log(loading.value);
+    let toggleModal = (data) => {
+      open.value = data
+    };
     return {
       action,
       path,
@@ -551,6 +554,7 @@ export default {
       RequestId,
       openDiag,
       loading,
+      toggleModal
     };
   },
 };
