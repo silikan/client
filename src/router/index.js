@@ -49,6 +49,7 @@ import TaskItemFeed from "@/views/TaskItemFeed.view.vue";
 import AdminDashboardHome from "@/components/Dashboard/Admin/Parts/Home.component.vue";
 import AdminDashboardTransactions from "@/components/Dashboard/Admin/Parts/Transactions.component.vue";
 import AdminDashboardSettings from "@/components/Dashboard/Admin/Parts/Settings.component.vue";
+import AdminDashboardFeedBack from "@/components/Dashboard/Admin/Parts/FeedBack.component.vue";
 import Skeletons from "@/views/Skeletons.view.vue";
 import Notification from "@/views/Notification.view.vue";
 import Resume from "@/views/Resume.view.vue";
@@ -136,6 +137,12 @@ const routes = [{
                 name: "AdminDashboardSettings",
 
                 component: AdminDashboardSettings,
+            },
+            {
+                path: "feedback",
+                name: "AdminDashboardFeedBack",
+
+                component: AdminDashboardFeedBack,
             },
         ],
     },

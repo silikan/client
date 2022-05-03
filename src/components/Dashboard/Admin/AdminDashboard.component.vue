@@ -400,6 +400,7 @@ import {
   HomeIcon,
   MenuAlt1Icon,
   ScaleIcon,
+    QuestionMarkCircleIcon,
   XIcon,
 } from "@heroicons/vue/outline";
 import {
@@ -408,6 +409,7 @@ import {
   ChevronDownIcon,
   ChevronRightIcon,
   OfficeBuildingIcon,
+
   SearchIcon,
 } from "@heroicons/vue/solid";
 import { useStore } from "vuex";
@@ -425,6 +427,13 @@ const navigation = [
     icon: CreditCardIcon,
     current: false,
   },
+  {
+    name: "Feedback",
+
+    link: "/dashboard/admin/feedback",
+    icon: QuestionMarkCircleIcon,
+    current: false,
+  }
 ];
 const secondaryNavigation = [
   { name: "Settings", link: "/dashboard/admin/settings", icon: CogIcon },
