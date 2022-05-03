@@ -107,7 +107,7 @@
                     <dt class="text-base font-medium text-gray-900">
                        total
                     </dt>
-                    <dd class="text-base font-medium text-gray-900">{{ price + (price/2)}} DZD</dd>
+                    <dd class="text-base font-medium text-gray-900"> {{ Number(price) + Number(price/2)}} DZD</dd>
                   </div>
                 </dl>
               </div>
