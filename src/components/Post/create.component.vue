@@ -32,24 +32,26 @@
         type="text"
         name="title"
         id="title"
+        v-model="title"
         :class="[
           titleErrorMessage
-            ? 'block w-full pr-10 border-red-300 text-red-900 placeholder-red-300 focus:outline-none focus:ring-red-500 focus:border-red-500 sm:text-sm rounded-md w-full px-3 py-2 border border-red-300  text-red-900 rounded-md  -smplaceholder-red-400 focus:outline-nonefocus:ring-red-500 focus:border-red-500 sm:text-sm'
+            ? 'block w-full pr-10 border-red-300 text-red-900 placeholder-red-300 focus:outline-none focus:ring-red-500 focus:border-red-500 sm:text-sm  w-full px-3 py-2 border border-red-300  text-red-900 rounded-md  -smplaceholder-red-400 focus:outline-nonefocus:ring-red-500 focus:border-red-500 sm:text-sm'
             : ' block w-full px-3 py-2 placeholder-gray-400   sm:text-sm',
         ]"
         placeholder="Title"
       />
-      <label for="description" class="sr-only">Description</label>
+      <label for="content" class="sr-only">content</label>
       <textarea
         rows="2"
-        name="description"
-        id="description"
+        name="content"
+        id="content"
+        v-model="content"
         :class="[
-          descriptionErrorMessage
-            ? 'block w-full py-3 h-40 -0 resize-none focus:ring-0  pr-10 sm:text-sm  appearance-none px-3 border border-red-300 rounded-md-sm placeholder-red-400 text-red-600 focus:outline-none focus:ring-red-500 focus:border-red-500'
+          contentErrorMessage
+            ? 'block w-full py-3 h-40 -0 resize-none focus:ring-0  pr-10 sm:text-sm  appearance-none px-3 border border-red-300  placeholder-red-400 text-red-600 focus:outline-none focus:ring-red-500 focus:border-red-500'
             : ' block w-full py-3 h-40 -0 resize-none focus:ring-0  pr-10 sm:text-sm  appearance-none px-3 -sm placeholder-gray-400 focus:outline-none ',
         ]"
-        placeholder="Write a description..."
+        placeholder="Write a content..."
       />
 
       <!-- Spacer element to match the height of the toolbar -->
@@ -68,21 +70,19 @@
           sm:px-3
         "
       >
-        <div class="flex   cursor-pointer">
-          <div class=" rounded-md">
+        <div class="flex cursor-pointer">
+          <div class="rounded-md">
             <div
               class="
-			    cursor-pointer
+                cursor-pointer
                 group
                 relative
-
                 rounded-md
                 py-2
                 px-3
                 flex
                 items-center
                 justify-center
-
               "
             >
               <label
@@ -99,7 +99,6 @@
                 <div
                   type="div"
                   class="
-
                     -ml-2
                     -my-2
                     rounded-full
@@ -112,7 +111,14 @@
                   "
                 >
                   <PhotographIcon
-                    class="  cursor-pointer -ml-1 h-5 w-5 mr-2 group-hover:text-gray-500"
+                    class="
+                      cursor-pointer
+                      -ml-1
+                      h-5
+                      w-5
+                      mr-2
+                      group-hover:text-gray-500
+                    "
                     aria-hidden="true"
                   />
                   <span
@@ -126,11 +132,11 @@
                 </div>
               </label>
               <input
-                id="mobile-user-photo"
-                name="user-photo"
+                id="post-image"
+                name="post-image"
                 type="file"
                 :fileTypes="['image/*']"
-                endpoint="/users/auth/avatar"
+                endpoint="/blog/post/image"
                 @change="fileChange"
                 :accept="fileTypes"
                 class="
@@ -167,6 +173,7 @@
               focus:ring-offset-2
               focus:ring-indigo-500
             "
+			@click.prevent="createPost"
           >
             Create
           </button>
@@ -177,47 +184,80 @@
 </template>
 
 <script>
-import { ref } from "vue";
-
 import { PhotographIcon } from "@heroicons/vue/solid";
-
-const assignees = [
-  { name: "Unassigned", value: null },
-  {
-    name: "Wade Cooper",
-    value: "wade-cooper",
-    avatar:
-      "https://images.unsplash.com/photo-1491528323818-fdd1faba62cc?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
-  },
-  // More items...
-];
-const labels = [
-  { name: "Unlabelled", value: null },
-  { name: "Engineering", value: "engineering" },
-  // More items...
-];
-const dueDates = [
-  { name: "No due date", value: null },
-  { name: "Today", value: "today" },
-  // More items...
-];
+import { useField } from "vee-validate";
+import * as yup from "yup";
+import FileService from "@/services/FileService";
+import { useStore } from "vuex";
 
 export default {
   components: {
     PhotographIcon,
   },
   setup() {
-    const assigned = ref(assignees[0]);
-    const labelled = ref(labels[0]);
-    const dated = ref(dueDates[0]);
+    let store = useStore();
 
+    let titleValidation = yup
+      .string()
+      .min(3, "Title must be at least 3 characters")
+      .max(50, "Title must be less than 50 characters")
+      .required("Title is required");
+    let contentValidation = yup
+      .string()
+      .min(10, "content must be at least 10 characters")
+      .max(255, "content must be less than 255 characters")
+      .required("content is required");
+
+    const { value: title, errorMessage: titleErrorMessage } = useField(
+      "title",
+      titleValidation
+    );
+
+    const { value: content, errorMessage: contentErrorMessage } = useField(
+      "content",
+      contentValidation
+    );
+
+    let file;
+
+    const fileChange = (event) => {
+      file = event.target.files[0];
+    };
+
+    let endpoint = "/blog/post/image";
+
+    const uploadFile = (post_id) => {
+      const payload = {};
+      const formData = new FormData();
+      formData.append("avatar", file);
+      payload.file = formData;
+      payload.endpoint = endpoint;
+      payload.post_id = post_id;
+      FileService.uploadPostFile(payload)
+        .then(() => {
+          console.log("fileUploaded");
+        })
+        .catch(() => console.log("error"));
+    };
+
+    let createPost = () => {
+      let post = {
+        title: title.value,
+        content: content.value,
+      };
+      store.dispatch("Blog/createPost", post).then((result) => {
+        uploadFile(result.id);
+      });
+    };
     return {
-      assignees,
-      labels,
-      dueDates,
-      assigned,
-      labelled,
-      dated,
+      title,
+      titleErrorMessage,
+      content,
+      contentErrorMessage,
+      file,
+      uploadFile,
+      fileChange,
+      createPost,
     };
   },
 };
