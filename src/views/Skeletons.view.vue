@@ -1,16 +1,16 @@
 <template>
-<!--   <div><Tables /></div>
- -->  <div><Tables /></div>
+<!--   <div><postFeed /></div>
+ -->  <div><postFeed /></div>
 </template>
 
 <script>
-/* import Tables from "@/components/Loading/Skeletons/Table.component.vue";
+/* import postFeed from "@/components/Loading/Skeletons/Table.component.vue";
  */
- import Tables from "@/components/Loading/Skeletons/Table.component.vue";
+ import postFeed from "@/components/Loading/Skeletons/postFeed.component.vue";
 export default {
   components: {
-/*     Tables,
- */    Tables
+/*     postFeed,
+ */    postFeed
   },
 };
 </script>

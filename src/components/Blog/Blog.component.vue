@@ -69,7 +69,7 @@
                     />
                   </div>
 
-                <article class=" px-4 py-6 shadow sm:p-6" :aria-labelledby="'question-title-' + question.id">
+                <article class=" px-4 py-6 shadow sm:p-6" :aria-labelledby="'question-title-' + question.id" v-if="loading === false && meta && links">
 
                   <div>
                     <div class="flex space-x-3">
@@ -110,7 +110,7 @@
                     </h2>
                   </div>
                   <div
-                    class="mt-2 text-sm text-gray-700 space-y-4"
+                    class="mt-2 break-all text-sm text-gray-700 space-y-4"
                     v-html="question.content"
                   />
 
@@ -191,6 +191,7 @@
               </li>
             </ul>
           </div>
+          <PostFeedSkeleton v-if="loading === true"/>
           <div class="mt-6        cursor-pointer" >
                     <a
 
@@ -273,6 +274,7 @@
                       </li>
                     </ul>
                   </div>
+
                   <div class="mt-6">
                     <a
                       href="#"
@@ -307,6 +309,7 @@
 
 <script>
 import Avatar from "@/components/Avatar/Avatar.component.vue";
+ import PostFeedSkeleton from "@/components/Loading/Skeletons/postFeed.component.vue";
 
 import { computed, reactive, ref } from "@vue/runtime-core";
 import { useStore } from "vuex";
@@ -365,6 +368,7 @@ export default {
     XIcon,
     CreatePost,
     Avatar,
+    PostFeedSkeleton,
   },
   setup() {
     let action = "Search/paginateHandymen";
@@ -456,7 +460,7 @@ export default {
       return data;
     });
     let preurl = `${process.env.VUE_APP_API_URL}`;
-    let loading = computed(() => store.getters["Blog/getTransactionsLoading"]);
+    let loading = computed(() => store.getters["Blog/getPaginatedPostsLoading"]);
 
     return {
       user,

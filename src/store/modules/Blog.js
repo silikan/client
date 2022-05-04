@@ -30,8 +30,8 @@ export const mutations = {
     SET_POSTS_LINKS(state, links) {
         state.links = links;
     },
-    SET_POSTS_LOADING(state, isLoading) {
-        state.isLoading = isLoading;
+    SET_POSTS_LOADING(state, loading) {
+        state.loading = loading;
     },
     SET_POST(state, post) {
         state.post = post;
