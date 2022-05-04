@@ -14,7 +14,7 @@ export default {
         return await API.apiClient.get(`blog/${title}/post`);
     },
     async PaginatePosts(page) {
-        return await API.apiClient.get(`/blog/posts/paginate${page}`);
+        return await API.apiClient.get(`/blog/posts/paginate`, { params: { page } });
     },
     async upload_post_image(formData) {
         return await API.apiClient.post(`/blog/podt/image`, formData);

@@ -112,7 +112,7 @@ export const actions = {
         }
     },
 
-    async getClientRequestLink({ commit }, link) {
+    async getLink({ commit }, link) {
         try {
             commit("SET_POSTS_LOADING", true);
             const posts = await BlogService.getLink(link);

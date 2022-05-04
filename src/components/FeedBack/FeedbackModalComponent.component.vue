@@ -450,7 +450,7 @@ let store = useStore();
     let messageValidation = yup
       .string()
       .min(10)
-      .max(255)
+      .max(500)
       .required("Message is required");
     const { value: name, errorMessage: nameErrorMessage } = useField(
       "name",

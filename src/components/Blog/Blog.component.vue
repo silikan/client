@@ -46,8 +46,8 @@
           </nav>
         </div>
         <main class="lg:col-span-9 xl:col-span-6">
-          <div class=" bg-gray-100">
-            <div class="bg-white  shadow  sm:rounded-lg">
+          <div class="bg-gray-100">
+            <div class="bg-white shadow sm:rounded-lg">
               <CreatePost />
             </div>
           </div>
@@ -55,33 +55,48 @@
             <h1 class="sr-only">Recent questions</h1>
             <ul role="list" class="space-y-4">
               <li
-                v-for="question in questions"
+                v-for="question in requests"
                 :key="question.id"
-                class="bg-white px-4 py-6 shadow sm:p-6 sm:rounded-lg"
+                class="bg-white sm:rounded-lg"
               >
-                <article :aria-labelledby="'question-title-' + question.id">
+              <div>
+                 <div class="flex-shrink-0 ">
+                    <img
+                      class="h-96 w-full rounded-t-lg"
+                      :src="`${preurl}/${question.image}`"
+                      alt=""
+                    />
+                  </div>
+
+                <article class=" px-4 py-6 shadow sm:p-6" :aria-labelledby="'question-title-' + question.id">
+
                   <div>
                     <div class="flex space-x-3">
                       <div class="flex-shrink-0">
-                        <img
-                          class="h-10 w-10 rounded-full"
-                          :src="question.author.imageUrl"
-                          alt=""
+                        <Avatar
+                          v-if="question.user.name"
+                          :url="question.user.avatar"
+                          :name="question.user.name"
                         />
                       </div>
                       <div class="min-w-0 flex-1">
                         <p class="text-sm font-b text-gray-900">
-                          <a
-                            :href="question.author.href"
+                          <router-link
+                            :to="`/user/${question.user.id}`"
                             class="hover:underline"
-                            >{{ question.author.name }}</a
+                            >{{ question.user.name }}</router-link
                           >
                         </p>
                         <p class="text-sm text-gray-500">
-                          <a :href="question.href" class="hover:underline">
-                            <time :datetime="question.datetime">{{
-                              question.date
-                            }}</time>
+                          <a class="hover:underline">
+                            <timeago
+                              :converter-options="{
+                                includeSeconds: true,
+                                addSuffix: true,
+                                useStrict: true,
+                              }"
+                              :datetime="question.created_at"
+                            />
                           </a>
                         </p>
                       </div>
@@ -95,8 +110,9 @@
                   </div>
                   <div
                     class="mt-2 text-sm text-gray-700 space-y-4"
-                    v-html="question.body"
+                    v-html="question.content"
                   />
+
                   <div class="mt-6 flex justify-between space-x-8">
                     <div class="flex space-x-6">
                       <span class="inline-flex items-center text-sm">
@@ -110,6 +126,23 @@
                           "
                         >
                           <ThumbUpIcon class="h-5 w-5" aria-hidden="true" />
+                          <span class="font-medium text-gray-900">{{
+                            question.likes
+                          }}</span>
+                          <span class="sr-only">likes</span>
+                        </button>
+                      </span>
+                      <span class="inline-flex items-center text-sm">
+                        <button
+                          type="button"
+                          class="
+                            inline-flex
+                            space-x-2
+                            text-gray-400
+                            hover:text-gray-500
+                          "
+                        >
+                          <ThumbDownIcon class="h-5 w-5" aria-hidden="true" />
                           <span class="font-medium text-gray-900">{{
                             question.likes
                           }}</span>
@@ -151,24 +184,9 @@
                         </button>
                       </span>
                     </div>
-                    <div class="flex text-sm">
-                      <span class="inline-flex items-center text-sm">
-                        <button
-                          type="button"
-                          class="
-                            inline-flex
-                            space-x-2
-                            text-gray-400
-                            hover:text-gray-500
-                          "
-                        >
-                          <ShareIcon class="h-5 w-5" aria-hidden="true" />
-                          <span class="font-medium text-gray-900">Share</span>
-                        </button>
-                      </span>
-                    </div>
                   </div>
                 </article>
+                  </div>
               </li>
             </ul>
           </div>
@@ -261,6 +279,10 @@
 </template>
 
 <script>
+import Avatar from "@/components/Avatar/Avatar.component.vue";
+
+import { computed, reactive, ref } from "@vue/runtime-core";
+import { useStore } from "vuex";
 import CreatePost from "@/components/Post/create.component.vue";
 import {
   ChatAltIcon,
@@ -273,6 +295,7 @@ import {
   ShareIcon,
   StarIcon,
   ThumbUpIcon,
+  ThumbDownIcon,
 } from "@heroicons/vue/solid";
 import {
   BellIcon,
@@ -296,72 +319,6 @@ const navigation = [
   { name: "Communities", href: "#", icon: UserGroupIcon, current: false },
   { name: "Trending", href: "#", icon: TrendingUpIcon, current: false },
 ];
-const userNavigation = [
-  { name: "Your Profile", href: "#" },
-  { name: "Settings", href: "#" },
-  { name: "Sign out", href: "#" },
-];
-const communities = [
-  { name: "Movies", href: "#" },
-  { name: "Food", href: "#" },
-  { name: "Sports", href: "#" },
-  { name: "Animals", href: "#" },
-  { name: "Science", href: "#" },
-  { name: "Dinosaurs", href: "#" },
-  { name: "Talents", href: "#" },
-  { name: "Gaming", href: "#" },
-];
-const tabs = [
-  { name: "Recent", href: "#", current: true },
-  { name: "Most Liked", href: "#", current: false },
-  { name: "Most Answers", href: "#", current: false },
-];
-const questions = [
-  {
-    id: "81614",
-    likes: "29",
-    replies: "11",
-    views: "2.7k",
-    author: {
-      name: "Dries Vincent",
-      imageUrl:
-        "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
-      href: "#",
-    },
-    date: "December 9 at 11:43 AM",
-    datetime: "2020-12-09T11:43:00",
-    href: "#",
-    title: "What would you have done differently if you ran Jurassic Park?",
-    body: `
-      <p>Jurassic Park was an incredible idea and a magnificent feat of engineering, but poor protocols and a disregard for human safety killed what could have otherwise been one of the best businesses of our generation.</p>
-      <p>Ultimately, I think that if you wanted to run the park successfully and keep visitors safe, the most important thing to prioritize would be&hellip;</p>
-    `,
-  },
-  // More questions...
-];
-const whoToFollow = [
-  {
-    name: "Leonard Krasner",
-    handle: "leonardkrasner",
-    href: "#",
-    imageUrl:
-      "https://images.unsplash.com/photo-1519345182560-3f2917c472ef?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
-  },
-  // More people...
-];
-const trendingPosts = [
-  {
-    id: 1,
-    user: {
-      name: "Floyd Miles",
-      imageUrl:
-        "https://images.unsplash.com/photo-1463453091185-61582044d556?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
-    },
-    body: "What books do you have on your bookshelf just to look smarter than you actually are?",
-    comments: 291,
-  },
-  // More posts...
-];
 
 export default {
   components: {
@@ -377,19 +334,125 @@ export default {
     ShareIcon,
     StarIcon,
     ThumbUpIcon,
+    ThumbDownIcon,
     XIcon,
     CreatePost,
+    Avatar,
   },
   setup() {
+    let action = "Search/paginateHandymen";
+    let store = useStore();
+    let meta, links, requests;
+    let path = "handymen";
+
+    let page = 1;
+    let open = ref(false);
+    let type = ref("request");
+    let RequestId = ref(null);
+    let openDiag = (id) => {
+      open.value = true;
+      RequestId.value = id;
+    };
+    /* let router = useRouter
+     */ store.dispatch("Blog/getAllPostsPaginated", page).then((res) => {
+      console.log(res);
+    });
+    meta = computed(() => {
+      return store.getters["Blog/getPaginatedPostsMeta"];
+    });
+    links = computed(() => {
+      return store.getters["Blog/getPaginatedPostsLinks"];
+    });
+    let feedbackReactive = reactive([]);
+    requests = computed(() => {
+      if (meta.value.current_page == 1 && feedbackReactive.length > 0) {
+        feedbackReactive = store.getters["Blog/getPaginatedPosts"];
+        return feedbackReactive;
+      } else {
+        feedbackReactive.push(...store.getters["Blog/getPaginatedPosts"]);
+        return feedbackReactive;
+      }
+    });
+    console.log(requests);
+    console.log(meta);
+    const loadMore = () => {
+      if (page < meta.value.last_page) {
+        page++;
+        let paginationlink = `${process.env.VUE_APP_API_URL}/api/Blog/get-all-feedback-paginate?page=${page}`;
+
+        store.dispatch("Blog/getClientRequestLink", paginationlink);
+      }
+    };
+    const prevPage = () => {
+      store.dispatch("Blog/getClientRequestLink", links.value.prev);
+    };
+    const nextPage = () => {
+      console.log(links.value.next);
+      store.dispatch("Blog/getClientRequestLink", links.value.next);
+    };
+
+    const setPage = (pageNumber) => {
+      let paginationlink = `${process.env.VUE_APP_API_URL}/api/blog/post/paginate?page=${pageNumber}`;
+
+      store.dispatch("Blog/getClientRequestLink", paginationlink);
+      console.log(meta.value);
+    };
+
+    let currentPage = computed(() => meta.value.current_page);
+    let totalPages = computed(() => meta.value.last_page);
+
+    let filterPages = computed(() => {
+      //keep the first and last page
+
+      let data = reactive([]);
+      let start = currentPage.value - 2;
+      let end = currentPage.value + 2;
+      let totalPages = computed(() => meta.value.last_page);
+
+      console.log(totalPages.value);
+      if (start < 1) {
+        start = 1;
+        end = 5;
+      }
+
+      if (end > totalPages.value) {
+        end = totalPages.value;
+        start = totalPages.value - 4;
+      }
+      for (let i = start; i <= end; i++) {
+        if (i !== totalPages.value && i !== 1 && i < totalPages) {
+          data.push(i);
+        }
+      }
+
+      return data;
+    });
+    let preurl = `${process.env.VUE_APP_API_URL}`;
+    let loading = computed(() => store.getters["Blog/getTransactionsLoading"]);
+
     return {
       user,
       navigation,
-      userNavigation,
-      communities,
-      tabs,
-      questions,
-      whoToFollow,
-      trendingPosts,
+
+      action,
+      path,
+
+      prevPage,
+      nextPage,
+      setPage,
+      meta,
+      links,
+      requests,
+      filterPages,
+      currentPage,
+      totalPages,
+      preurl,
+      open,
+      type,
+      RequestId,
+      openDiag,
+      loading,
+      loadMore,
     };
   },
 };

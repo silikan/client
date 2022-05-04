@@ -35,8 +35,8 @@
         v-model="title"
         :class="[
           titleErrorMessage
-            ? 'block w-full pr-10 border-red-300 text-red-900 placeholder-red-300 focus:outline-none focus:ring-red-500 focus:border-red-500 sm:text-sm  w-full px-3 py-2 border border-red-300  text-red-900 rounded-md  -smplaceholder-red-400 focus:outline-nonefocus:ring-red-500 focus:border-red-500 sm:text-sm'
-            : ' block w-full px-3 py-2 placeholder-gray-400   sm:text-sm',
+            ? 'overflow-auto block w-full pr-10 border-red-300 text-red-900 placeholder-red-300 focus:outline-none focus:ring-red-500 focus:border-red-500 sm:text-sm  w-full px-3 py-2 border border-red-300  text-red-900 rounded-md  -smplaceholder-red-400 focus:outline-nonefocus:ring-red-500 focus:border-red-500 sm:text-sm'
+            : 'overflow-auto block w-full px-3 py-2 placeholder-gray-400   sm:text-sm',
         ]"
         placeholder="Title"
       />
@@ -48,8 +48,8 @@
         v-model="content"
         :class="[
           contentErrorMessage
-            ? 'block w-full py-3 h-40 -0 resize-none focus:ring-0  pr-10 sm:text-sm  appearance-none px-3 border border-red-300  placeholder-red-400 text-red-600 focus:outline-none focus:ring-red-500 focus:border-red-500'
-            : ' block w-full py-3 h-40 -0 resize-none focus:ring-0  pr-10 sm:text-sm  appearance-none px-3 -sm placeholder-gray-400 focus:outline-none ',
+            ? 'block w-full py-3 h-40 -0  focus:ring-0  pr-10 sm:text-sm  appearance-none px-3 border border-red-300  placeholder-red-400 text-red-600 focus:outline-none focus:ring-red-500 focus:border-red-500'
+            : ' block w-full py-3 h-40 -0  focus:ring-0  pr-10 sm:text-sm  appearance-none px-3 -sm placeholder-gray-400 focus:outline-none ',
         ]"
         placeholder="Write a content..."
       />
@@ -205,7 +205,7 @@ export default {
     let contentValidation = yup
       .string()
       .min(10, "content must be at least 10 characters")
-      .max(255, "content must be less than 255 characters")
+      .max(500, "content must be less than 255 characters")
       .required("content is required");
 
     const { value: title, errorMessage: titleErrorMessage } = useField(
@@ -229,11 +229,11 @@ export default {
     const uploadFile = (post_id) => {
       const payload = {};
       const formData = new FormData();
-      formData.append("avatar", file);
+      formData.append("post_image", file);
       payload.file = formData;
       payload.endpoint = endpoint;
-      payload.post_id = post_id;
-      FileService.uploadPostFile(payload)
+
+      FileService.uploadPostFile(payload , post_id)
         .then(() => {
           console.log("fileUploaded");
         })
