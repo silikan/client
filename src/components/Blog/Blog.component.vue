@@ -192,6 +192,31 @@
             </ul>
           </div>
         </main>
+              <div class="mt-6        cursor-pointer" >
+                    <a
+
+                      class="
+                        w-full
+                        block
+                        text-center
+                        px-4
+                        py-2
+                        border border-gray-300
+                        shadow-sm
+                        text-sm
+                        font-medium
+                        rounded-md
+                        text-gray-700
+                        bg-white
+                        hover:bg-gray-50
+
+                      "
+                      @click="loadMore"
+                    v-if=" meta.current_page < meta.last_page"
+                    >
+                      View More
+                    </a>
+                  </div>
         <aside class="xl:block xl:col-span-4">
           <div class="sticky top-4 space-y-4">
             <section aria-labelledby="who-to-follow-heading">
@@ -364,6 +389,7 @@ export default {
     links = computed(() => {
       return store.getters["Blog/getPaginatedPostsLinks"];
     });
+
     let feedbackReactive = reactive([]);
     requests = computed(() => {
       if (meta.value.current_page == 1 && feedbackReactive.length > 0) {
@@ -379,23 +405,23 @@ export default {
     const loadMore = () => {
       if (page < meta.value.last_page) {
         page++;
-        let paginationlink = `${process.env.VUE_APP_API_URL}/api/Blog/get-all-feedback-paginate?page=${page}`;
+        let paginationlink = `${process.env.VUE_APP_API_URL}/api/blog/posts/paginate?page=${page}`;
 
-        store.dispatch("Blog/getClientRequestLink", paginationlink);
+        store.dispatch("Blog/getLink", paginationlink);
       }
     };
     const prevPage = () => {
-      store.dispatch("Blog/getClientRequestLink", links.value.prev);
+      store.dispatch("Blog/getLink", links.value.prev);
     };
     const nextPage = () => {
       console.log(links.value.next);
-      store.dispatch("Blog/getClientRequestLink", links.value.next);
+      store.dispatch("Blog/getLink", links.value.next);
     };
 
     const setPage = (pageNumber) => {
-      let paginationlink = `${process.env.VUE_APP_API_URL}/api/blog/post/paginate?page=${pageNumber}`;
+      let paginationlink = `${process.env.VUE_APP_API_URL}/api/blog/posts/paginate?page=${pageNumber}`;
 
-      store.dispatch("Blog/getClientRequestLink", paginationlink);
+      store.dispatch("Blog/getLink", paginationlink);
       console.log(meta.value);
     };
 
