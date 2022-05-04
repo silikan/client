@@ -62,6 +62,7 @@
               <div>
                  <div class="flex-shrink-0 ">
                     <img
+                    v-if="question.image"
                       class="h-96 w-full rounded-t-lg"
                       :src="`${preurl}/${question.image}`"
                       alt=""
@@ -103,7 +104,7 @@
                     </div>
                     <h2
                       :id="'question-title-' + question.id"
-                      class="mt-4 text-base font-medium text-gray-900"
+                      class="mt-4 text-base font-bold text-gray-900"
                     >
                       {{ question.title }}
                     </h2>
