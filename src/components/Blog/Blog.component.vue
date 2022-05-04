@@ -191,8 +191,7 @@
               </li>
             </ul>
           </div>
-        </main>
-              <div class="mt-6        cursor-pointer" >
+          <div class="mt-6        cursor-pointer" >
                     <a
 
                       class="
@@ -217,6 +216,8 @@
                       View More
                     </a>
                   </div>
+        </main>
+
         <aside class="xl:block xl:col-span-4">
           <div class="sticky top-4 space-y-4">
             <section aria-labelledby="who-to-follow-heading">
