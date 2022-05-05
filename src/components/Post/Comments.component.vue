@@ -1,5 +1,4 @@
 <template>
-
   <section aria-labelledby="Comments-title">
     <div class="bg-white shadow sm:rounded-lg sm:overflow-hidden">
       <div class="divide-y divide-gray-200">
@@ -10,7 +9,7 @@
         </div>
         <div class="px-4 py-6 sm:px-6">
           <ul role="list" class="space-y-8">
-            <li v-for="(comment , i ) in comments" :key="comment.id">
+            <li v-for="(comment, i) in comments" :key="comment.id">
               <div class="flex space-x-3">
                 <div class="flex-shrink-0">
                   <!--                <img
@@ -28,7 +27,7 @@
                     />
                   </div>
                 </div>
-                <div>
+                <div class="w-full">
                   <div class="text-lg font-bold">
                     <a href="#" class="font-bold text-gray-900">{{
                       comment.user.name
@@ -51,62 +50,56 @@
                       Reply
                     </button>
                   </div>
-                  {{comment.id}}
 
-               <Replies :commentId="comment.id"/>
+                  <Replies :commentId="comment.id" />
 
-                  <div class="mt-6">
-                    <div class="mr-4 flex-shrink-0">
-                      <div class="w-full flex-1">
-                        <form action="#">
-                          <div class="">
+                  <div class="w-full mr-4 flex-shrink-0 mt-6">
+                    <form action="#" class="">
+                      <div class="w-full">
+                        <label for="reply" class="sr-only">About</label>
 
-                            <label for="reply" class="sr-only">About</label>
-
-                            <textarea
-                              id="reply"
-                              name="reply"
-                              v-model="reply[i]"
-                              rows="3"
-                              :class="[
-                                bioErrorMessage
-                                  ? 'rounded-md block w-full py-3 h-20 -0 resize-none focus:ring-0  pr-10 sm:text-sm  appearance-none px-3 border border-red-300 rounded-md-sm placeholder-red-400 text-red-600 focus:outline-none focus:ring-red-500 focus:border-red-500'
-                                  : 'rounded-md  block w-full py-3 h-20 -0 resize-none focus:ring-0  pr-10 sm:text-sm  appearance-none px-3 border border-gray-300 rounded-md-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500',
-                              ]"
-                              placeholder="Add a Reply"
-                            />
-                          </div>
-                          <div class="mt-3 flex items-center justify-between">
-                            <div></div>
-                            <button
-                              type="submit"
-                              class="
-                                inline-flex
-                                items-center
-                                justify-center
-                                px-3
-                                py-1
-                                border border-transparent
-                                text-sm
-                                font-medium
-                                rounded-md
-                                shadow-sm
-                                text-white
-                                bg-indigo-600
-                                hover:bg-indigo-700
-                                focus:outline-none
-                                focus:ring-2
-                                focus:ring-offset-2
-                                focus:ring-indigo-500
-                              "
-                              @click.prevent="postReply(reply[i],comment.id)"
-                            >
-                              Reply
-                            </button>
-                          </div>
-                        </form>
+                        <textarea
+                          id="reply"
+                          name="reply"
+                          v-model="reply[i]"
+                          rows="3"
+                          :class="[
+                            bioErrorMessage
+                              ? 'rounded-md block w-full py-3 h-20 -0 resize-none focus:ring-0  pr-10 sm:text-sm  appearance-none px-3 border border-red-300 rounded-md-sm placeholder-red-400 text-red-600 focus:outline-none focus:ring-red-500 focus:border-red-500'
+                              : 'rounded-md  block w-full py-3 h-20 -0 resize-none focus:ring-0  pr-10 sm:text-sm  appearance-none px-3 border border-gray-300 rounded-md-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500',
+                          ]"
+                          placeholder="Add a Reply"
+                        />
                       </div>
-                    </div>
+                      <div class="mt-3 flex items-center justify-between">
+                        <div></div>
+                        <button
+                          type="submit"
+                          class="
+                            inline-flex
+                            items-center
+                            justify-center
+                            px-3
+                            py-1
+                            border border-transparent
+                            text-sm
+                            font-medium
+                            rounded-md
+                            shadow-sm
+                            text-white
+                            bg-indigo-600
+                            hover:bg-indigo-700
+                            focus:outline-none
+                            focus:ring-2
+                            focus:ring-offset-2
+                            focus:ring-indigo-500
+                          "
+                          @click.prevent="postReply(reply[i], comment.id)"
+                        >
+                          Reply
+                        </button>
+                      </div>
+                    </form>
                   </div>
                 </div>
               </div>
@@ -117,13 +110,13 @@
       <div class="bg-gray-50 px-4 py-6 sm:px-6">
         <div class="flex space-x-3">
           <div class="flex-shrink-0">
-             <Avatar
-                      v-if="authUser.name"
-                      :url="authUser.avatar"
-                      :name="authUser.name"
-                      :height="12"
-                      :width="12"
-                    />
+            <Avatar
+              v-if="authUser.name"
+              :url="authUser.avatar"
+              :name="authUser.name"
+              :height="12"
+              :width="12"
+            />
           </div>
           <div class="min-w-0 flex-1">
             <form action="#">
@@ -222,19 +215,19 @@ export default {
   components: {
     QuestionMarkCircleIcon,
     Avatar,
-    Replies
+    Replies,
   },
   setup() {
     let store = useStore();
     let route = useRoute();
-    let authUser =computed(()=>store.getters["auth/authUser"]) ;
+    let authUser = computed(() => store.getters["auth/authUser"]);
     let id = route.params.id;
     let commentValidation = yup
       .string()
       .min(1, "comment must be at least 1 characters")
       .max(500, "comment must be less than 500 characters")
       .nullable();
- /*    let replyValidation = yup
+    /*    let replyValidation = yup
       .string()
       .min(1, "reply must be at least 1 characters")
       .max(500, "reply must be less than 500 characters")
@@ -242,9 +235,8 @@ export default {
     const { value: comment, errorMessage: commentErrorMessage } = useField(
       "comment",
       commentValidation
-    )
-  let reply = ref([]);
-
+    );
+    let reply = ref([]);
 
     let postComment = () => {
       let payload = {
@@ -254,8 +246,7 @@ export default {
       store.dispatch("Blog/postComment", payload);
     };
 
-    let postReply = (data , comment_id) => {
-
+    let postReply = (data, comment_id) => {
       console.log(data);
       let payload = {
         comment: data,
@@ -264,8 +255,6 @@ export default {
       };
       store.dispatch("Blog/postReply", payload);
     };
-
-
 
     let action = "Search/paginateHandymen";
     let meta, links, comments;
