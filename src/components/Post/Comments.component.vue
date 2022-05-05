@@ -107,6 +107,32 @@
           </ul>
         </div>
       </div>
+           <div class="mt-6        cursor-pointer" >
+                    <a
+
+                      class="
+                        w-full
+
+                        block
+                        text-center
+                        px-4
+                        py-2
+                        border border-gray-300
+                        shadow-sm
+                        text-sm
+                        font-medium
+                        rounded-md
+                        text-gray-700
+                        bg-white
+                        hover:bg-gray-50
+
+                      "
+                      @click="loadMore"
+                    v-if=" meta.current_page < meta.last_page"
+                    >
+                      View More
+                    </a>
+                  </div>
       <div class="bg-gray-50 px-4 py-6 sm:px-6">
         <div class="flex space-x-3">
           <div class="flex-shrink-0">
@@ -118,6 +144,7 @@
               :width="12"
             />
           </div>
+
           <div class="min-w-0 flex-1">
             <form action="#">
               <div>
@@ -191,6 +218,7 @@
         </div>
       </div>
     </div>
+
   </section>
 </template>
 
@@ -300,7 +328,7 @@ export default {
     const loadMore = () => {
       if (page < meta.value.last_page) {
         page++;
-        let paginationlink = `${process.env.VUE_APP_API_URL}/blog/post/${id}/comment/paginate?page=${page}`;
+        let paginationlink = `${process.env.VUE_APP_API_URL}/api/blog/post/${id}/comment/paginate?page=${page}`;
 
         store.dispatch("Blog/getCommentsLinks", paginationlink);
       }
@@ -314,7 +342,7 @@ export default {
     };
 
     const setPage = (pageNumber) => {
-      let paginationlink = `${process.env.VUE_APP_API_URL}/blog/post/${id}/comment/paginate?page=${pageNumber}`;
+      let paginationlink = `${process.env.VUE_APP_API_URL}/api/blog/post/${id}/comment/paginate?page=${pageNumber}`;
 
       store.dispatch("Blog/getCommentsLinks", paginationlink);
       console.log(meta.value);

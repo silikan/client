@@ -225,8 +225,9 @@ export const actions = {
     },
     async getCommentsLinks({ commit }, link) {
         try {
+            console.log(link);
             commit("SET_COMMENT_LOADING", true);
-            const data = await BlogService.getdata(link);
+            const data = await BlogService.getLink(link);
             setPaginatedComments(commit, data);
 
             commit("SET_COMMENT_LOADING", false);
