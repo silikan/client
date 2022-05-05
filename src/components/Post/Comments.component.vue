@@ -12,33 +12,33 @@
             <li v-for="comment in comments" :key="comment.id">
               <div class="flex space-x-3">
                 <div class="flex-shrink-0">
-   <!--                <img
+                  <!--                <img
                     class="h-10 w-10 rounded-full"
                     :src="`https://images.unsplash.com/photo-${comment.imageId}?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80`"
                     alt=""
                   /> -->
-				     <div class="mr-4 flex-shrink-0">
-                      <svg
-                        class="
-                          h-12
-                          w-12
-                          border border-gray-300
-                          bg-white
-                          text-gray-300
-                        "
-                        preserveAspectRatio="none"
-                        stroke="currentColor"
-                        fill="none"
-                        viewBox="0 0 200 200"
-                        aria-hidden="true"
-                      >
-                        <path
-                          vector-effect="non-scaling-stroke"
-                          stroke-width="1"
-                          d="M0 0l200 200M0 200L200 0"
-                        />
-                      </svg>
-                    </div>
+                  <div class="mr-4 flex-shrink-0">
+                    <svg
+                      class="
+                        h-12
+                        w-12
+                        border border-gray-300
+                        bg-white
+                        text-gray-300
+                      "
+                      preserveAspectRatio="none"
+                      stroke="currentColor"
+                      fill="none"
+                      viewBox="0 0 200 200"
+                      aria-hidden="true"
+                    >
+                      <path
+                        vector-effect="non-scaling-stroke"
+                        stroke-width="1"
+                        d="M0 0l200 200M0 200L200 0"
+                      />
+                    </svg>
+                  </div>
                 </div>
                 <div>
                   <div class="text-lg font-bold">
@@ -95,9 +95,9 @@
                       </p>
                     </div>
                   </div>
-                  <div class="mt-6  ">
-                    <div class="mr-4 flex-shrink-0 ">
-                      <div class="w-full flex-1 ">
+                  <div class="mt-6">
+                    <div class="mr-4 flex-shrink-0">
+                      <div class="w-full flex-1">
                         <form action="#">
                           <div class="">
                             <label for="comment" class="sr-only">About</label>
@@ -105,16 +105,16 @@
                               id="comment"
                               name="comment"
                               rows="3"
-              :class="[
-                  bioErrorMessage
-                    ? 'rounded-md block w-full py-3 h-20 -0 resize-none focus:ring-0  pr-10 sm:text-sm  appearance-none px-3 border border-red-300 rounded-md-sm placeholder-red-400 text-red-600 focus:outline-none focus:ring-red-500 focus:border-red-500'
-                    : 'rounded-md  block w-full py-3 h-20 -0 resize-none focus:ring-0  pr-10 sm:text-sm  appearance-none px-3 border border-gray-300 rounded-md-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500',
-                ]"
+                              :class="[
+                                bioErrorMessage
+                                  ? 'rounded-md block w-full py-3 h-20 -0 resize-none focus:ring-0  pr-10 sm:text-sm  appearance-none px-3 border border-red-300 rounded-md-sm placeholder-red-400 text-red-600 focus:outline-none focus:ring-red-500 focus:border-red-500'
+                                  : 'rounded-md  block w-full py-3 h-20 -0 resize-none focus:ring-0  pr-10 sm:text-sm  appearance-none px-3 border border-gray-300 rounded-md-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500',
+                              ]"
                               placeholder="Add a Reply"
                             />
                           </div>
                           <div class="mt-3 flex items-center justify-between">
-							  	<div></div>
+                            <div></div>
                             <button
                               type="submit"
                               class="
@@ -153,39 +153,35 @@
       <div class="bg-gray-50 px-4 py-6 sm:px-6">
         <div class="flex space-x-3">
           <div class="flex-shrink-0">
- <svg
-                        class="
-                          h-12
-                          w-12
-                          border border-gray-300
-                          bg-white
-                          text-gray-300
-                        "
-                        preserveAspectRatio="none"
-                        stroke="currentColor"
-                        fill="none"
-                        viewBox="0 0 200 200"
-                        aria-hidden="true"
-                      >
-                        <path
-                          vector-effect="non-scaling-stroke"
-                          stroke-width="1"
-                          d="M0 0l200 200M0 200L200 0"
-                        />
-                      </svg>          </div>
+            <svg
+              class="h-12 w-12 border border-gray-300 bg-white text-gray-300"
+              preserveAspectRatio="none"
+              stroke="currentColor"
+              fill="none"
+              viewBox="0 0 200 200"
+              aria-hidden="true"
+            >
+              <path
+                vector-effect="non-scaling-stroke"
+                stroke-width="1"
+                d="M0 0l200 200M0 200L200 0"
+              />
+            </svg>
+          </div>
           <div class="min-w-0 flex-1">
             <form action="#">
               <div>
                 <label for="comment" class="sr-only">About</label>
                 <textarea
+                v-model="comment"
                   id="comment"
                   name="comment"
                   rows="3"
-              :class="[
-                  bioErrorMessage
-                    ? 'rounded-md block w-full py-3 h-28 -0 resize-none focus:ring-0  pr-10 sm:text-sm  appearance-none px-3 border border-red-300 rounded-md-sm placeholder-red-400 text-red-600 focus:outline-none focus:ring-red-500 focus:border-red-500'
-                    : 'rounded-md  block w-full py-3 h-28 -0 resize-none focus:ring-0  pr-10 sm:text-sm  appearance-none px-3 border border-gray-300 rounded-md-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500',
-                ]"
+                  :class="[
+                    bioErrorMessage
+                      ? 'rounded-md block w-full py-3 h-28 -0 resize-none focus:ring-0  pr-10 sm:text-sm  appearance-none px-3 border border-red-300 rounded-md-sm placeholder-red-400 text-red-600 focus:outline-none focus:ring-red-500 focus:border-red-500'
+                      : 'rounded-md  block w-full py-3 h-28 -0 resize-none focus:ring-0  pr-10 sm:text-sm  appearance-none px-3 border border-gray-300 rounded-md-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500',
+                  ]"
                   placeholder="Add a Comment"
                 />
               </div>
@@ -235,6 +231,7 @@
                     focus:ring-offset-2
                     focus:ring-indigo-500
                   "
+                  @click.prevent="postComment"
                 >
                   Comment
                 </button>
@@ -249,6 +246,11 @@
 
 <script>
 import { QuestionMarkCircleIcon } from "@heroicons/vue/solid";
+import { useStore } from "vuex";
+import { useRoute } from "vue-router";
+import { useField } from "vee-validate";
+import * as yup from "yup";
+
 const user = {
   name: "Whitney Francis",
   email: "whitney@example.com",
@@ -283,9 +285,53 @@ export default {
     QuestionMarkCircleIcon,
   },
   setup() {
+    let store = useStore();
+    let route = useRoute();
+    let id = route.params.id;
+    let commentValidation = yup
+      .string()
+      .min(1, "comment must be at least 1 characters")
+      .max(500, "comment must be less than 500 characters")
+      .nullable();
+    let replyValidation = yup
+      .string()
+      .min(1, "reply must be at least 1 characters")
+      .max(500, "reply must be less than 500 characters")
+      .nullable();
+    const { value: comment, errorMessage: commentErrorMessage } = useField(
+      "comment",
+      commentValidation
+    );
+    const { value: reply, errorMessage: replyErrorMessage } = useField(
+      "reply",
+      replyValidation
+    );
+
+    let postComment = () => {
+      let payload = {
+        comment: comment.value,
+        post_id: id,
+      };
+      store.dispatch("Blog/postComment", payload);
+    };
+
+    let postReply = (comment_id) => {
+      let payload = {
+        comment: comment.value,
+        post_id: id,
+        comment_id: comment_id,
+      };
+      store.dispatch("Blog/postReply", payload);
+    };
     return {
       user,
       comments,
+      comment,
+      reply,
+      commentErrorMessage,
+      replyErrorMessage,
+      postComment,
+      postReply,
     };
   },
 };
