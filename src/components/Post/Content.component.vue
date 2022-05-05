@@ -1,64 +1,275 @@
-
 <template>
-  <div class="relative py-16 bg-white overflow-hidden">
-    <div class="hidden lg:block lg:absolute lg:inset-y-0 lg:h-full lg:w-full">
-      <div class="relative h-full text-lg max-w-prose mx-auto" aria-hidden="true">
-        <svg class="absolute top-12 left-full transform translate-x-32" width="404" height="384" fill="none" viewBox="0 0 404 384">
-          <defs>
-            <pattern id="74b3fd99-0a6f-4271-bef2-e80eeafdf357" x="0" y="0" width="20" height="20" patternUnits="userSpaceOnUse">
-              <rect x="0" y="0" width="4" height="4" class="text-gray-200" fill="currentColor" />
-            </pattern>
-          </defs>
-          <rect width="404" height="384" fill="url(#74b3fd99-0a6f-4271-bef2-e80eeafdf357)" />
-        </svg>
-        <svg class="absolute top-1/2 right-full transform -translate-y-1/2 -translate-x-32" width="404" height="384" fill="none" viewBox="0 0 404 384">
-          <defs>
-            <pattern id="f210dbf6-a58d-4871-961e-36d5016a0f49" x="0" y="0" width="20" height="20" patternUnits="userSpaceOnUse">
-              <rect x="0" y="0" width="4" height="4" class="text-gray-200" fill="currentColor" />
-            </pattern>
-          </defs>
-          <rect width="404" height="384" fill="url(#f210dbf6-a58d-4871-961e-36d5016a0f49)" />
-        </svg>
-        <svg class="absolute bottom-12 left-full transform translate-x-32" width="404" height="384" fill="none" viewBox="0 0 404 384">
-          <defs>
-            <pattern id="d3eb07ae-5182-43e6-857d-35c643af9034" x="0" y="0" width="20" height="20" patternUnits="userSpaceOnUse">
-              <rect x="0" y="0" width="4" height="4" class="text-gray-200" fill="currentColor" />
-            </pattern>
-          </defs>
-          <rect width="404" height="384" fill="url(#d3eb07ae-5182-43e6-857d-35c643af9034)" />
-        </svg>
+  <!-- Component Code -->
+  <section>
+    <div class="max-w-screen-xl mx-auto p-5 sm:p-10 md:p-16 relative">
+      <div
+        class="bg-cover h-64 text-center overflow-hidden"
+        style="
+          height: 450px;
+          background-image: url('https://api.time.com/wp-content/uploads/2020/07/never-trumpers-2020-election-01.jpg?quality=85&w=1201&h=676&crop=1');
+        "
+        title="Woman holding a mug"
+      ></div>
+      <div class="max-w-2xl mx-auto">
+        <div
+          class="
+            mt-3
+            bg-white
+            rounded-b
+            lg:rounded-b-none lg:rounded-r
+            flex flex-col
+            justify-between
+            leading-normal
+          "
+        >
+          <div class="">
+            <a
+              href="#"
+              class="
+                text-xs text-indigo-600
+                uppercase
+                font-medium
+                hover:text-gray-900
+                transition
+                duration-500
+                ease-in-out
+              "
+            >
+              Election </a
+            >,
+            <a
+              href="#"
+              class="
+                text-xs text-indigo-600
+                uppercase
+                font-medium
+                hover:text-gray-900
+                transition
+                duration-500
+                ease-in-out
+              "
+            >
+              Politics
+            </a>
+            <h1 href="#" class="text-gray-900 font-bold text-3xl mb-2">
+              Revenge of the Never Trumpers
+            </h1>
+            <p class="text-gray-700 text-xs mt-2">
+              Written By:
+              <a
+                href="#"
+                class="
+                  text-indigo-600
+                  font-medium
+                  hover:text-gray-900
+                  transition
+                  duration-500
+                  ease-in-out
+                "
+              >
+                Ahmad Sultani
+              </a>
+            </p>
+
+            <p class="text-base leading-8 my-5">
+              Lorem Ipsum is simply dummy text of the printing and typesetting
+              industry. Lorem Ipsum has been the industry's standard dummy text
+              ever since the 1500s, when an unknown printer took a galley of
+              type and scrambled it to make a type specimen book. It has
+              survived not only five centuries, but also the leap into
+              electronic typesetting, remaining essentially unchanged. It was
+              popularised in the 1960s with the release of Letraset sheets
+              containing Lorem Ipsum passages, and more recently with desktop
+              publishing software like Aldus PageMaker including versions of
+              Lorem Ipsum. Lorem ipsum dolor sit amet consectetur adipisicing
+              elit. Cupiditate excepturi non eius reiciendis accusantium
+              laboriosam et. Vero aliquam, ipsa, fuga molestias doloribus nulla
+              optio quisquam facere eum inventore vel culpa.
+            </p>
+          </div>
+        </div>
       </div>
     </div>
-    <div class="relative px-4 sm:px-6 lg:px-8">
-      <div class="text-lg max-w-prose mx-auto">
-        <h1>
-          <span class="block text-base text-center text-indigo-600 font-semibold tracking-wide uppercase">Introducing</span>
-          <span class="mt-2 block text-3xl text-center leading-8 font-extrabold tracking-tight text-gray-900 sm:text-4xl">JavaScript for Beginners</span>
-        </h1>
-        <p class="mt-8 text-xl text-gray-500 leading-8">Aliquet nec orci mattis amet quisque ullamcorper neque, nibh sem. At arcu, sit dui mi, nibh dui, diam eget aliquam. Quisque id at vitae feugiat egestas ac. Diam nulla orci at in viverra scelerisque eget. Eleifend egestas fringilla sapien.</p>
+  </section>
+
+  <section aria-labelledby="notes-title">
+    <div class="bg-white shadow sm:rounded-lg sm:overflow-hidden">
+      <div class="divide-y divide-gray-200">
+        <div class="px-4 py-5 sm:px-6">
+          <h2 id="notes-title" class="text-lg font-medium text-gray-900">
+            Notes
+          </h2>
+        </div>
+        <div class="px-4 py-6 sm:px-6">
+          <ul role="list" class="space-y-8">
+            <li v-for="comment in comments" :key="comment.id">
+              <div class="flex space-x-3">
+                <div class="flex-shrink-0">
+                  <img
+                    class="h-10 w-10 rounded-full"
+                    :src="`https://images.unsplash.com/photo-${comment.imageId}?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80`"
+                    alt=""
+                  />
+                </div>
+                <div>
+                  <div class="text-sm">
+                    <a href="#" class="font-medium text-gray-900">{{
+                      comment.name
+                    }}</a>
+                  </div>
+                  <div class="mt-1 text-sm text-gray-700">
+                    <p>{{ comment.body }}</p>
+                  </div>
+                  <div class="mt-2 text-sm space-x-2">
+                    <span class="text-gray-500 font-medium">{{
+                      comment.date
+                    }}</span>
+                    {{ " " }}
+                    <span class="text-gray-500 font-medium">&middot;</span>
+                    {{ " " }}
+                    <button type="button" class="text-gray-900 font-medium">
+                      Reply
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </li>
+          </ul>
+        </div>
       </div>
-      <div class="mt-6 prose prose-indigo prose-lg text-gray-500 mx-auto">
-        <p>Faucibus commodo massa rhoncus, volutpat. <strong>Dignissim</strong> sed <strong>eget risus enim</strong>. Mattis mauris semper sed amet vitae sed turpis id. Id dolor praesent donec est. Odio penatibus risus viverra tellus varius sit neque erat velit. Faucibus commodo massa rhoncus, volutpat. Dignissim sed eget risus enim. <a href="#">Mattis mauris semper</a> sed amet vitae sed turpis id.</p>
-        <ul role="list">
-          <li>Quis elit egestas venenatis mattis dignissim.</li>
-          <li>Cras cras lobortis vitae vivamus ultricies facilisis tempus.</li>
-          <li>Orci in sit morbi dignissim metus diam arcu pretium.</li>
-        </ul>
-        <p>Quis semper vulputate aliquam venenatis egestas sagittis quisque orci. Donec commodo sit viverra aliquam porttitor ultrices gravida eu. Tincidunt leo, elementum mattis elementum ut nisl, justo, amet, mattis. Nunc purus, diam commodo tincidunt turpis. Amet, duis sed elit interdum dignissim.</p>
-        <h2>From beginner to expert in 30 days</h2>
-        <p>Id orci tellus laoreet id ac. Dolor, aenean leo, ac etiam consequat in. Convallis arcu ipsum urna nibh. Pharetra, euismod vitae interdum mauris enim, consequat vulputate nibh. Maecenas pellentesque id sed tellus mauris, ultrices mauris. Tincidunt enim cursus ridiculus mi. Pellentesque nam sed nullam sed diam turpis ipsum eu a sed convallis diam.</p>
-        <blockquote>
-          <p>Sagittis scelerisque nulla cursus in enim consectetur quam. Dictum urna sed consectetur neque tristique pellentesque. Blandit amet, sed aenean erat arcu morbi.</p>
-        </blockquote>
-        <p>Faucibus commodo massa rhoncus, volutpat. Dignissim sed eget risus enim. Mattis mauris semper sed amet vitae sed turpis id. Id dolor praesent donec est. Odio penatibus risus viverra tellus varius sit neque erat velit.</p>
-        <figure>
-          <img class="w-full rounded-lg" src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-1.2.1&auto=format&fit=facearea&w=1310&h=873&q=80&facepad=3" alt="" width="1310" height="873" />
-          <figcaption>Sagittis scelerisque nulla cursus in enim consectetur quam.</figcaption>
-        </figure>
-        <h2>Everything you need to get up and running</h2>
-        <p>Purus morbi dignissim senectus mattis <a href="#">adipiscing</a>. Amet, massa quam varius orci dapibus volutpat cras. In amet eu ridiculus leo sodales cursus tristique. Tincidunt sed tempus ut viverra ridiculus non molestie. Gravida quis fringilla amet eget dui tempor dignissim. Facilisis auctor venenatis varius nunc, congue erat ac. Cras fermentum convallis quam.</p>
-        <p>Faucibus commodo massa rhoncus, volutpat. Dignissim sed eget risus enim. Mattis mauris semper sed amet vitae sed turpis id. Id dolor praesent donec est. Odio penatibus risus viverra tellus varius sit neque erat velit.</p>
+      <div class="bg-gray-50 px-4 py-6 sm:px-6">
+        <div class="flex space-x-3">
+          <div class="flex-shrink-0">
+            <img class="h-10 w-10 rounded-full" :src="user.imageUrl" alt="" />
+          </div>
+          <div class="min-w-0 flex-1">
+            <form action="#">
+              <div>
+                <label for="comment" class="sr-only">About</label>
+                <textarea
+                  id="comment"
+                  name="comment"
+                  rows="3"
+                  class="
+                    shadow-sm
+                    block
+                    w-full
+                    focus:ring-blue-500 focus:border-blue-500
+                    sm:text-sm
+                    border border-gray-300
+                    rounded-md
+                  "
+                  placeholder="Add a note"
+                />
+              </div>
+              <div class="mt-3 flex items-center justify-between">
+                <a
+                  href="#"
+                  class="
+                    group
+                    inline-flex
+                    items-start
+                    text-sm
+                    space-x-2
+                    text-gray-500
+                    hover:text-gray-900
+                  "
+                >
+                  <QuestionMarkCircleIcon
+                    class="
+                      flex-shrink-0
+                      h-5
+                      w-5
+                      text-gray-400
+                      group-hover:text-gray-500
+                    "
+                    aria-hidden="true"
+                  />
+                  <span> Some HTML is okay. </span>
+                </a>
+                <button
+                  type="submit"
+                  class="
+                    inline-flex
+                    items-center
+                    justify-center
+                    px-4
+                    py-2
+                    border border-transparent
+                    text-sm
+                    font-medium
+                    rounded-md
+                    shadow-sm
+                    text-white
+                    bg-blue-600
+                    hover:bg-blue-700
+                    focus:outline-none
+                    focus:ring-2
+                    focus:ring-offset-2
+                    focus:ring-blue-500
+                  "
+                >
+                  Comment
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
       </div>
     </div>
-  </div>
+  </section>
 </template>
+
+<script>
+import {
+
+  QuestionMarkCircleIcon,
+
+} from '@heroicons/vue/solid'
+const user = {
+  name: 'Whitney Francis',
+  email: 'whitney@example.com',
+  imageUrl:
+    'https://images.unsplash.com/photo-1517365830460-955ce3ccd263?ixlib=rb-=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=8&w=256&h=256&q=80',
+}
+const comments = [
+  {
+    id: 1,
+    name: 'Leslie Alexander',
+    date: '4d ago',
+    imageId: '1494790108377-be9c29b29330',
+    body:
+      'Ducimus quas delectus ad maxime totam doloribus reiciendis ex. Tempore dolorem maiores. Similique voluptatibus tempore non ut.',
+  },
+  {
+    id: 2,
+    name: 'Michael Foster',
+    date: '4d ago',
+    imageId: '1519244703995-f4e0f30006d5',
+    body:
+      'Et ut autem. Voluptatem eum dolores sint necessitatibus quos. Quis eum qui dolorem accusantium voluptas voluptatem ipsum. Quo facere iusto quia accusamus veniam id explicabo et aut.',
+  },
+  {
+    id: 3,
+    name: 'Dries Vincent',
+    date: '4d ago',
+    imageId: '1506794778202-cad84cf45f1d',
+    body:
+      'Expedita consequatur sit ea voluptas quo ipsam recusandae. Ab sint et voluptatem repudiandae voluptatem et eveniet. Nihil quas consequatur autem. Perferendis rerum et.',
+  },
+]
+export default {
+  components: {
+    QuestionMarkCircleIcon,
+  },
+  setup() {
+    return {
+      comments,
+      user
+    }
+  },
+};
+</script>
+
+<style>
+</style>
