@@ -1,14 +1,15 @@
 <template >
+
   <img
-  referrerpolicy="no-referrer"
-    class="h-12 w-12 rounded-full"
+    referrerpolicy="no-referrer"
+    :class="[`h-${heightData} w-${widthData} rounded-full`]"
     :src="avatar_svg"
     v-if="avatarWithoutLocalhost === null && nameData !== null"
     alt=""
   />
   <img
-  referrerpolicy="no-referrer"
-    class="h-12 w-12 rounded-full"
+    referrerpolicy="no-referrer"
+    :class="[`h-${heightData} w-${widthData} rounded-full`]"
     :src="avatar"
     v-if="avatarWithoutLocalhost !== null && nameData !== null"
     alt=""
@@ -21,7 +22,7 @@ import * as style from "@dicebear/avatars-initials-sprites";
 import { computed } from "@vue/runtime-core";
 
 export default {
-  props: ["url", "name"],
+  props: ["url", "name", "height", "width"],
   setup(props) {
     let avatar_svg;
     let avatar;
@@ -49,12 +50,16 @@ export default {
         avatar = OathAvatar;
       }
     }
-
+    let heightData = computed(() => props.height);
+    let widthData = computed(() => props.width);
     return {
       avatar_svg,
       avatar,
       avatarWithoutLocalhost,
-      nameData
+      nameData,
+      urlData,
+      heightData,
+      widthData,
     };
   },
 };

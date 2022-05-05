@@ -1,4 +1,5 @@
 <template>
+
   <section aria-labelledby="Comments-title">
     <div class="bg-white shadow sm:rounded-lg sm:overflow-hidden">
       <div class="divide-y divide-gray-200">
@@ -22,6 +23,8 @@
                       v-if="comment.user.name"
                       :url="comment.user.avatar"
                       :name="comment.user.name"
+                      :height="12"
+                      :width="12"
                     />
                   </div>
                 </div>
@@ -48,38 +51,10 @@
                       Reply
                     </button>
                   </div>
-                  <div class="mt-6 flex">
-                    <div class="mr-4 flex-shrink-0">
-                      <svg
-                        class="
-                          h-12
-                          w-12
-                          border border-gray-300
-                          bg-white
-                          text-gray-300
-                        "
-                        preserveAspectRatio="none"
-                        stroke="currentColor"
-                        fill="none"
-                        viewBox="0 0 200 200"
-                        aria-hidden="true"
-                      >
-                        <path
-                          vector-effect="non-scaling-stroke"
-                          stroke-width="1"
-                          d="M0 0l200 200M0 200L200 0"
-                        />
-                      </svg>
-                    </div>
-                    <div>
-                      <h4 class="text-lg font-bold">Lorem ipsum</h4>
-                      <p class="mt-1 text-md text-gray-700 italic">
-                        Repudiandae sint consequuntur vel. Amet ut nobis
-                        explicabo numquam expedita quia omnis voluptatem. Minus
-                        quidem ipsam quia iusto.
-                      </p>
-                    </div>
-                  </div>
+                  {{comment.id}}
+
+               <Replies :commentId="comment.id"/>
+
                   <div class="mt-6">
                     <div class="mr-4 flex-shrink-0">
                       <div class="w-full flex-1">
@@ -142,20 +117,13 @@
       <div class="bg-gray-50 px-4 py-6 sm:px-6">
         <div class="flex space-x-3">
           <div class="flex-shrink-0">
-            <svg
-              class="h-12 w-12 border border-gray-300 bg-white text-gray-300"
-              preserveAspectRatio="none"
-              stroke="currentColor"
-              fill="none"
-              viewBox="0 0 200 200"
-              aria-hidden="true"
-            >
-              <path
-                vector-effect="non-scaling-stroke"
-                stroke-width="1"
-                d="M0 0l200 200M0 200L200 0"
-              />
-            </svg>
+             <Avatar
+                      v-if="authUser.name"
+                      :url="authUser.avatar"
+                      :name="authUser.name"
+                      :height="12"
+                      :width="12"
+                    />
           </div>
           <div class="min-w-0 flex-1">
             <form action="#">
@@ -235,7 +203,7 @@
 
 <script>
 import Avatar from "@/components/Post/CommentAvatar.component.vue";
-
+import Replies from "@/components/Post/Replies.component.vue";
 import { QuestionMarkCircleIcon } from "@heroicons/vue/solid";
 import { useStore } from "vuex";
 import { useRoute } from "vue-router";
@@ -254,10 +222,12 @@ export default {
   components: {
     QuestionMarkCircleIcon,
     Avatar,
+    Replies
   },
   setup() {
     let store = useStore();
     let route = useRoute();
+    let authUser =computed(()=>store.getters["auth/authUser"]) ;
     let id = route.params.id;
     let commentValidation = yup
       .string()
@@ -421,6 +391,7 @@ export default {
       openDiag,
       loading,
       loadMore,
+      authUser,
     };
   },
 };

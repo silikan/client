@@ -226,11 +226,11 @@ export const actions = {
     async getCommentsLinks({ commit }, link) {
         try {
             commit("SET_COMMENT_LOADING", true);
-            const posts = await BlogService.getLink(link);
-            setPaginatedComments(commit, posts);
+            const data = await BlogService.getdata(link);
+            setPaginatedComments(commit, data);
 
             commit("SET_COMMENT_LOADING", false);
-            return links.data;
+            return data.data;
         } catch (error) {
             commit("SET_COMMENT_LOADING", false);
             commit("SET_COMMENT_ERROR", getError(error));
@@ -251,7 +251,7 @@ export const actions = {
             commit("SET_COMMENT_REPLIES_ERROR", getError(error));
         }
     },
-    async getReliesLinks({ commit }, link) {
+    async getRepliesLinks({ commit }, link) {
         try {
             commit("SET_COMMENT_REPLIES_LOADING", true);
             const links = await BlogService.getLink(link);
