@@ -5,13 +5,16 @@
     <main class="py-10">
       <div
         class="
+        mx-5
           mt-8
           max-w-3xl
-          mx-auto
+          sm:mx-auto
           grid grid-cols-1
           gap-6
           sm:px-6
-          lg:max-w-7xl lg:grid-flow-col-dense lg:grid-cols-2
+          lg:max-w-3xl
+          lg:grid-flow-col-dense
+           lg:grid-cols-2
         "
       >
         <div class="space-y-6 lg:col-start-1 lg:col-span-2">
@@ -197,6 +200,7 @@
         </div>
       </div>
     </main>
+
   </div>
 </template>
 

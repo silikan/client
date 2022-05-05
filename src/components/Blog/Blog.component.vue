@@ -10,7 +10,7 @@
           lg:max-w-7xl lg:px-8 lg:grid lg:grid-cols-12 lg:gap-8
         "
       >
-        <div class="lg:block lg:col-span-3 xl:col-span-2">
+        <div class="">
           <nav
             aria-label="Sidebar"
             class="sticky top-4 divide-y divide-gray-300"
