@@ -8,6 +8,13 @@ function setPaginatedPosts(commit, response) {
     commit("SET_POSTS_LINKS", response.data.links);
     commit("SET_POSTS_LOADING", false);
 }
+
+function setPaginatedComments(commit, response) {
+    commit("SET_COMMENTS", response.data.data);
+    commit("SET_COMMENTS_META", response.data.meta);
+    commit("SET_COMMENTS_LINKS", response.data.links);
+    commit("SET_COMMENTS_LOADING", false);
+}
 export const state = {
     posts: [],
     post: {},
@@ -18,6 +25,8 @@ export const state = {
     comments: [],
     replies: [],
     likes: [],
+    comment_loading: false,
+    comment_error: null,
 };
 
 export const mutations = {
@@ -47,6 +56,12 @@ export const mutations = {
     },
     SET_POSTS_ERROR(state, error) {
         state.error = error;
+    },
+    SET_COMMENT_LOADING(state, loading) {
+        state.comment_loading = loading;
+    },
+    SET_COMMENT_ERROR(state, error) {
+        state.comment_error = error;
     },
 };
 
@@ -156,6 +171,31 @@ export const actions = {
             commit("SET_ERROR", getError(error));
         }
     },
+
+    async getPostCommentsPaginate({ commit }, payload) {
+        let page = payload.page;
+        let post_id = payload.post_id;
+        try {
+            commit("SET_COMMENT_LOADING", true);
+            const comments = await BlogService.getPostCommentsPaginate(post_id, page);
+            setPaginatedComments(commit, comments);
+            return comments.data;
+        } catch (error) {
+            commit("SET_COMMENT_LOADING", false);
+            commit("SET_COMMENT_ERROR", getError(error));
+        }
+    },
+    async getCommentsLinks({ commit }, link) {
+        try {
+            commit("SET_COMMENT_LOADING", true);
+            const links = await BlogService.getLink(link);
+            commit("SET_COMMENT_LOADING", false);
+            return links.data;
+        } catch (error) {
+            commit("SET_COMMENT_LOADING", false);
+            commit("SET_COMMENT_ERROR", getError(error));
+        }
+    },
 };
 
 export const getters = {
@@ -191,5 +231,14 @@ export const getters = {
     },
     getPaginatedPostsError(state) {
         return state.error;
+    },
+    getCommentLoading(state) {
+        return state.comment_loading;
+    },
+    getCommentError(state) {
+        return state.comment_error;
+    },
+    getComments(state) {
+        return state.comments;
     },
 };

@@ -34,4 +34,8 @@ export default {
     async postUnlike(payload) {
         return await API.apiClient.delete(`/blog/post/like`, payload);
     },
+
+    async getPostCommentsPaginate(post_id, page) {
+        return await API.apiClient.get(`/blog/post/${post_id}/comments/paginate`, { params: { page } });
+    },
 };
