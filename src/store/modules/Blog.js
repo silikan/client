@@ -296,6 +296,7 @@ export const getters = {
     getPaginatedPostsLoading(state) {
         return state.loading;
     },
+    //commit("SET_POSTS", response.data);
     getPaginatedPostsError(state) {
         return state.error;
     },
