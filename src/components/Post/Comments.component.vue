@@ -12,19 +12,41 @@
             <li v-for="comment in comments" :key="comment.id">
               <div class="flex space-x-3">
                 <div class="flex-shrink-0">
-                  <img
+   <!--                <img
                     class="h-10 w-10 rounded-full"
                     :src="`https://images.unsplash.com/photo-${comment.imageId}?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80`"
                     alt=""
-                  />
+                  /> -->
+				     <div class="mr-4 flex-shrink-0">
+                      <svg
+                        class="
+                          h-12
+                          w-12
+                          border border-gray-300
+                          bg-white
+                          text-gray-300
+                        "
+                        preserveAspectRatio="none"
+                        stroke="currentColor"
+                        fill="none"
+                        viewBox="0 0 200 200"
+                        aria-hidden="true"
+                      >
+                        <path
+                          vector-effect="non-scaling-stroke"
+                          stroke-width="1"
+                          d="M0 0l200 200M0 200L200 0"
+                        />
+                      </svg>
+                    </div>
                 </div>
                 <div>
-                  <div class="text-sm">
+                  <div class="text-lg font-bold">
                     <a href="#" class="font-bold text-gray-900">{{
                       comment.name
                     }}</a>
                   </div>
-                  <div class="mt-1 text-sm text-gray-700 italic">
+                  <div class="mt-1 text-md text-gray-700 italic">
                     <p>{{ comment.body }}</p>
                   </div>
                   <div class="mt-2 text-sm space-x-2">
@@ -66,7 +88,7 @@
                     </div>
                     <div>
                       <h4 class="text-lg font-bold">Lorem ipsum</h4>
-                      <p class="mt-1">
+                      <p class="mt-1 text-md text-gray-700 italic">
                         Repudiandae sint consequuntur vel. Amet ut nobis
                         explicabo numquam expedita quia omnis voluptatem. Minus
                         quidem ipsam quia iusto.
@@ -107,12 +129,12 @@
                                 rounded-md
                                 shadow-sm
                                 text-white
-                                bg-blue-600
-                                hover:bg-blue-700
+                                bg-indigo-600
+                                hover:bg-indigo-700
                                 focus:outline-none
                                 focus:ring-2
                                 focus:ring-offset-2
-                                focus:ring-blue-500
+                                focus:ring-indigo-500
                               "
                             >
                               Reply
@@ -131,8 +153,26 @@
       <div class="bg-gray-50 px-4 py-6 sm:px-6">
         <div class="flex space-x-3">
           <div class="flex-shrink-0">
-            <img class="h-10 w-10 rounded-full" :src="user.imageUrl" alt="" />
-          </div>
+ <svg
+                        class="
+                          h-12
+                          w-12
+                          border border-gray-300
+                          bg-white
+                          text-gray-300
+                        "
+                        preserveAspectRatio="none"
+                        stroke="currentColor"
+                        fill="none"
+                        viewBox="0 0 200 200"
+                        aria-hidden="true"
+                      >
+                        <path
+                          vector-effect="non-scaling-stroke"
+                          stroke-width="1"
+                          d="M0 0l200 200M0 200L200 0"
+                        />
+                      </svg>          </div>
           <div class="min-w-0 flex-1">
             <form action="#">
               <div>
@@ -188,12 +228,12 @@
                     rounded-md
                     shadow-sm
                     text-white
-                    bg-blue-600
-                    hover:bg-blue-700
+                    bg-indigo-600
+                    hover:bg-indigo-700
                     focus:outline-none
                     focus:ring-2
                     focus:ring-offset-2
-                    focus:ring-blue-500
+                    focus:ring-indigo-500
                   "
                 >
                   Comment

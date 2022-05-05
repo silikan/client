@@ -1,6 +1,7 @@
 <template>
+
   <!-- Component Code -->
-  <div class="min-h-full">
+  <div class="min-h-full" v-if="post">
     <main class="py-10">
       <div
         class="
@@ -17,14 +18,14 @@
           <section>
             <div class="bg-white shadow sm:rounded-lg">
               <div class="max-w-screen-xl mx-auto  relative">
-                <div
-                  class="bg-cover h-64 text-center overflow-hidden rounded-t-lg"
-                  style="
-                    height: 450px;
-                    background-image: url('https://api.time.com/wp-content/uploads/2020/07/never-trumpers-2020-election-01.jpg?quality=85&w=1201&h=676&crop=1');
-                  "
-                  title="Woman holding a mug"
-                ></div>
+          <div class="flex-shrink-0 ">
+                    <img
+                    v-if="post.image"
+                      class="h-96 w-full rounded-t-lg"
+                      :src="`${preurl}/${post.image}`"
+                      alt=""
+                    />
+                  </div>
                 <div class="max-w-3xl mx-auto p-5 sm:p-5 md:p-10">
                   <div
                     class="
@@ -70,42 +71,41 @@
                         href="#"
                         class="text-gray-900 font-bold text-3xl mb-2"
                       >
-                        Revenge of the Never Trumpers
+                        {{ post.title }}
                       </h1>
-                      <p class="text-gray-700 text-xs mt-2">
-                        Written By:
-                        <a
-                          href="#"
-                          class="
-                            text-indigo-600
-                            font-medium
-                            hover:text-gray-900
-                            transition
-                            duration-500
-                            ease-in-out
-                          "
-                        >
-                          Ahmad Sultani
-                        </a>
-                      </p>
+                <div class="flex space-x-3 ml-5">
+                      <div class="flex-shrink-0">
+                        <Avatar
+                          v-if="post.user.name"
+                          :url="post.user.avatar"
+                          :name="post.user.name"
+                        />
+                      </div>
+                      <div class="min-w-0 flex-1">
+                        <p class="text-sm font-b text-gray-900">
+                          <router-link
+                            :to="`/user/${post.user.id}`"
+                            class="hover:underline"
+                            >{{ post.user.name }}</router-link
+                          >
+                        </p>
+                        <p class="text-sm text-gray-500">
+                          <a class="hover:underline">
+                            <timeago
+                              :converter-options="{
+                                includeSeconds: true,
+                                addSuffix: true,
+                                useStrict: true,
+                              }"
+                              :datetime="post.created_at"
+                            />
+                          </a>
+                        </p>
+                      </div>
+                    </div>
 
-                      <p class="text-base leading-8 my-5">
-                        Lorem Ipsum is simply dummy text of the printing and
-                        typesetting industry. Lorem Ipsum has been the
-                        industry's standard dummy text ever since the 1500s,
-                        when an unknown printer took a galley of type and
-                        scrambled it to make a type specimen book. It has
-                        survived not only five centuries, but also the leap into
-                        electronic typesetting, remaining essentially unchanged.
-                        It was popularised in the 1960s with the release of
-                        Letraset sheets containing Lorem Ipsum passages, and
-                        more recently with desktop publishing software like
-                        Aldus PageMaker including versions of Lorem Ipsum. Lorem
-                        ipsum dolor sit amet consectetur adipisicing elit.
-                        Cupiditate excepturi non eius reiciendis accusantium
-                        laboriosam et. Vero aliquam, ipsa, fuga molestias
-                        doloribus nulla optio quisquam facere eum inventore vel
-                        culpa.
+                      <p class="text-base break-all leading-8 my-5">
+                        {{ post.content }}
                       </p>
                     </div>
                   </div>
@@ -115,7 +115,7 @@
 
             <div class="bg-white shadow sm:rounded-lg sm:overflow-hidden mt-5">
 
-              <div class="m-6 flex justify-between space-x-8">
+              <div class="m-6 flex justify-between space-x-8  py-5 sm:py-1">
                     <div class="flex space-x-6">
                       <span class="inline-flex items-center text-sm">
                         <button
@@ -202,6 +202,8 @@
 
 <script>
 import Comments from "./Comments.component.vue";
+import Avatar from "@/components/Avatar/Avatar.component.vue";
+
 import {
   ChatAltIcon,
   EyeIcon,
@@ -209,6 +211,9 @@ import {
   ThumbUpIcon,
   ThumbDownIcon,
 } from "@heroicons/vue/solid";
+import { useStore } from 'vuex';
+import { useRoute } from 'vue-router';
+import { ref } from 'vue';
 
 export default {
   components: {
@@ -218,10 +223,23 @@ export default {
   ThumbUpIcon,
   ThumbDownIcon,
   Comments,
+  Avatar
   },
   setup() {
-    return {
+    let store = useStore();
+    let route = useRoute();
 
+    let id = route.params.id;
+        let preurl = `${process.env.VUE_APP_API_URL}`;
+
+let post = ref(null);
+    store.dispatch('Blog/getPostById', id).then((res) => {
+      console.log(res);
+      post.value = res.data;
+    });
+    return {
+post,
+preurl
 
     };
   },
