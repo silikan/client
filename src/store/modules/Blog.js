@@ -15,6 +15,13 @@ function setPaginatedComments(commit, response) {
     commit("SET_COMMENTS_LINKS", response.data.links);
     commit("SET_COMMENTS_LOADING", false);
 }
+
+function setPaginatedReplies(commit, response) {
+    commit("SET_COMMENT_REPLIES", response.data.data);
+    commit("SET_COMMENT_REPLIES_META", response.data.meta);
+    commit("SET_COMMENT_REPLIES_LINKS", response.data.links);
+    commit("SET_COMMENT_REPLIES_LOADING", false);
+}
 export const state = {
     posts: [],
     post: {},
@@ -27,6 +34,13 @@ export const state = {
     likes: [],
     comment_loading: false,
     comment_error: null,
+    comments_meta: {},
+    comments_links: {},
+    comment_replies: [],
+    comment_replies_loading: false,
+    comment_replies_error: null,
+    comment_replies_meta: {},
+    comment_replies_links: {},
 };
 
 export const mutations = {
@@ -62,6 +76,30 @@ export const mutations = {
     },
     SET_COMMENT_ERROR(state, error) {
         state.comment_error = error;
+    },
+    SET_COMMENTS_META(state, meta) {
+        state.comments_meta = meta;
+    },
+    SET_COMMENTS_LINKS(state, links) {
+        state.comments_links = links;
+    },
+    SET_COMMENTS_LOADING(state, loading) {
+        state.comment_loading = loading;
+    },
+    SET_COMMENT_REPLIES(state, replies) {
+        state.comment_replies = replies;
+    },
+    SET_COMMENT_REPLIES_META(state, meta) {
+        state.comment_replies_meta = meta;
+    },
+    SET_COMMENT_REPLIES_LINKS(state, links) {
+        state.comment_replies_links = links;
+    },
+    SET_COMMENT_REPLIES_LOADING(state, loading) {
+        state.comment_replies_loading = loading;
+    },
+    SET_COMMENT_REPLIES_ERROR(state, error) {
+        state.comment_replies_error = error;
     },
 };
 
@@ -188,12 +226,41 @@ export const actions = {
     async getCommentsLinks({ commit }, link) {
         try {
             commit("SET_COMMENT_LOADING", true);
-            const links = await BlogService.getLink(link);
+            const posts = await BlogService.getLink(link);
+            setPaginatedComments(commit, posts);
+
             commit("SET_COMMENT_LOADING", false);
             return links.data;
         } catch (error) {
             commit("SET_COMMENT_LOADING", false);
             commit("SET_COMMENT_ERROR", getError(error));
+        }
+    },
+
+    async getPostCommentRepliesPaginate({ commit }, payload) {
+        let page = payload.page;
+        let comment_id = payload.comment_id;
+        let post_id = payload.post_id;
+        try {
+            commit("SET_COMMENT_REPLIES_LOADING", true);
+            const replies = await BlogService.getPostCommentRepliesPaginate(post_id, comment_id, page);
+            setPaginatedReplies(commit, replies);
+            return replies.data;
+        } catch (error) {
+            commit("SET_COMMENT_REPLIES_LOADING", false);
+            commit("SET_COMMENT_REPLIES_ERROR", getError(error));
+        }
+    },
+    async getReliesLinks({ commit }, link) {
+        try {
+            commit("SET_COMMENT_REPLIES_LOADING", true);
+            const links = await BlogService.getLink(link);
+            setPaginatedReplies(commit, links);
+            commit("SET_COMMENT_REPLIES_LOADING", false);
+            return links.data;
+        } catch (error) {
+            commit("SET_COMMENT_REPLIES_LOADING", false);
+            commit("SET_COMMENT_REPLIES_ERROR", getError(error));
         }
     },
 };
@@ -240,5 +307,30 @@ export const getters = {
     },
     getComments(state) {
         return state.comments;
+    },
+    getCommentsMeta(state) {
+        return state.comments_meta;
+    },
+    getCommentsLinks(state) {
+        return state.comments_links;
+    },
+    getCommentsLoading(state) {
+        return state.comments_loading;
+    },
+
+    getCommentRepliesLoading(state) {
+        return state.comment_replies_loading;
+    },
+    getCommentRepliesError(state) {
+        return state.comment_replies_error;
+    },
+    getCommentReplies(state) {
+        return state.comment_replies;
+    },
+    getCommentRepliesMeta(state) {
+        return state.comment_replies_meta;
+    },
+    getCommentRepliesLinks(state) {
+        return state.comment_replies_links;
     },
 };

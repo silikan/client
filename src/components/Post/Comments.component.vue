@@ -9,7 +9,7 @@
         </div>
         <div class="px-4 py-6 sm:px-6">
           <ul role="list" class="space-y-8">
-            <li v-for="comment in comments" :key="comment.id">
+            <li v-for="(comment , i ) in comments" :key="comment.id">
               <div class="flex space-x-3">
                 <div class="flex-shrink-0">
                   <!--                <img
@@ -18,40 +18,25 @@
                     alt=""
                   /> -->
                   <div class="mr-4 flex-shrink-0">
-                    <svg
-                      class="
-                        h-12
-                        w-12
-                        border border-gray-300
-                        bg-white
-                        text-gray-300
-                      "
-                      preserveAspectRatio="none"
-                      stroke="currentColor"
-                      fill="none"
-                      viewBox="0 0 200 200"
-                      aria-hidden="true"
-                    >
-                      <path
-                        vector-effect="non-scaling-stroke"
-                        stroke-width="1"
-                        d="M0 0l200 200M0 200L200 0"
-                      />
-                    </svg>
+                    <Avatar
+                      v-if="comment.user.name"
+                      :url="comment.user.avatar"
+                      :name="comment.user.name"
+                    />
                   </div>
                 </div>
                 <div>
                   <div class="text-lg font-bold">
                     <a href="#" class="font-bold text-gray-900">{{
-                      comment.name
+                      comment.user.name
                     }}</a>
                   </div>
                   <div class="mt-1 text-md text-gray-700 italic">
-                    <p>{{ comment.body }}</p>
+                    <p>{{ comment.comment }}</p>
                   </div>
                   <div class="mt-2 text-sm space-x-2">
                     <span class="text-gray-400 text-xs font-bold">{{
-                      comment.date
+                      comment.created_at
                     }}</span>
                     {{ " " }}
                     <span class="text-gray-500 font-medium">&middot;</span>
@@ -100,10 +85,13 @@
                       <div class="w-full flex-1">
                         <form action="#">
                           <div class="">
-                            <label for="comment" class="sr-only">About</label>
+
+                            <label for="reply" class="sr-only">About</label>
+
                             <textarea
-                              id="comment"
-                              name="comment"
+                              id="reply"
+                              name="reply"
+                              v-model="reply[i]"
                               rows="3"
                               :class="[
                                 bioErrorMessage
@@ -136,6 +124,7 @@
                                 focus:ring-offset-2
                                 focus:ring-indigo-500
                               "
+                              @click.prevent="postReply(reply[i],comment.id)"
                             >
                               Reply
                             </button>
@@ -173,7 +162,7 @@
               <div>
                 <label for="comment" class="sr-only">About</label>
                 <textarea
-                v-model="comment"
+                  v-model="comment"
                   id="comment"
                   name="comment"
                   rows="3"
@@ -245,11 +234,14 @@
 </template>
 
 <script>
+import Avatar from "@/components/Post/CommentAvatar.component.vue";
+
 import { QuestionMarkCircleIcon } from "@heroicons/vue/solid";
 import { useStore } from "vuex";
 import { useRoute } from "vue-router";
 import { useField } from "vee-validate";
 import * as yup from "yup";
+import { computed, ref, reactive } from "@vue/runtime-core";
 
 const user = {
   name: "Whitney Francis",
@@ -257,32 +249,11 @@ const user = {
   imageUrl:
     "https://images.unsplash.com/photo-1517365830460-955ce3ccd263?ixlib=rb-=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=8&w=256&h=256&q=80",
 };
-const comments = [
-  {
-    id: 1,
-    name: "Leslie Alexander",
-    date: "4d ago",
-    imageId: "1494790108377-be9c29b29330",
-    body: "Ducimus quas delectus ad maxime totam doloribus reiciendis ex. Tempore dolorem maiores. Similique voluptatibus tempore non ut.",
-  },
-  {
-    id: 2,
-    name: "Michael Foster",
-    date: "4d ago",
-    imageId: "1519244703995-f4e0f30006d5",
-    body: "Et ut autem. Voluptatem eum dolores sint necessitatibus quos. Quis eum qui dolorem accusantium voluptas voluptatem ipsum. Quo facere iusto quia accusamus veniam id explicabo et aut.",
-  },
-  {
-    id: 3,
-    name: "Dries Vincent",
-    date: "4d ago",
-    imageId: "1506794778202-cad84cf45f1d",
-    body: "Expedita consequatur sit ea voluptas quo ipsam recusandae. Ab sint et voluptatem repudiandae voluptatem et eveniet. Nihil quas consequatur autem. Perferendis rerum et.",
-  },
-];
+
 export default {
   components: {
     QuestionMarkCircleIcon,
+    Avatar,
   },
   setup() {
     let store = useStore();
@@ -293,19 +264,17 @@ export default {
       .min(1, "comment must be at least 1 characters")
       .max(500, "comment must be less than 500 characters")
       .nullable();
-    let replyValidation = yup
+ /*    let replyValidation = yup
       .string()
       .min(1, "reply must be at least 1 characters")
       .max(500, "reply must be less than 500 characters")
-      .nullable();
+      .nullable(); */
     const { value: comment, errorMessage: commentErrorMessage } = useField(
       "comment",
       commentValidation
-    );
-    const { value: reply, errorMessage: replyErrorMessage } = useField(
-      "reply",
-      replyValidation
-    );
+    )
+  let reply = ref([]);
+
 
     let postComment = () => {
       let payload = {
@@ -315,23 +284,143 @@ export default {
       store.dispatch("Blog/postComment", payload);
     };
 
-    let postReply = (comment_id) => {
+    let postReply = (data , comment_id) => {
+
+      console.log(data);
       let payload = {
-        comment: comment.value,
+        comment: data,
         post_id: id,
         comment_id: comment_id,
       };
       store.dispatch("Blog/postReply", payload);
     };
+
+
+
+    let action = "Search/paginateHandymen";
+    let meta, links, comments;
+    let path = "handymen";
+
+    let page = 1;
+    let open = ref(false);
+    let type = ref("request");
+    let RequestId = ref(null);
+    let openDiag = (id) => {
+      open.value = true;
+      RequestId.value = id;
+    };
+
+    let payload = {
+      page: page,
+      post_id: id,
+    };
+    /* let router = useRouter
+     */ store.dispatch("Blog/getPostCommentsPaginate", payload).then((res) => {
+      console.log(res);
+    });
+    meta = computed(() => {
+      return store.getters["Blog/getCommentsMeta"];
+    });
+    links = computed(() => {
+      return store.getters["Blog/getCommentsLinks"];
+    });
+
+    let feedbackReactive = reactive([]);
+    comments = computed(() => {
+      if (meta.value.current_page == 1 && feedbackReactive.length > 0) {
+        feedbackReactive = store.getters["Blog/getComments"];
+        return feedbackReactive;
+      } else {
+        feedbackReactive.push(...store.getters["Blog/getComments"]);
+        return feedbackReactive;
+      }
+    });
+
+    console.log(comments);
+    console.log(meta);
+    const loadMore = () => {
+      if (page < meta.value.last_page) {
+        page++;
+        let paginationlink = `${process.env.VUE_APP_API_URL}/blog/post/${id}/comment/paginate?page=${page}`;
+
+        store.dispatch("Blog/getCommentsLinks", paginationlink);
+      }
+    };
+    const prevPage = () => {
+      store.dispatch("Blog/getCommentsLinks", links.value.prev);
+    };
+    const nextPage = () => {
+      console.log(links.value.next);
+      store.dispatch("Blog/getCommentsLinks", links.value.next);
+    };
+
+    const setPage = (pageNumber) => {
+      let paginationlink = `${process.env.VUE_APP_API_URL}/blog/post/${id}/comment/paginate?page=${pageNumber}`;
+
+      store.dispatch("Blog/getCommentsLinks", paginationlink);
+      console.log(meta.value);
+    };
+
+    let currentPage = computed(() => meta.value.current_page);
+    let totalPages = computed(() => meta.value.last_page);
+
+    let filterPages = computed(() => {
+      //keep the first and last page
+
+      let data = reactive([]);
+      let start = currentPage.value - 2;
+      let end = currentPage.value + 2;
+      let totalPages = computed(() => meta.value.last_page);
+
+      console.log(totalPages.value);
+      if (start < 1) {
+        start = 1;
+        end = 5;
+      }
+
+      if (end > totalPages.value) {
+        end = totalPages.value;
+        start = totalPages.value - 4;
+      }
+      for (let i = start; i <= end; i++) {
+        if (i !== totalPages.value && i !== 1 && i < totalPages) {
+          data.push(i);
+        }
+      }
+
+      return data;
+    });
+    let preurl = `${process.env.VUE_APP_API_URL}`;
+    let loading = computed(() => store.getters["Blog/getCommentsLinksLoading"]);
+
     return {
       user,
-      comments,
+
       comment,
       reply,
       commentErrorMessage,
-      replyErrorMessage,
       postComment,
       postReply,
+
+      action,
+      path,
+
+      prevPage,
+      nextPage,
+      setPage,
+      meta,
+      links,
+      comments,
+      filterPages,
+      currentPage,
+      totalPages,
+      preurl,
+      open,
+      type,
+      RequestId,
+      openDiag,
+      loading,
+      loadMore,
     };
   },
 };
