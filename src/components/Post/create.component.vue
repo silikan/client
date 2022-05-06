@@ -53,8 +53,6 @@
         ]"
         placeholder="Write a content..."
       />
-
-      <!-- Spacer element to match the height of the toolbar -->
     </div>
 
     <div class="absolute bottom-0 inset-x-px">
@@ -152,6 +150,102 @@
             </div>
           </div>
         </div>
+        <div class="w-full flex-1"></div>
+        <Listbox as="div" v-model="assigned" class="flex-shrink-0">
+          <ListboxLabel class="sr-only"> Assign </ListboxLabel>
+          <div class="relative">
+            <ListboxButton
+              class="
+                relative
+                inline-flex
+                items-center
+                rounded-full
+                py-2
+                px-2
+                bg-gray-50
+                text-sm
+                font-medium
+                text-gray-500
+                whitespace-nowrap
+                hover:bg-gray-100
+                sm:px-3
+              "
+            >
+              <TagIcon
+                class="flex-shrink-0 h-5 w-5 text-gray-300 sm:-ml-1"
+                aria-hidden="true"
+              />
+
+
+
+              <span
+                :class="[
+                  assigned.value === null ? '' : 'text-gray-900',
+                  'hidden truncate sm:ml-2 sm:block',
+                ]"
+                >{{ assigned.value === null ? "Assign" : assigned.name }}</span
+              >
+            </ListboxButton>
+
+            <transition
+              leave-active-class="transition ease-in duration-100"
+              leave-from-class="opacity-100"
+              leave-to-class="opacity-0"
+            >
+              <ListboxOptions
+                class="
+                  absolute
+                  right-0
+                  z-10
+                  mt-1
+                  w-52
+                  bg-white
+                  shadow
+                  max-h-56
+                  rounded-lg
+                  py-3
+                  text-base
+                  ring-1 ring-black ring-opacity-5
+                  overflow-auto
+                  focus:outline-none
+                  sm:text-sm
+                "
+              >
+                <ListboxOption
+                  as="template"
+                  v-for="assignee in assignees"
+                  :key="assignee.value"
+                  :value="assignee"
+                  v-slot="{ active }"
+                >
+                  <li
+                    :class="[
+                      active ? 'bg-gray-100' : 'bg-white',
+                      'cursor-pointer select-none relative py-2 px-3',
+                    ]"
+                  >
+                    <div class="flex items-center">
+                      <img
+                        v-if="assignee.avatar"
+                        :src="assignee.avatar"
+                        alt=""
+                        class="flex-shrink-0 h-5 w-5 rounded-full"
+                      />
+                      <TagIcon
+                        v-else
+                        class="flex-shrink-0 h-5 w-5 text-gray-400"
+                        aria-hidden="true"
+                      />
+                      <span class="ml-3 block font-medium truncate">
+                        {{ assignee.name }}
+                      </span>
+                    </div>
+                  </li>
+                </ListboxOption>
+              </ListboxOptions>
+            </transition>
+          </div>
+        </Listbox>
         <div class="flex-shrink-0">
           <button
             type="submit"
@@ -173,7 +267,7 @@
               focus:ring-offset-2
               focus:ring-indigo-500
             "
-			@click.prevent="createPost"
+            @click.prevent="createPost"
           >
             Create
           </button>
@@ -184,15 +278,83 @@
 </template>
 
 <script>
-import { PhotographIcon } from "@heroicons/vue/solid";
+import {
+  Listbox,
+  ListboxButton,
+  ListboxLabel,
+  ListboxOption,
+  ListboxOptions,
+} from "@headlessui/vue";
+
+import { PhotographIcon, TagIcon } from "@heroicons/vue/solid";
 import { useField } from "vee-validate";
 import * as yup from "yup";
 import FileService from "@/services/FileService";
 import { useStore } from "vuex";
+import { ref } from "@vue/reactivity";
+import { watchEffect } from '@vue/runtime-core';
+const assignees = [
+  {
+    name: "Other",
+    value: "Other",
+  },
+  { name: "Cleaning", value: "Cleaning" },
+  {
+    name: "Cooking",
+    value: "Cooking",
+  },
+  {
+    name: "Plumbing",
+    value: "Plumbing",
+  },
+  {
+    name: "Moving",
+    value: "Moving",
+  },
+  {
+    name: "Electrical",
+    value: "Electrical",
+  },
+  {
+    name: "Painting",
+    value: "Painting",
+  },
+  {
+    name: "Carpentry",
+    value: "Carpentry",
+  },
+  {
+    name: "Building",
+    value: "Building",
+  },
+  {
+    name: "Massage",
+    value: "Massage",
+  },
+  {
+    name: "Tutoring",
+    value: "Tutoring",
+  },
+  {
+    name: "Woodwork",
+    value: "Woodwork",
+  },
+  {
+    name: "Cooking",
+    value: "Cooking",
+  },
+
+];
 
 export default {
   components: {
     PhotographIcon,
+    Listbox,
+    ListboxButton,
+    ListboxLabel,
+    ListboxOption,
+    ListboxOptions,
+    TagIcon,
   },
   setup() {
     let store = useStore();
@@ -233,22 +395,28 @@ export default {
       payload.file = formData;
       payload.endpoint = endpoint;
 
-      FileService.uploadPostFile(payload , post_id)
+      FileService.uploadPostFile(payload, post_id)
         .then(() => {
           console.log("fileUploaded");
         })
         .catch(() => console.log("error"));
     };
+    const assigned = ref(assignees[0]);
 
     let createPost = () => {
       let post = {
         title: title.value,
         content: content.value,
+        category : assigned.value,
       };
       store.dispatch("Blog/createPost", post).then((result) => {
         uploadFile(result.id);
       });
     };
+
+watchEffect(() => {
+  console.log(assigned.value);
+});
     return {
       title,
       titleErrorMessage,
@@ -258,6 +426,8 @@ export default {
       uploadFile,
       fileChange,
       createPost,
+      assigned,
+      assignees,
     };
   },
 };
