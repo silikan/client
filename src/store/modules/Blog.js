@@ -264,6 +264,15 @@ export const actions = {
             commit("SET_COMMENT_REPLIES_ERROR", getError(error));
         }
     },
+
+    async postPageViews({ commit }, id) {
+        try {
+            const response = await BlogService.postPageViews(id);
+            return response.data;
+        } catch (error) {
+            commit("SET_ERROR", getError(error));
+        }
+    },
 };
 
 export const getters = {

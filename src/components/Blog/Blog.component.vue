@@ -60,14 +60,14 @@
                 class="bg-white sm:rounded-lg"
               >
               <div>
-                 <div class="flex-shrink-0 ">
+                 <router-link class="flex-shrink-0 " :to="`/blog/post/${question.id}`">
                     <img
                     v-if="question.image"
                       class="h-96 w-full rounded-t-lg"
                       :src="`${preurl}/${question.image}`"
                       alt=""
                     />
-                  </div>
+                  </router-link>
 
                 <article class=" px-4 py-6 shadow sm:p-6" :aria-labelledby="'question-title-' + question.id" v-if="loading === false && meta && links">
 
@@ -160,10 +160,12 @@
                             hover:text-gray-500
                           "
                         >
-                          <ChatAltIcon class="h-5 w-5" aria-hidden="true" />
-                          <span class="font-medium text-gray-900">{{
-                            question.replies
+                          <ChatAltIcon class="h-5 w-5" aria-hidden="true"  />
+                          <span class="font-medium text-gray-900" >{{
+                            question.comments_count
                           }}</span>
+
+
                           <span class="sr-only">replies</span>
                         </button>
                       </span>
@@ -178,9 +180,11 @@
                           "
                         >
                           <EyeIcon class="h-5 w-5" aria-hidden="true" />
-                          <span class="font-medium text-gray-900">{{
-                            question.views
-                          }}</span>
+                          <span class="font-medium text-gray-900" >
+
+                            {{
+                            question.total_views
+             }}</span>
                           <span class="sr-only">views</span>
                         </button>
                       </span>
@@ -460,7 +464,7 @@ export default {
     });
     let preurl = `${process.env.VUE_APP_API_URL}`;
     let loading = computed(() => store.getters["Blog/getPaginatedPostsLoading"]);
-
+let totalComments = ref(0);
     return {
       user,
       navigation,
@@ -484,6 +488,7 @@ export default {
       openDiag,
       loading,
       loadMore,
+      totalComments,
     };
   },
 };

@@ -44,4 +44,8 @@ export default {
             params: { page },
         });
     },
+
+    async postPageViews(id) {
+        return await API.apiClient.get(`/blog/post/${id}/views`);
+    },
 };
