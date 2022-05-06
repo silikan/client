@@ -1,6 +1,5 @@
 
 <template>
-  {{selected}}
   <div class="min-h-full bg-gray-100">
     <div class="py-10">
       <div
@@ -60,7 +59,6 @@
                 :key="question.id"
                 class="bg-white sm:rounded-lg"
               >
-              {{getUserPostReaction(question.id , question.user.id)}}
                 <div>
                   <router-link
                     class="flex-shrink-0"
@@ -155,11 +153,173 @@
                                     text-gray-400
                                     hover:text-gray-500
                                   "
+                                  v-if="
+                                    question.reactions.filter(function (e) {
+                                      return authUser.id === e.user_id;
+                                    })[0] != null
+                                  "
+                                >
+                                  <div
+                                    v-for="reac in question.reactions.filter(
+                                      function (e) {
+                                        return authUser.id === e.user_id;
+                                      }
+                                    )"
+                                    :key="reac"
+                                  >
+                                    <span
+                                      class="flex items-center justify-center"
+                                    >
+                                      <span v-if="reac == null">
+                                        <EmojiHappyIcon
+                                          class="flex-shrink-0 h-5 w-5"
+                                          aria-hidden="true"
+                                        />
+                                        <span class="sr-only">
+                                          Add your mood
+                                        </span>
+                                      </span>
+                                      <span
+                                        v-if="
+                                          reac != null && selected[i] != null
+                                        "
+                                      >
+                                        <div
+                                          :class="[
+                                            selected[i].bgColor,
+                                            'w-8 h-8 rounded-full flex items-center justify-center',
+                                          ]"
+                                        >
+                                          <component
+                                            :is="selected[i].icon"
+                                            class="
+                                              flex-shrink-0
+                                              h-5
+                                              w-5
+                                              text-white
+                                            "
+                                            aria-hidden="true"
+                                          />
+                                        </div>
+                                        <span class="sr-only">{{
+                                          selected[i].name
+                                        }}</span>
+                                      </span>
+                                      <span
+                                        v-if="
+                                          reac != null && selected[i] == null
+                                        "
+                                      >
+                                        <div
+                                          :class="[
+                                            reac.bgColor,
+                                            'w-8 h-8 rounded-full flex items-center justify-center',
+                                          ]"
+                                        >
+                                          <component
+                                            v-if="reac.value == 'excited'"
+                                            :is="FireIcon"
+                                            class="
+                                              flex-shrink-0
+                                              h-5
+                                              w-5
+                                              text-white
+                                            "
+                                            aria-hidden="true"
+                                          />
+                                          <component
+                                            v-if="reac.value == 'happy'"
+                                            :is="EmojiHappyIcon"
+                                            class="
+                                              flex-shrink-0
+                                              h-5
+                                              w-5
+                                              text-white
+                                            "
+                                            aria-hidden="true"
+                                          />
+                                          <component
+                                            v-if="reac.value == 'sad'"
+                                            :is="EmojiSadIcon"
+                                            class="
+                                              flex-shrink-0
+                                              h-5
+                                              w-5
+                                              text-white
+                                            "
+                                            aria-hidden="true"
+                                          />
+                                          <component
+                                            v-if="reac.value == 'loved'"
+                                            :is="HeartIcon"
+                                            class="
+                                              flex-shrink-0
+                                              h-5
+                                              w-5
+                                              text-white
+                                            "
+                                          />
+                                          <component
+                                            v-if="reac.value == 'thumbsup'"
+                                            :is="ThumbUpIcon"
+                                            class="
+                                              flex-shrink-0
+                                              h-5
+                                              w-5
+                                              text-white
+                                            "
+                                          />
+                                          <component
+                                            v-if="reac.value == 'thumbsdown'"
+                                            :is="ThumbDownIcon"
+                                            class="
+                                              flex-shrink-0
+                                              h-5
+                                              w-5
+                                              text-white
+                                            "
+                                          />
+                                          <component
+                                            v-if="reac.value == 'nothing'"
+                                            :is="XIcon"
+                                            class="
+                                              flex-shrink-0
+                                              h-5
+                                              w-5
+                                              text-white
+                                            "
+                                          />
+                                        </div>
+                                        <span class="sr-only">{{
+                                          reac.name
+                                        }}</span>
+                                      </span>
+                                    </span>
+                                  </div>
+                                </ListboxButton>
+
+                                <ListboxButton
+                                  class="
+                                    relative
+                                    -m-3.5
+                                    w-10
+                                    h-10
+                                    rounded-full
+                                    flex
+                                    items-center
+                                    justify-center
+                                    text-gray-400
+                                    hover:text-gray-500
+                                  "
+                                  v-if="
+                                    question.reactions.filter(function (e) {
+                                      return authUser.id === e.user_id;
+                                    })[0] == null
+                                  "
                                 >
                                   <span
                                     class="flex items-center justify-center"
                                   >
-
                                     <span v-if="selected[i] == null">
                                       <EmojiHappyIcon
                                         class="flex-shrink-0 h-5 w-5"
@@ -191,7 +351,6 @@
                                         selected[i].name
                                       }}</span>
                                     </span>
-
                                   </span>
                                 </ListboxButton>
 
@@ -218,7 +377,9 @@
                                     "
                                   >
                                     <ListboxOption
-                                    @click="PostReaction(question.id, selected[i])"
+                                      @click="
+                                        PostReaction(question.id, selected[i])
+                                      "
                                       as="template"
                                       v-for="mood in moods"
                                       :key="mood.value"
@@ -466,6 +627,7 @@ const moods = [
     name: "Excited",
     value: "excited",
     icon: FireIcon,
+    icon_string: "FireIcon",
     iconColor: "text-white",
     bgColor: "bg-red-500",
   },
@@ -473,6 +635,7 @@ const moods = [
     name: "Loved",
     value: "loved",
     icon: HeartIcon,
+    icon_string: "HeartIcon",
     iconColor: "text-white",
     bgColor: "bg-pink-400",
   },
@@ -480,6 +643,7 @@ const moods = [
     name: "Happy",
     value: "happy",
     icon: EmojiHappyIcon,
+    icon_string: "EmojiHappyIcon",
     iconColor: "text-white",
     bgColor: "bg-green-400",
   },
@@ -487,6 +651,7 @@ const moods = [
     name: "Sad",
     value: "sad",
     icon: EmojiSadIcon,
+    icon_string: "EmojiSadIcon",
     iconColor: "text-white",
     bgColor: "bg-yellow-400",
   },
@@ -494,13 +659,15 @@ const moods = [
     name: "Thumbs Up",
     value: "thumbsup",
     icon: ThumbUpIcon,
+    icon_string: "ThumbUpIcon",
     iconColor: "text-white",
     bgColor: "bg-blue-500",
   },
-    {
+  {
     name: "Thumbs Down",
     value: "thumbsdown",
     icon: ThumbDownIcon,
+    icon_string: "ThumbDownIcon",
     iconColor: "text-white",
     bgColor: "bg-black",
   },
@@ -508,6 +675,7 @@ const moods = [
     name: "I feel nothing",
     value: "nothing",
     icon: XIcon,
+    icon_string: "XIcon",
     iconColor: "text-white",
     bgColor: "bg-gray-400",
   },
@@ -551,7 +719,6 @@ export default {
     ListboxOption,
     ListboxOptions,
     EmojiHappyIcon,
-
   },
   setup() {
     let action = "Search/paginateHandymen";
@@ -582,6 +749,7 @@ export default {
     requests = computed(() => {
       if (meta.value.current_page == 1 && feedbackReactive.length > 0) {
         feedbackReactive = store.getters["Blog/getPaginatedPosts"];
+        console.log(feedbackReactive);
         return feedbackReactive;
       } else {
         feedbackReactive.push(...store.getters["Blog/getPaginatedPosts"]);
@@ -647,43 +815,38 @@ export default {
       () => store.getters["Blog/getPaginatedPostsLoading"]
     );
     let totalComments = ref(0);
-    let selected = ref([
-
-    ]);
+    let selected = ref([]);
 
     watchEffect(() => {
       console.log(selected);
     });
 
-
     let PostReaction = (id, data) => {
       let payload = {
-        reaction : data.value,
-        post_id : id,
-
-
-      }
+        reaction: data.value,
+        post_id: id,
+        name: data.name,
+        value: data.value,
+        icon: data.icon_string,
+        iconColor: data.iconColor,
+        bgColor: data.bgColor,
+      };
       console.log(id, data);
-      store.dispatch("Blog/PostReaction", payload )
-    }
+      store.dispatch("Blog/PostReaction", payload);
+    };
 
-
-
-
-let getUserPostReaction =  (post_id , user_id ) =>{
-    let payload = {
-        user_id : user_id.value,
-        post_id : post_id,
-
-
-      }
- store.dispatch("Blog/getUserPostReaction", payload).then((res) => {
-   console.log(res);
-  selected.push(res.reaction);
- })
-
-}
-
+    let getUserPostReaction = (post_id, user_id) => {
+      let payload = {
+        user_id: user_id.value,
+        post_id: post_id,
+      };
+      store.dispatch("Blog/getUserPostReaction", payload).then((res) => {
+        console.log(res);
+        selected.push(res.reaction);
+      });
+    };
+    let authUser = computed(() => store.getters["auth/authUser"]);
+    console.log(moods);
     return {
       user,
       navigation,
@@ -711,7 +874,29 @@ let getUserPostReaction =  (post_id , user_id ) =>{
       moods,
       selected,
       PostReaction,
-      getUserPostReaction
+      getUserPostReaction,
+      authUser,
+  FireIcon,
+
+
+     HeartIcon,
+
+
+     EmojiHappyIcon,
+
+     EmojiSadIcon,
+
+
+     ThumbUpIcon,
+
+
+     ThumbDownIcon,
+
+
+
+     XIcon,
+
+
     };
   },
 };
