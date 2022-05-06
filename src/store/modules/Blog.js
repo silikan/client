@@ -283,6 +283,16 @@ export const actions = {
             commit("SET_ERROR", getError(error));
         }
     },
+    async getUserPostReaction({ commit }, payload) {
+        let post_id = payload.post_id;
+        let user_id = payload.user_id;
+        try {
+            const response = await BlogService.getUserPostReaction(post_id, user_id);
+            return response.data;
+        } catch (error) {
+            commit("SET_ERROR", getError(error));
+        }
+    },
 };
 
 export const getters = {

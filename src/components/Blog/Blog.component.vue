@@ -60,6 +60,7 @@
                 :key="question.id"
                 class="bg-white sm:rounded-lg"
               >
+              {{getUserPostReaction(question.id , question.user.id)}}
                 <div>
                   <router-link
                     class="flex-shrink-0"
@@ -190,6 +191,7 @@
                                         selected[i].name
                                       }}</span>
                                     </span>
+
                                   </span>
                                 </ListboxButton>
 
@@ -489,18 +491,25 @@ const moods = [
     bgColor: "bg-yellow-400",
   },
   {
-    name: "Thumbsy",
-    value: "thumbsy",
+    name: "Thumbs Up",
+    value: "thumbsup",
     icon: ThumbUpIcon,
     iconColor: "text-white",
     bgColor: "bg-blue-500",
   },
+    {
+    name: "Thumbs Down",
+    value: "thumbsdown",
+    icon: ThumbDownIcon,
+    iconColor: "text-white",
+    bgColor: "bg-black",
+  },
   {
     name: "I feel nothing",
-    value: null,
+    value: "nothing",
     icon: XIcon,
-    iconColor: "text-gray-400",
-    bgColor: "bg-transparent",
+    iconColor: "text-white",
+    bgColor: "bg-gray-400",
   },
 ];
 
@@ -542,6 +551,7 @@ export default {
     ListboxOption,
     ListboxOptions,
     EmojiHappyIcon,
+
   },
   setup() {
     let action = "Search/paginateHandymen";
@@ -648,7 +658,7 @@ export default {
 
     let PostReaction = (id, data) => {
       let payload = {
-        reaction : data.name,
+        reaction : data.value,
         post_id : id,
 
 
@@ -656,6 +666,23 @@ export default {
       console.log(id, data);
       store.dispatch("Blog/PostReaction", payload )
     }
+
+
+
+
+let getUserPostReaction =  (post_id , user_id ) =>{
+    let payload = {
+        user_id : user_id.value,
+        post_id : post_id,
+
+
+      }
+ store.dispatch("Blog/getUserPostReaction", payload).then((res) => {
+   console.log(res);
+  selected.push(res.reaction);
+ })
+
+}
 
     return {
       user,
@@ -683,7 +710,8 @@ export default {
       totalComments,
       moods,
       selected,
-      PostReaction
+      PostReaction,
+      getUserPostReaction
     };
   },
 };

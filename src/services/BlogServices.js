@@ -52,4 +52,8 @@ export default {
     async PostReaction(post_id, payload) {
         return await API.apiClient.post(`/blog/post/${post_id}/reaction`, payload);
     },
+
+    async getUserPostReaction(post_id, user_id) {
+        return await API.apiClient.get(`/blog/post/${post_id}/user/${user_id}/reaction/`);
+    },
 };
