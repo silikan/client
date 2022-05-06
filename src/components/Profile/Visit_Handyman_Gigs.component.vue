@@ -34,12 +34,12 @@
             shadow-inner
           "
         >
-          <div class="flex justify-center relative w-full h-72 overflow-hidden">
+          <router-link :to="`/gig/${gig.id}`" class="flex justify-center relative w-full h-72 overflow-hidden">
             <img
               :src="`${preurl}/${gig.Image}`"
               class="w-full h-full object-center object-cover"
             />
-          </div>
+          </router-link>
           <div class="flex-1 bg-white px-5 pt-5 flex flex-col justify-between">
             <div class="flex items-center">
               <div class="flex-shrink-0">
