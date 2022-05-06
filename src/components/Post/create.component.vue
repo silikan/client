@@ -53,6 +53,17 @@
         ]"
         placeholder="Write a content..."
       />
+        <div aria-hidden="true">
+        <div class="py-2">
+          <div class="h-1" />
+        </div>
+        <div class="h-px" />
+        <div class="py-2">
+          <div class="py-px">
+            <div class="h-1" />
+          </div>
+        </div>
+      </div>
     </div>
 
     <div class="absolute bottom-0 inset-x-px">
