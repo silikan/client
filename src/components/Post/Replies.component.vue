@@ -1,42 +1,61 @@
 <template>
-
-  <div class="mt-6 "  >
-    <div class="flex" v-for="reply in replies" :key="reply.id">
-
-    <div class="mr-4 flex-shrink-0">
-   <Avatar
-                      v-if="reply.user.name"
-                      :url="reply.user.avatar"
-                      :name="reply.user.name"
-                      :height="10"
-                      :width="10"
-                    />
+  <div class="mt-6" v-if="meta && links">
+    <div class="flex" v-for="reply in repliesData" :key="reply.id">
+      <div class="mr-4 flex-shrink-0">
+        <Avatar
+          v-if="reply.user.name"
+          :url="reply.user.avatar"
+          :name="reply.user.name"
+          :height="10"
+          :width="10"
+        />
+      </div>
+      <div>
+        <h4 class="text-lg font-bold">{{ reply.user.name }}</h4>
+        <p class="mt-1 text-md text-gray-700 italic">
+          {{ reply.comment }}
+        </p>
+      </div>
     </div>
-    <div>
-      <h4 class="text-lg font-bold">{{reply.user.name}}</h4>
-      <p class="mt-1 text-md text-gray-700 italic">
-       {{reply.comment}}
-      </p>
-    </div>
-    </div>
-
+  </div>
+  <div class="mt-6 cursor-pointer">
+    <a
+      class="
+        w-full
+        block
+        text-center
+        px-4
+        py-2
+        border border-gray-300
+        shadow-sm
+        text-sm
+        font-medium
+        rounded-md
+        text-gray-700
+        bg-white
+        hover:bg-gray-50
+      "
+      @click="loadMore"
+      v-if="meta.current_page < meta.last_page"
+    >
+      View More
+    </a>
   </div>
 </template>
 
 <script>
 import Avatar from "@/components/Post/CommentAvatar.component.vue";
 
-import { computed, ref } from "@vue/runtime-core";
+import { computed, reactive, ref, watchEffect } from "@vue/runtime-core";
 import { useRoute } from "vue-router";
 import BlogServices from "@/services/BlogServices";
 export default {
   props: ["commentId"],
   components: {
-     Avatar
+    Avatar,
   },
   setup(props) {
-
- /*    function setPaginatedReplies(commit, response) {
+    /*    function setPaginatedReplies(commit, response) {
     commit("SET_COMMENT_REPLIES", response.data.data);
     commit("SET_COMMENT_REPLIES_META", response.data.meta);
     commit("SET_COMMENT_REPLIES_LINKS", response.data.links);
@@ -52,47 +71,58 @@ export default {
 
     let page = 1;
 
+    console.log(id, comment_id.value, page);
+    let result = ref([]);
+    let replies = ref([]);
+    let meta = ref([]);
+    let links = ref([]);
+    watchEffect(async () => {
+      let data = await BlogServices.getPostCommentRepliesPaginate(
+        id,
+        comment_id.value,
+        page
+      );
 
+      result.value = data.data;
+      replies.value = result.value.data;
+      meta.value = result.value.meta;
+      links.value = result.value.links;
 
+      return { result, replies, meta, links };
+    });
+    let feedbackReactive = reactive([]);
+    let repliesData = computed(() => {
+      if (meta.value.current_page == 1 && feedbackReactive.length > 0) {
+        feedbackReactive = replies.value;
+        return feedbackReactive;
+      } else {
+        feedbackReactive.push(...replies.value);
+        return feedbackReactive;
+      }
+    });
 
+    const loadMore = async () => {
+      if (page < meta.value.last_page) {
+        page++;
+        let paginationlink = `${process.env.VUE_APP_API_URL}/api/blog/post/${id}/comment/${comment_id.value}/replies/paginate?page=${page}`;
 
-    console.log(id , comment_id.value , page);
-let replies  , meta , links;
-let result = ref([]);
- BlogServices.getPostCommentRepliesPaginate(id , comment_id.value , page).then((res)      => {
+        let data = await BlogServices.getLink(paginationlink);
 
-  result.value = res.data;
-
-
-})
-
- replies = computed(() => {
-  return result.value.data;
-});
-
-   meta = computed(() => {
-    return result.value.meta;
-  });
-
-   links = computed(() => {
-    return result.value.links;
-  });
-
-console.log(replies.value);
-
-
-
-    /* let router = useRouter
-     */
-
-
-
+        result.value = data.data;
+        replies.value = result.value.data;
+        meta.value = result.value.meta;
+        links.value = result.value.links;
+      }
+    };
 
     return {
+      open,
+      result,
       replies,
       meta,
       links,
-      open,
+      repliesData,
+      loadMore,
     };
   },
 };
