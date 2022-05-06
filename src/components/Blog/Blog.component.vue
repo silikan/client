@@ -446,6 +446,7 @@
                             <span class="sr-only">replies</span>
                           </button>
                         </span>
+
                         <span class="inline-flex items-center text-sm">
                           <button
                             type="button"
@@ -463,7 +464,68 @@
                             <span class="sr-only">views</span>
                           </button>
                         </span>
+
                       </div>
+                      <div class="flex space-x-2">
+                       <div
+                          class="
+
+                            mt-4
+                            flex-shrink-0
+                            sm:mt-0 sm:ml-5
+                            inline-flex
+                            items-center
+                            text-sm
+                          "
+                        >
+                          <div class="flex overflow-hidden -space-x-3">
+                            <div
+                              as="template"
+                              v-for="mood in moods"
+                              :key="mood.value"
+                              :value="mood"
+                            >
+                              <div class="flex items-center">
+                                <div
+                                  :class="[
+                                    mood.bgColor,
+                                    'w-6 h-6 rounded-full flex items-center justify-center',
+                                  ]"
+                                >
+                                  <component
+                                    :is="mood.icon"
+                                    :class="[
+                                      mood.iconColor,
+                                      'flex-shrink-0 h-5 w-5',
+                                    ]"
+                                    aria-hidden="true"
+                                  />
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          <span class="font-medium text-gray-900 ml-1">
+                            {{ question.reactions_count }}</span
+                          >
+                        </div>
+                      <div class="flex text-sm">
+                        <span class="inline-flex items-center text-sm">
+                          <button
+                            type="button"
+                            class="
+                              inline-flex
+                              space-x-2
+                              text-gray-400
+                              hover:text-gray-500
+                            "
+                          >
+                            <ShareIcon class="h-5 w-5" aria-hidden="true" />
+                            <span class="font-medium text-gray-900">Share</span>
+                          </button>
+                        </span>
+                      </div>
+                      </div>
+
                     </div>
                   </article>
                 </div>
@@ -876,27 +938,19 @@ export default {
       PostReaction,
       getUserPostReaction,
       authUser,
-  FireIcon,
+      FireIcon,
 
+      HeartIcon,
 
-     HeartIcon,
+      EmojiHappyIcon,
 
+      EmojiSadIcon,
 
-     EmojiHappyIcon,
+      ThumbUpIcon,
 
-     EmojiSadIcon,
+      ThumbDownIcon,
 
-
-     ThumbUpIcon,
-
-
-     ThumbDownIcon,
-
-
-
-     XIcon,
-
-
+      XIcon,
     };
   },
 };
