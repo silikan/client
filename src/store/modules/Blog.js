@@ -273,6 +273,16 @@ export const actions = {
             commit("SET_ERROR", getError(error));
         }
     },
+
+    async PostReaction({ commit }, payload) {
+        let post_id = payload.post_id;
+        try {
+            const response = await BlogService.PostReaction(post_id, payload);
+            return response.data;
+        } catch (error) {
+            commit("SET_ERROR", getError(error));
+        }
+    },
 };
 
 export const getters = {

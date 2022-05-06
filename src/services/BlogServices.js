@@ -48,4 +48,8 @@ export default {
     async postPageViews(id) {
         return await API.apiClient.get(`/blog/post/${id}/views`);
     },
+
+    async PostReaction(post_id, payload) {
+        return await API.apiClient.post(`/blog/post/${post_id}/reaction`, payload);
+    },
 };

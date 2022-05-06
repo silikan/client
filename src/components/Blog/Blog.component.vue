@@ -1,5 +1,6 @@
 
 <template>
+  {{selected}}
   <div class="min-h-full bg-gray-100">
     <div class="py-10">
       <div
@@ -10,7 +11,7 @@
           lg:max-w-7xl lg:px-8 lg:grid lg:grid-cols-12 lg:gap-8
         "
       >
-        <div class="w-full  lg:col-span-3 xl:col-span-3">
+        <div class="w-full lg:col-span-3 xl:col-span-3">
           <nav
             aria-label="Sidebar"
             class="sticky top-4 divide-y divide-gray-300 w-full"
@@ -45,7 +46,7 @@
             </div>
           </nav>
         </div>
-        <main class=" lg:col-span-6 xl:col-span-6">
+        <main class="lg:col-span-6 xl:col-span-6">
           <div class="bg-gray-100">
             <div class="bg-white shadow sm:rounded-lg">
               <CreatePost />
@@ -55,175 +56,283 @@
             <h1 class="sr-only">Recent questions</h1>
             <ul role="list" class="space-y-4">
               <li
-                v-for="question in requests"
+                v-for="(question, i) in requests"
                 :key="question.id"
                 class="bg-white sm:rounded-lg"
               >
-              <div>
-                 <router-link class="flex-shrink-0 " :to="`/blog/post/${question.id}`">
+                <div>
+                  <router-link
+                    class="flex-shrink-0"
+                    :to="`/blog/post/${question.id}`"
+                  >
                     <img
-                    v-if="question.image"
+                      v-if="question.image"
                       class="h-96 w-full rounded-t-lg"
                       :src="`${preurl}/${question.image}`"
                       alt=""
                     />
                   </router-link>
 
-                <article class=" px-4 py-6 shadow sm:p-6" :aria-labelledby="'question-title-' + question.id" v-if="loading === false && meta && links">
-
-                  <div>
-                    <div class="flex space-x-3">
-                      <div class="flex-shrink-0">
-                        <Avatar
-                          v-if="question.user.name"
-                          :url="question.user.avatar"
-                          :name="question.user.name"
-                        />
+                  <article
+                    class="px-4 py-6 shadow sm:p-6"
+                    :aria-labelledby="'question-title-' + question.id"
+                    v-if="loading === false && meta && links"
+                  >
+                    <div>
+                      <div class="flex space-x-3">
+                        <div class="flex-shrink-0">
+                          <Avatar
+                            v-if="question.user.name"
+                            :url="question.user.avatar"
+                            :name="question.user.name"
+                          />
+                        </div>
+                        <div class="min-w-0 flex-1">
+                          <p class="text-sm font-b text-gray-900">
+                            <router-link
+                              :to="`/user/${question.user.id}`"
+                              class="hover:underline"
+                              >{{ question.user.name }}</router-link
+                            >
+                          </p>
+                          <p class="text-sm text-gray-500">
+                            <a class="hover:underline">
+                              <timeago
+                                :converter-options="{
+                                  includeSeconds: true,
+                                  addSuffix: true,
+                                  useStrict: true,
+                                }"
+                                :datetime="question.created_at"
+                              />
+                            </a>
+                          </p>
+                        </div>
                       </div>
-                      <div class="min-w-0 flex-1">
-                        <p class="text-sm font-b text-gray-900">
-                          <router-link
-                            :to="`/user/${question.user.id}`"
-                            class="hover:underline"
-                            >{{ question.user.name }}</router-link
+                      <h2
+                        :id="'question-title-' + question.id"
+                        class="mt-4 text-base font-bold text-gray-900"
+                      >
+                        {{ question.title }}
+                      </h2>
+                    </div>
+                    <div
+                      class="mt-2 break-all text-sm text-gray-700 space-y-4"
+                      v-html="question.content"
+                    />
+
+                    <div class="mt-6 flex justify-between space-x-8">
+                      <div class="flex space-x-6">
+                        <!--reactions-->
+                        <div
+                          class="
+                            bottom-0
+                            inset-x-0
+                            pl-3
+                            pr-2
+                            py-2
+                            flex
+                            justify-between
+                          "
+                        >
+                          <div class="flex items-center">
+                            <Listbox as="div" v-model="selected[i]">
+                              <ListboxLabel class="sr-only">
+                                Your mood
+                              </ListboxLabel>
+                              <div class="relative">
+                                <ListboxButton
+                                  class="
+                                    relative
+                                    -m-3.5
+                                    w-10
+                                    h-10
+                                    rounded-full
+                                    flex
+                                    items-center
+                                    justify-center
+                                    text-gray-400
+                                    hover:text-gray-500
+                                  "
+                                >
+                                  <span
+                                    class="flex items-center justify-center"
+                                  >
+
+                                    <span v-if="selected[i] == null">
+                                      <EmojiHappyIcon
+                                        class="flex-shrink-0 h-5 w-5"
+                                        aria-hidden="true"
+                                      />
+                                      <span class="sr-only">
+                                        Add your mood
+                                      </span>
+                                    </span>
+                                    <span v-if="selected[i] != null">
+                                      <div
+                                        :class="[
+                                          selected[i].bgColor,
+                                          'w-8 h-8 rounded-full flex items-center justify-center',
+                                        ]"
+                                      >
+                                        <component
+                                          :is="selected[i].icon"
+                                          class="
+                                            flex-shrink-0
+                                            h-5
+                                            w-5
+                                            text-white
+                                          "
+                                          aria-hidden="true"
+                                        />
+                                      </div>
+                                      <span class="sr-only">{{
+                                        selected[i].name
+                                      }}</span>
+                                    </span>
+                                  </span>
+                                </ListboxButton>
+
+                                <transition
+                                  leave-active-class="transition ease-in duration-100"
+                                  leave-from-class="opacity-100"
+                                  leave-to-class="opacity-0"
+                                >
+                                  <ListboxOptions
+                                    class="
+                                      absolute
+                                      z-10
+                                      mt-1
+                                      -ml-6
+                                      w-60
+                                      bg-white
+                                      shadow
+                                      rounded-lg
+                                      py-3
+                                      text-base
+                                      ring-1 ring-black ring-opacity-5
+                                      focus:outline-none
+                                      sm:ml-auto sm:w-64 sm:text-sm
+                                    "
+                                  >
+                                    <ListboxOption
+                                      as="template"
+                                      v-for="mood in moods"
+                                      :key="mood.value"
+                                      :value="mood"
+                                      v-slot="{ active }"
+                                    >
+                                      <li
+                                        :class="[
+                                          active ? 'bg-gray-100' : 'bg-white',
+                                          'cursor-default select-none relative py-2 px-3',
+                                        ]"
+                                      >
+                                        <div class="flex items-center">
+                                          <div
+                                            :class="[
+                                              mood.bgColor,
+                                              'w-8 h-8 rounded-full flex items-center justify-center',
+                                            ]"
+                                          >
+                                            <component
+                                              :is="mood.icon"
+                                              :class="[
+                                                mood.iconColor,
+                                                'flex-shrink-0 h-5 w-5',
+                                              ]"
+                                              aria-hidden="true"
+                                            />
+                                          </div>
+                                          <span
+                                            class="
+                                              ml-3
+                                              block
+                                              font-medium
+                                              truncate
+                                            "
+                                          >
+                                            {{ mood.name }}
+                                          </span>
+                                        </div>
+                                      </li>
+                                    </ListboxOption>
+                                  </ListboxOptions>
+                                </transition>
+                              </div>
+                            </Listbox>
+                          </div>
+                        </div>
+
+                        <span class="inline-flex items-center text-sm">
+                          <button
+                            type="button"
+                            class="
+                              inline-flex
+                              space-x-2
+                              text-gray-400
+                              hover:text-gray-500
+                            "
                           >
-                        </p>
-                        <p class="text-sm text-gray-500">
-                          <a class="hover:underline">
-                            <timeago
-                              :converter-options="{
-                                includeSeconds: true,
-                                addSuffix: true,
-                                useStrict: true,
-                              }"
-                              :datetime="question.created_at"
-                            />
-                          </a>
-                        </p>
+                            <ChatAltIcon class="h-5 w-5" aria-hidden="true" />
+                            <span class="font-medium text-gray-900">{{
+                              question.comments_count
+                            }}</span>
+
+                            <span class="sr-only">replies</span>
+                          </button>
+                        </span>
+                        <span class="inline-flex items-center text-sm">
+                          <button
+                            type="button"
+                            class="
+                              inline-flex
+                              space-x-2
+                              text-gray-400
+                              hover:text-gray-500
+                            "
+                          >
+                            <EyeIcon class="h-5 w-5" aria-hidden="true" />
+                            <span class="font-medium text-gray-900">
+                              {{ question.total_views }}</span
+                            >
+                            <span class="sr-only">views</span>
+                          </button>
+                        </span>
                       </div>
                     </div>
-                    <h2
-                      :id="'question-title-' + question.id"
-                      class="mt-4 text-base font-bold text-gray-900"
-                    >
-                      {{ question.title }}
-                    </h2>
-                  </div>
-                  <div
-                    class="mt-2 break-all text-sm text-gray-700 space-y-4"
-                    v-html="question.content"
-                  />
-
-                  <div class="mt-6 flex justify-between space-x-8">
-                    <div class="flex space-x-6">
-                      <span class="inline-flex items-center text-sm">
-                        <button
-                          type="button"
-                          class="
-                            inline-flex
-                            space-x-2
-                            text-gray-400
-                            hover:text-gray-500
-                          "
-                        >
-                          <ThumbUpIcon class="h-5 w-5" aria-hidden="true" />
-                          <span class="font-medium text-gray-900">{{
-                            question.likes
-                          }}</span>
-                          <span class="sr-only">likes</span>
-                        </button>
-                      </span>
-                      <span class="inline-flex items-center text-sm">
-                        <button
-                          type="button"
-                          class="
-                            inline-flex
-                            space-x-2
-                            text-gray-400
-                            hover:text-gray-500
-                          "
-                        >
-                          <ThumbDownIcon class="h-5 w-5" aria-hidden="true" />
-                          <span class="font-medium text-gray-900">{{
-                            question.likes
-                          }}</span>
-                          <span class="sr-only">likes</span>
-                        </button>
-                      </span>
-                      <span class="inline-flex items-center text-sm">
-                        <button
-                          type="button"
-                          class="
-                            inline-flex
-                            space-x-2
-                            text-gray-400
-                            hover:text-gray-500
-                          "
-                        >
-                          <ChatAltIcon class="h-5 w-5" aria-hidden="true"  />
-                          <span class="font-medium text-gray-900" >{{
-                            question.comments_count
-                          }}</span>
-
-
-                          <span class="sr-only">replies</span>
-                        </button>
-                      </span>
-                      <span class="inline-flex items-center text-sm">
-                        <button
-                          type="button"
-                          class="
-                            inline-flex
-                            space-x-2
-                            text-gray-400
-                            hover:text-gray-500
-                          "
-                        >
-                          <EyeIcon class="h-5 w-5" aria-hidden="true" />
-                          <span class="font-medium text-gray-900" >
-
-                            {{
-                            question.total_views
-             }}</span>
-                          <span class="sr-only">views</span>
-                        </button>
-                      </span>
-                    </div>
-                  </div>
-                </article>
-                  </div>
+                  </article>
+                </div>
               </li>
             </ul>
           </div>
-          <PostFeedSkeleton v-if="loading === true"/>
-          <div class="mt-6        cursor-pointer" >
-                    <a
-
-                      class="
-                        w-full
-                        block
-                        text-center
-                        px-4
-                        py-2
-                        border border-gray-300
-                        shadow-sm
-                        text-sm
-                        font-medium
-                        rounded-md
-                        text-gray-700
-                        bg-white
-                        hover:bg-gray-50
-
-                      "
-                      @click="loadMore"
-                    v-if=" meta.current_page < meta.last_page"
-                    >
-                      View More
-                    </a>
-                  </div>
+          <PostFeedSkeleton v-if="loading === true" />
+          <div class="mt-6 cursor-pointer">
+            <a
+              class="
+                w-full
+                block
+                text-center
+                px-4
+                py-2
+                border border-gray-300
+                shadow-sm
+                text-sm
+                font-medium
+                rounded-md
+                text-gray-700
+                bg-white
+                hover:bg-gray-50
+              "
+              @click="loadMore"
+              v-if="meta.current_page < meta.last_page"
+            >
+              View More
+            </a>
+          </div>
         </main>
 
-        <aside class="xl:block   lg:col-span-3 xl:col-span-3">
+        <aside class="xl:block lg:col-span-3 xl:col-span-3">
           <div class="sticky top-4 space-y-4">
             <section aria-labelledby="who-to-follow-heading">
               <div class="bg-white rounded-lg shadow"></div>
@@ -279,7 +388,7 @@
                     </ul>
                   </div>
 
-                  <div class="mt-6 ">
+                  <div class="mt-6">
                     <a
                       href="#"
                       class="
@@ -312,9 +421,16 @@
 
 <script>
 import Avatar from "@/components/Avatar/Avatar.component.vue";
- import PostFeedSkeleton from "@/components/Loading/Skeletons/postFeed.component.vue";
+import PostFeedSkeleton from "@/components/Loading/Skeletons/postFeed.component.vue";
+import {
+  Listbox,
+  ListboxButton,
+  ListboxLabel,
+  ListboxOption,
+  ListboxOptions,
+} from "@headlessui/vue";
 
-import { computed, reactive, ref } from "@vue/runtime-core";
+import { computed, reactive, ref, watchEffect } from "@vue/runtime-core";
 import { useStore } from "vuex";
 import CreatePost from "@/components/Post/create.component.vue";
 import {
@@ -327,8 +443,11 @@ import {
   SearchIcon,
   ShareIcon,
   StarIcon,
-  ThumbUpIcon,
   ThumbDownIcon,
+  EmojiHappyIcon,
+  EmojiSadIcon,
+  HeartIcon,
+  ThumbUpIcon,
 } from "@heroicons/vue/solid";
 import {
   BellIcon,
@@ -339,6 +458,50 @@ import {
   UserGroupIcon,
   XIcon,
 } from "@heroicons/vue/outline";
+const moods = [
+  {
+    name: "Excited",
+    value: "excited",
+    icon: FireIcon,
+    iconColor: "text-white",
+    bgColor: "bg-red-500",
+  },
+  {
+    name: "Loved",
+    value: "loved",
+    icon: HeartIcon,
+    iconColor: "text-white",
+    bgColor: "bg-pink-400",
+  },
+  {
+    name: "Happy",
+    value: "happy",
+    icon: EmojiHappyIcon,
+    iconColor: "text-white",
+    bgColor: "bg-green-400",
+  },
+  {
+    name: "Sad",
+    value: "sad",
+    icon: EmojiSadIcon,
+    iconColor: "text-white",
+    bgColor: "bg-yellow-400",
+  },
+  {
+    name: "Thumbsy",
+    value: "thumbsy",
+    icon: ThumbUpIcon,
+    iconColor: "text-white",
+    bgColor: "bg-blue-500",
+  },
+  {
+    name: "I feel nothing",
+    value: null,
+    icon: XIcon,
+    iconColor: "text-gray-400",
+    bgColor: "bg-transparent",
+  },
+];
 
 const user = {
   name: "Chelsea Hagon",
@@ -372,6 +535,12 @@ export default {
     CreatePost,
     Avatar,
     PostFeedSkeleton,
+    Listbox,
+    ListboxButton,
+    ListboxLabel,
+    ListboxOption,
+    ListboxOptions,
+    EmojiHappyIcon,
   },
   setup() {
     let action = "Search/paginateHandymen";
@@ -463,8 +632,17 @@ export default {
       return data;
     });
     let preurl = `${process.env.VUE_APP_API_URL}`;
-    let loading = computed(() => store.getters["Blog/getPaginatedPostsLoading"]);
-let totalComments = ref(0);
+    let loading = computed(
+      () => store.getters["Blog/getPaginatedPostsLoading"]
+    );
+    let totalComments = ref(0);
+    let selected = ref([
+
+    ]);
+
+    watchEffect(() => {
+      console.log(selected);
+    });
     return {
       user,
       navigation,
@@ -489,6 +667,8 @@ let totalComments = ref(0);
       loading,
       loadMore,
       totalComments,
+      moods,
+      selected,
     };
   },
 };
