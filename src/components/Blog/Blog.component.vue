@@ -10,10 +10,10 @@
           lg:max-w-7xl lg:px-8 lg:grid lg:grid-cols-12 lg:gap-8
         "
       >
-        <div class="">
+        <div class="w-full  lg:col-span-3 xl:col-span-3">
           <nav
             aria-label="Sidebar"
-            class="sticky top-4 divide-y divide-gray-300"
+            class="sticky top-4 divide-y divide-gray-300 w-full"
           >
             <div class="pb-8 space-y-1">
               <a
@@ -45,7 +45,7 @@
             </div>
           </nav>
         </div>
-        <main class="lg:col-span-9 xl:col-span-6">
+        <main class=" lg:col-span-6 xl:col-span-6">
           <div class="bg-gray-100">
             <div class="bg-white shadow sm:rounded-lg">
               <CreatePost />
@@ -219,12 +219,12 @@
                   </div>
         </main>
 
-        <aside class="xl:block xl:col-span-4">
+        <aside class="xl:block   lg:col-span-3 xl:col-span-3">
           <div class="sticky top-4 space-y-4">
             <section aria-labelledby="who-to-follow-heading">
               <div class="bg-white rounded-lg shadow"></div>
             </section>
-            <section aria-labelledby="trending-heading">
+            <section aria-labelledby="trending-heading w-full ">
               <div class="bg-white rounded-lg shadow">
                 <div class="p-6">
                   <h2
@@ -275,11 +275,10 @@
                     </ul>
                   </div>
 
-                  <div class="mt-6">
+                  <div class="mt-6 ">
                     <a
                       href="#"
                       class="
-                        w-full
                         block
                         text-center
                         px-4
