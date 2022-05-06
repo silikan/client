@@ -389,7 +389,7 @@
                                       <li
                                         :class="[
                                           active ? 'bg-gray-100' : 'bg-white',
-                                          'cursor-default select-none relative py-2 px-3',
+                                          'cursor-pointer select-none relative py-2 px-3',
                                         ]"
                                       >
                                         <div class="flex items-center">
