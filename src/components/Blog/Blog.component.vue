@@ -216,6 +216,7 @@
                                     "
                                   >
                                     <ListboxOption
+                                    @click="PostReaction(question.id, selected[i])"
                                       as="template"
                                       v-for="mood in moods"
                                       :key="mood.value"
@@ -643,6 +644,19 @@ export default {
     watchEffect(() => {
       console.log(selected);
     });
+
+
+    let PostReaction = (id, data) => {
+      let payload = {
+        reaction : data.name,
+        post_id : id,
+
+
+      }
+      console.log(id, data);
+      store.dispatch("Blog/PostReaction", payload )
+    }
+
     return {
       user,
       navigation,
@@ -669,6 +683,7 @@ export default {
       totalComments,
       moods,
       selected,
+      PostReaction
     };
   },
 };
