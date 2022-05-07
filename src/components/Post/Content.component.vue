@@ -39,7 +39,8 @@
                       leading-normal
                     "
                   >
-                    <div class="">
+                    <div class=" " v-for="categ in post.category" :key="categ">
+
                       <a
                         href="#"
                         class="
@@ -52,21 +53,7 @@
                           ease-in-out
                         "
                       >
-                        Election </a
-                      >,
-                      <a
-                        href="#"
-                        class="
-                          text-xs text-indigo-600
-                          uppercase
-                          font-medium
-                          hover:text-gray-900
-                          transition
-                          duration-500
-                          ease-in-out
-                        "
-                      >
-                        Politics
+                        {{categ.title}}
                       </a>
                       <h1
                         href="#"
@@ -114,7 +101,7 @@
               </div>
             </div>
 
-            <div class="bg-white shadow sm:rounded-lg sm:overflow-hidden mt-5">
+            <div class="bg-white shadow sm:rounded-lg py-1 mt-5">
               <div class="m-6 flex justify-between space-x-8 py-5 sm:py-1">
                 <!--reactions-->
                 <div
@@ -236,6 +223,7 @@
                             justify-center
                             text-gray-400
                             hover:text-gray-500
+
                           "
                           v-if="
                             post.reactions.filter(function (e) {
@@ -294,6 +282,7 @@
                             <ListboxOption
                               @click="PostReaction(post.id, selected)"
                               as="template"
+                              class="z-50"
                               v-for="mood in moods"
                               :key="mood.value"
                               :value="mood"
@@ -346,7 +335,7 @@
                       "
                     >
                       <ChatAltIcon class="h-5 w-5" aria-hidden="true" />
-                      <span class="font-medium text-gray-900">{{ 106 }}</span>
+                      <span class="font-medium text-gray-900">{{ post.comments_count }}</span>
                       <span class="sr-only">replies</span>
                     </button>
                   </span>
