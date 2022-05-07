@@ -480,7 +480,7 @@
                             text-sm
                           "
                         >
-                          <div class="flex overflow-hidden -space-x-3">
+                          <div class="hidden md:flex  overflow-hidden -space-x-3">
                             <div
                               as="template"
                               v-for="mood in moods"
