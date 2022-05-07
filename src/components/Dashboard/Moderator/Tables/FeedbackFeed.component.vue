@@ -1,9 +1,19 @@
 <template>
-  {{}}
+ <div class="mt-10 flex w-full items-center justify-between mb-5">
+        <div
+          class="space-y-5 sm:space-y-4 md:max-w-xl lg:max-w-3xl xl:max-w-none"
+        >
+          <h2 class="text-3xl font-extrabold tracking-tight hidden md:block">
+            FeedBack
+          </h2>
+        </div>
+        <div class="flex items-center flex-1 md:flex-none"></div>
+      </div>
 
   <div class="bg-white" v-if="links && meta">
     <div class="">
       <div>
+
         <div class="flow-root mt-6">
           <ul role="list" class="divide-y divide-gray-200">
             <li
@@ -40,7 +50,7 @@
                 >
               </div>
               <div class="mt-1">
-                <p class="line-clamp-2 text-sm text-gray-600">
+                <p class="break-all line-clamp-2 text-sm text-gray-600">
                   {{ request.message }}
                 </p>
               </div>

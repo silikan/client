@@ -159,6 +159,7 @@
                     >
                       Client
                     </td>
+
                     <td
                       class="
                         px-6
@@ -174,22 +175,7 @@
                         >Visit</router-link
                       >
                     </td>
-                    <td
-                      class="
-                        px-6
-                        py-4
-                        whitespace-nowrap
-                        text-right text-sm
-                        font-medium
-                      "
-                    >
-                      <a
-                        v-if="person.isAdmin === false"
-                        @click="makeUserAdmin(person.id)"
-                        class="text-red-600 hover:text-indigo-900 cursor-pointer"
-                        >Make Admin</a
-                      >
-                    </td>
+
                     <td
                       class="
                         px-6

@@ -2,7 +2,14 @@
   <div v-if="loading === true">
     <Table />
   </div>
-
+  <div
+          class="ml-5 mt-10 space-y-5 sm:space-y-4 md:max-w-xl lg:max-w-3xl xl:max-w-none"
+        >
+          <h2 class="text-3xl font-extrabold tracking-tight hidden md:block">
+            Transactions
+          </h2>
+        <div class="flex items-center flex-1 md:flex-none"></div>
+      </div>
   <div class="bg-white" v-if="loading === false && links && meta">
     <div class="">
       <div class="flex flex-col">
