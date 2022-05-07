@@ -115,6 +115,22 @@
                         {{ question.title }}
                       </h2>
                     </div>
+                    <div v-for="categ in question.category" :key="categ">
+                      <a
+                        href="#"
+                        class="
+                          text-xs text-indigo-600
+                          uppercase
+                          font-medium
+                          hover:text-gray-900
+                          transition
+                          duration-500
+                          ease-in-out
+                        "
+                      >
+                        {{ categ.title }}
+                      </a>
+                    </div>
                     <div
                       class="mt-2 break-all text-sm text-gray-700 space-y-4"
                       v-html="question.content"
@@ -349,7 +365,7 @@
                                       </div>
                                       <span class="sr-only">{{
                                         selected[i].name
-                                       }}</span>
+                                      }}</span>
                                     </span>
                                   </span>
                                 </ListboxButton>
@@ -464,15 +480,11 @@
                             <span class="sr-only">views</span>
                           </button>
                         </span>
-
                       </div>
 
-
-                      <div class=" flex space-x-2">
-                       <div
+                      <div class="flex space-x-2">
+                        <div
                           class="
-
-
                             flex-shrink-0
                             sm:mt-0 sm:ml-5
                             inline-flex
@@ -480,7 +492,9 @@
                             text-sm
                           "
                         >
-                          <div class="hidden md:flex  overflow-hidden -space-x-3">
+                          <div
+                            class="hidden md:flex overflow-hidden -space-x-3"
+                          >
                             <div
                               as="template"
                               v-for="mood in moods"
@@ -510,24 +524,25 @@
                             {{ question.reactions_count }}</span
                           >
                         </div>
-                      <div class="flex text-sm">
-                        <span class="flex-1 inline-flex items-center text-sm">
-                          <button
-                            type="button"
-                            class="
-                              inline-flex
-                              space-x-2
-                              text-gray-400
-                              hover:text-gray-500
-                            "
-                          >
-                            <ShareIcon class="h-5 w-5" aria-hidden="true" />
-                            <span class="font-medium text-gray-900">Share</span>
-                          </button>
-                        </span>
+                        <div class="flex text-sm">
+                          <span class="flex-1 inline-flex items-center text-sm">
+                            <button
+                              type="button"
+                              class="
+                                inline-flex
+                                space-x-2
+                                text-gray-400
+                                hover:text-gray-500
+                              "
+                            >
+                              <ShareIcon class="h-5 w-5" aria-hidden="true" />
+                              <span class="font-medium text-gray-900"
+                                >Share</span
+                              >
+                            </button>
+                          </span>
+                        </div>
                       </div>
-                      </div>
-
                     </div>
                   </article>
                 </div>
@@ -562,8 +577,7 @@
 
         <aside class="xl:block lg:col-span-3 xl:col-span-3">
           <div class="sticky top-4 space-y-4">
-
-         <Trending class="flex-1 w-full"/>
+            <Trending class="flex-1 w-full" />
           </div>
         </aside>
       </div>
@@ -708,7 +722,7 @@ export default {
     ListboxOption,
     ListboxOptions,
     EmojiHappyIcon,
-    Trending
+    Trending,
   },
   setup() {
     let action = "Search/paginateHandymen";

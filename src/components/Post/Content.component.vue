@@ -39,22 +39,24 @@
                       leading-normal
                     "
                   >
-                    <div class=" " v-for="categ in post.category" :key="categ">
+                    <div class="">
+                      <div v-for="categ in post.category" :key="categ">
+                        <a
+                          href="#"
+                          class="
+                            text-xs text-indigo-600
+                            uppercase
+                            font-medium
+                            hover:text-gray-900
+                            transition
+                            duration-500
+                            ease-in-out
+                          "
+                        >
+                          {{ categ.title }}
+                        </a>
+                      </div>
 
-                      <a
-                        href="#"
-                        class="
-                          text-xs text-indigo-600
-                          uppercase
-                          font-medium
-                          hover:text-gray-900
-                          transition
-                          duration-500
-                          ease-in-out
-                        "
-                      >
-                        {{categ.title}}
-                      </a>
                       <h1
                         href="#"
                         class="text-gray-900 font-bold text-3xl mb-2"
@@ -223,7 +225,6 @@
                             justify-center
                             text-gray-400
                             hover:text-gray-500
-
                           "
                           v-if="
                             post.reactions.filter(function (e) {
@@ -323,79 +324,8 @@
                   </div>
                 </div>
                 <div class="flex flex-1 justify-between space-x-6">
-<div class="flex space-x-3">
-                  <span class="inline-flex items-center text-sm">
-                    <button
-                      type="button"
-                      class="
-                        inline-flex
-                        space-x-2
-                        text-gray-400
-                        hover:text-gray-500
-                      "
-                    >
-                      <ChatAltIcon class="h-5 w-5" aria-hidden="true" />
-                      <span class="font-medium text-gray-900">{{ post.comments_count }}</span>
-                      <span class="sr-only">replies</span>
-                    </button>
-                  </span>
-                  <span class="inline-flex items-center text-sm">
-                    <button
-                      type="button"
-                      class="
-                        inline-flex
-                        space-x-2
-                        text-gray-400
-                        hover:text-gray-500
-                      "
-                    >
-                      <EyeIcon class="h-5 w-5" aria-hidden="true" />
-                      <span class="font-medium text-gray-900">
-                        {{ post.total_views }}</span
-                      >
-                      <span class="sr-only">views</span>
-                    </button>
-                  </span>
-                  </div>
-                      <div class="flex space-x-2">
-                  <div
-                    class="
-                      flex-shrink-0
-                      sm:mt-0 sm:ml-5
-                      inline-flex
-                      items-center
-                      text-sm
-                    "
-                  >
-                    <div class="hidden md:flex overflow-hidden -space-x-3">
-                      <div
-                        as="template"
-                        v-for="mood in moods"
-                        :key="mood.value"
-                        :value="mood"
-                      >
-                        <div class="flex items-center">
-                          <div
-                            :class="[
-                              mood.bgColor,
-                              'w-6 h-6 rounded-full flex items-center justify-center',
-                            ]"
-                          >
-                            <component
-                              :is="mood.icon"
-                              :class="[mood.iconColor, 'flex-shrink-0 h-5 w-5']"
-                              aria-hidden="true"
-                            />
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <span class="font-medium text-gray-900 ml-1">
-                      {{ post.reactions_count }}</span
-                    >
-                  </div>
-                  <div class="flex text-sm">
-                    <span class="flex-1 inline-flex items-center text-sm">
+                  <div class="flex space-x-3">
+                    <span class="inline-flex items-center text-sm">
                       <button
                         type="button"
                         class="
@@ -405,14 +335,89 @@
                           hover:text-gray-500
                         "
                       >
-                        <ShareIcon class="h-5 w-5" aria-hidden="true" />
-                        <span class="font-medium text-gray-900">Share</span>
+                        <ChatAltIcon class="h-5 w-5" aria-hidden="true" />
+                        <span class="font-medium text-gray-900">{{
+                          post.comments_count
+                        }}</span>
+                        <span class="sr-only">replies</span>
+                      </button>
+                    </span>
+                    <span class="inline-flex items-center text-sm">
+                      <button
+                        type="button"
+                        class="
+                          inline-flex
+                          space-x-2
+                          text-gray-400
+                          hover:text-gray-500
+                        "
+                      >
+                        <EyeIcon class="h-5 w-5" aria-hidden="true" />
+                        <span class="font-medium text-gray-900">
+                          {{ post.total_views }}</span
+                        >
+                        <span class="sr-only">views</span>
                       </button>
                     </span>
                   </div>
+                  <div class="flex space-x-2">
+                    <div
+                      class="
+                        flex-shrink-0
+                        sm:mt-0 sm:ml-5
+                        inline-flex
+                        items-center
+                        text-sm
+                      "
+                    >
+                      <div class="hidden md:flex overflow-hidden -space-x-3">
+                        <div
+                          as="template"
+                          v-for="mood in moods"
+                          :key="mood.value"
+                          :value="mood"
+                        >
+                          <div class="flex items-center">
+                            <div
+                              :class="[
+                                mood.bgColor,
+                                'w-6 h-6 rounded-full flex items-center justify-center',
+                              ]"
+                            >
+                              <component
+                                :is="mood.icon"
+                                :class="[
+                                  mood.iconColor,
+                                  'flex-shrink-0 h-5 w-5',
+                                ]"
+                                aria-hidden="true"
+                              />
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <span class="font-medium text-gray-900 ml-1">
+                        {{ post.reactions_count }}</span
+                      >
+                    </div>
+                    <div class="flex text-sm">
+                      <span class="flex-1 inline-flex items-center text-sm">
+                        <button
+                          type="button"
+                          class="
+                            inline-flex
+                            space-x-2
+                            text-gray-400
+                            hover:text-gray-500
+                          "
+                        >
+                          <ShareIcon class="h-5 w-5" aria-hidden="true" />
+                          <span class="font-medium text-gray-900">Share</span>
+                        </button>
+                      </span>
+                    </div>
+                  </div>
                 </div>
-                </div>
-
               </div>
             </div>
           </section>
