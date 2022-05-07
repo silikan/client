@@ -22,6 +22,14 @@ function setPaginatedReplies(commit, response) {
     commit("SET_COMMENT_REPLIES_LINKS", response.data.links);
     commit("SET_COMMENT_REPLIES_LOADING", false);
 }
+
+function setPaginatedTrendingPosts(commit, response) {
+    commit("SET_TRENDING_POSTS", response.data.data);
+    commit("SET_TRENDING_POSTS_META", response.data.meta);
+    commit("SET_TRENDING_POSTS_LINKS", response.data.links);
+    commit("SET_TRENDING_POSTS_LOADING", false);
+}
+
 export const state = {
     posts: [],
     post: {},
@@ -41,6 +49,11 @@ export const state = {
     comment_replies_error: null,
     comment_replies_meta: {},
     comment_replies_links: {},
+    trending_posts: [],
+    trending_posts_loading: false,
+    trending_posts_error: null,
+    trending_posts_meta: {},
+    trending_posts_links: {},
 };
 
 export const mutations = {
@@ -100,6 +113,21 @@ export const mutations = {
     },
     SET_COMMENT_REPLIES_ERROR(state, error) {
         state.comment_replies_error = error;
+    },
+    SET_TRENDING_POSTS(state, posts) {
+        state.trending_posts = posts;
+    },
+    SET_TRENDING_POSTS_META(state, meta) {
+        state.trending_posts_meta = meta;
+    },
+    SET_TRENDING_POSTS_LINKS(state, links) {
+        state.trending_posts_links = links;
+    },
+    SET_TRENDING_POSTS_LOADING(state, loading) {
+        state.trending_posts_loading = loading;
+    },
+    SET_TRENDING_POSTS_ERROR(state, error) {
+        state.trending_posts_error = error;
     },
 };
 
@@ -293,6 +321,31 @@ export const actions = {
             commit("SET_ERROR", getError(error));
         }
     },
+
+    async PaginateTrendingPosts({ commit }, page) {
+        try {
+            commit("SET_TRENDING_POSTS_LOADING", true);
+            const posts = await BlogService.PaginateTrendingPosts(page);
+            setPaginatedTrendingPosts(commit, posts);
+            commit("SET_TRENDING_POSTS_LOADING", false);
+            return posts.data;
+        } catch (error) {
+            commit("SET_TRENDING_POSTS_LOADING", false);
+            commit("SET_TRENDING_POSTS_ERROR", getError(error));
+        }
+    },
+    async getTrendingPostsLinks({ commit }, link) {
+        try {
+            commit("SET_TRENDING_POSTS_LOADING", true);
+            const data = await BlogService.getLink(link);
+            setPaginatedTrendingPosts(commit, data);
+            commit("SET_TRENDING_POSTS_LOADING", false);
+            return data.data;
+        } catch (error) {
+            commit("SET_TRENDING_POSTS_LOADING", false);
+            commit("SET_TRENDING_POSTS_ERROR", getError(error));
+        }
+    },
 };
 
 export const getters = {
@@ -349,9 +402,6 @@ export const getters = {
         return state.comments_loading;
     },
 
-    getCommentRepliesLoading(state) {
-        return state.comment_replies_loading;
-    },
     getCommentRepliesError(state) {
         return state.comment_replies_error;
     },
@@ -363,5 +413,23 @@ export const getters = {
     },
     getCommentRepliesLinks(state) {
         return state.comment_replies_links;
+    },
+    getCommentRepliesLoading(state) {
+        return state.comment_replies_loading;
+    },
+    getTrendingPosts(state) {
+        return state.trending_posts;
+    },
+    getTrendingPostsMeta(state) {
+        return state.trending_posts_meta;
+    },
+    getTrendingPostsLinks(state) {
+        return state.trending_posts_links;
+    },
+    getTrendingPostsLoading(state) {
+        return state.trending_posts_loading;
+    },
+    getTrendingPostsError(state) {
+        return state.trending_posts_error;
     },
 };

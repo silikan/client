@@ -56,4 +56,7 @@ export default {
     async getUserPostReaction(post_id, user_id) {
         return await API.apiClient.get(`/blog/post/${post_id}/user/${user_id}/reaction/`);
     },
+    async PaginateTrendingPosts(page) {
+        return await API.apiClient.get(`/blog/trending/posts/paginate`, { params: { page } });
+    },
 };
