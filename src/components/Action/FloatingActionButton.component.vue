@@ -38,6 +38,7 @@
               "
             >
               <!-- Heroicon name: outline/plus-sm -->
+
               <LightningBoltIcon
                 class="h-6 w-6 text-white"
                 aria-hidden="true"
@@ -46,6 +47,28 @@
 
             <template #content>
               <div class="flex flex-col space-y-3">
+                   <router-link
+                  v-if="isLoggedin"
+                  to="/blog"
+                  class="
+                    inline-flex
+                    items-center
+                    p-3
+                    border border-transparent
+                    rounded-full
+                    shadow-sm
+                    text-white
+                    bg-indigo-600
+                    hover:bg-indigo-700
+                    focus:outline-none
+                    focus:ring-2
+                    focus:ring-offset-2
+                    focus:ring-indigo-500
+                  "
+                >
+                  <!-- Heroicon name: outline/plus-sm -->
+                  <UsersIcon class="h-5 w-5 text-white" aria-hidden="true" />
+                </router-link>
                     <router-link
                   v-if="isLoggedin && isAdmin === true"
                   to="/dashboard/admin"
@@ -190,6 +213,7 @@ import {
   HandIcon,
   ShieldCheckIcon,
   AdjustmentsIcon,
+  UsersIcon
 } from "@heroicons/vue/solid";
 import { useStore } from "vuex";
 import { computed, ref, watchEffect } from "@vue/runtime-core";
@@ -202,6 +226,7 @@ export default {
     Popper,
     ShieldCheckIcon,
     AdjustmentsIcon,
+      UsersIcon
   },
   setup() {
     ref;
