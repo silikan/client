@@ -1,6 +1,8 @@
 <template>
   <!-- Component Code -->
+
   <div class="min-h-full" v-if="post">
+
     <main class="py-10">
       <div
         class="
@@ -115,6 +117,226 @@
 
             <div class="bg-white shadow sm:rounded-lg sm:overflow-hidden mt-5">
               <div class="m-6 flex justify-between space-x-8 py-5 sm:py-1">
+                <!--reactions-->
+                <div
+                  class="bottom-0 inset-x-0 pl-3 pr-2 py-2 flex justify-between"
+                >
+                  <div class="flex items-center">
+                    <Listbox as="div" v-model="selected">
+                      <ListboxLabel class="sr-only"> Your mood </ListboxLabel>
+                      <div class="relative">
+                        <ListboxButton
+                          class="
+                            relative
+                            -m-3.5
+                            w-10
+                            h-10
+                            rounded-full
+                            flex
+                            items-center
+                            justify-center
+                            text-gray-400
+                            hover:text-gray-500
+                          "
+                          v-if="
+                            post.reactions.filter(function (e) {
+                              return authUser.id === e.user_id;
+                            })[0] != null
+                          "
+                        >
+                          <div
+                            v-for="reac in post.reactions.filter(function (e) {
+                              return authUser.id === e.user_id;
+                            })"
+                            :key="reac"
+                          >
+                            <span class="flex items-center justify-center">
+                              <span v-if="reac == null">
+                                <EmojiHappyIcon
+                                  class="flex-shrink-0 h-5 w-5"
+                                  aria-hidden="true"
+                                />
+                                <span class="sr-only"> Add your mood </span>
+                              </span>
+                              <span v-if="reac != null && selected != null">
+                                <div
+                                  :class="[
+                                    selected.bgColor,
+                                    'w-8 h-8 rounded-full flex items-center justify-center',
+                                  ]"
+                                >
+                                  <component
+                                    :is="selected.icon"
+                                    class="flex-shrink-0 h-5 w-5 text-white"
+                                    aria-hidden="true"
+                                  />
+                                </div>
+                                <span class="sr-only">{{ selected.name }}</span>
+                              </span>
+                              <span v-if="reac != null && selected == null">
+
+                                <div
+                                  :class="[
+                                    reac.bgColor,
+                                    'w-8 h-8 rounded-full flex items-center justify-center',
+                                  ]"
+                                >
+                                  <component
+                                    v-if="reac.value == 'excited'"
+                                    :is="FireIcon"
+                                    class="flex-shrink-0 h-5 w-5 text-white"
+                                    aria-hidden="true"
+                                  />
+                                  <component
+                                    v-if="reac.value == 'happy'"
+                                    :is="EmojiHappyIcon"
+                                    class="flex-shrink-0 h-5 w-5 text-white"
+                                    aria-hidden="true"
+                                  />
+                                  <component
+                                    v-if="reac.value == 'sad'"
+                                    :is="EmojiSadIcon"
+                                    class="flex-shrink-0 h-5 w-5 text-white"
+                                    aria-hidden="true"
+                                  />
+                                  <component
+                                    v-if="reac.value == 'loved'"
+                                    :is="HeartIcon"
+                                    class="flex-shrink-0 h-5 w-5 text-white"
+                                  />
+                                  <component
+                                    v-if="reac.value == 'thumbsup'"
+                                    :is="ThumbUpIcon"
+                                    class="flex-shrink-0 h-5 w-5 text-white"
+                                  />
+                                  <component
+                                    v-if="reac.value == 'thumbsdown'"
+                                    :is="ThumbDownIcon"
+                                    class="flex-shrink-0 h-5 w-5 text-white"
+                                  />
+                                  <component
+                                    v-if="reac.value == 'nothing'"
+                                    :is="XIcon"
+                                    class="flex-shrink-0 h-5 w-5 text-white"
+                                  />
+                                </div>
+                                <span class="sr-only">{{ reac.name }}</span>
+                              </span>
+                            </span>
+                          </div>
+                        </ListboxButton>
+
+                        <ListboxButton
+                          class="
+                            relative
+                            -m-3.5
+                            w-10
+                            h-10
+                            rounded-full
+                            flex
+                            items-center
+                            justify-center
+                            text-gray-400
+                            hover:text-gray-500
+                          "
+                          v-if="
+                            post.reactions.filter(function (e) {
+                              return authUser.id === e.user_id;
+                            })[0] == null
+                          "
+                        >
+                          <span class="flex items-center justify-center">
+                            <span v-if="selected == null">
+                              <EmojiHappyIcon
+                                class="flex-shrink-0 h-5 w-5"
+                                aria-hidden="true"
+                              />
+                              <span class="sr-only"> Add your mood </span>
+                            </span>
+                            <span v-if="selected != null">
+                              <div
+                                :class="[
+                                  selected.bgColor,
+                                  'w-8 h-8 rounded-full flex items-center justify-center',
+                                ]"
+                              >
+                                <component
+                                  :is="selected.icon"
+                                  class="flex-shrink-0 h-5 w-5 text-white"
+                                  aria-hidden="true"
+                                />
+                              </div>
+                              <span class="sr-only">{{
+                                selected.name
+                              }}</span>
+                            </span>
+                          </span>
+                        </ListboxButton>
+
+                        <transition
+                          leave-active-class="transition ease-in duration-100"
+                          leave-from-class="opacity-100"
+                          leave-to-class="opacity-0"
+                        >
+                          <ListboxOptions
+                            class="
+                              absolute
+                              z-10
+                              mt-1
+                              -ml-6
+                              w-60
+                              bg-white
+                              shadow
+                              rounded-lg
+                              py-3
+                              text-base
+                              ring-1 ring-black ring-opacity-5
+                              focus:outline-none
+                              sm:ml-auto sm:w-64 sm:text-sm
+                            "
+                          >
+                            <ListboxOption
+                              @click="PostReaction(post.id, selected)"
+                              as="template"
+                              v-for="mood in moods"
+                              :key="mood.value"
+                              :value="mood"
+                              v-slot="{ active }"
+                            >
+                              <li
+                                :class="[
+                                  active ? 'bg-gray-100' : 'bg-white',
+                                  'cursor-pointer select-none relative py-2 px-3',
+                                ]"
+                              >
+                                <div class="flex items-center">
+                                  <div
+                                    :class="[
+                                      mood.bgColor,
+                                      'w-8 h-8 rounded-full flex items-center justify-center',
+                                    ]"
+                                  >
+                                    <component
+                                      :is="mood.icon"
+                                      :class="[
+                                        mood.iconColor,
+                                        'flex-shrink-0 h-5 w-5',
+                                      ]"
+                                      aria-hidden="true"
+                                    />
+                                  </div>
+                                  <span class="ml-3 block font-medium truncate">
+                                    {{ mood.name }}
+                                  </span>
+                                </div>
+                              </li>
+                            </ListboxOption>
+                          </ListboxOptions>
+                        </transition>
+                      </div>
+                    </Listbox>
+                  </div>
+                </div>
                 <div class="flex space-x-6">
                   <span class="inline-flex items-center text-sm">
                     <button
@@ -194,6 +416,13 @@
 </template>
 
 <script>
+import {
+  Listbox,
+  ListboxButton,
+  ListboxLabel,
+  ListboxOption,
+  ListboxOptions,
+} from "@headlessui/vue";
 import Comments from "./Comments.component.vue";
 import Avatar from "@/components/Avatar/Avatar.component.vue";
 
@@ -205,8 +434,67 @@ import {
 } from "@heroicons/vue/solid";
 import { useStore } from "vuex";
 import { useRoute } from "vue-router";
-import { ref } from "vue";
-
+import { computed, ref } from "vue";
+const moods = [
+  {
+    name: "Excited",
+    value: "excited",
+    icon: FireIcon,
+    icon_string: "FireIcon",
+    iconColor: "text-white",
+    bgColor: "bg-red-500",
+  },
+  {
+    name: "Loved",
+    value: "loved",
+    icon: HeartIcon,
+    icon_string: "HeartIcon",
+    iconColor: "text-white",
+    bgColor: "bg-pink-400",
+  },
+  {
+    name: "Happy",
+    value: "happy",
+    icon: EmojiHappyIcon,
+    icon_string: "EmojiHappyIcon",
+    iconColor: "text-white",
+    bgColor: "bg-green-400",
+  },
+  {
+    name: "Sad",
+    value: "sad",
+    icon: EmojiSadIcon,
+    icon_string: "EmojiSadIcon",
+    iconColor: "text-white",
+    bgColor: "bg-yellow-400",
+  },
+  {
+    name: "Thumbs Up",
+    value: "thumbsup",
+    icon: ThumbUpIcon,
+    icon_string: "ThumbUpIcon",
+    iconColor: "text-white",
+    bgColor: "bg-blue-500",
+  },
+  {
+    name: "Thumbs Down",
+    value: "thumbsdown",
+    icon: ThumbDownIcon,
+    icon_string: "ThumbDownIcon",
+    iconColor: "text-white",
+    bgColor: "bg-black",
+  },
+  {
+    name: "I feel nothing",
+    value: "nothing",
+    icon: XIcon,
+    icon_string: "XIcon",
+    iconColor: "text-white",
+    bgColor: "bg-gray-400",
+  },
+];
+import { EmojiHappyIcon, EmojiSadIcon, HeartIcon } from "@heroicons/vue/solid";
+import { FireIcon, XIcon } from "@heroicons/vue/outline";
 export default {
   components: {
     ChatAltIcon,
@@ -216,7 +504,22 @@ export default {
     ThumbDownIcon,
     Comments,
     Avatar,
+    FireIcon,
+
+    HeartIcon,
+
+    EmojiHappyIcon,
+
+    EmojiSadIcon,
+
+    XIcon,
+    Listbox,
+    ListboxButton,
+    ListboxLabel,
+    ListboxOption,
+    ListboxOptions,
   },
+
   setup() {
     let store = useStore();
     let route = useRoute();
@@ -228,9 +531,45 @@ export default {
       console.log(res);
       post.value = res.data;
     });
+
+    let PostReaction = (id, data) => {
+      console.log(id, data);
+      let payload = {
+        reaction: data.value,
+        post_id: id,
+        name: data.name,
+        value: data.value,
+        icon: data.icon_string,
+        iconColor: data.iconColor,
+        bgColor: data.bgColor,
+      };
+      console.log(id, data);
+      store.dispatch("Blog/PostReaction", payload);
+    };
+
+    let authUser = computed(() => store.getters["auth/authUser"]);
+    let selected = ref(null);
+
     return {
       post,
       preurl,
+      moods,
+      selected,
+      PostReaction,
+      authUser,
+      FireIcon,
+
+      HeartIcon,
+
+      EmojiHappyIcon,
+
+      EmojiSadIcon,
+
+      ThumbUpIcon,
+
+      ThumbDownIcon,
+
+      XIcon,
     };
   },
 };
