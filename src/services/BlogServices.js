@@ -59,4 +59,8 @@ export default {
     async PaginateTrendingPosts(page) {
         return await API.apiClient.get(`/blog/trending/posts/paginate`, { params: { page } });
     },
+
+    async getPostByCategoryPaginate(title, page) {
+        return await API.apiClient.get(`/blog/category/${title}/post/paginate`, { params: { page } });
+    },
 };
