@@ -252,7 +252,7 @@
           >
             <span class="sr-only">View notifications</span>
             <BellIcon class="h-6 w-6" aria-hidden="true" />
-          <span
+            <span
               class="
                 absolute
                 top-0
@@ -263,11 +263,10 @@
                 rounded-full
                 ring-2 ring-white
                 bg-red-400
-                font-size-sm
-                font-bold
+                font-size-sm font-bold
               "
               v-if="notifications.length > 0"
-           />
+            />
           </button>
 
           <!-- Profile dropdown -->
@@ -377,6 +376,23 @@
         >
           {{ item.name }}
         </router-link>
+        <router-link
+          v-if="isLoggedin === true"
+          to="/blog"
+          class="
+            text-gray-900
+            hover:bg-gray-50 hover:text-gray-900
+            rounded-md
+            py-2
+            px-3
+            inline-flex
+            items-center
+            text-sm
+            font-medium
+          "
+        >
+          Blog
+        </router-link>
       </nav>
     </div>
 
@@ -396,6 +412,25 @@
             {{ item.name }}
           </DisclosureButton>
         </div>
+      </router-link>
+      <router-link to="/blog" v-if="isLoggedin === true">
+              <div class="pt-2 pb-3 px-2 space-y-1">
+
+        <DisclosureButton
+          class="
+            text-gray-900
+            hover:bg-gray-50 hover:text-gray-900,
+            block
+            rounded-md
+            py-2
+            px-3
+            text-base
+            font-medium
+          "
+        >
+          Blog
+        </DisclosureButton>
+      </div>
       </router-link>
       <div
         class="m-5 flex flex-col justify-between space-y-4 items-start"
@@ -576,7 +611,7 @@
             <span class="sr-only">View notifications</span>
 
             <BellIcon class="h-6 w-6" aria-hidden="true" />
-         <span
+            <span
               class="
                 absolute
                 top-0
@@ -587,12 +622,10 @@
                 rounded-full
                 ring-2 ring-white
                 bg-red-400
-                font-size-sm
-                font-bold
+                font-size-sm font-bold
               "
               v-if="notifications.length > 0"
-           />
-
+            />
           </button>
         </div>
         <div class="mt-3 px-2 space-y-1">
@@ -774,17 +807,15 @@ export default {
 
     let createNotificationRoom = () => {
       store.dispatch("Notification/createNotificationRoom").then(() => {
-
         router.push({
           name: "Notification",
-
         });
       });
     };
 
     let notifications = ref([]);
 
-    if (isLoggedin.value &&   authUserData.value.NotificationRoom) {
+    if (isLoggedin.value && authUserData.value.NotificationRoom) {
       let notificationSocket = io("http://localhost:4000");
 
       let roomId = authUserData.value.NotificationRoom.id;

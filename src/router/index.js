@@ -65,13 +65,13 @@ const routes = [{
     {
         path: "/blog",
         name: "Blog",
-        meta: { middleware: [auth, guest] },
+        meta: { middleware: [auth] },
         component: Blog,
     },
     {
         path: "/blog/post/:id",
         name: "BlogPost",
-        meta: { middleware: [auth, guest] },
+        meta: { middleware: [auth] },
         component: BlogPost,
     },
     {
