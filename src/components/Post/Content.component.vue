@@ -2,7 +2,6 @@
   <!-- Component Code -->
 
   <div class="min-h-full" v-if="post">
-
     <main class="py-10">
       <div
         class="
@@ -174,7 +173,6 @@
                                 <span class="sr-only">{{ selected.name }}</span>
                               </span>
                               <span v-if="reac != null && selected == null">
-
                                 <div
                                   :class="[
                                     reac.bgColor,
@@ -266,9 +264,7 @@
                                   aria-hidden="true"
                                 />
                               </div>
-                              <span class="sr-only">{{
-                                selected.name
-                              }}</span>
+                              <span class="sr-only">{{ selected.name }}</span>
                             </span>
                           </span>
                         </ListboxButton>
@@ -337,37 +333,8 @@
                     </Listbox>
                   </div>
                 </div>
-                <div class="flex space-x-6">
-                  <span class="inline-flex items-center text-sm">
-                    <button
-                      type="button"
-                      class="
-                        inline-flex
-                        space-x-2
-                        text-gray-400
-                        hover:text-gray-500
-                      "
-                    >
-                      <ThumbUpIcon class="h-5 w-5" aria-hidden="true" />
-                      <span class="font-medium text-gray-900">{{ 106 }}</span>
-                      <span class="sr-only">likes</span>
-                    </button>
-                  </span>
-                  <span class="inline-flex items-center text-sm">
-                    <button
-                      type="button"
-                      class="
-                        inline-flex
-                        space-x-2
-                        text-gray-400
-                        hover:text-gray-500
-                      "
-                    >
-                      <ThumbDownIcon class="h-5 w-5" aria-hidden="true" />
-                      <span class="font-medium text-gray-900">{{ 106 }}</span>
-                      <span class="sr-only">likes</span>
-                    </button>
-                  </span>
+                <div class="flex flex-1 justify-between space-x-6">
+<div class="flex space-x-3">
                   <span class="inline-flex items-center text-sm">
                     <button
                       type="button"
@@ -400,7 +367,63 @@
                       <span class="sr-only">views</span>
                     </button>
                   </span>
+                  </div>
+                      <div class="flex space-x-2">
+                  <div
+                    class="
+                      flex-shrink-0
+                      sm:mt-0 sm:ml-5
+                      inline-flex
+                      items-center
+                      text-sm
+                    "
+                  >
+                    <div class="hidden md:flex overflow-hidden -space-x-3">
+                      <div
+                        as="template"
+                        v-for="mood in moods"
+                        :key="mood.value"
+                        :value="mood"
+                      >
+                        <div class="flex items-center">
+                          <div
+                            :class="[
+                              mood.bgColor,
+                              'w-6 h-6 rounded-full flex items-center justify-center',
+                            ]"
+                          >
+                            <component
+                              :is="mood.icon"
+                              :class="[mood.iconColor, 'flex-shrink-0 h-5 w-5']"
+                              aria-hidden="true"
+                            />
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <span class="font-medium text-gray-900 ml-1">
+                      {{ post.reactions_count }}</span
+                    >
+                  </div>
+                  <div class="flex text-sm">
+                    <span class="flex-1 inline-flex items-center text-sm">
+                      <button
+                        type="button"
+                        class="
+                          inline-flex
+                          space-x-2
+                          text-gray-400
+                          hover:text-gray-500
+                        "
+                      >
+                        <ShareIcon class="h-5 w-5" aria-hidden="true" />
+                        <span class="font-medium text-gray-900">Share</span>
+                      </button>
+                    </span>
+                  </div>
                 </div>
+                </div>
+
               </div>
             </div>
           </section>
@@ -431,6 +454,7 @@ import {
   EyeIcon,
   ThumbUpIcon,
   ThumbDownIcon,
+  ShareIcon,
 } from "@heroicons/vue/solid";
 import { useStore } from "vuex";
 import { useRoute } from "vue-router";
@@ -518,6 +542,7 @@ export default {
     ListboxLabel,
     ListboxOption,
     ListboxOptions,
+    ShareIcon,
   },
 
   setup() {

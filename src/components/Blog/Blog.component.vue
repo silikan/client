@@ -349,7 +349,7 @@
                                       </div>
                                       <span class="sr-only">{{
                                         selected[i].name
-                                      }}</span>
+                                       }}</span>
                                     </span>
                                   </span>
                                 </ListboxButton>
@@ -466,11 +466,13 @@
                         </span>
 
                       </div>
-                      <div class="flex space-x-2">
+
+
+                      <div class=" flex space-x-2">
                        <div
                           class="
 
-                            mt-4
+
                             flex-shrink-0
                             sm:mt-0 sm:ml-5
                             inline-flex
@@ -509,7 +511,7 @@
                           >
                         </div>
                       <div class="flex text-sm">
-                        <span class="inline-flex items-center text-sm">
+                        <span class="flex-1 inline-flex items-center text-sm">
                           <button
                             type="button"
                             class="
@@ -908,7 +910,6 @@ export default {
       });
     };
     let authUser = computed(() => store.getters["auth/authUser"]);
-    console.log(moods);
     return {
       user,
       navigation,
