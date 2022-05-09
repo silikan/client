@@ -62,6 +62,7 @@ import Resume from "@/views/Resume.view.vue";
 import BlogPost from "@/views/BlogPost.view.vue";
 import Blog from "@/views/Blog.view.vue";
 import CreateBlog from "@/views/CreateBlog.view.vue";
+import CategoryBlog from "@/views/CategoryBlog.view.vue";
 const routes = [{
         path: "/",
         name: "Home",
@@ -85,6 +86,12 @@ const routes = [{
         name: "CreateBlog",
         meta: { middleware: [auth] },
         component: CreateBlog,
+    },
+    {
+        path: "/blog/category/:category",
+        name: "CategoryBlog",
+        meta: { middleware: [auth] },
+        component: CategoryBlog,
     },
     {
         path: "/resume/:id",

@@ -58,7 +58,7 @@ export const actions = {
  email,
       username,
       bio,
-      date_of_birth, sdsdds
+      date_of_birth,
       phone_number,
       address,
       country,

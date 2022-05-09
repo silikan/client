@@ -30,6 +30,13 @@ function setPaginatedTrendingPosts(commit, response) {
     commit("SET_TRENDING_POSTS_LOADING", false);
 }
 
+function setPaginatedCategoryPosts(commit, response) {
+    commit("SET_CATEGORY_POSTS", response.data.data);
+    commit("SET_CATEGORY_POSTS_META", response.data.meta);
+    commit("SET_CATEGORY_POSTS_LINKS", response.data.links);
+    commit("SET_CATEGORY_POSTS_LOADING", false);
+}
+
 export const state = {
     posts: [],
     post: {},
@@ -54,6 +61,11 @@ export const state = {
     trending_posts_error: null,
     trending_posts_meta: {},
     trending_posts_links: {},
+    category_posts: [],
+    category_posts_loading: false,
+    category_posts_error: null,
+    category_posts_meta: {},
+    category_posts_links: {},
 };
 
 export const mutations = {
@@ -128,6 +140,21 @@ export const mutations = {
     },
     SET_TRENDING_POSTS_ERROR(state, error) {
         state.trending_posts_error = error;
+    },
+    SET_CATEGORY_POSTS(state, posts) {
+        state.category_posts = posts;
+    },
+    SET_CATEGORY_POSTS_META(state, meta) {
+        state.category_posts_meta = meta;
+    },
+    SET_CATEGORY_POSTS_LINKS(state, links) {
+        state.category_posts_links = links;
+    },
+    SET_CATEGORY_POSTS_LOADING(state, loading) {
+        state.category_posts_loading = loading;
+    },
+    SET_CATEGORY_POSTS_ERROR(state, error) {
+        state.category_posts_error = error;
     },
 };
 
@@ -346,6 +373,32 @@ export const actions = {
             commit("SET_TRENDING_POSTS_ERROR", getError(error));
         }
     },
+
+    async getPostByCategoryPaginate({ commit }, payload) {
+        let page = payload.page;
+        let title = payload.title;
+        try {
+            commit("SET_CATEGORY_POSTS_LOADING", true);
+            const posts = await BlogService.getPostByCategoryPaginate(title, page);
+            setPaginatedCategoryPosts(commit, posts);
+            return posts.data;
+        } catch (error) {
+            commit("SET_CATEGORY_POSTS_LOADING", false);
+            commit("SET_CATEGORY_POSTS_ERROR", getError(error));
+        }
+    },
+    async getCategoryPostsLinks({ commit }, link) {
+        try {
+            commit("SET_CATEGORY_POSTS_LOADING", true);
+            const data = await BlogService.getLink(link);
+            setPaginatedCategoryPosts(commit, data);
+            commit("SET_CATEGORY_POSTS_LOADING", false);
+            return data.data;
+        } catch (error) {
+            commit("SET_CATEGORY_POSTS_LOADING", false);
+            commit("SET_CATEGORY_POSTS_ERROR", getError(error));
+        }
+    },
 };
 
 export const getters = {
@@ -431,5 +484,20 @@ export const getters = {
     },
     getTrendingPostsError(state) {
         return state.trending_posts_error;
+    },
+    getCategoryPosts(state) {
+        return state.category_posts;
+    },
+    getCategoryPostsMeta(state) {
+        return state.category_posts_meta;
+    },
+    getCategoryPostsLinks(state) {
+        return state.category_posts_links;
+    },
+    getCategoryPostsLoading(state) {
+        return state.category_posts_loading;
+    },
+    getCategoryPostsError(state) {
+        return state.category_posts_error;
     },
 };
