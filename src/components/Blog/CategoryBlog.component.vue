@@ -35,9 +35,10 @@
                   mb-5
                 "
               >
-                Posts Category "{{ `${category}` }}" :
+                Posts Category "{{ `${category}` }}"
               </h2>
             </div>
+
             <ul role="list" class="space-y-4">
               <li
                 v-for="(question, i) in requests"
@@ -101,8 +102,8 @@
                       </h2>
                     </div>
                     <div v-for="categ in question.category" :key="categ">
-                      <a
-                        href="#"
+                      <router-link
+                        :to="`/blog/category/${categ.title}`"
                         class="
                           text-xs text-indigo-600
                           uppercase
@@ -114,7 +115,7 @@
                         "
                       >
                         {{ categ.title }}
-                      </a>
+                      </router-link>
                     </div>
                     <div
                       class="mt-2 break-all text-sm text-gray-700 space-y-4"

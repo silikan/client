@@ -41,8 +41,8 @@
                   >
                     <div class="">
                       <div v-for="categ in post.category" :key="categ">
-                        <a
-                          href="#"
+                        <router-link
+                          :to="`/blog/category/${categ.title}`"
                           class="
                             text-xs text-indigo-600
                             uppercase
@@ -54,7 +54,7 @@
                           "
                         >
                           {{ categ.title }}
-                        </a>
+                        </router-link>
                       </div>
 
                       <h1
