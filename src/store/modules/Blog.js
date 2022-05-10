@@ -66,6 +66,7 @@ export const state = {
     category_posts_error: null,
     category_posts_meta: {},
     category_posts_links: {},
+    current_reply_page: 1,
 };
 
 export const mutations = {
@@ -155,6 +156,9 @@ export const mutations = {
     },
     SET_CATEGORY_POSTS_ERROR(state, error) {
         state.category_posts_error = error;
+    },
+    SET_CURRENT_REPLY_PAGE(state, page) {
+        state.current_reply_page = page;
     },
 };
 
@@ -499,5 +503,8 @@ export const getters = {
     },
     getCategoryPostsError(state) {
         return state.category_posts_error;
+    },
+    getCurrentReplyPage(state) {
+        return state.current_reply_page;
     },
 };

@@ -51,7 +51,10 @@
                     </button>
                   </div>
 
-                  <Replies :commentId="comment.id" />
+                  <Replies
+                    :commentId="comment.id"
+                    :newReplies="newReliesComp"
+                  />
 
                   <div class="w-full mr-4 flex-shrink-0 mt-6">
                     <form action="#" class="">
@@ -107,32 +110,29 @@
           </ul>
         </div>
       </div>
-           <div class="mt-6        cursor-pointer" >
-                    <a
-
-                      class="
-                        w-full
-
-                        block
-                        text-center
-                        px-4
-                        py-2
-                        border border-gray-300
-                        shadow-sm
-                        text-sm
-                        font-medium
-                        rounded-md
-                        text-gray-700
-                        bg-white
-                        hover:bg-gray-50
-
-                      "
-                      @click="loadMore"
-                    v-if=" meta.current_page < meta.last_page"
-                    >
-                      View More
-                    </a>
-                  </div>
+      <div class="mt-6 cursor-pointer">
+        <a
+          class="
+            w-full
+            block
+            text-center
+            px-4
+            py-2
+            border border-gray-300
+            shadow-sm
+            text-sm
+            font-medium
+            rounded-md
+            text-gray-700
+            bg-white
+            hover:bg-gray-50
+          "
+          @click="loadMore"
+          v-if="meta.current_page < meta.last_page"
+        >
+          View More
+        </a>
+      </div>
       <div class="bg-gray-50 px-4 py-6 sm:px-6">
         <div class="flex space-x-3">
           <div class="flex-shrink-0">
@@ -218,7 +218,6 @@
         </div>
       </div>
     </div>
-
   </section>
 </template>
 
@@ -230,7 +229,8 @@ import { useStore } from "vuex";
 import { useRoute } from "vue-router";
 import { useField } from "vee-validate";
 import * as yup from "yup";
-import { computed, ref, reactive } from "@vue/runtime-core";
+import { computed, ref, reactive, watch } from "@vue/runtime-core";
+import BlogServices from "../../services/BlogServices";
 
 const user = {
   name: "Whitney Francis",
@@ -271,10 +271,15 @@ export default {
         comment: comment.value,
         post_id: id,
       };
-      store.dispatch("Blog/postComment", payload);
+      store.dispatch("Blog/postComment", payload).then(() => {
+        store.dispatch("Blog/getPostCommentsPaginate", payload);
+      });
     };
 
-    let postReply = (data, comment_id) => {
+    let newReplies = ref([]);
+    let newReliesComp = ref([]);
+
+    let postReply = async (data, comment_id) => {
       console.log(data);
       let payload = {
         comment: data,
@@ -282,7 +287,19 @@ export default {
         comment_id: comment_id,
       };
       store.dispatch("Blog/postReply", payload);
+      let getCurrentReplyPage = store.getters["Blog/getCurrentReplyPage"];
+      newReplies.value = await BlogServices.getPostCommentRepliesPaginate(
+        id,
+        comment_id,
+        getCurrentReplyPage
+      );
+
+      console.log(newReliesComp.value);
     };
+
+    watch(newReliesComp.value, (newVal) => {
+      newReliesComp.value = newVal;
+    });
 
     let action = "Search/paginateHandymen";
     let meta, links, comments;
@@ -409,6 +426,8 @@ export default {
       loading,
       loadMore,
       authUser,
+      newReplies,
+      newReliesComp,
     };
   },
 };

@@ -46,11 +46,12 @@
 <script>
 import Avatar from "@/components/Post/CommentAvatar.component.vue";
 
-import { computed, reactive, ref, watchEffect } from "@vue/runtime-core";
+import { computed, reactive, ref, watch, watchEffect } from "@vue/runtime-core";
 import { useRoute } from "vue-router";
 import BlogServices from "@/services/BlogServices";
+import store from "../../store";
 export default {
-  props: ["commentId"],
+  props: ["commentId" , "newReplies"],
   components: {
     Avatar,
   },
@@ -83,6 +84,7 @@ export default {
         page
       );
 
+
       result.value = data.data;
       replies.value = result.value.data;
       meta.value = result.value.meta;
@@ -92,6 +94,7 @@ export default {
     });
     let feedbackReactive = reactive([]);
     let repliesData = computed(() => {
+
       if (meta.value.current_page == 1 && feedbackReactive.length > 0) {
         feedbackReactive = replies.value;
         return feedbackReactive;
@@ -101,9 +104,19 @@ export default {
       }
     });
 
+      watch(props.newReplies, (newValue) => {
+        console.log(newValue);
+
+        result.value = newValue;
+        replies.value = newValue.data;
+        meta.value = newValue.meta;
+        links.value = newValue.links;
+      });
+
     const loadMore = async () => {
       if (page < meta.value.last_page) {
         page++;
+        store.commit("Blog/SET_CURRENT_REPLY_PAGE", page);
         let paginationlink = `${process.env.VUE_APP_API_URL}/api/blog/post/${id}/comment/${comment_id.value}/replies/paginate?page=${page}`;
 
         let data = await BlogServices.getLink(paginationlink);

@@ -422,7 +422,9 @@ export default {
       };
       store.dispatch("Blog/createPost", post).then((result) => {
         uploadFile(result.id);
+        store.dispatch("Blog/getAllPostsPaginated", 1)
       });
+
     };
 
 watchEffect(() => {
