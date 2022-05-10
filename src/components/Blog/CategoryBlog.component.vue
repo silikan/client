@@ -22,7 +22,7 @@
                 mb-5
                 flex
                 justify-center
-                shadow-lg
+                shadow-sm
               "
             >
               <h2

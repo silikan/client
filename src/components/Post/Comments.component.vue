@@ -44,6 +44,7 @@
                     <span class="text-gray-500 font-medium">&middot;</span>
                     {{ " " }}
                     <button
+                    @click="toggleReplyForm(i)"
                       type="button"
                       class="text-gray-800 text-sm font-bold"
                     >
@@ -56,7 +57,7 @@
                     :newReplies="newReliesComp"
                   />
 
-                  <div class="w-full mr-4 flex-shrink-0 mt-6">
+                  <div class="w-full mr-4 flex-shrink-0 mt-6" v-if="showReplyForm[i]">
                     <form action="#" class="">
                       <div class="w-full">
                         <label for="reply" class="sr-only">About</label>
@@ -274,6 +275,8 @@ export default {
       store.dispatch("Blog/postComment", payload).then(() => {
         store.dispatch("Blog/getPostCommentsPaginate", payload);
       });
+      comment.value = "";
+
     };
 
     let newReplies = ref([]);
@@ -397,6 +400,11 @@ export default {
     let preurl = `${process.env.VUE_APP_API_URL}`;
     let loading = computed(() => store.getters["Blog/getCommentsLinksLoading"]);
 
+let showReplyForm = ref([]);
+const toggleReplyForm = (i) => {
+  console.log(i);
+  showReplyForm.value[i] = !showReplyForm.value[i];
+};
     return {
       user,
 
@@ -428,6 +436,8 @@ export default {
       authUser,
       newReplies,
       newReliesComp,
+      showReplyForm,
+      toggleReplyForm,
     };
   },
 };
