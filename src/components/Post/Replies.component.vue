@@ -18,6 +18,7 @@
       </div>
     </div>
   </div>
+
   <div class="mt-6 cursor-pointer">
     <a
       class="
@@ -40,6 +41,25 @@
     >
       View More
     </a>
+      <div class="mt-6" v-if="meta && links">
+    <div class="flex" v-for="reply in newReliadData" :key="reply.id">
+      <div class="mr-4 flex-shrink-0">
+        <Avatar
+          v-if="reply.user.name"
+          :url="reply.user.avatar"
+          :name="reply.user.name"
+          :height="10"
+          :width="10"
+        />
+      </div>
+      <div>
+        <h4 class="text-lg font-bold">{{ reply.user.name }}</h4>
+        <p class="mt-1 text-md text-gray-700 italic">
+          {{ reply.comment }}
+        </p>
+      </div>
+    </div>
+  </div>
   </div>
 </template>
 
@@ -49,9 +69,9 @@ import Avatar from "@/components/Post/CommentAvatar.component.vue";
 import { computed, reactive, ref, watch, watchEffect } from "@vue/runtime-core";
 import { useRoute } from "vue-router";
 import BlogServices from "@/services/BlogServices";
-import store from "../../store";
+import { useStore } from 'vuex';
 export default {
-  props: ["commentId" , "newReplies"],
+  props: ["commentId", "newReplies"],
   components: {
     Avatar,
   },
@@ -65,7 +85,7 @@ export default {
 
     let route = useRoute();
     let id = route.params.id;
-
+let store = useStore();
     let comment_id = computed(() => {
       return props.commentId;
     });
@@ -84,7 +104,6 @@ export default {
         page
       );
 
-
       result.value = data.data;
       replies.value = result.value.data;
       meta.value = result.value.meta;
@@ -92,9 +111,9 @@ export default {
 
       return { result, replies, meta, links };
     });
+
     let feedbackReactive = reactive([]);
     let repliesData = computed(() => {
-
       if (meta.value.current_page == 1 && feedbackReactive.length > 0) {
         feedbackReactive = replies.value;
         return feedbackReactive;
@@ -103,20 +122,27 @@ export default {
         return feedbackReactive;
       }
     });
+store.commit("Blog/SET_CURRENT_REPLY_PAGE", meta.value.last_page);
 
-      watch(props.newReplies, (newValue) => {
-        console.log(newValue);
+    let newReliadData = ref([]);
+    watch(
+      () => props.newReplies,
+      (value) => {
+store.commit("Blog/SET_CURRENT_REPLY_PAGE", meta.value.last_page);
+        console.log(value);
+if(comment_id.value ==  value.comment_id){
+newReliadData.value.push(value) ;
 
-        result.value = newValue;
-        replies.value = newValue.data;
-        meta.value = newValue.meta;
-        links.value = newValue.links;
-      });
+}
+
+
+      }
+    );
 
     const loadMore = async () => {
       if (page < meta.value.last_page) {
         page++;
-        store.commit("Blog/SET_CURRENT_REPLY_PAGE", page);
+
         let paginationlink = `${process.env.VUE_APP_API_URL}/api/blog/post/${id}/comment/${comment_id.value}/replies/paginate?page=${page}`;
 
         let data = await BlogServices.getLink(paginationlink);
@@ -136,6 +162,7 @@ export default {
       links,
       repliesData,
       loadMore,
+      newReliadData
     };
   },
 };

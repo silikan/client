@@ -44,7 +44,7 @@
                     <span class="text-gray-500 font-medium">&middot;</span>
                     {{ " " }}
                     <button
-                    @click="toggleReplyForm(i)"
+                      @click="toggleReplyForm(i)"
                       type="button"
                       class="text-gray-800 text-sm font-bold"
                     >
@@ -52,12 +52,12 @@
                     </button>
                   </div>
 
-                  <Replies
-                    :commentId="comment.id"
-                    :newReplies="newReliesComp"
-                  />
+                  <Replies :commentId="comment.id" :newReplies="newReplies" />
 
-                  <div class="w-full mr-4 flex-shrink-0 mt-6" v-if="showReplyForm[i]">
+                  <div
+                    class="w-full mr-4 flex-shrink-0 mt-6"
+                    v-if="showReplyForm[i]"
+                  >
                     <form action="#" class="">
                       <div class="w-full">
                         <label for="reply" class="sr-only">About</label>
@@ -98,7 +98,7 @@
                             focus:ring-offset-2
                             focus:ring-indigo-500
                           "
-                          @click.prevent="postReply(reply[i], comment.id)"
+                          @click.prevent="postReply(reply[i], comment.id , i)"
                         >
                           Reply
                         </button>
@@ -230,8 +230,7 @@ import { useStore } from "vuex";
 import { useRoute } from "vue-router";
 import { useField } from "vee-validate";
 import * as yup from "yup";
-import { computed, ref, reactive, watch } from "@vue/runtime-core";
-import BlogServices from "../../services/BlogServices";
+import { computed, ref, reactive } from "@vue/runtime-core";
 
 const user = {
   name: "Whitney Francis",
@@ -276,13 +275,9 @@ export default {
         store.dispatch("Blog/getPostCommentsPaginate", payload);
       });
       comment.value = "";
-
     };
-
     let newReplies = ref([]);
-    let newReliesComp = ref([]);
-
-    let postReply = async (data, comment_id) => {
+    let postReply = async (data, comment_id ,  i ) => {
       console.log(data);
       let payload = {
         comment: data,
@@ -290,19 +285,16 @@ export default {
         comment_id: comment_id,
       };
       store.dispatch("Blog/postReply", payload);
-      let getCurrentReplyPage = store.getters["Blog/getCurrentReplyPage"];
-      newReplies.value = await BlogServices.getPostCommentRepliesPaginate(
-        id,
-        comment_id,
-        getCurrentReplyPage
-      );
 
-      console.log(newReliesComp.value);
+      newReplies.value = {
+        user:  authUser.value,
+
+        comment: data,
+        post_id: id,
+        comment_id: comment_id,
+      };
+      reply.value[i] = "";
     };
-
-    watch(newReliesComp.value, (newVal) => {
-      newReliesComp.value = newVal;
-    });
 
     let action = "Search/paginateHandymen";
     let meta, links, comments;
@@ -400,11 +392,11 @@ export default {
     let preurl = `${process.env.VUE_APP_API_URL}`;
     let loading = computed(() => store.getters["Blog/getCommentsLinksLoading"]);
 
-let showReplyForm = ref([]);
-const toggleReplyForm = (i) => {
-  console.log(i);
-  showReplyForm.value[i] = !showReplyForm.value[i];
-};
+    let showReplyForm = ref([]);
+    const toggleReplyForm = (i) => {
+      console.log(i);
+      showReplyForm.value[i] = !showReplyForm.value[i];
+    };
     return {
       user,
 
@@ -435,7 +427,7 @@ const toggleReplyForm = (i) => {
       loadMore,
       authUser,
       newReplies,
-      newReliesComp,
+
       showReplyForm,
       toggleReplyForm,
     };
