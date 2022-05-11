@@ -442,6 +442,7 @@ import {
 } from "@headlessui/vue";
 import Comments from "./Comments.component.vue";
 import Avatar from "@/components/Avatar/Avatar.component.vue";
+import { io } from "socket.io-client";
 
 import {
   ChatAltIcon,
@@ -540,6 +541,7 @@ export default {
   },
 
   setup() {
+    let notificationsocket = io("http://localhost:4000");
     let store = useStore();
     let route = useRoute();
     let id = route.params.id;
@@ -563,7 +565,52 @@ export default {
         bgColor: data.bgColor,
       };
       console.log(id, data);
-      store.dispatch("Blog/PostReaction", payload);
+      store.dispatch("Blog/PostReaction", payload).then(() => {
+        store
+          .dispatch("Blog/getPostById", id)
+          .then(async (result) => {
+            console.log(result);
+            let toData = {
+              userId: result.data.user.id,
+            };
+            console.log(result);
+            let getUserNotificationRoom = await store.dispatch(
+              "Notification/getUserNotificationRoom",
+              toData
+            );
+
+            notificationsocket.on("connect", function () {
+              // Connected, let's sign-up for to receive messages for this room
+              notificationsocket.emit(
+                "notificationRoom",
+                `notification-room-${getUserNotificationRoom.id}`
+              );
+            });
+
+            let notificationpayload = {
+              data: {
+                to: result.data.user.id,
+                from: authUser.value.id,
+                data: `reacted with ${data.name} On Your Post`,
+                type: "Blog",
+                notification_room_id: getUserNotificationRoom.id,
+              },
+            };
+            console.log(notificationpayload);
+            store.dispatch(
+              "Notification/sendChatNotification",
+              notificationpayload
+            );
+            store.dispatch(
+              "Notification/Sendnotification",
+              notificationpayload
+            );
+          })
+
+          .catch((error) => {
+            console.log(error);
+          });
+      });
     };
 
     let authUser = computed(() => store.getters["auth/authUser"]);
