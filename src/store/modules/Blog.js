@@ -176,6 +176,7 @@ export const actions = {
     },
 
     async getPostById({ commit }, id) {
+        id;
         commit("SET_POSTS_LOADING", true);
         try {
             const response = await BlogService.getPostById(id);
@@ -401,6 +402,14 @@ export const actions = {
         } catch (error) {
             commit("SET_CATEGORY_POSTS_LOADING", false);
             commit("SET_CATEGORY_POSTS_ERROR", getError(error));
+        }
+    },
+    async getCommentById({ commit }, id) {
+        try {
+            const response = await BlogService.getCommentById(id);
+            return response.data;
+        } catch (error) {
+            commit("SET_ERROR", getError(error));
         }
     },
 };

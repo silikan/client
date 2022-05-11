@@ -63,4 +63,7 @@ export default {
     async getPostByCategoryPaginate(title, page) {
         return await API.apiClient.get(`/blog/category/${title}/post/paginate`, { params: { page } });
     },
+    async getCommentById(id) {
+        return await API.apiClient.get(`/blog/post/comment/${id}`);
+    },
 };
