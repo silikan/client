@@ -50,12 +50,10 @@ import AdminDashboardHome from "@/components/Dashboard/Admin/Parts/Home.componen
 import AdminDashboardTransactions from "@/components/Dashboard/Admin/Parts/Transactions.component.vue";
 import AdminDashboardSettings from "@/components/Dashboard/Admin/Parts/Settings.component.vue";
 import AdminDashboardFeedBack from "@/components/Dashboard/Admin/Parts/FeedBack.component.vue";
-
 import ModeratorDashboardHome from "@/components/Dashboard/Moderator/Parts/Home.component.vue";
 import ModeratorDashboardTransactions from "@/components/Dashboard/Moderator/Parts/Transactions.component.vue";
 import ModeratorDashboardSettings from "@/components/Dashboard/Moderator/Parts/Settings.component.vue";
 import ModeratorDashboardFeedBack from "@/components/Dashboard/Moderator/Parts/FeedBack.component.vue";
-
 import Skeletons from "@/views/Skeletons.view.vue";
 import Notification from "@/views/Notification.view.vue";
 import Resume from "@/views/Resume.view.vue";
