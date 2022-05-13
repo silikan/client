@@ -18,7 +18,7 @@ import * as BuyerFeed from "@/store/modules/BuyerFeed";
 import * as SellerFeed from "@/store/modules/SellerFeed";
 import * as Transaction from "@/store/modules/Transaction";
 import * as Notification from "@/store/modules/Notification";
-import * as FeedBack from "@/store/modules/FeedBack";
+import * as FeedBack from "@/store/modules/Feedback";
 import * as Blog from "@/store/modules/Blog";
 export default createStore({
     strict: true,
