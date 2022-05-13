@@ -1475,6 +1475,7 @@ import * as style from "@dicebear/avatars-initials-sprites";
 import { useField } from "vee-validate";
 import * as yup from "yup";
 import { ExclamationCircleIcon } from "@heroicons/vue/solid";
+import { useRouter } from "vue-router";
 
 export default {
   components: {
@@ -1492,6 +1493,7 @@ export default {
     this.moment = moment;
   },
   setup() {
+    let router = useRouter();
     const store = useStore();
     const WorkDays = [
       "Sunday",
@@ -1775,7 +1777,8 @@ today = mm + '/' + dd + '/' + yyyy;
         .then(() => {
           console.log("fileUploaded");
         })
-        .catch(() => console.log("error"));
+        .catch(() => console.log("error"))
+        .then(() => router.push("/profile"));
     };
 
     const updateAndUploadFile = () => {

@@ -332,6 +332,7 @@
 import { computed, reactive, ref } from "vue";
 import AuthService from "@/services/AuthService";
 import { useStore } from "vuex";
+import { useRouter } from "vue-router";
 
 const user = {
   name: "Debbie Lewis",
@@ -348,6 +349,7 @@ export default {
     const privateAccount = ref(false);
     const allowCommenting = ref(true);
     const allowMentions = ref(true);
+    let router = useRouter();
 
     let currentPassword;
     let password;
@@ -364,7 +366,8 @@ export default {
       };
       AuthService.updatePassword(payload)
         .then(() => console.log("Password updated."))
-        .catch((error) => console.log(error));
+        .catch((error) => console.log(error))
+        .then(() => router.push("/profile")) ;
     };
 
     const store = useStore();

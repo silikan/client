@@ -381,6 +381,7 @@ import {
   SwitchLabel,
 } from "@headlessui/vue";
 import { useStore } from "vuex";
+import { useRouter } from "vue-router";
 
 const user = {
   name: "Debbie Lewis",
@@ -410,6 +411,7 @@ export default {
     const store = useStore();
     const authUser = computed(() => store.getters["auth/authUser"]);
     const open = ref(false);
+    let router = useRouter();
 
     const openDeleteAcoountModal = () => {
       open.value = true;
@@ -458,7 +460,8 @@ export default {
       AuthService.updateUser(payload)
         .then(() => store.dispatch("auth/getAuthUser"))
         .then(() => console.log("User updated."))
-        .catch(() => console.log(payload));
+        .catch(() => console.log(payload))
+        .then(() => router.push("/profile"));
     };
 
     const deleteUserAccount = () => {
