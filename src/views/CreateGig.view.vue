@@ -89,9 +89,11 @@ import PaymentMthod from "../components/Gig/CreateGig/Payment_Mthod.component.vu
 import Upload from "../components/Gig/CreateGig/Upload.component.vue";
 import { reactive } from "@vue/reactivity";
 import { useStore } from "vuex";
+import { useRouter } from "vue-router";
 export default {
   components: { Stepper, General, Pricing, PaymentMthod, Upload },
   setup() {
+    let router = useRouter();
     const steps = reactive([
       { name: "General", href: "#", status: "current", active: true },
       { name: "Pricing", href: "#", status: "upcoming", active: false },
@@ -145,7 +147,8 @@ export default {
         GigImages,
       };
       let jsonData = JSON.stringify(data);
-      store.dispatch("Gig/createGig", jsonData);
+      store.dispatch("Gig/createGig", jsonData)
+      .then(() => router.push("/profile"));
     };
     return {
       steps,

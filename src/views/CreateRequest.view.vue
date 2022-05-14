@@ -93,10 +93,12 @@ import Pricing from "../components/Request/CreateRequest/Pricing.component.vue"
 import PaymentMthod from "../components/Request/CreateRequest/Payment_Mthod.component.vue"
 import { reactive } from '@vue/reactivity'
 import { useStore } from 'vuex'
+import { useRouter } from "vue-router";
 export default {
     components:{Stepper,General, Pricing,PaymentMthod },
 
  setup() {
+let router = useRouter();
 let store = useStore()
     const steps = reactive([
       { name: "General", href: "#", status: "current", active: true },
@@ -152,7 +154,8 @@ let createRequest = () => {
         duration
       };
       let jsonData = JSON.stringify(data);
-      store.dispatch("Request/createRequest",jsonData);
+      store.dispatch("Request/createRequest",jsonData)
+      .then(() => router.push("/profile"));
     };
 
 
