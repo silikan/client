@@ -24,7 +24,7 @@
               class="
                 inline-flex
                 items-center
-                p-4
+                p-1
                 border border-transparent
                 rounded-full
                 shadow-sm
@@ -39,8 +39,9 @@
             >
               <!-- Heroicon name: outline/plus-sm -->
 
-              <LightningBoltIcon
-                class="h-6 w-6 text-white"
+              <img
+                class="h-14 w-14 text-white"
+                src="@/assets/Logos/s-white.svg"
                 aria-hidden="true"
               />
             </button>
@@ -208,7 +209,6 @@ import Popper from "vue3-popper";
 
 import {
   QuestionMarkCircleIcon,
-  LightningBoltIcon,
   SpeakerphoneIcon,
   HandIcon,
   ShieldCheckIcon,
@@ -220,7 +220,6 @@ import { computed, ref, watchEffect } from "@vue/runtime-core";
 export default {
   components: {
     QuestionMarkCircleIcon,
-    LightningBoltIcon,
     SpeakerphoneIcon,
     HandIcon,
     Popper,
