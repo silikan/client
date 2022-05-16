@@ -105,8 +105,8 @@
                       rounded-full
                       text-xs
                       font-medium
-                      bg-indigo-100
-                      text-indigo-800
+                      bg-prgreen-100
+                      text-prgreen-800
                     "
                   >
                     {{ person.item.task_item.type }}
@@ -122,8 +122,8 @@
                       rounded-full
                       text-xs
                       font-medium
-                      bg-indigo-100
-                      text-indigo-800
+                      bg-prgreen-100
+                      text-prgreen-800
                     "
                   >
                     {{ person.item.task_item.status }}
@@ -162,7 +162,7 @@
                 >
                   <router-link
                     :to="`/gig/${person.item.gig[0].id}`"
-                    class="text-indigo-600 hover:text-indigo-900"
+                    class="text-prgreen-600 hover:text-prgreen-900"
                     >Check</router-link
                   >
                 </td>
@@ -178,7 +178,7 @@
                 >
                   <router-link
                     :to="`/request/${person.item.request[0].id}`"
-                    class="text-indigo-600 hover:text-indigo-900"
+                    class="text-prgreen-600 hover:text-prgreen-900"
                     >Check</router-link
                   >
                 </td>

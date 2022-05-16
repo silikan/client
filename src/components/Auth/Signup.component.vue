@@ -12,7 +12,7 @@
         <div>
           <img
             class="h-12 w-auto"
-            src="https://tailwindui.com/img/logos/Silikan-mark-indigo-600.svg"
+            src="https://tailwindui.com/img/logos/Silikan-mark-prgreen-600.svg"
             alt="Silikan"
           />
           <h2 class="mt-6 text-3xl font-extrabold text-gray-900">
@@ -23,7 +23,7 @@
             {{ " " }}
             <router-link
               to="/signin"
-              class="font-medium text-indigo-600 hover:text-indigo-500"
+              class="font-medium text-prgreen-600 hover:text-prgreen-500"
             >
               Signin To Your Account
             </router-link>
@@ -45,7 +45,7 @@
                     class="absolute inset-0 flex items-center"
                     aria-hidden="true"
                   >
-                    <div class="h-0.5 w-full bg-indigo-600" />
+                    <div class="h-0.5 w-full bg-prgreen-600" />
                   </div>
                   <a
                     href="#"
@@ -56,9 +56,9 @@
                       flex
                       items-center
                       justify-center
-                      bg-indigo-600
+                      bg-prgreen-600
                       rounded-full
-                      hover:bg-indigo-900
+                      hover:bg-prgreen-900
                     "
                   >
                     <CheckIcon class="w-5 h-5 text-white" aria-hidden="true" />
@@ -85,13 +85,13 @@
                       items-center
                       justify-center
                       bg-white
-                      border-2 border-indigo-600
+                      border-2 border-prgreen-600
                       rounded-full
                     "
                     aria-current="step"
                   >
                     <span
-                      class="h-2.5 w-2.5 bg-indigo-600 rounded-full"
+                      class="h-2.5 w-2.5 bg-prgreen-600 rounded-full"
                       aria-hidden="true"
                     />
                     <span class="sr-only">{{ step.name }}</span>
@@ -155,7 +155,7 @@
                       ? 'rounded-bl-md rounded-br-md'
                       : '',
                     checked
-                      ? 'bg-indigo-50 border-indigo-200 z-10'
+                      ? 'bg-prgreen-50 border-prgreen-200 z-10'
                       : 'border-gray-200',
                     'relative border p-4 flex cursor-pointer focus:outline-none',
                   ]"
@@ -163,9 +163,9 @@
                   <span
                     :class="[
                       checked
-                        ? 'bg-indigo-600 border-transparent'
+                        ? 'bg-prgreen-600 border-transparent'
                         : 'bg-white border-gray-300',
-                      active ? 'ring-2 ring-offset-2 ring-indigo-500' : '',
+                      active ? 'ring-2 ring-offset-2 ring-prgreen-500' : '',
                       'h-4 w-4 mt-0.5 cursor-pointer rounded-full border flex items-center justify-center',
                     ]"
                     aria-hidden="true"
@@ -176,7 +176,7 @@
                     <RadioGroupLabel
                       as="span"
                       :class="[
-                        checked ? 'text-indigo-900' : 'text-gray-900',
+                        checked ? 'text-prgreen-900' : 'text-gray-900',
                         'block text-sm font-medium',
                       ]"
                     >
@@ -185,7 +185,7 @@
                     <RadioGroupDescription
                       as="span"
                       :class="[
-                        checked ? 'text-indigo-700' : 'text-gray-500',
+                        checked ? 'text-prgreen-700' : 'text-gray-500',
                         'block text-sm',
                       ]"
                     >
@@ -212,12 +212,12 @@
               text-sm
               font-medium
               text-white
-              bg-indigo-600
-              hover:bg-indigo-700
+              bg-prgreen-600
+              hover:bg-prgreen-700
               focus:outline-none
               focus:ring-2
               focus:ring-offset-2
-              focus:ring-indigo-500
+              focus:ring-prgreen-500
             "
           >
             Next
@@ -381,7 +381,7 @@
                      :class="[
                         errorData.name
                           ? 'block w-full pr-10 border-red-300 text-red-900 placeholder-red-300 focus:outline-none focus:ring-red-500 focus:border-red-500 sm:text-sm rounded-md w-full px-3 py-2 border border-red-300  text-red-900 rounded-md  shadow-smplaceholder-red-400 focus:outline-nonefocus:ring-red-500 focus:border-red-500 sm:text-sm'
-                          : ' block w-full px-3 py-2 border border-gray-300 rounded-md  shadow-smplaceholder-gray-400 focus:outline-nonefocus:ring-indigo-500 focus:border-indigo-500 sm:text-sm',
+                          : ' block w-full px-3 py-2 border border-gray-300 rounded-md  shadow-smplaceholder-gray-400 focus:outline-nonefocus:ring-prgreen-500 focus:border-prgreen-500 sm:text-sm',
                       ]"
                     />
                     <div
@@ -424,7 +424,7 @@
                      :class="[
                         errorData.username
                           ? 'block w-full pr-10 border-red-300 text-red-900 placeholder-red-300 focus:outline-none focus:ring-red-500 focus:border-red-500 sm:text-sm rounded-md w-full px-3 py-2 border border-red-300  text-red-900 rounded-md  shadow-smplaceholder-red-400 focus:outline-nonefocus:ring-red-500 focus:border-red-500 sm:text-sm'
-                          : ' block w-full px-3 py-2 border border-gray-300 rounded-md  shadow-smplaceholder-gray-400 focus:outline-nonefocus:ring-indigo-500 focus:border-indigo-500 sm:text-sm',
+                          : ' block w-full px-3 py-2 border border-gray-300 rounded-md  shadow-smplaceholder-gray-400 focus:outline-nonefocus:ring-prgreen-500 focus:border-prgreen-500 sm:text-sm',
                       ]"
                     />
                     <div
@@ -467,7 +467,7 @@
                       :class="[
                         errorData.email
                           ? 'block w-full pr-10 border-red-300 text-red-900 placeholder-red-300 focus:outline-none focus:ring-red-500 focus:border-red-500 sm:text-sm rounded-md w-full px-3 py-2 border border-red-300  text-red-900 rounded-md  shadow-smplaceholder-red-400 focus:outline-nonefocus:ring-red-500 focus:border-red-500 sm:text-sm'
-                          : ' block w-full px-3 py-2 border border-gray-300 rounded-md  shadow-smplaceholder-gray-400 focus:outline-nonefocus:ring-indigo-500 focus:border-indigo-500 sm:text-sm',
+                          : ' block w-full px-3 py-2 border border-gray-300 rounded-md  shadow-smplaceholder-gray-400 focus:outline-nonefocus:ring-prgreen-500 focus:border-prgreen-500 sm:text-sm',
                       ]"
                     />
                 <div
@@ -511,7 +511,7 @@
                     :class="[
                         errorData.password
                           ? 'block w-full pr-10 border-red-300 text-red-900 placeholder-red-300 focus:outline-none focus:ring-red-500 focus:border-red-500 sm:text-sm rounded-md w-full px-3 py-2 border border-red-300  text-red-900 rounded-md  shadow-smplaceholder-red-400 focus:outline-nonefocus:ring-red-500 focus:border-red-500 sm:text-sm'
-                          : ' block w-full px-3 py-2 border border-gray-300 rounded-md  shadow-smplaceholder-gray-400 focus:outline-nonefocus:ring-indigo-500 focus:border-indigo-500 sm:text-sm',
+                          : ' block w-full px-3 py-2 border border-gray-300 rounded-md  shadow-smplaceholder-gray-400 focus:outline-nonefocus:ring-prgreen-500 focus:border-prgreen-500 sm:text-sm',
                       ]"
                     />
                      <div
@@ -554,7 +554,7 @@
                    :class="[
                         errorData.password
                           ? 'block w-full pr-10 border-red-300 text-red-900 placeholder-red-300 focus:outline-none focus:ring-red-500 focus:border-red-500 sm:text-sm rounded-md w-full px-3 py-2 border border-red-300  text-red-900 rounded-md  shadow-smplaceholder-red-400 focus:outline-nonefocus:ring-red-500 focus:border-red-500 sm:text-sm'
-                          : ' block w-full px-3 py-2 border border-gray-300 rounded-md  shadow-smplaceholder-gray-400 focus:outline-nonefocus:ring-indigo-500 focus:border-indigo-500 sm:text-sm',
+                          : ' block w-full px-3 py-2 border border-gray-300 rounded-md  shadow-smplaceholder-gray-400 focus:outline-nonefocus:ring-prgreen-500 focus:border-prgreen-500 sm:text-sm',
                       ]"
                     />
                       <div
@@ -590,8 +590,8 @@
                       class="
                         h-4
                         w-4
-                        text-indigo-600
-                        focus:ring-indigo-500
+                        text-prgreen-600
+                        focus:ring-prgreen-500
                         border-gray-300
                         rounded
                       "
@@ -625,12 +625,12 @@
                       text-sm
                       font-medium
                       text-white
-                      bg-indigo-600
-                      hover:bg-indigo-700
+                      bg-prgreen-600
+                      hover:bg-prgreen-700
                       focus:outline-none
                       focus:ring-2
                       focus:ring-offset-2
-                      focus:ring-indigo-500
+                      focus:ring-prgreen-500
                     "
                   >
                     sign up
@@ -649,12 +649,12 @@
                       text-sm
                       font-medium
                       text-white
-                      bg-indigo-600
-                      hover:bg-indigo-700
+                      bg-prgreen-600
+                      hover:bg-prgreen-700
                       focus:outline-none
                       focus:ring-2
                       focus:ring-offset-2
-                      focus:ring-indigo-500
+                      focus:ring-prgreen-500
                     "
                   >
                     <svg

@@ -57,7 +57,7 @@
                         focus:outline-none
                         focus:ring-2
                         focus:ring-offset-2
-                        focus:ring-indigo-500
+                        focus:ring-prgreen-500
                         text-gray-300
                       "
                     >

@@ -19,7 +19,7 @@
 
                   :class="[
                     item.current
-                      ? 'bg-indigo-50 border-indigo-500 text-indigo-700 hover:bg-indigo-50 hover:text-indigo-700'
+                      ? 'bg-prgreen-50 border-prgreen-500 text-prgreen-700 hover:bg-prgreen-50 hover:text-prgreen-700'
                       : 'border-transparent text-gray-900 hover:bg-gray-50 hover:text-gray-900',
                     'group border-l-4 px-3 py-2 flex items-center text-sm font-medium',
                   ]"
@@ -32,7 +32,7 @@
 
                     :class="[
                       item.current
-                        ? 'text-indigo-500 group-hover:text-indigo-500'
+                        ? 'text-prgreen-500 group-hover:text-prgreen-500'
                         : 'text-gray-400 group-hover:text-gray-500',
                       'flex-shrink-0 -ml-1 mr-3 h-6 w-6',
                     ]"

@@ -119,7 +119,7 @@
                       <router-link
                         :to="`/blog/category/${categ.title}`"
                         class="
-                          text-xs text-indigo-600
+                          text-xs text-prgreen-600
                           uppercase
                           font-medium
                           hover:text-gray-900

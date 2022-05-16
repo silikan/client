@@ -31,8 +31,8 @@
             <Switch
               v-model="availableToHire"
               :class="[
-                availableToHire ? 'bg-indigo-500' : 'bg-gray-200',
-                'ml-4 relative inline-flex flex-shrink-0 h-6 w-11 border-2 border-transparent rounded-full cursor-pointer transition-colors ease-in-out duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500',
+                availableToHire ? 'bg-prgreen-500' : 'bg-gray-200',
+                'ml-4 relative inline-flex flex-shrink-0 h-6 w-11 border-2 border-transparent rounded-full cursor-pointer transition-colors ease-in-out duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-prgreen-500',
               ]"
             >
               <span
@@ -60,8 +60,8 @@
             <Switch
               v-model="Handyman"
               :class="[
-                Handyman ? 'bg-indigo-500' : 'bg-gray-200',
-                'ml-4 relative inline-flex flex-shrink-0 h-6 w-11 border-2 border-transparent rounded-full cursor-pointer transition-colors ease-in-out duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500',
+                Handyman ? 'bg-prgreen-500' : 'bg-gray-200',
+                'ml-4 relative inline-flex flex-shrink-0 h-6 w-11 border-2 border-transparent rounded-full cursor-pointer transition-colors ease-in-out duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-prgreen-500',
               ]"
             >
               <span
@@ -89,8 +89,8 @@
             <Switch
               v-model="Online"
               :class="[
-                Online ? 'bg-indigo-500' : 'bg-gray-200',
-                'ml-4 relative inline-flex flex-shrink-0 h-6 w-11 border-2 border-transparent rounded-full cursor-pointer transition-colors ease-in-out duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500',
+                Online ? 'bg-prgreen-500' : 'bg-gray-200',
+                'ml-4 relative inline-flex flex-shrink-0 h-6 w-11 border-2 border-transparent rounded-full cursor-pointer transition-colors ease-in-out duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-prgreen-500',
               ]"
             >
               <span
@@ -312,7 +312,7 @@
                                   focus:outline-none
                                   focus:ring-2
                                   focus:ring-offset-2
-                                  focus:ring-indigo-500
+                                  focus:ring-prgreen-500
                                   sm:mt-0 sm:w-auto sm:text-sm
                                 "
                                 @click="open = false"
@@ -337,7 +337,7 @@
           type="submit"
           class="
             ml-5
-            bg-indigo-700
+            bg-prgreen-700
             border border-transparent
             rounded-md
             shadow-sm
@@ -348,11 +348,11 @@
             text-sm
             font-medium
             text-white
-            hover:bg-indigo-800
+            hover:bg-prgreen-800
             focus:outline-none
             focus:ring-2
             focus:ring-offset-2
-            focus:ring-indigo-500
+            focus:ring-prgreen-500
           "
         >
           Save

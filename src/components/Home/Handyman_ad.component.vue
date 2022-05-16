@@ -1,5 +1,5 @@
 <template>
-  <div class="grid grid-cols-1 md:grid-cols-2 bg-gray-800 p-10 md:w-2/3 self-center mb-10">
+  <div class="grid grid-cols-1 md:grid-cols-2 bg-prblue p-10 md:w-2/3 self-center mb-10">
     <div class="flex justify-center">
       <img
         src="@\assets\undraw_interview_re_e5jn.svg"
@@ -23,7 +23,7 @@
             text-base
             font-semibold
             tracking-wider
-            text-indigo-600
+            text-prgreen-600
             uppercase
           "
         >
@@ -57,12 +57,12 @@
             rounded-md
             shadow-sm
             text-white
-            bg-indigo-600
-            hover:bg-indigo-700
+            bg-prgreen-600
+            hover:bg-prgreen-700
             focus:outline-none
             focus:ring-2
             focus:ring-offset-2
-            focus:ring-indigo-500
+            focus:ring-prgreen-500
           "
         >
           signup

@@ -17,8 +17,8 @@
               font-semibold
               tracking-wide
               uppercase
-              bg-indigo-100
-              text-indigo-600
+              bg-prgreen-100
+              text-prgreen-600
             "
             id="tier-standard"
           >
@@ -73,7 +73,7 @@
               font-medium
               rounded-md
               text-white
-              bg-gray-800
+              bg-prblue
               hover:bg-gray-900
               cursor-pointer
             "

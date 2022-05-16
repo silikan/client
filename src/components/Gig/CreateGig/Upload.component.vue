@@ -53,12 +53,12 @@
                 bg-white
                 rounded-md
                 font-medium
-                text-indigo-600
-                hover:text-indigo-500
+                text-prgreen-600
+                hover:text-prgreen-500
                 focus-within:outline-none
                 focus-within:ring-2
                 focus-within:ring-offset-2
-                focus-within:ring-indigo-500
+                focus-within:ring-prgreen-500
               "
             >
               <span>Upload a file</span>

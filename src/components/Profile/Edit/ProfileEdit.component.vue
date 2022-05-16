@@ -58,7 +58,7 @@
                 :class="[
                   usernameErrorMessage
                     ? 'block w-full pr-10 border-red-300 text-red-900 placeholder-red-300 focus:outline-none focus:ring-red-500 focus:border-red-500 sm:text-sm rounded-md w-full px-3 py-2 border border-red-300  text-red-900 rounded-md  -smplaceholder-red-400 focus:outline-nonefocus:ring-red-500 focus:border-red-500 sm:text-sm'
-                    : ' block w-full px-3 py-2 border border-gray-300 rounded-md  -smplaceholder-gray-400 focus:outline-nonefocus:ring-indigo-500 focus:border-indigo-500 sm:text-sm',
+                    : ' block w-full px-3 py-2 border border-gray-300 rounded-md  -smplaceholder-gray-400 focus:outline-nonefocus:ring-prgreen-500 focus:border-prgreen-500 sm:text-sm',
                 ]"
                 v-model="username"
               />
@@ -114,7 +114,7 @@
                 :class="[
                   emailErrorMessage
                     ? 'block w-full pr-10 border-red-300 text-red-900 placeholder-red-300 focus:outline-none focus:ring-red-500 focus:border-red-500 sm:text-sm rounded-md w-full px-3 py-2 border border-red-300  text-red-900 rounded-md  -smplaceholder-red-400 focus:outline-nonefocus:ring-red-500 focus:border-red-500 sm:text-sm'
-                    : ' block w-full px-3 py-2 border border-gray-300 rounded-md  -smplaceholder-gray-400 focus:outline-nonefocus:ring-indigo-500 focus:border-indigo-500 sm:text-sm',
+                    : ' block w-full px-3 py-2 border border-gray-300 rounded-md  -smplaceholder-gray-400 focus:outline-nonefocus:ring-prgreen-500 focus:border-prgreen-500 sm:text-sm',
                 ]"
                 placeholder="you@example.com"
                 aria-describedby="email-description"
@@ -174,7 +174,7 @@
                 :class="[
                   bioErrorMessage
                     ? 'rounded-md block w-full py-3 h-40 -0 resize-none focus:ring-0  pr-10 sm:text-sm  appearance-none px-3 border border-red-300 rounded-md-sm placeholder-red-400 text-red-600 focus:outline-none focus:ring-red-500 focus:border-red-500'
-                    : 'rounded-md  block w-full py-3 h-40 -0 resize-none focus:ring-0  pr-10 sm:text-sm  appearance-none px-3 border border-gray-300 rounded-md-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500',
+                    : 'rounded-md  block w-full py-3 h-40 -0 resize-none focus:ring-0  pr-10 sm:text-sm  appearance-none px-3 border border-gray-300 rounded-md-sm placeholder-gray-400 focus:outline-none focus:ring-prgreen-500 focus:border-prgreen-500',
                 ]"
               />
               <div
@@ -248,7 +248,7 @@
                     hover:bg-gray-50
                     focus-within:ring-2
                     focus-within:ring-offset-2
-                    focus-within:ring-indigo-500
+                    focus-within:ring-prgreen-500
                   "
                 >
                   <label
@@ -378,7 +378,7 @@
               :class="[
                 nameErrorMessage
                   ? 'block pr-10 px-3 py-3 -none border-red-300 text-red-900 placeholder-red-300 focus:outline-none focus:ring-red-500 focus:border-red-500 sm:text-sm rounded-md w-full px-3 py-2 border border-red-300  text-red-900 rounded-md  -smplaceholder-red-400 focus:outline-nonefocus:ring-red-500 focus:border-red-500 sm:text-sm'
-                  : ' block w-full px-3 py-3 border border-gray-300 rounded-md  -smplaceholder-gray-400 focus:outline-nonefocus:ring-indigo-500 focus:border-indigo-500 sm:text-sm',
+                  : ' block w-full px-3 py-3 border border-gray-300 rounded-md  -smplaceholder-gray-400 focus:outline-nonefocus:ring-prgreen-500 focus:border-prgreen-500 sm:text-sm',
               ]"
             />
             <div
@@ -433,8 +433,8 @@
                 autocomplete="district"
                 class="
                   focus:outline-none
-                  focus:ring-indigo-500
-                  focus:border-indigo-500
+                  focus:ring-prgreen-500
+                  focus:border-prgreen-500
                   h-full
                   py-0
                   pl-3
@@ -460,7 +460,7 @@
               :class="[
                 phone_numberErrorMessage
                   ? 'mt-1 block w-full border border-red-300 rounded-md  py-3  text-red-900  px-3 pl-24 focus:outline-none focus:ring-red-500 focus:border-red-500 sm:text-sm'
-                  : ' mt-1 block w-full border border-gray-300 rounded-md  py-3   px-3 pl-24 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm',
+                  : ' mt-1 block w-full border border-gray-300 rounded-md  py-3   px-3 pl-24 focus:outline-none focus:ring-prgreen-500 focus:border-prgreen-500 sm:text-sm',
               ]"
               placeholder="+1 (555) 987-6543"
             />
@@ -566,7 +566,7 @@
                 :class="[
                   salaryErrorMessage
                     ? 'mt-1 block w-full border border-red-300 rounded-md  py-3  text-red-900  px-3 pl-5 focus:outline-none focus:ring-red-500 focus:border-red-500 sm:text-sm'
-                    : ' mt-1 block w-full border border-gray-300 rounded-md  py-3   px-3 pl-5 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm',
+                    : ' mt-1 block w-full border border-gray-300 rounded-md  py-3   px-3 pl-5 focus:outline-none focus:ring-prgreen-500 focus:border-prgreen-500 sm:text-sm',
                 ]"
                 placeholder="0.00"
               />
@@ -595,8 +595,8 @@
                     py-3
                     px-3
                     focus:outline-none
-                    focus:ring-indigo-500
-                    focus:border-indigo-500
+                    focus:ring-prgreen-500
+                    focus:border-prgreen-500
                     sm:text-sm
                   "
                 >
@@ -640,8 +640,8 @@
                   cursor-default
                   focus:outline-none
                   focus:ring-1
-                  focus:ring-indigo-500
-                  focus:border-indigo-500
+                  focus:ring-prgreen-500
+                  focus:border-prgreen-500
                   sm:text-sm
                 "
               >
@@ -696,7 +696,7 @@
                   >
                     <li
                       :class="[
-                        active ? 'text-white bg-indigo-600' : 'text-gray-900',
+                        active ? 'text-white bg-prgreen-600' : 'text-gray-900',
                         'cursor-default select-none relative py-2 pl-8 pr-4',
                       ]"
                     >
@@ -712,7 +712,7 @@
                       <span
                         v-if="work_place"
                         :class="[
-                          active ? 'text-white' : 'text-indigo-600',
+                          active ? 'text-white' : 'text-prgreen-600',
                           'absolute inset-y-0 left-0 flex items-center pl-1.5',
                         ]"
                       >
@@ -758,8 +758,8 @@
                   cursor-default
                   focus:outline-none
                   focus:ring-1
-                  focus:ring-indigo-500
-                  focus:border-indigo-500
+                  focus:ring-prgreen-500
+                  focus:border-prgreen-500
                   sm:text-sm
                 "
               >
@@ -814,7 +814,7 @@
                   >
                     <li
                       :class="[
-                        active ? 'text-white bg-indigo-600' : 'text-gray-900',
+                        active ? 'text-white bg-prgreen-600' : 'text-gray-900',
                         'cursor-default select-none relative py-2 pl-8 pr-4',
                       ]"
                     >
@@ -830,7 +830,7 @@
                       <span
                         v-if="work_time_length"
                         :class="[
-                          active ? 'text-white' : 'text-indigo-600',
+                          active ? 'text-white' : 'text-prgreen-600',
                           'absolute inset-y-0 left-0 flex items-center pl-1.5',
                         ]"
                       >
@@ -874,7 +874,7 @@
                 rounded-md
                 py-3
                 px-3
-                focus:outline-none focus:ring-indigo-500 focus:border-indigo-500
+                focus:outline-none focus:ring-prgreen-500 focus:border-prgreen-500
                 sm:text-sm
               "
             >
@@ -916,7 +916,7 @@
                 rounded-md
                 py-3
                 px-3
-                focus:outline-none focus:ring-indigo-500 focus:border-indigo-500
+                focus:outline-none focus:ring-prgreen-500 focus:border-prgreen-500
                 sm:text-sm
               "
             >
@@ -952,7 +952,7 @@
               :class="[
                 addressErrorMessage
                   ? 'block w-full pr-10 border-red-300 text-red-900 placeholder-red-300 focus:outline-none focus:ring-red-500 focus:border-red-500 sm:text-sm rounded-md w-full px-3 py-2 border border-red-300  text-red-900 rounded-md  -smplaceholder-red-400 focus:outline-nonefocus:ring-red-500 focus:border-red-500 sm:text-sm'
-                  : ' block w-full px-3 py-2 border border-gray-300 rounded-md  -smplaceholder-gray-400 focus:outline-nonefocus:ring-indigo-500 focus:border-indigo-500 sm:text-sm',
+                  : ' block w-full px-3 py-2 border border-gray-300 rounded-md  -smplaceholder-gray-400 focus:outline-nonefocus:ring-prgreen-500 focus:border-prgreen-500 sm:text-sm',
               ]"
             />
 
@@ -1011,7 +1011,7 @@
               :class="[
                 cityErrorMessage
                   ? 'block w-full pr-10 border-red-300 text-red-900 placeholder-red-300 focus:outline-none focus:ring-red-500 focus:border-red-500 sm:text-sm rounded-md w-full px-3 py-2 border border-red-300  text-red-900 rounded-md  -smplaceholder-red-400 focus:outline-nonefocus:ring-red-500 focus:border-red-500 sm:text-sm'
-                  : ' block w-full px-3 py-2 border border-gray-300 rounded-md  -smplaceholder-gray-400 focus:outline-nonefocus:ring-indigo-500 focus:border-indigo-500 sm:text-sm',
+                  : ' block w-full px-3 py-2 border border-gray-300 rounded-md  -smplaceholder-gray-400 focus:outline-nonefocus:ring-prgreen-500 focus:border-prgreen-500 sm:text-sm',
               ]"
             />
             <div
@@ -1069,7 +1069,7 @@
               :class="[
                 stateErrorMessage
                   ? 'block w-full pr-10 border-red-300 text-red-900 placeholder-red-300 focus:outline-none focus:ring-red-500 focus:border-red-500 sm:text-sm rounded-md w-full px-3 py-2 border border-red-300  text-red-900 rounded-md  -smplaceholder-red-400 focus:outline-nonefocus:ring-red-500 focus:border-red-500 sm:text-sm'
-                  : ' block w-full px-3 py-2 border border-gray-300 rounded-md  -smplaceholder-gray-400 focus:outline-nonefocus:ring-indigo-500 focus:border-indigo-500 sm:text-sm',
+                  : ' block w-full px-3 py-2 border border-gray-300 rounded-md  -smplaceholder-gray-400 focus:outline-nonefocus:ring-prgreen-500 focus:border-prgreen-500 sm:text-sm',
               ]"
             />
             <div
@@ -1127,7 +1127,7 @@
               :class="[
                 zip_codeErrorMessage
                   ? 'block w-full pr-10 border-red-300 text-red-900 placeholder-red-300 focus:outline-none focus:ring-red-500 focus:border-red-500 sm:text-sm rounded-md w-full px-3 py-2 border border-red-300  text-red-900 rounded-md  -smplaceholder-red-400 focus:outline-nonefocus:ring-red-500 focus:border-red-500 sm:text-sm'
-                  : ' block w-full px-3 py-2 border border-gray-300 rounded-md  -smplaceholder-gray-400 focus:outline-nonefocus:ring-indigo-500 focus:border-indigo-500 sm:text-sm',
+                  : ' block w-full px-3 py-2 border border-gray-300 rounded-md  -smplaceholder-gray-400 focus:outline-nonefocus:ring-prgreen-500 focus:border-prgreen-500 sm:text-sm',
               ]"
             />
             <div
@@ -1199,7 +1199,7 @@
               :class="[
                 websiteErrorMessage
                   ? 'block w-full pr-10 border-red-300 text-red-900 placeholder-red-300 focus:outline-none focus:ring-red-500 focus:border-red-500 sm:text-sm rounded-md w-full px-3 py-2 border border-red-300  text-red-900 rounded-md  -smplaceholder-red-400 focus:outline-nonefocus:ring-red-500 focus:border-red-500 sm:text-sm'
-                  : ' block w-full px-3 py-2 border border-gray-300 rounded-md  -smplaceholder-gray-400 focus:outline-nonefocus:ring-indigo-500 focus:border-indigo-500 sm:text-sm',
+                  : ' block w-full px-3 py-2 border border-gray-300 rounded-md  -smplaceholder-gray-400 focus:outline-nonefocus:ring-prgreen-500 focus:border-prgreen-500 sm:text-sm',
               ]"
               v-model="website"
             />
@@ -1300,7 +1300,7 @@
               v-model="facebook_social_link"
               name="facebook_social_link"
               class="
-                focus:ring-indigo-500 focus:border-indigo-500
+                focus:ring-prgreen-500 focus:border-prgreen-500
                 block
                 w-full
                 border border-gray-300
@@ -1353,7 +1353,7 @@
               v-model="twitter_social_link"
               name="twitter_social_link"
               class="
-                focus:ring-indigo-500 focus:border-indigo-500
+                focus:ring-prgreen-500 focus:border-prgreen-500
                 block
                 w-full
                 border border-gray-300
@@ -1406,7 +1406,7 @@
               type="text"
               name="linkedin_social_link"
               class="
-                focus:ring-indigo-500 focus:border-indigo-500
+                focus:ring-prgreen-500 focus:border-prgreen-500
                 block
                 w-full
                 border border-gray-300
@@ -1429,7 +1429,7 @@
         type="submit"
         class="
           ml-5
-          bg-indigo-700
+          bg-prgreen-700
           border border-transparent
           rounded-md
           py-2
@@ -1439,11 +1439,11 @@
           text-sm
           font-medium
           text-white
-          hover:bg-indigo-800
+          hover:bg-prgreen-800
           focus:outline-none
           focus:ring-2
           focus:ring-offset-2
-          focus:ring-indigo-500
+          focus:ring-prgreen-500
         "
       >
         Save

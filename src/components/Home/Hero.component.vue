@@ -1,5 +1,5 @@
 <template>
-  <div class="relative bg-gray-800 overflow-hidden">
+  <div class="relative bg-prblue overflow-hidden">
     <div class="hidden sm:block sm:absolute sm:inset-0" aria-hidden="true">
       <svg
         class="
@@ -58,14 +58,14 @@
                 <span class="sr-only">Silikan</span>
                 <img
                   class="h-8 w-auto sm:h-10"
-                  src="https://tailwindui.com/img/logos/Silikan-mark-indigo-500.svg"
+                  src="https://tailwindui.com/img/logos/Silikan-mark-prgreen-500.svg"
                   alt=""
                 />
               </a>
               <div class="-mr-2 flex items-center md:hidden">
                 <PopoverButton
                   class="
-                    bg-gray-800
+                    bg-prblue
                     rounded-md
                     p-2
                     inline-flex
@@ -137,8 +137,8 @@
                   rounded-full
                   shadow-sm
                   text-white
-                  bg-indigo-600
-                  hover:bg-indigo-700
+                  bg-prgreen-600
+                  hover:bg-prgreen-700
                 "
               >
                 Signup
@@ -182,7 +182,7 @@
                 <div>
                   <img
                     class="h-8 w-auto"
-                    src="https://tailwindui.com/img/logos/Silikan-mark-indigo-600.svg"
+                    src="https://tailwindui.com/img/logos/Silikan-mark-prgreen-600.svg"
                     alt=""
                   />
                 </div>
@@ -200,7 +200,7 @@
                       focus:outline-none
                       focus:ring-2
                       focus:ring-inset
-                      focus:ring-indigo-500
+                      focus:ring-prgreen-500
                     "
                   >
                     <span class="sr-only">Close menu</span>
@@ -236,7 +236,7 @@
                   py-3
                   text-center
                   font-medium
-                  bg-indigo-600
+                  bg-prgreen-600
                   text-gray-50
                 "
               >
@@ -251,7 +251,7 @@
                   py-3
                   text-center
                   font-medium
-                  text-indigo-600
+                  text-prgreen-600
                   bg-gray-50
                   hover:bg-gray-100
                 "
@@ -288,7 +288,7 @@
                     lg:mt-6
                   "
                 >
-                  <span class="text-indigo-400 text-left text-5xl xl:text-6xl"
+                  <span class="text-prgreen-400 text-left text-5xl xl:text-6xl"
                     >Silikan</span
                   >
                 </h1>
@@ -351,12 +351,12 @@
                               rounded-full
                               shadow-sm
                               text-white
-                              bg-indigo-600
-                              hover:bg-indigo-700
+                              bg-prgreen-600
+                              hover:bg-prgreen-700
                               focus:outline-none
                               focus:ring-2
                               focus:ring-offset-2
-                              focus:ring-indigo-500
+                              focus:ring-prgreen-500
                               cursor-pointer
                             "
                             :to="`/search/gigs/${search}`"

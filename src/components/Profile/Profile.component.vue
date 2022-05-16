@@ -95,7 +95,7 @@
               </p>
               <div class="flex" v-if="authUserData.username === null">
                 <router-link
-                  class="flex font-bold items-center text-indigo-800"
+                  class="flex font-bold items-center text-prgreen-800"
                   to="/edit/profile"
                 >
                   <PlusCircleIcon
@@ -176,7 +176,7 @@
                       focus:outline-none
                       focus:ring-2
                       focus:ring-offset-2
-                      focus:ring-indigo-500
+                      focus:ring-prgreen-500
                     "
                   >
                     <span class="sr-only">Open options menu</span>
@@ -282,7 +282,7 @@
                   </p>
                   <div v-if="authUserData.work_time_length === null">
                     <router-link
-                      class="flex font-bold items-center text-indigo-800"
+                      class="flex font-bold items-center text-prgreen-800"
                       to="/edit/profile"
                     >
                       <PlusCircleIcon
@@ -311,7 +311,7 @@
                   </p>
                   <div v-if="authUserData.work_place === null">
                     <router-link
-                      class="flex font-bold items-center text-indigo-800"
+                      class="flex font-bold items-center text-prgreen-800"
                       to="/edit/profile"
                     >
                       <PlusCircleIcon
@@ -340,7 +340,7 @@
                   </p>
                   <div v-if="authUserData.salary === null">
                     <router-link
-                      class="flex font-bold items-center text-indigo-800"
+                      class="flex font-bold items-center text-prgreen-800"
                       to="/edit/profile"
                     >
                       <PlusCircleIcon
@@ -370,7 +370,7 @@
                   </p>
                   <div v-if="authUserData.work_hours === null">
                     <router-link
-                      class="flex font-bold items-center text-indigo-800"
+                      class="flex font-bold items-center text-prgreen-800"
                       to="/edit/profile"
                     >
                       <PlusCircleIcon

@@ -18,7 +18,7 @@
             {{ authUserData.bio }}
           </p>
           <div v-if="authUserData.bio === null">
-            <div class="flex font-bold items-center text-indigo-800">
+            <div class="flex font-bold items-center text-prgreen-800">
 
               <span class="">No Bio</span>
             </div>
@@ -50,7 +50,7 @@
             authUserData.address === null
           "
         >
-          <div class="flex font-bold items-center text-indigo-800">
+          <div class="flex font-bold items-center text-prgreen-800">
             <span class="">No Location</span>
           </div>
         </div>
@@ -71,7 +71,7 @@
           {{ authUserData.website }}
         </dd>
         <div class="flex" v-if="authUserData.website === null">
-          <div class="flex font-bold items-center text-indigo-800">
+          <div class="flex font-bold items-center text-prgreen-800">
             <span class="">No website</span>
           </div>
         </div>
@@ -93,7 +93,7 @@
         </dd>
 
         <div class="flex" v-if="authUserData.date_of_birth === null">
-          <div class="flex font-bold items-center text-indigo-800">
+          <div class="flex font-bold items-center text-prgreen-800">
             <span class="">No Birthday</span>
           </div>
         </div>

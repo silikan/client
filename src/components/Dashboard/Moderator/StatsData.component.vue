@@ -17,7 +17,7 @@
         "
       >
         <dt>
-          <div class="absolute bg-indigo-500 rounded-md p-3">
+          <div class="absolute bg-prgreen-500 rounded-md p-3">
             <component
               :is="item.icon"
               class="h-6 w-6 text-white"

@@ -1,19 +1,19 @@
 <!-- This example requires Tailwind CSS v2.0+ -->
 <template>
-  <section class="bg-indigo-800">
+  <section class="bg-prgreen-800">
     <div class="max-w-7xl mx-auto md:grid md:grid-cols-2 md:px-6 lg:px-8">
-      <div class="py-12 px-4 sm:px-6 md:flex md:flex-col md:py-16 md:pl-0 md:pr-10 md:border-r md:border-indigo-900 lg:pr-16">
+      <div class="py-12 px-4 sm:px-6 md:flex md:flex-col md:py-16 md:pl-0 md:pr-10 md:border-r md:border-prgreen-900 lg:pr-16">
         <div class="md:flex-shrink-0">
           <img
             class="h-12"
-            src="https://tailwindui.com/img/logos/tuple-logo-indigo-300.svg"
+            src="https://tailwindui.com/img/logos/tuple-logo-prgreen-300.svg"
             alt="Tuple"
           >
         </div>
         <blockquote class="mt-6 md:flex-grow md:flex md:flex-col">
           <div class="relative text-lg font-medium text-white md:flex-grow">
             <svg
-              class="absolute top-0 left-0 transform -translate-x-3 -translate-y-2 h-8 w-8 text-indigo-600"
+              class="absolute top-0 left-0 transform -translate-x-3 -translate-y-2 h-8 w-8 text-prgreen-600"
               fill="currentColor"
               viewBox="0 0 32 32"
               aria-hidden="true"
@@ -37,7 +37,7 @@
                 <div class="text-base font-medium text-white">
                   Ismail Bentabet
                 </div>
-                <div class="text-base font-medium text-indigo-200">
+                <div class="text-base font-medium text-prgreen-200">
                   CEO, Silikan
                 </div>
               </div>
@@ -45,18 +45,18 @@
           </footer>
         </blockquote>
       </div>
-      <div class="py-12 px-4 border-t-2 border-indigo-900 sm:px-6 md:py-16 md:pr-0 md:pl-10 md:border-t-0 md:border-l lg:pl-16">
+      <div class="py-12 px-4 border-t-2 border-prgreen-900 sm:px-6 md:py-16 md:pr-0 md:pl-10 md:border-t-0 md:border-l lg:pl-16">
         <div class="md:flex-shrink-0">
           <img
             class="h-12"
-            src="https://tailwindui.com/img/logos/workcation-logo-indigo-300.svg"
+            src="https://tailwindui.com/img/logos/workcation-logo-prgreen-300.svg"
             alt="Workcation"
           >
         </div>
         <blockquote class="mt-6 md:flex-grow md:flex md:flex-col">
           <div class="relative text-lg font-medium text-white md:flex-grow">
             <svg
-              class="absolute top-0 left-0 transform -translate-x-3 -translate-y-2 h-8 w-8 text-indigo-600"
+              class="absolute top-0 left-0 transform -translate-x-3 -translate-y-2 h-8 w-8 text-prgreen-600"
               fill="currentColor"
               viewBox="0 0 32 32"
             >
@@ -79,7 +79,7 @@
                 <div class="text-base font-medium text-white">
                   Kamel Cerbah
                 </div>
-                <div class="text-base font-medium text-indigo-200">
+                <div class="text-base font-medium text-prgreen-200">
                   CTO, Silikan
                 </div>
               </div>

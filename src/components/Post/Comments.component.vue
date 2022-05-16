@@ -70,7 +70,7 @@
                           :class="[
                             bioErrorMessage
                               ? 'rounded-md block w-full py-3 h-20 -0 resize-none focus:ring-0  pr-10 sm:text-sm  appearance-none px-3 border border-red-300 rounded-md-sm placeholder-red-400 text-red-600 focus:outline-none focus:ring-red-500 focus:border-red-500'
-                              : 'rounded-md  block w-full py-3 h-20 -0 resize-none focus:ring-0  pr-10 sm:text-sm  appearance-none px-3 border border-gray-300 rounded-md-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500',
+                              : 'rounded-md  block w-full py-3 h-20 -0 resize-none focus:ring-0  pr-10 sm:text-sm  appearance-none px-3 border border-gray-300 rounded-md-sm placeholder-gray-400 focus:outline-none focus:ring-prgreen-500 focus:border-prgreen-500',
                           ]"
                           placeholder="Add a Reply"
                         />
@@ -91,12 +91,12 @@
                             rounded-md
                             shadow-sm
                             text-white
-                            bg-indigo-600
-                            hover:bg-indigo-700
+                            bg-prgreen-600
+                            hover:bg-prgreen-700
                             focus:outline-none
                             focus:ring-2
                             focus:ring-offset-2
-                            focus:ring-indigo-500
+                            focus:ring-prgreen-500
                           "
                           @click.prevent="postReply(reply[i], comment.id, i)"
                         >
@@ -158,7 +158,7 @@
                   :class="[
                     bioErrorMessage
                       ? 'rounded-md block w-full py-3 h-28 -0 resize-none focus:ring-0  pr-10 sm:text-sm  appearance-none px-3 border border-red-300 rounded-md-sm placeholder-red-400 text-red-600 focus:outline-none focus:ring-red-500 focus:border-red-500'
-                      : 'rounded-md  block w-full py-3 h-28 -0 resize-none focus:ring-0  pr-10 sm:text-sm  appearance-none px-3 border border-gray-300 rounded-md-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500',
+                      : 'rounded-md  block w-full py-3 h-28 -0 resize-none focus:ring-0  pr-10 sm:text-sm  appearance-none px-3 border border-gray-300 rounded-md-sm placeholder-gray-400 focus:outline-none focus:ring-prgreen-500 focus:border-prgreen-500',
                   ]"
                   placeholder="Add a Comment"
                 />
@@ -202,12 +202,12 @@
                     rounded-md
                     shadow-sm
                     text-white
-                    bg-indigo-600
-                    hover:bg-indigo-700
+                    bg-prgreen-600
+                    hover:bg-prgreen-700
                     focus:outline-none
                     focus:ring-2
                     focus:ring-offset-2
-                    focus:ring-indigo-500
+                    focus:ring-prgreen-500
                   "
                   @click.prevent="postComment"
                 >

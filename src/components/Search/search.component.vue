@@ -40,8 +40,8 @@
             focus:text-gray-900
             focus:placeholder-gray-400
             focus:ring-1
-            focus:ring-indigo-500
-            focus:border-indigo-500
+            focus:ring-prgreen-500
+            focus:border-prgreen-500
             sm:text-sm
           "
           placeholder="Search"

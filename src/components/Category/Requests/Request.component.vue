@@ -200,7 +200,7 @@
                       <router-link
                         :to="`/request/${request.id}`"
                         href="#"
-                        class="text-indigo-600 hover:text-indigo-900"
+                        class="text-prgreen-600 hover:text-prgreen-900"
                         >Check</router-link
                       >
                     </td>
@@ -276,7 +276,7 @@
         </div>
         <div class="sm:flex-1 sm:flex sm:items-center sm:justify-between">
           <div class="flex justify-end items-center mt-3">
-            <p class="text-sm text-indigo-700">
+            <p class="text-sm text-prgreen-700">
               Page {{ meta.current_page }} of {{ meta.last_page }}
             </p>
           </div>
@@ -316,7 +316,7 @@
                 <span class="sr-only">Previous</span>
                 <ChevronLeftIcon class="h-5 w-5" aria-hidden="true" />
               </a>
-              <!-- Current: "z-10 bg-indigo-50 border-indigo-500 text-indigo-600", Default: "bg-white border-gray-300 text-gray-500 hover:bg-gray-50" -->
+              <!-- Current: "z-10 bg-prgreen-50 border-prgreen-500 text-prgreen-600", Default: "bg-white border-gray-300 text-gray-500 hover:bg-gray-50" -->
               <a
                 class="
                   border-gray-300
@@ -335,7 +335,7 @@
                   max-w-md
                 "
                 :class="{
-                  'bg-indigo-50 border-indigo-500 text-indigo-600':
+                  'bg-prgreen-50 border-prgreen-500 text-prgreen-600':
                     1 === meta.current_page,
                   'bg-white border-gray-300 text-gray-500 hover:bg-gray-50':
                     1 !== meta.current_page,
@@ -362,7 +362,7 @@
                     font-medium
                   "
                   :class="{
-                    'bg-indigo-50 border-indigo-500 text-indigo-600':
+                    'bg-prgreen-50 border-prgreen-500 text-prgreen-600':
                       page === meta.current_page,
                     'bg-white border-gray-300 text-gray-500 hover:bg-gray-50':
                       page !== meta.current_page,
@@ -392,7 +392,7 @@
                 "
                 @click="setPage(totalPages)"
                 :class="{
-                  'bg-indigo-50 border-indigo-500 text-indigo-600':
+                  'bg-prgreen-50 border-prgreen-500 text-prgreen-600':
                     totalPages === meta.current_page,
                   'bg-white border-gray-300 text-gray-500 hover:bg-gray-50':
                     totalPages !== meta.current_page,

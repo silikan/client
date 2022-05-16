@@ -14,7 +14,7 @@
           <router-link type="button" to="/" class="cursor-pointer">
             <img
               class="block h-8 w-auto cursor-pointer"
-              src="https://tailwindui.com/img/logos/workflow-mark-indigo-600.svg"
+              src="https://tailwindui.com/img/logos/workflow-mark-prgreen-600.svg"
               alt="Workflow"
             />
           </router-link>
@@ -67,8 +67,8 @@
                   focus:text-gray-900
                   focus:placeholder-gray-400
                   focus:ring-1
-                  focus:ring-indigo-500
-                  focus:border-indigo-500
+                  focus:ring-prgreen-500
+                  focus:border-prgreen-500
                   sm:text-sm
                 "
                 placeholder="Search"
@@ -98,7 +98,7 @@
               focus:outline-none
               focus:ring-2
               focus:ring-inset
-              focus:ring-indigo-500
+              focus:ring-prgreen-500
             "
           >
             <span class="sr-only">Open menu</span>
@@ -145,8 +145,8 @@
                   rounded-full
                   shadow-sm
                   text-white
-                  bg-indigo-600
-                  hover:bg-indigo-700
+                  bg-prgreen-600
+                  hover:bg-prgreen-700
                 "
               >
                 Signup
@@ -164,7 +164,7 @@
               border border-transparent
               text-sm
               rounded-full
-              text-indigo-600
+              text-prgreen-600
               font-bold
             "
           >
@@ -181,7 +181,7 @@
               border border-transparent
               text-sm
               rounded-full
-              text-indigo-600
+              text-prgreen-600
               font-bold
             "
           >
@@ -281,7 +281,7 @@
                   focus:outline-none
                   focus:ring-2
                   focus:ring-offset-2
-                  focus:ring-indigo-500
+                  focus:ring-prgreen-500
                 "
               >
                 <span class="sr-only">Open user menu</span>
@@ -472,8 +472,8 @@
               rounded-full
               shadow-sm
               text-white
-              bg-indigo-600
-              hover:bg-indigo-700
+              bg-prgreen-600
+              hover:bg-prgreen-700
             "
           >
             Signup
@@ -521,7 +521,7 @@
               text-sm
               rounded-full
               flex-1
-              text-indigo-600
+              text-prgreen-600
               font-bold
             "
           >
@@ -539,7 +539,7 @@
               text-sm
               rounded-full
               flex-1
-              text-indigo-600
+              text-prgreen-600
               font-bold
             "
           >

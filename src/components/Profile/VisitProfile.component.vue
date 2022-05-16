@@ -92,7 +92,7 @@
                 @{{ VisitUserData.username }}
               </p>
               <div class="flex" v-if="VisitUserData.username === null">
-                <div class="flex font-bold items-center text-indigo-800">
+                <div class="flex font-bold items-center text-prgreen-800">
                   <span class="">No Username</span>
                 </div>
               </div>
@@ -121,7 +121,7 @@
                       focus:outline-none
                       focus:ring-2
                       focus:ring-offset-2
-                      focus:ring-indigo-500
+                      focus:ring-prgreen-500
                     "
                   >
                     <span class="sr-only">Open options menu</span>
@@ -226,7 +226,7 @@
                     {{ VisitUserData.work_time_length }}
                   </p>
                   <div v-if="VisitUserData.work_time_length === null">
-                    <div class="flex font-bold items-center text-indigo-800">
+                    <div class="flex font-bold items-center text-prgreen-800">
                       <span class="">No Work Time Length</span>
                     </div>
                   </div>
@@ -248,7 +248,7 @@
                     {{ VisitUserData.work_place }}
                   </p>
                   <div v-if="VisitUserData.work_place === null">
-                    <div class="flex font-bold items-center text-indigo-800">
+                    <div class="flex font-bold items-center text-prgreen-800">
                       <span class="">No Work Place</span>
                     </div>
                   </div>
@@ -270,7 +270,7 @@
                     {{ VisitUserData.salary }}$
                   </p>
                   <div v-if="VisitUserData.salary === null">
-                    <div class="flex font-bold items-center text-indigo-800">
+                    <div class="flex font-bold items-center text-prgreen-800">
                       <span class="">No Salary</span>
                     </div>
                   </div>
@@ -294,7 +294,7 @@
                     pm
                   </p>
                   <div v-if="VisitUserData.work_hours === null">
-                    <div class="flex font-bold items-center text-indigo-800">
+                    <div class="flex font-bold items-center text-prgreen-800">
                       <span class="">No Work Hours</span>
                     </div>
                   </div>

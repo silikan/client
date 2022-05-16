@@ -173,7 +173,7 @@ export default {
             client: result.client,
             condition: result.cart_item.is_confirmed,
             icon: CheckIcon,
-            iconBackground: "bg-indigo-500",
+            iconBackground: "bg-prgreen-500",
             }
         ];
       })
