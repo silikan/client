@@ -1,13 +1,13 @@
 <!-- This example requires Tailwind CSS v2.0+ -->
 <template>
-  <section class="bg-prgreen-800">
+  <section class="bg-prgreen-600">
     <div class="max-w-7xl mx-auto md:grid md:grid-cols-2 md:px-6 lg:px-8">
       <div class="py-12 px-4 sm:px-6 md:flex md:flex-col md:py-16 md:pl-0 md:pr-10 md:border-r md:border-prgreen-900 lg:pr-16">
         <div class="md:flex-shrink-0">
           <img
-            class="h-12"
-            src="https://tailwindui.com/img/logos/tuple-logo-prgreen-300.svg"
-            alt="Tuple"
+            class="h-10"
+            src="@/assets/Logos/full-white.svg"
+            alt="Silikan"
           >
         </div>
         <blockquote class="mt-6 md:flex-grow md:flex md:flex-col">
@@ -37,7 +37,7 @@
                 <div class="text-base font-medium text-white">
                   Ismail Bentabet
                 </div>
-                <div class="text-base font-medium text-prgreen-200">
+                <div class="text-base font-medium text-prgreen-50">
                   CEO, Silikan
                 </div>
               </div>
@@ -45,12 +45,12 @@
           </footer>
         </blockquote>
       </div>
-      <div class="py-12 px-4 border-t-2 border-prgreen-900 sm:px-6 md:py-16 md:pr-0 md:pl-10 md:border-t-0 md:border-l lg:pl-16">
+      <div class="py-12 px-4 border-t-2 border-prgreen-500 sm:px-6 md:py-16 md:pr-0 md:pl-10 md:border-t-0 md:border-l lg:pl-16">
         <div class="md:flex-shrink-0">
           <img
-            class="h-12"
-            src="https://tailwindui.com/img/logos/workcation-logo-prgreen-300.svg"
-            alt="Workcation"
+            class="h-10"
+            src="@/assets/Logos/full-black.svg"
+            alt="Silikan"
           >
         </div>
         <blockquote class="mt-6 md:flex-grow md:flex md:flex-col">
@@ -79,7 +79,7 @@
                 <div class="text-base font-medium text-white">
                   Kamel Cerbah
                 </div>
-                <div class="text-base font-medium text-prgreen-200">
+                <div class="text-base font-medium text-prgreen-50">
                   CTO, Silikan
                 </div>
               </div>

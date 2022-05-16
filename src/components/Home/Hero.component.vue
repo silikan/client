@@ -57,8 +57,8 @@
               <a href="#">
                 <span class="sr-only">Silikan</span>
                 <img
-                  class="h-8 w-auto sm:h-10"
-                  src="https://tailwindui.com/img/logos/Silikan-mark-prgreen-500.svg"
+                  class="h-20 w-auto sm:h-20"
+                  src="@/assets/Logos/s-green.svg"
                   alt=""
                 />
               </a>
@@ -182,7 +182,7 @@
                 <div>
                   <img
                     class="h-8 w-auto"
-                    src="https://tailwindui.com/img/logos/Silikan-mark-prgreen-600.svg"
+                  src="@/assets/Logos/full-green.svg"
                     alt=""
                   />
                 </div>
@@ -288,9 +288,13 @@
                     lg:mt-6
                   "
                 >
-                  <span class="text-prgreen-400 text-left text-5xl xl:text-6xl"
-                    >Silikan</span
-                  >
+                 <img
+                    class="h-16 w-auto sm:h-24"
+                  src="@/assets/Logos/full-green.svg"
+                    alt=""
+                  />
+
+
                 </h1>
                 <p
                   class="
