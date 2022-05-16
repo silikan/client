@@ -34,7 +34,10 @@
             shadow-inner
           "
         >
-          <router-link :to="`/gig/${gig.id}`" class="flex justify-center relative w-full h-72 overflow-hidden">
+          <router-link
+            :to="`/gig/${gig.id}`"
+            class="flex justify-center relative w-full h-72 overflow-hidden"
+          >
             <img
               :src="`${preurl}/${gig.Image}`"
               class="w-full h-full object-center object-cover"
@@ -79,18 +82,13 @@
                 {{ gig.basic.price }}$
               </p>
               <div class="flex justify-center items-center">
-                <button class="text-black font-bold rounded-full">
+                <button
+                  class="text-black font-bold rounded-full"
+                  @click="addToCart({ price:gig.basic.price }, gig.id)"
+                >
                   <span class="sr-only">Button</span>
                   <span class="icon">
                     <ShoppingCartIcon
-                      class="flex-shrink-0 mr-1.5 h-6 w-6 text-gray-400"
-                    />
-                  </span>
-                </button>
-                <button class="text-black font-bold rounded-full">
-                  <span class="sr-only">Button</span>
-                  <span class="icon">
-                    <BookmarkIcon
                       class="flex-shrink-0 mr-1.5 h-6 w-6 text-gray-400"
                     />
                   </span>
@@ -105,19 +103,22 @@
 </template>
 
 <script>
-import { BookmarkIcon, ShoppingCartIcon } from "@heroicons/vue/solid";
+import { ShoppingCartIcon } from "@heroicons/vue/solid";
 import { useStore } from "vuex";
 import { reactive } from "@vue/reactivity";
 import { useRoute } from "vue-router";
 import Avatar from "@/components/Avatar/Avatar.component.vue";
+import { io } from "socket.io-client";
+import { computed } from '@vue/runtime-core';
 
 export default {
   components: {
-    BookmarkIcon,
     ShoppingCartIcon,
-    Avatar
+    Avatar,
   },
   setup() {
+    let notificationsocket = io("http://localhost:4000");
+
     let store = useStore();
     let gigs = reactive([]);
     let route = useRoute();
@@ -143,10 +144,101 @@ export default {
         console.log(err);
       });
     let preurl = `${process.env.VUE_APP_API_URL}`;
+    const addToTaskList = async (cartItemId, tier, gig_id) => {
+      let userId = computed(() => store.getters["auth/id"]);
 
+      store
+        .dispatch("Gig/getGigUser", gig_id)
+        .then(async (result) => {
+          let payload = {
+            type: "gig",
+            gig_id: gig_id,
+            user_id: result.id,
+            client_id: userId.value,
+            handyman_id: result.id,
+            cart_item_id: cartItemId,
+            plan: JSON.stringify(tier),
+          };
+          store.dispatch("Task/addToTaskList", payload);
+
+          let toData = {
+            userId: result.id,
+          };
+
+          let getUserNotificationRoom = await store.dispatch(
+            "Notification/getUserNotificationRoom",
+            toData
+          );
+
+          notificationsocket.on("connect", function () {
+            // Connected, let's sign-up for to receive messages for this room
+            notificationsocket.emit(
+              "notificationRoom",
+              `notification-room-${getUserNotificationRoom.id}`
+            );
+          });
+
+          let notificationpayload = {
+            data: {
+              to: result.id,
+              from: userId.value,
+              data: "added your gig to his cart",
+              type: "gig",
+              notification_room_id: getUserNotificationRoom.id,
+            },
+          };
+          store.dispatch(
+            "Notification/sendChatNotification",
+            notificationpayload
+          );
+          store.dispatch("Notification/Sendnotification", notificationpayload);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    };
+
+    const addToCart = (tier, gig_id) => {
+      store
+        .dispatch("Gig/getGigUser", gig_id)
+        .then((result) => {
+          let userId = computed(() => store.getters["auth/id"]);
+          console.log(userId.value);
+
+          let payload = {
+            type: "gig",
+            gig_id: gig_id,
+            user_id: userId.value,
+            client_id: userId.value,
+            handyman_id: result.id,
+            plan: JSON.stringify(tier),
+          };
+          store
+            .dispatch("Cart/addToCart", payload)
+            .then(() => {
+              let cartItemId = computed(
+                () => store.getters["Cart/cartItemData"]
+              );
+              console.log(cartItemId.value.id);
+              let cartItemIdValue = cartItemId.value.id;
+              addToTaskList(cartItemIdValue, tier, gig_id);
+            })
+            .catch((err) => {
+              console.log(err);
+            });
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    };
+
+    let authUser = computed(() => store.getters["auth/authUser"]);
     return {
       gigs,
       preurl,
+      authUser,
+      addToCart,
+
     };
   },
 };

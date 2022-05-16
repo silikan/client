@@ -11,11 +11,10 @@
       sm:px-6
     "
   >
-      <h2 class="mb-5 text-3xl font-extrabold tracking-tight hidden md:block">
-            Gigs
-          </h2>
+    <h2 class="mb-5 text-3xl font-extrabold tracking-tight hidden md:block">
+      Gigs
+    </h2>
     <div class="relative mx-auto">
-
       <div
         class="
           lg:mx-10
@@ -38,12 +37,15 @@
             shadow-inner
           "
         >
-          <router-link :to="`/gig/${gig.id}`" class="flex justify-center relative w-full h-72 overflow-hidden">
+          <router-link
+            :to="`/gig/${gig.id}`"
+            class="flex justify-center relative w-full h-72 overflow-hidden"
+          >
             <img
               :src="`${preurl}/${gig.Image}`"
               class="w-full h-full object-center object-cover"
             />
-          </router-link >
+          </router-link>
           <div class="flex-1 bg-white px-5 pt-5 flex flex-col justify-between">
             <div class="flex items-center">
               <div class="flex-shrink-0">
@@ -82,58 +84,68 @@
               <p class="font-bold text-2xl text-gray-400">
                 {{ gig.basic.price }}$
               </p>
-              <div class="flex justify-center items-center">
-                <button class="text-black font-bold rounded-full">
-                  <span class="sr-only">Button</span>
-                  <span class="icon">
-                    <ShoppingCartIcon
-                      class="flex-shrink-0 mr-1.5 h-6 w-6 text-gray-400"
-                    />
-                  </span>
-                </button>
-                <button class="text-black font-bold rounded-full">
-                  <span class="sr-only">Button</span>
-                  <span class="icon">
-                    <BookmarkIcon
-                      class="flex-shrink-0 mr-1.5 h-6 w-6 text-gray-400"
-                    />
-                  </span>
-                </button>
-              </div>
+              <div class="flex justify-center items-center"></div>
             </div>
           </div>
         </div>
-              <router-link to="/gig/create" type="button" class="relative flex flex-col justify-center items-center w-full border-2 border-gray-300 border-dashed rounded-lg p-12 text-center hover:border-gray-400 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
-     <svg class="mx-auto h-12 w-12 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
-      <path vector-effect="non-scaling-stroke" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 13h6m-3-3v6m-9 1V7a2 2 0 012-2h6l2 2h6a2 2 0 012 2v8a2 2 0 01-2 2H5a2 2 0 01-2-2z" />
-    </svg>
-    <span class="mt-2 block text-sm font-medium text-gray-900">
-      Create a new Gig
-    </span>
-  </router-link>
+        <router-link
+          to="/gig/create"
+          type="button"
+          class="
+            relative
+            flex flex-col
+            justify-center
+            items-center
+            w-full
+            border-2 border-gray-300 border-dashed
+            rounded-lg
+            p-12
+            text-center
+            hover:border-gray-400
+            focus:outline-none
+            focus:ring-2
+            focus:ring-offset-2
+            focus:ring-indigo-500
+          "
+        >
+          <svg
+            class="mx-auto h-12 w-12 text-gray-400"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+            aria-hidden="true"
+          >
+            <path
+              vector-effect="non-scaling-stroke"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M9 13h6m-3-3v6m-9 1V7a2 2 0 012-2h6l2 2h6a2 2 0 012 2v8a2 2 0 01-2 2H5a2 2 0 01-2-2z"
+            />
+          </svg>
+          <span class="mt-2 block text-sm font-medium text-gray-900">
+            Create a new Gig
+          </span>
+        </router-link>
       </div>
-
     </div>
   </div>
 </template>
 
 <script>
-import { BookmarkIcon, ShoppingCartIcon } from "@heroicons/vue/solid";
 import { useStore } from "vuex";
 import { reactive } from "@vue/reactivity";
 import Avatar from "@/components/Avatar/Avatar.component.vue";
-import { computed } from '@vue/runtime-core';
+import { computed } from "@vue/runtime-core";
 
 export default {
   components: {
-    BookmarkIcon,
-    ShoppingCartIcon,
-    Avatar
+    Avatar,
   },
   setup() {
     let store = useStore();
     let gigs = reactive([]);
-let myId =  computed(()=>store.getters["auth/id"])
+    let myId = computed(() => store.getters["auth/id"]);
     store
       .dispatch("Gig/getUserGigs", myId.value)
       .then((result) => {

@@ -101,7 +101,7 @@
                     <button
                       v-if="authUser.id != gig.user.id"
                       class="text-black font-bold rounded-full"
-                      @click="addToCart({ price: Data.price }, gig.id)"
+                      @click="addToCart({ price:JSON.parse(gig.basic).price }, gig.id)"
                     >
                       <span class="sr-only">Button</span>
                       <span class="icon">
