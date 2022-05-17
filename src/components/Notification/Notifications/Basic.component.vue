@@ -68,6 +68,7 @@
                       Visit
                     </button>
                     <button
+                      @click="item.show = false"
                       type="button"
                       class="
                         bg-white

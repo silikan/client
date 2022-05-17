@@ -1,7 +1,7 @@
 
 <template>
   <div>
-    <TransitionRoot as="template" :show="sidebarOpen">
+    <TransitionRoot as="template" :show="sidebarOpen" class="z-50">
       <Dialog
         as="div"
         class="fixed inset-0 flex z-40 lg:hidden"
@@ -70,7 +70,13 @@
                 </button>
               </div>
             </TransitionChild>
-
+            <div class="md:flex-shrink-0 my-3">
+              <img
+                class="h-10"
+                src="@/assets/Logos/full-white.svg"
+                alt="Silikan"
+              />
+            </div>
             <nav
               class="
                 mt-5
@@ -336,14 +342,12 @@
                         Good morning, {{ authUser.name }}
                       </h1>
                     </div>
-
-
                   </div>
                 </div>
               </div>
               <div class="mt-6 flex space-x-3 md:mt-0 md:ml-4">
                 <router-link
-                :to="`/profile`"
+                  :to="`/profile`"
                   type="button"
                   class="
                     inline-flex
@@ -366,7 +370,6 @@
                 >
                   Go To Profile
                 </router-link>
-
               </div>
             </div>
           </div>
@@ -400,7 +403,7 @@ import {
   HomeIcon,
   MenuAlt1Icon,
   ScaleIcon,
-    QuestionMarkCircleIcon,
+  QuestionMarkCircleIcon,
   XIcon,
 } from "@heroicons/vue/solid";
 import {
@@ -409,7 +412,6 @@ import {
   ChevronDownIcon,
   ChevronRightIcon,
   OfficeBuildingIcon,
-
   SearchIcon,
 } from "@heroicons/vue/solid";
 import { useStore } from "vuex";
@@ -433,7 +435,7 @@ const navigation = [
     link: "/dashboard/admin/feedback",
     icon: QuestionMarkCircleIcon,
     current: false,
-  }
+  },
 ];
 const secondaryNavigation = [
   { name: "Settings", link: "/dashboard/admin/settings", icon: CogIcon },
@@ -456,7 +458,7 @@ const transactions = [
   // More transactions...
 ];
 const statusStyles = {
-  success: "bg-green-100 text-green-800",
+  success: "bg-prgreen-600 text-prgreen-50",
   processing: "bg-yellow-100 text-yellow-800",
   failed: "bg-gray-100 text-gray-800",
 };

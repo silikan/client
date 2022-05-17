@@ -24,10 +24,10 @@
               class="
                 inline-flex
                 items-center
-                p-1
+
                 border border-transparent
                 rounded-full
-                shadow-sm
+                shadow-lg
                 text-white
                 bg-prgreen-600
                 hover:bg-prgreen-700

@@ -1,7 +1,7 @@
 
 <template>
   <div>
-    <TransitionRoot as="template" :show="sidebarOpen">
+    <TransitionRoot as="template" class="z-50" :show="sidebarOpen">
       <Dialog
         as="div"
         class="fixed inset-0 flex z-40 lg:hidden"
@@ -70,7 +70,13 @@
                 </button>
               </div>
             </TransitionChild>
-
+   <div class="md:flex-shrink-0 my-3">
+              <img
+                class="h-10"
+                src="@/assets/Logos/full-white.svg"
+                alt="Silikan"
+              />
+            </div>
             <nav
               class="
                 mt-5
@@ -456,7 +462,7 @@ const transactions = [
   // More transactions...
 ];
 const statusStyles = {
-  success: "bg-green-100 text-green-800",
+  success: "bg-prgreen-600 text-prgreen-50",
   processing: "bg-yellow-100 text-yellow-800",
   failed: "bg-gray-100 text-gray-800",
 };

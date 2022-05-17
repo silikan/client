@@ -17,8 +17,8 @@
               font-semibold
               tracking-wide
               uppercase
-              bg-prgreen-100
-              text-prgreen-600
+              bg-prgreen-600
+              text-prgreen-50
             "
             id="tier-standard"
           >

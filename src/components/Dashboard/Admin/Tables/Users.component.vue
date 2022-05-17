@@ -105,8 +105,8 @@
                           leading-5
                           font-semibold
                           rounded-full
-                          bg-green-100
-                          text-green-800
+                          bg-prgreen-600
+                          text-prgreen-50
                         "
                       >
                         Online

@@ -75,7 +75,7 @@
                   h-12
                   w-12
                   rounded-full
-                  bg-green-100
+                  bg-prgreen-600
                 "
               >
                 <CheckIcon class="h-6 w-6 text-green-600" aria-hidden="true" />
