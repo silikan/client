@@ -1,5 +1,5 @@
 <template>
-  <div class="grid grid-cols-1 md:grid-cols-2 bg-prblue p-10 md:w-2/3 self-center mb-10">
+  <div class="grid grid-cols-1 md:grid-cols-2 bg-prblue-500 p-10 md:w-2/3 self-center mb-10">
     <div class="flex justify-center">
       <img
         src="@\assets\undraw_interview_re_e5jn.svg"

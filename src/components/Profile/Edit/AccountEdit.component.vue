@@ -31,7 +31,7 @@
             <Switch
               v-model="availableToHire"
               :class="[
-                availableToHire ? 'bg-prgreen-500' : 'bg-gray-200',
+                availableToHire ? 'bg-prgreen-600' : 'bg-gray-200',
                 'ml-4 relative inline-flex flex-shrink-0 h-6 w-11 border-2 border-transparent rounded-full cursor-pointer transition-colors ease-in-out duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-prgreen-500',
               ]"
             >
@@ -60,7 +60,7 @@
             <Switch
               v-model="Handyman"
               :class="[
-                Handyman ? 'bg-prgreen-500' : 'bg-gray-200',
+                Handyman ? 'bg-prgreen-600' : 'bg-gray-200',
                 'ml-4 relative inline-flex flex-shrink-0 h-6 w-11 border-2 border-transparent rounded-full cursor-pointer transition-colors ease-in-out duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-prgreen-500',
               ]"
             >
@@ -89,7 +89,7 @@
             <Switch
               v-model="Online"
               :class="[
-                Online ? 'bg-prgreen-500' : 'bg-gray-200',
+                Online ? 'bg-prgreen-600' : 'bg-gray-200',
                 'ml-4 relative inline-flex flex-shrink-0 h-6 w-11 border-2 border-transparent rounded-full cursor-pointer transition-colors ease-in-out duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-prgreen-500',
               ]"
             >

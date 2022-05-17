@@ -95,7 +95,7 @@
               </p>
               <div class="flex" v-if="authUserData.username === null">
                 <router-link
-                  class="flex font-bold items-center text-prgreen-800"
+                  class="flex font-bold items-center text-prgreen-900"
                   to="/edit/profile"
                 >
                   <PlusCircleIcon
@@ -251,7 +251,7 @@
               :href="tab.href"
               :class="[
                 tab.current
-                  ? 'border-pink-500 text-gray-900'
+                  ? 'border-prgreen-500 text-gray-900'
                   : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300',
                 'whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm cursor-pointer',
               ]"
@@ -282,7 +282,7 @@
                   </p>
                   <div v-if="authUserData.work_time_length === null">
                     <router-link
-                      class="flex font-bold items-center text-prgreen-800"
+                      class="flex font-bold items-center text-prgreen-900"
                       to="/edit/profile"
                     >
                       <PlusCircleIcon
@@ -311,7 +311,7 @@
                   </p>
                   <div v-if="authUserData.work_place === null">
                     <router-link
-                      class="flex font-bold items-center text-prgreen-800"
+                      class="flex font-bold items-center text-prgreen-900"
                       to="/edit/profile"
                     >
                       <PlusCircleIcon
@@ -340,7 +340,7 @@
                   </p>
                   <div v-if="authUserData.salary === null">
                     <router-link
-                      class="flex font-bold items-center text-prgreen-800"
+                      class="flex font-bold items-center text-prgreen-900"
                       to="/edit/profile"
                     >
                       <PlusCircleIcon
@@ -370,7 +370,7 @@
                   </p>
                   <div v-if="authUserData.work_hours === null">
                     <router-link
-                      class="flex font-bold items-center text-prgreen-800"
+                      class="flex font-bold items-center text-prgreen-900"
                       to="/edit/profile"
                     >
                       <PlusCircleIcon
@@ -399,7 +399,7 @@
             class="cursor-pointer"
             :class="[
               tab.current
-                ? 'border-pink-500 text-gray-900'
+                ? 'border-prgreen-500  text-gray-900'
                 : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300',
               'whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm',
             ]"

@@ -105,8 +105,8 @@
                       rounded-full
                       text-xs
                       font-medium
-                      bg-prgreen-100
-                      text-prgreen-800
+                        bg-prgreen-600
+                      text-prgreen-50
                     "
                   >
                     {{ person.item.task_item.type }}
@@ -122,8 +122,8 @@
                       rounded-full
                       text-xs
                       font-medium
-                      bg-prgreen-100
-                      text-prgreen-800
+                      bg-prgreen-600
+                      text-prgreen-50
                     "
                   >
                     {{ person.item.task_item.status }}
@@ -142,10 +142,10 @@
                     </div>
                     <div class="ml-4">
                       <div class="text-sm font-medium text-gray-900">
-                        {{ person.name }}
+                        {{ person.item.client.name}}
                       </div>
                       <div class="text-sm text-gray-500">
-                        {{ person.email }}
+                        {{ person.item.client.email }}
                       </div>
                     </div>
                   </div>
@@ -198,7 +198,7 @@
                     class="
                       cursor-pointer
                       text-white
-                      bg-green-500
+                      bg-prgreen-600
                       inline-flex
                       items-center
                       px-2
@@ -227,7 +227,7 @@
                     class="
                       cursor-pointer
                       text-white
-                      bg-green-500
+                      bg-prgreen-600
                       inline-flex
                       items-center
                       px-2
@@ -255,7 +255,7 @@
                     class="
                       cursor-pointer
                       text-white
-                      bg-green-500
+                      bg-red-500
                       inline-flex
                       items-center
                       px-2
@@ -286,7 +286,7 @@
                     class="
                       cursor-pointer
                       text-white
-                      bg-green-500
+                      bg-prgreen-600
                       inline-flex
                       items-center
                       px-2
@@ -344,7 +344,7 @@
                     class="
                       cursor-pointer
                       text-white
-                      bg-green-500
+                      bg-prgreen-600
                       inline-flex
                       items-center
                       px-2

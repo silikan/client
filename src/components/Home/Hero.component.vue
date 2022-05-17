@@ -1,5 +1,5 @@
 <template>
-  <div class="relative bg-prblue overflow-hidden">
+  <div class="relative bg-prblue-500 overflow-hidden">
     <div class="hidden sm:block sm:absolute sm:inset-0" aria-hidden="true">
       <svg
         class="
@@ -58,14 +58,14 @@
                 <span class="sr-only">Silikan</span>
                 <img
                   class="h-20 w-auto sm:h-20"
-                  src="@/assets/Logos/s-green.svg"
+                  src="@/assets/Logos/s-white.svg"
                   alt=""
                 />
               </a>
               <div class="-mr-2 flex items-center md:hidden">
                 <PopoverButton
                   class="
-                    bg-prblue
+                    bg-prblue-500
                     rounded-md
                     p-2
                     inline-flex

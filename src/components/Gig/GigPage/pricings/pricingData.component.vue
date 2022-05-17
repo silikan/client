@@ -73,7 +73,7 @@
               font-medium
               rounded-md
               text-white
-              bg-prblue
+              bg-prblue-500
               hover:bg-gray-900
               cursor-pointer
             "

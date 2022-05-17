@@ -15,21 +15,17 @@
                   v-for="item in subNavigation"
                   :key="item.name"
                   :to="item.route"
-                       @click="CurrentCondition"
-
+                  @click="CurrentCondition"
                   :class="[
                     item.current
-                      ? 'bg-prgreen-50 border-prgreen-500 text-prgreen-700 hover:bg-prgreen-50 hover:text-prgreen-700'
+                      ? 'bg-green-50 border-green-300 text-green-700 hover:bg-green-50 hover:text-green-700'
                       : 'border-transparent text-gray-900 hover:bg-gray-50 hover:text-gray-900',
                     'group border-l-4 px-3 py-2 flex items-center text-sm font-medium',
                   ]"
-
                 >
                   <component
-                       @click="CurrentCondition"
-
+                    @click="CurrentCondition"
                     :is="item.icon"
-
                     :class="[
                       item.current
                         ? 'text-prgreen-500 group-hover:text-prgreen-500'
@@ -101,7 +97,6 @@ const navigation = [
 ];
 
 const subNavigation = [
-
   {
     name: "Profile",
     href: "#",
@@ -109,7 +104,7 @@ const subNavigation = [
     icon: UserCircleIcon,
     route: "/edit/profile",
   },
-   {
+  {
     name: "Account",
     href: "#",
     current: true,
@@ -166,7 +161,6 @@ export default {
     const route = useRoute();
 
     let CurrentCondition = computed(() => {
-
       if (route.path === subNavigation[0].route) {
         subNavigation[0].current = true;
         subNavigation[1].current = false;
@@ -181,11 +175,7 @@ export default {
         subNavigation[2].current = true;
       }
       console.log(route.path);
-
-
     });
-
-
 
     return {
       user,

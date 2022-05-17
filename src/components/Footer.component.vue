@@ -16,7 +16,7 @@
 -->
 <template>
   <footer
-    class="bg-prblue  "
+    class="bg-prblue-500  "
     aria-labelledby="footer-heading"
   >
     <h2

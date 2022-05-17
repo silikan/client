@@ -1,6 +1,6 @@
 <!-- This example requires Tailwind CSS v2.0+ -->
 <template>
-  <div class="bg-prgreen-600">
+  <div class="bg-prblue-500">
     <div class="max-w-7xl mx-auto py-12 px-4 sm:py-16 sm:px-6 lg:px-8 lg:py-20">
       <div class="max-w-4xl mx-auto text-center">
         <h2 class="text-3xl font-extrabold text-white sm:text-4xl">
