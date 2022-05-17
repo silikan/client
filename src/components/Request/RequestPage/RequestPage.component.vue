@@ -1,24 +1,24 @@
 <template>
   <div class="flex flex-col md:p-10 m-5 sm:m-1">
     <div class="profile flex justify-between flex-col ml-5 md:ml-0 mt-10">
-      <nav class="flex mb-3" aria-label="Breadcrumb">
-        <ol role="list" class="flex space-x-4">
+        <nav class="flex mb-3" aria-label="Breadcrumb">
+        <ol role="list" class="flex items-center space-x-4">
           <li>
             <div>
-              <a href="#" class="text-gray-400 hover:text-gray-500">
+              <router-link to="/requests" class="text-gray-400 hover:text-gray-500">
                 <HomeIcon class="flex-shrink-0 h-5 w-5" aria-hidden="true" />
                 <span class="sr-only">Home</span>
-              </a>
+              </router-link>
             </div>
           </li>
           <li v-for="page in pages" :key="page.name">
-            <div class="flex">
+            <div class="flex items-center">
               <ChevronRightIcon
                 class="flex-shrink-0 h-5 w-5 text-gray-400"
                 aria-hidden="true"
               />
-              <a
-                :href="page.href"
+              <router-link
+                to="/categories"
                 class="
                   ml-4
                   text-sm
@@ -27,7 +27,7 @@
                   hover:text-gray-700
                 "
                 :aria-current="page.current ? 'page' : undefined"
-                >{{ page.name }}</a
+                >{{ page.title }}</router-link
               >
             </div>
           </li>
@@ -156,10 +156,7 @@ import {
   EyeIcon
 } from "@heroicons/vue/solid";
 import ChatButton from "@/components/Chat/ChatButton.component.vue";
-const pages = [
-  { name: "Projects", href: "#", current: false },
-  { name: "Project Nero", href: "#", current: true },
-];
+
 import "tw-elements";
 import { useStore } from "vuex";
 import { useRoute } from "vue-router";
@@ -187,6 +184,12 @@ export default {
     let price = ref("");
     let duration = ref("");
     let views = ref(null);
+
+    let pages = ref([]);
+    store.dispatch("Request/getClientRequestCategory", id).then(async (result) => {
+      console.log(result);
+      pages.value = result
+    });
 
     let notificationsocket = io("http://localhost:4000");
 
