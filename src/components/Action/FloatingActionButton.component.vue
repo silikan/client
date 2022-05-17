@@ -18,36 +18,37 @@
         <!-- Notification panel, dynamically insert this into the live region when it needs to be displayed -->
 
         <div class="pointer-events-auto">
-          <Popper placement="top" >
+          <Popper placement="top">
             <button
               type="button"
               class="
                 inline-flex
                 items-center
-                p-4
+
                 border border-transparent
                 rounded-full
-                shadow-sm
+                shadow-lg
                 text-white
-                bg-indigo-600
-                hover:bg-indigo-700
+                bg-prgreen-600
+                hover:bg-prgreen-700
                 focus:outline-none
                 focus:ring-2
                 focus:ring-offset-2
-                focus:ring-indigo-500
+                focus:ring-prgreen-500
               "
             >
               <!-- Heroicon name: outline/plus-sm -->
 
-              <LightningBoltIcon
-                class="h-6 w-6 text-white"
+              <img
+                class="h-14 w-14 text-white"
+                src="@/assets/Logos/s-white.svg"
                 aria-hidden="true"
               />
             </button>
 
             <template #content>
               <div class="flex flex-col space-y-3">
-                   <router-link
+                <router-link
                   v-if="isLoggedin"
                   to="/blog"
                   class="
@@ -58,18 +59,18 @@
                     rounded-full
                     shadow-sm
                     text-white
-                    bg-indigo-600
-                    hover:bg-indigo-700
+                    bg-prgreen-600
+                    hover:bg-prgreen-700
                     focus:outline-none
                     focus:ring-2
                     focus:ring-offset-2
-                    focus:ring-indigo-500
+                    focus:ring-prgreen-500
                   "
                 >
                   <!-- Heroicon name: outline/plus-sm -->
                   <UsersIcon class="h-5 w-5 text-white" aria-hidden="true" />
                 </router-link>
-                    <router-link
+                <router-link
                   v-if="isLoggedin && isAdmin === true"
                   to="/dashboard/admin"
                   type="button"
@@ -81,12 +82,12 @@
                     rounded-full
                     shadow-sm
                     text-white
-                    bg-indigo-600
-                    hover:bg-indigo-700
+                    bg-prgreen-600
+                    hover:bg-prgreen-700
                     focus:outline-none
                     focus:ring-2
                     focus:ring-offset-2
-                    focus:ring-indigo-500
+                    focus:ring-prgreen-500
                   "
                 >
                   <!-- Heroicon name: outline/plus-sm -->
@@ -95,7 +96,7 @@
                     aria-hidden="true"
                   />
                 </router-link>
-                    <router-link
+                <router-link
                   v-if="isLoggedin && isModerator === true"
                   to="/dashboard/moderator"
                   type="button"
@@ -107,12 +108,12 @@
                     rounded-full
                     shadow-sm
                     text-white
-                    bg-indigo-600
-                    hover:bg-indigo-700
+                    bg-prgreen-600
+                    hover:bg-prgreen-700
                     focus:outline-none
                     focus:ring-2
                     focus:ring-offset-2
-                    focus:ring-indigo-500
+                    focus:ring-prgreen-500
                   "
                 >
                   <!-- Heroicon name: outline/plus-sm -->
@@ -133,12 +134,12 @@
                     rounded-full
                     shadow-sm
                     text-white
-                    bg-indigo-600
-                    hover:bg-indigo-700
+                    bg-prgreen-600
+                    hover:bg-prgreen-700
                     focus:outline-none
                     focus:ring-2
                     focus:ring-offset-2
-                    focus:ring-indigo-500
+                    focus:ring-prgreen-500
                   "
                 >
                   <!-- Heroicon name: outline/plus-sm -->
@@ -158,12 +159,12 @@
                     rounded-full
                     shadow-sm
                     text-white
-                    bg-indigo-600
-                    hover:bg-indigo-700
+                    bg-prgreen-600
+                    hover:bg-prgreen-700
                     focus:outline-none
                     focus:ring-2
                     focus:ring-offset-2
-                    focus:ring-indigo-500
+                    focus:ring-prgreen-500
                   "
                 >
                   <!-- Heroicon name: outline/plus-sm -->
@@ -179,17 +180,49 @@
                     rounded-full
                     shadow-sm
                     text-white
-                    bg-indigo-600
-                    hover:bg-indigo-700
+                    bg-prgreen-600
+                    hover:bg-prgreen-700
                     focus:outline-none
                     focus:ring-2
                     focus:ring-offset-2
-                    focus:ring-indigo-500
+                    focus:ring-prgreen-500
                   "
                   @click="toggleFeedback"
                 >
                   <!-- Heroicon name: outline/plus-sm -->
                   <QuestionMarkCircleIcon
+                    class="h-5 w-5 text-white"
+                    aria-hidden="true"
+                  />
+                </button>
+
+                 <button
+                  type="button"
+                  class="
+                    inline-flex
+                    items-center
+                    p-3
+                    border border-transparent
+                    rounded-full
+                    shadow-sm
+                    text-white
+                    bg-prgreen-600
+                    hover:bg-prgreen-700
+                    focus:outline-none
+                    focus:ring-2
+                    focus:ring-offset-2
+                    focus:ring-prgreen-500
+                  "
+                  @click="toggleDarkMode"
+                >
+                  <!-- Heroicon name: outline/plus-sm -->
+                  <SunIcon
+                  v-if="isDark == false"
+                    class="h-5 w-5 text-white"
+                    aria-hidden="true"
+                  />
+                    <MoonIcon
+                     v-if="isDark == true"
                     class="h-5 w-5 text-white"
                     aria-hidden="true"
                   />
@@ -208,48 +241,63 @@ import Popper from "vue3-popper";
 
 import {
   QuestionMarkCircleIcon,
-  LightningBoltIcon,
   SpeakerphoneIcon,
   HandIcon,
   ShieldCheckIcon,
   AdjustmentsIcon,
-  UsersIcon
+  UsersIcon,
+  SunIcon,
+  MoonIcon,
 } from "@heroicons/vue/solid";
 import { useStore } from "vuex";
 import { computed, ref, watchEffect } from "@vue/runtime-core";
 export default {
   components: {
     QuestionMarkCircleIcon,
-    LightningBoltIcon,
     SpeakerphoneIcon,
     HandIcon,
     Popper,
     ShieldCheckIcon,
     AdjustmentsIcon,
-      UsersIcon
+    UsersIcon,
+    SunIcon,
+    MoonIcon,
   },
   setup() {
-    ref;
+    let isDark = ref(false);
+
+   isDark.value =  localStorage.getItem("darkMode") == "true";
+    const toggleDarkMode = () => {
+      isDark.value = !isDark.value;
+      localStorage.setItem("darkMode", isDark.value);
+    };
+
     let store = useStore();
     const isLoggedin = computed(() => store.getters["auth/loggedIn"]);
     let isHandyman = ref(false);
     let isAdmin = ref(false);
     let isModerator = ref(false);
-  watchEffect(() => {
-    if (isLoggedin.value) {
-      let authUser = computed(() => store.getters["auth/authUser"]);
-
+    watchEffect(() => {
+      if (isLoggedin.value) {
+        let authUser = computed(() => store.getters["auth/authUser"]);
 
         isHandyman.value = authUser.value.isHandyman;
         isAdmin.value = authUser.value.isAdmin;
         isModerator.value = authUser.value.isModerator;
-
-    }
-      });
+      }
+    });
     let toggleFeedback = () => {
       store.dispatch("FeedBack/toggleFeedBack");
     };
-    return { isLoggedin, isHandyman, toggleFeedback, isAdmin, isModerator };
+    return {
+      isLoggedin,
+      isHandyman,
+      toggleFeedback,
+      isAdmin,
+      isModerator,
+      isDark,
+      toggleDarkMode,
+    };
   },
 };
 </script>

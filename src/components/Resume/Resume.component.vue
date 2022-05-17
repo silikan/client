@@ -4,7 +4,7 @@
 <div class=" min-h-screen">
       <div class="bg-white shadow-xl rounded grid grid-rows-2 lg:grid-rows-1 lg:grid-cols-3">
         <!-- Left section -->
-        <div class="row-span-1 col-span-1 space-y-4 pt-20 bg-gradient-to-b from-indigo-600 to-indigo-600 dark:from-gray-200 dark:to-gray-400">
+        <div class="row-span-1 col-span-1 space-y-4 pt-20 bg-gradient-to-b from-prgreen-600 to-prgreen-600 dark:from-gray-200 dark:to-gray-400">
 
           <!-- Image and name -->
           <div class="flex flex-col justify-start items-center pb-8">
@@ -88,14 +88,14 @@
 
           <!-- Profile -->
           <div class="space-y-4">
-            <h1 class="text-3xl border-l-8 mb-8 border-indigo-200">Profile</h1>
+            <h1 class="text-3xl border-l-8 mb-8 border-prgreen-200">Profile</h1>
             <p class="sm:text-base 2xl:text-xl text-gray-500 dark:text-gray-300 leading-loose sm:tracking-relaxed">Lorem ipsum dolor sit amet consectetur adipisicing elit. Necessitatibus est sed eaque distinctio saepe, commodi, nisi enim aliquam quae labore quidem vitae tempore! Fuga.</p>
             <hr class="border-gray-200">
           </div>
 
           <!-- Experience -->
           <div class="space-y-4 mt-8">
-            <h1 class="text-3xl border-l-8 border-indigo-200">Experience</h1>
+            <h1 class="text-3xl border-l-8 border-prgreen-200">Experience</h1>
 
             <div class="flex space-x-8 md:space-x-14 pt-8 sm:pl-4 lg:pl-8 text-gray-500 dark:text-gray-300 text-base lg:text-xl">
               <div>
@@ -123,7 +123,7 @@
 
           <!-- Formation -->
           <div class="space-y-4 mt-8">
-            <h1 class="text-3xl border-l-8 border-indigo-200">Formation</h1>
+            <h1 class="text-3xl border-l-8 border-prgreen-200">Formation</h1>
 
             <div class="flex space-x-8 md:space-x-14 pt-8 sm:pl-4 lg:pl-8 text-gray-500 dark:text-gray-300 text-base lg:text-xl">
               <div class="flex space-x-4">
@@ -151,20 +151,20 @@
 
           <!-- Projects -->
           <div class="space-y-4 mt-8">
-            <h1 class="text-3xl border-l-8 border-indigo-200">Skills</h1>
+            <h1 class="text-3xl border-l-8 border-prgreen-200">Skills</h1>
 
             <div class="relative pt-8">
               <div class="flex justify-start space-x-12 mb-4 items-center">
                 <div class="flex-1">
                   <h2 class="text-gray-800 text-sm sm:text-base md:text-xl mb-2 dark:text-gray-300">Javascript</h2>
                   <div class="overflow-hidden h-2 mb-4 text-xs  flex space-x-44 rounded bg-gray-200">
-                    <div style="width:70%" class="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-indigo-200"></div>
+                    <div style="width:70%" class="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-prgreen-200"></div>
                   </div>
                 </div>
                 <div class="flex-1">
                   <h2 class="text-gray-800 text-sm sm:text-base md:text-xl mb-2 dark:text-gray-300">Vue JS</h2>
                   <div class="overflow-hidden h-2 mb-4 text-xs  flex space-x-44 rounded bg-gray-200">
-                    <div style="width:80%" class="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-indigo-200"></div>
+                    <div style="width:80%" class="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-prgreen-200"></div>
                   </div>
                 </div>
               </div>
@@ -173,13 +173,13 @@
                 <div class="flex-1">
                   <h2 class="text-gray-800 text-sm sm:text-base md:text-xl mb-2 dark:text-gray-300">Tailwind CSS</h2>
                   <div class="overflow-hidden h-2 mb-4 text-xs  flex space-x-44 rounded bg-gray-200">
-                    <div style="width:90%" class="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-indigo-200"></div>
+                    <div style="width:90%" class="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-prgreen-200"></div>
                   </div>
                 </div>
                 <div class="flex-1">
                   <h2 class="text-gray-800 text-sm sm:text-base md:text-xl mb-2 dark:text-gray-300">Bootstrap</h2>
                   <div class="overflow-hidden h-2 mb-4 text-xs  flex space-x-44 rounded bg-gray-200">
-                    <div style="width:80%" class="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-indigo-200"></div>
+                    <div style="width:80%" class="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-prgreen-200"></div>
                   </div>
                 </div>
               </div>
@@ -188,13 +188,13 @@
                 <div class="flex-1">
                   <h2 class="text-gray-800 text-sm sm:text-base md:text-xl mb-2 dark:text-gray-300">Laravel</h2>
                   <div class="overflow-hidden h-2 mb-4 text-xs  flex space-x-44 rounded bg-gray-200">
-                    <div style="width:65%" class="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-indigo-200"></div>
+                    <div style="width:65%" class="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-prgreen-200"></div>
                   </div>
                 </div>
                 <div class="flex-1">
                   <h2 class="text-gray-800 text-sm sm:text-base md:text-xl mb-2 dark:text-gray-300">MySQL</h2>
                   <div class="overflow-hidden h-2 mb-4 text-xs  flex space-x-44 rounded bg-gray-200">
-                    <div style="width:85%" class="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-indigo-200"></div>
+                    <div style="width:85%" class="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-prgreen-200"></div>
                   </div>
                 </div>
               </div>
@@ -203,13 +203,13 @@
                 <div class="flex-1">
                   <h2 class="text-gray-800 text-sm sm:text-base md:text-xl mb-2 dark:text-gray-300">Android Developement</h2>
                   <div class="overflow-hidden h-2 mb-4 text-xs  flex space-x-44 rounded bg-gray-200">
-                    <div style="width:60%" class="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-indigo-200"></div>
+                    <div style="width:60%" class="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-prgreen-200"></div>
                   </div>
                 </div>
                 <div class="flex-1">
                   <h2 class="text-gray-800 text-sm sm:text-base md:text-xl mb-2 dark:text-gray-300">Flutter</h2>
                   <div class="overflow-hidden h-2 mb-4 text-xs  flex space-x-44 rounded bg-gray-200">
-                    <div style="width:50%" class="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-indigo-200"></div>
+                    <div style="width:50%" class="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-prgreen-200"></div>
                   </div>
                 </div>
               </div>

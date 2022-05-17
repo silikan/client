@@ -1,7 +1,7 @@
 <template>
 
   <div class="relative" v-if="loading === true">
-    <div class="overflow-hidden h-0.5 mb-4 text-xs flex bg-indigo-200">
+    <div class="overflow-hidden h-0.5 mb-4 text-xs flex bg-prgreen-200">
 
 
       <div
@@ -12,7 +12,7 @@
           whitespace-nowrap
           text-white
           justify-center
-          bg-indigo-600
+          bg-prgreen-600
         ease-in duration-300
         "
 

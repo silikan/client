@@ -19,7 +19,7 @@
           </p>
           <div v-if="authUserData.email === null">
             <div
-              class="flex font-bold items-center text-indigo-800"
+              class="flex font-bold items-center text-prgreen-800"
 
             >
 
@@ -46,7 +46,7 @@
           </p>
           <div v-if="authUserData.gender === null">
             <div
-              class="flex font-bold items-center text-indigo-800"
+              class="flex font-bold items-center text-prgreen-800"
 
             >
 
@@ -72,7 +72,7 @@
         </dd>
         <div class="flex" v-if="authUserData.phone_number === null">
           <div
-            class="flex font-bold items-center text-indigo-800"
+            class="flex font-bold items-center text-prgreen-800"
 
           >
             <span class="">No a phone number</span>
@@ -149,7 +149,7 @@
           "
         >
           <div
-            class="flex font-bold items-center text-indigo-800"
+            class="flex font-bold items-center text-prgreen-800"
 
           >
             <span class="">No Social Links </span>
@@ -174,7 +174,7 @@
 
         <div class="flex" v-if="authUserData.zip_code === null">
           <div
-            class="flex font-bold items-center text-indigo-800"
+            class="flex font-bold items-center text-prgreen-800"
 
           >
             <span class="">No zip code</span>

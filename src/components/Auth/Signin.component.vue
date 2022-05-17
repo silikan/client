@@ -5,8 +5,8 @@
         <div class="mx-auto w-full max-w-sm lg:w-96">
           <div>
             <img
-              class="h-12 w-auto"
-              src="https://tailwindui.com/img/logos/Silikan-mark-indigo-600.svg"
+              class="h-10 w-auto"
+              src="@/assets/Logos/full-green.svg"
               alt="Silikan"
             />
             <h2 class="mt-6 text-3xl font-extrabold text-gray-900">
@@ -17,7 +17,7 @@
               {{ " " }}
               <router-link
                 to="/signup"
-                class="font-medium text-indigo-600 hover:text-indigo-500"
+                class="font-medium text-prgreen-600 hover:text-prgreen-500"
               >
                 Create a New Account
               </router-link>
@@ -199,7 +199,7 @@
                       :class="[
                         errorData.email
                           ? 'block w-full pr-10 border-red-300 text-red-900 placeholder-red-300 focus:outline-none focus:ring-red-500 focus:border-red-500 sm:text-sm rounded-md w-full px-3 py-2 border border-red-300  text-red-900 rounded-md  shadow-smplaceholder-red-400 focus:outline-nonefocus:ring-red-500 focus:border-red-500 sm:text-sm'
-                          : ' block w-full px-3 py-2 border border-gray-300 rounded-md  shadow-smplaceholder-gray-400 focus:outline-nonefocus:ring-indigo-500 focus:border-indigo-500 sm:text-sm',
+                          : ' block w-full px-3 py-2 border border-gray-300 rounded-md  shadow-smplaceholder-gray-400 focus:outline-nonefocus:ring-prgreen-500 focus:border-prgreen-500 sm:text-sm',
                       ]"
                     />
                     <div
@@ -247,7 +247,7 @@
                       :class="[
                         errorData.email
                           ? 'block w-full pr-10 border-red-300 text-red-900 placeholder-red-300 focus:outline-none focus:ring-red-500 focus:border-red-500 sm:text-sm rounded-md w-full px-3 py-2 border border-red-300  text-red-900 rounded-md  shadow-smplaceholder-red-400 focus:outline-nonefocus:ring-red-500 focus:border-red-500 sm:text-sm'
-                          : ' block w-full px-3 py-2 border border-gray-300 rounded-md  shadow-smplaceholder-gray-400 focus:outline-nonefocus:ring-indigo-500 focus:border-indigo-500 sm:text-sm',
+                          : ' block w-full px-3 py-2 border border-gray-300 rounded-md  shadow-smplaceholder-gray-400 focus:outline-nonefocus:ring-prgreen-500 focus:border-prgreen-500 sm:text-sm',
                       ]"
                     />
                     <div
@@ -286,8 +286,8 @@
                       class="
                         h-4
                         w-4
-                        text-indigo-600
-                        focus:ring-indigo-500
+                        text-prgreen-600
+                        focus:ring-prgreen-500
                         border-gray-300
                         rounded
                       "
@@ -303,7 +303,7 @@
                   <router-link class="text-sm" :to="'/forgot-password'">
                     <a
                       href="#"
-                      class="font-medium text-indigo-600 hover:text-indigo-500"
+                      class="font-medium text-prgreen-600 hover:text-prgreen-500"
                     >
                       Forgot your password?
                     </a>
@@ -326,12 +326,12 @@
                       text-sm
                       font-medium
                       text-white
-                      bg-indigo-600
-                      hover:bg-indigo-700
+                      bg-prgreen-600
+                      hover:bg-prgreen-700
                       focus:outline-none
                       focus:ring-2
                       focus:ring-offset-2
-                      focus:ring-indigo-500
+                      focus:ring-prgreen-500
                     "
                   >
                     Sign in
@@ -351,12 +351,12 @@
                       text-sm
                       font-medium
                       text-white
-                      bg-indigo-600
-                      hover:bg-indigo-700
+                      bg-prgreen-600
+                      hover:bg-prgreen-700
                       focus:outline-none
                       focus:ring-2
                       focus:ring-offset-2
-                      focus:ring-indigo-500
+                      focus:ring-prgreen-500
                     "
                   >
                     <svg

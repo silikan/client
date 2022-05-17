@@ -57,17 +57,18 @@
                         rounded-md
                         text-sm
                         font-medium
-                        text-indigo-600
-                        hover:text-indigo-500
+                        text-prgreen-600
+                        hover:text-prgreen-500
                         focus:outline-none
                         focus:ring-2
                         focus:ring-offset-2
-                        focus:ring-indigo-500
+                        focus:ring-prgreen-500
                       "
                     >
                       Visit
                     </button>
                     <button
+                      @click="item.show = false"
                       type="button"
                       class="
                         bg-white
@@ -79,7 +80,7 @@
                         focus:outline-none
                         focus:ring-2
                         focus:ring-offset-2
-                        focus:ring-indigo-500
+                        focus:ring-prgreen-500
                       "
                     >
                       Dismiss
@@ -98,7 +99,7 @@
                       focus:outline-none
                       focus:ring-2
                       focus:ring-offset-2
-                      focus:ring-indigo-500
+                      focus:ring-prgreen-500
                     "
                   >
                     <span class="sr-only">Close</span>

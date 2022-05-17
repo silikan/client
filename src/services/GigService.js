@@ -39,4 +39,7 @@ export default {
     async gigPageViews(id) {
         return await API.apiClient.get(`/gig/${id}/views`);
     },
+    async getGigCategory(id) {
+        return await API.apiClient.get(`/gig/${id}/category`);
+    },
 };

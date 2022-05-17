@@ -123,8 +123,8 @@
                           leading-5
                           font-semibold
                           rounded-full
-                          bg-green-100
-                          text-green-800
+                          bg-prgreen-600
+                          text-prgreen-50
                         "
                       >
                         {{ request.price }} DZD
@@ -139,8 +139,8 @@
                           leading-5
                           font-semibold
                           rounded-full
-                          bg-green-100
-                          text-green-800
+                          bg-prgreen-600
+                          text-prgreen-50
                         "
                       >
                         {{ request.duration }} Days
@@ -158,7 +158,7 @@
                       <router-link
                         :to="`/request/${request.id}`"
                         href="#"
-                        class="text-indigo-600 hover:text-indigo-900"
+                        class="text-prgreen-600 hover:text-prgreen-900"
                         >Check</router-link
                       >
                     </td>
@@ -185,7 +185,7 @@
                         focus:outline-none
                         focus:ring-2
                         focus:ring-offset-2
-                        focus:ring-indigo-500
+                        focus:ring-prgreen-500
                       "
                     >
                       <svg

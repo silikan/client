@@ -31,7 +31,7 @@
             rounded-md
             shadow-sm
             placeholder-gray-400
-            focus:outline-none focus:ring-indigo-500 focus:border-indigo-500
+            focus:outline-none focus:ring-prgreen-500 focus:border-prgreen-500
             sm:text-sm
           "
           placeholder="you@example.com"
@@ -56,12 +56,12 @@
           font-medium
           rounded-md
           text-white
-          bg-indigo-600
-          hover:bg-indigo-700
+          bg-prgreen-600
+          hover:bg-prgreen-700
           focus:outline-none
           focus:ring-2
           focus:ring-offset-2
-          focus:ring-indigo-500
+          focus:ring-prgreen-500
         "
       >
         Send

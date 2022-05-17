@@ -12,7 +12,7 @@
         <template #item="request">
 
            <div class="flex flex-col overflow-hidden rounded-lg">
-      <p class="text-sm font-medium text-indigo-600 self-end">
+      <p class="text-sm font-medium text-prgreen-600 self-end">
                 <router-link :to="`/request/${request.data.id}`"  class="hover:underline">
                   Visit
                 </router-link>

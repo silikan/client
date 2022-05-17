@@ -92,7 +92,7 @@
                 @{{ VisitUserData.username }}
               </p>
               <div class="flex" v-if="VisitUserData.username === null">
-                <div class="flex font-bold items-center text-indigo-800">
+                <div class="flex font-bold items-center text-prgreen-800">
                   <span class="">No Username</span>
                 </div>
               </div>
@@ -121,7 +121,7 @@
                       focus:outline-none
                       focus:ring-2
                       focus:ring-offset-2
-                      focus:ring-indigo-500
+                      focus:ring-prgreen-500
                     "
                   >
                     <span class="sr-only">Open options menu</span>
@@ -196,7 +196,7 @@
               :href="tab.href"
               :class="[
                 tab.current
-                  ? 'border-pink-500 text-gray-900'
+                  ? 'border-prgreen-500  text-gray-900'
                   : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300',
                 'whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm cursor-pointer',
               ]"
@@ -226,7 +226,7 @@
                     {{ VisitUserData.work_time_length }}
                   </p>
                   <div v-if="VisitUserData.work_time_length === null">
-                    <div class="flex font-bold items-center text-indigo-800">
+                    <div class="flex font-bold items-center text-prgreen-800">
                       <span class="">No Work Time Length</span>
                     </div>
                   </div>
@@ -248,7 +248,7 @@
                     {{ VisitUserData.work_place }}
                   </p>
                   <div v-if="VisitUserData.work_place === null">
-                    <div class="flex font-bold items-center text-indigo-800">
+                    <div class="flex font-bold items-center text-prgreen-800">
                       <span class="">No Work Place</span>
                     </div>
                   </div>
@@ -270,7 +270,7 @@
                     {{ VisitUserData.salary }}$
                   </p>
                   <div v-if="VisitUserData.salary === null">
-                    <div class="flex font-bold items-center text-indigo-800">
+                    <div class="flex font-bold items-center text-prgreen-800">
                       <span class="">No Salary</span>
                     </div>
                   </div>
@@ -294,7 +294,7 @@
                     pm
                   </p>
                   <div v-if="VisitUserData.work_hours === null">
-                    <div class="flex font-bold items-center text-indigo-800">
+                    <div class="flex font-bold items-center text-prgreen-800">
                       <span class="">No Work Hours</span>
                     </div>
                   </div>
@@ -317,7 +317,7 @@
             class="cursor-pointer"
             :class="[
               tab.current
-                ? 'border-pink-500 text-gray-900'
+                ? 'border-prgreen-500  text-gray-900'
                 : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300',
               'whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm',
             ]"

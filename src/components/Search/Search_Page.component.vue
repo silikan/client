@@ -93,7 +93,7 @@
                       </div>
                     </td>
                     <td class="px-6 py-4 whitespace-nowrap">
-                      <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
+                      <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-prgreen-600 text-prgreen-50">
                         Active
                       </span>
                     </td>
@@ -103,7 +103,7 @@
                     <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                       <a
                         href="#"
-                        class="text-indigo-600 hover:text-indigo-900"
+                        class="text-prgreen-600 hover:text-prgreen-900"
                       >Edit</a>
                     </td>
                   </tr>
@@ -161,11 +161,11 @@
                   aria-hidden="true"
                 />
               </a>
-              <!-- Current: "z-10 bg-indigo-50 border-indigo-500 text-indigo-600", Default: "bg-white border-gray-300 text-gray-500 hover:bg-gray-50" -->
+              <!-- Current: "z-10 bg-prgreen-50 border-prgreen-500 text-prgreen-600", Default: "bg-white border-gray-300 text-gray-500 hover:bg-gray-50" -->
               <a
                 href="#"
                 aria-current="page"
-                class="z-10 bg-indigo-50 border-indigo-500 text-indigo-600 relative inline-flex items-center px-4 py-2 border text-sm font-medium"
+                class="z-10 bg-prgreen-50 border-prgreen-500 text-prgreen-600 relative inline-flex items-center px-4 py-2 border text-sm font-medium"
               >
                 1
               </a>

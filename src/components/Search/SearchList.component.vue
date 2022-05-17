@@ -22,7 +22,7 @@
         <h3>{{ section }}</h3>
 
             <div class="text-sm" v-if="section != 'categories'">
-              <router-link class="font-medium text-indigo-600 hover:text-indigo-500" :to="`/search/${section}/${search}`">View all</router-link>
+              <router-link class="font-medium text-prgreen-600 hover:text-prgreen-500" :to="`/search/${section}/${search}`">View all</router-link>
             </div>
       </div>
       <ul role="list" class="relative z-0 divide-y divide-gray-200">
@@ -39,7 +39,7 @@
               hover:bg-gray-50
               focus-within:ring-2
               focus-within:ring-inset
-              focus-within:ring-indigo-500
+              focus-within:ring-prgreen-500
             "
           >
             <router-link
@@ -80,7 +80,7 @@
               hover:bg-gray-50
               focus-within:ring-2
               focus-within:ring-inset
-              focus-within:ring-indigo-500
+              focus-within:ring-prgreen-500
             "
           >
 
@@ -113,7 +113,7 @@
               hover:bg-gray-50
               focus-within:ring-2
               focus-within:ring-inset
-              focus-within:ring-indigo-500
+              focus-within:ring-prgreen-500
             "
           >
            <router-link
@@ -146,7 +146,7 @@
               hover:bg-gray-50
               focus-within:ring-2
               focus-within:ring-inset
-              focus-within:ring-indigo-500
+              focus-within:ring-prgreen-500
             "
           >
             <router-link

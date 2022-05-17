@@ -30,7 +30,7 @@
             <p class="text-gray-500">{{ category.name }}</p>
           </div>
    <div class="flex-shrink-0 pr-2">
-            <button type="button" class="w-8 h-8 bg-white inline-flex items-center justify-center text-gray-400 rounded-full bg-transparent hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+            <button type="button" class="w-8 h-8 bg-white inline-flex items-center justify-center text-gray-400 rounded-full bg-transparent hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-prgreen-500">
               <span class="sr-only">Open options</span>
               <ChevronRightIcon class="w-5 h-5" aria-hidden="true" />
             </button>
@@ -56,7 +56,7 @@
             <p class="text-gray-500">{{ category.name }}</p>
           </div>
    <div class="flex-shrink-0 pr-2">
-            <button type="button" class="w-8 h-8 bg-white inline-flex items-center justify-center text-gray-400 rounded-full bg-transparent hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+            <button type="button" class="w-8 h-8 bg-white inline-flex items-center justify-center text-gray-400 rounded-full bg-transparent hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-prgreen-500">
               <span class="sr-only">Open options</span>
               <ChevronRightIcon class="w-5 h-5" aria-hidden="true" />
             </button>

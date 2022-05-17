@@ -17,8 +17,8 @@
               font-semibold
               tracking-wide
               uppercase
-              bg-indigo-100
-              text-indigo-600
+              bg-prgreen-600
+              text-prgreen-50
             "
             id="tier-standard"
           >
@@ -59,7 +59,7 @@
             </p>
           </li>
         </ul>
-        <div class="rounded-md shadow">
+        <div class="rounded-md shadow" v-if="loggedIn">
           <a
             @click="addToCart({ price: Data.price })"
             class="
@@ -73,7 +73,7 @@
               font-medium
               rounded-md
               text-white
-              bg-gray-800
+              bg-prblue-500
               hover:bg-gray-900
               cursor-pointer
             "

@@ -1,7 +1,7 @@
 
 <template>
   <div>
-    <TransitionRoot as="template" :show="sidebarOpen">
+    <TransitionRoot as="template" class="z-50" :show="sidebarOpen">
       <Dialog
         as="div"
         class="fixed inset-0 flex z-40 lg:hidden"
@@ -35,7 +35,7 @@
               w-full
               pt-5
               pb-4
-              bg-indigo-700
+              bg-prgreen-700
             "
           >
             <TransitionChild
@@ -70,13 +70,19 @@
                 </button>
               </div>
             </TransitionChild>
-
+   <div class="md:flex-shrink-0 my-3">
+              <img
+                class="h-10"
+                src="@/assets/Logos/full-white.svg"
+                alt="Silikan"
+              />
+            </div>
             <nav
               class="
                 mt-5
                 flex-shrink-0
                 h-full
-                divide-y divide-indigo-800
+                divide-y divide-prgreen-800
                 overflow-y-auto
               "
               aria-label="Sidebar"
@@ -89,15 +95,15 @@
                   class="cursor-pointer"
                   :class="[
                     item.current
-                      ? 'bg-indigo-800 text-white'
-                      : 'text-indigo-100 hover:text-white hover:bg-indigo-600',
+                      ? 'bg-prgreen-800 text-white'
+                      : 'text-prgreen-100 hover:text-white hover:bg-prgreen-600',
                     'group flex items-center px-2 py-2 text-base font-medium rounded-md',
                   ]"
                   :aria-current="item.current ? 'page' : undefined"
                 >
                   <component
                     :is="item.icon"
-                    class="mr-4 flex-shrink-0 h-6 w-6 text-indigo-200"
+                    class="mr-4 flex-shrink-0 h-6 w-6 text-prgreen-200"
                     aria-hidden="true"
                   />
                   {{ item.name }}
@@ -118,13 +124,13 @@
                       text-base
                       font-medium
                       rounded-md
-                      text-indigo-100
-                      hover:text-white hover:bg-indigo-600
+                      text-prgreen-100
+                      hover:text-white hover:bg-prgreen-600
                     "
                   >
                     <component
                       :is="item.icon"
-                      class="mr-4 h-6 w-6 text-indigo-200"
+                      class="mr-4 h-6 w-6 text-prgreen-200"
                       aria-hidden="true"
                     />
                     {{ item.name }}
@@ -144,13 +150,13 @@
     <div class="hidden lg:flex lg:w-64 lg:flex-col lg:fixed lg:inset-y-0">
       <!-- Sidebar component, swap this element with another sidebar if you like -->
       <div
-        class="flex flex-col flex-grow bg-indigo-700 pt-5 pb-4 overflow-y-auto"
+        class="flex flex-col flex-grow bg-prgreen-700 pt-5 pb-4 overflow-y-auto"
       >
         <nav
           class="
             mt-5
             flex-1 flex flex-col
-            divide-y divide-indigo-800
+            divide-y divide-prgreen-800
             overflow-y-auto
           "
           aria-label="Sidebar"
@@ -163,15 +169,15 @@
               :to="item.link"
               :class="[
                 item.current
-                  ? 'bg-indigo-800 text-white'
-                  : 'text-indigo-100 hover:text-white hover:bg-indigo-600',
+                  ? 'bg-prgreen-800 text-white'
+                  : 'text-prgreen-100 hover:text-white hover:bg-prgreen-600',
                 'group flex items-center px-2 py-2 text-sm leading-6 font-medium rounded-md',
               ]"
               :aria-current="item.current ? 'page' : undefined"
             >
               <component
                 :is="item.icon"
-                class="mr-4 flex-shrink-0 h-6 w-6 text-indigo-200"
+                class="mr-4 flex-shrink-0 h-6 w-6 text-prgreen-200"
                 aria-hidden="true"
               />
               {{ item.name }}
@@ -194,13 +200,13 @@
                   leading-6
                   font-medium
                   rounded-md
-                  text-indigo-100
-                  hover:text-white hover:bg-indigo-600
+                  text-prgreen-100
+                  hover:text-white hover:bg-prgreen-600
                 "
               >
                 <component
                   :is="item.icon"
-                  class="mr-4 h-6 w-6 text-indigo-200"
+                  class="mr-4 h-6 w-6 text-prgreen-200"
                   aria-hidden="true"
                 />
                 {{ item.name }}
@@ -232,7 +238,7 @@
             focus:outline-none
             focus:ring-2
             focus:ring-inset
-            focus:ring-indigo-500
+            focus:ring-prgreen-500
             lg:hidden
           "
           @click="sidebarOpen = true"
@@ -361,7 +367,7 @@
                     focus:outline-none
                     focus:ring-2
                     focus:ring-offset-2
-                    focus:ring-indigo-500
+                    focus:ring-prgreen-500
                   "
                 >
                   Go To Profile
@@ -456,7 +462,7 @@ const transactions = [
   // More transactions...
 ];
 const statusStyles = {
-  success: "bg-green-100 text-green-800",
+  success: "bg-prgreen-600 text-prgreen-50",
   processing: "bg-yellow-100 text-yellow-800",
   failed: "bg-gray-100 text-gray-800",
 };

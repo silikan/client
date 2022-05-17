@@ -1,14 +1,15 @@
 <template>
+
   <div class="flex flex-col md:p-10 m-5 sm:m-1">
     <div class="profile flex justify-between flex-col ml-5 md:ml-0 mt-10">
       <nav class="flex mb-3" aria-label="Breadcrumb">
         <ol role="list" class="flex items-center space-x-4">
           <li>
             <div>
-              <a href="#" class="text-gray-400 hover:text-gray-500">
+              <router-link to="/gigs" class="text-gray-400 hover:text-gray-500">
                 <HomeIcon class="flex-shrink-0 h-5 w-5" aria-hidden="true" />
                 <span class="sr-only">Home</span>
-              </a>
+              </router-link>
             </div>
           </li>
           <li v-for="page in pages" :key="page.name">
@@ -17,8 +18,8 @@
                 class="flex-shrink-0 h-5 w-5 text-gray-400"
                 aria-hidden="true"
               />
-              <a
-                :href="page.href"
+              <router-link
+                to="/categories"
                 class="
                   ml-4
                   text-sm
@@ -27,15 +28,18 @@
                   hover:text-gray-700
                 "
                 :aria-current="page.current ? 'page' : undefined"
-                >{{ page.name }}</a
+                >{{ page.title }}</router-link
               >
             </div>
           </li>
         </ol>
       </nav>
-      <div class="flex text-gray-400 items-center ">
-      <EyeIcon class=" text-gray-400 flex-shrink-0 h-5 w-5 mr-2" aria-hidden="true" />
-<span>{{views}}</span>
+      <div class="flex text-gray-400 items-center">
+        <EyeIcon
+          class="text-gray-400 flex-shrink-0 h-5 w-5 mr-2"
+          aria-hidden="true"
+        />
+        <span>{{ views }}</span>
       </div>
 
       <h1 class="mb-2 text-3xl font-medium">{{ title }}</h1>
@@ -123,10 +127,6 @@
 import { ChevronRightIcon, HomeIcon, EyeIcon } from "@heroicons/vue/solid";
 import Avatar from "@/components/Avatar/Avatar.component.vue";
 
-const pages = [
-  { name: "Projects", href: "#", current: false },
-  { name: "Project Nero", href: "#", current: true },
-];
 import "tw-elements";
 import { computed, ref } from "@vue/runtime-core";
 import { useStore } from "vuex";
@@ -144,6 +144,13 @@ export default {
     let store = useStore();
     let route = useRoute();
     let id = route.params.id;
+
+    let pages = ref([]);
+    store.dispatch("Gig/getGigCategory", id).then(async (result) => {
+      console.log(result[0].title);
+      pages.value = result
+    });
+
     let gigImages = computed(() => {
       return props.images;
     });
@@ -151,6 +158,8 @@ export default {
     let gigImagesData = computed(() => {
       return gigImages.value;
     });
+
+    let category = ref(null);
 
     let description = ref("");
     let title = ref("");
@@ -165,6 +174,7 @@ export default {
         description.value = result.description;
         title.value = result.title;
         views.value = result.total_views;
+        category.value = result.category;
       })
       .catch((err) => {
         console.log(err);
@@ -173,7 +183,6 @@ export default {
     store
       .dispatch("Gig/getGigUser", id)
       .then((result) => {
-        console.log(result);
         name.value = result.name;
         avatar.value = result.avatar;
         userId.value = result.id;
@@ -196,7 +205,8 @@ export default {
       name,
       avatar,
       userId,
-      views
+      views,
+      category,
     };
   },
 };

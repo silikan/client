@@ -106,8 +106,8 @@
                       rounded-full
                       text-xs
                       font-medium
-                      bg-indigo-100
-                      text-indigo-800
+                      bg-prgreen-600
+                      text-prgreen-50
                     "
                   >
                     {{ person.item.cart_item.type }}
@@ -123,8 +123,8 @@
                       rounded-full
                       text-xs
                       font-medium
-                      bg-indigo-100
-                      text-indigo-800
+                      bg-prgreen-600
+                      text-prgreen-50
                     "
                   >
                     {{ person.item.cart_item.status }}
@@ -144,10 +144,10 @@
                     </div>
                     <div class="ml-4">
                       <div class="text-sm font-medium text-gray-900">
-                        {{ person.name }}
+                        {{ person.item.handyman.name }}
                       </div>
                       <div class="text-sm text-gray-500">
-                        {{ person.email }}
+                        {{ person.item.handyman.email }}
                       </div>
                     </div>
                   </div>
@@ -164,7 +164,7 @@
                 >
                   <router-link
                     :to="`/gig/${person.item.gig[0].id}`"
-                    class="text-indigo-600 hover:text-indigo-900"
+                    class="text-prgreen-600 hover:text-prgreen-900"
                     >Check</router-link
                   >
                 </td>
@@ -180,7 +180,7 @@
                 >
                   <router-link
                     :to="`/request/${person.item.request[0].id}`"
-                    class="text-indigo-600 hover:text-indigo-900"
+                    class="text-prgreen-600 hover:text-prgreen-900"
                     >Check</router-link
                   >
                 </td>
@@ -203,7 +203,7 @@
                     class="
                       cursor-pointer
                       text-white
-                      bg-green-500
+                      bg-prgreen-600
                       inline-flex
                       items-center
                       px-2
@@ -260,7 +260,7 @@
                     class="
                       cursor-pointer
                       text-white
-                      bg-red-500
+                      bg-prgreen-600
                       inline-flex
                       items-center
                       px-2

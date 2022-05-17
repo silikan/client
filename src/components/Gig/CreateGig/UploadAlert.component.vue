@@ -75,7 +75,7 @@
                   h-12
                   w-12
                   rounded-full
-                  bg-green-100
+                  bg-prgreen-600
                 "
               >
                 <CheckIcon class="h-6 w-6 text-green-600" aria-hidden="true" />
@@ -107,15 +107,15 @@
                   shadow-sm
                   px-4
                   py-2
-                  bg-indigo-600
+                  bg-prgreen-600
                   text-base
                   font-medium
                   text-white
-                  hover:bg-indigo-700
+                  hover:bg-prgreen-700
                   focus:outline-none
                   focus:ring-2
                   focus:ring-offset-2
-                  focus:ring-indigo-500
+                  focus:ring-prgreen-500
                   sm:text-sm
                 "
                 @click="open = false"

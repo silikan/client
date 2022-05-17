@@ -26,7 +26,7 @@
                 hover:bg-gray-50
                 focus-within:ring-2
                 focus-within:ring-inset
-                focus-within:ring-indigo-600
+                focus-within:ring-prgreen-600
               "
             >
               <div class="flex justify-between space-x-3">

@@ -16,7 +16,7 @@
 -->
 <template>
   <footer
-    class="bg-gray-800  "
+    class="bg-prblue-500  "
     aria-labelledby="footer-heading"
   >
     <h2
@@ -208,7 +208,7 @@
           <div class="mt-3 rounded-md sm:mt-0 sm:ml-3 sm:flex-shrink-0">
             <button
               type="submit"
-              class="w-full bg-indigo-500 border border-transparent rounded-md py-2 px-4 flex items-center justify-center text-base font-medium text-white hover:bg-indigo-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-indigo-500"
+              class="w-full bg-prgreen-500 border border-transparent rounded-md py-2 px-4 flex items-center justify-center text-base font-medium text-white hover:bg-prgreen-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-prgreen-500"
             >
               Subscribe
             </button>

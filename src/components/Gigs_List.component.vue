@@ -97,7 +97,7 @@
                   <p class="font-bold text-2xl text-gray-400">
                     {{ JSON.parse(gig.basic).price }}$
                   </p>
-                  <div class="flex justify-center items-center">
+                  <div class="flex justify-center items-center" v-if="authUser">
                     <button
                       v-if="authUser.id != gig.user.id"
                       class="text-black font-bold rounded-full"

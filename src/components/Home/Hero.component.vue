@@ -1,5 +1,5 @@
 <template>
-  <div class="relative bg-gray-800 overflow-hidden">
+  <div class="relative bg-prblue-500 overflow-hidden">
     <div class="hidden sm:block sm:absolute sm:inset-0" aria-hidden="true">
       <svg
         class="
@@ -57,15 +57,15 @@
               <a href="#">
                 <span class="sr-only">Silikan</span>
                 <img
-                  class="h-8 w-auto sm:h-10"
-                  src="https://tailwindui.com/img/logos/Silikan-mark-indigo-500.svg"
+                  class="h-20 w-auto sm:h-20"
+                  src="@/assets/Logos/s-white.svg"
                   alt=""
                 />
               </a>
               <div class="-mr-2 flex items-center md:hidden">
                 <PopoverButton
                   class="
-                    bg-gray-800
+                    bg-prblue-500
                     rounded-md
                     p-2
                     inline-flex
@@ -137,8 +137,8 @@
                   rounded-full
                   shadow-sm
                   text-white
-                  bg-indigo-600
-                  hover:bg-indigo-700
+                  bg-prgreen-600
+                  hover:bg-prgreen-700
                 "
               >
                 Signup
@@ -182,7 +182,7 @@
                 <div>
                   <img
                     class="h-8 w-auto"
-                    src="https://tailwindui.com/img/logos/Silikan-mark-indigo-600.svg"
+                  src="@/assets/Logos/full-green.svg"
                     alt=""
                   />
                 </div>
@@ -200,7 +200,7 @@
                       focus:outline-none
                       focus:ring-2
                       focus:ring-inset
-                      focus:ring-indigo-500
+                      focus:ring-prgreen-500
                     "
                   >
                     <span class="sr-only">Close menu</span>
@@ -236,7 +236,7 @@
                   py-3
                   text-center
                   font-medium
-                  bg-indigo-600
+                  bg-prgreen-600
                   text-gray-50
                 "
               >
@@ -251,7 +251,7 @@
                   py-3
                   text-center
                   font-medium
-                  text-indigo-600
+                  text-prgreen-600
                   bg-gray-50
                   hover:bg-gray-100
                 "
@@ -288,9 +288,13 @@
                     lg:mt-6
                   "
                 >
-                  <span class="text-indigo-400 text-left text-5xl xl:text-6xl"
-                    >Silikan</span
-                  >
+                 <img
+                    class="h-16 w-auto sm:h-24"
+                  src="@/assets/Logos/full-green.svg"
+                    alt=""
+                  />
+
+
                 </h1>
                 <p
                   class="
@@ -301,10 +305,14 @@
                     text-white
                     tracking-tight
                     text-left
+                    dark:text-black
                   "
+
+
                 >
                   Everything you need to get your services
                 </p>
+
                 <div class="w-full sm:mx-auto sm:max-w-lg lg:ml-0 mt-20">
                   <div class="hero bg-gredient-dark h-400px flex flex-col px-2">
                     <div class="w-full">
@@ -351,12 +359,12 @@
                               rounded-full
                               shadow-sm
                               text-white
-                              bg-indigo-600
-                              hover:bg-indigo-700
+                              bg-prgreen-600
+                              hover:bg-prgreen-700
                               focus:outline-none
                               focus:ring-2
                               focus:ring-offset-2
-                              focus:ring-indigo-500
+                              focus:ring-prgreen-500
                               cursor-pointer
                             "
                             :to="`/search/gigs/${search}`"

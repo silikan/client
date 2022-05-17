@@ -35,7 +35,7 @@
                     focus:outline-none
                     focus:ring-2
                     focus:ring-offset-2
-                    focus:ring-indigo-500
+                    focus:ring-prgreen-500
                   "
                 >
                   <span class="min-w-0 flex-1 flex items-center space-x-3">
@@ -71,7 +71,7 @@
           </div>
           <div v-if="education === null || education.length === 0">
             <router-link
-              class="flex font-bold items-center text-indigo-800"
+              class="flex font-bold items-center text-prgreen-800"
               to="/edit/profile"
             >
               <PlusCircleIcon
@@ -117,7 +117,7 @@
                     focus:outline-none
                     focus:ring-2
                     focus:ring-offset-2
-                    focus:ring-indigo-500
+                    focus:ring-prgreen-500
                   "
                 >
                   <span class="min-w-0 flex-1 flex items-center space-x-3">
@@ -154,7 +154,7 @@
         </dd>
         <div class="flex" v-if="skills === null || skills.length === 0">
           <router-link
-            class="flex font-bold items-center text-indigo-800"
+            class="flex font-bold items-center text-prgreen-800"
             to="/edit/profile"
           >
             <PlusCircleIcon class="w-6 h-6 stroke-1 mr-3" aria-hidden="true" />
@@ -196,7 +196,7 @@
                     focus:outline-none
                     focus:ring-2
                     focus:ring-offset-2
-                    focus:ring-indigo-500
+                    focus:ring-prgreen-500
                   "
                 >
                   <span class="min-w-0 flex-1 flex items-center space-x-3">
@@ -233,7 +233,7 @@
         </dd>
         <div class="flex" v-if="experience === null || experience.length === 0">
           <router-link
-            class="flex font-bold items-center text-indigo-800"
+            class="flex font-bold items-center text-prgreen-800"
             to="/edit/profile"
           >
             <PlusCircleIcon class="w-6 h-6 stroke-1 mr-3" aria-hidden="true" />
@@ -278,7 +278,7 @@
                     focus:outline-none
                     focus:ring-2
                     focus:ring-offset-2
-                    focus:ring-indigo-500
+                    focus:ring-prgreen-500
                   "
                 >
                   <span class="min-w-0 flex-1 flex items-center space-x-3">
@@ -319,7 +319,7 @@
           v-if="certifications === null || certifications.length === 0"
         >
           <router-link
-            class="flex font-bold items-center text-indigo-800"
+            class="flex font-bold items-center text-prgreen-800"
             to="/edit/profile"
           >
             <PlusCircleIcon class="w-6 h-6 stroke-1 mr-3" aria-hidden="true" />

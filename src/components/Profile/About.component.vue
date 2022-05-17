@@ -19,7 +19,7 @@
           </p>
           <div v-if="authUserData.bio === null">
             <router-link
-              class="flex font-bold items-center text-indigo-800"
+              class="flex font-bold items-center text-prgreen-900"
               to="/edit/profile"
             >
               <PlusCircleIcon
@@ -57,7 +57,7 @@
           "
         >
           <router-link
-            class="flex font-bold items-center text-indigo-800"
+            class="flex font-bold items-center text-prgreen-900"
             to="/edit/profile"
           >
             <PlusCircleIcon class="w-6 h-6 stroke-1 mr-3" aria-hidden="true" />
@@ -82,7 +82,7 @@
         </dd>
         <div class="flex" v-if="authUserData.website === null">
           <router-link
-            class="flex font-bold items-center text-indigo-800"
+            class="flex font-bold items-center text-prgreen-900"
             to="/edit/profile"
           >
             <PlusCircleIcon class="w-6 h-6 stroke-1 mr-3" aria-hidden="true" />
@@ -108,7 +108,7 @@
 
         <div class="flex" v-if="authUserData.date_of_birth === null">
           <router-link
-            class="flex font-bold items-center text-indigo-800"
+            class="flex font-bold items-center text-prgreen-900"
             to="/edit/profile"
           >
             <PlusCircleIcon class="w-6 h-6 stroke-1 mr-3" aria-hidden="true" />

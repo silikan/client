@@ -24,7 +24,7 @@
             type="submit"
             class="
               ml-5
-              bg-indigo-700
+              bg-prgreen-700
               border border-transparent
               rounded-md
               shadow-sm
@@ -35,11 +35,11 @@
               text-sm
               font-medium
               text-white
-              hover:bg-indigo-800
+              hover:bg-prgreen-800
               focus:outline-none
               focus:ring-2
               focus:ring-offset-2
-              focus:ring-indigo-500
+              focus:ring-prgreen-500
             "
           >
             Verify Email
@@ -97,8 +97,8 @@
                         shadow-sm
                         placeholder-gray-400
                         focus:outline-none
-                        focus:ring-indigo-500
-                        focus:border-indigo-500
+                        focus:ring-prgreen-500
+                        focus:border-prgreen-500
                         sm:text-sm
                       "
                     />
@@ -131,8 +131,8 @@
                         shadow-sm
                         placeholder-gray-400
                         focus:outline-none
-                        focus:ring-indigo-500
-                        focus:border-indigo-500
+                        focus:ring-prgreen-500
+                        focus:border-prgreen-500
                         sm:text-sm
                       "
                     />
@@ -147,7 +147,7 @@
             type="submit"
             class="
               ml-5
-              bg-indigo-700
+              bg-prgreen-700
               border border-transparent
               rounded-md
               shadow-sm
@@ -158,11 +158,11 @@
               text-sm
               font-medium
               text-white
-              hover:bg-indigo-800
+              hover:bg-prgreen-800
               focus:outline-none
               focus:ring-2
               focus:ring-offset-2
-              focus:ring-indigo-500
+              focus:ring-prgreen-500
             "
           >
             Change Password
@@ -218,8 +218,8 @@
                         shadow-sm
                         placeholder-gray-400
                         focus:outline-none
-                        focus:ring-indigo-500
-                        focus:border-indigo-500
+                        focus:ring-prgreen-500
+                        focus:border-prgreen-500
                         sm:text-sm
                       "
                     />
@@ -252,8 +252,8 @@
                         shadow-sm
                         placeholder-gray-400
                         focus:outline-none
-                        focus:ring-indigo-500
-                        focus:border-indigo-500
+                        focus:ring-prgreen-500
+                        focus:border-prgreen-500
                         sm:text-sm
                       "
                     />
@@ -286,8 +286,8 @@
                         shadow-sm
                         placeholder-gray-400
                         focus:outline-none
-                        focus:ring-indigo-500
-                        focus:border-indigo-500
+                        focus:ring-prgreen-500
+                        focus:border-prgreen-500
                         sm:text-sm
                       "
                     />
@@ -302,7 +302,7 @@
             type="submit"
             class="
               ml-5
-              bg-indigo-700
+              bg-prgreen-700
               border border-transparent
               rounded-md
               shadow-sm
@@ -313,11 +313,11 @@
               text-sm
               font-medium
               text-white
-              hover:bg-indigo-800
+              hover:bg-prgreen-800
               focus:outline-none
               focus:ring-2
               focus:ring-offset-2
-              focus:ring-indigo-500
+              focus:ring-prgreen-500
             "
           >
             Change Password

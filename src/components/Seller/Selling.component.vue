@@ -27,8 +27,8 @@
               hidden
               text-sm
               font-semibold
-              text-indigo-600
-              hover:text-indigo-500
+              text-prgreen-600
+              hover:text-prgreen-500
               sm:block
             "
             >all categories<span aria-hidden="true"> &rarr;</span></router-link
@@ -122,8 +122,8 @@
               block
               text-sm
               font-semibold
-              text-indigo-600
-              hover:text-indigo-500
+              text-prgreen-600
+              hover:text-prgreen-500
             "
             >Browse all categories<span aria-hidden="true"> &rarr;</span></a
           >

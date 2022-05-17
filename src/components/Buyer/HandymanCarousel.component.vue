@@ -45,7 +45,7 @@
                   <div class="space-y-2">
                     <div class=" text-xl leading-6 font-medium space-y-1">
                       <h3 class="">{{ handyman.data.name }}</h3>
-                      <p class="text-sm font-bold text-indigo-600">
+                      <p class="text-sm font-bold text-prgreen-600">
                         @{{ handyman.data.username }}
                       </p>
                     </div>
@@ -104,12 +104,12 @@
                           rounded-full
                           shadow-sm
                           text-white
-                          bg-indigo-600
-                          hover:bg-indigo-700
+                          bg-prgreen-600
+                          hover:bg-prgreen-700
                           focus:outline-none
                           focus:ring-2
                           focus:ring-offset-2
-                          focus:ring-indigo-500
+                          focus:ring-prgreen-500
                         "
                       >
                         Hire
