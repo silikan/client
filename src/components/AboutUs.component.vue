@@ -22,7 +22,7 @@
             <div class="absolute inset-0 bg-gradient-to-t from-prgreen-600 via-prgreen-600 opacity-90" />
             <div class="relative px-8">
               <div>
-                <img class="h-12" src="https://tailwindui.com/img/logos/Sillikan.svg?color=white" alt="Sillikan" />
+                <img class="h-16" src="@/assets/Logos/s-white.svg" alt="Silikan" />
               </div>
               <blockquote class="mt-8">
                 <div class="relative text-lg font-medium text-white md:flex-grow">

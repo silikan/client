@@ -59,7 +59,7 @@
             </p>
           </li>
         </ul>
-        <div class="rounded-md shadow">
+        <div class="rounded-md shadow" v-if="loggedIn">
           <a
             @click="addToCart({ price: Data.price })"
             class="

@@ -1,4 +1,5 @@
 <template>
+{{category}}
   <div class="flex flex-col md:p-10 m-5 sm:m-1">
     <div class="profile flex justify-between flex-col ml-5 md:ml-0 mt-10">
       <nav class="flex mb-3" aria-label="Breadcrumb">
@@ -123,8 +124,10 @@
 import { ChevronRightIcon, HomeIcon, EyeIcon } from "@heroicons/vue/solid";
 import Avatar from "@/components/Avatar/Avatar.component.vue";
 
+
+
 const pages = [
-  { name: "Projects", href: "#", current: false },
+  { name: "Gigs", href: "#", current: false },
   { name: "Project Nero", href: "#", current: true },
 ];
 import "tw-elements";
@@ -152,6 +155,8 @@ export default {
       return gigImages.value;
     });
 
+    let category = ref(null);
+
     let description = ref("");
     let title = ref("");
     let name = ref(null);
@@ -165,6 +170,7 @@ export default {
         description.value = result.description;
         title.value = result.title;
         views.value = result.total_views;
+             category.value  = result.category
       })
       .catch((err) => {
         console.log(err);
@@ -173,10 +179,10 @@ export default {
     store
       .dispatch("Gig/getGigUser", id)
       .then((result) => {
-        console.log(result);
         name.value = result.name;
         avatar.value = result.avatar;
         userId.value = result.id;
+
       })
       .catch((err) => {
         console.log(err);
@@ -196,7 +202,8 @@ export default {
       name,
       avatar,
       userId,
-      views
+      views,
+      category
     };
   },
 };

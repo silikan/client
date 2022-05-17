@@ -307,6 +307,8 @@
                     text-left
                     dark:text-black
                   "
+
+
                 >
                   Everything you need to get your services
                 </p>
