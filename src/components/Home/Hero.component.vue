@@ -305,10 +305,12 @@
                     text-white
                     tracking-tight
                     text-left
+                    dark:text-black
                   "
                 >
                   Everything you need to get your services
                 </p>
+
                 <div class="w-full sm:mx-auto sm:max-w-lg lg:ml-0 mt-20">
                   <div class="hero bg-gredient-dark h-400px flex flex-col px-2">
                     <div class="w-full">

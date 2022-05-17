@@ -13,9 +13,9 @@
         <div class="flex-shrink-0 flex items-center h-full z-50">
           <router-link type="button" to="/" class="cursor-pointer">
             <img
-              class="block h-8 w-auto cursor-pointer"
-              src="https://tailwindui.com/img/logos/workflow-mark-prgreen-600.svg"
-              alt="Workflow"
+              class="block h-16 w-auto cursor-pointer"
+              src="@/assets/Logos/s-green.svg"
+              alt="Silikan"
             />
           </router-link>
         </div>
