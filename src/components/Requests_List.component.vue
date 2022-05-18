@@ -1,15 +1,24 @@
 <template>
-<div v-if="loading === true">
-<Table/>
-</div>
+  <div v-if="loading === true">
+    <Table />
+  </div>
 
-  <div class="bg-white" v-if=" loading === false && links && meta">
+  <div class="" v-if="loading === false && links && meta">
     <div class="mx-auto py-12 px-4 max-w-7xl sm:px-6 lg:px-8 lg:py-24">
       <div class="flex w-full items-center justify-between mb-5">
         <div
           class="space-y-5 sm:space-y-4 md:max-w-xl lg:max-w-3xl xl:max-w-none"
         >
-          <h2 class="text-3xl font-extrabold tracking-tight hidden md:block">
+          <h2
+            class="
+              dark:text-white
+              text-3xl
+              font-extrabold
+              tracking-tight
+              hidden
+              md:block
+            "
+          >
             Requests
           </h2>
         </div>
@@ -27,8 +36,8 @@
                 sm:rounded-lg
               "
             >
-              <table class="min-w-full divide-y divide-gray-200">
-                <thead class="bg-gray-50">
+              <table class="min-w-full divide-y divide-gray-200 dark:divide-prgreen-50">
+                <thead class="bg-gray-50 dark:bg-prblue-600">
                   <tr>
                     <th
                       scope="col"
@@ -105,7 +114,9 @@
                     </th>
                   </tr>
                 </thead>
-                <tbody class="bg-white divide-y divide-gray-200">
+                <tbody
+                  class="bg-white dark:bg-prblue-500  divide-y divide-gray-200 "
+                >
                   <tr v-for="request in requests" :key="request.id">
                     <td class="px-6 py-4 whitespace-nowrap">
                       <router-link :to="`/user/${request.user.id}`">
@@ -118,20 +129,27 @@
                             />
                           </div>
                           <div class="ml-4">
-                            <div class="text-sm font-medium text-gray-900">
+                            <div
+                              class="
+                                text-sm
+                                font-medium
+                                text-gray-900
+                                dark:text-white
+                              "
+                            >
                               {{ request.user.name }}
                             </div>
-                            <div class="text-sm text-gray-500">
+                            <div class="text-sm text-gray-500 dark:text-white">
                               {{ request.user.email }}
                             </div>
                           </div>
                         </div>
                       </router-link>
                     </td>
-                  <td class="px-6 py-4 whitespace-nowrap">
+                    <td class="px-6 py-4 whitespace-nowrap">
                       <div class="flex items-center">
                         <div class="ml-4">
-                          <div class="text-sm text-gray-500">
+                          <div class="text-sm text-gray-500 dark:text-white">
                             {{ request.title }}
                           </div>
                         </div>
@@ -210,6 +228,7 @@
       </div>
       <div
         class="
+        dark:bg-prblue-500
           bg-white
           px-4
           py-3
@@ -332,7 +351,7 @@
                   max-w-md
                 "
                 :class="{
-                  'bg-prgreen-50 border-prgreen-500 text-prgreen-600':
+                  'bg-prgreen-50 dark:bg-white border-prgreen-500 text-prgreen-600':
                     1 === meta.current_page,
                   'bg-white border-gray-300 text-gray-500 hover:bg-gray-50':
                     1 !== meta.current_page,
@@ -430,7 +449,7 @@
 <script>
 import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/vue/solid";
 import Avatar from "@/components/Avatar/Avatar.component.vue";
-import Table from "@/components/Loading/Skeletons/Table.component.vue"
+import Table from "@/components/Loading/Skeletons/Table.component.vue";
 
 import { computed, reactive } from "@vue/runtime-core";
 import { useStore } from "vuex";
@@ -440,7 +459,7 @@ export default {
     ChevronLeftIcon,
     ChevronRightIcon,
     Avatar,
-    Table
+    Table,
   },
 
   setup() {
@@ -510,7 +529,7 @@ export default {
       return data;
     });
     let preurl = `${process.env.VUE_APP_API_URL}`;
-            let loading = computed(() => store.getters["Request/loading"]);
+    let loading = computed(() => store.getters["Request/loading"]);
 
     return {
       action,

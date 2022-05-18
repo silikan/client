@@ -1,5 +1,8 @@
 <template>
+<div class="dark:bg-prblue-500">
   <RequestsList />
+</div>
+
 </template>
 
 <script>
