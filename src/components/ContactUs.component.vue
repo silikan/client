@@ -23,7 +23,7 @@
               text-gray-900 text-center
               sm:text-5xl sm:leading-none
               lg:text-6xl
-            dark:text-white
+              dark:text-white
             "
           >
             Get in touch
@@ -66,7 +66,15 @@
         >
           <div class="lg:pr-8">
             <div class="max-w-md mx-auto sm:max-w-lg lg:mx-0">
-              <h2 class="text-3xl font-extrabold tracking-tight sm:text-4xl dark:text-white">
+              <h2
+                class="
+                  text-3xl
+                  font-extrabold
+                  tracking-tight
+                  sm:text-4xl
+                  dark:text-white
+                "
+              >
                 Let's work together
               </h2>
               <p class="mt-4 text-lg text-gray-500 sm:mt-3 dark:text-white">
@@ -82,7 +90,13 @@
                 <div>
                   <label
                     for="first-name"
-                    class="block text-sm font-medium text-gray-700 dark:text-white"
+                    class="
+                      block
+                      text-sm
+                      font-medium
+                      text-gray-700
+                      dark:text-white
+                    "
                     >First name</label
                   >
                   <div class="mt-1">
@@ -92,7 +106,16 @@
                       id="first-name"
                       autocomplete="given-name"
                       class="
-                    block w-full px-3 py-2 border border-gray-300 rounded-md  -smplaceholder-gray-400 focus:outline-nonefocus:ring-prgreen-500 focus:border-prgreen-500 sm:text-sm
+                        block
+                        w-full
+                        px-3
+                        py-2
+                        border border-gray-300
+                        rounded-md
+                        -smplaceholder-gray-400
+                        focus:outline-nonefocus:ring-prgreen-500
+                        focus:border-prgreen-500
+                        sm:text-sm
                       "
                     />
                   </div>
@@ -100,7 +123,13 @@
                 <div>
                   <label
                     for="last-name"
-                    class="block text-sm font-medium text-gray-700 dark:text-white"
+                    class="
+                      block
+                      text-sm
+                      font-medium
+                      text-gray-700
+                      dark:text-white
+                    "
                     >Last name</label
                   >
                   <div class="mt-1">
@@ -110,7 +139,16 @@
                       id="last-name"
                       autocomplete="family-name"
                       class="
-                    block w-full px-3 py-2 border border-gray-300 rounded-md  -smplaceholder-gray-400 focus:outline-nonefocus:ring-prgreen-500 focus:border-prgreen-500 sm:text-sm
+                        block
+                        w-full
+                        px-3
+                        py-2
+                        border border-gray-300
+                        rounded-md
+                        -smplaceholder-gray-400
+                        focus:outline-nonefocus:ring-prgreen-500
+                        focus:border-prgreen-500
+                        sm:text-sm
                       "
                     />
                   </div>
@@ -118,7 +156,13 @@
                 <div class="sm:col-span-2">
                   <label
                     for="email"
-                    class="block text-sm font-medium text-gray-700 dark:text-white"
+                    class="
+                      block
+                      text-sm
+                      font-medium
+                      text-gray-700
+                      dark:text-white
+                    "
                     >Email</label
                   >
                   <div class="mt-1">
@@ -128,7 +172,16 @@
                       type="email"
                       autocomplete="email"
                       class="
-                    block w-full px-3 py-2 border border-gray-300 rounded-md  -smplaceholder-gray-400 focus:outline-nonefocus:ring-prgreen-500 focus:border-prgreen-500 sm:text-sm
+                        block
+                        w-full
+                        px-3
+                        py-2
+                        border border-gray-300
+                        rounded-md
+                        -smplaceholder-gray-400
+                        focus:outline-nonefocus:ring-prgreen-500
+                        focus:border-prgreen-500
+                        sm:text-sm
                       "
                     />
                   </div>
@@ -136,7 +189,13 @@
                 <div class="sm:col-span-2">
                   <label
                     for="company"
-                    class="block text-sm font-medium text-gray-700 dark:text-white"
+                    class="
+                      block
+                      text-sm
+                      font-medium
+                      text-gray-700
+                      dark:text-white
+                    "
                     >Company</label
                   >
                   <div class="mt-1">
@@ -146,7 +205,16 @@
                       id="company"
                       autocomplete="organization"
                       class="
-                    block w-full px-3 py-2 border border-gray-300 rounded-md  -smplaceholder-gray-400 focus:outline-nonefocus:ring-prgreen-500 focus:border-prgreen-500 sm:text-sm
+                        block
+                        w-full
+                        px-3
+                        py-2
+                        border border-gray-300
+                        rounded-md
+                        -smplaceholder-gray-400
+                        focus:outline-nonefocus:ring-prgreen-500
+                        focus:border-prgreen-500
+                        sm:text-sm
                       "
                     />
                   </div>
@@ -155,10 +223,18 @@
                   <div class="flex justify-between">
                     <label
                       for="phone"
-                      class="block text-sm font-medium text-gray-700 dark:text-white"
+                      class="
+                        block
+                        text-sm
+                        font-medium
+                        text-gray-700
+                        dark:text-white
+                      "
                       >Phone</label
                     >
-                    <span id="phone-description" class="text-sm text-gray-500 dark:text-white"
+                    <span
+                      id="phone-description"
+                      class="text-sm text-gray-500 dark:text-white"
                       >Optional</span
                     >
                   </div>
@@ -170,7 +246,16 @@
                       autocomplete="tel"
                       aria-describedby="phone-description"
                       class="
-                    block w-full px-3 py-2 border border-gray-300 rounded-md  -smplaceholder-gray-400 focus:outline-nonefocus:ring-prgreen-500 focus:border-prgreen-500 sm:text-sm
+                        block
+                        w-full
+                        px-3
+                        py-2
+                        border border-gray-300
+                        rounded-md
+                        -smplaceholder-gray-400
+                        focus:outline-nonefocus:ring-prgreen-500
+                        focus:border-prgreen-500
+                        sm:text-sm
                       "
                     />
                   </div>
@@ -179,7 +264,13 @@
                   <div class="flex justify-between">
                     <label
                       for="how-can-we-help"
-                      class="block text-sm font-medium text-gray-700 dark:text-white"
+                      class="
+                        block
+                        text-sm
+                        font-medium
+                        text-gray-700
+                        dark:text-white
+                      "
                       >How can we help you?</label
                     >
                     <span
@@ -202,13 +293,20 @@
                         focus:ring-prgreen-500 focus:border-prgreen-500
                         border border-gray-300
                         rounded-md
-
                       "
                     />
                   </div>
                 </div>
                 <fieldset class="sm:col-span-2">
-                  <legend class="block text-sm font-medium text-gray-700 dark:text-white">
+                  <legend
+                    class="
+                      block
+                      text-sm
+                      font-medium
+                      text-gray-700
+                      dark:text-white
+                    "
+                  >
                     Expected Salary
                   </legend>
                   <div class="mt-4 grid grid-cols-1 gap-y-4">
@@ -227,7 +325,8 @@
                         "
                       />
                       <label for="Salary-under-25k" class="ml-3">
-                        <span class="block text-sm text-gray-700 dark:text-white"
+                        <span
+                          class="block text-sm text-gray-700 dark:text-white"
                           >Less than $25K</span
                         >
                       </label>
@@ -247,7 +346,8 @@
                         "
                       />
                       <label for="Salary-25k-50k" class="ml-3">
-                        <span class="block text-sm text-gray-700 dark:text-white"
+                        <span
+                          class="block text-sm text-gray-700 dark:text-white"
                           >$25K – $50K</span
                         >
                       </label>
@@ -267,7 +367,8 @@
                         "
                       />
                       <label for="Salary-50k-100k" class="ml-3">
-                        <span class="block text-sm text-gray-700 dark:text-white"
+                        <span
+                          class="block text-sm text-gray-700 dark:text-white"
                           >$50K – $100K</span
                         >
                       </label>
@@ -287,7 +388,10 @@
                         "
                       />
                       <label for="Salary-over-100k" class="ml-3">
-                        <span class="block text-sm text-gray-700 dark:text-white">$100K+</span>
+                        <span
+                          class="block text-sm text-gray-700 dark:text-white"
+                          >$100K+</span
+                        >
                       </label>
                     </div>
                   </div>
@@ -295,7 +399,13 @@
                 <div class="sm:col-span-2">
                   <label
                     for="how-did-you-hear-about-us"
-                    class="block text-sm font-medium text-gray-700 dark:text-white"
+                    class="
+                      block
+                      text-sm
+                      font-medium
+                      text-gray-700
+                      dark:text-white
+                    "
                     >How did you hear about us?</label
                   >
                   <div class="mt-1">
@@ -336,7 +446,7 @@
                       focus:ring-offset-2
                       focus:ring-prgreen-500
                       text-black
-dark:text-white
+                      dark:text-white
                     "
                   >
                     Submit
@@ -347,7 +457,6 @@ dark:text-white
           </div>
         </div>
       </div>
-
     </main>
   </div>
 </template>
@@ -459,15 +568,11 @@ const footerNavigation = {
 };
 
 export default {
-  components: {
-
-
-  },
+  components: {},
   setup() {
     return {
       navigation,
       footerNavigation,
-
     };
   },
 };
