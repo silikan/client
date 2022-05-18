@@ -14,7 +14,7 @@
             >
               Sign in to your account
             </h2>
-            <p class="mt-2 text-sm text-gray-600 dark:text-prgreen-50">
+            <p class="mt-2 text-sm text-gray-600 dark:text-white">
               Or
               {{ " " }}
               <router-link
@@ -30,7 +30,7 @@
             <div>
               <div>
                 <p
-                  class="text-sm font-medium text-gray-700 dark:text-prgreen-50"
+                  class="text-sm font-medium text-gray-700 dark:text-white"
                 >
                   Sign in with
                 </p>
@@ -198,7 +198,7 @@
                       text-sm
                       font-medium
                       text-gray-700
-                      dark:text-prgreen-50
+                      dark:text-white
                     "
                   >
                     Email address
@@ -252,7 +252,7 @@
                       text-sm
                       font-medium
                       text-gray-700
-                      dark:text-prgreen-50
+                      dark:text-white
                     "
                   >
                     Password
