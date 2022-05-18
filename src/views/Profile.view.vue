@@ -1,5 +1,7 @@
 <template>
-  <Profile :authUser="authUser" />
+  <div class="dark:bg-prblue-500">
+    <Profile :authUser="authUser" />
+  </div>
 </template>
 
 <script>
