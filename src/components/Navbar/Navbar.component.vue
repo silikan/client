@@ -1,5 +1,5 @@
 <template>
-  <Disclosure v-slot="{ open }" as="header" class="bg-white shadow">
+  <Disclosure v-slot="{ open }" as="header" class="bg-white dark:bg-prblue-500 shadow ">
     <div
       class="
         max-w-7xl
@@ -368,8 +368,8 @@
           :to="item.link"
           :class="[
             item.current
-              ? 'bg-gray-100 text-gray-900'
-              : 'text-gray-900 hover:bg-gray-50 hover:text-gray-900',
+              ? 'bg-gray-100 text-gray-900 dark:text-white'
+              : 'dark:text-white text-gray-900 hover:bg-gray-50 dark:hover:text-white dark:hover:bg-prblue-500 hover:text-gray-900',
             'rounded-md py-2 px-3 inline-flex items-center text-sm font-medium',
           ]"
           :aria-current="item.current ? 'page' : undefined"
@@ -382,6 +382,7 @@
           class="
             text-gray-900
             hover:bg-gray-50 hover:text-gray-900
+            dark:text-white
             rounded-md
             py-2
             px-3
@@ -403,8 +404,8 @@
             as="a"
             :class="[
               item.current
-                ? 'bg-gray-100 text-gray-900'
-                : 'text-gray-900 hover:bg-gray-50 hover:text-gray-900',
+                ? 'dark:bg-prblue-500 dark:text-white bg-gray-100 text-gray-900'
+                : 'dark:bg-prblue-500 dark:text-white text-gray-900 hover:bg-gray-50 hover:text-gray-900',
               'block rounded-md py-2 px-3 text-base font-medium',
             ]"
             :aria-current="item.current ? 'page' : undefined"
@@ -555,6 +556,7 @@
               p-1
               text-gray-400
               hover:text-gray-500
+              dark:text-white
             "
             to="/rooms"
           >
@@ -571,6 +573,7 @@
               p-1
               text-gray-400
               hover:text-gray-500
+                 dark:text-white
             "
             to="/cart"
           >
@@ -587,6 +590,7 @@
               p-1
               text-gray-400
               hover:text-gray-500
+                 dark:text-white
             "
             to="/task"
           >
@@ -605,6 +609,7 @@
               hover:text-gray-500
               inline-block
               relative
+                 dark:text-white
             "
             @click="createNotificationRoom"
           >
