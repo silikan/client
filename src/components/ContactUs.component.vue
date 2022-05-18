@@ -1,9 +1,9 @@
 
 <template>
-  <div class="bg-white">
+  <div class="bg-white dark:bg-prblue-500">
     <main>
       <!-- Header -->
-      <div class="py-24 bg-gray-50 sm:py-32">
+      <div class="py-24 bg-gray-50 sm:py-32 dark:bg-prblue-500">
         <div
           class="
             max-w-md
@@ -23,6 +23,7 @@
               text-gray-900 text-center
               sm:text-5xl sm:leading-none
               lg:text-6xl
+            dark:text-white
             "
           >
             Get in touch
@@ -35,6 +36,7 @@
               text-xl
               leading-normal
               text-gray-500 text-center
+              dark:text-white
             "
           >
             We're always looking for new and interesting projects to work on.
@@ -43,7 +45,7 @@
       </div>
 
       <!-- Contact Section -->
-      <div class="relative bg-white">
+      <div class="relative bg-white dark:bg-prblue-500">
         <div class="lg:absolute lg:inset-0">
           <div class="lg:absolute lg:inset-y-0 lg:right-0 lg:w-1/2">
             <img
@@ -64,10 +66,10 @@
         >
           <div class="lg:pr-8">
             <div class="max-w-md mx-auto sm:max-w-lg lg:mx-0">
-              <h2 class="text-3xl font-extrabold tracking-tight sm:text-4xl">
+              <h2 class="text-3xl font-extrabold tracking-tight sm:text-4xl dark:text-white">
                 Let's work together
               </h2>
-              <p class="mt-4 text-lg text-gray-500 sm:mt-3">
+              <p class="mt-4 text-lg text-gray-500 sm:mt-3 dark:text-white">
                 We’d love to hear from you! Send us a message using the form
                 opposite, or email us. We’d love to hear from you! Send us a
                 message using the form opposite, or email us.
@@ -80,7 +82,7 @@
                 <div>
                   <label
                     for="first-name"
-                    class="block text-sm font-medium text-gray-700"
+                    class="block text-sm font-medium text-gray-700 dark:text-white"
                     >First name</label
                   >
                   <div class="mt-1">
@@ -98,7 +100,7 @@
                 <div>
                   <label
                     for="last-name"
-                    class="block text-sm font-medium text-gray-700"
+                    class="block text-sm font-medium text-gray-700 dark:text-white"
                     >Last name</label
                   >
                   <div class="mt-1">
@@ -116,7 +118,7 @@
                 <div class="sm:col-span-2">
                   <label
                     for="email"
-                    class="block text-sm font-medium text-gray-700"
+                    class="block text-sm font-medium text-gray-700 dark:text-white"
                     >Email</label
                   >
                   <div class="mt-1">
@@ -134,7 +136,7 @@
                 <div class="sm:col-span-2">
                   <label
                     for="company"
-                    class="block text-sm font-medium text-gray-700"
+                    class="block text-sm font-medium text-gray-700 dark:text-white"
                     >Company</label
                   >
                   <div class="mt-1">
@@ -153,10 +155,10 @@
                   <div class="flex justify-between">
                     <label
                       for="phone"
-                      class="block text-sm font-medium text-gray-700"
+                      class="block text-sm font-medium text-gray-700 dark:text-white"
                       >Phone</label
                     >
-                    <span id="phone-description" class="text-sm text-gray-500"
+                    <span id="phone-description" class="text-sm text-gray-500 dark:text-white"
                       >Optional</span
                     >
                   </div>
@@ -177,12 +179,12 @@
                   <div class="flex justify-between">
                     <label
                       for="how-can-we-help"
-                      class="block text-sm font-medium text-gray-700"
+                      class="block text-sm font-medium text-gray-700 dark:text-white"
                       >How can we help you?</label
                     >
                     <span
                       id="how-can-we-help-description"
-                      class="text-sm text-gray-500"
+                      class="text-sm text-gray-500 dark:text-white"
                       >Max. 500 characters</span
                     >
                   </div>
@@ -197,15 +199,16 @@
                         w-full
                         shadow-sm
                         sm:text-sm
-                        focus:ring-grape-500 focus:border-grape-500
+                        focus:ring-prgreen-500 focus:border-prgreen-500
                         border border-gray-300
                         rounded-md
+
                       "
                     />
                   </div>
                 </div>
                 <fieldset class="sm:col-span-2">
-                  <legend class="block text-sm font-medium text-gray-700">
+                  <legend class="block text-sm font-medium text-gray-700 dark:text-white">
                     Expected Salary
                   </legend>
                   <div class="mt-4 grid grid-cols-1 gap-y-4">
@@ -216,15 +219,15 @@
                         value="under_25k"
                         type="radio"
                         class="
-                          focus:ring-grape-500
+                          focus:ring-prgreen-500
                           h-4
                           w-4
-                          text-grape-600
+                          text-prgreen-600
                           border-gray-300
                         "
                       />
                       <label for="Salary-under-25k" class="ml-3">
-                        <span class="block text-sm text-gray-700"
+                        <span class="block text-sm text-gray-700 dark:text-white"
                           >Less than $25K</span
                         >
                       </label>
@@ -236,15 +239,15 @@
                         value="25k-50k"
                         type="radio"
                         class="
-                          focus:ring-grape-500
+                          focus:ring-prgreen-500
                           h-4
                           w-4
-                          text-grape-600
+                          text-prgreen-600
                           border-gray-300
                         "
                       />
                       <label for="Salary-25k-50k" class="ml-3">
-                        <span class="block text-sm text-gray-700"
+                        <span class="block text-sm text-gray-700 dark:text-white"
                           >$25K – $50K</span
                         >
                       </label>
@@ -256,15 +259,15 @@
                         value="50k-100k"
                         type="radio"
                         class="
-                          focus:ring-grape-500
+                          focus:ring-prgreen-500
                           h-4
                           w-4
-                          text-grape-600
+                          text-prgreen-600
                           border-gray-300
                         "
                       />
                       <label for="Salary-50k-100k" class="ml-3">
-                        <span class="block text-sm text-gray-700"
+                        <span class="block text-sm text-gray-700 dark:text-white"
                           >$50K – $100K</span
                         >
                       </label>
@@ -276,15 +279,15 @@
                         value="over_100k"
                         type="radio"
                         class="
-                          focus:ring-grape-500
+                          focus:ring-prgreen-500
                           h-4
                           w-4
-                          text-grape-600
+                          text-prgreen-600
                           border-gray-300
                         "
                       />
                       <label for="Salary-over-100k" class="ml-3">
-                        <span class="block text-sm text-gray-700">$100K+</span>
+                        <span class="block text-sm text-gray-700 dark:text-white">$100K+</span>
                       </label>
                     </div>
                   </div>
@@ -292,7 +295,7 @@
                 <div class="sm:col-span-2">
                   <label
                     for="how-did-you-hear-about-us"
-                    class="block text-sm font-medium text-gray-700"
+                    class="block text-sm font-medium text-gray-700 dark:text-white"
                     >How did you hear about us?</label
                   >
                   <div class="mt-1">
@@ -302,7 +305,7 @@
                       id="how-did-you-hear-about-us"
                       class="
                         shadow-sm
-                        focus:ring-grape-500 focus:border-grape-500
+                        focus:ring-prgreen-500 focus:border-prgreen-500
                         block
                         w-full
                         sm:text-sm
@@ -326,12 +329,14 @@
                       font-medium
                       rounded-md
                       text-white
-                      bg-grape-600
-                      hover:bg-grape-700
+                      bg-prgreen-600
+                      hover:bg-prgreen-700
                       focus:outline-none
                       focus:ring-2
                       focus:ring-offset-2
-                      focus:ring-grape-500
+                      focus:ring-prgreen-500
+                      text-black
+dark:text-white
                     "
                   >
                     Submit
