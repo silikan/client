@@ -33,11 +33,13 @@
                 shadow
                 overflow-hidden
                 border-b border-gray-200
+                dark:border-prblue-500
                 sm:rounded-lg
+                mb-5
               "
             >
-              <table class="min-w-full divide-y divide-gray-200 dark:divide-prgreen-50">
-                <thead class="bg-gray-50 dark:bg-prblue-500">
+              <table class="min-w-full divide-y divide-gray-200 dark:divide-prblue-500">
+                <thead class="bg-gray-50 dark:bg-prblue-600">
                   <tr>
                     <th
                       scope="col"
@@ -49,6 +51,7 @@
                         text-gray-500
                         uppercase
                         tracking-wider
+                        dark:text-prblue-50
                       "
                     >
                       Client
@@ -63,6 +66,7 @@
                         text-gray-500
                         uppercase
                         tracking-wider
+                        dark:text-prblue-50
                       "
                     >
                       Title
@@ -77,6 +81,7 @@
                         text-gray-500
                         uppercase
                         tracking-wider
+                        dark:text-prblue-50
                       "
                     >
                       Price
@@ -91,6 +96,7 @@
                         text-gray-500
                         uppercase
                         tracking-wider
+                        dark:text-prblue-50
                       "
                     >
                       Duration
@@ -105,6 +111,7 @@
                         text-gray-500
                         uppercase
                         tracking-wider
+                        dark:text-prblue-50
                       "
                     >
                       Payment Method
@@ -115,7 +122,7 @@
                   </tr>
                 </thead>
                 <tbody
-                  class="bg-white dark:bg-prblue-500  divide-y divide-gray-200 "
+                  class="bg-white dark:bg-prblue-500  divide-y divide-gray-200 dark:divide-prblue-500 "
                 >
                   <tr v-for="request in requests" :key="request.id">
                     <td class="px-6 py-4 whitespace-nowrap">
@@ -139,7 +146,7 @@
                             >
                               {{ request.user.name }}
                             </div>
-                            <div class="text-sm text-gray-500 dark:text-white">
+                            <div class="text-sm text-gray-500 dark:text-prblue-50">
                               {{ request.user.email }}
                             </div>
                           </div>
@@ -166,6 +173,7 @@
                           rounded-full
                           bg-prgreen-600
                           text-prgreen-50
+
                         "
                       >
                         {{ request.price }} DZD
@@ -236,6 +244,7 @@
           items-between
           justify-center
           border-t border-gray-200
+          dark:border-prblue-500
           sm:px-6
           mb-10
         "
@@ -351,7 +360,7 @@
                   max-w-md
                 "
                 :class="{
-                  'bg-prgreen-50 dark:bg-white border-prgreen-500 text-prgreen-600':
+                  'bg-prgreen-50 dark:bg-prgreen-50 border-prgreen-500 text-prgreen-600':
                     1 === meta.current_page,
                   'bg-white border-gray-300 text-gray-500 hover:bg-gray-50':
                     1 !== meta.current_page,

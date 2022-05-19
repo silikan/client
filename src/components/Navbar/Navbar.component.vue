@@ -418,6 +418,8 @@
             items-center
             text-sm
             font-medium
+            dark:hover:bg-prblue-500
+            dark:hover:text-white
           "
         >
           Blog

@@ -1,6 +1,6 @@
 
 <template>
-  <div class="min-h-full bg-gray-100">
+  <div class="min-h-full bg-gray-100 dark:bg-prblue-500">
     <div class="py-10">
       <div
         class="
@@ -20,6 +20,11 @@
                 v-for="item in navigation"
                 :key="item.name"
                 :href="item.href"
+                class="dark:bg-prblue-500
+                dark:text-white
+                dark:hover:bg-prblue-600
+                dark:hover:text-white
+                "
                 :class="[
                   item.current
                     ? 'bg-gray-200 text-gray-900'
@@ -46,8 +51,8 @@
           </nav>
         </div>
         <main class="lg:col-span-6 xl:col-span-6">
-          <div class="bg-gray-100">
-            <div class="bg-white shadow sm:rounded-lg">
+          <div class="bg-gray-100 dark:bg-prblue-600">
+            <div class="bg-white shadow sm:rounded-lg dark:bg-prblue-600">
               <CreatePost />
             </div>
           </div>
@@ -57,7 +62,7 @@
               <li
                 v-for="(question, i) in requests"
                 :key="question.id"
-                class="bg-white sm:rounded-lg"
+                class="bg-white sm:rounded-lg "
               >
                 <div>
                   <router-link
