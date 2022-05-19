@@ -38,7 +38,13 @@
                 mb-5
               "
             >
-              <table class="min-w-full divide-y divide-gray-200 dark:divide-prblue-500">
+              <table
+                class="
+                  min-w-full
+                  divide-y divide-gray-200
+                  dark:divide-prblue-500
+                "
+              >
                 <thead class="bg-gray-50 dark:bg-prblue-600">
                   <tr>
                     <th
@@ -122,7 +128,12 @@
                   </tr>
                 </thead>
                 <tbody
-                  class="bg-white dark:bg-prblue-500  divide-y divide-gray-200 dark:divide-prblue-500 "
+                  class="
+                    bg-white
+                    dark:bg-prblue-500
+                    divide-y divide-gray-200
+                    dark:divide-prblue-500
+                  "
                 >
                   <tr v-for="request in requests" :key="request.id">
                     <td class="px-6 py-4 whitespace-nowrap">
@@ -146,7 +157,9 @@
                             >
                               {{ request.user.name }}
                             </div>
-                            <div class="text-sm text-gray-500 dark:text-prblue-50">
+                            <div
+                              class="text-sm text-gray-500 dark:text-prblue-50"
+                            >
                               {{ request.user.email }}
                             </div>
                           </div>
@@ -173,7 +186,6 @@
                           rounded-full
                           bg-prgreen-600
                           text-prgreen-50
-
                         "
                       >
                         {{ request.price }} DZD
@@ -236,7 +248,7 @@
       </div>
       <div
         class="
-        dark:bg-prblue-500
+          dark:bg-prblue-500
           bg-white
           px-4
           py-3
@@ -244,7 +256,7 @@
           items-between
           justify-center
           border-t border-gray-200
-          dark:border-prblue-500
+          dark:border-prblue-50
           sm:px-6
           mb-10
         "

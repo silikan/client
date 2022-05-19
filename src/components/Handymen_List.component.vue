@@ -167,6 +167,7 @@
           items-between
           justify-center
           border-t border-gray-200
+            dark:border-prblue-50
           sm:px-6
           mb-10
           dark:bg-prblue-500
