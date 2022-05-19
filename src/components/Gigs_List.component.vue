@@ -37,6 +37,7 @@
                 shadow-inner
                   border
               border-gray-200
+              dark:border-transparent
               mb-5
               "
             >
@@ -61,7 +62,7 @@
                 </router-link>
               </div>
               <div
-                class="flex-1 bg-white dark:bg-prblue-500 px-5 pt-5 flex flex-col justify-between"
+                class="flex-1 bg-white dark:bg-prblue-700 px-5 pt-5 flex flex-col justify-between"
               >
                 <div class="flex items-center">
                   <div class="flex-shrink-0">

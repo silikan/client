@@ -24,7 +24,7 @@
         </div>
       </div>
       <div class="flex flex-col">
-        <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
+        <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8 scrollbar">
           <div
             class="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8"
           >
@@ -45,7 +45,7 @@
                   dark:divide-prblue-500
                 "
               >
-                <thead class="bg-gray-50 dark:bg-prblue-600">
+                <thead class="bg-gray-50 dark:bg-prblue-700">
                   <tr>
                     <th
                       scope="col"
@@ -256,7 +256,7 @@
           items-between
           justify-center
           border-t border-gray-200
-          dark:border-prblue-50
+          dark:border-prblue-500
           sm:px-6
           mb-10
         "
@@ -571,3 +571,29 @@ export default {
   },
 };
 </script>
+
+
+<style>
+.scrollbar {
+  cursor: pointer;
+}
+.scrollbar::-webkit-scrollbar {
+  width: 15px;
+  height: 20px;
+}
+
+.scrollbar::-webkit-scrollbar-track {
+  border-radius: 100vh;
+  background: #e2e8f0;
+}
+
+.scrollbar::-webkit-scrollbar-thumb {
+  background: #94a3b8;
+  border-radius: 100vh;
+  border: 3px solid #e2e8f0;
+}
+
+.scrollbar::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
+}
+</style>
