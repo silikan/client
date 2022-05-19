@@ -1,11 +1,11 @@
 <template>
-  <div class=" bg-gray-50">
+  <div class=" bg-gray-50 dark:bg-prblue-500">
     <div class="mx-auto py-12 px-4 max-w-7xl sm:px-6 lg:px-8 lg:py-24">
       <div class="flex w-full items-center justify-between mb-5">
         <div
           class="space-y-5 sm:space-y-4 md:max-w-xl lg:max-w-3xl xl:max-w-none"
         >
-          <h2 class="text-3xl font-extrabold tracking-tight hidden md:block">
+          <h2 class="text-3xl font-extrabold tracking-tight hidden md:block dark:text-white">
             Requests
           </h2>
         </div>
@@ -28,7 +28,7 @@
               "
             >
               <table class="min-w-full divide-y divide-gray-200">
-                <thead class="bg-gray-50">
+                <thead class="bg-gray-50 dark:bg-prblue-500">
                   <tr>
                     <th
                       scope="col"
@@ -40,6 +40,7 @@
                         text-gray-500
                         uppercase
                         tracking-wider
+                         dark:text-white
                       "
                     >
                       Name
@@ -54,6 +55,7 @@
                         text-gray-500
                         uppercase
                         tracking-wider
+                        dark:text-white
                       "
                     >
                       Title
@@ -68,6 +70,7 @@
                         text-gray-500
                         uppercase
                         tracking-wider
+                        dark:text-white
                       "
                     >
                       Price
@@ -82,6 +85,7 @@
                         text-gray-500
                         uppercase
                         tracking-wider
+                        dark:text-white
                       "
                     >
                       Duration
@@ -91,7 +95,7 @@
                     </th>
                   </tr>
                 </thead>
-                <tbody class="bg-white divide-y divide-gray-200">
+                <tbody class="bg-white divide-y divide-gray-200 dark:bg-prblue-500">
                   <tr v-for="request in requests" :key="request.id">
                     <td class="px-6 py-4 whitespace-nowrap">
                       <div class="flex items-center">
@@ -103,14 +107,14 @@
                           />
                         </div>
                         <div class="ml-4">
-                          <div class="text-sm font-medium text-gray-900">
+                          <div class="text-sm font-medium dark:text-white text-gray-900">
                             {{ request.username }}
                           </div>
                         </div>
                       </div>
                     </td>
                     <td class="px-6 py-4 whitespace-nowrap">
-                      <div class="text-sm text-gray-900">
+                      <div class="text-sm text-gray-900 dark:text-white">
                         {{ request.title }}
                       </div>
                     </td>

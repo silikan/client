@@ -37,7 +37,7 @@
               "
             >
               <table class="min-w-full divide-y divide-gray-200 dark:divide-prgreen-50">
-                <thead class="bg-gray-50 dark:bg-prblue-600">
+                <thead class="bg-gray-50 dark:bg-prblue-500">
                   <tr>
                     <th
                       scope="col"

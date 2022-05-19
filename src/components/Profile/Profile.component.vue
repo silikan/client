@@ -47,7 +47,7 @@
                   dark:text-white">
             <div class="flex flex-col items-center sm:block">
               <div class="flex items-center sm:mt-6 min-w-0 flex-1 ">
-                <h3 class="font-bold text-xl text-gray-900 sm:text-2xl">
+                <h3 class="font-bold text-xl text-gray-900 sm:text-2xl dark:text-white">
                   {{ authUserData.name }}
                 </h3>
                 <span
