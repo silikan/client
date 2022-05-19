@@ -205,6 +205,8 @@
                         rounded-md
                         shadow-lg
                         bg-white
+                        dark:bg-prblue-500
+                        dark:text-white
                         ring-1 ring-black ring-opacity-5
                         focus:outline-none
                       "
@@ -213,6 +215,7 @@
                         <MenuItem v-slot="{ active }">
                           <a
                             href="#"
+                            class="  dark:text-white"
                             :class="[
                               active
                                 ? 'bg-gray-100 text-gray-900'
@@ -226,6 +229,7 @@
                           <a
                             href="#"
                             @click="copy"
+                            class="  dark:text-white"
                             :class="[
                               active
                                 ? 'bg-gray-100 text-gray-900'
