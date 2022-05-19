@@ -1,5 +1,19 @@
 <template>
-  <div class="grid grid-cols-1 md:grid-cols-2 bg-prblue-500 p-10 md:w-2/3 self-center mb-10  ">
+  <div
+    class="
+      grid grid-cols-1
+      md:grid-cols-2
+      bg-prblue-500
+      max-w-7xl
+      mx-auto
+      sm:px-6
+      lg:px-8
+      md:mx-10
+      self-center
+      mb-10
+      py-10
+    "
+  >
     <div
       class="
         m-10
@@ -33,22 +47,23 @@
         >
           Everything you need to get the job done
         </p>
-        <p class="mt-5 max-w-prose mx-auto text-xl text-gray-500">
-         signin and find the best service provider for the task you need
+        <p class="mt-5 max-w-prose mx-auto text-xl text-gray-500 mb-7">
+          signin and find the best service provider for the task you need
         </p>
-        <button
+        <router-link
+          to="/signin"
           type="button"
           class="
             inline-flex
             items-center
-            px-4
+            px-10
             py-2
             border border-transparent
             text-sm
             font-medium
-            rounded-md
+            rounded-full
             shadow-sm
-            text-white
+             text-white
             bg-prgreen-600
             hover:bg-prgreen-700
             focus:outline-none
@@ -58,7 +73,7 @@
           "
         >
           Signin
-        </button>
+        </router-link>
       </div>
     </div>
     <div class="flex justify-center">
@@ -66,7 +81,7 @@
         src="@\assets\undraw_contract_re_ves9.svg"
         class="w-60 lg:w-96 h-96"
         alt=""
-      >
+      />
     </div>
   </div>
 </template>

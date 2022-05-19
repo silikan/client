@@ -103,6 +103,7 @@
               focus:ring-2
               focus:ring-inset
               focus:ring-prgreen-500
+              dark:hover:bg-prblue-100
             "
           >
             <span class="sr-only">Open menu</span>
