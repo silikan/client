@@ -3,15 +3,15 @@
   <div class="max-w-md mx-auto sm:max-w-3xl">
     <div>
       <div class="flex flex-col justify-center items-center">
-        <AcademicCapIcon v-if="dataTypeComp == 'education'" class="w-10 h-10" />
-        <PuzzleIcon v-if="dataTypeComp == 'skills'" class="w-10 h-10" />
-        <BriefcaseIcon v-if="dataTypeComp == 'experience'" class="w-10 h-10" />
+        <AcademicCapIcon v-if="dataTypeComp == 'education'" class="w-10 h-10 dark:text-prblue-50" />
+        <PuzzleIcon v-if="dataTypeComp == 'skills'" class="w-10 h-10 dark:text-prblue-50" />
+        <BriefcaseIcon v-if="dataTypeComp == 'experience'" class="w-10 h-10 dark:text-prblue-50" />
 
         <BadgeCheckIcon
           v-if="dataTypeComp == 'certifications'"
-          class="w-10 h-10"
+          class="w-10 h-10 dark:text-prblue-50"
         />
-        <h2 class="mt-2 text-lg font-medium text-gray-900">
+        <h2 class="mt-2 text-lg font-medium text-gray-900 dark:text-prblue-50">
           Add {{ dataTypeComp }}
         </h2>
       </div>

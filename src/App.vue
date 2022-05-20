@@ -5,6 +5,8 @@
       min-h-full
       flex flex-col
       justify-between
+
+dark:bg-prblue-500
     "
   >
     <Teleport to=".notifications">
