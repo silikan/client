@@ -15,10 +15,10 @@
               src="@/assets/Logos/full-green.svg"
               alt="Silikan"
             />
-          <h2 class="mt-6 text-3xl font-extrabold text-gray-900">
+          <h2 class="mt-6 text-3xl font-extrabold text-gray-900 dark:text-white">
             Create a New Account
           </h2>
-          <p class="mt-2 text-sm text-gray-600">
+          <p class="mt-2 text-sm text-gray-600 dark:text-white">
             Or
             {{ " " }}
             <router-link
@@ -73,7 +73,7 @@
                     class="absolute inset-0 flex items-center"
                     aria-hidden="true"
                   >
-                    <div class="h-0.5 w-full bg-gray-200" />
+                    <div class="h-0.5 w-full bg-gray-200 " />
                   </div>
                   <a
                     href="#"
@@ -85,6 +85,7 @@
                       items-center
                       justify-center
                       bg-white
+                      dark:bg-prblue-500
                       border-2 border-prgreen-600
                       rounded-full
                     "
@@ -155,8 +156,8 @@
                       ? 'rounded-bl-md rounded-br-md'
                       : '',
                     checked
-                      ? 'bg-prgreen-50 border-prgreen-200 z-10'
-                      : 'border-gray-200',
+                      ? 'bg-prgreen-50 border-prgreen-200 z-10 '
+                      : 'border-gray-200 dark:bg-prblue-500 ',
                     'relative border p-4 flex cursor-pointer focus:outline-none',
                   ]"
                 >
@@ -176,7 +177,7 @@
                     <RadioGroupLabel
                       as="span"
                       :class="[
-                        checked ? 'text-prgreen-900' : 'text-gray-900',
+                        checked ? 'text-prgreen-900' : 'text-gray-900 dark:text-white',
                         'block text-sm font-medium',
                       ]"
                     >
@@ -185,7 +186,7 @@
                     <RadioGroupDescription
                       as="span"
                       :class="[
-                        checked ? 'text-prgreen-700' : 'text-gray-500',
+                        checked ? 'text-prgreen-700' : 'text-gray-500 ',
                         'block text-sm',
                       ]"
                     >
@@ -224,136 +225,139 @@
           </button>
           <div v-if="steps[1].status == 'current'" class="signup">
             <div>
-              <p class="text-sm font-medium text-gray-700">Sign in with</p>
+              <p class="text-sm font-medium text-gray-700 dark:text-white">Sign up with</p>
 
-              <div class="mt-1 grid grid-cols-3 gap-3">
-                <div>
-                  <a
-                    :href="facebook"
-                    class="
-                      w-full
-                      inline-flex
-                      justify-center
-                      py-2
-                      px-4
-                      border border-gray-300
-                      rounded-md
-                      shadow-sm
-                      bg-white
-                      text-sm
-                      font-medium
-                      text-gray-500
-                      hover:bg-gray-50
-                    "
-                  >
-                    <span class="sr-only">Sign in with Facebook</span>
-                    <svg
-                      class="w-5 h-5"
-                      aria-hidden="true"
-                      fill="currentColor"
-                      viewBox="0 0 24 24"
+               <div class="mt-1 grid grid-cols-3 gap-3">
+                  <div>
+                    <a
+                      :href="facebook"
+                      class="
+                        w-full
+                        inline-flex
+                        justify-center
+                        py-2
+                        px-4
+                        border border-gray-300
+                        rounded-md
+                        shadow-sm
+                        bg-white
+                        dark:bg-prblue-500
+                        text-sm
+                        font-medium
+                        text-gray-500
+                        hover:bg-gray-50
+                      "
                     >
-                      <path
-                        d="M9 8h-3v4h3v12h5v-12h3.642l.358-4h-4v-1.667c0-.955.192-1.333 1.115-1.333h2.885v-5h-3.808c-3.596 0-5.192 1.583-5.192 4.615v3.385z"
-                      />
-                    </svg>
-                  </a>
-                </div>
-
-                <div>
-                  <a
-                    :href="linkedin"
-                    class="
-                      w-full
-                      inline-flex
-                      justify-center
-                      py-2
-                      px-4
-                      border border-gray-300
-                      rounded-md
-                      shadow-sm
-                      bg-white
-                      text-sm
-                      font-medium
-                      text-gray-500
-                      hover:bg-gray-50
-                    "
-                  >
-                    <span class="sr-only">Sign in with Linkedin</span>
-                    <svg
-                      class="w-5 h-5"
-                      aria-hidden="true"
-                      fill="currentColor"
-                      viewBox="0 0 24 24"
-                    >
-                      <path
-                        d="M4.98 3.5c0 1.381-1.11 2.5-2.48 2.5s-2.48-1.119-2.48-2.5c0-1.38 1.11-2.5 2.48-2.5s2.48 1.12 2.48 2.5zm.02 4.5h-5v16h5v-16zm7.982 0h-4.968v16h4.969v-8.399c0-4.67 6.029-5.052 6.029 0v8.399h4.988v-10.131c0-7.88-8.922-7.593-11.018-3.714v-2.155z"
-                      />
-                    </svg>
-                  </a>
-                </div>
-
-                <div>
-                  <a
-                    :href="google"
-                    class="
-                      w-full
-                      inline-flex
-                      justify-center
-                      py-2
-                      px-4
-                      border border-gray-300
-                      rounded-md
-                      shadow-sm
-                      bg-white
-                      text-sm
-                      font-medium
-                      text-gray-500
-                      hover:bg-gray-50
-                    "
-                  >
-                    <span class="sr-only">Sign in with Google</span>
-                    <svg
-                      class="w-5 h-5"
-                      aria-hidden="true"
-                      fill="currentColor"
-                      xmlns="http://www.w3.org/2000/svg"
-                      xmlns:xlink="http://www.w3.org/1999/xlink"
-                      viewBox="0 0 48 48"
-                    >
-                      <defs>
+                      <span class="sr-only">Sign in with Facebook</span>
+                      <svg
+                        class="w-5 h-5"
+                        aria-hidden="true"
+                        fill="currentColor"
+                        viewBox="0 0 24 24"
+                      >
                         <path
-                          id="a"
-                          d="M44.5 20H24v8.5h11.8C34.7 33.9 30.1 37 24 37c-7.2 0-13-5.8-13-13s5.8-13 13-13c3.1 0 5.9 1.1 8.1 2.9l6.4-6.4C34.6 4.1 29.6 2 24 2 11.8 2 2 11.8 2 24s9.8 22 22 22c11 0 21-8 21-22 0-1.3-.2-2.7-.5-4z"
+                          d="M9 8h-3v4h3v12h5v-12h3.642l.358-4h-4v-1.667c0-.955.192-1.333 1.115-1.333h2.885v-5h-3.808c-3.596 0-5.192 1.583-5.192 4.615v3.385z"
                         />
-                      </defs>
-                      <clipPath id="b">
-                        <use xlink:href="#a" overflow="visible" />
-                      </clipPath>
-                      <path
-                        clip-path="url(#b)"
+                      </svg>
+                    </a>
+                  </div>
+
+                  <div>
+                    <a
+                      :href="linkedin"
+                      class="
+                        w-full
+                        inline-flex
+                        justify-center
+                        py-2
+                        px-4
+                        border border-gray-300
+                        dark:bg-prblue-500
+                        rounded-md
+                        shadow-sm
+                        bg-white
+                        text-sm
+                        font-medium
+                        text-gray-500
+                        hover:bg-gray-50
+                      "
+                    >
+                      <span class="sr-only">Sign in with Linkedin</span>
+                      <svg
+                        class="w-5 h-5"
+                        aria-hidden="true"
                         fill="currentColor"
-                        d="M0 37V11l17 13z"
-                      />
-                      <path
-                        clip-path="url(#b)"
+                        viewBox="0 0 24 24"
+                      >
+                        <path
+                          d="M4.98 3.5c0 1.381-1.11 2.5-2.48 2.5s-2.48-1.119-2.48-2.5c0-1.38 1.11-2.5 2.48-2.5s2.48 1.12 2.48 2.5zm.02 4.5h-5v16h5v-16zm7.982 0h-4.968v16h4.969v-8.399c0-4.67 6.029-5.052 6.029 0v8.399h4.988v-10.131c0-7.88-8.922-7.593-11.018-3.714v-2.155z"
+                        />
+                      </svg>
+                    </a>
+                  </div>
+
+                  <div>
+                    <a
+                      :href="google"
+                      class="
+                        w-full
+                        inline-flex
+                        justify-center
+                        py-2
+                        px-4
+                        border border-gray-300
+                        dark:bg-prblue-500
+                        rounded-md
+                        shadow-sm
+                        bg-white
+                        text-sm
+                        font-medium
+                        text-gray-500
+                        hover:bg-gray-50
+                      "
+                    >
+                      <span class="sr-only">Sign in with Google</span>
+                      <svg
+                        class="w-5 h-5"
+                        aria-hidden="true"
                         fill="currentColor"
-                        d="M0 11l17 13 7-6.1L48 14V0H0z"
-                      />
-                      <path
-                        clip-path="url(#b)"
-                        fill="currentColor"
-                        d="M0 37l30-23 7.9 1L48 0v48H0z"
-                      />
-                      <path
-                        clip-path="url(#b)"
-                        fill="currentColor"
-                        d="M48 48L17 24l-4-3 35-10z"
-                      />
-                    </svg>
-                  </a>
+                        xmlns="http://www.w3.org/2000/svg"
+                        xmlns:xlink="http://www.w3.org/1999/xlink"
+                        viewBox="0 0 48 48"
+                      >
+                        <defs>
+                          <path
+                            id="a"
+                            d="M44.5 20H24v8.5h11.8C34.7 33.9 30.1 37 24 37c-7.2 0-13-5.8-13-13s5.8-13 13-13c3.1 0 5.9 1.1 8.1 2.9l6.4-6.4C34.6 4.1 29.6 2 24 2 11.8 2 2 11.8 2 24s9.8 22 22 22c11 0 21-8 21-22 0-1.3-.2-2.7-.5-4z"
+                          />
+                        </defs>
+                        <clipPath id="b">
+                          <use xlink:href="#a" overflow="visible" />
+                        </clipPath>
+                        <path
+                          clip-path="url(#b)"
+                          fill="currentColor"
+                          d="M0 37V11l17 13z"
+                        />
+                        <path
+                          clip-path="url(#b)"
+                          fill="currentColor"
+                          d="M0 11l17 13 7-6.1L48 14V0H0z"
+                        />
+                        <path
+                          clip-path="url(#b)"
+                          fill="currentColor"
+                          d="M0 37l30-23 7.9 1L48 0v48H0z"
+                        />
+                        <path
+                          clip-path="url(#b)"
+                          fill="currentColor"
+                          d="M48 48L17 24l-4-3 35-10z"
+                        />
+                      </svg>
+                    </a>
+                  </div>
                 </div>
-              </div>
             </div>
 
             <div class="mt-6">
@@ -366,7 +370,7 @@
                 <div>
                   <label
                     for="name"
-                    class="block text-sm font-medium text-gray-700"
+                    class="block text-sm font-medium text-gray-700 dark:text-white"
                   >
                     name
                   </label>
@@ -409,7 +413,7 @@
                      <div>
                   <label
                     for="username"
-                    class="block text-sm font-medium text-gray-700"
+                    class="block text-sm font-medium text-gray-700 dark:text-white"
                   >
                     username
                   </label>
@@ -452,7 +456,7 @@
                 <div>
                   <label
                     for="email"
-                    class="block text-sm font-medium text-gray-700"
+                    class="block text-sm font-medium text-gray-700 dark:text-white"
                   >
                     Email address
                   </label>
@@ -496,7 +500,7 @@
                 <div class="space-y-1">
                   <label
                     for="password"
-                    class="block text-sm font-medium text-gray-700"
+                    class="block text-sm font-medium text-gray-700 dark:text-white"
                   >
                     Password
                   </label>
@@ -539,7 +543,7 @@
                 <div class="space-y-1">
                   <label
                     for="confirm password"
-                    class="block text-sm font-medium text-gray-700"
+                    class="block text-sm font-medium text-gray-700 dark:text-white"
                   >
                     confirm Password
                   </label>
@@ -594,11 +598,12 @@
                         focus:ring-prgreen-500
                         border-gray-300
                         rounded
+                        dark:text-white
                       "
                     />
                     <label
                       for="remember-me"
-                      class="ml-2 block text-sm text-gray-900"
+                      class="ml-2 block text-sm text-gray-900 dark:text-white"
                     >
                       Remember me
                     </label>

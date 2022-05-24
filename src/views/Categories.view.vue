@@ -1,5 +1,5 @@
 <template>
-  <div class=" p-10">
+  <div class=" p-10 dark:bg-prblue-500">
 
     <CategoriesList />
   </div>

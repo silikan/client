@@ -1,5 +1,9 @@
 <template>
-  <Disclosure v-slot="{ open }" as="header" class="bg-white shadow">
+  <Disclosure
+    v-slot="{ open }"
+    as="header"
+    class="bg-white dark:bg-prblue-500 shadow"
+  >
     <div
       class="
         max-w-7xl
@@ -99,6 +103,7 @@
               focus:ring-2
               focus:ring-inset
               focus:ring-prgreen-500
+              dark:hover:bg-prblue-100
             "
           >
             <span class="sr-only">Open menu</span>
@@ -198,6 +203,10 @@
               p-1
               text-gray-400
               hover:text-gray-500
+                 dark:bg-prblue-500
+              dark:text-white
+              dark:hover:bg-prblue-500
+              dark:hover:text-white
             "
           >
             <span class="sr-only">chat rooms</span>
@@ -213,6 +222,10 @@
               p-1
               text-gray-400
               hover:text-gray-500
+                 dark:bg-prblue-500
+              dark:text-white
+              dark:hover:bg-prblue-500
+              dark:hover:text-white
             "
             to="/task"
           >
@@ -229,6 +242,9 @@
               p-1
               text-gray-400
               hover:text-gray-500
+               dark:bg-prblue-500
+              dark:text-white
+
             "
             to="/cart"
           >
@@ -247,6 +263,11 @@
               hover:text-gray-500
               inline-block
               relative
+              dark:bg-prblue-500
+              dark:text-white
+              dark:hover:bg-prblue-500
+              dark:hover:text-white
+
             "
             @click="createNotificationRoom"
           >
@@ -262,6 +283,7 @@
                 w-2
                 rounded-full
                 ring-2 ring-white
+                dark:ring-prblue-500
                 bg-red-400
                 font-size-sm font-bold
               "
@@ -320,11 +342,14 @@
                   ring-1 ring-black ring-opacity-5
                   py-1
                   focus:outline-none
+                  dark:bg-prblue-500
                 "
               >
                 <router-link to="/profile">
                   <MenuItem v-slot="{ active }">
                     <a
+                      class="dark:text-white dark:hover:bg-prblue-500 dark:hover:text-white"
+
                       :class="[
                         active ? 'bg-gray-100' : '',
                         'block py-2 px-4 text-sm text-gray-700',
@@ -337,6 +362,8 @@
                 <router-link to="/edit/profile">
                   <MenuItem v-slot="{ active }">
                     <a
+                                            class="dark:text-white dark:hover:bg-prblue-500 dark:hover:text-white"
+
                       :class="[
                         active ? 'bg-gray-100' : '',
                         'block py-2 px-4 text-sm text-gray-700',
@@ -348,6 +375,8 @@
                 </router-link>
                 <MenuItem v-slot="{ active }" class="cursor-pointer">
                   <a
+                                          class="dark:text-white dark:hover:bg-prblue-500 dark:hover:text-white"
+
                     :class="[
                       active ? 'bg-gray-100' : '',
                       'block py-2 px-4 text-sm text-gray-700',
@@ -368,8 +397,8 @@
           :to="item.link"
           :class="[
             item.current
-              ? 'bg-gray-100 text-gray-900'
-              : 'text-gray-900 hover:bg-gray-50 hover:text-gray-900',
+              ? 'bg-gray-100 text-gray-900 dark:text-white'
+              : 'dark:text-white text-gray-900 hover:bg-gray-50 dark:hover:text-white dark:hover:bg-prblue-500 hover:text-gray-900',
             'rounded-md py-2 px-3 inline-flex items-center text-sm font-medium',
           ]"
           :aria-current="item.current ? 'page' : undefined"
@@ -382,6 +411,7 @@
           class="
             text-gray-900
             hover:bg-gray-50 hover:text-gray-900
+            dark:text-white
             rounded-md
             py-2
             px-3
@@ -389,6 +419,8 @@
             items-center
             text-sm
             font-medium
+            dark:hover:bg-prblue-500
+            dark:hover:text-white
           "
         >
           Blog
@@ -403,8 +435,8 @@
             as="a"
             :class="[
               item.current
-                ? 'bg-gray-100 text-gray-900'
-                : 'text-gray-900 hover:bg-gray-50 hover:text-gray-900',
+                ? 'dark:bg-prblue-500 dark:text-white bg-gray-100 text-gray-900'
+                : 'dark:bg-prblue-500 dark:text-white text-gray-900 hover:bg-gray-50 hover:text-gray-900',
               'block rounded-md py-2 px-3 text-base font-medium',
             ]"
             :aria-current="item.current ? 'page' : undefined"
@@ -414,23 +446,23 @@
         </div>
       </router-link>
       <router-link to="/blog" v-if="isLoggedin === true">
-              <div class="pt-2 pb-3 px-2 space-y-1">
-
-        <DisclosureButton
-          class="
-            text-gray-900
-            hover:bg-gray-50 hover:text-gray-900,
-            block
-            rounded-md
-            py-2
-            px-3
-            text-base
-            font-medium
-          "
-        >
-          Blog
-        </DisclosureButton>
-      </div>
+        <div class="pt-2 pb-3 px-2 space-y-1">
+          <DisclosureButton
+            class="
+              text-gray-900
+              hover:bg-gray-50 hover:text-gray-900,
+              block
+              rounded-md
+              py-2
+              px-3
+              text-base
+              font-medium
+              dark:text-white dark:hover:bg-prblue-500 dark:hover:text-white
+            "
+          >
+            Blog
+          </DisclosureButton>
+        </div>
       </router-link>
       <div
         class="m-5 flex flex-col justify-between space-y-4 items-start"
@@ -501,10 +533,10 @@
               />
             </div>
             <div class="ml-3">
-              <div class="text-base font-medium text-gray-800">
+              <div class="text-base font-medium text-gray-800 dark:text-white">
                 {{ authUserData.name }}
               </div>
-              <div class="text-sm font-medium text-gray-500">
+              <div class="text-sm font-medium text-gray-500 dark:text-white">
                 {{ authUserData.username }}
               </div>
             </div>
@@ -555,6 +587,7 @@
               p-1
               text-gray-400
               hover:text-gray-500
+              dark:bg-prblue-500 dark:text-white
             "
             to="/rooms"
           >
@@ -571,6 +604,7 @@
               p-1
               text-gray-400
               hover:text-gray-500
+              dark:bg-prblue-500 dark:text-white
             "
             to="/cart"
           >
@@ -587,6 +621,7 @@
               p-1
               text-gray-400
               hover:text-gray-500
+              dark:bg-prblue-500 dark:text-white
             "
             to="/task"
           >
@@ -605,6 +640,7 @@
               hover:text-gray-500
               inline-block
               relative
+              dark:bg-prblue-500 dark:text-white
             "
             @click="createNotificationRoom"
           >
@@ -621,8 +657,10 @@
                 w-2
                 rounded-full
                 ring-2 ring-white
+                 dark:ring-prblue-500
                 bg-red-400
                 font-size-sm font-bold
+                dark:bg-prblue-500 dark:text-white
               "
               v-if="notifications.length > 0"
             />
@@ -641,6 +679,7 @@
                 text-gray-500
                 hover:bg-gray-50 hover:text-gray-900
                 cursor-pointer
+                dark:text-white dark:hover:bg-prblue-500 dark:hover:text-white
               "
             >
               Your Profile
@@ -658,6 +697,7 @@
                 text-gray-500
                 hover:bg-gray-50 hover:text-gray-900
                 cursor-pointer
+                dark:text-white dark:hover:bg-prblue-500 dark:hover:text-white
               "
             >
               Settings
@@ -674,6 +714,7 @@
               text-gray-500
               hover:bg-gray-50 hover:text-gray-900
               cursor-pointer
+              dark:text-white dark:hover:bg-prblue-500 dark:hover:text-white
             "
             @click="logout"
           >

@@ -275,6 +275,7 @@ let getUserNotificationRoom = await store.dispatch(
       addToCart,
       handymanId,
       authUserId,
+      loggedIn
     };
   },
 };

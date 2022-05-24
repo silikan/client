@@ -1,14 +1,14 @@
 <!-- This example requires Tailwind CSS v2.0+ -->
 <template>
-  <div class="relative bg-white py-16 sm:py-24 lg:py-32">
+  <div class="relative bg-white py-16 sm:py-24 lg:py-32 dark:bg-prblue-500 ">
     <div class="mx-auto max-w-md px-4 text-center sm:max-w-3xl sm:px-6 lg:px-8 lg:max-w-7xl">
-      <h2 class="text-base font-semibold tracking-wider text-prgreen-600 uppercase">
+      <h2 class="text-base font-semibold tracking-wider text-prgreen-600 uppercase dark:text-white">
         Work faster
       </h2>
-      <p class="mt-2 text-3xl font-extrabold text-gray-900 tracking-tight sm:text-4xl">
+      <p class="mt-2 text-3xl font-extrabold text-gray-900 tracking-tight sm:text-4xl dark:text-white">
         Everything you need to get the job done
       </p>
-      <p class="mt-5 max-w-prose mx-auto text-xl text-gray-500">
+      <p class="mt-5 max-w-prose mx-auto text-xl text-gray-500 dark:text-white">
         you get your services done faster and easier.
       </p>
       <div class="mt-12">
@@ -18,7 +18,7 @@
             :key="feature.name"
             class="pt-6"
           >
-            <div class="flow-root bg-gray-50 rounded-lg px-6 pb-8">
+            <div class="flow-root bg-gray-50 rounded-lg px-6 pb-8  dark:bg-prblue-500">
               <div class="-mt-10">
                 <div>
                   <span class="inline-flex items-center justify-center p-3 bg-prgreen-500 rounded-md shadow-lg">
@@ -29,10 +29,10 @@
                     />
                   </span>
                 </div>
-                <h3 class="mt-8 text-lg font-medium text-gray-900 tracking-tight">
+                <h3 class="mt-8 text-lg font-medium text-gray-900 tracking-tight dark:text-white">
                   {{ feature.name }}
                 </h3>
-                <p class="mt-5 text-base text-gray-500">
+                <p class="mt-5 text-base text-gray-500 dark:text-white">
                   {{ feature.description }}
                 </p>
               </div>

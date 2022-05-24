@@ -1,15 +1,15 @@
 <template>
   <form
     @submit.prevent="updateAndUploadFile"
-    class="divide-y divide-gray-200 lg:col-span-9"
+    class="divide-y divide-gray-200 lg:col-span-9 dark:bg-prblue-500"
     action="#"
     method="POST"
   >
     <!-- Profile section -->
     <div class="py-6 px-4 sm:p-6 lg:pb-8">
       <div>
-        <h2 class="text-lg leading-6 font-medium text-gray-900">Profile</h2>
-        <p class="mt-1 text-sm text-gray-500">
+        <h2 class="text-lg leading-6 font-medium text-gray-900 dark:text-prblue-50">Profile</h2>
+        <p class="mt-1 text-sm text-gray-500 dark:text-prblue-50">
           This information will be displayed publicly so be careful what you
           share.
         </p>
@@ -30,7 +30,7 @@
           >
             <label
               for="username"
-              class="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2"
+              class="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2 dark:text-prblue-50"
             >
               Username
             </label>
@@ -44,6 +44,7 @@
                 inline-flex
                 items-center
                 text-gray-500
+                dark:text-prblue-50
                 sm:text-sm
               "
             >
@@ -102,7 +103,7 @@
           >
             <label
               for="email"
-              class="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2"
+              class="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2 dark:text-prblue-50"
               >Email</label
             >
             <div class="mt-1 rounded-md relative flex sm:col-span-2">
@@ -160,7 +161,7 @@
           >
             <label
               for="about"
-              class="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2"
+              class="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2 dark:text-prblue-50"
             >
               Bio
             </label>
@@ -209,7 +210,7 @@
         <div
           class="mt-6 flex-grow lg:mt-0 lg:ml-6 lg:flex-grow-0 lg:flex-shrink-0"
         >
-          <p class="text-sm font-medium text-gray-700" aria-hidden="true">
+          <p class="text-sm font-medium text-gray-700 dark:text-prblue-50" aria-hidden="true">
             Photo
           </p>
           <div class="mt-1 lg:hidden">
@@ -259,6 +260,7 @@
                       leading-4
                       font-medium
                       text-gray-700
+                      dark:text-prblue-50
                       pointer-events-none
                     "
                   >
@@ -364,7 +366,7 @@
         >
           <label
             for="name"
-            class="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2"
+            class="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2 dark:text-prblue-50"
           >
             name</label
           >
@@ -421,7 +423,7 @@
         >
           <label
             for="phone-number"
-            class="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2"
+            class="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2 dark:text-prblue-50"
             >Phone Number</label
           >
           <div class="mt-1 relative rounded-md sm:col-span-2">
@@ -442,6 +444,7 @@
                   border-transparent
                   bg-transparent
                   text-gray-500
+                  dark:text-prblue-50
                   sm:text-sm
                   rounded-md
                 "
@@ -505,7 +508,7 @@
         >
           <label
             for="work_hours"
-            class="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2"
+            class="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2 dark:text-prblue-50"
           >
             Work Hours</label
           >
@@ -532,7 +535,7 @@
         >
           <label
             for="work_hours"
-            class="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2"
+            class="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2 dark:text-prblue-50"
           >
             Birthday</label
           >
@@ -553,7 +556,7 @@
         >
           <label
             for="salary"
-            class="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2"
+            class="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2 dark:text-prblue-50"
             >salary</label
           >
           <div class="sm:col-span-2 relative">
@@ -621,7 +624,7 @@
         >
           <label
             for="salary"
-            class="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2"
+            class="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2 dark:text-prblue-50"
             >Work Place</label
           >
           <Listbox as="div" v-model="work_place" class="sm:col-span-2">
@@ -658,7 +661,7 @@
                   "
                 >
                   <SelectorIcon
-                    class="h-5 w-5 text-gray-400"
+                    class="h-5 w-5 text-gray-400 dark:text-prblue-50"
                     aria-hidden="true"
                   />
                 </span>
@@ -739,7 +742,7 @@
         >
           <label
             for="salary"
-            class="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2"
+            class="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2 dark:text-prblue-50"
             >Work Time Length
           </label>
           <Listbox as="div" v-model="work_time_length" class="sm:col-span-2">
@@ -776,7 +779,7 @@
                   "
                 >
                   <SelectorIcon
-                    class="h-5 w-5 text-gray-400"
+                    class="h-5 w-5 text-gray-400 dark:text-prblue-50"
                     aria-hidden="true"
                   />
                 </span>
@@ -856,7 +859,7 @@
         >
           <label
             for="country"
-            class="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2"
+            class="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2 dark:text-prblue-50"
             >Country</label
           >
           <div class="sm:col-span-2">
@@ -898,7 +901,7 @@
         >
           <label
             for="gender"
-            class="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2"
+            class="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2 dark:text-prblue-50"
             >gender</label
           >
           <div class="sm:col-span-2">
@@ -939,7 +942,7 @@
         >
           <label
             for="street-address"
-            class="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2"
+            class="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2 dark:text-prblue-50"
             >Street address</label
           >
           <div class="mt-1 relative rounded-md sm:col-span-2">
@@ -998,7 +1001,7 @@
         >
           <label
             for="city"
-            class="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2"
+            class="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2 dark:text-prblue-50"
             >City</label
           >
           <div class="mt-1 relative rounded-md sm:col-span-2">
@@ -1056,7 +1059,7 @@
         >
           <label
             for="region"
-            class="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2"
+            class="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2 dark:text-prblue-50"
             >State / Province</label
           >
           <div class="mt-1 relative rounded-md sm:col-span-2">
@@ -1114,7 +1117,7 @@
         >
           <label
             for="zip_code"
-            class="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2"
+            class="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2 dark:text-prblue-50"
             >ZIP / Postal code</label
           >
           <div class="mt-1 relative rounded-md sm:col-span-2">
@@ -1172,7 +1175,7 @@
         >
           <label
             for="website"
-            class="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2"
+            class="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2 dark:text-prblue-50"
           >
             website
           </label>
@@ -1186,6 +1189,7 @@
                 inline-flex
                 items-center
                 text-gray-500
+                 dark:text-prblue-50
                 sm:text-sm
               "
             >
@@ -1275,7 +1279,7 @@
         >
           <label
             for="company-website"
-            class="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2"
+            class="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2 dark:text-prblue-50 "
           >
             Facebook
           </label>
@@ -1289,6 +1293,7 @@
                 border border-r-0 border-gray-300
                 bg-gray-50
                 text-gray-500
+                dark:text-prblue-50
                 sm:text-sm
               "
             >
@@ -1328,7 +1333,7 @@
         >
           <label
             for="company-website"
-            class="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2"
+            class="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2 dark:text-prblue-50"
           >
             Twitter
           </label>
@@ -1342,6 +1347,7 @@
                 border border-r-0 border-gray-300
                 bg-gray-50
                 text-gray-500
+                dark:text-prblue-50
                 sm:text-sm
               "
             >
@@ -1381,7 +1387,7 @@
         >
           <label
             for="company-website"
-            class="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2"
+            class="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2 dark:text-prblue-50"
           >
             Linkedin
           </label>
@@ -1395,6 +1401,7 @@
                 border border-r-0 border-gray-300
                 bg-gray-50
                 text-gray-500
+                dark:text-prblue-50
                 sm:text-sm
               "
             >

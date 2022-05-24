@@ -1,21 +1,30 @@
 <template>
-<div v-if="loading === true">
-<Table/>
-</div>
+  <div v-if="loading === true">
+    <Table />
+  </div>
 
-  <div class="bg-white" v-if=" loading === false && links && meta">
+  <div class="" v-if="loading === false && links && meta">
     <div class="mx-auto py-12 px-4 max-w-7xl sm:px-6 lg:px-8 lg:py-24">
       <div class="flex w-full items-center justify-between mb-5">
         <div
           class="space-y-5 sm:space-y-4 md:max-w-xl lg:max-w-3xl xl:max-w-none"
         >
-          <h2 class="text-3xl font-extrabold tracking-tight hidden md:block">
+          <h2
+            class="
+              dark:text-white
+              text-3xl
+              font-extrabold
+              tracking-tight
+              hidden
+              md:block
+            "
+          >
             Requests
           </h2>
         </div>
       </div>
       <div class="flex flex-col">
-        <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
+        <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8 scrollbar">
           <div
             class="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8"
           >
@@ -24,11 +33,19 @@
                 shadow
                 overflow-hidden
                 border-b border-gray-200
+                dark:border-prblue-500
                 sm:rounded-lg
+                mb-5
               "
             >
-              <table class="min-w-full divide-y divide-gray-200">
-                <thead class="bg-gray-50">
+              <table
+                class="
+                  min-w-full
+                  divide-y divide-gray-200
+                  dark:divide-prblue-500
+                "
+              >
+                <thead class="bg-gray-50 dark:bg-prblue-700">
                   <tr>
                     <th
                       scope="col"
@@ -40,6 +57,7 @@
                         text-gray-500
                         uppercase
                         tracking-wider
+                        dark:text-prblue-50
                       "
                     >
                       Client
@@ -54,6 +72,7 @@
                         text-gray-500
                         uppercase
                         tracking-wider
+                        dark:text-prblue-50
                       "
                     >
                       Title
@@ -68,6 +87,7 @@
                         text-gray-500
                         uppercase
                         tracking-wider
+                        dark:text-prblue-50
                       "
                     >
                       Price
@@ -82,6 +102,7 @@
                         text-gray-500
                         uppercase
                         tracking-wider
+                        dark:text-prblue-50
                       "
                     >
                       Duration
@@ -96,6 +117,7 @@
                         text-gray-500
                         uppercase
                         tracking-wider
+                        dark:text-prblue-50
                       "
                     >
                       Payment Method
@@ -105,7 +127,14 @@
                     </th>
                   </tr>
                 </thead>
-                <tbody class="bg-white divide-y divide-gray-200">
+                <tbody
+                  class="
+                    bg-white
+                    dark:bg-prblue-500
+                    divide-y divide-gray-200
+                    dark:divide-prblue-500
+                  "
+                >
                   <tr v-for="request in requests" :key="request.id">
                     <td class="px-6 py-4 whitespace-nowrap">
                       <router-link :to="`/user/${request.user.id}`">
@@ -118,20 +147,29 @@
                             />
                           </div>
                           <div class="ml-4">
-                            <div class="text-sm font-medium text-gray-900">
+                            <div
+                              class="
+                                text-sm
+                                font-medium
+                                text-gray-900
+                                dark:text-white
+                              "
+                            >
                               {{ request.user.name }}
                             </div>
-                            <div class="text-sm text-gray-500">
+                            <div
+                              class="text-sm text-gray-500 dark:text-prblue-50"
+                            >
                               {{ request.user.email }}
                             </div>
                           </div>
                         </div>
                       </router-link>
                     </td>
-                  <td class="px-6 py-4 whitespace-nowrap">
+                    <td class="px-6 py-4 whitespace-nowrap">
                       <div class="flex items-center">
                         <div class="ml-4">
-                          <div class="text-sm text-gray-500">
+                          <div class="text-sm text-gray-500 dark:text-white">
                             {{ request.title }}
                           </div>
                         </div>
@@ -210,6 +248,7 @@
       </div>
       <div
         class="
+          dark:bg-prblue-500
           bg-white
           px-4
           py-3
@@ -217,6 +256,7 @@
           items-between
           justify-center
           border-t border-gray-200
+          dark:border-prblue-500
           sm:px-6
           mb-10
         "
@@ -332,7 +372,7 @@
                   max-w-md
                 "
                 :class="{
-                  'bg-prgreen-50 border-prgreen-500 text-prgreen-600':
+                  'bg-prgreen-50 dark:bg-prgreen-50 border-prgreen-500 text-prgreen-600':
                     1 === meta.current_page,
                   'bg-white border-gray-300 text-gray-500 hover:bg-gray-50':
                     1 !== meta.current_page,
@@ -430,7 +470,7 @@
 <script>
 import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/vue/solid";
 import Avatar from "@/components/Avatar/Avatar.component.vue";
-import Table from "@/components/Loading/Skeletons/Table.component.vue"
+import Table from "@/components/Loading/Skeletons/Table.component.vue";
 
 import { computed, reactive } from "@vue/runtime-core";
 import { useStore } from "vuex";
@@ -440,7 +480,7 @@ export default {
     ChevronLeftIcon,
     ChevronRightIcon,
     Avatar,
-    Table
+    Table,
   },
 
   setup() {
@@ -510,7 +550,7 @@ export default {
       return data;
     });
     let preurl = `${process.env.VUE_APP_API_URL}`;
-            let loading = computed(() => store.getters["Request/loading"]);
+    let loading = computed(() => store.getters["Request/loading"]);
 
     return {
       action,
@@ -531,3 +571,29 @@ export default {
   },
 };
 </script>
+
+
+<style>
+.scrollbar {
+  cursor: pointer;
+}
+.scrollbar::-webkit-scrollbar {
+  width: 15px;
+  height: 20px;
+}
+
+.scrollbar::-webkit-scrollbar-track {
+  border-radius: 100vh;
+  background: #e2e8f0;
+}
+
+.scrollbar::-webkit-scrollbar-thumb {
+  background: #94a3b8;
+  border-radius: 100vh;
+  border: 3px solid #e2e8f0;
+}
+
+.scrollbar::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
+}
+</style>

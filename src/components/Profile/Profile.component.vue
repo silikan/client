@@ -1,30 +1,30 @@
 <!-- This example requires Tailwind CSS v2.0+ -->
-<template>
-  <div>
-    <div>
+<template >
+  <div >
+    <div >
       <img
         class="h-32 w-full object-cover lg:h-48"
         :src="profile.backgroundImage"
         alt=""
       />
     </div>
-    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="-mt-12 sm:-mt-16 sm:flex sm:items-end sm:space-x-5">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 dark:bg-prblue-500">
+      <div class="-mt-12 sm:-mt-16 sm:flex sm:items-end sm:space-x-5 ">
         <div class="flex justify-center items-center md:flex-none">
           <div
-            class="h-40 w-40 rounded-full ring-4 ring-white sm:h-48 sm:w-48"
+            class="h-40 w-40 rounded-full ring-4 ring-white sm:h-48 sm:w-48 dark:ring-prblue-500"
             aria-hidden="true"
           >
             <img
               referrerpolicy="no-referrer"
-              class="h-40 w-40 rounded-full ring-4 ring-white sm:h-48 sm:w-48"
+              class="h-40 w-40 rounded-full ring-4 ring-white sm:h-48 sm:w-48 dark:ring-prblue-500"
               :src="avatar_svg"
               v-if="avatarWithoutLocalhost === null"
               alt=""
             />
             <img
               referrerpolicy="no-referrer"
-              class="h-40 w-40 rounded-full ring-4 ring-white sm:h-48 sm:w-48"
+              class="h-40 w-40 rounded-full ring-4 ring-white sm:h-48 sm:w-48 dark:ring-prblue-500"
               :src="avatar"
               v-if="avatarWithoutLocalhost !== null"
               alt=""
@@ -43,10 +43,11 @@
             sm:pb-1
           "
         >
-          <div class="mt-6 sm:ml-6 sm:flex-1">
+          <div class="mt-6 sm:ml-6 sm:flex-1
+                  dark:text-white">
             <div class="flex flex-col items-center sm:block">
-              <div class="flex items-center sm:mt-6 min-w-0 flex-1">
-                <h3 class="font-bold text-xl text-gray-900 sm:text-2xl">
+              <div class="flex items-center sm:mt-6 min-w-0 flex-1 ">
+                <h3 class="font-bold text-xl text-gray-900 sm:text-2xl dark:text-white">
                   {{ authUserData.name }}
                 </h3>
                 <span
@@ -127,6 +128,8 @@
                   text-black
                   bg-white
                   hover:border-transparent
+                  dark:bg-prblue-500
+                  dark:text-white
                 "
                 tag="button"
                 to="/edit/profile"
@@ -177,6 +180,8 @@
                       focus:ring-2
                       focus:ring-offset-2
                       focus:ring-prgreen-500
+                                     dark:bg-prblue-500
+                  dark:text-white
                     "
                   >
                     <span class="sr-only">Open options menu</span>
@@ -200,6 +205,8 @@
                         rounded-md
                         shadow-lg
                         bg-white
+                        dark:bg-prblue-500
+                        dark:text-white
                         ring-1 ring-black ring-opacity-5
                         focus:outline-none
                       "
@@ -208,6 +215,7 @@
                         <MenuItem v-slot="{ active }">
                           <a
                             href="#"
+                            class="  dark:text-white"
                             :class="[
                               active
                                 ? 'bg-gray-100 text-gray-900'
@@ -221,6 +229,7 @@
                           <a
                             href="#"
                             @click="copy"
+                            class="  dark:text-white"
                             :class="[
                               active
                                 ? 'bg-gray-100 text-gray-900'
@@ -240,7 +249,7 @@
         </div>
       </div>
     </div>
-    <div class="mt-6 sm:mt-2 2xl:mt-5">
+    <div class="mt-6 sm:mt-2 2xl:mt-5 dark:bg-prblue-500">
       <div class="border-b border-gray-200">
         <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
           <nav class="-mb-px flex space-x-8" aria-label="Tabs">
@@ -249,6 +258,7 @@
               :key="tab.number"
               @click="navigateTabs(tab)"
               :href="tab.href"
+              class="dark:text-white"
               :class="[
                 tab.current
                   ? 'border-prgreen-500 text-gray-900'
@@ -263,7 +273,7 @@
           <About :Data="authUserData" v-if="tabs[0].current === true" />
           <Info :Data="authUserData" v-if="tabs[1].current === true" />
           <Resume :Data="authUserData" v-if="tabs[2].current === true" />
-          <div class="sm:flex sm:px-6 sm:py-5 mt-10 sm:mt-0">
+          <div class="sm:flex sm:px-6 sm:py-5 mt-10 sm:mt-0 dark:text-white">
             <div class="flex flex-col">
               <div class="mb-5 mt-2 flex items-center text-sm text-gray-500">
                 <BriefcaseIcon
@@ -275,6 +285,7 @@
                     mt-1
                     text-md text-gray-900
                     sm:mt-0 sm:ml-6 sm:col-span-2
+                    dark:text-white
                   "
                 >
                   <p v-if="authUserData.work_time_length !== null">
@@ -304,6 +315,7 @@
                     mt-1
                     text-md text-gray-900
                     sm:mt-0 sm:ml-6 sm:col-span-2
+                    dark:text-white
                   "
                 >
                   <p v-if="authUserData.work_place !== null">
@@ -333,6 +345,7 @@
                     mt-1
                     text-md text-gray-900
                     sm:mt-0 sm:ml-6 sm:col-span-2
+                    dark:text-white
                   "
                 >
                   <p v-if="authUserData.salary !== null">
@@ -362,6 +375,7 @@
                     mt-1
                     text-md text-gray-900
                     sm:mt-0 sm:ml-6 sm:col-span-2
+                    dark:text-white
                   "
                 >
                   <p v-if="authUserData.work_hours !== null">
@@ -396,7 +410,7 @@
             v-for="tab in Gigs_Requests_tabs"
             :key="tab.name"
             @click="GigRequestNavigation(tab)"
-            class="cursor-pointer"
+            class="cursor-pointer dark:text-white"
             :class="[
               tab.current
                 ? 'border-prgreen-500  text-gray-900'

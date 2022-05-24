@@ -1,5 +1,5 @@
 <template>
-  <div class="grid grid-cols-1 md:grid-cols-2 bg-prblue-500 p-10 md:w-2/3 self-center mb-10">
+  <div class="grid grid-cols-1 md:grid-cols-2 bg-prblue-500 max-w-7xl mx-auto sm:px-6 lg:px-8 md:mx-10 self-center py-10 mb-10">
     <div class="flex justify-center">
       <img
         src="@\assets\undraw_interview_re_e5jn.svg"
@@ -41,22 +41,23 @@
         >
           For service providers
         </p>
-        <p class="mt-5 max-w-prose mx-auto text-xl text-gray-500">
+        <p class="mt-5 max-w-prose mx-auto text-xl text-gray-500 mb-7">
           If you're a service provider, signup and get paid for your services
         </p>
-        <button
+        <router-link
+          to="/signup"
           type="button"
           class="
             inline-flex
             items-center
-            px-4
+            px-10
             py-2
             border border-transparent
             text-sm
             font-medium
-            rounded-md
+            rounded-full
             shadow-sm
-            text-white
+             text-white
             bg-prgreen-600
             hover:bg-prgreen-700
             focus:outline-none
@@ -66,7 +67,7 @@
           "
         >
           signup
-        </button>
+        </router-link>
       </div>
     </div>
   </div>

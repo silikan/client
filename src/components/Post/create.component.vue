@@ -180,6 +180,7 @@
                 whitespace-nowrap
                 hover:bg-gray-100
                 sm:px-3
+                dark:bg-prblue-600
               "
             >
               <TagIcon

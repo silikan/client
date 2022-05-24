@@ -1,5 +1,5 @@
 <template>
-<div class="mt-5">
+<div class="mt-5 dark:bg-prblue-500">
 <EditProfile />
 </div>
 

@@ -1,15 +1,15 @@
 <template>
   <form
-    class="p-10 bg-white border rounded shadow"
+    class="p-10 bg-white border rounded shadow m-10"
     @submit.prevent="forgotPassword"
   >
     <div class=" divide-y divide-gray-200">
       <h2 class="text-lg leading-6 font-medium text-gray-900  mb-5 ">
-        Verify Email
+        Verify Email For Password Change
       </h2>
     </div>
 
-    <div>
+    <div class="mb-5">
       <label
         for="email"
         class="block text-sm font-medium text-gray-700"

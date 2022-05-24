@@ -2,7 +2,7 @@
   <div>
     <main class="">
       <div class="max-w-screen-xl mx-auto pb-6 px-4 sm:px-6 lg:pb-16 lg:px-8">
-        <div class="bg-white rounded-lg shadow overflow-hidden">
+        <div class="bg-white rounded-lg shadow overflow-hidden dark:bg-prblue-500">
           <div
             class="
               divide-y divide-gray-200
@@ -18,8 +18,8 @@
                   @click="CurrentCondition"
                   :class="[
                     item.current
-                      ? 'bg-green-50 border-green-300 text-green-700 hover:bg-green-50 hover:text-green-700'
-                      : 'border-transparent text-gray-900 hover:bg-gray-50 hover:text-gray-900',
+                      ? 'bg-green-50 border-green-300 text-green-700 hover:bg-green-50 hover:text-green-700 dark:bg-prblue-500 dark:text-prblue-50'
+                      : 'border-transparent text-gray-900 hover:bg-gray-50 hover:text-gray-900 dark:hover:bg-prblue-500 dark:text-prblue-50',
                     'group border-l-4 px-3 py-2 flex items-center text-sm font-medium',
                   ]"
                 >

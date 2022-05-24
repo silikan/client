@@ -7,7 +7,6 @@ node_modules
 
 
 # local env files
-.env.local
 .env.*.local
 
 # Log files
@@ -18,9 +17,12 @@ pnpm-debug.log*
 
 # Editor directories and files
 .idea
-.vscode
 *.suo
 *.ntvs*
 *.njsproj
 *.sln
 *.sw?
+branch_structure.json
+temp_auto_push.bat
+temp_interactive_push.bat
+config.bat
