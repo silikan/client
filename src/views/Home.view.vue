@@ -1,5 +1,5 @@
 <template>
-  <div class="flex flex-col  justify-center">
+  <div class="flex flex-col  justify-center dark:bg-prblue-500">
     <Hero />
     <Trusted />
     <Features />

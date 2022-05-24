@@ -1,5 +1,5 @@
 <template>
-  <div class="px-4 py-5 sm:px-0 sm:py-0 mt-10 lg:flex lg:flex">
+  <div class="px-4 py-5 sm:px-0 sm:py-0 mt-10 lg:flex lg:flex dark:bg-prblue-500">
     <dl>
       <div class="sm:flex sm:px-6 sm:py-5 px-4 py-5 sm:px-6">
         <dt
@@ -13,7 +13,7 @@
         >
           email
         </dt>
-        <dd class="mt-1 text-md text-gray-900 sm:mt-0 sm:ml-6 sm:col-span-2">
+        <dd class="mt-1 text-md text-gray-900 dark:text-white sm:mt-0 sm:ml-6 sm:col-span-2">
           <p>
             {{ authUserData.email }}
           </p>
@@ -43,7 +43,7 @@
         >
           gender
         </dt>
-        <dd class="mt-1 text-md text-gray-900 sm:mt-0 sm:ml-6 sm:col-span-2">
+        <dd class="mt-1 text-md text-gray-900 dark:text-white sm:mt-0 sm:ml-6 sm:col-span-2">
           <p>
             {{ authUserData.gender }}
           </p>
@@ -73,7 +73,7 @@
         >
           Phone number
         </dt>
-        <dd class="mt-1 text-md text-gray-900 sm:mt-0 sm:ml-6 sm:col-span-2">
+        <dd class="mt-1 text-md text-gray-900 dark:text-white sm:mt-0 sm:ml-6 sm:col-span-2">
           {{ authUserData.phone_number }}
         </dd>
         <div class="flex" v-if="authUserData.phone_number === null">
@@ -99,7 +99,7 @@
           Website
         </dt>
         <dd
-          class="flex mt-1 text-md text-gray-900 sm:mt-0 sm:ml-6 sm:col-span-2"
+          class="flex mt-1 text-md text-gray-900 dark:text-white sm:mt-0 sm:ml-6 sm:col-span-2"
         >
           <a :href="authUserData.facebook_social_link" class="facebook cursor-pointer" v-if="authUserData.facebook_social_link !== null">
             <svg
@@ -176,7 +176,7 @@
         >
           Zip Code
         </dt>
-        <dd class="mt-1 text-md text-gray-900 sm:mt-0 sm:ml-6 sm:col-span-2">
+        <dd class="mt-1 text-md text-gray-900 dark:text-white sm:mt-0 sm:ml-6 sm:col-span-2">
          {{authUserData.zip_code}}
         </dd>
 

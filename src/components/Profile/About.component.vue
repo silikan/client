@@ -1,5 +1,5 @@
 <template>
-  <div class="px-4 py-5 sm:px-0 sm:py-0 mt-10 lg:flex lg:flex">
+  <div class="px-4 py-5 sm:px-0 sm:py-0 mt-10 lg:flex lg:flex dark:bg-prblue-500">
     <dl>
       <div class="sm:flex sm:px-6 sm:py-5 px-4 py-5 sm:px-6">
         <dt
@@ -9,11 +9,12 @@
             text-gray-500
             sm:w-40 sm:flex-shrink-0
             lg:w-48
+
           "
         >
           Bio
         </dt>
-        <dd class="mt-1 text-md text-gray-900 sm:mt-0 sm:ml-6 sm:col-span-2">
+        <dd class="mt-1 text-md text-gray-900 dark:text-white sm:mt-0 sm:ml-6 sm:col-span-2 dark:text-white">
           <p>
             {{ authUserData.bio }}
           </p>
@@ -43,7 +44,7 @@
         >
           Location
         </dt>
-        <dd class="mt-1 text-md text-gray-900 sm:mt-0 sm:ml-6 sm:col-span-2">
+        <dd class="mt-1 text-md text-gray-900 dark:text-white sm:mt-0 sm:ml-6 sm:col-span-2 dark:text-white">
           {{ authUserData.country }} {{ authUserData.city }}
           {{ authUserData.state }} {{ authUserData.address }}
         </dd>
@@ -77,7 +78,7 @@
         >
           Website
         </dt>
-        <dd class="mt-1 text-md text-gray-900 sm:mt-0 sm:ml-6 sm:col-span-2">
+        <dd class="mt-1 text-md text-gray-900 dark:text-white sm:mt-0 sm:ml-6 sm:col-span-2 dark:text-white">
           {{ authUserData.website }}
         </dd>
         <div class="flex" v-if="authUserData.website === null">
@@ -102,7 +103,7 @@
         >
           Birthday
         </dt>
-        <dd class="mt-1 text-md text-gray-900 sm:mt-0 sm:ml-6 sm:col-span-2">
+        <dd class="mt-1 text-md text-gray-900 dark:text-white sm:mt-0 sm:ml-6 sm:col-span-2">
           {{ authUserData.date_of_birth }}
         </dd>
 

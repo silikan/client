@@ -5,13 +5,24 @@
       border-t border-gray-200
       relative
       bg-gray-50
+      dark:bg-prblue-500
       pt-16
       pb-20
       px-4F
       sm:px-6
     "
   >
-    <h2 class="mb-5 text-3xl font-extrabold tracking-tight hidden md:block">
+    <h2
+      class="
+        mb-5
+        text-3xl
+        font-extrabold
+        tracking-tight
+        hidden
+        md:block
+        dark:text-white
+      "
+    >
       Gigs
     </h2>
     <div class="relative mx-auto">
@@ -32,7 +43,7 @@
           class="
             flex flex-col
             rounded-lg
-            border-x border-b border-gray-200
+            border border-gray-200
             overflow-hidden
             shadow-inner
           "
@@ -46,7 +57,17 @@
               class="w-full h-full object-center object-cover"
             />
           </router-link>
-          <div class="flex-1 bg-white px-5 pt-5 flex flex-col justify-between">
+          <div
+            class="
+              flex-1
+              bg-white
+              px-5
+              pt-5
+              flex flex-col
+              justify-between
+              dark:bg-prblue-500
+            "
+          >
             <div class="flex items-center">
               <div class="flex-shrink-0">
                 <a href="#">
@@ -59,7 +80,7 @@
                 </a>
               </div>
               <div class="ml-3">
-                <p class="text-md font-medium text-gray-600">
+                <p class="text-md font-medium text-gray-600 dark:text-white">
                   <a href="gig.author.href" class="hover:underline">
                     {{ gig.username }}
                   </a>
@@ -67,7 +88,7 @@
               </div>
             </div>
             <div class="">
-              <p class="text-md font-medium text-gray-500 mt-2">
+              <p class="text-md font-medium text-gray-500 mt-2 dark:text-white">
                 {{ gig.title }}
               </p>
             </div>
@@ -81,7 +102,7 @@
                 p-3
               "
             >
-              <p class="font-bold text-2xl text-gray-400">
+              <p class="font-bold text-2xl text-gray-400 dark:text-white">
                 {{ gig.basic.price }}$
               </p>
               <div class="flex justify-center items-center"></div>
@@ -123,7 +144,9 @@
               d="M9 13h6m-3-3v6m-9 1V7a2 2 0 012-2h6l2 2h6a2 2 0 012 2v8a2 2 0 01-2 2H5a2 2 0 01-2-2z"
             />
           </svg>
-          <span class="mt-2 block text-sm font-medium text-gray-900">
+          <span
+            class="mt-2 block text-sm font-medium text-gray-900 dark:text-white"
+          >
             Create a new Gig
           </span>
         </router-link>

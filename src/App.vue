@@ -1,9 +1,18 @@
 <template>
-  <div class="h-screen min-h-full flex flex-col justify-between">
+  <div
+    class="
+      h-screen
+      min-h-full
+      flex flex-col
+      justify-between
+
+dark:bg-prblue-500
+    "
+  >
     <Teleport to=".notifications">
       <BasicNotification class="z-50 mt-10" v-if="isLoggedin" />
     </Teleport>
-<FeedbackModalComponent/>
+    <FeedbackModalComponent />
     <Teleport to=".action">
       <FloatingActionButton />
     </Teleport>
@@ -33,7 +42,7 @@ export default {
     LoadingBar,
     BasicNotification,
     FloatingActionButton,
-    FeedbackModalComponent
+    FeedbackModalComponent,
   },
 
   setup() {

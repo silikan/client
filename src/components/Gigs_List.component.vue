@@ -2,19 +2,19 @@
   <div v-if="loading === true">
     <GigLoadingSkeleton />
   </div>
-  <div class="bg-white" v-if="loading === false && links && meta">
+  <div class="bg-white dark:bg-prblue-500" v-if="loading === false && links && meta">
     <div class="mx-auto py-12 px-4 max-w-7xl sm:px-6 lg:px-8 lg:py-24">
       <div class="flex w-full items-center justify-between mb-5">
         <div
           class="space-y-5 sm:space-y-4 md:max-w-xl lg:max-w-3xl xl:max-w-none"
         >
-          <h2 class="text-3xl font-extrabold tracking-tight hidden md:block">
+          <h2 class="text-3xl font-extrabold tracking-tight hidden md:block dark:text-white">
             Gigs
           </h2>
         </div>
         <div class="flex items-center flex-1 md:flex-none"></div>
       </div>
-      <div class="relative bg-white">
+      <div class="relative ">
         <div class="relative mx-auto">
           <div
             class="
@@ -24,6 +24,7 @@
               grid-cols-1
               sm:grid-cols-2
               xl:grid-cols-3
+
             "
           >
             <div
@@ -32,9 +33,12 @@
               class="
                 flex flex-col
                 rounded-lg
-                border-x border-b border-gray-200
                 overflow-hidden
                 shadow-inner
+                  border
+              border-gray-200
+              dark:border-transparent
+              mb-5
               "
             >
               <div
@@ -58,7 +62,7 @@
                 </router-link>
               </div>
               <div
-                class="flex-1 bg-white px-5 pt-5 flex flex-col justify-between"
+                class="flex-1 bg-white dark:bg-prblue-700 px-5 pt-5 flex flex-col justify-between"
               >
                 <div class="flex items-center">
                   <div class="flex-shrink-0">
@@ -73,14 +77,14 @@
                   </div>
                   <div class="ml-3">
                     <p class="text-md font-medium text-gray-600">
-                      <a href="gig.author.href" class="hover:underline">
+                      <a href="gig.author.href" class="hover:underline dark:text-white">
                         {{ gig.user.name }}
                       </a>
                     </p>
                   </div>
                 </div>
                 <div class="">
-                  <p class="text-md font-medium text-gray-500 mt-2">
+                  <p class="text-md font-medium text-gray-500 mt-2 dark:text-white">
                     {{ gig.title }}
                   </p>
                 </div>
@@ -94,7 +98,7 @@
                     p-3
                   "
                 >
-                  <p class="font-bold text-2xl text-gray-400">
+                  <p class="font-bold text-2xl text-gray-400 dark:text-white">
                     {{ JSON.parse(gig.basic).price }}$
                   </p>
                   <div class="flex justify-center items-center" v-if="authUser">
@@ -120,6 +124,7 @@
       <div
         class="
           bg-white
+          dark:bg-prblue-500
           px-4
           py-3
           flex flex-col
@@ -182,7 +187,7 @@
         </div>
         <div class="sm:flex-1 sm:flex sm:items-center sm:justify-between">
           <div class="flex justify-end items-center mt-3">
-            <p class="text-sm text-indigo-700">
+            <p class="text-sm text-prgreen-700">
               Page {{ meta.current_page }} of {{ meta.last_page }}
             </p>
           </div>
@@ -222,7 +227,7 @@
                 <span class="sr-only">Previous</span>
                 <ChevronLeftIcon class="h-5 w-5" aria-hidden="true" />
               </a>
-              <!-- Current: "z-10 bg-indigo-50 border-indigo-500 text-indigo-600", Default: "bg-white border-gray-300 text-gray-500 hover:bg-gray-50" -->
+              <!-- Current: "z-10 bg-prgreen-50 border-prgreen-500 text-prgreen-600", Default: "bg-white border-gray-300 text-gray-500 hover:bg-gray-50" -->
               <a
                 class="
                   border-gray-300
@@ -241,7 +246,7 @@
                   max-w-md
                 "
                 :class="{
-                  'bg-indigo-50 border-indigo-500 text-indigo-600':
+                  'bg-prgreen-50 border-prgreen-500 text-prgreen-600':
                     1 === meta.current_page,
                   'bg-white border-gray-300 text-gray-500 hover:bg-gray-50':
                     1 !== meta.current_page,
@@ -268,7 +273,7 @@
                     font-medium
                   "
                   :class="{
-                    'bg-indigo-50 border-indigo-500 text-indigo-600':
+                    'bg-prgreen-50 border-prgreen-500 text-prgreen-600':
                       page === meta.current_page,
                     'bg-white border-gray-300 text-gray-500 hover:bg-gray-50':
                       page !== meta.current_page,
@@ -298,7 +303,7 @@
                 "
                 @click="setPage(totalPages)"
                 :class="{
-                  'bg-indigo-50 border-indigo-500 text-indigo-600':
+                  'bg-prgreen-50 border-prgreen-500 text-prgreen-600':
                     totalPages === meta.current_page,
                   'bg-white border-gray-300 text-gray-500 hover:bg-gray-50':
                     totalPages !== meta.current_page,
