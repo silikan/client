@@ -341,7 +341,8 @@ store
       addToTaskList,
        handymanId,
       authUserId,
-      views
+      views,
+      loggedIn
     };
   },
 };
