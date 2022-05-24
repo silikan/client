@@ -1,11 +1,11 @@
 <template>
-  <div class="bg-white">
+  <div class="bg-white dark:bg-prblue-500 ">
     <div class="mx-auto py-12 px-4 max-w-7xl sm:px-6 lg:px-8 lg:py-24">
       <div class="flex w-full items-center justify-between mb-5">
         <div
           class="space-y-5 sm:space-y-4 md:max-w-xl lg:max-w-3xl xl:max-w-none"
         >
-          <h2 class="text-3xl font-extrabold tracking-tight hidden md:block">
+          <h2 class="dark:text-white text-3xl font-extrabold tracking-tight hidden md:block">
             Handymen
           </h2>
         </div>
@@ -54,7 +54,7 @@
               </div>
               <div class="flex justify-between">
                 <div class="space-y-2">
-                  <div class="text-xl leading-6 font-medium space-y-1">
+                  <div class="text-xl leading-6 font-medium space-y-1 dark:text-white">
                     <h3>{{ person.name }}</h3>
                     <p class="text-sm font-bold text-prgreen-600">
                       @{{ person.username }}
@@ -167,8 +167,10 @@
           items-between
           justify-center
           border-t border-gray-200
+            dark:border-prblue-50
           sm:px-6
           mb-10
+          dark:bg-prblue-500
         "
       >
         <div class="flex-1 flex justify-between sm:hidden">

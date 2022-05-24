@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="">
     <div class="min-h-full flex">
       <div class="flex flex-col justify-center py-12 px-4 flex-1">
         <div class="mx-auto w-full max-w-sm lg:w-96">
@@ -9,10 +9,12 @@
               src="@/assets/Logos/full-green.svg"
               alt="Silikan"
             />
-            <h2 class="mt-6 text-3xl font-extrabold text-gray-900">
+            <h2
+              class="mt-6 text-3xl font-extrabold text-gray-900 dark:text-white"
+            >
               Sign in to your account
             </h2>
-            <p class="mt-2 text-sm text-gray-600">
+            <p class="mt-2 text-sm text-gray-600 dark:text-white">
               Or
               {{ " " }}
               <router-link
@@ -27,7 +29,11 @@
           <div class="mt-8">
             <div>
               <div>
-                <p class="text-sm font-medium text-gray-700">Sign in with</p>
+                <p
+                  class="text-sm font-medium text-gray-700 dark:text-white"
+                >
+                  Sign in with
+                </p>
 
                 <div class="mt-1 grid grid-cols-3 gap-3">
                   <div>
@@ -43,6 +49,7 @@
                         rounded-md
                         shadow-sm
                         bg-white
+                        dark:bg-prblue-500
                         text-sm
                         font-medium
                         text-gray-500
@@ -73,6 +80,7 @@
                         py-2
                         px-4
                         border border-gray-300
+                        dark:bg-prblue-500
                         rounded-md
                         shadow-sm
                         bg-white
@@ -106,6 +114,7 @@
                         py-2
                         px-4
                         border border-gray-300
+                        dark:bg-prblue-500
                         rounded-md
                         shadow-sm
                         bg-white
@@ -167,7 +176,7 @@
                   <div class="w-full border-t border-gray-300" />
                 </div>
                 <div class="relative flex justify-center text-sm">
-                  <span class="px-2 bg-white text-gray-500">
+                  <span class="px-2 bg-white text-gray-500 dark:bg-prblue-500 dark:font-bold">
                     Or continue with
                   </span>
                 </div>
@@ -184,7 +193,13 @@
                 <div>
                   <label
                     for="email"
-                    class="block text-sm font-medium text-gray-700"
+                    class="
+                      block
+                      text-sm
+                      font-medium
+                      text-gray-700
+                      dark:text-white
+                    "
                   >
                     Email address
                   </label>
@@ -232,7 +247,13 @@
                 <div class="space-y-1">
                   <label
                     for="password"
-                    class="block text-sm font-medium text-gray-700"
+                    class="
+                      block
+                      text-sm
+                      font-medium
+                      text-gray-700
+                      dark:text-white
+                    "
                   >
                     Password
                   </label>
@@ -247,7 +268,7 @@
                       :class="[
                         errorData.email
                           ? 'block w-full pr-10 border-red-300 text-red-900 placeholder-red-300 focus:outline-none focus:ring-red-500 focus:border-red-500 sm:text-sm rounded-md w-full px-3 py-2 border border-red-300  text-red-900 rounded-md  shadow-smplaceholder-red-400 focus:outline-nonefocus:ring-red-500 focus:border-red-500 sm:text-sm'
-                          : ' block w-full px-3 py-2 border border-gray-300 rounded-md  shadow-smplaceholder-gray-400 focus:outline-nonefocus:ring-prgreen-500 focus:border-prgreen-500 sm:text-sm',
+                          : 'dark:bg-prblue-500 block w-full px-3 py-2 border border-gray-300 rounded-md  shadow-smplaceholder-gray-400 focus:outline-nonefocus:ring-prgreen-500 focus:border-prgreen-500 sm:text-sm',
                       ]"
                     />
                     <div
@@ -294,7 +315,7 @@
                     />
                     <label
                       for="remember-me"
-                      class="ml-2 block text-sm text-gray-900"
+                      class="ml-2 block text-sm text-gray-900 dark:text-white"
                     >
                       Remember me
                     </label>
@@ -303,7 +324,11 @@
                   <router-link class="text-sm" :to="'/forgot-password'">
                     <a
                       href="#"
-                      class="font-medium text-prgreen-600 hover:text-prgreen-500"
+                      class="
+                        font-medium
+                        text-prgreen-600
+                        hover:text-prgreen-500
+                      "
                     >
                       Forgot your password?
                     </a>

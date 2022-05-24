@@ -1,6 +1,6 @@
 <!-- This example requires Tailwind CSS v2.0+ -->
 <template>
-  <div class="bg-white">
+  <div class="bg-white dark:bg-prblue-500 ">
 
     <div
       class="
@@ -13,7 +13,7 @@
       "
     >
       <div class="lg:col-span-4">
-        <h2 class="text-2xl font-extrabold tracking-tight text-gray-900">
+        <h2 class="text-2xl font-extrabold tracking-tight text-gray-900 dark:text-white">
           Customer Reviews
         </h2>
 
@@ -34,7 +34,7 @@
             </div>
             <p class="sr-only">{{ reviews.average }} out of 5 stars</p>
           </div>
-          <p class="ml-2 text-sm text-gray-900">
+          <p class="ml-2 text-sm text-gray-900 dark:text-white">
             Based on {{ reviews.totalCount }} reviews
           </p>
         </div>
@@ -49,7 +49,7 @@
               class="flex items-center text-sm"
             >
               <dt class="flex-1 flex items-center">
-                <p class="w-3 font-medium text-gray-900">
+                <p class="w-3 font-medium text-gray-900 dark:text-white">
                   {{ count.rating }}<span class="sr-only"> star reviews</span>
                 </p>
                 <div aria-hidden="true" class="ml-1 flex-1 flex items-center">
@@ -87,7 +87,7 @@
                 </div>
               </dt>
               <dd
-                class="ml-3 w-10 text-right tabular-nums text-sm text-gray-900"
+                class="ml-3 w-10 text-right tabular-nums text-sm dark:text-white text-gray-900"
               >
                  {{  (Math.round((count.count / reviews.totalCount) * 100)) || 0 }}%
               </dd>
@@ -114,7 +114,7 @@
                         :name="review.name"
                       />
                 <div class="ml-4">
-                  <h4 class="text-sm font-bold text-gray-900">
+                  <h4 class="text-sm font-bold text-gray-900 dark:text-white">
                     {{ review.name }}
                   </h4>
                   <div class="mt-1 flex items-center">
@@ -134,7 +134,7 @@
                 </div>
               </div>
               <div
-                class="mt-4 space-y-6 break-all text-base italic text-gray-600"
+                class="mt-4 space-y-6 break-all text-base italic dark:text-white text-gray-600"
                 v-html="review.content"
               />
             </div>

@@ -305,7 +305,7 @@
                     text-white
                     tracking-tight
                     text-left
-                    dark:text-black
+
                   "
 
 

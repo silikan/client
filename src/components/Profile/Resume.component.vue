@@ -1,5 +1,5 @@
 <template>
-  <div class="px-4 py-5 sm:px-0 sm:py-0 mt-10 lg:flex lg:flex">
+  <div class="px-4 py-5 sm:px-0 sm:py-0 mt-10 lg:flex lg:flex dark:bg-prblue-500">
     <dl>
       <div class="sm:flex sm:px-6 sm:py-5 px-4 py-5 sm:px-6">
         <dt
@@ -13,7 +13,7 @@
         >
           Education
         </dt>
-        <dd class="mt-1 text-md text-gray-900 sm:mt-0 sm:ml-6 sm:col-span-2">
+        <dd class="mt-1 text-md text-gray-900 dark:text-white sm:mt-0 sm:ml-6 sm:col-span-2">
           <div class="m-10" v-if="education !== null && education.length > 0">
             <ul role="list" class="mt-4 grid grid-cols-1 gap-4 sm:grid-cols-2">
               <li v-for="person in education" :key="person.id">
@@ -45,7 +45,7 @@
 
                     <span class="block min-w-0 flex-1">
                       <span
-                        class="block text-sm font-medium text-gray-900 truncate"
+                        class="block text-sm font-medium text-gray-900 dark:text-white truncate"
                         >{{ person.name }}</span
                       >
                       <span
@@ -95,7 +95,7 @@
         >
           Skills
         </dt>
-        <dd class="mt-1 text-md text-gray-900 sm:mt-0 sm:ml-6 sm:col-span-2">
+        <dd class="mt-1 text-md text-gray-900 dark:text-white sm:mt-0 sm:ml-6 sm:col-span-2">
           <div class="m-10" v-if="skills !== null && skills.length > 0">
             <ul role="list" class="mt-4 grid grid-cols-1 gap-4 sm:grid-cols-2">
               <li v-for="person in skills" :key="person.id">
@@ -127,7 +127,7 @@
 
                     <span class="block min-w-0 flex-1">
                       <span
-                        class="block text-sm font-medium text-gray-900 truncate"
+                        class="block text-sm font-medium text-gray-900 dark:text-white truncate"
                         >{{ person.name }}</span
                       >
                       <span
@@ -174,7 +174,7 @@
         >
           Experience
         </dt>
-        <dd class="mt-1 text-md text-gray-900 sm:mt-0 sm:ml-6 sm:col-span-2">
+        <dd class="mt-1 text-md text-gray-900 dark:text-white sm:mt-0 sm:ml-6 sm:col-span-2">
           <div class="m-10" v-if="experience !== null && experience.length > 0">
             <ul role="list" class="mt-4 grid grid-cols-1 gap-4 sm:grid-cols-2">
               <li v-for="person in experience" :key="person.id">
@@ -206,7 +206,7 @@
 
                     <span class="block min-w-0 flex-1">
                       <span
-                        class="block text-sm font-medium text-gray-900 truncate"
+                        class="block text-sm font-medium text-gray-900 dark:text-white truncate"
                         >{{ person.name }}</span
                       >
                       <span
@@ -253,7 +253,7 @@
         >
           Certifications
         </dt>
-        <dd class="mt-1 text-md text-gray-900 sm:mt-0 sm:ml-6 sm:col-span-2">
+        <dd class="mt-1 text-md text-gray-900 dark:text-white sm:mt-0 sm:ml-6 sm:col-span-2">
           <div
             class="m-10"
             v-if="certifications !== null && certifications.length > 0"
@@ -288,7 +288,7 @@
 
                     <span class="block min-w-0 flex-1">
                       <span
-                        class="block text-sm font-medium text-gray-900 truncate"
+                        class="block text-sm font-medium text-gray-900 dark:text-white truncate"
                         >{{ person.name }}</span
                       >
                       <span

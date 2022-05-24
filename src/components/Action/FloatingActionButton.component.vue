@@ -270,6 +270,14 @@ export default {
     const toggleDarkMode = () => {
       isDark.value = !isDark.value;
       localStorage.setItem("darkMode", isDark.value);
+      //acess all classes and remove the dark class
+      const body = document.querySelector("body");
+      if(isDark.value){
+        body.classList.add("dark");
+      }else{
+        body.classList.remove("dark");
+      }
+
     };
 
     let store = useStore();

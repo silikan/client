@@ -1,5 +1,8 @@
 <template>
-  <GigsList/>
+<div class="dark:bg-prblue-500">
+	  <GigsList/>
+</div>
+
 </template>
 
 <script>

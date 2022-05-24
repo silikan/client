@@ -1,16 +1,16 @@
 <template>
 <!--   <div><postFeed /></div>
- -->  <div><postFeed /></div>
+ -->  <div><UserCard /></div>
 </template>
 
 <script>
-/* import postFeed from "@/components/Loading/Skeletons/Table.component.vue";
+/* import UserCard from "@/components/Loading/Skeletons/UserCard.component.vue";
  */
- import postFeed from "@/components/Loading/Skeletons/postFeed.component.vue";
+ import UserCard from "@/components/Loading/Skeletons/UserCard.component.vue";
 export default {
   components: {
-/*     postFeed,
- */    postFeed
+/*     UserCard,
+ */    UserCard
   },
 };
 </script>

@@ -1,14 +1,14 @@
 <!-- This example requires Tailwind CSS v2.0+ -->
 <template>
-  <div class="bg-gray-50">
+  <div class="bg-gray-50 dark:bg-prblue-500">
     <div class="max-w-7xl mx-auto py-12 px-4 sm:py-16 sm:px-6 lg:px-8">
-      <div class="max-w-3xl mx-auto divide-y-2 divide-gray-200">
+      <div class="max-w-3xl mx-auto divide-y-2 divide-gray-200 dark:divide-prgreen-50">
         <h2
-          class="text-center text-3xl font-extrabold text-gray-900 sm:text-4xl"
+          class="text-center text-3xl font-extrabold text-gray-900 sm:text-4xl dark:text-white"
         >
           Frequently asked questions
         </h2>
-        <dl class="mt-6 space-y-6 divide-y divide-gray-200">
+        <dl class="mt-6 space-y-6 divide-y divide-gray-200 dark:divide-prgreen-50">
           <Disclosure
             v-for="faq in faqs"
             :key="faq.question"
@@ -16,9 +16,10 @@
             as="div"
             class="pt-6"
           >
-            <dt class="text-lg">
+            <dt class="text-lg dark:text-white">
               <DisclosureButton
                 class="
+                dark:text-white
                   text-left
                   w-full
                   flex
@@ -27,7 +28,7 @@
                   text-gray-400
                 "
               >
-                <span class="font-medium text-gray-900">
+                <span class="font-medium text-gray-900 dark:text-white">
                   {{ faq.question }}
                 </span>
                 <span class="ml-6 h-7 flex items-center">
@@ -42,7 +43,7 @@
               </DisclosureButton>
             </dt>
             <DisclosurePanel as="dd" class="mt-2 pr-12">
-              <p class="text-base text-gray-500">
+              <p class="text-base text-gray-500 dark:text-white">
                 {{ faq.answer }}
               </p>
             </DisclosurePanel>

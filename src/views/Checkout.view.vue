@@ -91,7 +91,7 @@ import Review from "@/components/Checkout/Review.component.vue";
 import StepperComponent from "../components/Checkout/Stepper.component.vue";
 import { reactive } from "@vue/reactivity";
 import { useStore } from "vuex";
-import { useRoute } from "vue-router";
+import { useRoute, useRouter } from "vue-router";
 export default {
   components: {
     StepperComponent,
@@ -99,6 +99,7 @@ export default {
     Price,
   },
   setup() {
+    let router = useRouter();
     let store = useStore();
     let route = useRoute();
         let notificationsocket = io("http://localhost:4000");
@@ -199,6 +200,9 @@ export default {
       let jsonData = JSON.stringify(data);
       store.dispatch("Review/postAReview", jsonData).then(() => {
         setCartItemStatusToPaid();
+
+router.push('/');
+
 
       });
     };
